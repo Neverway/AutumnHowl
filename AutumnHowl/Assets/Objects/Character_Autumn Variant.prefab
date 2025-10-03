@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 6441825444075411899}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000014901161, y: -0.000000059604645, z: -0.92387956, w: 0.38268346}
-  m_LocalPosition: {x: 0.391, y: 0.491, z: 0.25}
+  m_LocalPosition: {x: 0.28, y: 0.516, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -267,8 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff3da93cbd47d22bae22991c0c81eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
-  inventoryWidget: {fileID: 0}
+  walkSpeed: 2
+  sprintSpeed: 3
 --- !u!4 &6972457444599413610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

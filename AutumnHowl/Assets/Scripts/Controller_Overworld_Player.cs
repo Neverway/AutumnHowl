@@ -16,7 +16,8 @@ public class Controller_Overworld_Player : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public float movementSpeed=3;
+    public float walkSpeed = 2;
+    public float sprintSpeed = 4;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -24,13 +25,15 @@ public class Controller_Overworld_Player : MonoBehaviour
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private Vector2 movement;
+    private float currentMoveSpeed;
     private bool inMenu;
+    private bool canPause = true;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private InputActions.TopDownActions inputActions;
     private Rigidbody2D _rigidbody;
-    [SerializeField] private GameObject inventoryWidget;
+    private GameObject inventoryWidget;
 
 
     #endregion
@@ -50,23 +53,38 @@ public class Controller_Overworld_Player : MonoBehaviour
     private void Update()
     {
         // Menu pausing
-        if (inputActions.Select.WasPressedThisFrame())
+        UpdatePausingInput();
+
+        if (inMenu)
         {
-            inventoryWidget.SetActive(!inventoryWidget.activeInHierarchy);
-            inMenu = inventoryWidget.activeInHierarchy;
+            return;
         }
-        
-        if (inMenu) return;
         UpdateMovementInput();
     }
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = movement*movementSpeed;
+        _rigidbody.velocity = movement * currentMoveSpeed;
     }
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    private void UpdatePausingInput()
+    {
+        if (inputActions.Select.WasPressedThisFrame() && canPause)
+        {
+            if (!inventoryWidget)
+            {
+                var widgetManager = GameInstance.Get<GI_WidgetManager>();
+                widgetManager.AddWidget("WB_Inventory");
+                inventoryWidget = widgetManager.GetExistingWidget("WB_Inventory");
+            }
+            movement = new Vector2(0,0); // Clear Movement 
+            inventoryWidget.SetActive(!inventoryWidget.activeInHierarchy);
+            inMenu = inventoryWidget.activeInHierarchy;
+        }
+    }
+    
     private void UpdateMovementInput()
     {
         if (inputActions.MoveUp.IsPressed()) movement.y = 1;
@@ -76,6 +94,9 @@ public class Controller_Overworld_Player : MonoBehaviour
         if (inputActions.MoveLeft.IsPressed()) movement.x = -1;
         else if (inputActions.MoveRight.IsPressed()) movement.x = 1;
         else movement.x = 0;
+
+        if (inputActions.Action.IsPressed()) currentMoveSpeed = sprintSpeed;
+        else currentMoveSpeed = walkSpeed;
     }
     
 
