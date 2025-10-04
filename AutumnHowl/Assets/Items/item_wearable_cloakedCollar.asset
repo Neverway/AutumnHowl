@@ -18,6 +18,7 @@ MonoBehaviour:
     black collar with a silver engraving. Looking at it took long makes your head
     spin.
   canNotDiscard: 1
+  allowMultiple: 0
   buyCost: 25
   sellCost: 0
   effectsWhileWorn:

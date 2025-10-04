@@ -17,6 +17,7 @@ MonoBehaviour:
   description: <Color=#ffff88>[Cost 25 Power] [Removes 25 Corruption]<Color=#ffffff>
     Sacrifice your strength to restore sanity.
   canNotDiscard: 1
+  allowMultiple: 0
   buyCost: 50
   sellCost: 0
   effectsWhenCast:

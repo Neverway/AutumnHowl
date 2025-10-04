@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Cloaked Collar
   description: <Color=#ffff88>[Grants +10 ATK while worn]<Color=#ffffff>
   canNotDiscard: 1
+  allowMultiple: 0
   buyCost: 25
   sellCost: 0
   effectsWhileWorn:
