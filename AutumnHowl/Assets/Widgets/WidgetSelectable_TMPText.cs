@@ -32,15 +32,16 @@ public class WidgetSelectable_TMPText : WidgetSelectable
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+    [HideInInspector] public bool initialized;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     [Tooltip("A variable to hold the text content before we add or remove anything from it using the selection indicators")]
-    [HideInInspector] public string originalTextContent;
+    public string originalTextContent;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private TextMeshProUGUI text;
 
 
     #endregion
@@ -48,14 +49,9 @@ public class WidgetSelectable_TMPText : WidgetSelectable
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
+    private void Awake()
     {
-        if (!text)
-        {
-            text = GetComponent<TMP_Text>();
-        }
-        
-        originalTextContent = text.text;
+        GetInitValues();
     }
 
 
@@ -65,11 +61,21 @@ public class WidgetSelectable_TMPText : WidgetSelectable
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public override void SetSelected(bool _isSelected)
     {
+        if (!initialized) GetInitValues();
+        
         base.SetSelected(_isSelected);
         
         // Remember about ternary conditional operators, "Condition ? true : false;" ~Liz
         if (useTextIndicators) text.text = _isSelected ? (selectedIndicator + originalTextContent) : (unselectedIndicator + originalTextContent);
         if (useColorIndicators) text.color =  _isSelected ? selectedColor : unselectedColor;
+    }
+
+    public void GetInitValues()
+    {
+        if (!text) { text = GetComponent<TextMeshProUGUI>(); }
+        
+        originalTextContent = text.text;
+        initialized = true;
     }
 
 

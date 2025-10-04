@@ -31,6 +31,11 @@ public class LB_Shop : MonoBehaviour
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    private void Start()
+    {
+        GameInstance.Get<GI_WidgetManager>().AddWidget("WB_Shop");
+        GameInstance.Get<GI_TransitionManager>().Fadein();
+    }
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/

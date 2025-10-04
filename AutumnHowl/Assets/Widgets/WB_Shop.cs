@@ -7,12 +7,12 @@
 //
 //====================================================================================================================//
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class LB_Overworld : MonoBehaviour
+public class WB_Shop : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
@@ -32,16 +32,22 @@ public class LB_Overworld : MonoBehaviour
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        GameInstance.Get<GI_TransitionManager>().Fadein();
-    }
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    private IEnumerator ExitCoroutine()
+    {
+        GameInstance.Get<GI_TransitionManager>().Fadeout();
+        yield return new WaitForSeconds(0.5f);
+        GameInstance.Get<GI_WorldLoader>().Load("Town", "Shop");
+    }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public void Exit()
+    {
+        StartCoroutine(ExitCoroutine());
+    }
 
 
     #endregion

@@ -21,19 +21,20 @@ public class Controller_Overworld_Player : MonoBehaviour
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+    [SerializeField] private bool canPause = true;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private Vector2 movement;
     private float currentMoveSpeed;
     private bool inMenu;
-    private bool canPause = true;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private InputActions.TopDownActions inputActions;
     private Rigidbody2D _rigidbody;
     private GameObject inventoryWidget;
+    private GI_AuHoGameState gameState;
 
 
     #endregion
@@ -59,6 +60,8 @@ public class Controller_Overworld_Player : MonoBehaviour
         {
             return;
         }
+
+        UpdateStoredOverworldPosition();
         UpdateMovementInput();
     }
 
@@ -83,6 +86,12 @@ public class Controller_Overworld_Player : MonoBehaviour
             inventoryWidget.SetActive(!inventoryWidget.activeInHierarchy);
             inMenu = inventoryWidget.activeInHierarchy;
         }
+    }
+
+    private void UpdateStoredOverworldPosition()
+    {
+        if (gameState) gameState.currentGameState.overworldPosition = new Vector2(transform.position.x, transform.position.y);
+        else gameState = GameInstance.Get<GI_AuHoGameState>();
     }
     
     private void UpdateMovementInput()

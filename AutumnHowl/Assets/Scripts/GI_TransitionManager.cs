@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class GI_TransitionManager : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image fadescreen;
+    private GI_WidgetManager widgetManager;
 
 
     #endregion
@@ -36,13 +38,21 @@ public class GI_TransitionManager : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
-        var widgetManager = GameInstance.Get<GI_WidgetManager>();
-        widgetManager.AddWidget("WB_Transition");
-        fadescreen = widgetManager.GetExistingWidget("WB_Transition").GetComponentInChildren<Image>();
-        Fadein();
+        ReferenceCheck();
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    private void ReferenceCheck()
+    {
+        widgetManager = GameInstance.Get<GI_WidgetManager>();
+        widgetManager.AddWidget("WB_Transition");
+
+        if (!fadescreen)
+        {
+            fadescreen = widgetManager.GetExistingWidget("WB_Transition").GetComponentInChildren<Image>();
+        }
+    }
+    
     private IEnumerator FadeCoroutine(float _duration, Color _startColor, Color _targetColor, float _delay = 0)
     {
         yield return new WaitForSeconds(_delay);
@@ -67,18 +77,21 @@ public class GI_TransitionManager : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public void Fadeout(float _duration = 1)
+    public void Fadeout(float _duration = 0.5f)
     {
+        ReferenceCheck();
         StartCoroutine(FadeCoroutine(_duration, new Color(0,0,0,0), new Color(0,0,0,1)));
     }
 
-    public void Fadein(float _duration = 1)
+    public void Fadein(float _duration = 0.5f)
     {
+        ReferenceCheck();
         StartCoroutine(FadeCoroutine(_duration, new Color(0,0,0,1), new Color(0,0,0,0)));
     }
 
     public void Fadecross(float _duration = 1, float _holdDuration = 0.5f)
     {
+        ReferenceCheck();
         StartCoroutine(FadecrossCoroutine(_duration, _holdDuration));
     }
 
