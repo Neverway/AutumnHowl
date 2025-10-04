@@ -20,6 +20,7 @@ public class Item : ScriptableObject
     public string displayName;
     [TextArea] public string description;
     public bool canNotDiscard;
+    public bool allowMultiple=true;
     public int buyCost;
     public int sellCost;
 

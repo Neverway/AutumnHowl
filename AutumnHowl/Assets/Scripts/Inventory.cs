@@ -50,6 +50,7 @@ public class Inventory
         {
             if (spells.Count < maxSpells)
             {
+                if (spells.Contains(itemMagic) && itemMagic.allowMultiple is false) return false;
                 spells.Add(itemMagic);
                 return true;
             }
@@ -58,6 +59,7 @@ public class Inventory
         {
             if (items.Count < maxItems)
             {
+                if (items.Contains(_item) && _item.allowMultiple is false) return false;
                 items.Add(_item);
                 return true;
             }

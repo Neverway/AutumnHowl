@@ -43,7 +43,7 @@ public class WidgetNavigator : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private InputActions.TopDownActions inputActions;
     public List<WidgetSelectable> selectableElements;
-    public UnityEvent OnBack;
+    public UnityEvent OnNavigatable, OnBack;
 
 
     #endregion
@@ -146,6 +146,7 @@ public class WidgetNavigator : MonoBehaviour
     public void SetIsNavigating(bool _isNavigating)
     {
         activelyNavigating = _isNavigating;
+        if (_isNavigating) OnNavigatable.Invoke();
     }
 
 
