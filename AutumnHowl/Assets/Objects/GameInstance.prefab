@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4614295181685429276}
   - component: {fileID: 8242925302667692382}
   - component: {fileID: 4989175591088187531}
-  - component: {fileID: 1129797565793594252}
   - component: {fileID: 7577233282566247981}
+  - component: {fileID: 1129797565793594252}
   m_Layer: 0
   m_Name: GameInstance
   m_TagString: Untagged
@@ -77,18 +77,6 @@ MonoBehaviour:
   - {fileID: 3092748077091196145, guid: d7c9f518445b8598a92d2ef60309d8b8, type: 3}
   - {fileID: 3436949595233855408, guid: a946690243749cb2aa4025ceee6536df, type: 3}
   - {fileID: 4208236378167866197, guid: aab2708306b8a9c54b924cc33d64e446, type: 3}
---- !u!114 &1129797565793594252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9024666662515001753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c1717205c7c4d46f8c3149929c2b82b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7577233282566247981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,3 +89,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b139c2101ceed7de2bec83bf6f76eeee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1129797565793594252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024666662515001753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1717205c7c4d46f8c3149929c2b82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGameState:
+    map: Town
+    overworldPosition: {x: 0, y: 0}
+    health: 100
+    power: 0
+    corruption: 0
+    money: 99999
+    kills: 0
+    deaths: 0
+    playtime: 0

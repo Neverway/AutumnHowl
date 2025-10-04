@@ -10,13 +10,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class GI_AuHoGameState : MonoBehaviour
+[RequireComponent(typeof(TMP_Text))]
+public class Text_GoldCounter : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public AuHoGameState currentGameState;
+    public string textDecoratorStart = "$ ";
+    public string textDecoratorEnd = "";
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -26,6 +29,8 @@ public class GI_AuHoGameState : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    private TMP_Text text;
+    private GI_AuHoGameState gameState;
 
 
     #endregion
@@ -34,6 +39,22 @@ public class GI_AuHoGameState : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    private void Start()
+    {
+        text = GetComponent<TMP_Text>();
+        gameState = GameInstance.Get<GI_AuHoGameState>();
+    }
+
+    private void Update()
+    {
+        if (!gameState)
+        {
+            gameState = GameInstance.Get<GI_AuHoGameState>();
+            return;
+        }
+        
+        text.text = textDecoratorStart + gameState.currentGameState.money + textDecoratorEnd;
+    }
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
@@ -43,19 +64,4 @@ public class GI_AuHoGameState : MonoBehaviour
 
 
     #endregion
-}
-
-[Serializable]
-public class AuHoGameState
-{
-    public string map = "Town";
-    public Vector2 overworldPosition;
-    public float health = 100;
-    public float power = 0;
-    public float corruption = 0;
-    public int money = 0;
-    public Inventory inventory = new Inventory();
-    public int kills = 0;
-    public int deaths = 0;
-    public float playtime = 0;
 }

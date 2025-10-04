@@ -7,16 +7,20 @@
 //
 //====================================================================================================================//
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GI_AuHoGameState : MonoBehaviour
+[CreateAssetMenu(menuName = "AuHo/New Item", fileName = "Item_")]
+public class Item : ScriptableObject
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public AuHoGameState currentGameState;
+    public string id;
+    public string displayName;
+    public bool canNotDiscard;
+    public int buyCost;
+    public int sellCost;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -43,19 +47,4 @@ public class GI_AuHoGameState : MonoBehaviour
 
 
     #endregion
-}
-
-[Serializable]
-public class AuHoGameState
-{
-    public string map = "Town";
-    public Vector2 overworldPosition;
-    public float health = 100;
-    public float power = 0;
-    public float corruption = 0;
-    public int money = 0;
-    public Inventory inventory = new Inventory();
-    public int kills = 0;
-    public int deaths = 0;
-    public float playtime = 0;
 }

@@ -12,17 +12,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GI_AuHoGameState : MonoBehaviour
+[Serializable]
+public class Inventory
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public AuHoGameState currentGameState;
+    public List<Item> items = new List<Item>();
+    public List<Item_Magic> spells = new List<Item_Magic>();
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+    private int maxItems = 8;
+    private int maxSpells = 4;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -40,22 +44,56 @@ public class GI_AuHoGameState : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public bool TryAddItem(Item _item)
+    {
+        if (_item is Item_Magic itemMagic)
+        {
+            if (spells.Count < maxSpells)
+            {
+                spells.Add(itemMagic);
+                return true;
+            }
+        }
+        else
+        {
+            if (items.Count < maxItems)
+            {
+                items.Add(_item);
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public Item GetItem(int _atIndex, int _inList=0)
+    {
+        switch (_inList)
+        {
+            case 0:
+                if (_atIndex < items.Count) return items[_atIndex];
+                else return null;
+            case 1:
+                if (_atIndex < spells.Count) return spells[_atIndex];
+                else return null;
+        }
+
+        return null;
+    }
+    
+    public void RemoveItem(int _atIndex, int _inList=0)
+    {
+        switch (_inList)
+        {
+            case 0:
+                items.Remove(items[_atIndex]);
+                break;
+            case 1:
+                spells.Remove(spells[_atIndex]);
+                break;
+        }
+    }
 
 
     #endregion
-}
-
-[Serializable]
-public class AuHoGameState
-{
-    public string map = "Town";
-    public Vector2 overworldPosition;
-    public float health = 100;
-    public float power = 0;
-    public float corruption = 0;
-    public int money = 0;
-    public Inventory inventory = new Inventory();
-    public int kills = 0;
-    public int deaths = 0;
-    public float playtime = 0;
 }

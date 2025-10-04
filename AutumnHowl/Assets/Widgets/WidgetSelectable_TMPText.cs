@@ -78,6 +78,14 @@ public class WidgetSelectable_TMPText : WidgetSelectable
         initialized = true;
     }
 
+    public void SetText(string _text)
+    {
+        // Puts text in the text text text 
+        // TEXT :3
+        originalTextContent = _text;
+        text.text = _text;
+    }
+
 
     #endregion
 }

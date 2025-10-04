@@ -234,9 +234,10 @@ MonoBehaviour:
       m_Calls: []
   useTextIndicators: 1
   selectedIndicator: '>'
-  unselectedIndicator: ' '
+  unselectedIndicator: 
   useColorIndicators: 1
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   unselectedColor: {r: 1, g: 1, b: 1, a: 0.25}
+  initialized: 0
   originalTextContent: 
   text: {fileID: 8038951119062112954}
