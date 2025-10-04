@@ -18,6 +18,7 @@ public class Item : ScriptableObject
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public string id;
     public string displayName;
+    [TextArea] public string description;
     public bool canNotDiscard;
     public int buyCost;
     public int sellCost;

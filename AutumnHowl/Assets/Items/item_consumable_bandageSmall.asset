@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
-  m_Name: Item_Consumable_SmallBandage
+  m_Name: item_consumable_bandageSmall
   m_EditorClassIdentifier: 
-  id: Item_Consumable_SmallBandage
-  displayName: Small Bandage
+  id: item_consumable_bandageSmall
+  displayName: Sm. Bandage
+  description: <Color=#ffff88>[Heals 5 HP]<Color=#ffffff> A small bandage.
   canNotDiscard: 0
   buyCost: 5
-  sellCost: 10
+  sellCost: 5
+  effectsOnConsume:
+  - effect: 1
+    affected: 1
+    amount: 5

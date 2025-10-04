@@ -56,6 +56,7 @@ public class GI_TransitionManager : MonoBehaviour
     private IEnumerator FadeCoroutine(float _duration, Color _startColor, Color _targetColor, float _delay = 0)
     {
         yield return new WaitForSeconds(_delay);
+        SetDrawInFront();
         
         fadescreen.color = _startColor;
         var elapsedTime = 0f;
@@ -70,9 +71,15 @@ public class GI_TransitionManager : MonoBehaviour
 
     private IEnumerator FadecrossCoroutine(float _duration, float _holdDuration)
     {
+        SetDrawInFront();
         StartCoroutine(FadeCoroutine(_duration/2, new Color(0,0,0,0), new Color(0,0,0,1)));
         yield return new WaitForSeconds(_holdDuration);
         StartCoroutine(FadeCoroutine(_duration/2, new Color(0,0,0,1), new Color(0,0,0,0), _duration / 2));
+    }
+
+    private void SetDrawInFront()
+    {
+        fadescreen.transform.parent.SetAsLastSibling();
     }
 
 

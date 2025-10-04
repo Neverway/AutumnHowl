@@ -10,10 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
-  m_Name: Item_Magic_Purify
+  m_Name: item_magic_purify
   m_EditorClassIdentifier: 
-  id: Item_Magic_Purify
-  displayName: Purify
-  canNotDiscard: 0
-  buyCost: 0
+  id: item_magic_purify
+  displayName: Purify Spell
+  description: <Color=#ffff88>[Cost 25 Power] [Removes 25 Corruption]<Color=#ffffff>
+    Sacrifice your strength to restore sanity.
+  canNotDiscard: 1
+  buyCost: 50
   sellCost: 0
+  effectsWhenCast:
+  - effect: 3
+    affected: 1
+    amount: -25
+  - effect: 5
+    affected: 1
+    amount: -25

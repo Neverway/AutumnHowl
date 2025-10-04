@@ -10,10 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
-  m_Name: Item_Consumable_Test
+  m_Name: item_consumable_shieldCookie
   m_EditorClassIdentifier: 
-  id: Item_Consumable_Test
-  displayName: Lemon Milk
+  id: item_consumable_shieldCookie
+  displayName: Shield Cookie
+  description: <Color=#ffff88>[Grants 10 DEF for 1 turn]<Color=#ffffff> A small cookie
+    shaped like a shield.
   canNotDiscard: 0
-  buyCost: 1
-  sellCost: 999
+  buyCost: 10
+  sellCost: 8
+  effectsOnConsume:
+  - effect: 2
+    affected: 1
+    amount: 10

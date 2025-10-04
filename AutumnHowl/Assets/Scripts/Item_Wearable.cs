@@ -11,12 +11,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AuHo/New Consumable Item", fileName = "item_consumable_")]
-public class Item_Consumable : Item
+[CreateAssetMenu(menuName = "AuHo/New Wearable Item", fileName = "item_wearable_")]
+public class Item_Wearable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public List<UsingEffect> effectsOnConsume;
+    public List<UsingEffect> effectsWhileWorn;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/

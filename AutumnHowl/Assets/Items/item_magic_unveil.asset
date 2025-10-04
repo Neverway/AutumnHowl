@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
+  m_Name: item_magic_unveil
+  m_EditorClassIdentifier: 
+  id: item_magic_unveil
+  displayName: Unveil Spell
+  description: <Color=#ffff88>[Cost 25 Power]<Color=#ffffff> Reveal hidden things
+    about the environment or a target.
+  canNotDiscard: 1
+  buyCost: 50
+  sellCost: 0
+  effectsWhenCast:
+  - effect: 5
+    affected: 1
+    amount: -25

@@ -11,11 +11,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AuHo/New Magic Item", fileName = "Item_Magic_")]
+[CreateAssetMenu(menuName = "AuHo/New Magic Item", fileName = "item_magic_")]
 public class Item_Magic : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
+    public List<UsingEffect> effectsWhenCast;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/

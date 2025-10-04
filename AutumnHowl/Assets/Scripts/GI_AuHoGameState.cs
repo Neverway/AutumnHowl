@@ -59,3 +59,32 @@ public class AuHoGameState
     public int deaths = 0;
     public float playtime = 0;
 }
+
+[Serializable]
+public class UsingEffect
+{
+    public Effect effect;
+    public Affected affected;
+    public float amount;
+}
+
+[Serializable]
+public enum Effect
+{
+    none,
+    heal,
+    damage,
+    corrupt,
+    attack,
+    strength,
+    defense,
+}
+
+[Serializable]
+public enum Affected
+{
+    none,
+    user,
+    target,
+    all,
+}
