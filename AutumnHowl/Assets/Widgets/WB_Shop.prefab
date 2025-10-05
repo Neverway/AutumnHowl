@@ -39,81 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1208343975410386629
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4613701953987945104}
-  - component: {fileID: 2718672036550386764}
-  - component: {fileID: 6839311065864948418}
-  m_Layer: 5
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4613701953987945104
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208343975410386629}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5842279307202196180}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2718672036550386764
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208343975410386629}
-  m_CullTransparentMesh: 1
---- !u!114 &6839311065864948418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208343975410386629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6223068527f3883c5a1f3a90860a5ae5, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1499548525979992988
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +298,7 @@ GameObject:
   - component: {fileID: 2090816684832164961}
   - component: {fileID: 1963504927121737818}
   - component: {fileID: 1858818392721688320}
+  - component: {fileID: 5158140350808197980}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -433,6 +359,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: Play
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Open
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5158140350808197980}
+        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
+        m_MethodName: CallEvent
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -513,6 +451,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5158140350808197980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859985481638387513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 1
+  textEvent:
+    frames:
+    - name: Shop Keeper
+      chatContent: '*Whatcha got for me?'
+      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 1
+      preventTextContinuing: 1
+      autoProgressOnComplete: 0
 --- !u!1 &1938869312959969076
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +708,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4613701953987945104}
   - {fileID: 3355338341327668119}
   - {fileID: 7731562807101132899}
   - {fileID: 2090816684832164961}
@@ -802,6 +764,21 @@ MonoBehaviour:
   - {fileID: 1846228686528428175}
   - {fileID: 3997973674284076665}
   inventoryList: {fileID: 8683514532719970696}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6177928957136497922}
+        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
+        m_MethodName: CallEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4688198519885429009
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +790,7 @@ GameObject:
   - component: {fileID: 3355338341327668119}
   - component: {fileID: 1132765533306684503}
   - component: {fileID: 7019164940185972375}
+  - component: {fileID: 6177928957136497922}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -877,6 +855,18 @@ MonoBehaviour:
           m_StringArgument: Open
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6177928957136497922}
+        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
+        m_MethodName: CallEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Open
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBack:
     m_PersistentCalls:
       m_Calls: []
@@ -901,6 +891,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6177928957136497922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688198519885429009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 1
+  textEvent:
+    frames:
+    - name: Shop Keeper
+      chatContent: '*What can I do for ya?'
+      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 1
+      preventTextContinuing: 1
+      autoProgressOnComplete: 0
 --- !u!1 &4791272073102957114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1339,7 @@ GameObject:
   - component: {fileID: 7731562807101132899}
   - component: {fileID: 7729737390465376851}
   - component: {fileID: 7675176318286310187}
+  - component: {fileID: 8606063772834655546}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1382,6 +1398,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: Play
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Open
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8606063772834655546}
+        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
+        m_MethodName: CallEvent
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1462,6 +1490,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8606063772834655546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507495740873202073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 1
+  textEvent:
+    frames:
+    - name: 
+      chatContent: '*LIZ INSERT ITEM DESC HERE'
+      portrait: {fileID: 0}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 2
+      preventTextSkipping: 1
+      preventTextContinuing: 1
+      autoProgressOnComplete: 0
 --- !u!1 &6268463673513234247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1526,7 @@ GameObject:
   - component: {fileID: 8075251507906951072}
   - component: {fileID: 7354453225230661580}
   - component: {fileID: 8739758254918377467}
+  - component: {fileID: 2870384229666970337}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1528,6 +1582,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: Play
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Open
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2870384229666970337}
+        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
+        m_MethodName: CallEvent
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1608,6 +1674,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2870384229666970337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268463673513234247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 1
+  textEvent:
+    frames:
+    - name: Shop Keeper
+      chatContent: '*What ya wanna know?'
+      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 1
+      preventTextContinuing: 1
+      autoProgressOnComplete: 0
 --- !u!1 &6846509268537742736
 GameObject:
   m_ObjectHideFlags: 0

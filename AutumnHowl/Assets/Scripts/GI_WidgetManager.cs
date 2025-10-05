@@ -118,6 +118,12 @@ public class GI_WidgetManager : MonoBehaviour
         return null;
     }
 
+    public bool TryGetExistingWidget(string _widgetName, out GameObject _result)
+    {
+        _result = GetExistingWidget(_widgetName);
+        return _result != null;
+    }
+
 
     #endregion
 }

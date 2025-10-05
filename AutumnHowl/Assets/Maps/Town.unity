@@ -123,6 +123,94 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &16827367
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2847026067039455842, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_Name
+      value: Volume_TriggerInteract
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 880130536}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CallEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Func_TextEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2847026067039455842, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 880130536}
+  m_SourcePrefab: {fileID: 100100000, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
 --- !u!1001 &27851841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3806,6 +3894,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3083713600096094931, guid: 0d63b29d0a940173585b83e02c2443f1, type: 3}
   m_PrefabInstance: {fileID: 836850266}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &880130531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2847026067039455842, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+  m_PrefabInstance: {fileID: 16827367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &880130536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880130531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 0
+  textEvent:
+    frames:
+    - name: Autumn
+      chatContent: '*This is a test of the dialogue chatting system!'
+      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 1
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: 
+      chatContent: '*This is a test of the monologue chatting system!'
+      portrait: {fileID: 0}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 0
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
 --- !u!1001 &886946818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14401,3 +14529,4 @@ SceneRoots:
   - {fileID: 359402374}
   - {fileID: 304741627}
   - {fileID: 380344626}
+  - {fileID: 16827367}

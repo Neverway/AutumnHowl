@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class WB_Shop : MonoBehaviour
@@ -31,6 +32,7 @@ public class WB_Shop : MonoBehaviour
     public List<WidgetSelectable_TMPText> buySlots;
     public List<WidgetSelectable_TMPText> sellSlots;
     public Text_Inventory inventoryList;
+    public UnityEvent OnStart;
     private GI_AuHoGameState gameState;
 
 
@@ -43,6 +45,7 @@ public class WB_Shop : MonoBehaviour
     {
         UpdateBuyables();
         UpdateSellables();
+        OnStart.Invoke();
     }
 
 
@@ -77,6 +80,7 @@ public class WB_Shop : MonoBehaviour
     
     private IEnumerator ExitCoroutine()
     {
+        GameInstance.Get<GI_TextboxManager>().Reset();
         GameInstance.Get<GI_TransitionManager>().Fadeout();
         yield return new WaitForSeconds(0.5f);
         GameInstance.Get<GI_WorldLoader>().Load("Town", "Shop");
