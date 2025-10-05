@@ -30,7 +30,8 @@ public class GI_TextboxManager : MonoBehaviour
     private string currentTextContent;
     private float currentTextTypeDelay;
     private int currentFrame;
-    private bool performingMarkup;
+    private bool performingRegularMarkup, performingSpecialMarkup;
+    private Vector2Int specialMarkupIndex;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -135,18 +136,82 @@ public class GI_TextboxManager : MonoBehaviour
         for (int i = 0; i < _fullTextContent.Length; i++)
         {
             // Check for markups
-            var substringCharacter = _fullTextContent[i];
-            if (substringCharacter == '<') performingMarkup = true;
-            if (substringCharacter == '>') performingMarkup = false;
+            CheckForMarkups(_fullTextContent, i, out i);
+            if (i >= _fullTextContent.Length) break;
             
-            currentTextContent = _fullTextContent.Substring(0, i+1);
-            if (!performingMarkup) yield return new WaitForSeconds(currentTextTypeDelay);
+            var currentChar = _fullTextContent[i];
+            if (!performingSpecialMarkup) currentTextContent += currentChar;
+
+            if (!performingSpecialMarkup && !performingRegularMarkup)
+            {
+                yield return new WaitForSeconds(currentTextTypeDelay);
+            }
         }
         currentlyPrinting = false;
 
         _onFrameCompleted.Invoke();
         
         if (currentTextEvent.frames[currentFrame].autoProgressOnComplete) PrintNextFrame();
+    }
+
+    private void CheckForMarkups(string _fullTextContent, int _index, out int _outIndex)
+    {
+        var outIndexResult = _index;
+        var substringCharacter = _fullTextContent[_index];
+        if (substringCharacter == '<') performingRegularMarkup = true;
+        if (substringCharacter == '>') performingRegularMarkup = false;
+        if (substringCharacter == '{')
+        {
+            specialMarkupIndex.x = _index+1;
+            performingSpecialMarkup = true;
+        }
+
+        if (substringCharacter == '}')
+        {
+            specialMarkupIndex.y = _index;
+            if (performingSpecialMarkup)
+            {
+                var totalCommands = _fullTextContent.Substring(specialMarkupIndex.x, specialMarkupIndex.y - specialMarkupIndex.x).Trim(' ').Split(',');
+                foreach (var command in totalCommands)
+                {
+                    var specialCommand = command.Trim(' ').Split('=');
+                    switch (specialCommand[0])
+                    {
+                        case "col":
+                            switch (specialCommand[1])
+                            {
+                                case "":
+                                    currentTextContent += "<color=#ffffff>";
+                                    break;
+                                case "key":
+                                    currentTextContent += "<color=#ffe04d>";
+                                    break;
+                                case "stat":
+                                    currentTextContent += "<color=#ffad2f>";
+                                    break;
+                            }
+                            break;
+                        case "spd":
+                            switch (specialCommand[1])
+                            {
+                                case "stat":
+                                    currentTextTypeDelay = 0.01f;
+                                    break;
+                                default:
+                                    float.TryParse(specialCommand[1], out currentTextTypeDelay);
+                                    break;
+                            }
+                            break;
+                        case "por":
+                    
+                            break;
+                    }
+                }
+            }
+            performingSpecialMarkup = false;
+            outIndexResult += 1;
+        }
+        _outIndex = outIndexResult;
     }
 
     private bool MoveNext()
@@ -182,8 +247,10 @@ public class GI_TextboxManager : MonoBehaviour
 
     public void Reset()
     {
+        StopAllCoroutines();
         textEventActive = false;
-        performingMarkup = false;
+        performingRegularMarkup = false;
+        performingSpecialMarkup = false;
         currentTextContent = "";
     }
 

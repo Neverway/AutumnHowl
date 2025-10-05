@@ -742,6 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698ddfb2a65ddb4369405a8d6b778d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buyDescriptionTextEvent: {fileID: 8606063772834655546}
   buyableItems:
   - {fileID: 11400000, guid: 212ecd547de670133b09a7fe60a3e367, type: 2}
   - {fileID: 11400000, guid: c9737e1ef110b8e5cb447213479bd251, type: 2}
@@ -749,7 +750,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b83b8afcd240af860b711ff6888948b6, type: 2}
   - {fileID: 11400000, guid: 4f26d5fb7dfa68ebfa23a2636fe3f24e, type: 2}
   - {fileID: 11400000, guid: 36c0c8bdc090101198faac4ead9252f6, type: 2}
-  - {fileID: 11400000, guid: b4cd49f58ad2e27c8891b517485961b3, type: 2}
   buySlots:
   - {fileID: 6193484794906443154}
   - {fileID: 992242656571392573}
@@ -1412,18 +1412,6 @@ MonoBehaviour:
           m_StringArgument: Open
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8606063772834655546}
-        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
-        m_MethodName: CallEvent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Open
-          m_BoolArgument: 0
-        m_CallState: 2
   OnBack:
     m_PersistentCalls:
       m_Calls:
@@ -1512,7 +1500,7 @@ MonoBehaviour:
   textEvent:
     frames:
     - name: 
-      chatContent: '*LIZ INSERT ITEM DESC HERE'
+      chatContent: 
       portrait: {fileID: 0}
       OnFrameCompleted:
         m_PersistentCalls:
@@ -3651,7 +3639,8 @@ MonoBehaviour:
       preventTextContinuing: 0
       autoProgressOnComplete: 0
     - name: Shop Keeper
-      chatContent: '*You''re here planning to slay The Beast, right?'
+      chatContent: '*You''re here planning to slay {col=key, spd=0.05}The Beast{col=,
+        spd=0.02}, right?'
       portrait: {fileID: 0}
       OnFrameCompleted:
         m_PersistentCalls:
@@ -3661,8 +3650,8 @@ MonoBehaviour:
       preventTextContinuing: 0
       autoProgressOnComplete: 0
     - name: Shop Keeper
-      chatContent: '*It''s a long journey. I would recommend visiting <color=#ffbb88>The
-        Inn<color=#ffffff> when you get tired.'
+      chatContent: '*It''s a long journey. I would recommend visiting {col=key}The
+        Inn{col=} when you get tired.'
       portrait: {fileID: 0}
       OnFrameCompleted:
         m_PersistentCalls:
@@ -3808,7 +3797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -4523,7 +4512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -4696,7 +4685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -5168,7 +5157,7 @@ MonoBehaviour:
   textEvent:
     frames:
     - name: Shop Keeper
-      chatContent: '*Ah, <color=#FFBB77>The Beast.<color=#FFFFFF> '
+      chatContent: '*Ah, {col=key, spd=0.05}The Beast.{spd=0.02}'
       portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
@@ -5179,7 +5168,8 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Shop Keeper
       chatContent: '*Legend says it lurks beyond the barrier and can only be defeated
-        by a mythical blade. Guess no one cared to mention it was so heavy, huh? '
+        by a {col=key, spd=0.05}Mythical Blade.{spd=0.02, col=} Guess no one cared
+        to mention it was so heavy, huh? '
       portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
@@ -5320,7 +5310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -5493,7 +5483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -6747,7 +6737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280746262565623124, guid: 6b4b9689b8ede49c49b2222415bbd337, type: 3}
       propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

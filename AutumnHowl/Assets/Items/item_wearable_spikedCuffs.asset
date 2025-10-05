@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
   m_Name: item_wearable_spikedCuffs
   m_EditorClassIdentifier: 
-  id: item_wearable_cloakedCollar
-  displayName: Cloaked Collar
-  description: <Color=#ffff88>[Grants +10 ATK while worn]<Color=#ffffff>
+  id: item_wearable_spikedCuffs
+  displayName: Spiked Cuffs
+  description: '{spd=0.1, col=stat}[Grants +10 ATK while worn]{col=}'
   canNotDiscard: 1
   allowMultiple: 0
   buyCost: 25

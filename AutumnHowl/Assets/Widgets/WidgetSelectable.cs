@@ -46,8 +46,15 @@ public class WidgetSelectable : MonoBehaviour
 
     public virtual void SetSelected(bool _isSelected)
     {
-        if (_isSelected) OnSelected.Invoke();
-        else OnUnselected.Invoke();
+        if (_isSelected)
+        {
+            print($"SetSelected Invoked on {gameObject.name}");
+            OnSelected.Invoke();
+        }
+        else
+        {
+            OnUnselected.Invoke();
+        }
     }
 
 

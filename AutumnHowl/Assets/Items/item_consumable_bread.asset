@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_bread
   displayName: Bread
-  description: '<Color=#ffff88>[Heals 10 HP]<Color=#ffffff> It''s a loaf of bread. '
+  description: '{spd=0.1, col=stat}[Heals 10 HP]{col=} It''s a loaf of bread. '
   canNotDiscard: 0
+  allowMultiple: 1
   buyCost: 10
   sellCost: 8
   effectsOnConsume:

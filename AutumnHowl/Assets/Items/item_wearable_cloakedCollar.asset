@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_wearable_cloakedCollar
   displayName: Cloaked Collar
-  description: <Color=#ffff88>[Grants +25 DEF while worn]<Color=#ffffff> A small
-    black collar with a silver engraving. Looking at it took long makes your head
-    spin.
+  description: '{spd=0.1, col=stat}[Grants +25 DEF while worn]{col=} A small black
+    collar with a silver engraving. Looking at it took long makes your head spin.{col=stat}'
   canNotDiscard: 1
   allowMultiple: 0
   buyCost: 25

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_shieldCookie
   displayName: Shield Cookie
-  description: <Color=#ffff88>[Grants 10 DEF for 1 turn]<Color=#ffffff> A small cookie
-    shaped like a shield.
+  description: '{spd=0.1, col=stat}[Grants 10 DEF for 1 turn]{col=} A small cookie
+    shaped like a shield.'
   canNotDiscard: 0
+  allowMultiple: 1
   buyCost: 10
   sellCost: 8
   effectsOnConsume:

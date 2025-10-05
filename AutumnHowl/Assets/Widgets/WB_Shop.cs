@@ -28,6 +28,7 @@ public class WB_Shop : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    public Func_TextEvent buyDescriptionTextEvent;
     public List<Item> buyableItems;
     public List<WidgetSelectable_TMPText> buySlots;
     public List<WidgetSelectable_TMPText> sellSlots;
@@ -58,8 +59,11 @@ public class WB_Shop : MonoBehaviour
             {
                 buySlots[i].SetText($"${buyableItems[i].buyCost} - {buyableItems[i].displayName}");
                 buySlots[i].OnInteracted.RemoveAllListeners();
+                buySlots[i].OnSelected.RemoveAllListeners();
                 var itemIndex = i; // Cache this value so calling the listener doesn't break
                 buySlots[i].OnInteracted.AddListener(()=> { BuyItem(itemIndex); });
+                buySlots[i].OnSelected.AddListener(()=> { SetBuyDescription(itemIndex); });
+                buySlots[i].OnSelected.AddListener(()=> { buyDescriptionTextEvent.CallEvent(); });
             }
             else
             {
@@ -107,6 +111,12 @@ public class WB_Shop : MonoBehaviour
                 gameState.currentGameState.money -= buyableItems[_index].buyCost;
             }
         }
+    }
+
+    public void SetBuyDescription(int _index)
+    {
+        print($"Set description to index {_index}");
+        buyDescriptionTextEvent.textEvent.frames[0].chatContent = buyableItems[_index].description;
     }
 
     public void SellItem(int _index)

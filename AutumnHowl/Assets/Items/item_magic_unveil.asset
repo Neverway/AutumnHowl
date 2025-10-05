@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_magic_unveil
   displayName: Unveil Spell
-  description: <Color=#ffff88>[Cost 25 Power]<Color=#ffffff> Reveal hidden things
-    about the environment or a target.
+  description: '{spd=0.1, col=stat}[Cost 25 Power]{col=} Reveal hidden things about
+    the environment or a target.'
   canNotDiscard: 1
   allowMultiple: 0
   buyCost: 50

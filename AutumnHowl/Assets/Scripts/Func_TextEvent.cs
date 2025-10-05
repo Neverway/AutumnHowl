@@ -47,7 +47,6 @@ public class Func_TextEvent : MonoBehaviour
         {
             textboxManager = GameInstance.Get<GI_TextboxManager>();
         }
-        print("Called event");
         textboxManager.TryStartTextEvent(textEvent, overrideExistingEvents);
     }
 
