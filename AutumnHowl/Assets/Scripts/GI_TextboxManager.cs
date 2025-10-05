@@ -91,11 +91,11 @@ public class GI_TextboxManager : MonoBehaviour
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void StartTextEvent()
     {
+        print($"Started text event");
         // Open or get the textbox
         GetTextbox();
         
         // Display the first frame
-        currentTextTypeDelay = normalTextTypeDelay;
         currentFrame = -1;
         PrintNextFrame();
         
@@ -113,14 +113,16 @@ public class GI_TextboxManager : MonoBehaviour
         {
             widgetManager.AddWidget("WB_Textbox");
             textbox = widgetManager.GetExistingWidget("WB_Textbox").GetComponent<WB_Textbox>();
-            print($"Textbox wasn't found setting to {textbox}");
         }
+        print($"Got textbox {textbox}");
     }
 
     private void PrintNextFrame()
     {
+        print($"printing next frame... started at {currentFrame}");
         if (MoveNext())
         {
+            print($"movenext passed, printing {currentFrame}");
             var currentEventFrame = currentTextEvent.frames[currentFrame];
             StartCoroutine(TypeText(currentEventFrame.chatContent, currentEventFrame.OnFrameCompleted));
         }
@@ -189,6 +191,9 @@ public class GI_TextboxManager : MonoBehaviour
                                 case "stat":
                                     currentTextContent += "<color=#ffad2f>";
                                     break;
+                                case "err":
+                                    currentTextContent += "<color=#ff1111>";
+                                    break;
                             }
                             break;
                         case "spd":
@@ -224,8 +229,8 @@ public class GI_TextboxManager : MonoBehaviour
         
         textEventActive = false;
         Destroy(textbox.gameObject);
-        currentTextEvent.OnFinish.AddListener(()=>print("OnFinished Invoked!"));
         currentTextEvent.OnFinish.Invoke();
+        Clear();
         return false;
     }
 
@@ -233,10 +238,14 @@ public class GI_TextboxManager : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public bool TryStartTextEvent(TextEvent _textEvent, bool _overrideExistingEvents = false)
     {
+        print($"TESTESTEST: {_textEvent.frames[0].chatContent}");
+        print($"TryStart {_textEvent} {_overrideExistingEvents}");
         if (textEventActive is false || _overrideExistingEvents)
         {   
-            Reset();
+            print($"TryStart texteventactive = {textEventActive}");
+            Clear();
             currentTextEvent = _textEvent;
+            print($"Set currentTextEvent to {_textEvent}");
             StartTextEvent();
             return true;
         }
@@ -245,13 +254,16 @@ public class GI_TextboxManager : MonoBehaviour
         return false;
     }
 
-    public void Reset()
+    public void Clear()
     {
+        print($"Cleared textbox");
         StopAllCoroutines();
         textEventActive = false;
         performingRegularMarkup = false;
         performingSpecialMarkup = false;
         currentTextContent = "";
+        currentTextEvent = null;
+        currentTextTypeDelay = normalTextTypeDelay;
     }
 
     #endregion
@@ -263,7 +275,7 @@ public class TextFrames
     public string name;
     [TextArea] public string chatContent;
     public Sprite portrait;
-    public UnityEvent OnFrameCompleted;
+    public UnityEvent OnFrameCompleted = new UnityEvent();
     [Header("Frame Settings")] 
     public TextboxDisplayMode displayMode;
     public bool preventTextSkipping;
@@ -275,7 +287,7 @@ public class TextFrames
 public class TextEvent
 {
     public List<TextFrames> frames;
-    public UnityEvent OnFinish;
+    public UnityEvent OnFinish = new UnityEvent();
 }
 
 [Serializable]

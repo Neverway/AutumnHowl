@@ -10,6 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Func_TextEvent : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Func_TextEvent : MonoBehaviour
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public bool overrideExistingEvents;
     public TextEvent textEvent;
+    public UnityEvent OnCallFailed = new UnityEvent();
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -47,7 +49,12 @@ public class Func_TextEvent : MonoBehaviour
         {
             textboxManager = GameInstance.Get<GI_TextboxManager>();
         }
-        textboxManager.TryStartTextEvent(textEvent, overrideExistingEvents);
+
+        var result = textboxManager.TryStartTextEvent(textEvent, overrideExistingEvents);
+        if (result is false)
+        {
+            OnCallFailed.Invoke();
+        }
     }
 
 

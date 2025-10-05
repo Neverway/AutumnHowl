@@ -84,7 +84,7 @@ public class WB_Shop : MonoBehaviour
     
     private IEnumerator ExitCoroutine()
     {
-        GameInstance.Get<GI_TextboxManager>().Reset();
+        GameInstance.Get<GI_TextboxManager>().Clear();
         GameInstance.Get<GI_TransitionManager>().Fadeout();
         yield return new WaitForSeconds(0.5f);
         GameInstance.Get<GI_WorldLoader>().Load("Town", "Shop");

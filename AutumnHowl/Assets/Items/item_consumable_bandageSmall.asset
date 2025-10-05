@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_bandageSmall
   displayName: Sm. Bandage
-  description: '{spd=0.1, col=stat}[Heals 5 HP]{col=} A small bandage.'
+  description: '{spd=stat, col=stat}[Heals 5 HP]{col=} A small bandage.'
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 5

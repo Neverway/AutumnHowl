@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_magic_purify
   displayName: Purify Spell
-  description: '{spd=0.1, col=stat}[Cost 25 Power] [Removes 25 Corruption]{col=}
+  description: '{spd=stat, col=stat}[Cost 25 Power] [Removes 25 Corruption]{col=}
     Sacrifice your strength to restore sanity.'
   canNotDiscard: 1
   allowMultiple: 0
