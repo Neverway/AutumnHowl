@@ -128,7 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5147100074f7bb056a6cac34f46ab87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalTextTypeDelay: 0.03
+  normalTextTypeDelay: 0.02
   skippingTextTypeDelay: 0.01
   currentTextEvent:
     frames: []
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []

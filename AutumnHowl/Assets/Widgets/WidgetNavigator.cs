@@ -38,6 +38,8 @@ public class WidgetNavigator : MonoBehaviour
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private bool initialized;
+    [Tooltip("If this is enabled, navigation inputs are disabled")]
+    private bool initialInputDelay;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -66,16 +68,17 @@ public class WidgetNavigator : MonoBehaviour
             // Initialize the element states
             SetElementStates();
         }
-        
         if (activelyNavigating)
         {
             GetIndexingInputs();
-            selectableElements[currentIndex].SetSelected(true); // This line is required here to fix a bug caused by the hideIndicatorOnInactive statement below
+            //selectableElements[currentIndex].SetSelected(true); 
+            //Debug.Log("This is the SpaceCat Lore"); // This line is required here to fix a bug caused by the hideIndicatorOnInactive statement below
         }
+        /*
         else if (hideIndicatorOnInactive)
         {
             selectableElements[currentIndex].SetSelected(false);
-        }
+        }*/
     }
 
 
@@ -97,6 +100,7 @@ public class WidgetNavigator : MonoBehaviour
     /// </summary>
     private void GetIndexingInputs()
     {
+        if (initialInputDelay) return;
         switch (navigationMode)
         {
             case NavigationMode.Vertical:
@@ -141,12 +145,22 @@ public class WidgetNavigator : MonoBehaviour
         }
     }
 
+    private IEnumerator StartInitialInputDelay()
+    {
+        initialInputDelay = true;
+        yield return new WaitForSeconds(0.2f);
+        initialInputDelay = false;
+    }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void SetIsNavigating(bool _isNavigating)
     {
         activelyNavigating = _isNavigating;
-        if (_isNavigating) OnNavigatable.Invoke();
+        if (_isNavigating)
+        {
+            StartCoroutine(StartInitialInputDelay());
+            OnNavigatable.Invoke();
+        }
     }
 
 

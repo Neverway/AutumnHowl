@@ -47,23 +47,27 @@ public class WB_Textbox : MonoBehaviour
                 portrait.enabled = false;
                 name.enabled = false;
                 chat.rectTransform.offsetMin = new Vector2(15, 15);
+                chat.rectTransform.offsetMax = new Vector2(-15, -15);
                 break;
             case TextboxDisplayMode.dialogue:
                 portrait.enabled = true;
                 name.enabled = true;
                 chat.rectTransform.offsetMin = new Vector2(100, 15);
+                chat.rectTransform.offsetMax = new Vector2(-15, -15);
                 break;
             case TextboxDisplayMode.shopMono:
                 SetDrawInBack();
                 portrait.enabled = false;
                 name.enabled = false;
-                chat.rectTransform.offsetMin = new Vector2(15, 100);
+                chat.rectTransform.offsetMin = new Vector2(15, 15);
+                chat.rectTransform.offsetMax = new Vector2(-200, -15);
                 break;
             case TextboxDisplayMode.shopDia:
                 SetDrawInBack();
                 portrait.enabled = true;
                 name.enabled = true;
-                chat.rectTransform.offsetMin = new Vector2(100, 100);
+                chat.rectTransform.offsetMin = new Vector2(100, 15);
+                chat.rectTransform.offsetMax = new Vector2(-200, -15);
                 break;
         }
     }

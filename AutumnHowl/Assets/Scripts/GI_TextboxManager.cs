@@ -159,6 +159,8 @@ public class GI_TextboxManager : MonoBehaviour
         
         textEventActive = false;
         Destroy(textbox.gameObject);
+        currentTextEvent.OnFinish.AddListener(()=>print("OnFinished Invoked!"));
+        currentTextEvent.OnFinish.Invoke();
         return false;
     }
 
@@ -166,14 +168,13 @@ public class GI_TextboxManager : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public bool TryStartTextEvent(TextEvent _textEvent, bool _overrideExistingEvents = false)
     {
-        print("Called event 2");
         if (textEventActive is false || _overrideExistingEvents)
-        {
+        {   
+            Reset();
             currentTextEvent = _textEvent;
             StartTextEvent();
             return true;
         }
-        print("failed Called event");
         
         // Failed to start, an event was already running
         return false;
@@ -183,6 +184,7 @@ public class GI_TextboxManager : MonoBehaviour
     {
         textEventActive = false;
         performingMarkup = false;
+        currentTextContent = "";
     }
 
     #endregion
@@ -206,6 +208,7 @@ public class TextFrames
 public class TextEvent
 {
     public List<TextFrames> frames;
+    public UnityEvent OnFinish;
 }
 
 [Serializable]

@@ -3762,6 +3762,141 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8392324193076840830, guid: b68833da8b6997ff49f918822253b713, type: 3}
   m_PrefabInstance: {fileID: 810907838}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &818169040
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2847026067039455842, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_Name
+      value: Volume_TriggerInteract (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 818169042}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CallEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Func_TextEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2847026067039455842, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 818169042}
+  m_SourcePrefab: {fileID: 100100000, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+--- !u!1 &818169041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2847026067039455842, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+  m_PrefabInstance: {fileID: 818169040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &818169042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818169041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 0
+  textEvent:
+    frames:
+    - name: 
+      chatContent: '*There is a strange man back here.'
+      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 0
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: 
+      chatContent: '*Sell him your used bread?'
+      portrait: {fileID: 0}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 0
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1001 &830902598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3934,6 +4069,9 @@ MonoBehaviour:
       preventTextSkipping: 0
       preventTextContinuing: 0
       autoProgressOnComplete: 0
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1001 &886946818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14530,3 +14668,4 @@ SceneRoots:
   - {fileID: 304741627}
   - {fileID: 380344626}
   - {fileID: 16827367}
+  - {fileID: 818169040}
