@@ -24,18 +24,24 @@ public class MapGenerator : MonoBehaviour
     // Private Variables
     //=-----------------=
 
-    [SerializeField] private int mapWidth = 5;
-    [SerializeField] private int mapHeight = 5;
-    private MapNode[,] mapNodes;
+    [SerializeField] private int mapWidth = 5; //width of node map
+    [SerializeField] private int mapHeight = 5; //height of node map
+    private MapNode[,] mapNodes; //Grid of "rooms" (nodes) that the tiles are generated from
 
-    public const int directionCount = 4;
+    public const int directionCount = 4; //The directions the random walk can go (change if modifying mapgen to use different grid)
 
-    [SerializeField] private int roomWidth = 10;
-    [SerializeField] private int roomHeight = 8;
+    [SerializeField] private int roomWidth = 10; //width of rooms in tiles
+    [SerializeField] private int roomHeight = 8; //width of rooms in tiles
 
-    [SerializeField] private int pathWidth = 3;
-    private int pathRadius;
-    [SerializeField] private float pathWidthRandomness = 2;
+    [SerializeField] private int pathWidth = 3; //Width of the path through the rooms
+    private int pathRadius; //calculated path radius (saved for optimization)
+    [SerializeField] private float pathWidthRandomness = 2; //Randomness amount for the path width (affects visuals only)
+
+    private int branchLength; //ticks up how long the generator has gone without branching.
+    [SerializeField] private int maxBranchLength; //at this length, we jump to a new location
+
+    [SerializeField] private bool useSeed = false; //Whether to use specified seed
+    [SerializeField] private int seed = 1000; //Random seed. For testing only.
 
     //=-----------------=
     // Reference Variables
@@ -149,6 +155,11 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap ()
     {
+        if (useSeed)
+        {
+            UnityEngine.Random.InitState (seed);
+        }
+        branchLength = 0;
         mapNodes = new MapNode[mapWidth, mapHeight];
         for (int y = 0; y < mapHeight; y++)
         {
@@ -209,6 +220,9 @@ public class MapGenerator : MonoBehaviour
     private void GenerateFromNode (int x, int y)
     {
         PrintNodes ();
+        
+        branchLength++;
+
         var node = mapNodes[x, y];
         node.visited = true;
         int possibleNodes = 0;
@@ -236,6 +250,15 @@ public class MapGenerator : MonoBehaviour
         if (possibleNodes == 0)
         {
             //Dead End
+            branchLength = 0;
+            return;
+        }
+
+        if (branchLength > maxBranchLength)
+        {
+            branchLength = 0;
+            PickRandomNode ();
+            GenerateFromNode(x, y);
             return;
         }
 
@@ -294,6 +317,37 @@ public class MapGenerator : MonoBehaviour
                 }
         }
         GenerateFromNode (x, y);
+    }
+
+    private void PickRandomNode ()
+    {
+        List<Vector2Int> nodes = new List<Vector2Int>();
+        for (int x = 0; x < mapWidth; x++)
+        {
+            for (int y = 0; y < mapHeight; y++)
+            {
+                if (mapNodes[x, y].visited)
+                {
+                    if (
+                        (x > 0 && !mapNodes[x - 1, y].visited)
+                        || (x < mapWidth-1 && !mapNodes[x+1, y].visited)
+                        || (y > 0 && !mapNodes[x, y-1].visited)
+                        || (y < mapHeight - 1 && !mapNodes[x, y+1].visited)
+                        )
+                    {
+                        //if the node has visit-able nodes, add it to a list.
+                        nodes.Add(new Vector2Int(x, y));
+                    }
+                }
+            }
+        }
+        if (nodes.Count == 0)
+        {
+            return;
+        }
+        int rand = UnityEngine.Random.Range (0, nodes.Count);
+        Debug.Log ("Generating from " + nodes[rand].x + "," + nodes[rand].y);
+        GenerateFromNode (nodes[rand].x, nodes[rand].y);
     }
 
     private void GenerateTilesFromNodes ()
