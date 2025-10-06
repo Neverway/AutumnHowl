@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -960,6 +959,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1001 &268014404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2136,6 +2136,10 @@ PrefabInstance:
     - target: {fileID: 7876762255231928604, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Simulated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876762255231928604, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_Constraints
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8382,6 +8386,10 @@ PrefabInstance:
     - target: {fileID: 7876762255231928604, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Simulated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876762255231928604, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_Constraints
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
