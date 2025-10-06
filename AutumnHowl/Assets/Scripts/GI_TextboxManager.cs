@@ -91,7 +91,6 @@ public class GI_TextboxManager : MonoBehaviour
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void StartTextEvent()
     {
-        print($"Started text event");
         // Open or get the textbox
         GetTextbox();
         
@@ -114,15 +113,12 @@ public class GI_TextboxManager : MonoBehaviour
             widgetManager.AddWidget("WB_Textbox");
             textbox = widgetManager.GetExistingWidget("WB_Textbox").GetComponent<WB_Textbox>();
         }
-        print($"Got textbox {textbox}");
     }
 
     private void PrintNextFrame()
     {
-        print($"printing next frame... started at {currentFrame}");
         if (MoveNext())
         {
-            print($"movenext passed, printing {currentFrame}");
             var currentEventFrame = currentTextEvent.frames[currentFrame];
             StartCoroutine(TypeText(currentEventFrame.chatContent, currentEventFrame.OnFrameCompleted));
         }
@@ -238,14 +234,10 @@ public class GI_TextboxManager : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public bool TryStartTextEvent(TextEvent _textEvent, bool _overrideExistingEvents = false)
     {
-        print($"TESTESTEST: {_textEvent.frames[0].chatContent}");
-        print($"TryStart {_textEvent} {_overrideExistingEvents}");
         if (textEventActive is false || _overrideExistingEvents)
         {   
-            print($"TryStart texteventactive = {textEventActive}");
             Clear();
             currentTextEvent = _textEvent;
-            print($"Set currentTextEvent to {_textEvent}");
             StartTextEvent();
             return true;
         }
@@ -256,7 +248,6 @@ public class GI_TextboxManager : MonoBehaviour
 
     public void Clear()
     {
-        print($"Cleared textbox");
         StopAllCoroutines();
         textEventActive = false;
         performingRegularMarkup = false;

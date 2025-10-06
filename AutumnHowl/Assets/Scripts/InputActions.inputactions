@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputActions",
     "maps": [
         {
@@ -9,7 +10,7 @@
                     "name": "MoveUp",
                     "type": "Button",
                     "id": "01d99e69-e7f7-46a0-b59d-6c62a8aa0a33",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
