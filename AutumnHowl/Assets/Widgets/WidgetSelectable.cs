@@ -48,7 +48,6 @@ public class WidgetSelectable : MonoBehaviour
     {
         if (_isSelected)
         {
-            print($"SetSelected Invoked on {gameObject.name}");
             OnSelected.Invoke();
         }
         else
