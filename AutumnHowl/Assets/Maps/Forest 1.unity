@@ -344,7 +344,16 @@ MonoBehaviour:
   tilemapCollision: {fileID: 1994119680}
   collisionTile: {fileID: 11400000, guid: c029266316062f8cda22f9ffa4430a19, type: 2}
   emptyTile: {fileID: 11400000, guid: 19f21e5f03930f3d690cee0c3ee36df7, type: 2}
-  decor: []
+  propList:
+  - {fileID: 6659489718510107595, guid: c55f51174d7d9b344be46388d87da8a3, type: 3}
+  - {fileID: 6659489718510107595, guid: c55f51174d7d9b344be46388d87da8a3, type: 3}
+  - {fileID: 6659489718510107595, guid: dfd230f50ccad4d4dbf66fe8a47f51e1, type: 3}
+  - {fileID: 6659489718510107595, guid: 40e0229752032fe40b0bed66f4dd46e6, type: 3}
+  treeList:
+  - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
+  - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
+  - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
+  - {fileID: 6659489718510107595, guid: c88afa07151b9f34a800069a3e562ca3, type: 3}
 --- !u!1 &970689508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,11 +1059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 51.8
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.14
+      value: 26.2
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.z

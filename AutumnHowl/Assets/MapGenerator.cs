@@ -47,6 +47,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Tile collisionTile;
     [SerializeField] private Tile emptyTile;
     [SerializeField] private GameObject[] propList;
+    [SerializeField] private GameObject[] treeList;
 
     //=-----------------=
     // Mono Functions
@@ -165,29 +166,36 @@ public class MapGenerator : MonoBehaviour
 
     private void ScatterTrees ()
     {
-        if (propList.Length == 0)
-        {
-            Debug.LogError ("map generator lacks decor objects");
-        }
         for (int x = 0; x <mapWidth * roomWidth; x+=2)
         {
             for (int y = 0; y< mapHeight * roomHeight; y+=2)
             {
                 if (tilemapCollision.GetTile (new Vector3Int (x, y, 0)) == collisionTile)
                 {
-                    PlaceProp (x, y);
+                    PlaceProp (x, y, treeList);
+                    PlaceProp (x, y, propList);
                 }
             }
         }
     }
 
-    private void PlaceProp (float x, float y)
+    private void PlaceProp (float x, float y, GameObject[] props)
     {
-        GameObject prop = Instantiate (propList[UnityEngine.Random.Range(0,propList.Length)]);
+        if (props.Length == 0)
+        {
+            Debug.LogError ("A props list was empty. Skipping.");
+            return;
+        }
+        GameObject prop = Instantiate (props[UnityEngine.Random.Range(0, props.Length)]);
         prop.transform.position = new Vector3 (
             x + UnityEngine.Random.Range (-1f, 1f),
             y + UnityEngine.Random.Range (-1f, 1f),
             prop.transform.position.z);
+        if (UnityEngine.Random.Range (0f, 1f) > .5f)
+        {
+            // 50/50 chance to flip the prop
+            prop.transform.localScale = new Vector3 (-prop.transform.localScale.x,prop.transform.localScale.y,prop.transform.localScale.z);
+        }
     }
 
     private bool IsNodeWalkable (int x, int y)
