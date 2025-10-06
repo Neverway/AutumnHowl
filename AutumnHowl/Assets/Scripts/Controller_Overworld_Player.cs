@@ -35,6 +35,7 @@ public class Controller_Overworld_Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private GameObject inventoryWidget;
     private GI_AuHoGameState gameState;
+    [SerializeField] private Animator animator;
 
 
     #endregion
@@ -58,6 +59,7 @@ public class Controller_Overworld_Player : MonoBehaviour
 
         if (inMenu)
         {
+            animator.SetBool("walking", false);
             return;
         }
 
@@ -106,6 +108,15 @@ public class Controller_Overworld_Player : MonoBehaviour
 
         if (inputActions.Action.IsPressed()) currentMoveSpeed = sprintSpeed;
         else currentMoveSpeed = walkSpeed;
+        
+        animator.SetFloat("walkX", movement.x);
+        animator.SetFloat("walkY", movement.y);
+        animator.SetBool("walking", movement.x != 0 || movement.y != 0);
+        if (animator.GetBool("walking"))
+        {
+            animator.SetFloat("idleX", movement.x);
+            animator.SetFloat("idleY", movement.y);
+        }
     }
     
 

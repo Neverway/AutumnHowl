@@ -108,7 +108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2329664329643371849
 Transform:
   m_ObjectHideFlags: 0
@@ -184,6 +184,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_labelHash
+      value: 5.4366404e-19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_CategoryHash
+      value: 0.009161512
+      objectReference: {fileID: 0}
     - target: {fileID: 1247483541322235961, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Range
       value: 5
@@ -230,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Name
-      value: Character_Autumn Variant
+      value: Character_Autumn
       objectReference: {fileID: 0}
     - target: {fileID: 8149108149484254407, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -250,6 +258,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4738709400823522955}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+--- !u!95 &1867420067129031397 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 8642731249078861319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2403621237896906538 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
@@ -268,7 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 2
-  sprintSpeed: 3
+  sprintSpeed: 2.5
+  canPause: 1
+  animator: {fileID: 1867420067129031397}
 --- !u!4 &6972457444599413610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
