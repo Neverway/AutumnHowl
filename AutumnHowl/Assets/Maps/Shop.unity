@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -247,6 +246,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6366712938765167761, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6601185223956943184, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: movement.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7876762255231928604, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
@@ -726,6 +729,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &1570955406
 MonoBehaviour:
   m_ObjectHideFlags: 0
