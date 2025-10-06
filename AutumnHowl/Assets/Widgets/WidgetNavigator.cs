@@ -62,7 +62,7 @@ public class WidgetNavigator : MonoBehaviour
 
     private void Update()
     {
-        if (!initialized)
+        if (!initialized && activelyNavigating)
         {
             initialized = true;
             // Initialize the element states
@@ -92,6 +92,7 @@ public class WidgetNavigator : MonoBehaviour
         {
             selectable.SetSelected(false);
         }
+        if (selectableElements.Count == 0) return;
         selectableElements[currentIndex].SetSelected(true);
     }
 
@@ -115,7 +116,7 @@ public class WidgetNavigator : MonoBehaviour
 
         if (inputActions.Interact.WasPressedThisFrame())
         {
-            selectableElements[currentIndex].Interact();
+            if (selectableElements.Count != 0) selectableElements[currentIndex].Interact();
         }
 
         if (inputActions.Action.WasPressedThisFrame())
@@ -128,6 +129,7 @@ public class WidgetNavigator : MonoBehaviour
     {
         if (inputAction.WasPressedThisFrame())
         {
+            if (selectableElements.Count == 0) return;
             if (enableWrapping)
             {
                 currentIndex += incrementIndex;
@@ -160,6 +162,17 @@ public class WidgetNavigator : MonoBehaviour
         {
             StartCoroutine(StartInitialInputDelay());
             OnNavigatable.Invoke();
+            if (hideIndicatorOnInactive && selectableElements.Count != 0)
+            {
+                selectableElements[currentIndex].SetSelected(true);
+            }
+        }
+        else
+        {
+            if (hideIndicatorOnInactive && selectableElements.Count != 0)
+            {
+                selectableElements[currentIndex].SetSelected(false);
+            }
         }
     }
 
