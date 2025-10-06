@@ -65,7 +65,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.00000013287452
+        value: 4.110237e-19
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -74,7 +74,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.16666667
-        value: 0.0000010044981
+        value: 8.499733e-19
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -83,7 +83,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.33333334
-        value: 0.0031620567
+        value: 3.2598907e-10
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -92,7 +92,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.5
-        value: 1.8158902e-20
+        value: 1.0378563e-32
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -101,7 +101,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.6666667
-        value: 1.8158902e-20
+        value: 1.0378563e-32
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -281,7 +281,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.00000013287452
+        value: 4.110237e-19
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -290,7 +290,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.16666667
-        value: 0.0000010044981
+        value: 8.499733e-19
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -299,7 +299,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.33333334
-        value: 0.0031620567
+        value: 3.2598907e-10
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -308,7 +308,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.5
-        value: 1.8158902e-20
+        value: 1.0378563e-32
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -317,7 +317,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.6666667
-        value: 1.8158902e-20
+        value: 1.0378563e-32
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
