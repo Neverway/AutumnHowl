@@ -14,12 +14,24 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public class Text_GoldCounter : MonoBehaviour
+public class Text_GameStateValue : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public string textDecoratorStart = "$ ";
     public string textDecoratorEnd = "";
+    public GameStateVariable gameStateVariable;
+    public enum GameStateVariable
+    {
+        level,
+        currentHealth,
+        maxHealth,
+        power,
+        corruption,
+        attack,
+        defense,
+        money
+    }
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -52,8 +64,34 @@ public class Text_GoldCounter : MonoBehaviour
             gameState = GameInstance.Get<GI_AuHoGameState>();
             return;
         }
-        
-        text.text = textDecoratorStart + gameState.currentGameState.money + textDecoratorEnd;
+
+        switch (gameStateVariable)
+        {
+            case GameStateVariable.level:
+                text.text = textDecoratorStart + gameState.currentGameState.level + textDecoratorEnd;
+                break;
+            case GameStateVariable.currentHealth:
+                text.text = textDecoratorStart + gameState.currentGameState.health + textDecoratorEnd;
+                break;
+            case GameStateVariable.maxHealth:
+                text.text = textDecoratorStart + gameState.currentGameState.health + textDecoratorEnd;
+                break;
+            case GameStateVariable.power:
+                text.text = textDecoratorStart + gameState.currentGameState.power + textDecoratorEnd;
+                break;
+            case GameStateVariable.corruption:
+                text.text = textDecoratorStart + gameState.currentGameState.corruption + textDecoratorEnd;
+                break;
+            case GameStateVariable.attack:
+                text.text = textDecoratorStart + gameState.currentGameState.attack + textDecoratorEnd;
+                break;
+            case GameStateVariable.defense:
+                text.text = textDecoratorStart + gameState.currentGameState.defense + textDecoratorEnd;
+                break;
+            case GameStateVariable.money:
+                text.text = textDecoratorStart + gameState.currentGameState.money + textDecoratorEnd;
+                break;
+        }
     }
 
 

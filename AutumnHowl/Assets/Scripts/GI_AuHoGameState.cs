@@ -50,9 +50,12 @@ public class AuHoGameState
 {
     public string map = "Town";
     public Vector2 overworldPosition;
+    public float level;
     public float health = 100;
     public float power = 0;
     public float corruption = 0;
+    public float attack = 0;
+    public float defense = 0;
     public int money = 0;
     public Inventory inventory = new Inventory();
     public int kills = 0;
