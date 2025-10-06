@@ -46,7 +46,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Tilemap tilemapCollision;
     [SerializeField] private Tile collisionTile;
     [SerializeField] private Tile emptyTile;
-    [SerializeField] private GameObject[] decor;
+    [SerializeField] private GameObject[] propList;
 
     //=-----------------=
     // Mono Functions
@@ -160,6 +160,34 @@ public class MapGenerator : MonoBehaviour
         Debug.Log ("Map Nodes Finished");
         GenerateTilesFromNodes ();
         Debug.Log ("Map Tiles Finished");
+        ScatterTrees ();
+    }
+
+    private void ScatterTrees ()
+    {
+        if (propList.Length == 0)
+        {
+            Debug.LogError ("map generator lacks decor objects");
+        }
+        for (int x = 0; x <mapWidth * roomWidth; x+=2)
+        {
+            for (int y = 0; y< mapHeight * roomHeight; y+=2)
+            {
+                if (tilemapCollision.GetTile (new Vector3Int (x, y, 0)) == collisionTile)
+                {
+                    PlaceProp (x, y);
+                }
+            }
+        }
+    }
+
+    private void PlaceProp (float x, float y)
+    {
+        GameObject prop = Instantiate (propList[UnityEngine.Random.Range(0,propList.Length)]);
+        prop.transform.position = new Vector3 (
+            x + UnityEngine.Random.Range (-1f, 1f),
+            y + UnityEngine.Random.Range (-1f, 1f),
+            prop.transform.position.z);
     }
 
     private bool IsNodeWalkable (int x, int y)
