@@ -24,30 +24,41 @@ public class MapGenerator : MonoBehaviour
     // Private Variables
     //=-----------------=
 
-    private int mapWidth = 5;
-    private int mapHeight = 5;
+    [SerializeField] private int mapWidth = 5;
+    [SerializeField] private int mapHeight = 5;
     private MapNode[,] mapNodes;
 
     public const int directionCount = 4;
+
+    [SerializeField] private int roomWidth = 10;
+    [SerializeField] private int roomHeight = 8;
+
+    [SerializeField] private int pathWidth = 3;
+    private int pathRadius;
+    [SerializeField] private float pathWidthRandomness = 2;
 
     //=-----------------=
     // Reference Variables
     //=-----------------=
 
+    [SerializeField] private Tilemap tilemapGround;
     [SerializeField] private RuleTile groundTile;
+    [SerializeField] private Tilemap tilemapCollision;
+    [SerializeField] private Tile collisionTile;
+    [SerializeField] private Tile emptyTile;
     [SerializeField] private GameObject[] decor;
 
     //=-----------------=
     // Mono Functions
     //=-----------------=
-    private void Start()
+    private void Start ()
     {
-        GenerateMap();
+        GenerateMap ();
     }
 
-    private void Update()
+    private void Update ()
     {
-    
+
     }
 
     //=-----------------=
@@ -61,7 +72,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                MapNode n = mapNodes[x,y];
+                MapNode n = mapNodes[x, y];
                 if (mapNodes[x, y].visited)
                 {
                     if (n.paths[0] && !n.paths[1] && !n.paths[2] && !n.paths[3])
@@ -132,21 +143,23 @@ public class MapGenerator : MonoBehaviour
             }
             p += "\n";
         }
-        Debug.Log(p);
+        Debug.Log (p);
     }
 
     private void GenerateMap ()
     {
         mapNodes = new MapNode[mapWidth, mapHeight];
-        for (int y = 0; y < mapHeight;y++)
+        for (int y = 0; y < mapHeight; y++)
         {
-            for (int x = 0; x < mapWidth;x++)
+            for (int x = 0; x < mapWidth; x++)
             {
-                mapNodes[x, y] = new MapNode();
+                mapNodes[x, y] = new MapNode ();
             }
         }
         GenerateFromNode (mapWidth / 2, 0);
         Debug.Log ("Map Nodes Finished");
+        GenerateTilesFromNodes ();
+        Debug.Log ("Map Tiles Finished");
     }
 
     private bool IsNodeWalkable (int x, int y)
@@ -164,22 +177,22 @@ public class MapGenerator : MonoBehaviour
         node.visited = true;
         int possibleNodes = 0;
         bool[] foundPaths = new bool[4];
-        if (IsNodeWalkable(x, y - 1))
+        if (IsNodeWalkable (x, y - 1))
         {
             possibleNodes++;
             foundPaths[0] = true;
         }
-        if (IsNodeWalkable(x, y + 1))
+        if (IsNodeWalkable (x, y + 1))
         {
             possibleNodes++;
             foundPaths[1] = true;
         }
-        if (IsNodeWalkable (x-1, y))
+        if (IsNodeWalkable (x - 1, y))
         {
             possibleNodes++;
             foundPaths[2] = true;
         }
-        if (IsNodeWalkable (x+1,y))
+        if (IsNodeWalkable (x + 1, y))
         {
             possibleNodes++;
             foundPaths[3] = true;
@@ -190,13 +203,13 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-            int rand = UnityEngine.Random.Range (0, possibleNodes);
+        int rand = UnityEngine.Random.Range (0, possibleNodes);
         int moveDirection = 0;
         int n = -1;
-            //We're going to check foundPaths until
-            //"n" is equal to our random number.
-            //This selects a path at random.
-        for (int i = 0;i < 4;i++)
+        //We're going to check foundPaths until
+        //"n" is equal to our random number.
+        //This selects a path at random.
+        for (int i = 0; i < 4; i++)
         {
             if (foundPaths[i])
             {
@@ -247,6 +260,86 @@ public class MapGenerator : MonoBehaviour
         GenerateFromNode (x, y);
     }
 
+    private void GenerateTilesFromNodes ()
+    {
+        pathRadius = pathWidth / 2;
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                PlaceNodeTiles (x * roomWidth, y * roomHeight, mapNodes[x, y]);
+            }
+        }
+    }
+
+
+    private void PlaceNodeTiles (int xoffset, int yoffset, MapNode node)
+    {
+        for (int x = 0; x < roomWidth; x++)
+        {
+            for (int y = 0; y < roomHeight; y++)
+            {
+                tilemapCollision.SetTile(new Vector3Int(x+xoffset, y+yoffset), collisionTile);
+            }
+        }
+        if (node.paths[0])
+        {
+            //north exit
+            for (int y = 0; y < roomHeight / 2; y++)
+            {
+                SplatGround (roomWidth / 2 + xoffset, y + yoffset);
+            }
+        }
+        if (node.paths[1])
+        {
+            //south exit
+            for (int y = roomHeight / 2; y < roomHeight; y++)
+            {
+                SplatGround (roomWidth / 2 + xoffset, y + yoffset);
+            }
+        }
+        if (node.paths[2])
+        {
+            //west exit
+            for (int x = 0; x < roomWidth / 2; x++)
+            {
+                SplatGround (x + xoffset, roomHeight / 2 + yoffset);
+            }
+        }
+        if (node.paths[3])
+        {
+            //east exit
+            for (int x = roomWidth / 2; x < roomWidth; x++)
+            {
+                SplatGround (x + xoffset, roomHeight / 2 + yoffset);
+            }
+        }
+    }
+
+    private void SplatGround (int _x, int _y)
+    {
+        int collRadius = pathRadius + (int)(pathWidthRandomness/2);
+        for (int x = -collRadius; x < collRadius; x++)
+        {
+            for (int y = -collRadius; y < collRadius; y++)
+            {
+                tilemapCollision.SetTile (new Vector3Int (_x + x, _y + y), null);
+            }
+        }
+
+        float randomRadius = (float)pathRadius + UnityEngine.Random.Range (0f, pathWidthRandomness) - (pathWidthRandomness/2f);
+        for (int x = -(int)randomRadius; x < (int)randomRadius; x++)
+        {
+            for (int y = -(int)randomRadius; y < (int)randomRadius; y++)
+            {
+                if (new Vector2(x,y).magnitude < randomRadius)
+                {
+                    tilemapGround.SetTile (new Vector3Int(_x + x, _y + y), groundTile);
+                }
+            }
+        }
+    }
+
     //=-----------------=
     // External Functions
     //=-----------------=
@@ -257,7 +350,7 @@ class MapNode
     public bool[] paths;
     public bool visited = false;
 
-    public MapNode  ()
+    public MapNode ()
     {
         paths = new bool[MapGenerator.directionCount];
     }
