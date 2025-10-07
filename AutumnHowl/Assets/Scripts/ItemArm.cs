@@ -26,6 +26,7 @@ public class ItemArm : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Animator charAnimator;
+    public GameObject charObject;
     public Animator itemAnimator;
 
 
@@ -35,11 +36,19 @@ public class ItemArm : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    private void Start()
+    {
+    }
 
-
-    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     public void Update()
     {
+        if (!charAnimator)
+        {
+            print("Char anim not found");
+            charAnimator = charObject.GetComponent<Animator>();
+            print(charAnimator);
+            return;
+        }
         itemAnimator.SetFloat("idleX", charAnimator.GetFloat("idleX"));
         itemAnimator.SetFloat("idleY", charAnimator.GetFloat("idleY"));
         itemAnimator.SetFloat("walkX", charAnimator.GetFloat("walkX"));
@@ -47,6 +56,9 @@ public class ItemArm : MonoBehaviour
         itemAnimator.SetBool("walking", charAnimator.GetBool("walking"));
     }
 
+
+
+    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 

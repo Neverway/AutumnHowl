@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charAnimator: {fileID: 1867420067129031397}
+  charObject: {fileID: 2403621237896906538}
   itemAnimator: {fileID: 7650744234431831741}
 --- !u!1 &6441825444075411899
 GameObject:
