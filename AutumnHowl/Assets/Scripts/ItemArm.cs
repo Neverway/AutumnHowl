@@ -25,7 +25,7 @@ public class ItemArm : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    public Animator charAnimator;
+    [SerializeField] private Animator charAnimator;
     public GameObject charObject;
     public Animator itemAnimator;
 
@@ -45,7 +45,7 @@ public class ItemArm : MonoBehaviour
         if (!charAnimator)
         {
             print("Char anim not found");
-            charAnimator = charObject.GetComponent<Animator>();
+            //charAnimator = charObject.GetComponent<Animator>();
             print(charAnimator);
             return;
         }
