@@ -153,22 +153,36 @@ public class ModifyCorruptionAction : EffectAction
 public class GiveItemsEffect : EffectAction
 {
     //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
-    public Item itemToGIve;
+    public Item itemToGive;
     public int count;
 
     public override void ApplyEffect(Character user)
     {
         Inventory inventoryToAddTo = GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory;
         for (int i = 0;  i < count; i++)
-            inventoryToAddTo.TryAddItem(itemToGIve);
+            inventoryToAddTo.TryAddItem(itemToGive);
     }
 
     public override string DescribeNoFormat()
     {
         string target = "self"; //Placeholder until target is implemented for giving items
         if (count == 0) return "";
-        if (count == 1) return $"[Give {target} {itemToGIve}] ";
-        return $"[Give {target} {count} {itemToGIve}] ";
+        if (count == 1) return $"[Give {target} {itemToGive}] ";
+        return $"[Give {target} {count} {itemToGive}] ";
 
     }
+}
+
+[Serializable]
+public class ModifierUntilEndOfSession : EffectAction
+{
+    //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    [Polymorphic, SerializeReference] public Modifier modifier;
+
+    public override void ApplyEffect(Character user)
+    {
+        modifier.RegisterModifier(multiRegister: true);
+    }
+
+    public override string DescribeNoFormat() => "[Permanent Boost???] ";
 }

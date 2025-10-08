@@ -7,8 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/New Magic Item", fileName = "item_magic_")]
@@ -46,9 +44,9 @@ public class Item_Magic : Item
 
         //Add power cost to description if cost is not 0
         if (powerCost != 0)
-            fullDescription += $"[{powerCost} power to cast] ";
+            fullDescription += $"[Costs {powerCost} PWR] ";
         else
-            fullDescription += "[No Cost] ";
+            fullDescription += "[No cast cost] ";
 
         //Add effects to description if there is defined effects
         if (effectsWhenCast != null)

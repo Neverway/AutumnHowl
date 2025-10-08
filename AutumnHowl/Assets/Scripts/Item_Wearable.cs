@@ -16,7 +16,7 @@ public class Item_Wearable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public List<UsingEffect> effectsWhileWorn;
+    [Polymorphic, SerializeReference] public Modifier[] effectsWhileWorn;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/

@@ -8,8 +8,6 @@
 //====================================================================================================================//
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -81,36 +79,4 @@ public abstract class Character : MonoBehaviour
 
 
     #endregion
-}
-
-[Serializable]
-public class CharacterStats
-{
-    [Header("Base Values")]
-    public float health = 100;
-    public float level = 0;
-    public int power = 5;
-    public int corruption = 0;
-    [Tooltip("When damage is taken, this is how much damage is negated")]
-    public int defense = 0;
-    public int attack = 5;
-    [Header("Max Values")]
-    public float maxHealth = 100;
-    public int maxPower = 100;
-    public int maxCorruption = 100;
-    
-    public float walkSpeed;
-    public float runSpeed;
-
-    public float PercentCurrentHealth => health / maxHealth;
-    public float PercentMissingHealth => 1f - PercentCurrentHealth;
-    public float MissingHealth => maxHealth - health;
-
-    public float PercentCurrentCorruption => ((float)corruption) / maxCorruption;
-    public float PercentMissingCorruption => 1f - PercentCurrentCorruption;
-    public float MissingCorruption => maxCorruption - corruption;
-
-    public float PercentCurrentPower => ((float)power) / maxPower;
-    public float PercentMissingPower => 1f - PercentCurrentPower;
-    public float MissingPower => maxPower - power;
 }

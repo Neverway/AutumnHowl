@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4764,6 +4763,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tinted_Lights
       objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: currentStats.modifier
+      value: 1234355927148920843
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920842]
+      value: Assembly-CSharp CharacterStatModifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920843]
+      value: Assembly-CSharp CharacterStatModifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920842].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920843].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920842].modifierType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920842].statToModify
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920843].modifierType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: managedReferences[1234355927148920843].statToModify
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6736,6 +6771,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8392324193076840830, guid: b68833da8b6997ff49f918822253b713, type: 3}
   m_PrefabInstance: {fileID: 1436376150}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1438257757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438257759}
+  - component: {fileID: 1438257758}
+  m_Layer: 0
+  m_Name: MODIFYSPEED
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1438257758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438257757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefd7a97ec995914da5064fd80e78cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allMods:
+  - rid: 1234355927148920844
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355927148920844
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 1
+        value: 2
+        statToModify: 5
+--- !u!4 &1438257759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438257757}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1014928, y: -4.6114407, z: -0.99648577}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1448769549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14635,3 +14725,4 @@ SceneRoots:
   - {fileID: 380344626}
   - {fileID: 942825698}
   - {fileID: 903930284}
+  - {fileID: 1438257759}
