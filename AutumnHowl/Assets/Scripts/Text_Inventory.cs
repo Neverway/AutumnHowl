@@ -52,7 +52,7 @@ public class Text_Inventory : MonoBehaviour
 
     private void Update()
     {
-        UpdateItemList();
+        //UpdateItemList();
     }
 
 
