@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -26,6 +27,7 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField] private int mapWidth = 5; //width of node map
     [SerializeField] private int mapHeight = 5; //height of node map
+    [SerializeField] private Vector2Int startPosition;
     private MapNode[,] mapNodes; //Grid of "rooms" (nodes) that the tiles are generated from
 
     public const int directionCount = 4; //The directions the random walk can go (change if modifying mapgen to use different grid)
@@ -43,6 +45,11 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private bool useSeed = false; //Whether to use specified seed
     [SerializeField] private int seed = 1000; //Random seed. For testing only.
 
+    private int farthestDistance = 0;
+    private Vector2Int farthestNode;
+
+    private List<Vector2Int> poiLocations = new List<Vector2Int>();
+
     //=-----------------=
     // Reference Variables
     //=-----------------=
@@ -54,6 +61,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Tile emptyTile;
     [SerializeField] private GameObject[] propList;
     [SerializeField] private GameObject[] treeList;
+
+    [SerializeField] private GameObject[] poiList; //point of interest list. These get placed on deadends.
 
     //=-----------------=
     // Mono Functions
@@ -168,11 +177,49 @@ public class MapGenerator : MonoBehaviour
                 mapNodes[x, y] = new MapNode ();
             }
         }
-        GenerateFromNode (mapWidth / 2, 0);
+        GenerateFromNode (startPosition.x, startPosition.y, -1);
         Debug.Log ("Map Nodes Finished");
         GenerateTilesFromNodes ();
         Debug.Log ("Map Tiles Finished");
         ScatterTrees ();
+        PrintDistances ();
+        foreach(var loc in poiLocations)
+        {
+            print (loc);
+        }
+        PlacePOIs ();
+    }
+
+    private void PlacePOIs ()
+    {
+        if (poiList.Length == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < poiList.Length; i++)
+        {
+            if (i >= poiLocations.Count)
+            {
+                return;
+            }
+            GameObject poi = Instantiate (poiList[i]);
+            poi.transform.position = new Vector3 (poiLocations[i].x * roomWidth + (roomWidth / 2),
+                poiLocations[i].y * roomHeight + (roomHeight/2), 0) ;
+        }
+    }
+
+    private void PrintDistances ()
+    {
+        string p = "\n";
+        for (int y = 0; y < mapHeight;y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                p += mapNodes[x, y].distanceFromStart.ToString ("D2")+",";
+            }
+            p += "\n";
+        }
+        print (p);
     }
 
     private void ScatterTrees ()
@@ -183,8 +230,8 @@ public class MapGenerator : MonoBehaviour
             {
                 if (tilemapCollision.GetTile (new Vector3Int (x, y, 0)) == collisionTile)
                 {
-                    PlaceProp (x, y, treeList);
-                    PlaceProp (x, y, propList);
+                    PlaceProp (x+1, y, treeList);
+                    PlaceProp (x+1, y, propList);
                 }
             }
         }
@@ -217,11 +264,17 @@ public class MapGenerator : MonoBehaviour
         return true;
     }
 
-    private void GenerateFromNode (int x, int y)
+    private void GenerateFromNode (int x, int y, int distanceFromStart, bool walking = false)
     {
         PrintNodes ();
         
         branchLength++;
+        if (distanceFromStart > farthestDistance)
+        {
+            farthestDistance = distanceFromStart;
+            farthestNode = new Vector2Int(x, y);
+        }
+        mapNodes[x, y].distanceFromStart = distanceFromStart;
 
         var node = mapNodes[x, y];
         node.visited = true;
@@ -250,6 +303,10 @@ public class MapGenerator : MonoBehaviour
         if (possibleNodes == 0)
         {
             //Dead End
+            if (walking)
+            {
+                poiLocations.Add(new Vector2Int(x, y));
+            }
             branchLength = 0;
             return;
         }
@@ -258,7 +315,7 @@ public class MapGenerator : MonoBehaviour
         {
             branchLength = 0;
             PickRandomNode ();
-            GenerateFromNode(x, y);
+            GenerateFromNode(x, y, distanceFromStart, true);
             return;
         }
 
@@ -288,7 +345,7 @@ public class MapGenerator : MonoBehaviour
                     //north
                     node.paths[0] = true;
                     mapNodes[x, y - 1].paths[1] = true;
-                    GenerateFromNode (x, y - 1);
+                    GenerateFromNode (x, y - 1, distanceFromStart+1, true);
                     break;
                 }
             case 1:
@@ -296,7 +353,7 @@ public class MapGenerator : MonoBehaviour
                     //south
                     node.paths[1] = true;
                     mapNodes[x, y + 1].paths[0] = true;
-                    GenerateFromNode (x, y + 1);
+                    GenerateFromNode (x, y + 1, distanceFromStart+1, true);
                     break;
                 }
             case 2:
@@ -304,7 +361,7 @@ public class MapGenerator : MonoBehaviour
                     //west
                     node.paths[2] = true;
                     mapNodes[x - 1, y].paths[3] = true;
-                    GenerateFromNode (x - 1, y);
+                    GenerateFromNode (x - 1, y, distanceFromStart+1, true);
                     break;
                 }
             case 3:
@@ -312,11 +369,11 @@ public class MapGenerator : MonoBehaviour
                     //east
                     node.paths[3] = true;
                     mapNodes[x + 1, y].paths[2] = true;
-                    GenerateFromNode (x + 1, y);
+                    GenerateFromNode (x + 1, y, distanceFromStart+1, true);
                     break;
                 }
         }
-        GenerateFromNode (x, y);
+        GenerateFromNode (x, y, distanceFromStart);
     }
 
     private void PickRandomNode ()
@@ -347,7 +404,7 @@ public class MapGenerator : MonoBehaviour
         }
         int rand = UnityEngine.Random.Range (0, nodes.Count);
         Debug.Log ("Generating from " + nodes[rand].x + "," + nodes[rand].y);
-        GenerateFromNode (nodes[rand].x, nodes[rand].y);
+        GenerateFromNode (nodes[rand].x, nodes[rand].y, mapNodes[nodes[rand].x, nodes[rand].y].distanceFromStart) ;
     }
 
     private void GenerateTilesFromNodes ()
@@ -417,7 +474,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        float randomRadius = (float)pathRadius + UnityEngine.Random.Range (0f, pathWidthRandomness) - (pathWidthRandomness/2f);
+        float randomRadius = (float)pathRadius + .5f + UnityEngine.Random.Range (0f, pathWidthRandomness) - (pathWidthRandomness/2f);
         for (int x = -(int)randomRadius; x < (int)randomRadius; x++)
         {
             for (int y = -(int)randomRadius; y < (int)randomRadius; y++)
@@ -439,6 +496,7 @@ class MapNode
 {
     public bool[] paths;
     public bool visited = false;
+    public int distanceFromStart;
 
     public MapNode ()
     {
