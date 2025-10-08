@@ -20,20 +20,18 @@ MonoBehaviour:
   buyCost: 10
   sellCost: 8
   effectsOnConsume:
-    rid: 1234355919461023768
+    rid: 1234355927148920835
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1234355919461023768
-      type: {class: HealAction, ns: , asm: Assembly-CSharp}
+    - rid: 1234355927148920835
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
         target:
-          rid: 1234355919461023769
+          rid: 1234355927148920836
         modifierType: 0
-        healAmount: 10
-    - rid: 1234355919461023769
+        amount: 10
+    - rid: 1234355927148920836
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
-      data: {}
+      data: 

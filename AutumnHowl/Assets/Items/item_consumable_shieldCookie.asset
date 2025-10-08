@@ -21,6 +21,9 @@ MonoBehaviour:
   buyCost: 10
   sellCost: 8
   effectsOnConsume:
-  - effect: 6
-    affected: 1
-    amount: 10
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

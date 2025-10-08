@@ -204,9 +204,10 @@ namespace ErryLib.Reflection
             int inTypeContextDepth = tokens.First().contextStack.Length;
             bool inBrackets = false;
             bool isLambda = false;
+#pragma warning disable CS0162
             tokens.Where((token) =>
             {
-                return true;
+                return true; 
                 int tokenDepth = token.contextStack.Length;
                 if (isLambda)
                 {
@@ -239,6 +240,7 @@ namespace ErryLib.Reflection
                 return true;
             }
             );
+#pragma warning restore CS0162
 
             DebugPrintTokens(tokens, "After Hiding Brackets");
 

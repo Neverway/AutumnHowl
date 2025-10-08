@@ -119,7 +119,7 @@ public class ModifyCorruptionAction : EffectAction
         if (amount == 0) return "";
         if (amount < 0)
         {
-            corrupts = "Cures corruption";
+            corrupts = "Removes corruption on";
             positiveAmount *= -1;
         }
         switch (modifierType)

@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 [CustomPropertyDrawer(typeof(PolymorphicAttribute))]
@@ -25,19 +28,27 @@ public class PolymorphicDrawer : PropertyDrawer
         }
         bool hasValue = property.managedReferenceValue != null;
 
+        EditorGUI.BeginProperty(position, label, property);
 
         // Get the currently assigned type (if any)
         Type currentType = GetManagedReferenceType(property);
         if (currentType == null)
         {
-            EditorGUI.BeginProperty(position, label, property);
-            EditorGUI.LabelField(position, "---Could not find type of field?---");
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label);
+            if (GUILayout.Button("Missing Type : Clear?"))
+            {
+                Debug.Log(GetParent(property));
+                fieldInfo.SetValue(GetParent(property), null);
+                property.serializedObject.ApplyModifiedProperties();
+                //GetParent(property);
+            }
+            GUILayout.EndHorizontal();
             EditorGUI.EndProperty();
-
             return;
         }
 
-        EditorGUI.BeginProperty(position, label, property);
+        
 
         List<Type> derivedTypes;
         cachedDerivedTypes.TryGetValue(currentType, out derivedTypes);
@@ -130,8 +141,6 @@ public class PolymorphicDrawer : PropertyDrawer
                 return Type.GetType($"{className}, {assemblyName}");
             }
         }
-
-        // If null, return the field's base type (the declared type of the field)
         return GetNonArrayType(fieldInfo.FieldType);
     }
     private Type GetNonArrayType(Type fieldType)
@@ -152,6 +161,54 @@ public class PolymorphicDrawer : PropertyDrawer
 
         // If it's not an array or a generic type, return the type itself
         return fieldType;
+    }
+
+    /// <remarks>Credit to whydoidoit on at 
+    /// https://discussions.unity.com/t/get-the-instance-the-serializedproperty-belongs-to-in-a-custompropertydrawer/66954</remarks>
+    public object GetParent(SerializedProperty prop)
+    {
+        var path = prop.propertyPath.Replace(".Array.data[", "[");
+        object obj = prop.serializedObject.targetObject;
+        var elements = path.Split('.');
+        foreach (var element in elements.Take(elements.Length - 1))
+        {
+            if (element.Contains("["))
+            {
+                var elementName = element.Substring(0, element.IndexOf("["));
+                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                obj = GetValue(obj, elementName, index);
+            }
+            else
+            {
+                obj = GetValue(obj, element);
+            }
+        }
+        return obj;
+    }
+
+    public object GetValue(object source, string name)
+    {
+        if (source == null)
+            return null;
+        var type = source.GetType();
+        var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+        if (f == null)
+        {
+            var p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+            if (p == null)
+                return null;
+            return p.GetValue(source, null);
+        }
+        return f.GetValue(source);
+    }
+
+    public object GetValue(object source, string name, int index)
+    {
+        var enumerable = GetValue(source, name) as IEnumerable;
+        var enm = enumerable.GetEnumerator();
+        while (index-- >= 0)
+            enm.MoveNext();
+        return enm.Current;
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
