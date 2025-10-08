@@ -634,10 +634,10 @@ MonoBehaviour:
   currentStats:
     health: 100
     level: 0
-    power: 5
+    power: 10
     corruption: 0
     defense: 0
-    attack: 5
+    attack: 10
     maxHealth: 100
     maxPower: 100
     maxCorruption: 100
