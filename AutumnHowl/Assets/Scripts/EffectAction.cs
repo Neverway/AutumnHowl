@@ -167,8 +167,8 @@ public class GiveItemsEffect : EffectAction
     {
         string target = "self"; //Placeholder until target is implemented for giving items
         if (count == 0) return "";
-        if (count == 1) return $"[Give {target} {itemToGive}] ";
-        return $"[Give {target} {count} {itemToGive}] ";
+        if (count == 1) return $"[Give {target} {itemToGive.displayName}] ";
+        return $"[Give {target} {count} {itemToGive.displayName}s] ";
 
     }
 }
