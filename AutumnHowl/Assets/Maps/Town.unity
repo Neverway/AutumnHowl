@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4747,9 +4748,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 659075103541051035, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 659075103541051035, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2403621237896906538, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_Name
       value: Character_Autumn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2700393277847865069, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_Name
+      value: Tinted_Lights
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4790,6 +4803,22 @@ PrefabInstance:
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013523230781423332, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_Name
+      value: Old_Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231353931230428249, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231353931230428249, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8530681385773721576, guid: af80e5b6f006c0c1382521987dead533, type: 3}
+      propertyPath: m_Name
+      value: White_Lights
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -110,14 +110,14 @@ public class Inventory
         return false;
     }
     
-    public bool TryUseItem(int _atIndex, Character user, Character target, int _inList=0)
+    public bool TryUseItem(int _atIndex, Character user, int _inList=0)
     {
         switch (_inList)
         {
             case 0:
                 if (_atIndex < items.Count)
                 {
-                    if (items[_atIndex].Use(user, target, _atIndex, _inList))
+                    if (items[_atIndex].Use(user, _atIndex, _inList))
                     {
                         return true;
                     }
@@ -128,7 +128,7 @@ public class Inventory
             case 1:
                 if (_atIndex < spells.Count)
                 {
-                    if (spells[_atIndex].Use(user, target, _atIndex, _inList))
+                    if (spells[_atIndex].Use(user, _atIndex, _inList))
                     {
                         return true;
                     }

@@ -35,7 +35,6 @@ public class GI_TextboxManager : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private InputActions.TopDownActions inputActions;
     private GI_WidgetManager widgetManager;
     private WB_Textbox textbox;
 
@@ -46,12 +45,6 @@ public class GI_TextboxManager : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        // Setup inputs
-        inputActions = new InputActions().TopDown;
-        inputActions.Enable();
-    }
 
     public void Update()
     {
@@ -72,14 +65,14 @@ public class GI_TextboxManager : MonoBehaviour
             // Handel pressing the skip text button
             if (currentEventFrame.preventTextSkipping is false)
             {
-                if (inputActions.Action.WasPressedThisFrame()) currentTextTypeDelay = skippingTextTypeDelay;
-                if (inputActions.Action.WasReleasedThisFrame()) currentTextTypeDelay = normalTextTypeDelay;
+                if (GameInstance.Inputs.Action.WasPressedThisFrame()) currentTextTypeDelay = skippingTextTypeDelay;
+                if (GameInstance.Inputs.Action.WasReleasedThisFrame()) currentTextTypeDelay = normalTextTypeDelay;
             }
             
             // Handel move next frame inputs
             if (currentEventFrame.preventTextContinuing is false)
             {
-                if (inputActions.Interact.WasPressedThisFrame() && currentlyPrinting is false)
+                if (GameInstance.Inputs.Interact.WasPressedThisFrame() && currentlyPrinting is false)
                 {
                     PrintNextFrame();
                 }

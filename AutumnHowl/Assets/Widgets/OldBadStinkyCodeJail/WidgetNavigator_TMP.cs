@@ -41,7 +41,6 @@ public class WidgetNavigator_TMP : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private InputActions.TopDownActions inputActions;
     [SerializeField] private List<TMP_Text> buttons;
 
 
@@ -50,12 +49,6 @@ public class WidgetNavigator_TMP : MonoBehaviour
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        // Setup inputs
-        inputActions = new InputActions().TopDown;
-        inputActions.Enable();
-    }
 
     private void Update()
     {
@@ -90,12 +83,12 @@ public class WidgetNavigator_TMP : MonoBehaviour
         switch (navigationMode)
         {
             case NavigationMode.Vertical:
-                CheckMove(inputActions.MoveUp, -1);
-                CheckMove(inputActions.MoveDown, 1);
+                CheckMove(GameInstance.Inputs.MoveUp, -1);
+                CheckMove(GameInstance.Inputs.MoveDown, 1);
                 break;
             case NavigationMode.Horizontal:
-                CheckMove(inputActions.MoveLeft, -1);
-                CheckMove(inputActions.MoveRight, 1);
+                CheckMove(GameInstance.Inputs.MoveLeft, -1);
+                CheckMove(GameInstance.Inputs.MoveRight, 1);
                 break;
         }
     }

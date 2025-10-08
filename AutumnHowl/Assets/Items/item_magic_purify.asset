@@ -21,9 +21,19 @@ MonoBehaviour:
   buyCost: 50
   sellCost: 0
   effectsWhenCast:
-  - effect: 3
-    affected: 1
-    amount: -25
-  - effect: 5
-    affected: 1
-    amount: -25
+    rid: 1234355919461023776
+  powerCost: 25
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355919461023776
+      type: {class: ModifyCorruptionAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234355919461023777
+        modifierType: 0
+        amount: -25
+    - rid: 1234355919461023777
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

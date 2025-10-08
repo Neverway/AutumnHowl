@@ -30,7 +30,6 @@ public class Volume_TriggerInteract : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private InputActions.TopDownActions inputActions;
 
 
     #endregion
@@ -39,18 +38,11 @@ public class Volume_TriggerInteract : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        // Setup inputs
-        inputActions = new InputActions().TopDown;
-        inputActions.Enable();
-    }
-    
     private void Update()
     {
         if (inTrigger && !activated)
         {
-            if (inputActions.Interact.WasPressedThisFrame())
+            if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
                 activated = true;
                 OnInteract.Invoke();

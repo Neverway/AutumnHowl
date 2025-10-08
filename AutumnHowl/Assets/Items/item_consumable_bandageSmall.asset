@@ -14,12 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_bandageSmall
   displayName: Sm. Bandage
-  description: '{spd=stat, col=stat}[Heals 5 HP]{col=} A small bandage.'
+  description: A small bandage.
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 5
   sellCost: 5
   effectsOnConsume:
-  - effect: 1
-    affected: 1
-    amount: 5
+    rid: 1234355919461023764
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234355919461023764
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234355919461023765
+        - rid: 1234355919461023767
+    - rid: 1234355919461023765
+      type: {class: HealAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234355919461023766
+        modifierType: 0
+        healAmount: 1
+    - rid: 1234355919461023766
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: {}
+    - rid: 1234355919461023767
+      type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        itemToGIve: {fileID: 0}
+        count: 0

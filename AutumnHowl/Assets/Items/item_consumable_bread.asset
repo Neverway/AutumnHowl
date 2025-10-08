@@ -14,12 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_bread
   displayName: Bread
-  description: '{spd=stat, col=stat}[Heals 10 HP]{col=} It''s a loaf of bread. '
+  description: 'It''s a loaf of bread. '
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 10
   sellCost: 8
   effectsOnConsume:
-  - effect: 1
-    affected: 1
-    amount: 10
+    rid: 1234355919461023768
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234355919461023768
+      type: {class: HealAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234355919461023769
+        modifierType: 0
+        healAmount: 10
+    - rid: 1234355919461023769
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: {}

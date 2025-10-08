@@ -55,6 +55,8 @@ public abstract class Character : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual void ModifyHealth(float _amount)
     {
+        if (_amount == 0) return;
+
         if (_amount > 0)
         {
             if (currentStats.health + _amount > currentStats.maxHealth) currentStats.health = currentStats.maxHealth;
@@ -99,4 +101,16 @@ public class CharacterStats
     
     public float walkSpeed;
     public float runSpeed;
+
+    public float PercentCurrentHealth => health / maxHealth;
+    public float PercentMissingHealth => 1f - PercentCurrentHealth;
+    public float MissingHealth => maxHealth - health;
+
+    public float PercentCurrentCorruption => ((float)corruption) / maxCorruption;
+    public float PercentMissingCorruption => 1f - PercentCurrentCorruption;
+    public float MissingCorruption => maxCorruption - corruption;
+
+    public float PercentCurrentPower => ((float)power) / maxPower;
+    public float PercentMissingPower => 1f - PercentCurrentPower;
+    public float MissingPower => maxPower - power;
 }
