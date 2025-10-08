@@ -12,12 +12,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller_Overworld_Player : MonoBehaviour
+public class Controller_Overworld_Player : Character
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public float walkSpeed = 2;
-    public float sprintSpeed = 4;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -25,17 +23,13 @@ public class Controller_Overworld_Player : MonoBehaviour
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    private Vector2 movement;
-    private float currentMoveSpeed;
     private bool inMenu;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private InputActions.TopDownActions inputActions;
-    private Rigidbody2D _rigidbody;
     private GameObject inventoryWidget;
     private GI_AuHoGameState gameState;
-    [SerializeField] private Animator animator;
 
 
     #endregion
@@ -43,17 +37,18 @@ public class Controller_Overworld_Player : MonoBehaviour
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         // Setup inputs
         inputActions = new InputActions().TopDown;
         inputActions.Enable();
-
-        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        if (isDead) return;
+        
         // Menu pausing
         UpdatePausingInput();
 
@@ -63,12 +58,13 @@ public class Controller_Overworld_Player : MonoBehaviour
             return;
         }
 
-        UpdateStoredOverworldPosition();
+        UpdateGameStateValues();
         UpdateMovementInput();
     }
 
     private void FixedUpdate()
     {
+        if (isDead) return;
         _rigidbody.velocity = movement * currentMoveSpeed;
     }
 
@@ -83,6 +79,7 @@ public class Controller_Overworld_Player : MonoBehaviour
                 var widgetManager = GameInstance.Get<GI_WidgetManager>();
                 widgetManager.AddWidget("WB_Inventory");
                 inventoryWidget = widgetManager.GetExistingWidget("WB_Inventory");
+                inventoryWidget.SetActive(!inventoryWidget.activeInHierarchy);
             }
             movement = new Vector2(0,0); // Clear Movement 
             inventoryWidget.SetActive(!inventoryWidget.activeInHierarchy);
@@ -90,9 +87,16 @@ public class Controller_Overworld_Player : MonoBehaviour
         }
     }
 
-    private void UpdateStoredOverworldPosition()
+    private void UpdateGameStateValues()
     {
-        if (gameState) gameState.currentGameState.overworldPosition = new Vector2(transform.position.x, transform.position.y);
+        
+        // Transfer player data to game state
+        if (gameState)
+        {
+            gameState.currentGameState.playtime += Time.deltaTime;
+            gameState.currentGameState.playerStats = currentStats;
+            gameState.currentGameState.overworldPosition = new Vector2(transform.position.x, transform.position.y);
+        }
         else gameState = GameInstance.Get<GI_AuHoGameState>();
     }
     
@@ -106,8 +110,8 @@ public class Controller_Overworld_Player : MonoBehaviour
         else if (inputActions.MoveRight.IsPressed()) movement.x = 1;
         else movement.x = 0;
 
-        if (inputActions.Action.IsPressed()) currentMoveSpeed = sprintSpeed;
-        else currentMoveSpeed = walkSpeed;
+        if (inputActions.Action.IsPressed()) currentMoveSpeed = currentStats.runSpeed;
+        else currentMoveSpeed = currentStats.walkSpeed;
         
         animator.SetFloat("walkX", movement.x);
         animator.SetFloat("walkY", movement.y);

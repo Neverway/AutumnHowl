@@ -133,7 +133,7 @@ public class WB_Shop : MonoBehaviour
         
         // All good, un-yoink their dubloons
         gameState.currentGameState.money += item.sellCost;
-        inventory.RemoveItem(_index);
+        inventory.TryRemoveItem(_index);
         
         // Update the list
         inventoryList.UpdateItemList();

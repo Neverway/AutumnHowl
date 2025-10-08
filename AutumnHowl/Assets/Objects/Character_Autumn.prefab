@@ -631,10 +631,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff3da93cbd47d22bae22991c0c81eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 2
-  sprintSpeed: 2.5
-  canPause: 1
+  currentStats:
+    health: 100
+    level: 0
+    power: 5
+    corruption: 0
+    defense: 0
+    attack: 5
+    maxHealth: 100
+    maxPower: 100
+    maxCorruption: 100
+    walkSpeed: 2
+    runSpeed: 3
+  isDead: 0
   animator: {fileID: 1867420067129031397}
+  canPause: 1
 --- !u!4 &6972457444599413610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

@@ -30,6 +30,8 @@ public class WidgetNavigator : MonoBehaviour
     [Tooltip("If enabled, all elements will appear unselected when this menu is not set as activelyNavigating")]
     [SerializeField] private bool hideIndicatorOnInactive;
 
+    [SerializeField] private bool resetSelectedOnInactive;
+
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     [Tooltip("The current position in the menu")]
@@ -157,6 +159,7 @@ public class WidgetNavigator : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void SetIsNavigating(bool _isNavigating)
     {
+        //print($"Navigation set to {_isNavigating} on {gameObject.name}");
         activelyNavigating = _isNavigating;
         if (_isNavigating)
         {
@@ -173,6 +176,20 @@ public class WidgetNavigator : MonoBehaviour
             {
                 selectableElements[currentIndex].SetSelected(false);
             }
+
+            if (resetSelectedOnInactive)
+            {
+                ResetSelectedIndex();
+            }
+        }
+    }
+
+    public void ResetSelectedIndex()
+    {
+        currentIndex = 0;
+        if (selectableElements.Count != 0)
+        {
+            SetElementStates();
         }
     }
 

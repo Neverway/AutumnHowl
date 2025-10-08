@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TestNameTest
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
   m_sharedMaterial: {fileID: -3348543016456799847, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
@@ -199,8 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '* Lemon Milk! Lemon Milk! This is a test! If you can read this, I messed
-    up!'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
   m_sharedMaterial: {fileID: -3348543016456799847, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
@@ -463,7 +462,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1856661408, guid: d9f146c7ae71c412aa01cb7e5e41ee21, type: 3}
+  m_Sprite: {fileID: 1297853125, guid: d9f146c7ae71c412aa01cb7e5e41ee21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

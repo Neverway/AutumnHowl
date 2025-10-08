@@ -19,6 +19,7 @@ public class Inventory
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public List<Item> items = new List<Item>();
     public List<Item_Magic> spells = new List<Item_Magic>();
+    public List<Item_Wearable> equippedWearables = new List<Item_Wearable>();
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -73,7 +74,10 @@ public class Inventory
         switch (_inList)
         {
             case 0:
-                if (_atIndex < items.Count) return items[_atIndex];
+                if (_atIndex < items.Count)
+                {
+                    return items[_atIndex];
+                }
                 else return null;
             case 1:
                 if (_atIndex < spells.Count) return spells[_atIndex];
@@ -83,17 +87,58 @@ public class Inventory
         return null;
     }
     
-    public void RemoveItem(int _atIndex, int _inList=0)
+    public bool TryRemoveItem(int _atIndex, int _inList=0)
     {
         switch (_inList)
         {
             case 0:
-                items.Remove(items[_atIndex]);
+                if (_atIndex < items.Count)
+                {
+                    if (items[_atIndex].canNotDiscard) { return false; }
+                    else { items.Remove(items[_atIndex]); return true; }
+                }
                 break;
             case 1:
-                spells.Remove(spells[_atIndex]);
+                if (_atIndex < spells.Count)
+                {
+                    if (spells[_atIndex].canNotDiscard) { return false; }
+                    else { spells.Remove(spells[_atIndex]); return true; }
+                }
                 break;
         }
+
+        return false;
+    }
+    
+    public bool TryUseItem(int _atIndex, Character user, Character target, int _inList=0)
+    {
+        switch (_inList)
+        {
+            case 0:
+                if (_atIndex < items.Count)
+                {
+                    if (items[_atIndex].Use(user, target, _atIndex, _inList))
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+                break;
+            case 1:
+                if (_atIndex < spells.Count)
+                {
+                    if (spells[_atIndex].Use(user, target, _atIndex, _inList))
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+                break;
+        }
+
+        return false;
     }
 
 
