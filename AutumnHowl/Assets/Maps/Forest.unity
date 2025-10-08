@@ -335,6 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapWidth: 5
   mapHeight: 5
+  startPosition: {x: 2, y: 0}
   roomWidth: 16
   roomHeight: 16
   pathWidth: 2
@@ -352,12 +353,21 @@ MonoBehaviour:
   - {fileID: 6659489718510107595, guid: c55f51174d7d9b344be46388d87da8a3, type: 3}
   - {fileID: 6659489718510107595, guid: dfd230f50ccad4d4dbf66fe8a47f51e1, type: 3}
   - {fileID: 6659489718510107595, guid: 40e0229752032fe40b0bed66f4dd46e6, type: 3}
+  - {fileID: 6659489718510107595, guid: f95e04793611a794c99a95aef2b78299, type: 3}
   treeList:
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
+  - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: c88afa07151b9f34a800069a3e562ca3, type: 3}
-  - {fileID: 6659489718510107595, guid: f95e04793611a794c99a95aef2b78299, type: 3}
+  poiList:
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
+  - {fileID: 6243378823440702933, guid: a4c504ef335e0e12091e7a65a7cf4dd3, type: 3}
 --- !u!1 &970689508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,11 +1077,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.8
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.z
