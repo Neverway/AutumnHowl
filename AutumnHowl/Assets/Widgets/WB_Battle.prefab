@@ -581,6 +581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4120627537271842407}
+  - component: {fileID: 5699039624150531221}
   m_Layer: 5
   m_Name: WB_Battle
   m_TagString: Untagged
@@ -611,6 +612,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5699039624150531221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130124327870129743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d858b37f15f83024fbb5552367f75da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartImage: {fileID: 6181192012666916062}
+  powerImage: {fileID: 5667048712613438482}
+  corruptionImage: {fileID: 6128486156696235051}
+  heartSprites:
+  - {fileID: -2131394125, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -592293520, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 1598338038, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -384743291, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -701025666, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -639462038, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 733073676, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1532249798, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -729526508, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -2101407258, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  powerSprites:
+  - {fileID: -86798970, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 1978764662, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 1190013875, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 409526636, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 1620662459, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 49859627, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 850837912, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1850769978, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 302199354, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1942571663, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  corruptionSprites:
+  - {fileID: -460582934, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 1535910021, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -908132771, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: 1694931769, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1249237098, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -720039964, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1978223085, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1810484006, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -1811649803, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  - {fileID: -831521074, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  gameState: {fileID: 0}
+  heartAnimator: {fileID: 7431007868217375425}
 --- !u!1 &6379317378870815650
 GameObject:
   m_ObjectHideFlags: 0

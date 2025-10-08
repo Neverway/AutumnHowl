@@ -106,16 +106,27 @@ MonoBehaviour:
   currentGameState:
     map: Town
     overworldPosition: {x: 0, y: 0}
-    health: 100
-    power: 0
-    corruption: 0
+    playerStats:
+      health: 100
+      level: 0
+      power: 10
+      corruption: 0
+      defense: 0
+      attack: 10
+      maxHealth: 100
+      maxPower: 100
+      maxCorruption: 100
+      walkSpeed: 0
+      runSpeed: 0
     money: 99999
     inventory:
       items: []
       spells: []
+      equippedWearables: []
     kills: 0
     deaths: 0
     playtime: 0
+  player: {fileID: 0}
 --- !u!114 &8445139238223071731
 MonoBehaviour:
   m_ObjectHideFlags: 0
