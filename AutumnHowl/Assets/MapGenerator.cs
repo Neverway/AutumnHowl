@@ -247,7 +247,7 @@ public class MapGenerator : MonoBehaviour
         GameObject prop = Instantiate (props[UnityEngine.Random.Range(0, props.Length)]);
         prop.transform.position = new Vector3 (
             x + UnityEngine.Random.Range (-1f, 1f),
-            y + UnityEngine.Random.Range (-1f, 1f),
+            y + UnityEngine.Random.Range (-1f, 1f) + 1,
             prop.transform.position.z);
         if (UnityEngine.Random.Range (0f, 1f) > .5f)
         {
