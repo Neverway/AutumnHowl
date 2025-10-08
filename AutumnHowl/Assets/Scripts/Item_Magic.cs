@@ -39,7 +39,26 @@ public class Item_Magic : Item
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-
+    public override bool Use(Character user, Character target, int _atIndex, int _inList=0)
+    {
+        foreach (var effect in effectsWhenCast)
+        {
+            switch (effect.affected)
+            {
+                case Affected.user:
+                    ApplyEffect(effect.effect, effect.amount, user);
+                    break;
+                case Affected.target:
+                    ApplyEffect(effect.effect, effect.amount, target);
+                    break;
+                case Affected.all:
+                    ApplyEffect(effect.effect, effect.amount, user);
+                    ApplyEffect(effect.effect, effect.amount, target);
+                    break;
+            }
+        }
+        return true;
+    }
 
     #endregion
 }

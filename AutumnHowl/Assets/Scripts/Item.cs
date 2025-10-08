@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/New Item", fileName = "Item_")]
-public class Item : ScriptableObject
+public abstract class Item : ScriptableObject
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
@@ -43,9 +43,34 @@ public class Item : ScriptableObject
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    public virtual void ApplyEffect(Effect _effect, float _amount, Character _target)
+    {
+        switch (_effect)
+        {
+            case Effect.heal:
+                _target.ModifyHealth(_amount);
+                break;
+            case Effect.damage:
+                _target.ModifyHealth(-_amount);
+                break;
+            case Effect.corrupt:
+                _target.currentStats.corruption+=(int)_amount;
+                break;
+            case Effect.attack:
+                _target.currentStats.attack+=(int)_amount;
+                break;
+            case Effect.strength:
+                _target.currentStats.power+=(int)_amount;
+                break;
+            case Effect.defense:
+                _target.currentStats.defense+=(int)_amount;
+                break;
+        }
+    }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public abstract bool Use(Character user, Character target, int _atIndex, int _inList = 0);
 
 
     #endregion

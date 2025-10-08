@@ -21,6 +21,6 @@ MonoBehaviour:
   buyCost: 10
   sellCost: 8
   effectsOnConsume:
-  - effect: 2
+  - effect: 6
     affected: 1
     amount: 10

@@ -43,4 +43,9 @@ public class Item_Wearable : Item
 
 
     #endregion
+
+    public override bool Use(Character user, Character target, int _atIndex, int _inList=0)
+    {
+        return false;
+    }
 }

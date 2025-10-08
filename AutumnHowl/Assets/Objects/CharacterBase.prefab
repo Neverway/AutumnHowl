@@ -191,11 +191,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc802781824505aa0b391e3d26bfa9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 2
-  sprintSpeed: 4
-  movement: {x: 0, y: -1}
-  frozen: 1
+  currentStats:
+    health: 100
+    level: 0
+    power: 5
+    corruption: 0
+    defense: 0
+    attack: 5
+    maxHealth: 100
+    maxPower: 100
+    maxCorruption: 100
+    walkSpeed: 2
+    runSpeed: 3
+  isDead: 0
   animator: {fileID: 7934021959449969890}
+  frozen: 1
 --- !u!1 &6366712938765167761
 GameObject:
   m_ObjectHideFlags: 0

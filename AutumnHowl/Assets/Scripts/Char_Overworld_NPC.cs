@@ -11,35 +11,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller_Overworld_NPC : MonoBehaviour
+public class Controller_Overworld_NPC : Character
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public float walkSpeed = 2;
-    public float sprintSpeed = 4;
-    public Vector2 movement;
     public bool frozen;
-    /*
-    public FaceDirection faceDirection;
-    public enum FaceDirection
-    {
-        up,
-        down,
-        left,
-        right
-    }*/
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    private float currentMoveSpeed;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private Rigidbody2D _rigidbody;
-    [SerializeField] private Animator animator;
 
 
     #endregion
@@ -50,13 +35,13 @@ public class Controller_Overworld_NPC : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        base.Start();
     }
 
     private void Update()
     {
-        currentMoveSpeed = walkSpeed;
-        if (frozen)
+        currentMoveSpeed = currentStats.walkSpeed;
+        if (frozen || isDead)
         {
             animator.SetBool("walking", false);
             animator.SetFloat("idleX", movement.x);
@@ -69,7 +54,7 @@ public class Controller_Overworld_NPC : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (frozen)
+        if (frozen || isDead)
         {
             _rigidbody.velocity = new Vector2();
             return;

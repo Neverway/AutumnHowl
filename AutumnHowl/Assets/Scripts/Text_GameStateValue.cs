@@ -68,25 +68,25 @@ public class Text_GameStateValue : MonoBehaviour
         switch (gameStateVariable)
         {
             case GameStateVariable.level:
-                text.text = textDecoratorStart + gameState.currentGameState.level + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.level + textDecoratorEnd;
                 break;
             case GameStateVariable.currentHealth:
-                text.text = textDecoratorStart + gameState.currentGameState.health + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.health + textDecoratorEnd;
                 break;
             case GameStateVariable.maxHealth:
-                text.text = textDecoratorStart + gameState.currentGameState.health + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.health + textDecoratorEnd;
                 break;
             case GameStateVariable.power:
-                text.text = textDecoratorStart + gameState.currentGameState.power + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.power + textDecoratorEnd;
                 break;
             case GameStateVariable.corruption:
-                text.text = textDecoratorStart + gameState.currentGameState.corruption + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.corruption + textDecoratorEnd;
                 break;
             case GameStateVariable.attack:
-                text.text = textDecoratorStart + gameState.currentGameState.attack + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.attack + textDecoratorEnd;
                 break;
             case GameStateVariable.defense:
-                text.text = textDecoratorStart + gameState.currentGameState.defense + textDecoratorEnd;
+                text.text = textDecoratorStart + gameState.currentGameState.playerStats.defense + textDecoratorEnd;
                 break;
             case GameStateVariable.money:
                 text.text = textDecoratorStart + gameState.currentGameState.money + textDecoratorEnd;
