@@ -18,8 +18,8 @@ MonoBehaviour:
     sugar!'
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 0
-  sellCost: 0
+  buyCost: 25
+  sellCost: 10
   effectsOnConsume:
     rid: 1234355927148920855
   references:

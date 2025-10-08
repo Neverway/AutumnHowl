@@ -17,8 +17,8 @@ MonoBehaviour:
   description: A small pack of sugar cookies! Yum!
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 0
-  sellCost: 0
+  buyCost: 100
+  sellCost: 80
   effectsOnConsume:
     rid: 1234355927148920854
   references:
