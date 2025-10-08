@@ -136,7 +136,7 @@ public class GI_TextboxManager : MonoBehaviour
             if (CheckForRegularMarkups(_fullTextContent, i))
                 continue;
 
-            //If there was no markups, add current character to text content and wait for text delay
+            //If there are no markups, add current character to text content and wait for text delay
             currentTextContent += _fullTextContent[i];
             yield return new WaitForSeconds(currentTextTypeDelay);
         }
@@ -147,10 +147,10 @@ public class GI_TextboxManager : MonoBehaviour
         if (currentTextEvent.frames[currentFrame].autoProgressOnComplete) PrintNextFrame();
     }
 
-    /// <returns>True if currently inside of a special markup</returns>
+    /// <returns>True if currently inside a special markup</returns>
     private bool CheckForSpecialMarkups(string _fullTextContent, int _index)
     {
-        //Dont check for special markups if you're checking for regular markups
+        //Don't check for special markups if you're checking for regular markups
         if (performingRegularMarkup) return false;
 
         //If not in regular markup, check if this is the start of one, and exit function
@@ -230,10 +230,10 @@ public class GI_TextboxManager : MonoBehaviour
         return true;
     }
     
-    /// <returns>True if currently inside of a regular markup</returns>
+    /// <returns>True if currently inside a regular markup</returns>
     private bool CheckForRegularMarkups(string _fullTextContent, int _index)
     {
-        //Dont check for regular markups if you're checking for special markups
+        //Don't check for regular markups if you're checking for special markups
         if (performingSpecialMarkup) return false;
 
         //If not in regular markup, check if this is the start of one, and exit function
