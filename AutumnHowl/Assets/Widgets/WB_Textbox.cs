@@ -28,7 +28,7 @@ public class WB_Textbox : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image portrait;
-    public TMP_Text name;
+    public new TMP_Text name;
     public TMP_Text chat;
     public TextboxDisplayMode displayMode;
 

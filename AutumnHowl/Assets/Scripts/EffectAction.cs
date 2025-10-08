@@ -8,8 +8,20 @@ public abstract class EffectAction
     public bool hideDescription = false;
     public abstract void ApplyEffect(Character user);
     public abstract string DescribeNoFormat();
-    public string DescribeFormatted() => $"{"{spd=stat, col=stat}"}{DescribeNoFormat()}{"{col=,spd=}"}";
-    public override string ToString() => DescribeNoFormat();
+    public string DescribeFormatted()
+    {
+        try
+        {
+            string description = DescribeNoFormat();
+            return $"{"{spd=stat, col=stat}"}{description}{"{col=,spd=}"}";
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            return "{col=err}[ERROR]{col=} ";
+        }
+    }
+    public override string ToString() => DescribeFormatted();
 }
 public enum StatModType { Flat, PercentMissing, PercentCurrent, PercentMax }
 public static class StatModTypeExtension
@@ -86,14 +98,14 @@ public class ModifyHealthAction : EffectAction
     {
         switch (modifierType)
         {
-            case StatModType.Flat: return $"[Deals {amount} DMG to {target}]";
-            case StatModType.PercentMissing: return $"[Deals {amount}% missing HP DMG to {target}]";
-            case StatModType.PercentCurrent: return $"[Deals {amount}% HP DMG to {target}]";
-            case StatModType.PercentMax: return $"[Deals {amount}% max HP DMG to {target}]";
+            case StatModType.Flat: return $"[Deals {amount} DMG to {target}] ";
+            case StatModType.PercentMissing: return $"[Deals {amount}% missing HP DMG to {target}] ";
+            case StatModType.PercentCurrent: return $"[Deals {amount}% HP DMG to {target}] ";
+            case StatModType.PercentMax: return $"[Deals {amount}% max HP DMG to {target}] ";
         }
         Debug.LogError($"{nameof(ModifyHealthAction)}: Does not have a description for dealing damage {modifierType}: " +
             $"Falling back to back to ??? as description");
-        return $"[???]";
+        return $"[???] ";
     }
 }
 
@@ -124,14 +136,14 @@ public class ModifyCorruptionAction : EffectAction
         }
         switch (modifierType)
         {
-            case StatModType.Flat: return $"[{corrupts} {target} by {positiveAmount}]";
-            case StatModType.PercentMissing: return $"[{corrupts} {target} by {positiveAmount}% of missing corruption]";
-            case StatModType.PercentCurrent: return $"[{corrupts} {target} by {positiveAmount}% of corruption]";
-            case StatModType.PercentMax: return $"[{corrupts} {target} by {positiveAmount}% max corruption]";
+            case StatModType.Flat: return $"[{corrupts} {target} by {positiveAmount}] ";
+            case StatModType.PercentMissing: return $"[{corrupts} {target} by {positiveAmount}% of missing corruption] ";
+            case StatModType.PercentCurrent: return $"[{corrupts} {target} by {positiveAmount}% of corruption] ";
+            case StatModType.PercentMax: return $"[{corrupts} {target} by {positiveAmount}% max corruption] ";
         }
         Debug.LogError($"{nameof(ModifyCorruptionAction)}: Does not have a description for ModifyCorruption {modifierType}: " +
             $"Falling back to back to ??? as description");
-        return $"[???]";
+        return $"[???] ";
     }
 }
 
@@ -155,8 +167,8 @@ public class GiveItemsEffect : EffectAction
     {
         string target = "self"; //Placeholder until target is implemented for giving items
         if (count == 0) return "";
-        if (count == 1) return $"[Give {target} {itemToGIve}]";
-        return $"[Give {target} {count} {itemToGIve}]";
+        if (count == 1) return $"[Give {target} {itemToGIve}] ";
+        return $"[Give {target} {count} {itemToGIve}] ";
 
     }
 }

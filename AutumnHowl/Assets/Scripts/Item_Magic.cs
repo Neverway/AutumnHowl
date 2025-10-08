@@ -16,8 +16,8 @@ public class Item_Magic : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    [Polymorphic, SerializeReference] public EffectAction effectsWhenCast;
     public int powerCost;
+    [Polymorphic, SerializeReference] public EffectAction effectsWhenCast;
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -41,14 +41,34 @@ public class Item_Magic : Item
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public override string GetDescription()
     {
-        string fullDescription = "";
-        if (effectsWhenCast == null) return fullDescription;
+        //Start description with stat colors and speed
+        string fullDescription = "{col=stat,spd=stat}";
+
+        //Add power cost to description if cost is not 0
         if (powerCost != 0)
-            fullDescription += $"[Costs {powerCost} Power]";
-        return effectsWhenCast.DescribeFormatted() + " " + description;
+            fullDescription += $"[{powerCost} power to cast] ";
+        else
+            fullDescription += "[No Cost] ";
+
+        //Add effects to description if there is defined effects
+        if (effectsWhenCast != null)
+            fullDescription += $"{effectsWhenCast.DescribeNoFormat()}";
+
+        //End stat colors and speed
+        fullDescription += "{col=,spd=}";
+
+        //Add the item's basic description afterwards and return result
+        fullDescription += $"{description}";
+        return fullDescription;
     }
     public override bool Use(Character user, int _atIndex, int _inList=0)
     {
+        //Don't use if the user cannot afford power cost
+        if (powerCost != 0 && user.currentStats.power < powerCost)
+            return false;
+
+        //Spend power and apply the effect
+        user.currentStats.power -= powerCost;
         effectsWhenCast.ApplyEffect(user);
         return true;
     }
