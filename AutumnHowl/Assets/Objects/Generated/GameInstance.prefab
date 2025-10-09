@@ -107,17 +107,40 @@ MonoBehaviour:
     map: Town
     overworldPosition: {x: 0, y: 0}
     playerStats:
+      modifier:
+        rid: -2
       health: 100
       level: 0
       power: 10
       corruption: 0
-      defense: 0
-      attack: 10
-      maxHealth: 100
-      maxPower: 100
-      maxCorruption: 100
-      walkSpeed: 0
-      runSpeed: 0
+      defense:
+        startValue: 0
+        multiplier: 0
+        addedValue: 0
+      attack:
+        startValue: 5
+        multiplier: 0
+        addedValue: 0
+      maxHealth:
+        startValue: 100
+        multiplier: 0
+        addedValue: 0
+      maxPower:
+        startValue: 100
+        multiplier: 0
+        addedValue: 0
+      maxCorruption:
+        startValue: 100
+        multiplier: 0
+        addedValue: 0
+      walkSpeed:
+        startValue: 2
+        multiplier: 0
+        addedValue: 0
+      runSpeed:
+        startValue: 3
+        multiplier: 0
+        addedValue: 0
     money: 99999
     inventory:
       items: []
@@ -126,7 +149,13 @@ MonoBehaviour:
     kills: 0
     deaths: 0
     playtime: 0
+    currentBattle: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
   player: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!114 &8445139238223071731
 MonoBehaviour:
   m_ObjectHideFlags: 0

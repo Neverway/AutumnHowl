@@ -41,7 +41,9 @@ public class BattleStateController : MonoBehaviour
     private void Start()
     {
         gameState = GameInstance.Get<GI_AuHoGameState>();
+        print(gameState);
         currentBattleState = new BS_Start(this);
+        currentBattleState.OnStateEnter(null);
     }
 
     private void Update()
@@ -103,6 +105,7 @@ public class BS_Start : BattleState
     public override void OnStateEnter(BattleState stateLeaving)
     {
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;
+        controller.textEvent.CallEvent();
     }
 
     public override void OnStateUpdate()

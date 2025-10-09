@@ -60,7 +60,7 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
         waveAttack: {fileID: 0}
-        waveSteps: 0
+        waveSteps: 5
     - rid: 26148788346028044
       type: {class: BattleWave, ns: , asm: Assembly-CSharp}
       data:
@@ -80,4 +80,4 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
         waveAttack: {fileID: 0}
-        waveSteps: 0
+        waveSteps: 5
