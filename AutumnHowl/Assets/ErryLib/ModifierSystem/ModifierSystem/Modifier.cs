@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
+using ErryLib.GameEvents;
 
 /// <summary>
 /// This class is used to modify the values of <see cref="Modifiable"/>s as well as react to <see cref="GameEvent"/>s by implementing 
