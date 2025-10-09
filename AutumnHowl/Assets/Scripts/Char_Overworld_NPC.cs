@@ -33,11 +33,6 @@ public class Controller_Overworld_NPC : Character
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        base.Start();
-    }
-
     private void Update()
     {
         currentMoveSpeed = currentStats.walkSpeed;

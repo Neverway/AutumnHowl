@@ -18,7 +18,7 @@ public abstract class Item : ScriptableObject
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public string id;
     public string displayName;
-    [TextArea] public string description;
+    [TextArea, SerializeField] protected string description;
     public bool canNotDiscard;
     public bool allowMultiple=true;
     public int buyCost;
@@ -43,8 +43,11 @@ public abstract class Item : ScriptableObject
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    public virtual void ApplyEffect(Effect _effect, float _amount, Character _target)
+    /*
+    public virtual void ApplyEffect(Character _user)
     {
+
+        
         switch (_effect)
         {
             case Effect.heal:
@@ -66,11 +69,13 @@ public abstract class Item : ScriptableObject
                 _target.currentStats.defense+=(int)_amount;
                 break;
         }
+        
     }
-
+        // */
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public abstract bool Use(Character user, Character target, int _atIndex, int _inList = 0);
+    public virtual string GetDescription() => description;
+    public abstract bool Use(Character user, int _atIndex, int _inList = 0);
 
 
     #endregion

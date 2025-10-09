@@ -7,8 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/New Magic Item", fileName = "item_magic_")]
@@ -16,8 +14,8 @@ public class Item_Magic : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public List<UsingEffect> effectsWhenCast;
-
+    public int powerCost;
+    [Polymorphic, SerializeReference] public EffectAction effectsWhenCast;
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -39,24 +37,37 @@ public class Item_Magic : Item
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public override bool Use(Character user, Character target, int _atIndex, int _inList=0)
+    public override string GetDescription()
     {
-        foreach (var effect in effectsWhenCast)
-        {
-            switch (effect.affected)
-            {
-                case Affected.user:
-                    ApplyEffect(effect.effect, effect.amount, user);
-                    break;
-                case Affected.target:
-                    ApplyEffect(effect.effect, effect.amount, target);
-                    break;
-                case Affected.all:
-                    ApplyEffect(effect.effect, effect.amount, user);
-                    ApplyEffect(effect.effect, effect.amount, target);
-                    break;
-            }
-        }
+        //Start description with stat colors and speed
+        string fullDescription = "{col=stat,spd=stat}";
+
+        //Add power cost to description if cost is not 0
+        if (powerCost != 0)
+            fullDescription += $"[Costs {powerCost} PWR] ";
+        else
+            fullDescription += "[No cast cost] ";
+
+        //Add effects to description if there is defined effects
+        if (effectsWhenCast != null)
+            fullDescription += $"{effectsWhenCast.DescribeNoFormat()}";
+
+        //End stat colors and speed
+        fullDescription += "{col=,spd=}";
+
+        //Add the item's basic description afterwards and return result
+        fullDescription += $"{description}";
+        return fullDescription;
+    }
+    public override bool Use(Character user, int _atIndex, int _inList=0)
+    {
+        //Don't use if the user cannot afford power cost
+        if (powerCost != 0 && user.currentStats.power < powerCost)
+            return false;
+
+        //Spend power and apply the effect
+        user.currentStats.power -= powerCost;
+        effectsWhenCast.ApplyEffect(user);
         return true;
     }
 

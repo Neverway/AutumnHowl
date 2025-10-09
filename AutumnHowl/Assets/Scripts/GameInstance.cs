@@ -8,15 +8,16 @@
 //====================================================================================================================//
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class GameInstance : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
 
+    public static InputActions.TopDownActions Inputs { get; private set; }
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -44,8 +45,17 @@ public class GameInstance : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(instance);
     }
+    private void OnEnable()
+    {
+        Inputs = new InputActions().TopDown;
+        Inputs.Enable();
+    }
+    private void OnDisable()
+    {
+        if (this == instance)
+            Inputs.Disable();
+    }
 
-    
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
 
@@ -64,7 +74,6 @@ public class GameInstance : MonoBehaviour
 
         return instance.GetComponent<T>();
     }
-
 
     #endregion
 }

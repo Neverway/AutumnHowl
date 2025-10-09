@@ -21,6 +21,19 @@ MonoBehaviour:
   buyCost: 10
   sellCost: 8
   effectsOnConsume:
-  - effect: 6
-    affected: 1
-    amount: 10
+    rid: 1234355927148920847
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355927148920847
+      type: {class: ModifierUntilEndOfSession, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 1
+        modifier:
+          rid: 1234355927148920848
+    - rid: 1234355927148920848
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 0
+        value: 10
+        statToModify: 0

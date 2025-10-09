@@ -9,6 +9,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/New Consumable Item", fileName = "item_consumable_")]
@@ -16,7 +17,7 @@ public class Item_Consumable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public List<UsingEffect> effectsOnConsume;
+    [Polymorphic, SerializeReference] public EffectAction effectsOnConsume;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -40,26 +41,16 @@ public class Item_Consumable : Item
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public override bool Use(Character user, Character target, int _atIndex, int _inList=0)
+    public override string GetDescription()
     {
-        foreach (var effect in effectsOnConsume)
-        {
-            switch (effect.affected)
-            {
-                case Affected.user:
-                    ApplyEffect(effect.effect, effect.amount, user);
-                    break;
-                case Affected.target:
-                    ApplyEffect(effect.effect, effect.amount, target);
-                    break;
-                case Affected.all:
-                    ApplyEffect(effect.effect, effect.amount, user);
-                    ApplyEffect(effect.effect, effect.amount, target);
-                    break;
-            }
-        }
+        if (effectsOnConsume == null) return description;
 
+        return effectsOnConsume.DescribeFormatted() + " " + description;
+    }
+    public override bool Use(Character user, int _atIndex, int _inList=0)
+    {
         GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory.TryRemoveItem(_atIndex, _inList);
+        effectsOnConsume.ApplyEffect(user);
         return true;
     }
 

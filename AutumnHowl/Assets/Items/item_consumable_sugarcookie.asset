@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: item_consumable_sugarcookie
+  m_EditorClassIdentifier: 
+  id: item_consumable_sugarcookies
+  displayName: Sugar Cookie
+  description: '[5 lbs sugar] {col=,spd=}A sweet delicious sugar cookie! With extra
+    sugar!'
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 25
+  sellCost: 10
+  effectsOnConsume:
+    rid: 1234355927148920855
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355927148920855
+      type: {class: ModifierUntilEndOfSession, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 1
+        modifier:
+          rid: 1234355927148920856
+    - rid: 1234355927148920856
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 1
+        value: 1.5
+        statToModify: 5

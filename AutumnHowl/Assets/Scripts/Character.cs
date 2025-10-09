@@ -8,8 +8,6 @@
 //====================================================================================================================//
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -55,6 +53,8 @@ public abstract class Character : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual void ModifyHealth(float _amount)
     {
+        if (_amount == 0) return;
+
         if (_amount > 0)
         {
             if (currentStats.health + _amount > currentStats.maxHealth) currentStats.health = currentStats.maxHealth;
@@ -79,24 +79,4 @@ public abstract class Character : MonoBehaviour
 
 
     #endregion
-}
-
-[Serializable]
-public class CharacterStats
-{
-    [Header("Base Values")]
-    public float health = 100;
-    public float level = 0;
-    public int power = 5;
-    public int corruption = 0;
-    [Tooltip("When damage is taken, this is how much damage is negated")]
-    public int defense = 0;
-    public int attack = 5;
-    [Header("Max Values")]
-    public float maxHealth = 100;
-    public int maxPower = 100;
-    public int maxCorruption = 100;
-    
-    public float walkSpeed;
-    public float runSpeed;
 }

@@ -100,7 +100,7 @@ public class WB_Inventory : MonoBehaviour
         {
             inspectListNavigator.SetIsNavigating(false);
             SpellListNavigator.SetIsNavigating(false);
-            inspectTextEvent.textEvent.frames[0].chatContent = item.description;
+            inspectTextEvent.textEvent.frames[0].chatContent = item.GetDescription();
             inspectTextEvent.CallEvent();
         }
         else
@@ -126,7 +126,7 @@ public class WB_Inventory : MonoBehaviour
             return;
         }
         
-        if (gameState.currentGameState.inventory.TryUseItem(_index, FindObjectOfType<Controller_Overworld_Player>(), null, itemList))
+        if (gameState.currentGameState.inventory.TryUseItem(_index, FindObjectOfType<Controller_Overworld_Player>(), itemList))
         {
             inspectListNavigator.SetIsNavigating(false);
             inspectListNavigator.gameObject.SetActive(false);

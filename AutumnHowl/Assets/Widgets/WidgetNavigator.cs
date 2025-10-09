@@ -45,7 +45,6 @@ public class WidgetNavigator : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private InputActions.TopDownActions inputActions;
     public List<WidgetSelectable> selectableElements;
     public UnityEvent OnNavigatable, OnBack;
 
@@ -55,12 +54,6 @@ public class WidgetNavigator : MonoBehaviour
 
     #region=======================================( Functions )======================================================= //
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        // Setup inputs
-        inputActions = new InputActions().TopDown;
-        inputActions.Enable();
-    }
 
     private void Update()
     {
@@ -107,21 +100,21 @@ public class WidgetNavigator : MonoBehaviour
         switch (navigationMode)
         {
             case NavigationMode.Vertical:
-                CheckMove(inputActions.MoveUp, -1);
-                CheckMove(inputActions.MoveDown, 1);
+                CheckMove(GameInstance.Inputs.MoveUp, -1);
+                CheckMove(GameInstance.Inputs.MoveDown, 1);
                 break;
             case NavigationMode.Horizontal:
-                CheckMove(inputActions.MoveLeft, -1);
-                CheckMove(inputActions.MoveRight, 1);
+                CheckMove(GameInstance.Inputs.MoveLeft, -1);
+                CheckMove(GameInstance.Inputs.MoveRight, 1);
                 break;
         }
 
-        if (inputActions.Interact.WasPressedThisFrame())
+        if (GameInstance.Inputs.Interact.WasPressedThisFrame())
         {
             if (selectableElements.Count != 0) selectableElements[currentIndex].Interact();
         }
 
-        if (inputActions.Action.WasPressedThisFrame())
+        if (GameInstance.Inputs.Action.WasPressedThisFrame())
         {
             OnBack.Invoke();
         }

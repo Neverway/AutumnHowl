@@ -20,6 +20,13 @@ MonoBehaviour:
   buyCost: 25
   sellCost: 0
   effectsWhileWorn:
-  - effect: 4
-    affected: 1
-    amount: 10
+  - rid: 1234355927148920846
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355927148920846
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 0
+        value: 10
+        statToModify: 1

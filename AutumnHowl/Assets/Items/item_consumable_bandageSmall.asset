@@ -14,12 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_bandageSmall
   displayName: Sm. Bandage
-  description: '{spd=stat, col=stat}[Heals 5 HP]{col=} A small bandage.'
+  description: A small bandage.
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 5
   sellCost: 5
   effectsOnConsume:
-  - effect: 1
-    affected: 1
-    amount: 5
+    rid: 1234355927148920833
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355927148920833
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234355927148920834
+        modifierType: 0
+        amount: 5
+    - rid: 1234355927148920834
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

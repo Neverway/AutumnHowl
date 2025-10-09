@@ -27,7 +27,6 @@ public class Controller_Overworld_Player : Character
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private InputActions.TopDownActions inputActions;
     private GameObject inventoryWidget;
     private GI_AuHoGameState gameState;
 
@@ -37,14 +36,6 @@ public class Controller_Overworld_Player : Character
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private new void Start()
-    {
-        base.Start();
-        // Setup inputs
-        inputActions = new InputActions().TopDown;
-        inputActions.Enable();
-    }
-
     private void Update()
     {
         if (isDead) return;
@@ -72,7 +63,7 @@ public class Controller_Overworld_Player : Character
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void UpdatePausingInput()
     {
-        if (inputActions.Select.WasPressedThisFrame() && canPause)
+        if (GameInstance.Inputs.Select.WasPressedThisFrame() && canPause)
         {
             if (!inventoryWidget)
             {
@@ -102,15 +93,15 @@ public class Controller_Overworld_Player : Character
     
     private void UpdateMovementInput()
     {
-        if (inputActions.MoveUp.IsPressed()) movement.y = 1;
-        else if (inputActions.MoveDown.IsPressed()) movement.y = -1;
+        if (GameInstance.Inputs.MoveUp.IsPressed()) movement.y = 1;
+        else if (GameInstance.Inputs.MoveDown.IsPressed()) movement.y = -1;
         else movement.y = 0;
         
-        if (inputActions.MoveLeft.IsPressed()) movement.x = -1;
-        else if (inputActions.MoveRight.IsPressed()) movement.x = 1;
+        if (GameInstance.Inputs.MoveLeft.IsPressed()) movement.x = -1;
+        else if (GameInstance.Inputs.MoveRight.IsPressed()) movement.x = 1;
         else movement.x = 0;
 
-        if (inputActions.Action.IsPressed()) currentMoveSpeed = currentStats.runSpeed;
+        if (GameInstance.Inputs.Action.IsPressed()) currentMoveSpeed = currentStats.runSpeed;
         else currentMoveSpeed = currentStats.walkSpeed;
         
         animator.SetFloat("walkX", movement.x);

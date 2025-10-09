@@ -16,7 +16,7 @@ public class Item_Wearable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public List<UsingEffect> effectsWhileWorn;
+    [Polymorphic, SerializeReference] public Modifier[] effectsWhileWorn;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -44,7 +44,7 @@ public class Item_Wearable : Item
 
     #endregion
 
-    public override bool Use(Character user, Character target, int _atIndex, int _inList=0)
+    public override bool Use(Character user, int _atIndex, int _inList=0)
     {
         return false;
     }

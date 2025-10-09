@@ -342,6 +342,7 @@ MonoBehaviour:
   navigationMode: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 0
+  resetSelectedOnInactive: 0
   currentIndex: 0
   selectableElements:
   - {fileID: 5705366956684208753}
@@ -748,7 +749,7 @@ MonoBehaviour:
   buyDescriptionTextEvent: {fileID: 8606063772834655546}
   buyableItems:
   - {fileID: 11400000, guid: 212ecd547de670133b09a7fe60a3e367, type: 2}
-  - {fileID: 11400000, guid: c9737e1ef110b8e5cb447213479bd251, type: 2}
+  - {fileID: 11400000, guid: 62bfd89b5e7d0e244a873b2192cf11ea, type: 2}
   - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}
   - {fileID: 11400000, guid: b83b8afcd240af860b711ff6888948b6, type: 2}
   - {fileID: 11400000, guid: 4f26d5fb7dfa68ebfa23a2636fe3f24e, type: 2}
@@ -840,6 +841,7 @@ MonoBehaviour:
   navigationMode: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 0
+  resetSelectedOnInactive: 0
   currentIndex: 0
   selectableElements:
   - {fileID: 2311236527714348286}
@@ -1397,6 +1399,7 @@ MonoBehaviour:
   navigationMode: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 0
+  resetSelectedOnInactive: 0
   currentIndex: 0
   selectableElements:
   - {fileID: 6193484794906443154}
@@ -1578,6 +1581,7 @@ MonoBehaviour:
   navigationMode: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 0
+  resetSelectedOnInactive: 0
   currentIndex: 0
   selectableElements:
   - {fileID: 792204902931565850}

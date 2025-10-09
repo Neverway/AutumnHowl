@@ -50,9 +50,9 @@ public class Text_Inventory : MonoBehaviour
         gameState = GameInstance.Get<GI_AuHoGameState>();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        UpdateItemList();
+        //UpdateItemList();
     }
 
 

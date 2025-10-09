@@ -26,7 +26,6 @@ public class oWB_Inventory : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private InputActions.TopDownActions inputActions;
     [SerializeField] private WidgetNavigator_Animator sidebar;
     public List<WidgetNavigator_TMP> submenus;
 
@@ -36,12 +35,6 @@ public class oWB_Inventory : MonoBehaviour
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
-    {
-        // Setup inputs
-        inputActions = new InputActions().TopDown;
-        inputActions.Enable();
-    }
 
     private void Update()
     {
@@ -49,7 +42,7 @@ public class oWB_Inventory : MonoBehaviour
         {
             SetSubmenuStates();
         }
-        if (inputActions.Interact.WasPressedThisFrame())
+        if (GameInstance.Inputs.Interact.WasPressedThisFrame())
         {
             sidebar.activelyNavigating = false;
             submenus[sidebar.currentIndex].activelyNavigating = true;
