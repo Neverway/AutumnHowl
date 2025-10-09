@@ -7,12 +7,18 @@ public abstract class EffectActionTarget
     public abstract string Describe();
     public override string ToString() => Describe();
 }
+
+// ----------------------------
+// TARGET TYPES BELOW!!!!!
+// ----------------------------
+
 [Serializable]
 public class TargetSelf : EffectActionTarget
 {
     public override Character GetTarget(Character user) => user;
     public override string Describe() => "self";
 }
+
 [Serializable]
 public class TargetNearestEnemy : EffectActionTarget
 {
@@ -23,6 +29,7 @@ public class TargetNearestEnemy : EffectActionTarget
     }
     public override string Describe() => "nearest enemy";
 }
+
 [Serializable]
 public class TargetAllEnemies : EffectActionTarget
 {
