@@ -44,7 +44,7 @@ public static class StatModTypeExtension
 [Serializable]
 public class MultipleEffectsAction : EffectAction
 {
-    [Polymorphic, SerializeReference] public EffectAction[] effects = new EffectAction[1];
+    [Box, Polymorphic, SerializeReference] public EffectAction[] effects = new EffectAction[1];
     public override void ApplyEffect(Character user)
     {
         foreach(EffectAction effect in effects)
@@ -60,7 +60,7 @@ public class MultipleEffectsAction : EffectAction
 [Serializable]
 public class ModifyHealthAction : EffectAction
 {
-    [Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
@@ -112,7 +112,7 @@ public class ModifyHealthAction : EffectAction
 [Serializable]
 public class ModifyCorruptionAction : EffectAction
 {
-    [Polymorphic, SerializeReference] public EffectActionTarget target;
+    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target;
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
@@ -177,7 +177,7 @@ public class GiveItemsEffect : EffectAction
 public class ModifierUntilEndOfSession : EffectAction
 {
     //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
-    [Polymorphic, SerializeReference] public Modifier modifier;
+    [Box, Polymorphic, SerializeReference] public Modifier modifier;
 
     public override void ApplyEffect(Character user)
     {

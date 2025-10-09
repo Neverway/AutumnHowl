@@ -15,7 +15,7 @@ public class Item_Magic : Item
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public int powerCost;
-    [Polymorphic, SerializeReference] public EffectAction effectsWhenCast;
+    [Box, Polymorphic, SerializeReference] public EffectAction effectsWhenCast;
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -59,7 +59,7 @@ public class Item_Magic : Item
         fullDescription += $"{description}";
         return fullDescription;
     }
-    public override bool Use(Character user, int _atIndex, int _inList=0)
+    protected override bool OnUse(Character user, int _atIndex, int _inList=0)
     {
         //Don't use if the user cannot afford power cost
         if (powerCost != 0 && user.currentStats.power < powerCost)

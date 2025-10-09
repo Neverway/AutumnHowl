@@ -17,7 +17,7 @@ public class Item_Consumable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    [Polymorphic, SerializeReference] public EffectAction effectsOnConsume;
+    [Box, Polymorphic, SerializeReference] public EffectAction effectsOnConsume;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -47,7 +47,7 @@ public class Item_Consumable : Item
 
         return effectsOnConsume.DescribeFormatted() + " " + description;
     }
-    public override bool Use(Character user, int _atIndex, int _inList=0)
+    protected override bool OnUse(Character user, int _atIndex, int _inList=0)
     {
         GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory.TryRemoveItem(_atIndex, _inList);
         effectsOnConsume.ApplyEffect(user);
