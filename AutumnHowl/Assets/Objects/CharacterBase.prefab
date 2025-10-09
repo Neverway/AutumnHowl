@@ -192,20 +192,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStats:
+    modifier:
+      rid: -2
     health: 100
     level: 0
     power: 5
     corruption: 0
-    defense: 0
-    attack: 5
-    maxHealth: 100
-    maxPower: 100
-    maxCorruption: 100
-    walkSpeed: 2
-    runSpeed: 3
+    defense:
+      startValue: 0
+      multiplier: 0
+      addedValue: 0
+    attack:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    maxHealth:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxPower:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    maxCorruption:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    walkSpeed:
+      startValue: 2
+      multiplier: 0
+      addedValue: 0
+    runSpeed:
+      startValue: 3
+      multiplier: 0
+      addedValue: 0
   isDead: 0
   animator: {fileID: 7934021959449969890}
   frozen: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &6366712938765167761
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +310,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1108106259, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
+  m_Sprite: {fileID: 2082776072, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -320,9 +348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 0.009161512
-  m_labelHash: 6.3050896e-14
+  m_labelHash: 0.00000039825036
   m_SpriteKey: 0
-  m_SpriteHash: 996075896
+  m_SpriteHash: 361506409
 --- !u!1 &6890817420152045578
 GameObject:
   m_ObjectHideFlags: 0

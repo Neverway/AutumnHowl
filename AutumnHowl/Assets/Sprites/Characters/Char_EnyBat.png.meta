@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: a2692420bbd60584383d53f88db82801
+guid: 2573121aba1a7f2949b906547c0bbc92
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -119,11 +119,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Autumn_0
+      name: Char_EnyBat_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64910f76063f9b8309c85140c95d84d6
-      internalID: 781893458
+      spriteID: bc91e642bb85287d5abbea8f7b0882ec
+      internalID: 644904314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_1
+      name: Char_EnyBat_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5bc59a8b9b004d7fa97995d5b2b65ef
-      internalID: -929992665
+      spriteID: 8f87cda989cae5f558542a2deda45085
+      internalID: 1418588575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_2
+      name: Char_EnyBat_2
       rect:
         serializedVersion: 2
         x: 128
@@ -179,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e397dbad12dacd7a4bce699b9e22e12f
-      internalID: 368652490
+      spriteID: e92e7612640b7fb80964dbb4346ac993
+      internalID: -1108847405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_3
+      name: Char_EnyBat_3
       rect:
         serializedVersion: 2
         x: 192
@@ -200,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d11cb53c2f9cca18fb0675f86921d5c8
-      internalID: -100503706
+      spriteID: cf0c1f724c132b114aa7c90ba8c7eec6
+      internalID: -1784628778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_4
+      name: Char_EnyBat_4
       rect:
         serializedVersion: 2
         x: 256
@@ -221,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 929731190a1d716758713724f747ed62
-      internalID: 1819864923
+      spriteID: bc7a1b5c8a29d0547bf8116135ba4090
+      internalID: 198314191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_5
+      name: Char_EnyBat_5
       rect:
         serializedVersion: 2
         x: 320
@@ -242,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbb9e0c2c45dc54edbd3d4e37cbc5ebe
-      internalID: -995648226
+      spriteID: 74ad3c1450892786b8ac082fb39b2fed
+      internalID: 1310484754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_6
+      name: Char_EnyBat_6
       rect:
         serializedVersion: 2
         x: 384
@@ -263,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7e7e63b8eb2a91b3ba4f66ea0e11132
-      internalID: -334663375
+      spriteID: 0415cb182c342fd75ae06d9858546a2c
+      internalID: -744275402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_7
+      name: Char_EnyBat_7
       rect:
         serializedVersion: 2
         x: 448
@@ -284,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a891c43e06ba9e38cb15d4f119df704b
-      internalID: 1063401247
+      spriteID: 0ca33f1af6190fe42bf18677776f2178
+      internalID: -309785494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_8
+      name: Char_EnyBat_8
       rect:
         serializedVersion: 2
         x: 512
@@ -305,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d2240739fd3879fb9759cc8628d9a70
-      internalID: 1297265946
+      spriteID: f69ff0fb80c7eb5728e6a1248398ba25
+      internalID: 304869361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_9
+      name: Char_EnyBat_9
       rect:
         serializedVersion: 2
         x: 576
@@ -326,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b87da11a8812092eb1e7bfe64c7696a
-      internalID: -1856469411
+      spriteID: 386cfa292e6b7741092ae858099126b8
+      internalID: -1780252211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_10
+      name: Char_EnyBat_10
       rect:
         serializedVersion: 2
         x: 640
@@ -347,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c0e48cd5957b75e594c795bdeae6f0a
-      internalID: 925150890
+      spriteID: 1ad451767072c7ecab0801e3170b525a
+      internalID: 1318698313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_11
+      name: Char_EnyBat_11
       rect:
         serializedVersion: 2
         x: 704
@@ -368,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce4af8b55d5a665608078de64fe5e697
-      internalID: 888093029
+      spriteID: 13990986b3fcbf74ea2845dfdc30a757
+      internalID: -637587475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_12
+      name: Char_EnyBat_12
       rect:
         serializedVersion: 2
         x: 768
@@ -389,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fd30ef55d378ff0a985f02a15b2d99a
-      internalID: -52701957
+      spriteID: 2454fc99753c4d0019478c95e00790cf
+      internalID: -1483867818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_13
+      name: Char_EnyBat_13
       rect:
         serializedVersion: 2
         x: 832
@@ -410,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6248cc7f1d7266b3fa76173e3bf16f3a
-      internalID: -1108052001
+      spriteID: 89fdf0f15596769b49ee113a8737f241
+      internalID: -494754943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_14
+      name: Char_EnyBat_14
       rect:
         serializedVersion: 2
         x: 896
@@ -431,14 +444,119 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5258803033aada3b93faf2503572e14
-      internalID: -1936043428
+      spriteID: a7d9db5795f7217f1ae4f5bd1425484b
+      internalID: -1761562953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_15
+      name: Char_EnyBat_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 256
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ef5b4d21a507c94eb26ec86c332e4ef
+      internalID: -518435739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 256
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c77ed8981e11618ff8342d3eacbca0c6
+      internalID: -913459260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_17
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 256
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0377a5a8386eb82c6ad0233b194dc598
+      internalID: -1116627540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 256
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71d6e0dc1a84cd4fb1e8be65284f210
+      internalID: 1545972739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_19
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 256
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c14a7e6cef95e8ba74147268d445c5
+      internalID: -2027298773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_20
       rect:
         serializedVersion: 2
         x: 0
@@ -452,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fdca833b9b26acdfbb7349529eca5b0
-      internalID: 1627640151
+      spriteID: 47c35db960e4b3ad5b23e67f36968a90
+      internalID: -2058961056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_16
+      name: Char_EnyBat_21
       rect:
         serializedVersion: 2
         x: 64
@@ -473,14 +591,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50f2ade66bb2dc383b02711cdd844ec1
-      internalID: 1587412741
+      spriteID: eb2ccab33b0f7eb30a09c9db1851537f
+      internalID: 310517372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_17
+      name: Char_EnyBat_22
       rect:
         serializedVersion: 2
         x: 128
@@ -494,14 +612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34ee9f3a111f3894aa65de13ae2517f0
-      internalID: -111077074
+      spriteID: be081daaa6f97beac8703f7fe6d9538a
+      internalID: -1654005497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_18
+      name: Char_EnyBat_23
       rect:
         serializedVersion: 2
         x: 192
@@ -515,14 +633,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1be26936ba05bc53eb808ce6f81ebabe
-      internalID: 1278452335
+      spriteID: b5685ce86241b9c9e9baf33fa3685e7f
+      internalID: -1774996731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_19
+      name: Char_EnyBat_24
       rect:
         serializedVersion: 2
         x: 256
@@ -536,14 +654,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de9ba993d78fbb65ca7881879f6bb0cc
-      internalID: 588449233
+      spriteID: 3c130b557752ec11b8d11af135c9ea4c
+      internalID: 1277057100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_20
+      name: Char_EnyBat_25
       rect:
         serializedVersion: 2
         x: 320
@@ -557,14 +675,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44b22b02f374349ac9298d5102255f48
-      internalID: -1214821865
+      spriteID: c2394401ec9e1c0789de9976cf9a567d
+      internalID: 1537935446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_21
+      name: Char_EnyBat_26
       rect:
         serializedVersion: 2
         x: 384
@@ -578,14 +696,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f1aca534c2656686a84cf75be476b97
-      internalID: 1617227596
+      spriteID: fcd9c83e9e79c7c939a5724322f37fec
+      internalID: 1220590367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_22
+      name: Char_EnyBat_27
       rect:
         serializedVersion: 2
         x: 448
@@ -599,14 +717,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 501f5492ba5cb9486a2119133d92a4bf
-      internalID: -826056921
+      spriteID: 6d1a21942c4b9a136a7805f31c1a9284
+      internalID: 1856182403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_23
+      name: Char_EnyBat_28
       rect:
         serializedVersion: 2
         x: 512
@@ -620,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 662218df0e61d67a98024de11b69a74b
-      internalID: 2112719554
+      spriteID: 305a9e498fc1a98eabfd8435b7b5a665
+      internalID: -1661239506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_24
+      name: Char_EnyBat_29
       rect:
         serializedVersion: 2
         x: 576
@@ -641,14 +759,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a400c104fb4c90f8fb962603c9ebdc05
-      internalID: -1901886798
+      spriteID: 80d227f82cd9737b1973192abf11426a
+      internalID: 458561260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_25
+      name: Char_EnyBat_30
       rect:
         serializedVersion: 2
         x: 640
@@ -662,14 +780,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9af370f214fe913f8846921f1d229f2
-      internalID: -885393275
+      spriteID: a527028b11132f3b183b2f89da2cfde1
+      internalID: -1893220413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_26
+      name: Char_EnyBat_31
       rect:
         serializedVersion: 2
         x: 704
@@ -683,14 +801,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07d8a504d0fd2a686ad20d6267604989
-      internalID: -166660795
+      spriteID: e81d6d5ac960e878793cdea8d02b7ca6
+      internalID: 1523025212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_27
+      name: Char_EnyBat_32
       rect:
         serializedVersion: 2
         x: 768
@@ -704,14 +822,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 919213c0525cbfc918077eb3d7668730
-      internalID: -619462768
+      spriteID: a744e89713713ce858a80da684a00dd3
+      internalID: 1690781426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_28
+      name: Char_EnyBat_33
       rect:
         serializedVersion: 2
         x: 832
@@ -725,14 +843,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aeef48682f1d414c980d574c4bd0ef40
-      internalID: -211257679
+      spriteID: c1436763c77da90a887e2fe44d62dc3f
+      internalID: 1714845100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_29
+      name: Char_EnyBat_34
       rect:
         serializedVersion: 2
         x: 896
@@ -746,14 +864,119 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f60dc25a97e15d7c29d6c4da2664b295
-      internalID: -1397338526
+      spriteID: 56a3c947db22bc20b8f48dbd26929b14
+      internalID: 1531823961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_30
+      name: Char_EnyBat_35
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 192
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c7364d9d276ef89b6dd5699ef072e1
+      internalID: -271540529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_36
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 192
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 362ea61dd2236ad6ebfc03516f2de433
+      internalID: 890681498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_37
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 192
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60751b5b7cc2ad9edb1460a79e5fa9f3
+      internalID: 421472961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_38
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 192
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c9ca00db438283ca59f60757312b89
+      internalID: -1373825717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_39
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 192
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5b099cfea54d658a9667a98025e6818
+      internalID: 332454560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_40
       rect:
         serializedVersion: 2
         x: 0
@@ -767,14 +990,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08a474a9769ae05f9a862eb31a129f83
-      internalID: 1511850187
+      spriteID: 7add175b29ebeda55a29df8ef75c4ee5
+      internalID: 1160097743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_31
+      name: Char_EnyBat_41
       rect:
         serializedVersion: 2
         x: 64
@@ -788,14 +1011,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47f7a489b88bf88139e32003bd5e701c
-      internalID: -1625077461
+      spriteID: 1e7b34565ffb6cac2b47aaec52f9d16b
+      internalID: 1110733863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_32
+      name: Char_EnyBat_42
       rect:
         serializedVersion: 2
         x: 128
@@ -809,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0539d7a0479335f6ba2628e4d5f7550b
-      internalID: 388277358
+      spriteID: 8bac99ec98dff5134b01dccaff65376f
+      internalID: 389794538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_33
+      name: Char_EnyBat_43
       rect:
         serializedVersion: 2
         x: 192
@@ -830,14 +1053,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41d945653369a30a5a926fdf11e0246e
-      internalID: 1168712967
+      spriteID: 38e8fb6f86692c834bb6c4cfcee14e09
+      internalID: 567530919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_34
+      name: Char_EnyBat_44
       rect:
         serializedVersion: 2
         x: 256
@@ -851,14 +1074,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f39c041c4413f066b4a20c212516cad
-      internalID: 1879587731
+      spriteID: 5e1552a9f15e876bfad22f9238541599
+      internalID: -734931466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_35
+      name: Char_EnyBat_45
       rect:
         serializedVersion: 2
         x: 320
@@ -872,14 +1095,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9e852aa6eebc825593869b6bdcf3118
-      internalID: 1527710758
+      spriteID: 5358b492e1dca6859a80940eeb43723f
+      internalID: -630524804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_36
+      name: Char_EnyBat_46
       rect:
         serializedVersion: 2
         x: 384
@@ -893,14 +1116,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d33e4c70da618803281bddfe60d7631f
-      internalID: -872471064
+      spriteID: 2c56036872a4c3889811e90206356dae
+      internalID: -1631330320
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_37
+      name: Char_EnyBat_47
       rect:
         serializedVersion: 2
         x: 448
@@ -914,14 +1137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 615bbc1dcfce681afac01d3ae5b8d41e
-      internalID: -654915569
+      spriteID: d852dcfe1272ac588887c055a5c691d0
+      internalID: -300986694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_38
+      name: Char_EnyBat_48
       rect:
         serializedVersion: 2
         x: 512
@@ -935,14 +1158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461f2ad602115dbf188cc40dd6eb6dd5
-      internalID: 350952460
+      spriteID: 931ce7b885c095f5385f5a9619f381fa
+      internalID: -448345661
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_39
+      name: Char_EnyBat_49
       rect:
         serializedVersion: 2
         x: 576
@@ -956,14 +1179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26d458723a40a8473b4c232ce4f2ffa2
-      internalID: 1096704880
+      spriteID: 2445212d499beb54d8357f305d00d7d6
+      internalID: -345331990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_40
+      name: Char_EnyBat_50
       rect:
         serializedVersion: 2
         x: 640
@@ -977,14 +1200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e299c17227e27930fa564d75405b2848
-      internalID: -477988933
+      spriteID: c79fd8d20479f4d9f94dd9421b30361a
+      internalID: -730697962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_41
+      name: Char_EnyBat_51
       rect:
         serializedVersion: 2
         x: 704
@@ -998,14 +1221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35994974d6bcacdf6a235c90f8c8e789
-      internalID: 451708331
+      spriteID: 8f84763e34633720eb52688c459c1417
+      internalID: -486852999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_42
+      name: Char_EnyBat_52
       rect:
         serializedVersion: 2
         x: 768
@@ -1019,14 +1242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d0c3cb746df9f0df91bd80f5314bfc9
-      internalID: -1123821984
+      spriteID: c0f68b8a67592e331abe6bacac092c5b
+      internalID: 321995821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_43
+      name: Char_EnyBat_53
       rect:
         serializedVersion: 2
         x: 832
@@ -1040,14 +1263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 827cb59fab71656e6a54ccb73c1587d3
-      internalID: -783065985
+      spriteID: 179496edfee3709fd892194851db4752
+      internalID: 942940014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_44
+      name: Char_EnyBat_54
       rect:
         serializedVersion: 2
         x: 896
@@ -1061,14 +1284,119 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c3bd3a19fc908c4ab70e755f52b77aa
-      internalID: -2139631917
+      spriteID: b0a52c1ba9af2f178a8622c7ceeee3cf
+      internalID: 667302921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_45
+      name: Char_EnyBat_55
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 261ef8f5326ef49ba88b146d0e5630dd
+      internalID: -808254301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_56
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3db07adfab49f1b3bb8f740e6fdada62
+      internalID: 1915247132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_57
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 363c193efe12ce429a187bbf4b14e30b
+      internalID: -613310887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_58
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0609ddd607af7899a3c68fdc4a07fd9
+      internalID: 745191136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_59
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aeab08873f692de0b069540d5fa9d12
+      internalID: -1518303327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_60
       rect:
         serializedVersion: 2
         x: 0
@@ -1082,14 +1410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97fa32d50779c051cb70ce0b47ebe17a
-      internalID: -1958184451
+      spriteID: 7534274f93ad48259be651d91c99a517
+      internalID: -639427914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_46
+      name: Char_EnyBat_61
       rect:
         serializedVersion: 2
         x: 64
@@ -1103,14 +1431,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9859607ee0920c69d8b07c64ff0f8741
-      internalID: -1491641739
+      spriteID: 64404571781457366bd852552c28410f
+      internalID: 768503845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_47
+      name: Char_EnyBat_62
       rect:
         serializedVersion: 2
         x: 128
@@ -1124,14 +1452,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4258107c39c4e105eb8bdfe269a41ddf
-      internalID: -1078269065
+      spriteID: 2bed5d746b6d56e81b6b057fbc83603a
+      internalID: 1652288338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_48
+      name: Char_EnyBat_63
       rect:
         serializedVersion: 2
         x: 192
@@ -1145,14 +1473,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da8d2363c207ae49782111759c763e02
-      internalID: -1208958169
+      spriteID: 7524fca4eddffbae68d3e28986e8c7a0
+      internalID: -1788504157
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_49
+      name: Char_EnyBat_64
       rect:
         serializedVersion: 2
         x: 256
@@ -1166,14 +1494,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c424b082ef48174caee448928f02a3a
-      internalID: 1685928596
+      spriteID: a88a19a3b03f5df2abb3cf6c342ed182
+      internalID: -1245355584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_50
+      name: Char_EnyBat_65
       rect:
         serializedVersion: 2
         x: 320
@@ -1187,14 +1515,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5de11285a5c3f709bc7b78bb2aa61b0
-      internalID: 1516406625
+      spriteID: 23acf7f9d7f32bf1a92f0b835f0087ff
+      internalID: 1845778728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_51
+      name: Char_EnyBat_66
       rect:
         serializedVersion: 2
         x: 384
@@ -1208,14 +1536,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2de0660aaed72f9387eadcf10d43224
-      internalID: -105491326
+      spriteID: 27b673e9e16e0f018b4ed6fa8c62d209
+      internalID: -1915776124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_52
+      name: Char_EnyBat_67
       rect:
         serializedVersion: 2
         x: 448
@@ -1229,14 +1557,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f1db2347b58852e0868399c63190819
-      internalID: -1843249401
+      spriteID: 443a465b0e363322abd0db2e30c6f5b1
+      internalID: 1508921637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_53
+      name: Char_EnyBat_68
       rect:
         serializedVersion: 2
         x: 512
@@ -1250,14 +1578,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 196493c8c9f1a6aa79d2e9ff3fa120a6
-      internalID: 656194913
+      spriteID: fa291bb8a5cc42239b5ccf831598328d
+      internalID: -1839646595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_54
+      name: Char_EnyBat_69
       rect:
         serializedVersion: 2
         x: 576
@@ -1271,14 +1599,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce4d94c2608b526d081cdd8da2d8272a
-      internalID: -826785888
+      spriteID: 01c500fd6bd125bc8acd9551316b4f1d
+      internalID: 1234498781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_55
+      name: Char_EnyBat_70
       rect:
         serializedVersion: 2
         x: 640
@@ -1292,14 +1620,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c33cef0cda6b0eb3097a10d07006c2b3
-      internalID: 917705374
+      spriteID: 1e099cc03638d2752bba84c8640d878f
+      internalID: 1762394354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_56
+      name: Char_EnyBat_71
       rect:
         serializedVersion: 2
         x: 704
@@ -1313,14 +1641,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d73adfd01b9269334b33da33e9149db6
-      internalID: 867638866
+      spriteID: 0391678b6c3ab7380af95aa429c81647
+      internalID: 1010280084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_57
+      name: Char_EnyBat_72
       rect:
         serializedVersion: 2
         x: 768
@@ -1334,14 +1662,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d1efdb88ba86890fa82ce35df64892f
-      internalID: 756519041
+      spriteID: 7b4a6dc787d5de22a9895d44ec988ac3
+      internalID: 22111975
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_58
+      name: Char_EnyBat_73
       rect:
         serializedVersion: 2
         x: 832
@@ -1355,14 +1683,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 400fd36813973dbb4b798498ec787d9b
-      internalID: -1966986817
+      spriteID: 0f16295f7a4ecddbe88a7255d1db9bd2
+      internalID: -418767876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_59
+      name: Char_EnyBat_74
       rect:
         serializedVersion: 2
         x: 896
@@ -1376,14 +1704,119 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02df300d0ec0930f4a0d10d3df9cde83
-      internalID: 1173129065
+      spriteID: bb4c24b48a8e1e112815ae977ba5b599
+      internalID: 478642786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_60
+      name: Char_EnyBat_75
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 64
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b323164c7b62bdadfa81491f80a6952b
+      internalID: -647071661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_76
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 64
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 296646f7759198c79812f8d2a570ff45
+      internalID: 126674314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_77
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 64
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aba3f80948448c39b7a1586ef8b834c
+      internalID: 27937591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_78
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 64
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7da30152116bdf4fbd645aa30fcaaba
+      internalID: -678647939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_79
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 64
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 877ce87ea69f9c379b95bfa72f354d78
+      internalID: -2077445979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_80
       rect:
         serializedVersion: 2
         x: 0
@@ -1397,14 +1830,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d39d8c7f8259eafc98eff1cf6126beaa
-      internalID: 1611461234
+      spriteID: 771f0f61a685eca2b9cfe5a81a5603fa
+      internalID: 1314807391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_61
+      name: Char_EnyBat_81
       rect:
         serializedVersion: 2
         x: 64
@@ -1418,14 +1851,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7474b5b11d697e0a2b9d903a794e3025
-      internalID: -457612889
+      spriteID: 9724ade30c04f866ea0da4b1b43ab773
+      internalID: -1263103224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_62
+      name: Char_EnyBat_82
       rect:
         serializedVersion: 2
         x: 128
@@ -1439,14 +1872,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe0f3a3945dae6f02852342e142492fa
-      internalID: -1763881676
+      spriteID: 756ee5bdcb43bc7cb814b4a82fac0c06
+      internalID: 824501522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_63
+      name: Char_EnyBat_83
       rect:
         serializedVersion: 2
         x: 192
@@ -1460,14 +1893,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cbf1832ae6fff952a5a962a460c7b74
-      internalID: -1114489493
+      spriteID: 3e4f08c4b174072d78703e203bac2146
+      internalID: -1367803940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_64
+      name: Char_EnyBat_84
       rect:
         serializedVersion: 2
         x: 256
@@ -1481,14 +1914,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b474cb66879a2dc4bb7582206b28cbd
-      internalID: 1458664680
+      spriteID: e3d0e7f255fd66f718635a5649f20179
+      internalID: 1329010250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_65
+      name: Char_EnyBat_85
       rect:
         serializedVersion: 2
         x: 320
@@ -1502,14 +1935,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f45b1e392169eea00a41fb30c1ca6b99
-      internalID: 1093461701
+      spriteID: 5b7d8d84c853d010298125d43e2f82b5
+      internalID: -1671219220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_66
+      name: Char_EnyBat_86
       rect:
         serializedVersion: 2
         x: 384
@@ -1523,14 +1956,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a93367005163497c8466a2884eec5ea
-      internalID: 55358380
+      spriteID: c43e3c5dd2d0a0db6920740675b54ec7
+      internalID: 1488153080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_67
+      name: Char_EnyBat_87
       rect:
         serializedVersion: 2
         x: 448
@@ -1544,14 +1977,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25c2ce0bef297c2dea802f36674859a2
-      internalID: -259362540
+      spriteID: 40e07f6b29e197b5992f47303cf241d5
+      internalID: -172090424
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_68
+      name: Char_EnyBat_88
       rect:
         serializedVersion: 2
         x: 512
@@ -1565,14 +1998,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac3bacbff2e947517915236e39fc2006
-      internalID: -1600543595
+      spriteID: b4d8d9354248380c79243c46b7315589
+      internalID: 1848725859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_69
+      name: Char_EnyBat_89
       rect:
         serializedVersion: 2
         x: 576
@@ -1586,14 +2019,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab478feccae0ccf7ba2520b0f0a7a0d7
-      internalID: 1391275398
+      spriteID: fe22d172c80236bfd861ec584030035b
+      internalID: -47712366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_70
+      name: Char_EnyBat_90
       rect:
         serializedVersion: 2
         x: 640
@@ -1607,14 +2040,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bc8a5079755cff67a5c27674e316885
-      internalID: -385039794
+      spriteID: 71544fb75ad617998be7afc604877e95
+      internalID: 1195295222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_71
+      name: Char_EnyBat_91
       rect:
         serializedVersion: 2
         x: 704
@@ -1628,14 +2061,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84b2d1cff2ef7c17d865c71953e6d09f
-      internalID: 550594795
+      spriteID: 69252e08a6b1ce291babe5d22e2e91f4
+      internalID: -1514440269
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_72
+      name: Char_EnyBat_92
       rect:
         serializedVersion: 2
         x: 768
@@ -1649,14 +2082,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73d5f5ce510f722a2a01e91d260b0734
-      internalID: 193685110
+      spriteID: 57f7dfddbe8183f2f82ad67f2b043e77
+      internalID: 231316619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_73
+      name: Char_EnyBat_93
       rect:
         serializedVersion: 2
         x: 832
@@ -1670,14 +2103,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edbe0d5592e1ae8c69c10d9ee6255ef2
-      internalID: 107459551
+      spriteID: cef93d14d7823cea0b8962436d8ada95
+      internalID: 1769039311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Autumn_74
+      name: Char_EnyBat_94
       rect:
         serializedVersion: 2
         x: 896
@@ -1691,8 +2124,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 752c9bdff909a356284076c02c154190
-      internalID: 793872620
+      spriteID: 0f07c5486c02b633389dc833c3c23570
+      internalID: 1035140197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_95
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d70fe06d1678ea0286fdff5d030151c
+      internalID: 1133086764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_96
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64d7899d6f0a980938914702b6f34796
+      internalID: -61344460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_97
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4d0c137bcd9f4ea085337e22c8d436e
+      internalID: 859742471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_98
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73fc1d57385a2a7a28f5ec011576c705
+      internalID: -1294012173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_EnyBat_99
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e12bf2ba54493191aace54b7cba40b8c
+      internalID: -1095974571
       vertices: []
       indices: 
       edges: []
@@ -1708,81 +2246,106 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Autumn_0: 781893458
-      Autumn_1: -929992665
-      Autumn_10: 925150890
-      Autumn_11: 888093029
-      Autumn_12: -52701957
-      Autumn_13: -1108052001
-      Autumn_14: -1936043428
-      Autumn_15: 1627640151
-      Autumn_16: 1587412741
-      Autumn_17: -111077074
-      Autumn_18: 1278452335
-      Autumn_19: 588449233
-      Autumn_2: 368652490
-      Autumn_20: -1214821865
-      Autumn_21: 1617227596
-      Autumn_22: -826056921
-      Autumn_23: 2112719554
-      Autumn_24: -1901886798
-      Autumn_25: -885393275
-      Autumn_26: -166660795
-      Autumn_27: -619462768
-      Autumn_28: -211257679
-      Autumn_29: -1397338526
-      Autumn_3: -100503706
-      Autumn_30: 1511850187
-      Autumn_31: -1625077461
-      Autumn_32: 388277358
-      Autumn_33: 1168712967
-      Autumn_34: 1879587731
-      Autumn_35: 1527710758
-      Autumn_36: -872471064
-      Autumn_37: -654915569
-      Autumn_38: 350952460
-      Autumn_39: 1096704880
-      Autumn_4: 1819864923
-      Autumn_40: -477988933
-      Autumn_41: 451708331
-      Autumn_42: -1123821984
-      Autumn_43: -783065985
-      Autumn_44: -2139631917
-      Autumn_45: -1958184451
-      Autumn_46: -1491641739
-      Autumn_47: -1078269065
-      Autumn_48: -1208958169
-      Autumn_49: 1685928596
-      Autumn_5: -995648226
-      Autumn_50: 1516406625
-      Autumn_51: -105491326
-      Autumn_52: -1843249401
-      Autumn_53: 656194913
-      Autumn_54: -826785888
-      Autumn_55: 917705374
-      Autumn_56: 867638866
-      Autumn_57: 756519041
-      Autumn_58: -1966986817
-      Autumn_59: 1173129065
-      Autumn_6: -334663375
-      Autumn_60: 1611461234
-      Autumn_61: -457612889
-      Autumn_62: -1763881676
-      Autumn_63: -1114489493
-      Autumn_64: 1458664680
-      Autumn_65: 1093461701
-      Autumn_66: 55358380
-      Autumn_67: -259362540
-      Autumn_68: -1600543595
-      Autumn_69: 1391275398
-      Autumn_7: 1063401247
-      Autumn_70: -385039794
-      Autumn_71: 550594795
-      Autumn_72: 193685110
-      Autumn_73: 107459551
-      Autumn_74: 793872620
-      Autumn_8: 1297265946
-      Autumn_9: -1856469411
+      Char_EnyBat_0: 644904314
+      Char_EnyBat_1: 1418588575
+      Char_EnyBat_10: 1318698313
+      Char_EnyBat_11: -637587475
+      Char_EnyBat_12: -1483867818
+      Char_EnyBat_13: -494754943
+      Char_EnyBat_14: -1761562953
+      Char_EnyBat_15: -518435739
+      Char_EnyBat_16: -913459260
+      Char_EnyBat_17: -1116627540
+      Char_EnyBat_18: 1545972739
+      Char_EnyBat_19: -2027298773
+      Char_EnyBat_2: -1108847405
+      Char_EnyBat_20: -2058961056
+      Char_EnyBat_21: 310517372
+      Char_EnyBat_22: -1654005497
+      Char_EnyBat_23: -1774996731
+      Char_EnyBat_24: 1277057100
+      Char_EnyBat_25: 1537935446
+      Char_EnyBat_26: 1220590367
+      Char_EnyBat_27: 1856182403
+      Char_EnyBat_28: -1661239506
+      Char_EnyBat_29: 458561260
+      Char_EnyBat_3: -1784628778
+      Char_EnyBat_30: -1893220413
+      Char_EnyBat_31: 1523025212
+      Char_EnyBat_32: 1690781426
+      Char_EnyBat_33: 1714845100
+      Char_EnyBat_34: 1531823961
+      Char_EnyBat_35: -271540529
+      Char_EnyBat_36: 890681498
+      Char_EnyBat_37: 421472961
+      Char_EnyBat_38: -1373825717
+      Char_EnyBat_39: 332454560
+      Char_EnyBat_4: 198314191
+      Char_EnyBat_40: 1160097743
+      Char_EnyBat_41: 1110733863
+      Char_EnyBat_42: 389794538
+      Char_EnyBat_43: 567530919
+      Char_EnyBat_44: -734931466
+      Char_EnyBat_45: -630524804
+      Char_EnyBat_46: -1631330320
+      Char_EnyBat_47: -300986694
+      Char_EnyBat_48: -448345661
+      Char_EnyBat_49: -345331990
+      Char_EnyBat_5: 1310484754
+      Char_EnyBat_50: -730697962
+      Char_EnyBat_51: -486852999
+      Char_EnyBat_52: 321995821
+      Char_EnyBat_53: 942940014
+      Char_EnyBat_54: 667302921
+      Char_EnyBat_55: -808254301
+      Char_EnyBat_56: 1915247132
+      Char_EnyBat_57: -613310887
+      Char_EnyBat_58: 745191136
+      Char_EnyBat_59: -1518303327
+      Char_EnyBat_6: -744275402
+      Char_EnyBat_60: -639427914
+      Char_EnyBat_61: 768503845
+      Char_EnyBat_62: 1652288338
+      Char_EnyBat_63: -1788504157
+      Char_EnyBat_64: -1245355584
+      Char_EnyBat_65: 1845778728
+      Char_EnyBat_66: -1915776124
+      Char_EnyBat_67: 1508921637
+      Char_EnyBat_68: -1839646595
+      Char_EnyBat_69: 1234498781
+      Char_EnyBat_7: -309785494
+      Char_EnyBat_70: 1762394354
+      Char_EnyBat_71: 1010280084
+      Char_EnyBat_72: 22111975
+      Char_EnyBat_73: -418767876
+      Char_EnyBat_74: 478642786
+      Char_EnyBat_75: -647071661
+      Char_EnyBat_76: 126674314
+      Char_EnyBat_77: 27937591
+      Char_EnyBat_78: -678647939
+      Char_EnyBat_79: -2077445979
+      Char_EnyBat_8: 304869361
+      Char_EnyBat_80: 1314807391
+      Char_EnyBat_81: -1263103224
+      Char_EnyBat_82: 824501522
+      Char_EnyBat_83: -1367803940
+      Char_EnyBat_84: 1329010250
+      Char_EnyBat_85: -1671219220
+      Char_EnyBat_86: 1488153080
+      Char_EnyBat_87: -172090424
+      Char_EnyBat_88: 1848725859
+      Char_EnyBat_89: -47712366
+      Char_EnyBat_9: -1780252211
+      Char_EnyBat_90: 1195295222
+      Char_EnyBat_91: -1514440269
+      Char_EnyBat_92: 231316619
+      Char_EnyBat_93: 1769039311
+      Char_EnyBat_94: 1035140197
+      Char_EnyBat_95: 1133086764
+      Char_EnyBat_96: -61344460
+      Char_EnyBat_97: 859742471
+      Char_EnyBat_98: -1294012173
+      Char_EnyBat_99: -1095974571
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

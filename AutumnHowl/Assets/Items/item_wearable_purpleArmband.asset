@@ -12,14 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
   m_Name: item_wearable_purpleArmband
   m_EditorClassIdentifier: 
-  id: 
-  displayName: 
-  description: 
+  id: item_wearable_purpleArmband
+  displayName: Purp. Armband
+  description: A sign of a true adventuerer.
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 0
   sellCost: 0
-  effectsWhileWorn: []
+  effectsWhileWorn:
+  - rid: 26148788346028034
+  - rid: 26148788346028035
+  - rid: 26148788346028036
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 26148788346028034
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 0
+        value: 10
+        statToModify: 4
+    - rid: 26148788346028035
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 0
+        value: 10
+        statToModify: 0
+    - rid: 26148788346028036
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        modifierType: 0
+        value: 10
+        statToModify: 3

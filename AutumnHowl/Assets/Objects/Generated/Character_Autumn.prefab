@@ -1332,7 +1332,7 @@ PrefabInstance:
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -539306625, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
+      objectReference: {fileID: 779807480, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -1343,7 +1343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteHash
-      value: 576174274
+      value: 1069177207
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_CategoryHash
@@ -1464,20 +1464,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStats:
+    modifier:
+      rid: -2
     health: 100
     level: 0
     power: 10
     corruption: 0
-    defense: 0
-    attack: 10
-    maxHealth: 100
-    maxPower: 100
-    maxCorruption: 100
-    walkSpeed: 2
-    runSpeed: 3
+    defense:
+      startValue: 0
+      multiplier: 0
+      addedValue: 0
+    attack:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    maxHealth:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxPower:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    maxCorruption:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    walkSpeed:
+      startValue: 2
+      multiplier: 0
+      addedValue: 0
+    runSpeed:
+      startValue: 3
+      multiplier: 0
+      addedValue: 0
   isDead: 0
   animator: {fileID: 1867420067129031397}
   canPause: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!4 &6972457444599413610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

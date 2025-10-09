@@ -9,7 +9,7 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AuHo/New Magic Item", fileName = "item_magic_")]
+[CreateAssetMenu(menuName = "AuHo/Item/New Magic", fileName = "item_magic_")]
 public class Item_Magic : Item
 {
     #region========================================( Variables )======================================================//

@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AuHo/New Wearable Item", fileName = "item_wearable_")]
+[CreateAssetMenu(menuName = "AuHo/Item/New Wearable", fileName = "item_wearable_")]
 public class Item_Wearable : Item
 {
     #region========================================( Variables )======================================================//
