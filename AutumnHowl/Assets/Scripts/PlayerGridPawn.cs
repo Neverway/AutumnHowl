@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerGridPawn : GridPawn
 {
+    public bool canMove;
     private void Update ()
     {
+        if (!canMove) return;
+        
         if (Input.GetKeyDown (KeyCode.LeftArrow))
         {
             if (BattleGrid.Instance.ValidTile (position.x - 1, position.y) && ! BattleGrid.Instance.IsOccupied(position.x - 1, position.y))

@@ -20,6 +20,14 @@ public class BattleStateController : MonoBehaviour
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     public int currentWave;
+    public PlayerAction playerAction {get; set;}
+    public enum PlayerAction
+    {
+        attack,
+        spell,
+        item,
+        defend,
+    }
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
@@ -29,7 +37,8 @@ public class BattleStateController : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public GI_AuHoGameState gameState;
     public Func_TextEvent textEvent;
-    public Animator ChoiceBoxAnimator;
+    public WB_Battle battleWidget;
+    public Char_Battle_Player battlePlayer;
 
 
     #endregion
@@ -63,6 +72,26 @@ public class BattleStateController : MonoBehaviour
 
         currentBattleState = newBS;
         currentBattleState.OnStateEnter(oldBS);
+    }
+
+    public void SetPlayerAction(int _action)
+    {
+        switch (_action)
+        {
+            case 0:
+                playerAction = PlayerAction.attack;
+                break;
+            case 2:
+                playerAction = PlayerAction.spell;
+                break;
+            case 1:
+                playerAction = PlayerAction.item;
+                break;
+            case 3:
+                playerAction = PlayerAction.defend;
+                break;
+        }
+        NewState(new BS_GridAction(this));
     }
 
 
@@ -105,6 +134,10 @@ public class BS_Start : BattleState
     public override void OnStateEnter(BattleState stateLeaving)
     {
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;
+        controller.textEvent.textEvent.OnFinish.AddListener(() =>
+        {
+            controller.NewState(new BS_PlayerAction(controller));
+        });
         controller.textEvent.CallEvent();
     }
 
@@ -114,6 +147,7 @@ public class BS_Start : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
+        controller.textEvent.textEvent.OnFinish.RemoveAllListeners();
     }
 }
 
@@ -128,6 +162,7 @@ public class BS_PlayerAction : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        controller.battleWidget.SetActionBarVisible(true);
     }
 
     public override void OnStateUpdate()
@@ -136,6 +171,8 @@ public class BS_PlayerAction : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
+        Debug.Log("Left Play Act");
+        controller.battleWidget.SetActionBarVisible(false);
     }
 }
 
@@ -150,6 +187,7 @@ public class BS_GridAction : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        controller.battlePlayer.canMove = true;
     }
 
     public override void OnStateUpdate()
@@ -158,5 +196,6 @@ public class BS_GridAction : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
+        controller.battlePlayer.canMove = false;
     }
 }

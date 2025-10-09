@@ -26,10 +26,16 @@ public class WB_Battle : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    public Image heartImage, powerImage, corruptionImage;
+    [Header("Heartbeat Stuff")]
+    public Image heartImage;
+    public Image powerImage, corruptionImage;
     public List<Sprite> heartSprites, powerSprites, corruptionSprites;
-    public GI_AuHoGameState gameState;
     public Animator heartAnimator;
+    private GI_AuHoGameState gameState;
+    [Header("Action Stuff")] 
+    public Animator actionBarAnimator;
+    public GameObject attackBar;
+    public Image attackBarLeft, attackBarRight;
 
 
     #endregion
@@ -41,6 +47,7 @@ public class WB_Battle : MonoBehaviour
     private void Start()
     {
         gameState = GameInstance.Get<GI_AuHoGameState>();
+        SetActionBarVisible(false);
     }
 
     public void Update()
@@ -74,6 +81,32 @@ public class WB_Battle : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public void SetActionBarVisible(bool _isVisible)
+    {
+        switch (_isVisible)
+        {
+            case true:
+                actionBarAnimator.GetComponent<WidgetNavigator>().SetIsNavigating(true);
+                actionBarAnimator.Play("Open");
+                break;
+            case false:
+                actionBarAnimator.GetComponent<WidgetNavigator>().SetIsNavigating(false);
+                actionBarAnimator.Play("Close");
+                break;
+        }
+    }
+    public void SetAttackBarVisible(bool _isVisible)
+    {
+        switch (_isVisible)
+        {
+            case true:
+                attackBar.SetActive(true);
+                break;
+            case false:
+                attackBar.SetActive(true);
+                break;
+        }
+    }
 
 
     #endregion
