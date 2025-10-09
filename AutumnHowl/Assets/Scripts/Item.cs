@@ -11,7 +11,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AuHo/New Item", fileName = "Item_")]
 public abstract class Item : ScriptableObject
 {
     #region========================================( Variables )======================================================//

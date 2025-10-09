@@ -23,7 +23,9 @@ public abstract class EffectAction
     }
     public override string ToString() => DescribeFormatted();
 }
+
 public enum StatModType { Flat, PercentMissing, PercentCurrent, PercentMax }
+
 public static class StatModTypeExtension
 {
     public static float ApplyMod(this StatModType modType, float amount, float current, float max)
@@ -40,6 +42,10 @@ public static class StatModTypeExtension
     public static int ApplyModInt(this StatModType modType, float amount, float current, float max) =>
         Mathf.RoundToInt(ApplyMod(modType, amount, current, max));
 }
+
+// ----------------------------
+// EFFECTS BELOW!!!!!!!
+// ----------------------------
 
 [Serializable]
 public class MultipleEffectsAction : EffectAction
@@ -146,8 +152,6 @@ public class ModifyCorruptionAction : EffectAction
         return $"[???] ";
     }
 }
-
-
 
 [Serializable]
 public class GiveItemsEffect : EffectAction

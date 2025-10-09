@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AuHo/New Consumable Item", fileName = "item_consumable_")]
+[CreateAssetMenu(menuName = "AuHo/Item/New Consumable", fileName = "item_consumable_")]
 public class Item_Consumable : Item
 {
     #region========================================( Variables )======================================================//

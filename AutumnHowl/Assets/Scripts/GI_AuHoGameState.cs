@@ -57,6 +57,7 @@ public class AuHoGameState
     public int kills = 0;
     public int deaths = 0;
     public float playtime = 0;
+    public BattleData currentBattle;
 }
 
 [Serializable]
