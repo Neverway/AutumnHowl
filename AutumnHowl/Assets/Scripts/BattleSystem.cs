@@ -29,9 +29,14 @@ public class BattleStateController : MonoBehaviour
         defend,
     }
 
+    public int stepsRemaining;
+    public List<Char_Battle> turnOrder;
+    public int currentTurn = 0;
+
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private BattleState currentBattleState;
+    private bool initialized;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -39,6 +44,7 @@ public class BattleStateController : MonoBehaviour
     public Func_TextEvent textEvent;
     public WB_Battle battleWidget;
     public Char_Battle_Player battlePlayer;
+    public BattleGrid battleGrid;
 
 
     #endregion
@@ -47,16 +53,18 @@ public class BattleStateController : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(()=>BattleGrid.Instance != null);
         gameState = GameInstance.Get<GI_AuHoGameState>();
-        print(gameState);
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
+        initialized = true;
     }
 
     private void Update()
     {
+        if (!initialized) return;
         currentBattleState.OnStateUpdate();
     }
 
@@ -92,6 +100,35 @@ public class BattleStateController : MonoBehaviour
                 break;
         }
         NewState(new BS_GridAction(this));
+    }
+
+    public IEnumerator CoNextTurnStep()
+    {
+        // Disable movement for the current character
+        turnOrder[currentTurn].SetTurnActive(false);
+        
+        yield return null;
+        
+        // If there are more characters waiting for their turn
+        if (currentTurn + 1 < turnOrder.Count)
+        {
+            currentTurn++;
+            // Enable movement for the next character
+            turnOrder[currentTurn].SetTurnActive(true);
+        }
+        
+        // If there are no more characters waiting for their turn, end the step
+        else
+        {
+            stepsRemaining--;
+            currentTurn = 0;
+            turnOrder[0].SetTurnActive(true);
+        }
+    }
+
+    public void NextTurnStep()
+    {
+        StartCoroutine(CoNextTurnStep());
     }
 
 
@@ -133,12 +170,25 @@ public class BS_Start : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        // Add the player to be first in the turn order
+        controller.turnOrder.Add(controller.battlePlayer);
+        
+        // Create the enemy on the grid
+        var newEnemy = controller.battleGrid.InstantiatePawn(
+            controller.gameState.currentGameState.currentBattle.enemyStartPosition,
+            controller.gameState.currentGameState.currentBattle.enemyPrefab);
+        
+        // Add the enemy to be next in the turn order
+        controller.turnOrder.Add(newEnemy.GetComponent<Char_Battle>());
+        
+        // Display opening text
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;
         controller.textEvent.textEvent.OnFinish.AddListener(() =>
         {
             controller.NewState(new BS_PlayerAction(controller));
         });
         controller.textEvent.CallEvent();
+        
     }
 
     public override void OnStateUpdate()
@@ -171,7 +221,6 @@ public class BS_PlayerAction : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
-        Debug.Log("Left Play Act");
         controller.battleWidget.SetActionBarVisible(false);
     }
 }
@@ -181,21 +230,32 @@ public class BS_PlayerAction : BattleState
 /// </summary>
 public class BS_GridAction : BattleState
 {
+    private BattleWave activeWave;
+    private bool initialized = false;
+    
     public BS_GridAction(BattleStateController controller) : base(controller)
     {
     }
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        activeWave = controller.gameState.currentGameState.currentBattle.battleSequence.GetBattleWave();
+        controller.stepsRemaining = activeWave.waveSteps;
         controller.battlePlayer.canMove = true;
     }
 
     public override void OnStateUpdate()
     {
+        controller.battleWidget.stepCountText.text = controller.stepsRemaining.ToString();
+        if (controller.stepsRemaining <= 0)
+        {
+            controller.NewState(new BS_PlayerAction(controller));
+        }
     }
 
     public override void OnStateLeave(BattleState stateEntering)
     {
+        Debug.Log("Left");
         controller.battlePlayer.canMove = false;
     }
 }

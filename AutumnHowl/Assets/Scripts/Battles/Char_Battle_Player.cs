@@ -11,21 +11,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Char_Battle_Player : Character
+public class Char_Battle_Player : Char_Battle
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-    public bool canMove;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [SerializeField] private GridPawn gridPawnController;
 
 
     #endregion
@@ -44,32 +42,30 @@ public class Char_Battle_Player : Character
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void UpdateMovementInput()
     {
-
         if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
         {
-            TryMove(Vector2Int.up);
+            TryMoveInDirection(Vector2Int.up);
         }
-        if (GameInstance.Inputs.MoveDown.WasPressedThisFrame())
+        else if (GameInstance.Inputs.MoveDown.WasPressedThisFrame())
         {
-            TryMove(Vector2Int.down);
+            TryMoveInDirection(Vector2Int.down);
         }
-        if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
+        else if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
         {
-            TryMove(Vector2Int.left);
+            TryMoveInDirection(Vector2Int.left);
         }
-        if (GameInstance.Inputs.MoveRight.WasPressedThisFrame())
+        else if (GameInstance.Inputs.MoveRight.WasPressedThisFrame())
         {
-            TryMove(Vector2Int.right);
+            TryMoveInDirection(Vector2Int.right);
         }
     }
-
-    private void TryMove(Vector2Int _direction)
+    
+    protected override bool TryMoveInDirection(Vector2Int _direction)
     {
-        var testPos = gridPawnController.position + _direction;
-        if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
-        {
-            gridPawnController.MoveToTile (testPos.x, testPos.y);
-        }
+        print ($"PPos {gridPawnController.position}");
+        gridPather.GetPathToTarget(gridPawnController);
+        bool oldResult = base.TryMoveInDirection(_direction);
+        return oldResult;
     }
 
 

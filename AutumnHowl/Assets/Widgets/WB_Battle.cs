@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,6 +37,8 @@ public class WB_Battle : MonoBehaviour
     public Animator actionBarAnimator;
     public GameObject attackBar;
     public Image attackBarLeft, attackBarRight;
+    [Header("Step Stuff")] 
+    public TMP_Text stepCountText;
 
 
     #endregion

@@ -31,7 +31,7 @@ MonoBehaviour:
     waves:
     - rid: 26148788346028042
   enemyPrefab: {fileID: 6242562417686465405, guid: 99c859ca18339c81fa939e27fb693e59, type: 3}
-  enemyStartPosition: {x: 0, y: 0}
+  enemyStartPosition: {x: 2, y: 4}
   references:
     version: 2
     RefIds:
@@ -80,4 +80,4 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
         waveAttack: {fileID: 0}
-        waveSteps: 5
+        waveSteps: 8
