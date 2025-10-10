@@ -14,12 +14,13 @@ public abstract class Character : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    protected CharacterStats defaultStats = new CharacterStats();
+    public CharacterTemplate template;
     public CharacterStats currentStats = new CharacterStats();
     public bool isDead;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+    [HideInInspector] public CharacterIdentifier identifier;
     public event Action OnHurt;
     public event Action OnHeal;
     public event Action OnDeath;
@@ -44,8 +45,8 @@ public abstract class Character : MonoBehaviour
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        currentStats.LinkCharacterStatsToCharacter(this);
     }
-
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
@@ -76,7 +77,6 @@ public abstract class Character : MonoBehaviour
             }
         }
     }
-
 
     #endregion
 }

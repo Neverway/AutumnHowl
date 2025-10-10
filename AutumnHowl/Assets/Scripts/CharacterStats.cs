@@ -1,16 +1,21 @@
+using ErryLib.Reflection;
 using System;
+using System.Reflection;
 using UnityEngine;
-using StatType = CharacterStats.StatType;
+using static CharacterStats;
 using static CharacterStats.StatType;
 
 [Serializable]
 public class CharacterStats
 {
-    [Polymorphic, SerializeReference] public Modifier modifier;
-
     public enum StatType
     {
-        Defense, Attack, MaxHealth, MaxPower, MaxCorruption, MoveSpeed
+        [StatName("DEF")] Defense,
+        [StatName("ATK")] Attack,
+        [StatName("MAX HP")] MaxHealth,
+        [StatName("MAX PWR")] MaxPower,
+        [StatName("MAX COR")] MaxCorruption,
+        [StatName("SPD")] MoveSpeed
     }
 
     [Header("Base Values")]
@@ -29,6 +34,23 @@ public class CharacterStats
     [Unbox] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
     [Unbox] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
 
+
+    public void LinkCharacterStatsToCharacter(Character character)
+    {
+        foreach (MemberInfo member in typeof(CharacterStats).GetCachedMemberInfos())
+        {
+            if (member is FieldInfo field)
+            {
+                object value = field.GetValue(this);
+                if (value != null && value is CharacterStat stat)
+                {
+                    stat.linkedCharacter = character;
+                }
+            }
+        }
+    }
+
+    #region HelperProperties
     public float PercentCurrentHealth => health / maxHealth;
     public float PercentMissingHealth => 1f - PercentCurrentHealth;
     public float MissingHealth => maxHealth - health;
@@ -40,43 +62,24 @@ public class CharacterStats
     public float PercentCurrentPower => ((float)power) / maxPower;
     public float PercentMissingPower => 1f - PercentCurrentPower;
     public float MissingPower => maxPower - power;
+    #endregion
 }
 
-public interface CharacterStat : INumberModifiable
+public static partial class AuHo_ExtentionMethods
 {
-    public bool IsStat(StatType stat);
-}
-[Serializable]
-public class CharacterStatInt : ModifiableInt, CharacterStat
-{
-    private StatType statType;
-    public CharacterStatInt(int startValue, StatType statType) : base(startValue)
+    public static string GetStatName(this StatType statType)
     {
-        this.statType = statType;
+        var attribute = statType.GetAttributeOfType<StatNameAttribute>();
+        if (attribute != null)
+            return attribute.statName;
+        return null;
     }
-
-    public bool IsStat(StatType stat) => statType == stat;
 }
-[Serializable]
-public class CharacterStatFloat : ModifiableFloat, CharacterStat
+public class StatNameAttribute : Attribute
 {
-    private StatType statType;
-    public CharacterStatFloat(float startValue, StatType statType) : base(startValue)
-    {
-        this.statType = statType;
-    }
-    public bool IsStat(StatType stat) => statType == stat;
-}
-
-[Serializable]
-public class CharacterStatModifier : NumberModifier<CharacterStat>
-{
-    public StatType statToModify;
-    public override void ModifyValue(Modifiable modifiableValue)
-    {
-        //Only modify values that are CharacterStats of the specific StatType
-        if (modifiableValue is CharacterStat characterStat)
-            if (characterStat.IsStat(statToModify))
-                base.ModifyValue(modifiableValue);
-    }
+    public string statName;
+    public StatNameAttribute(string statName) 
+    { 
+        this.statName = statName; 
+    } 
 }

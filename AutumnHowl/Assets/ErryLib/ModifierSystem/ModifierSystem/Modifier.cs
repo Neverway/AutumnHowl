@@ -24,6 +24,7 @@ public abstract class Modifier
             return;
 
         ActiveModifiers.Add(this);
+        OnRegisterModifier();
     }
 
     public int GetMultiRegisterCount() => ActiveModifiers.Where((mod) => mod == this).Count();
@@ -32,9 +33,13 @@ public abstract class Modifier
     /// Unregisters the <see cref="Modifier"/> from the global list <see cref="ActiveModifiers"/>. This will <b>disable</b> the
     /// <see cref="Modifier"/> from affecting <see cref="Modifiable"/>s and reacting to <see cref="GameEvent"/>s
     /// </summary>
-    public void UnregisterModifier() => ActiveModifiers.Remove(this);
-
-
+    public void UnregisterModifier()
+    {
+        if (ActiveModifiers.Remove(this))
+            OnUnregisterModifier();
+    }
+    protected virtual void OnRegisterModifier() { }
+    protected virtual void OnUnregisterModifier() { }
     /// <summary>
     /// Whenever <see cref="Modifiable{T}.Get"/> is called to retrieve the modifiable's value, all
     /// <see cref="ActiveModifiers"/> will call this method to modify that <paramref name="modifiableValue"/> IF this <see cref="Modifier"/>

@@ -7,6 +7,7 @@
 //
 //====================================================================================================================//
 
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/Item/New Magic", fileName = "item_magic_")]
@@ -48,9 +49,15 @@ public class Item_Magic : Item
         else
             fullDescription += "[No cast cost] ";
 
-        //Add effects to description if there is defined effects
+        //Try to add effects to description
         if (effectsWhenCast != null)
-            fullDescription += $"{effectsWhenCast.DescribeNoFormat()}";
+        {
+            try { fullDescription += $"{effectsWhenCast.DescribeNoFormat()}"; }
+            catch (Exception e) { 
+                Debug.LogException(e);  
+                fullDescription += "{col=err}[ERROR]{col=} "; 
+            }
+        }
 
         //End stat colors and speed
         fullDescription += "{col=,spd=}";

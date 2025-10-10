@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -72,9 +73,11 @@ public class ModifyHealthAction : EffectAction
 
     public override void ApplyEffect(Character user)
     {
+        /*
         var targetCharacter = target.GetTarget(user);
         var stats = targetCharacter.currentStats;
         targetCharacter.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
+        // */
     }
 
     public override string DescribeNoFormat()
@@ -91,14 +94,14 @@ public class ModifyHealthAction : EffectAction
     {
         switch (modifierType)
         {
-            case StatModType.Flat: return $"[Heals {target} by {amount} HP]";
-            case StatModType.PercentMissing: return $"[Heals {target} by {amount}% missing HP]";
-            case StatModType.PercentCurrent: return $"[Heals {target} by {amount}% HP]";
-            case StatModType.PercentMax: return $"[Heals {target} by {amount}% max HP]";
+            case StatModType.Flat: return $"[Heals {target} by {amount} HP] ";
+            case StatModType.PercentMissing: return $"[Heals {target} by {amount}% missing HP] ";
+            case StatModType.PercentCurrent: return $"[Heals {target} by {amount}% HP] ";
+            case StatModType.PercentMax: return $"[Heals {target} by {amount}% max HP] ";
         }
         Debug.LogError($"{nameof(ModifyHealthAction)}: Does not have a description for healing {modifierType}: " +
             $"Falling back to back to ??? as description");
-        return $"[???]";
+        return $"[???] ";
     }
     private string DescribeDealingDamage()
     {
@@ -124,10 +127,13 @@ public class ModifyCorruptionAction : EffectAction
 
     public override void ApplyEffect(Character user)
     {
+        /*
         var targetCharacter = target.GetTarget(user);
         var stats = targetCharacter.currentStats;
         targetCharacter.currentStats.corruption += 
                 modifierType.ApplyModInt(amount, stats.corruption, stats.maxCorruption);
+
+        // */
     }
 
     public override string DescribeNoFormat()
@@ -178,7 +184,45 @@ public class GiveItemsEffect : EffectAction
 }
 
 [Serializable]
-public class ModifierUntilEndOfSession : EffectAction
+public class ModifierForTimedDuration : EffectAction
+{
+    public float seconds;
+    [Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    [Box, Polymorphic, SerializeReference] public UserTargetedModifier modifier;
+
+    public override void ApplyEffect(Character user)
+    {
+        modifier.RegisterModifier(target.GetTargetsFrom(user));
+        GameInstance.SendCoroutine(RemoveModifierAfterTime());
+    }
+    public IEnumerator RemoveModifierAfterTime()
+    {
+        yield return new WaitForSeconds(seconds);
+        modifier.UnRegisterModifier();
+    }
+
+    public override string DescribeNoFormat()
+    {
+        if (hideDescription || seconds <= 0) return "";
+
+        if (modifier != null && modifier is IDescribable describable)
+        {
+            string description = describable.Description;
+            if (string.IsNullOrEmpty(description))
+                return "";
+
+            int inMinutes = Mathf.FloorToInt(seconds / 60);
+            int inSeconds = Mathf.FloorToInt(seconds % 60);
+            string XXm = inMinutes > 0 ? $"{inMinutes}m" : "";
+            string XXs = inSeconds > 0 ? $"{inSeconds}s" : "";
+            return $"[{describable.Description} for {XXm}{XXs}] ";
+        }
+        return "";
+    }
+}
+
+[Serializable]
+public class ModifierForever : EffectAction
 {
     //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
     [Box, Polymorphic, SerializeReference] public Modifier modifier;
@@ -188,5 +232,14 @@ public class ModifierUntilEndOfSession : EffectAction
         modifier.RegisterModifier(multiRegister: true);
     }
 
-    public override string DescribeNoFormat() => "[Permanent Boost???] ";
+    public override string DescribeNoFormat()
+    {
+        if (modifier is IDescribable describable)
+        {
+            string description = describable.Description;
+            if (description != null)
+                return $"[{description} forever] ";
+        }
+        return "";
+    }
 }

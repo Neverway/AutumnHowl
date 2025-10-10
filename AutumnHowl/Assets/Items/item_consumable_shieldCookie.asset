@@ -14,26 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_shieldCookie
   displayName: Shield Cookie
-  description: '{spd=stat, col=stat}[Grants 10 DEF for 1 turn]{col=} A small cookie
-    shaped like a shield.'
+  description: A small cookie shaped like a shield.
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 10
   sellCost: 8
   effectsOnConsume:
-    rid: 1234355927148920847
+    rid: 1234355949659750448
   references:
     version: 2
     RefIds:
-    - rid: 1234355927148920847
-      type: {class: ModifierUntilEndOfSession, ns: , asm: Assembly-CSharp}
+    - rid: 1234355949659750448
+      type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
       data:
-        hideDescription: 1
+        hideDescription: 0
+        seconds: 300
+        target:
+          rid: 1234355949659750449
         modifier:
-          rid: 1234355927148920848
-    - rid: 1234355927148920848
+          rid: 1234355964234170371
+    - rid: 1234355949659750449
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234355964234170371
       type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
       data:
         modifierType: 0
-        value: 10
+        value: 25
+        hideDescription: 0
         statToModify: 0

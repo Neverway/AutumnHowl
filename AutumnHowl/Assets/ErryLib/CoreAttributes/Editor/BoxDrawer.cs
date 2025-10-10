@@ -14,7 +14,6 @@ public class BoxDrawer : PropertyDrawer
 {
     public static Stack<VisualElement> highlightStack = new Stack<VisualElement>();
     public static List<string> collapsed = new List<string>();
-
     public override VisualElement CreatePropertyGUI(SerializedProperty property)
     {
         //Setup unique property ID
@@ -66,7 +65,7 @@ public class BoxDrawer : PropertyDrawer
         
         if (attributeInfo.foldout)
         {
-            contents.SetActive(!collapsed.Contains(propertyID));
+            contents.SetActive(string.IsNullOrEmpty(propertyID) || !collapsed.Contains(propertyID));
             title.OnMouseDown(_ =>
             {
                 if (highlightStack.TryPeek(out VisualElement topElement) && topElement == fullDrawer)
@@ -103,6 +102,10 @@ public class BoxDrawer : PropertyDrawer
                     break;
 
                 var field = new PropertyField(iterator);
+
+                //if (iterator.isArray && iterator.propertyType != SerializedPropertyType.String)
+                //    field.style.marginLeft = 100;
+
                 field.style.SetMargin(1);
                 contents.Add(field);
             }
@@ -111,13 +114,33 @@ public class BoxDrawer : PropertyDrawer
         bool hasDivider = divider != null;
         if (contents.childCount == (hasDivider ? 1 : 0))
         {
+            contents.SetActive(false);
             if (hasDivider) divider.SetActive(false);
             if (attributeInfo.label)
             {
                 title.style.unityFontStyleAndWeight = FontStyle.Normal;
                 title.style.paddingLeft = 2;
+                if (!attributeInfo.box)
+                {
+                    title.style.height = EditorGUIUtility.singleLineHeight;
+                    title.style.maxHeight = EditorGUIUtility.singleLineHeight;
+                    title.style.minHeight = EditorGUIUtility.singleLineHeight;
+                    title.style.marginTop = 0;
+                    title.style.marginBottom = 0;
+                    title.style.paddingTop = 0;
+                    title.style.paddingBottom = 0;
+                }
             }
-            contents.SetActive(false);
+            if (!attributeInfo.box)
+            {
+                fullDrawer.style.height = EditorGUIUtility.singleLineHeight;
+                fullDrawer.style.maxHeight = EditorGUIUtility.singleLineHeight;
+                fullDrawer.style.minHeight = EditorGUIUtility.singleLineHeight;
+                fullDrawer.style.marginTop = 0;
+                fullDrawer.style.marginBottom = 0;
+                fullDrawer.style.paddingTop = 0;
+                fullDrawer.style.paddingBottom = 0;
+            }
         }
 
         return fullDrawer;
@@ -176,6 +199,8 @@ public class BoxDrawer : PropertyDrawer
         box.style.backgroundColor = new Color(g, g, g);
         g = (highlight ? 0.85f : (subhighlight ? 0.6f : 0f));
         box.style.SetBorderColor(new Color (g, g, g));
+
+        box.MarkDirtyRepaint();
     }
     public VisualElement GetPropertyLabel(SerializedProperty property)
     {
@@ -198,7 +223,7 @@ public class BoxDrawer : PropertyDrawer
             prop.style.maxWidth = Length.Percent(75);
             prop.style.flexBasis = StyleKeyword.Auto;
             prop.style.height = 18;
-            prop.style.top = -3;
+            prop.style.top = -2;
             polymorphicTitle.Add(prop);
 
             return polymorphicTitle;

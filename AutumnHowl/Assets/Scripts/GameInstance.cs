@@ -8,6 +8,7 @@
 //====================================================================================================================//
 
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
@@ -73,6 +74,11 @@ public class GameInstance : MonoBehaviour
                                              $"(or it is not stored in {nameof(GameInstance)}.{nameof(instance)}");
 
         return instance.GetComponent<T>();
+    }
+
+    public static void SendCoroutine(IEnumerator coroutine)
+    {
+        instance.StartCoroutine(coroutine);
     }
 
     #endregion
