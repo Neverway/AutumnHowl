@@ -11,16 +11,16 @@ namespace Neverway.StateMachine
 
     public class ControllerEnemyWander : StateMachine<ControllerEnemyWander>
     {
-        private Controller_Overworld_Player player;
-        [SerializeField] private float searchDistance = 6;
-        [SerializeField] private float walkForce = 100f;
-        private Vector3 homePosition;
+        public Controller_Overworld_Player player;
+        [SerializeField] public float searchDistance = 6;
+        [SerializeField] public float comfyDistance = 3f;
+        public Vector3 homePosition {  get; private set; }
         // the attached Rigidbody2D component
         private Rigidbody2D rb;
         /// <summary>
         /// Normalized vector for movement direction.
         /// </summary>
-        private Vector2 movement;
+        public Vector2 movement;
         public float currentMoveSpeed = 0;
         public float wanderSpeed = 1f;
         public float chaseSpeed = 2f;
@@ -38,21 +38,21 @@ namespace Neverway.StateMachine
         {
             base.Update ();
             rb.velocity = movement * currentMoveSpeed;
+            Debug.DrawLine (transform.position, homePosition, Color.yellow);
         }
 
-        internal bool LookForPlayer ()
+        internal void LookForPlayer ()
         {
             if (player == null)
             {
                 Debug.LogError ("Enemy doesn't have player to search for??");
-                return false;
+                return;
             }
             //If we're close to the player, return true.
-            if ((transform.position - player.transform.position).magnitude < searchDistance)
+            if ((player.transform.position - transform.position).magnitude < searchDistance)
             {
-                return true;
+                NewState(new EW_Chase(this));
             }
-            return false;
         }
 
         internal void PickRandomDirection ()
@@ -63,7 +63,7 @@ namespace Neverway.StateMachine
 
         internal void GetDirectionToPlayer ()
         {
-            movement = (transform.position - player.transform.position).normalized;
+            movement = (player.transform.position - transform.position).normalized;
         }
     }
 
@@ -108,6 +108,12 @@ namespace Neverway.StateMachine
         {
             timer = 0f;
             controller.currentMoveSpeed = controller.wanderSpeed;
+            Vector3 homeDirection = controller.homePosition - controller.transform.position;
+            if (homeDirection.magnitude > controller.comfyDistance)
+            {
+                controller.movement = homeDirection.normalized;
+                return;
+            }
             controller.PickRandomDirection ();
         }
 
@@ -135,7 +141,6 @@ namespace Neverway.StateMachine
 
         public override void OnStateEnter (EW_State stateLeaving)
         {
-            controller.GetDirectionToPlayer ();
             controller.currentMoveSpeed = controller.chaseSpeed;
         }
 
@@ -145,6 +150,13 @@ namespace Neverway.StateMachine
 
         public override void OnStateUpdate ()
         {
+            if ((controller.transform.position - controller.player.transform.position).magnitude > controller.searchDistance)
+            {
+                controller.NewState (new EW_Idle (controller));
+                return;
+            }
+
+            controller.GetDirectionToPlayer ();
         }
 
     }
