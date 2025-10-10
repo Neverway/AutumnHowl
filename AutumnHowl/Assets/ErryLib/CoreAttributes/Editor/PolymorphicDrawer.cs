@@ -1,11 +1,12 @@
+using ErryLib.Reflection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 [CustomPropertyDrawer(typeof(PolymorphicAttribute))]
@@ -14,21 +15,48 @@ public class PolymorphicDrawer : PropertyDrawer
     public static Dictionary<Type, List<Type>> cachedDerivedTypes = new Dictionary<Type, List<Type>>();
     public static GUIStyle popupStyle;
     public static GUIStyle popupStyleIfNull;
+    private bool? _drawContentCached;
+    public bool drawContent { 
+        get 
+        { 
+            if (_drawContentCached == null)
+            {
+                _drawContentCached = true;
+                // In the rare case where there is another attribute that rewrites the drawing of a property but you want to
+                // allow the use of the polymorphic propertydrawer, skip drawing this content to allow them to use
+                // ULElements.Property to draw this dropdown without also redrawing all of the properties fields
+                foreach (AttributeInfo attributes in fieldInfo.GetCachedAttributeUsages())
+                {
+                    if (attributes.Attribute.GetType()
+                        .HasAttribute<AttributeNeedsPolymorphicDrawerToIgnoreContentsButDrawDropdownAttribute>())
+                    {
+                        _drawContentCached = false; break;
+                    }
+                }
+            }
+            return _drawContentCached.Value;
+        } 
+    }
+
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        EditorGUI.BeginProperty(position, label, property);
+
         //todo: This is bad hotfix to make sure array elements are propertly indented, probably doesnt fully work
         bool doIndent = property.propertyPath.Contains("Array.data[");
         if (doIndent) EditorGUI.indentLevel++; //Also reduce indent at end of property
 
         if (property.propertyType != SerializedPropertyType.ManagedReference)
         {
-            EditorGUI.PropertyField(position, property, label);
+            if (drawContent)
+                EditorGUI.PropertyField(position, property, label);
+            EditorGUI.EndProperty();
             return;
         }
         bool hasValue = property.managedReferenceValue != null;
 
-        EditorGUI.BeginProperty(position, label, property);
+
 
         // Get the currently assigned type (if any)
         Type currentType = GetManagedReferenceType(property);
@@ -87,8 +115,17 @@ public class PolymorphicDrawer : PropertyDrawer
 
         // Draw the dropdown
         position.height = EditorGUIUtility.singleLineHeight;
-        int newSelectedIndex = EditorGUI.Popup(position, " ", selectedIndex, typeOptions.ToArray(), 
-            (hasValue ? popupStyle : popupStyleIfNull));
+        int newSelectedIndex = 0;
+        if (drawContent)
+        {
+            newSelectedIndex = EditorGUI.Popup(position, " ", selectedIndex, typeOptions.ToArray(),
+                (hasValue ? popupStyle : popupStyleIfNull));
+        }
+        else
+        {
+            newSelectedIndex = EditorGUI.Popup(position, selectedIndex, typeOptions.ToArray(),
+                (hasValue ? popupStyle : popupStyleIfNull));
+        }
 
         // If the selected index changed, update the property
         if (newSelectedIndex != selectedIndex)
@@ -107,8 +144,13 @@ public class PolymorphicDrawer : PropertyDrawer
         // Save original indent level and expand child properties
         int originalIndent = EditorGUI.indentLevel;
 
-        position.height = EditorGUI.GetPropertyHeight(property, true);
-        EditorGUI.PropertyField(position, property, true);
+        
+
+        if (drawContent)
+        {
+            position.height = EditorGUI.GetPropertyHeight(property, true);
+            EditorGUI.PropertyField(position, property, true);
+        }
 
         if (doIndent) EditorGUI.indentLevel--; //Undo added increment from beginning of property
         EditorGUI.EndProperty();
@@ -213,6 +255,8 @@ public class PolymorphicDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
+        if (!drawContent)
+            return EditorGUIUtility.singleLineHeight;
         return EditorGUI.GetPropertyHeight(property, true);
     }
 }

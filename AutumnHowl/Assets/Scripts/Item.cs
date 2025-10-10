@@ -7,8 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Item : ScriptableObject
@@ -19,7 +17,7 @@ public abstract class Item : ScriptableObject
     public string displayName;
     [TextArea, SerializeField] protected string description;
     public bool canNotDiscard;
-    public bool allowMultiple=true;
+    public bool allowMultiple = true;
     public int buyCost;
     public int sellCost;
 
@@ -42,39 +40,17 @@ public abstract class Item : ScriptableObject
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    /*
-    public virtual void ApplyEffect(Character _user)
-    {
-
-        
-        switch (_effect)
-        {
-            case Effect.heal:
-                _target.ModifyHealth(_amount);
-                break;
-            case Effect.damage:
-                _target.ModifyHealth(-_amount);
-                break;
-            case Effect.corrupt:
-                _target.currentStats.corruption+=(int)_amount;
-                break;
-            case Effect.attack:
-                _target.currentStats.attack+=(int)_amount;
-                break;
-            case Effect.strength:
-                _target.currentStats.power+=(int)_amount;
-                break;
-            case Effect.defense:
-                _target.currentStats.defense+=(int)_amount;
-                break;
-        }
-        
-    }
-        // */
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual string GetDescription() => description;
-    public abstract bool Use(Character user, int _atIndex, int _inList = 0);
+    public bool Use(Character user, int _atIndex, int _inList = 0)
+    {
+        if (new Event_UseItem(this, user).InvokeAndGetIfSuccess())
+            return OnUse(user, _atIndex, _inList);
+
+        return false;
+    }
+    protected abstract bool OnUse(Character user, int _atIndex, int _inList = 0);
 
 
     #endregion

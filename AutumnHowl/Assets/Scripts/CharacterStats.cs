@@ -19,15 +19,15 @@ public class CharacterStats
     public int power = 5;
     public int corruption = 0;
     [Tooltip("When damage is taken, this is how much damage is negated")]
-    public CharacterStatInt defense = new(0, Defense);
-    public CharacterStatInt attack = new(5, Attack);
+    [Unbox] public CharacterStatInt defense = new(0, Defense);
+    [Unbox] public CharacterStatInt attack = new(5, Attack);
     [Header("Max Values")]
-    public CharacterStatFloat maxHealth = new(100, MaxHealth);
-    public CharacterStatInt maxPower = new(5, MaxPower);
-    public CharacterStatInt maxCorruption = new(5, MaxCorruption);
+    [Unbox] public CharacterStatFloat maxHealth = new(100, MaxHealth);
+    [Unbox] public CharacterStatInt maxPower = new(5, MaxPower);
+    [Unbox] public CharacterStatInt maxCorruption = new(5, MaxCorruption);
 
-    public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
-    public CharacterStatFloat runSpeed = new(3, MoveSpeed);
+    [Unbox] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
+    [Unbox] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
 
     public float PercentCurrentHealth => health / maxHealth;
     public float PercentMissingHealth => 1f - PercentCurrentHealth;

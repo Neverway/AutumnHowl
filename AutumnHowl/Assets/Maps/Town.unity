@@ -6818,6 +6818,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allMods:
   - rid: 1234355927148920844
+  someInlineItemTest:
+  - testInt: -2
+    testString: 
+    testString2: 
+    subTest:
+      dropvalue: 1
+  - testInt: -2
+    testString: 
+    testString2: 
+    subTest:
+      dropvalue: 1
+  - testInt: -2
+    testString: 
+    testString2: 
+    subTest:
+      dropvalue: 1
   references:
     version: 2
     RefIds:
