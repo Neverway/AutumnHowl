@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class BattleGrid : MonoBehaviour
 {
-    [SerializeField] private int width;
-    [SerializeField] private int height;
+    public int width;
+    public int height;
     private BattleTile[,] grid;
     public static BattleGrid Instance { get; private set; }
 
@@ -31,11 +31,14 @@ public class BattleGrid : MonoBehaviour
         }
     }
 
-    public void InstantiatePawn (Vector2Int _position, GridPawn _pawn) {
-        GridPawn newPawn = Instantiate (_pawn, transform);
+    public GameObject InstantiatePawn (Vector2Int _position, GameObject _pawn) {
+        var newObject = Instantiate (_pawn, transform);
+        GridPawn newPawn = newObject.GetComponent<GridPawn>();
+        print(newPawn);
         newPawn.SetPosition(_position);
         grid[_position.x, _position.y].pawns.Add(newPawn);
         newPawn.InitPawn ();
+        return newObject;
     }
 
     internal void MovePawn (int _x, int _y, int _x2, int _y2, GridPawn gridPawn)
@@ -55,6 +58,19 @@ public class BattleGrid : MonoBehaviour
             return true;
         }
         return false;
+    }
+    
+    public bool IsMoveable (int _x, int _y)
+    {
+        if (ValidTile (_x, _y) == false)
+        {
+            return false;
+        }
+        if (grid[_x, _y].pawns.Count > 0)
+        {
+            return false;
+        }
+        return true;
     }
 
     internal bool ValidTile(int _x, int _y)

@@ -22,7 +22,7 @@ public class BattleData : ScriptableObject
     public TextEvent openingText;
     public BattleSequence battleSequence;
     public GameObject enemyPrefab;
-    public Vector2 enemyStartPosition;
+    public Vector2Int enemyStartPosition = new Vector2Int(3,6);
 }
 
 /// <summary>
@@ -32,6 +32,11 @@ public class BattleData : ScriptableObject
 public class BattleSequence
 {
     [Polymorphic, SerializeReference] public BattleWaveSelector[] waves;
+
+    public BattleWave GetBattleWave()
+    {
+        return waves[0].GetBattleWave();
+    }
 }
 
 /// <summary>
@@ -40,7 +45,7 @@ public class BattleSequence
 [Serializable]
 public abstract class BattleWaveSelector
 {
-    public abstract BattleWave GetWaveInfo();
+    public abstract BattleWave GetBattleWave();
 }
 
 /// <summary>
@@ -53,7 +58,7 @@ public class BattleWave : BattleWaveSelector
     public GameObject waveAttack;
     public int waveSteps;
     
-    public override BattleWave GetWaveInfo()
+    public override BattleWave GetBattleWave()
     {
         return this;
     }
@@ -67,10 +72,10 @@ public class RandoBattleWave : BattleWaveSelector
 {
     [Polymorphic, SerializeReference] public BattleWaveSelector[] waves = new BattleWaveSelector[0];
     
-    public override BattleWave GetWaveInfo()
+    public override BattleWave GetBattleWave()
     {
         if (waves.Length == 0) { throw new Exception("WTF??? A random battle wave is defined, but with no waves."); }
-        return waves[Random.Range(0, waves.Length)].GetWaveInfo();
+        return waves[Random.Range(0, waves.Length)].GetBattleWave();
     }
 }
 
