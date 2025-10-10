@@ -232,10 +232,12 @@ MonoBehaviour:
   player: {fileID: 0}
   searchDistance: 3
   comfyDistance: 3
+  enterBattleDistance: 0.75
   movement: {x: 0, y: 0}
   currentMoveSpeed: 0
   wanderSpeed: 0.5
   chaseSpeed: 2.5
+  chasesPlayer: 1
 --- !u!50 &5351969164555424201
 Rigidbody2D:
   serializedVersion: 4

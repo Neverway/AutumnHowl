@@ -14,6 +14,7 @@ namespace Neverway.StateMachine
         public Controller_Overworld_Player player;
         [SerializeField] public float searchDistance = 6;
         [SerializeField] public float comfyDistance = 3f;
+        [SerializeField] public float enterBattleDistance = 0.75f;
         public Vector3 homePosition {  get; private set; }
         // the attached Rigidbody2D component
         private Rigidbody2D rb;
@@ -24,6 +25,8 @@ namespace Neverway.StateMachine
         public float currentMoveSpeed = 0;
         public float wanderSpeed = 1f;
         public float chaseSpeed = 2f;
+        [Tooltip("Turn this off to make it wander but not attack. Useful for villagers and things.")]
+        public bool chasesPlayer = true;
         // Start is called before the first frame update
         void Start ()
         {
@@ -48,11 +51,21 @@ namespace Neverway.StateMachine
                 Debug.LogError ("Enemy doesn't have player to search for??");
                 return;
             }
+            if (chasesPlayer == false)
+            {
+                return;
+            }
             //If we're close to the player, return true.
             if ((player.transform.position - transform.position).magnitude < searchDistance)
             {
                 NewState(new EW_Chase(this));
             }
+        }
+
+        internal void EnterBattle ()
+        {
+            //Todo
+            throw new NotImplementedException();
         }
 
         internal void PickRandomDirection ()
@@ -150,10 +163,15 @@ namespace Neverway.StateMachine
 
         public override void OnStateUpdate ()
         {
-            if ((controller.transform.position - controller.player.transform.position).magnitude > controller.searchDistance)
+            float playerDistance = (controller.transform.position - controller.player.transform.position).magnitude;
+            if (playerDistance > controller.searchDistance)
             {
                 controller.NewState (new EW_Idle (controller));
                 return;
+            }
+            if (playerDistance < controller.enterBattleDistance)
+            {
+                controller.EnterBattle ();
             }
 
             controller.GetDirectionToPlayer ();
