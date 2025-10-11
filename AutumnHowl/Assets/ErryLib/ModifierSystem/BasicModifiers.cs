@@ -56,11 +56,11 @@ namespace ErryLib.ModiferSystem.Instancers
     public class InstancedModifier<TData> : Modifier 
     {
         public IModifierInstancer<TData> Instancer { get; private set; }
-        TData modifierData;
+        public TData ModifierData;
         internal InstancedModifier(IModifierInstancer<TData> from, TData data)
         {
             this.Instancer = from;
-            this.modifierData = data;
+            this.ModifierData = data;
         }
 
 
@@ -73,6 +73,6 @@ namespace ErryLib.ModiferSystem.Instancers
             Instancer.Invoke_OnInstanceUnregistered(this);
 
         public override void ModifyValue(Modifiable modifiableValue) =>
-            Instancer.Invoke_OnInstanceModifyValue(modifiableValue, modifierData);
+            Instancer.Invoke_OnInstanceModifyValue(modifiableValue, ModifierData);
     }
 }

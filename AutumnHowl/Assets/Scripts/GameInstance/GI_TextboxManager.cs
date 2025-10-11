@@ -23,7 +23,7 @@ public class GI_TextboxManager : MonoBehaviour
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-    public TextEvent currentTextEvent;
+    [Box] public TextEvent currentTextEvent;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/

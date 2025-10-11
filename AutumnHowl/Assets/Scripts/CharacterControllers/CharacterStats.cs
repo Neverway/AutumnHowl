@@ -1,27 +1,25 @@
 using ErryLib.Reflection;
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
-using static CharacterStats;
-using static CharacterStats.StatType;
+using static CharacterStatType;
+
+public enum CharacterStatType
+{
+    [StatName("DEF")] Defense,
+    [StatName("ATK")] Attack,
+    [StatName("MAX HP")] MaxHealth,
+    [StatName("MAX PWR")] MaxPower,
+    [StatName("MAX COR")] MaxCorruption,
+    [StatName("SPD")] MoveSpeed
+}
 
 [Serializable]
 public class CharacterStats
 {
     public CharacterStats() { }
     public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
-
-    public enum StatType
-    {
-        [StatName("DEF")] Defense,
-        [StatName("ATK")] Attack,
-        [StatName("MAX HP")] MaxHealth,
-        [StatName("MAX PWR")] MaxPower,
-        [StatName("MAX COR")] MaxCorruption,
-        [StatName("SPD")] MoveSpeed
-    }
 
     [HideInInspector] public float health = 100;
     [HideInInspector] public float level = 0;
@@ -89,7 +87,7 @@ public class CharacterStats
 
 public static partial class AuHo_ExtentionMethods
 {
-    public static string GetStatName(this StatType statType)
+    public static string GetStatName(this CharacterStatType statType)
     {
         var attribute = statType.GetAttributeOfType<StatNameAttribute>();
         if (attribute != null)

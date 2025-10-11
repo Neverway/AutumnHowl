@@ -67,7 +67,7 @@ public class MultipleEffectsAction : EffectAction
 
     public override string DescribeNoFormat()
     {
-        return string.Join("", effects.Select((e) => e.DescribeNoFormat()));
+        return string.Join(" ", effects.Select((e) => e.DescribeNoFormat()));
     }
 }
 
@@ -101,10 +101,10 @@ public class ModifyHealthAction : EffectAction
     {
         switch (modifierType)
         {
-            case StatModType.Flat: return $"[Heals {target} by {amount} HP] ";
-            case StatModType.PercentMissing: return $"[Heals {target} by {amount}% missing HP] ";
-            case StatModType.PercentCurrent: return $"[Heals {target} by {amount}% HP] ";
-            case StatModType.PercentMax: return $"[Heals {target} by {amount}% max HP] ";
+            case StatModType.Flat: return $"[Heals {target} by {amount} HP]";
+            case StatModType.PercentMissing: return $"[Heals {target} by {amount}% missing HP]";
+            case StatModType.PercentCurrent: return $"[Heals {target} by {amount}% HP]";
+            case StatModType.PercentMax: return $"[Heals {target} by {amount}% max HP]";
         }
         Debug.LogError($"{nameof(ModifyHealthAction)}: Does not have a description for healing {modifierType}: " +
             $"Falling back to back to ??? as description");
@@ -155,10 +155,10 @@ public class ModifyCorruptionAction : EffectAction
         }
         switch (modifierType)
         {
-            case StatModType.Flat: return $"[{corrupts} {target} by {positiveAmount}] ";
-            case StatModType.PercentMissing: return $"[{corrupts} {target} by {positiveAmount}% of missing corruption] ";
-            case StatModType.PercentCurrent: return $"[{corrupts} {target} by {positiveAmount}% of corruption] ";
-            case StatModType.PercentMax: return $"[{corrupts} {target} by {positiveAmount}% max corruption] ";
+            case StatModType.Flat: return $"[{corrupts} {target} by {positiveAmount}]";
+            case StatModType.PercentMissing: return $"[{corrupts} {target} by {positiveAmount}% of missing corruption]";
+            case StatModType.PercentCurrent: return $"[{corrupts} {target} by {positiveAmount}% of corruption]";
+            case StatModType.PercentMax: return $"[{corrupts} {target} by {positiveAmount}% max corruption]";
         }
         Debug.LogError($"{nameof(ModifyCorruptionAction)}: Does not have a description for ModifyCorruption {modifierType}: " +
             $"Falling back to back to ??? as description");
@@ -184,8 +184,8 @@ public class GiveItemsEffect : EffectAction
     {
         string target = "self"; //Placeholder until target is implemented for giving items
         if (count == 0) return "";
-        if (count == 1) return $"[Give {target} {itemToGive.displayName}] ";
-        return $"[Give {target} {count} {itemToGive.displayName}s] ";
+        if (count == 1) return $"[Give {target} {itemToGive.displayName}]";
+        return $"[Give {target} {count} {itemToGive.displayName}s]";
 
     }
 }
@@ -222,7 +222,7 @@ public class ModifierForTimedDuration : EffectAction
             int inSeconds = Mathf.FloorToInt(seconds % 60);
             string XXm = inMinutes > 0 ? $"{inMinutes}m" : "";
             string XXs = inSeconds > 0 ? $"{inSeconds}s" : "";
-            return $"[{describable.Description} for {XXm}{XXs}] ";
+            return $"[{describable.Description} to {target} for {XXm}{XXs}]";
         }
         return "";
     }

@@ -15,19 +15,22 @@ public interface ICharacterStatModInstancer : IModifierInstancer<CharacterTarget
 public abstract class CharacterStatModInstancer : ICharacterStatModInstancer
 {
     public abstract string Description { get; }
+
+    /// <summary>Passes any stat that need to be modified by the modifier</summary>
     public abstract void ModifyStat(CharacterStat stat);
 
+    /// <summary>Filters the modifiers for ones that are a CharacterStat and of a character that is targeted by the provided CharacterTargets</summary>
     void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets)
     {
         if (modifiableValue is CharacterStat charStat)
             if (targets.IsTargeted(charStat.linkedCharacter))
                 ModifyStat(charStat);
     }
+
+    public override string ToString() => Description;
 }
-
+/// <summary>Used by some classes to define a description for the object</summary>
 public interface IDescribable { public string Description { get; } }
-
-
 
 //------------------------------------------------
 //            MODIFIERS READY TO USE
@@ -48,7 +51,7 @@ public class GroupedModifiers : CharacterStatModInstancer, IDescribable
 
     //IDescribable implementation --------------------------------------------------------------
     public override string Description => 
-        string.Join(" ",                             // Join below array of strings together into one string seperated by " " 
+        string.Join(", ",                             // Join below array of strings together into one string seperated by "] [" 
             modifiers.NotNull()                        // Skip all null modifiers
             .Select((m) => m.Description)              // Get array of all descriptions from modifiers
             .Where((m) => !string.IsNullOrEmpty(m)));  // Trim all empty or null strings from array
@@ -59,7 +62,7 @@ public class GroupedModifiers : CharacterStatModInstancer, IDescribable
 public class CharacterStatModifier : CharacterStatModInstancer
 {
     public bool hideDescription = false;
-    public StatType statToModify;
+    public CharacterStatType statToModify;
     public NumberModifierType modifierType;
     public float value;
 
@@ -89,7 +92,7 @@ public class CharacterStatModifier : CharacterStatModInstancer
                 return "Changes stat?";
 
             if (modifierType == NumberModifierType.Add)
-                return $"+{Mathf.RoundToInt(value)} {statToModify.GetStatName()}";
+                return $"{(value > 0 ? "+" : "")}{Mathf.RoundToInt(value)} {statToModify.GetStatName()}";
             else if (modifierType == NumberModifierType.Multiply)
             {
                 //return $"x{value.ToString("0.0")} {stat}";

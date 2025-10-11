@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   characterReferenceType: 0
-  characterName: 
+  characterName: Player
   baseStats:
     health: 100
     level: 0

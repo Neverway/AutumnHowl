@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: EVILBREAD
+  m_EditorClassIdentifier: 
+  id: evil_bread
+  displayName: Evil Bread
+  description: bread, and its evil this time
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 9999
+  sellCost: 1
+  effectsOnConsume:
+    rid: 1234355984407986180
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234355984407986180
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234355984407986181
+        - rid: 1234355984407986183
+        - rid: 1234355984407986184
+    - rid: 1234355984407986181
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234355984407986182
+        modifierType: 0
+        amount: 5
+    - rid: 1234355984407986182
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234355984407986183
+      type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        itemToGive: {fileID: 11400000, guid: c9737e1ef110b8e5cb447213479bd251, type: 2}
+        count: 1
+    - rid: 1234355984407986184
+      type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        seconds: 15
+        target:
+          rid: 1234355984407986188
+        modifier:
+          rid: 1234355984407986189
+    - rid: 1234355984407986188
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234355984407986189
+      type: {class: GroupedModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        modifiers:
+        - rid: 1234355984407986190
+        - rid: 1234355984407986191
+    - rid: 1234355984407986190
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 2
+        modifierType: 0
+        value: 10
+    - rid: 1234355984407986191
+      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 0
+        modifierType: 0
+        value: -3
