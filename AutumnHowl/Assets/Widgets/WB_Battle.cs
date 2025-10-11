@@ -106,7 +106,7 @@ public class WB_Battle : MonoBehaviour
                 attackBar.SetActive(true);
                 break;
             case false:
-                attackBar.SetActive(true);
+                attackBar.SetActive(false);
                 break;
         }
     }

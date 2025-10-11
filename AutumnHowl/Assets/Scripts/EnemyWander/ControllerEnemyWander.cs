@@ -12,6 +12,8 @@ namespace Neverway.StateMachine
     public class ControllerEnemyWander : StateMachine<ControllerEnemyWander>
     {
         public Controller_Overworld_Player player;
+        public BattleData battleData;
+        public GI_AuHoGameState gameState;
         [SerializeField] public float searchDistance = 6;
         [SerializeField] public float comfyDistance = 3f;
         [SerializeField] public float enterBattleDistance = 0.75f;
@@ -34,6 +36,7 @@ namespace Neverway.StateMachine
             rb = GetComponent<Rigidbody2D> ();
             homePosition = transform.position;
             NewState (new EW_Idle(this));
+            gameState = FindObjectOfType<GI_AuHoGameState>();
         }
 
         // Update is called once per frame
@@ -64,8 +67,10 @@ namespace Neverway.StateMachine
 
         internal void EnterBattle ()
         {
-            //Todo
-            throw new NotImplementedException();
+            // I gotchu ~Liz
+            gameState = FindObjectOfType<GI_AuHoGameState>();
+            gameState.currentGameState.currentBattle = battleData;
+            gameState.GetComponent<GI_WorldLoader>().Load("Battle");
         }
 
         internal void PickRandomDirection ()

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2950959927844369236}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.094, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.12775001, y: 0.05624999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -230,6 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  battleData: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
+  gameState: {fileID: 0}
   searchDistance: 3
   comfyDistance: 3
   enterBattleDistance: 0.75

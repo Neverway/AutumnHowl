@@ -221,6 +221,12 @@ public class BS_PlayerAction : BattleState
     public override void OnStateLeave(BattleState stateEntering)
     {
         controller.battleWidget.SetActionBarVisible(false);
+        switch (controller.playerAction)
+        {
+            case BattleStateController.PlayerAction.attack:
+                controller.battleWidget.SetAttackBarVisible(true);
+                break;
+        }
     }
 }
 
@@ -254,7 +260,12 @@ public class BS_GridAction : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
-        Debug.Log("Left");
+        switch (controller.playerAction)
+        {
+            case BattleStateController.PlayerAction.attack:
+                controller.battleWidget.SetAttackBarVisible(false);
+                break;
+        }
         controller.battlePlayer.canMove = false;
     }
 }
