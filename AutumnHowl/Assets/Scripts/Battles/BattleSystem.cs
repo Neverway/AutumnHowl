@@ -101,18 +101,20 @@ public class BattleStateController : MonoBehaviour
         NewState(new BS_GridAction(this));
     }
 
-    public IEnumerator CoNextTurnStep()
+    public IEnumerator CoNextTurnStep(float _delay = 0.1f)
     {
         // Disable movement for the current character
         turnOrder[currentTurn].SetTurnActive(false);
-        
-        yield return null;
+        print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
+
+        yield return new WaitForSeconds(_delay);
         
         // If there are more characters waiting for their turn
         if (currentTurn + 1 < turnOrder.Count)
         {
             currentTurn++;
             // Enable movement for the next character
+            print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
             turnOrder[currentTurn].SetTurnActive(true);
         }
         
@@ -122,12 +124,13 @@ public class BattleStateController : MonoBehaviour
             stepsRemaining--;
             currentTurn = 0;
             turnOrder[0].SetTurnActive(true);
+            print($"All turns completed, going to step {stepsRemaining}");
         }
     }
 
-    public void NextTurnStep()
+    public void NextTurnStep(float _delay=0.1f)
     {
-        StartCoroutine(CoNextTurnStep());
+        StartCoroutine(CoNextTurnStep(_delay));
     }
 
 

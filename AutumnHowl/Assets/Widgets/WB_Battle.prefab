@@ -168,16 +168,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a4f7cc049c14775bcc6c6a6acde77f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resistance: 0.002
-  push: 0.03
-  enduranceTime: 25
+  resistance: 0.0025
+  push: 0.04
+  enduranceTime: 15
   enduranceExpension: 0.1
   attack1Range: {x: 0.42, y: 0.5}
-  attack2Range: {x: 0.7, y: 0.75}
+  attack2Range: {x: 0.68, y: 0.76}
   attack3Range: {x: 0.97, y: 2}
   attackLeft: 0
   attackRight: 0
   attackBarActive: 0
+  hasInitialized: 0
   currentProgressLeft: 0
   currentProgressRight: 0
   currentEnduranceTime: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   colorAttack3: {r: 1, g: 0.7675424, b: 0.28773582, a: 1}
   colorAttack4: {r: 1, g: 0.64484394, b: 0.5330188, a: 1}
   colorFailed: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+  player: {fileID: 0}
 --- !u!1 &853674219725404292
 GameObject:
   m_ObjectHideFlags: 0
