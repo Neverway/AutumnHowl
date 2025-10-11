@@ -469,7 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 659075103541051035}
   m_Layer: 0
-  m_Name: TintedLights
+  m_Name: Tinted_Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -484,7 +484,7 @@ Transform:
   m_GameObject: {fileID: 2700393277847865069}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.428, z: -0.342}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1170,7 +1170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7231353931230428249}
   m_Layer: 0
-  m_Name: WhiteLights
+  m_Name: White_Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,7 +1185,7 @@ Transform:
   m_GameObject: {fileID: 8530681385773721576}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.428, z: -0.342}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1339,7 +1339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_labelHash
-      value: 9.653118e-10
+      value: 0.00000039825036
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteHash
@@ -1352,6 +1352,10 @@ PrefabInstance:
     - target: {fileID: 1247483541322235961, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Range
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631477892144578787, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_Name
+      value: Old_Light
       objectReference: {fileID: 0}
     - target: {fileID: 1631477892144578787, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_IsActive

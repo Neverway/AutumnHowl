@@ -136,7 +136,7 @@ public abstract class Char_Battle : Character
         {
             for (int j = 0; j < AttackSequences[i].attacks.Count; j++)
             {
-                AttackSequences[i].attacks[j].damage = currentStats.attack;
+                AttackSequences[i].attacks[j].damage = Stats.attack;
             }
         }
     }

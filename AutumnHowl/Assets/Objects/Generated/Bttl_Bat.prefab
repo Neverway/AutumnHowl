@@ -117,40 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 0}
-  currentStats:
-    health: 100
-    level: 0
-    power: 5
-    corruption: 0
-    defense:
-      startValue: 0
-      multiplier: 0
-      addedValue: 0
-    attack:
-      startValue: 25
-      multiplier: 0
-      addedValue: 0
-    maxHealth:
-      startValue: 40
-      multiplier: 0
-      addedValue: 0
-    maxPower:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    maxCorruption:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    walkSpeed:
-      startValue: 2
-      multiplier: 0
-      addedValue: 0
-    runSpeed:
-      startValue: 3
-      multiplier: 0
-      addedValue: 0
+  template: {fileID: 11400000, guid: 2e954964197096782a4b20683525e471, type: 2}
   isDead: 0
   animator: {fileID: 7931684597536962226}
   AttackSequences:
