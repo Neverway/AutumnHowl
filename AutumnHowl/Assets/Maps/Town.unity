@@ -6818,22 +6818,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allMods:
   - rid: 1234355927148920844
-  someInlineItemTest:
-  - testInt: -2
-    testString: 
-    testString2: 
-    subTest:
-      dropvalue: 1
-  - testInt: -2
-    testString: 
-    testString2: 
-    subTest:
-      dropvalue: 1
-  - testInt: -2
-    testString: 
-    testString2: 
-    subTest:
-      dropvalue: 1
   references:
     version: 2
     RefIds:
@@ -6842,6 +6826,7 @@ MonoBehaviour:
       data:
         modifierType: 1
         value: 2
+        hideDescription: 0
         statToModify: 5
 --- !u!4 &1438257759
 Transform:
@@ -14259,7 +14244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3083713600096094931, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3083713600096094931, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: m_LocalPosition.z

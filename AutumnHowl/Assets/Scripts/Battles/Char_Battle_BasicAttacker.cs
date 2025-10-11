@@ -31,6 +31,9 @@ public class Char_Battle_BasicAttacker : Char_Battle
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+
+
+    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private bool TestTile(Vector2Int checkPos, int lowestTileNumber)
     {
         if (battleGrid.IsMoveable(checkPos.x, checkPos.y))
@@ -44,8 +47,20 @@ public class Char_Battle_BasicAttacker : Char_Battle
         return false;
     }
 
+    private bool TestForEnemy(Vector2Int checkPos)
+    {
+        var pawnAtTile = battleGrid.GetIsOccupied(new Vector2Int(checkPos.x, checkPos.y));
+        if (pawnAtTile)
+        {
+            if (pawnAtTile.pawnName == "Autumn")
+            {
+                return true;
+            }
+        }
 
-    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+        return false;
+    }
+    
     private Vector2Int GetLowestTileToTarget()
     {
         var x = gridPawnController.position.x;
@@ -83,10 +98,64 @@ public class Char_Battle_BasicAttacker : Char_Battle
 
         return lowestTile;
     }
+
+    private string GetTarget()
+    {
+        var x = gridPawnController.position.x;
+        var y = gridPawnController.position.y;
+        Vector2Int checkPos;
+
+        if (TestForEnemy(new Vector2Int(x, y+1))) return "north";
+        if (TestForEnemy(new Vector2Int(x, y-1))) return "south";
+        if (TestForEnemy(new Vector2Int(x+1, y))) return "east";
+        if (TestForEnemy(new Vector2Int(x-1, y))) return "west";
+        return "none";
+    }
     
     private void TakeTurn()
     {
-        print ($"Pos {gridPawnController.position} | Tar {GetLowestTileToTarget()}");
+        if (isDead) battleStateController.NextTurnStep();
+        
+        SetAttackDamageToCurrentATK();
+        var x = gridPawnController.position.x;
+        var y = gridPawnController.position.y;
+        // If target is in range, randomly decide to attack or back away
+        switch (GetTarget())
+        {
+            case "north":
+                if (Random.Range(0, 4) == 0)
+                {
+                    TryAttackSequence(AttackSequences[0]);
+                    return;
+                }
+                if (TryMoveTo(new Vector2Int(x+0, y+-1))) { return; }
+                break;
+            case "south":
+                if (Random.Range(0, 4) == 0)
+                {
+                    TryAttackSequence(AttackSequences[1]);
+                    return;
+                }
+                if (TryMoveTo(new Vector2Int(x+0, y+1))) { return; }
+                break;
+            case "east":
+                if (Random.Range(0, 4) == 0)
+                {
+                    TryAttackSequence(AttackSequences[2]);
+                    return;
+                }
+                if (TryMoveTo(new Vector2Int(x+-1, y+0))) { return; }
+                break;
+            case "west":
+                if (Random.Range(0, 4) == 0)
+                {
+                    TryAttackSequence(AttackSequences[3]);
+                    return;
+                }
+                if (TryMoveTo(new Vector2Int(x+1, y+0))) { return; }
+                break;
+        }
+        
         if (!TryMoveTo(GetLowestTileToTarget()))
         {
             print($"{gameObject.name} couldn't find a path to target, skipping turn");

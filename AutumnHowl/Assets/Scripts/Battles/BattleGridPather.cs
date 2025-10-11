@@ -148,7 +148,7 @@ public class BattleGridPather : MonoBehaviour
         
         grid[_targetGridPawn.position.x, _targetGridPawn.position.y]=1;
         RecursivePather(1);
-        PrintDistances();
+        //PrintDistances();
     }
 
 

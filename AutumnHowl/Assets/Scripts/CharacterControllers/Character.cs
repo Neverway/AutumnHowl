@@ -60,6 +60,7 @@ public abstract class Character : MonoBehaviour
         {
             if (currentStats.health + _amount > currentStats.maxHealth) currentStats.health = currentStats.maxHealth;
             else currentStats.health += _amount;
+            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), gameObject.transform, 1);
             OnHeal?.Invoke();
         }
         else if (_amount < 0)
@@ -68,11 +69,14 @@ public abstract class Character : MonoBehaviour
             if (currentStats.health + totalAmount < 0)
             {
                 currentStats.health = 0;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), gameObject.transform, 0);
+                isDead = true;
                 OnDeath?.Invoke();
             }
             else
             {
                 currentStats.health += totalAmount;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), gameObject.transform, 0);
                 OnHurt?.Invoke();
             }
         }
