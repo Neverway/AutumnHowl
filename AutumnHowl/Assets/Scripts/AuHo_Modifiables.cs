@@ -4,7 +4,7 @@ using static CharacterStats;
 public interface CharacterStat : INumberModifiable
 {
     public CharacterIdentifier linkedCharacter { get; set; }
-    public bool IsStat(StatType stat);
+    public bool IsStatType(StatType stat);
     public CharacterStat GetClonedStat();
 }
 
@@ -17,7 +17,7 @@ public class CharacterStatInt : ModifiableInt, CharacterStat
 
     // CharacterStat implementation -------------------------------------------------------------------
     public CharacterIdentifier linkedCharacter { get; set; }
-    public bool IsStat(StatType stat) => statType == stat;
+    public bool IsStatType(StatType stat) => statType == stat;
     public CharacterStat GetClonedStat() => new CharacterStatInt(startValue, statType);
 }
 
@@ -30,7 +30,7 @@ public class CharacterStatFloat : ModifiableFloat, CharacterStat
 
     // CharacterStat implementation -------------------------------------------------------------------
     public CharacterIdentifier linkedCharacter { get; set; }
-    public bool IsStat(StatType stat) => statType == stat;
+    public bool IsStatType(StatType stat) => statType == stat;
     public CharacterStat GetClonedStat() => new CharacterStatFloat(startValue, statType);
 }
 

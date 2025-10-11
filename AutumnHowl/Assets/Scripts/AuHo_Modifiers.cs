@@ -32,7 +32,7 @@ public interface IDescribable { public string Description { get; } }
 //------------------------------------------------
 //            MODIFIERS READY TO USE
 //------------------------------------------------
-
+//===========================================================================================================================
 [Serializable]
 public class GroupedModifiers : CharacterStatModInstancer, IDescribable
 {
@@ -54,6 +54,7 @@ public class GroupedModifiers : CharacterStatModInstancer, IDescribable
             .Where((m) => !string.IsNullOrEmpty(m)));  // Trim all empty or null strings from array
 }
 
+//===========================================================================================================================
 [Serializable]
 public class CharacterStatModifier : CharacterStatModInstancer
 {
@@ -65,6 +66,9 @@ public class CharacterStatModifier : CharacterStatModInstancer
     //CharacterStatModInstancer implementation ---------------------------------------------------
     public override void ModifyStat(CharacterStat stat)
     {
+        if (!stat.IsStatType(statToModify))
+            return;
+
         if (modifierType == NumberModifierType.Add)
             stat.OnModify_AddNumber(value);
 
@@ -101,7 +105,7 @@ public class CharacterStatModifier : CharacterStatModInstancer
     }
 
 }
-
+//===========================================================================================================================
 
 
 

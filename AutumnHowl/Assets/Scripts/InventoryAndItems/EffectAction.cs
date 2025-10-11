@@ -3,12 +3,18 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>Base class for all EffectActions! 
+/// (Polymorphic and serializeable actions that can be defined on objects) </summary>
 [Serializable]
 public abstract class EffectAction
 {
     public bool hideDescription = false;
+
+    /// <summary>Call this when you want to trigger this action</summary>
     public abstract void ApplyEffect(CharacterIdentifier user);
+    /// <summary>Get the description of the action without any added formatting for displaying stat colors</summary>
     public abstract string DescribeNoFormat();
+    /// <summary>Gets the description with colors and text speed added to it, or [ERROR] if an error occurred</summary>
     public string DescribeFormatted()
     {
         try
@@ -22,6 +28,7 @@ public abstract class EffectAction
             return "{col=err}[ERROR]{col=} ";
         }
     }
+    /// <summary>Automatically converts this class to a string without needing to cast it</summary>
     public override string ToString() => DescribeFormatted();
 }
 
