@@ -81,8 +81,12 @@ public abstract class Char_Battle : Character
 
     public IEnumerator CoTryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
     {
+        var hasStopped = false;
+        
         for (int i = 0; i < attackSequence.attacks.Count; i++)
         {
+            if (hasStopped) continue;
+                
             // Applied position is the position offset after mirroring has been applied
             var appliedPosition = attackSequence.attacks[i].position;
             if (mirrorX)
@@ -93,12 +97,15 @@ public abstract class Char_Battle : Character
             
             var currentPosition = gridPawnController.position + appliedPosition;
             
+            Instantiate(attackSequence.attacks[i].visualEffect, battleGrid.transform.position+new Vector3(currentPosition.x, currentPosition.y, 0), new Quaternion(), null);
+            
             var target = battleGrid.GetIsOccupied(currentPosition);
             if (target)
             {
                 if (target.type == GridPawn.GridPawnType.obstacle)
                 {
                     print($"Found obstcl at {appliedPosition}");
+                    hasStopped = true;
                 }
                 else if (target.type == GridPawn.GridPawnType.character)
                 {
@@ -108,11 +115,11 @@ public abstract class Char_Battle : Character
                 else if (target.type == GridPawn.GridPawnType.attack)
                 {
                     print($"Found attack at {appliedPosition}");
+                    hasStopped = true;
                 }
             }
 
-                        
-            Instantiate(attackSequence.attacks[i].visualEffect, battleGrid.transform.position+new Vector3(currentPosition.x, currentPosition.y, 0), new Quaternion(), null);
+            
             yield return new WaitForSeconds(0.1f);
         }
         battleStateController.NextTurnStep(0.5f);

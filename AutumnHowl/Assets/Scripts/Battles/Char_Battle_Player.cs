@@ -31,6 +31,12 @@ public class Char_Battle_Player : Char_Battle
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    private new void Start()
+    {
+        movement = new Vector2(0, 1);
+        base.Start();
+    }
+    
     private void Update()
     {
         if (isDead) return;
@@ -44,20 +50,26 @@ public class Char_Battle_Player : Char_Battle
     {
         if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
         {
-            TryMoveInDirection(Vector2Int.up);
+            if (TryMoveInDirection(Vector2Int.up)) movement = new Vector2(0, 1);
+            
         }
         else if (GameInstance.Inputs.MoveDown.WasPressedThisFrame())
         {
-            TryMoveInDirection(Vector2Int.down);
+            if (TryMoveInDirection(Vector2Int.down)) movement = new Vector2(0, -1);
+            
         }
         else if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
         {
-            TryMoveInDirection(Vector2Int.left);
+            if (TryMoveInDirection(Vector2Int.left)) movement = new Vector2(-1, 0);
+            
         }
         else if (GameInstance.Inputs.MoveRight.WasPressedThisFrame())
         {
-            TryMoveInDirection(Vector2Int.right);
+            if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0); 
+            
         }
+        animator.SetFloat("idleX", movement.x);
+        animator.SetFloat("idleY", movement.y);
     }
     
     protected override bool TryMoveInDirection(Vector2Int _direction)
