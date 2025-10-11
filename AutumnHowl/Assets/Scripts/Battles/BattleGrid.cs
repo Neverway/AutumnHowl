@@ -55,9 +55,22 @@ public class BattleGrid : MonoBehaviour
         }
         if (grid[_x, _y].pawns.Count > 0)
         {
-            return true;
+            if (grid[_x, _y].pawns[0].type == GridPawn.GridPawnType.attack) return false;
+            else return true;
         }
         return false;
+    }
+    public GridPawn GetIsOccupied (Vector2Int _gridPosition)
+    {
+        if (ValidTile (_gridPosition.x, _gridPosition.y) == false)
+        {
+            return null;
+        }
+        if (grid[_gridPosition.x, _gridPosition.y].pawns.Count > 0)
+        {
+            return grid[_gridPosition.x, _gridPosition.y].pawns[0];
+        }
+        return null;
     }
     
     public bool IsMoveable (int _x, int _y)

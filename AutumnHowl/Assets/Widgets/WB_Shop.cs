@@ -55,9 +55,9 @@ public class WB_Shop : MonoBehaviour
     {
         for (int i = 0; i < buySlots.Count; i++)
         {
-            if (i < buyableItems.Count)
+            if (i < buyableItems.Count && buyableItems[i] != null)
             {
-                buySlots[i].SetText($"${buyableItems[i].buyCost} - {buyableItems[i].displayName}");
+                buySlots[i].SetText($"$" + $"{buyableItems[i].buyCost} - " + $"{buyableItems[i].displayName}");
                 buySlots[i].OnInteracted.RemoveAllListeners();
                 buySlots[i].OnSelected.RemoveAllListeners();
                 var itemIndex = i; // Cache this value so calling the listener doesn't break

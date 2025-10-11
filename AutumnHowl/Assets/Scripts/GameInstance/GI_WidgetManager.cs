@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GI_WidgetManager : MonoBehaviour
@@ -36,7 +37,9 @@ public class GI_WidgetManager : MonoBehaviour
             return _canvas;
         }
     }
+
     public List<GameObject> widgets;
+    public GameObject effectText;
 
 
     #endregion
@@ -122,6 +125,34 @@ public class GI_WidgetManager : MonoBehaviour
     {
         _result = GetExistingWidget(_widgetName);
         return _result != null;
+    }
+
+    public void SpawnEffectText(string _amount, Transform _position, int _mode)
+    {
+        var newText = Instantiate(effectText, _canvas.transform);
+        var viewCam = FindObjectOfType<Camera>();
+        newText.transform.position = viewCam.WorldToScreenPoint(_position.position);
+        var textComponent = newText.transform.GetChild(0).GetComponent<TMP_Text>();
+        Destroy(newText.gameObject, 1);
+        
+        switch (_mode)
+        {
+            case 0:
+                textComponent.color = Color.red;
+                textComponent.text =
+                    $"{_amount}";
+                break;
+            case 1:
+                textComponent.color = Color.green;
+                textComponent.text =
+                    $"{_amount}";
+                break;
+            case 2:
+                textComponent.color = Color.white;
+                textComponent.text =
+                    $"<sprite index = 5>{_amount}";
+                break;
+        }
     }
 
 

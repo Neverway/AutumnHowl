@@ -117,53 +117,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStats:
-    modifier:
-      rid: -2
-    health: 100
-    level: 0
-    power: 5
-    corruption: 0
-    defense:
-      startValue: 0
-      multiplier: 0
-      addedValue: 0
-    attack:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    maxHealth:
-      startValue: 100
-      multiplier: 0
-      addedValue: 0
-    maxPower:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    maxCorruption:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    walkSpeed:
-      startValue: 2
-      multiplier: 0
-      addedValue: 0
-    runSpeed:
-      startValue: 3
-      multiplier: 0
-      addedValue: 0
+  template: {fileID: 11400000, guid: 2e954964197096782a4b20683525e471, type: 2}
   isDead: 0
   animator: {fileID: 7931684597536962226}
+  AttackSequences:
+  - attacks:
+    - position: {x: 0, y: 1}
+      damage: 0
+      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+  - attacks:
+    - position: {x: 0, y: -1}
+      damage: 0
+      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+  - attacks:
+    - position: {x: 1, y: 0}
+      damage: 0
+      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+  - attacks:
+    - position: {x: -1, y: 0}
+      damage: 0
+      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
   canMove: 0
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
 --- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pawnName: 
+  type: 1
 --- !u!95 &7931684597536962226 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

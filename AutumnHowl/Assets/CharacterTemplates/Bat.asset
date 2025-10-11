@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
-  m_Name: Player
+  m_Name: Bat
   m_EditorClassIdentifier: 
-  characterReferenceType: 0
-  characterName: Autumn
+  characterReferenceType: 1
+  characterName: SaltBat
   baseStats:
     health: 100
     level: 0
@@ -24,19 +24,19 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     attack:
-      startValue: 15
+      startValue: 25
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 100
+      startValue: 60
       multiplier: 0
       addedValue: 0
     maxPower:
-      startValue: 100
+      startValue: 5
       multiplier: 0
       addedValue: 0
     maxCorruption:
-      startValue: 100
+      startValue: 5
       multiplier: 0
       addedValue: 0
     walkSpeed:

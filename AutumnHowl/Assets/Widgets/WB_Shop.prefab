@@ -751,9 +751,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 212ecd547de670133b09a7fe60a3e367, type: 2}
   - {fileID: 11400000, guid: 62bfd89b5e7d0e244a873b2192cf11ea, type: 2}
   - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}
+  - {fileID: 11400000, guid: 36c0c8bdc090101198faac4ead9252f6, type: 2}
   - {fileID: 11400000, guid: b83b8afcd240af860b711ff6888948b6, type: 2}
   - {fileID: 11400000, guid: 4f26d5fb7dfa68ebfa23a2636fe3f24e, type: 2}
-  - {fileID: 11400000, guid: 36c0c8bdc090101198faac4ead9252f6, type: 2}
   buySlots:
   - {fileID: 6193484794906443154}
   - {fileID: 992242656571392573}

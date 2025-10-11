@@ -37,6 +37,7 @@ public class BattleAttackBar : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image frame, leftBar, rightBar, leftTimer, rightTimer;
     public Color colorDefault, colorAttack1, colorAttack2, colorAttack3, colorAttack4, colorFailed;
+    public Char_Battle_Player player;
 
 
     #endregion
@@ -45,6 +46,11 @@ public class BattleAttackBar : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    public void Start()
+    {
+        player = FindObjectOfType<Char_Battle_Player>();
+    }
+
     public void Update()
     {
         if (!attackBarActive)
@@ -82,15 +88,24 @@ public class BattleAttackBar : MonoBehaviour
     public void Initialize()
     {
         if (hasInitialized) return;
+        player.canMove = false;
         attackBarActive = true;
         hasInitialized = true;
     }
 
-    public void OnEnable()
+    public IEnumerator CoReset()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Reset();
+    }
+
+    public void Reset()
     {
         frame.color = Color.white;
         leftBar.color = colorDefault;
         rightBar.color = colorDefault;
+        leftBar.fillAmount = 0;
+        rightBar.fillAmount = 0;
         leftTimer.fillAmount = 1;
         rightTimer.fillAmount = 1;
         currentProgressLeft = 0;
@@ -98,6 +113,11 @@ public class BattleAttackBar : MonoBehaviour
         currentEnduranceTime = enduranceTime;
         attackBarActive = false;
         hasInitialized = false;
+    }
+
+    public void OnEnable()
+    {
+        Reset();
     }
 
 
@@ -212,29 +232,48 @@ public class BattleAttackBar : MonoBehaviour
     public void OnAttackDone()
     {
         var attack = 0;
+        bool mirrorX = false;
+        bool mirrorY = false;
 
-        if (attackLeft > attackRight) attack = attackLeft;
-        else if (attackLeft < attackRight) attack = attackRight;
-        else attack = attackLeft;
+        if (attackLeft > attackRight)
+        {
+            attack = attackLeft;
+        }
+        else if (attackLeft < attackRight)
+        {
+            attack = attackRight;
+            mirrorX = true;
+        }
+        else
+        {
+            attack = attackLeft;
+        }
         
         switch (attack)
         {
             case 0:
                 frame.color = colorFailed;
+                player.battleStateController.NextTurnStep();
                 break;
             case 1:
                 frame.color = colorAttack1;
+                player.PerformAttack(0, mirrorX, mirrorY);
                 break;
             case 2:
                 frame.color = colorAttack2;
+                player.PerformAttack(1, mirrorX, mirrorY);
                 break;
             case 3:
                 frame.color = colorAttack3;
+                player.PerformAttack(2, mirrorX, mirrorY);
                 break;
             case 4:
                 frame.color = colorAttack4;
+                player.PerformAttack(3, mirrorX, mirrorY);
                 break;
         }
+
+        StartCoroutine(CoReset());
     }
 
 

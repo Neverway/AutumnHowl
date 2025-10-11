@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class GridPawn : MonoBehaviour
 {
+    public string pawnName;
+    public GridPawnType type;
+    public enum GridPawnType
+    {
+        obstacle,
+        character,
+        attack,
+    }
     public Vector2Int position { get; private set; }
     private bool initialized = false;
 

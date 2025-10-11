@@ -3501,7 +3501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398230392484373324, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: targetLevel
-      value: Forest 1
+      value: Forest
       objectReference: {fileID: 0}
     - target: {fileID: 5398230392484373324, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: targetLevelScene
@@ -4775,57 +4775,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 659075103541051035, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 659075103541051035, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2403621237896906538, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_Name
       value: Character_Autumn
-      objectReference: {fileID: 0}
-    - target: {fileID: 2700393277847865069, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_Name
-      value: Tinted_Lights
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: currentStats.modifier
-      value: 1234355927148920843
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920842]
-      value: Assembly-CSharp CharacterStatModifier
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920843]
-      value: Assembly-CSharp CharacterStatModifier
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920842].value
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920843].value
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920842].modifierType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920842].statToModify
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920843].modifierType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738709400823522955, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: managedReferences[1234355927148920843].statToModify
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4867,30 +4819,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7013523230781423332, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_Name
-      value: Old_Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 7231353931230428249, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7231353931230428249, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8530681385773721576, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_Name
-      value: White_Lights
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784737395474397023, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_labelHash
-      value: 0.00000039825036
-      objectReference: {fileID: 0}
-    - target: {fileID: 9012977918629766531, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 779807480, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14253,7 +14181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3083713600096094931, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3083713600096094931, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: m_LocalPosition.z
