@@ -80,12 +80,11 @@ public class Controller_Overworld_Player : Character
 
     private void UpdateGameStateValues()
     {
-        
         // Transfer player data to game state
-        if (gameState)
+        if (gameState != null)
         {
             gameState.currentGameState.playtime += Time.deltaTime;
-            gameState.currentGameState.playerStats = currentStats;
+            gameState.currentGameState.player = Identifier;
             gameState.currentGameState.overworldPosition = new Vector2(transform.position.x, transform.position.y);
         }
         else gameState = GameInstance.Get<GI_AuHoGameState>();
@@ -101,8 +100,8 @@ public class Controller_Overworld_Player : Character
         else if (GameInstance.Inputs.MoveRight.IsPressed()) movement.x = 1;
         else movement.x = 0;
 
-        if (GameInstance.Inputs.Action.IsPressed()) currentMoveSpeed = currentStats.runSpeed;
-        else currentMoveSpeed = currentStats.walkSpeed;
+        if (GameInstance.Inputs.Action.IsPressed()) currentMoveSpeed = Stats.runSpeed;
+        else currentMoveSpeed = Stats.walkSpeed;
         
         animator.SetFloat("walkX", movement.x);
         animator.SetFloat("walkY", movement.y);

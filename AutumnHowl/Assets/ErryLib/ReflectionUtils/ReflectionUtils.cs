@@ -5,6 +5,12 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using System.IO;
+
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection.Emit;
+
+
 
 
 
@@ -577,6 +583,25 @@ namespace ErryLib.Reflection
             var memInfo = type.GetMember(enumVal.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
             return (attributes.Length > 0) ? (T)attributes[0] : null;
+        }
+
+        /// <summary>
+        /// Deeply clones an object instance to a new object instance
+        /// </summary>
+        /// <typeparam name="T">Type of object you want the clone to return as</typeparam>
+        /// <param name="obj">object to clone</param>
+        /// <returns>cloned instance of given object</returns>
+        /// /// <remarks>credit to Robert Harvey at https://stackoverflow.com/questions/129389/how-do-you-do-a-deep-copy-of-an-object-in-net</remarks>
+        public static T DeepClone<T>(this T obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (T)formatter.Deserialize(ms);
+            }
         }
     }
 }

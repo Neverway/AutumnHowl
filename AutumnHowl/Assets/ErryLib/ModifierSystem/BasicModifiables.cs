@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
+public enum NumberModifierType { Add, Multiply }
 [Serializable]
 public abstract class NumberModifier<TTarget> : Modifier where TTarget : INumberModifiable
 {
-    public enum ModifierType { Add, Multiply }
-    public ModifierType modifierType;
+    public NumberModifierType modifierType;
     public float value;
 
     public override void ModifyValue(Modifiable modifiableValue)
@@ -13,10 +13,10 @@ public abstract class NumberModifier<TTarget> : Modifier where TTarget : INumber
         if (modifiableValue is not TTarget number)
             return;
 
-        if (modifierType == ModifierType.Add)
+        if (modifierType == NumberModifierType.Add)
             number.OnModify_AddNumber(value);
 
-        if (modifierType == ModifierType.Multiply)
+        if (modifierType == NumberModifierType.Multiply)
             number.OnModify_MultiplyNumber(value);
     }
 }
@@ -28,7 +28,7 @@ public interface INumberModifiable : Modifiable
 [Serializable]
 public abstract class ModifiableInt : Modifiable<int>, INumberModifiable
 {
-    [SerializeField] private int startValue;
+    [SerializeField] protected int startValue;
     [HideInInspector] public float multiplier;
     [HideInInspector] public float addedValue;
 
@@ -48,7 +48,7 @@ public abstract class ModifiableInt : Modifiable<int>, INumberModifiable
 [Serializable]
 public abstract class ModifiableFloat : Modifiable<float>, INumberModifiable
 {
-    [SerializeField] private float startValue;
+    [SerializeField] protected float startValue;
     [HideInInspector] public float multiplier;
     [HideInInspector] public float addedValue;
 

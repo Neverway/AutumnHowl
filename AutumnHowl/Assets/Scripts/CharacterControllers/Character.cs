@@ -14,13 +14,15 @@ public abstract class Character : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public CharacterTemplate template;
-    public CharacterStats currentStats = new CharacterStats();
-    public bool isDead;
+    [SerializeField] protected CharacterTemplate template;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-    [HideInInspector] public CharacterIdentifier identifier;
+    public CharacterStats Stats => Identifier.Stats;
+    public CharacterIdentifier Identifier { get; private set; }
+
+    [HideInInspector] public bool isDead;
+
     public event Action OnHurt;
     public event Action OnHeal;
     public event Action OnDeath;
@@ -42,10 +44,15 @@ public abstract class Character : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    public void Awake()
+    {
+        //Grabs and assigns the CharacterIdentifier that gives this character its identity!!!
+        Identifier = CharacterIdentifier.GetFromCharacterTemplate(template);
+    }
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        currentStats.LinkCharacterStatsToCharacter(this);
+
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
@@ -58,21 +65,21 @@ public abstract class Character : MonoBehaviour
 
         if (_amount > 0)
         {
-            if (currentStats.health + _amount > currentStats.maxHealth) currentStats.health = currentStats.maxHealth;
-            else currentStats.health += _amount;
+            if (Stats.health + _amount > Stats.maxHealth) Stats.health = Stats.maxHealth;
+            else Stats.health += _amount;
             OnHeal?.Invoke();
         }
         else if (_amount < 0)
         {
-            var totalAmount = _amount + currentStats.defense;
-            if (currentStats.health + totalAmount < 0)
+            var totalAmount = _amount + Stats.defense;
+            if (Stats.health + totalAmount < 0)
             {
-                currentStats.health = 0;
+                Stats.health = 0;
                 OnDeath?.Invoke();
             }
             else
             {
-                currentStats.health += totalAmount;
+                Stats.health += totalAmount;
                 OnHurt?.Invoke();
             }
         }

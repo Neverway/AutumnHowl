@@ -125,8 +125,8 @@ public class WB_Inventory : MonoBehaviour
             inspectTextEvent.CallEvent();
             return;
         }
-        
-        if (gameState.currentGameState.inventory.TryUseItem(_index, FindObjectOfType<Controller_Overworld_Player>(), itemList))
+        Character player = FindObjectOfType<Controller_Overworld_Player>();
+        if (gameState.currentGameState.inventory.TryUseItem(_index, player.Identifier, itemList))
         {
             inspectListNavigator.SetIsNavigating(false);
             inspectListNavigator.gameObject.SetActive(false);

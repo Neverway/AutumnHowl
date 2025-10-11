@@ -6818,31 +6818,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allMods:
   - rid: 1234355927148920844
-  someInlineItemTest:
-  - testInt: -2
-    testString: 
-    testString2: 
-    subTest:
-      dropvalue: 1
-  - testInt: -2
-    testString: 
-    testString2: 
-    subTest:
-      dropvalue: 1
-  - testInt: -2
-    testString: 
-    testString2: 
-    subTest:
-      dropvalue: 1
   references:
     version: 2
     RefIds:
     - rid: 1234355927148920844
       type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
       data:
+        hideDescription: 0
+        statToModify: 5
         modifierType: 1
         value: 2
-        statToModify: 5
 --- !u!4 &1438257759
 Transform:
   m_ObjectHideFlags: 0

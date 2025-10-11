@@ -1,14 +1,20 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(menuName = "AuHo/Character Template", fileName = "char_template_")]
 public class CharacterTemplate : ScriptableObject
 {
-    public CharacterIdentifier.ReferenceType characterReferenceType;
+    public CharacterTemplateToIdentifierStrategy characterReferenceType;
+    public string characterName;
 
-    [Box] public CharacterStats baseStats = new CharacterStats();
+    [Space, Unbox] public CharacterStats baseStats = new CharacterStats();
+}
+
+public enum CharacterTemplateToIdentifierStrategy
+{
+    UniqueAndPersistent,
+    CloneableAndDisposable
 }
 
 /// <summary>
@@ -20,32 +26,50 @@ public class CharacterTemplate : ScriptableObject
 /// </summary>
 public class CharacterIdentifier 
 {
+    public CharacterTemplate TemplateCreatedFrom { get; private set; }
+    public CharacterStats Stats { get; private set; }
+
     private static Dictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters = new();
 
-    public enum ReferenceType
+    public CharacterIdentifier(CharacterTemplate fromTemplate)
     {
-        UniqueAndPersistent,
-        CloneableAndDisposable
+        if (fromTemplate != null)
+        {
+            TemplateCreatedFrom = fromTemplate;
+            Stats = new CharacterStats(this);
+        }
+        else
+            Stats = new CharacterStats(this);
     }
 
-    //private 
-
-    public static CharacterIdentifier Get(Character character)
+    public static CharacterIdentifier GetDefaultCharacter() => GetFromCharacterTemplate(null);
+    public static CharacterIdentifier GetFromCharacterTemplate(CharacterTemplate characterTemplate)
     {
-        if (character == null) throw new NullReferenceException("Why on gods green earth are you sending null " +
-            "characters to get null identifiers? is it because your IQ is null?");
+        //Create empty identifier as default if no template is provided (used for GetDefaultCharacter()
+        if (characterTemplate == null)
+        {
+            Debug.LogWarning("Creating a CharacterIdentifier without a template. Using a default character identifier in its place. " +
+                "It will have default stats and not be persistent. May cause other errors");
+            return new CharacterIdentifier(null);
+        }
 
-        var type = character.template.characterReferenceType;
-        if (type == ReferenceType.UniqueAndPersistent)
+        CharacterIdentifier toReturn;
+        switch (characterTemplate.characterReferenceType)
         {
-            if (persistentCharacters.TryGetValue(character.template, out CharacterIdentifier identifier))
-                return identifier;
-            persistentCharacters.Add(character.template, new CharacterIdentifier());
+            case CharacterTemplateToIdentifierStrategy.UniqueAndPersistent:
+                if (!persistentCharacters.TryGetValue(characterTemplate, out toReturn))
+                {
+                    toReturn = new CharacterIdentifier(characterTemplate);
+                    persistentCharacters.Add(characterTemplate, toReturn);
+                }
+                break;
+            case CharacterTemplateToIdentifierStrategy.CloneableAndDisposable:
+                toReturn = new CharacterIdentifier(characterTemplate);
+                break;
+            default:
+                throw new System.NotImplementedException("Unimplemented CharacterIdentifier.ReferenceType in constructor");
         }
-        else if (type == ReferenceType.CloneableAndDisposable)
-        {
-            return new CharacterIdentifier();
-        }
-        throw new System.NotImplementedException("Unimplemented CharacterIdentifier.ReferenceType in constructor");
+        return toReturn;
+        
     }
 }

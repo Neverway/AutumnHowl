@@ -55,7 +55,7 @@ public class WB_Battle : MonoBehaviour
 
     public void Update()
     {
-        var stats = gameState.currentGameState.playerStats;
+        var stats = gameState.currentGameState.player.Stats;
         
         float percentHealth = stats.health / stats.maxHealth;
         int index = Mathf.FloorToInt(heartSprites.Count * (1f-percentHealth));

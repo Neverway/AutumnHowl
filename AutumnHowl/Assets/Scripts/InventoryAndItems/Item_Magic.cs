@@ -66,14 +66,14 @@ public class Item_Magic : Item
         fullDescription += $"{description}";
         return fullDescription;
     }
-    protected override bool OnUse(Character user, int _atIndex, int _inList=0)
+    protected override bool OnUse(CharacterIdentifier user, int _atIndex, int _inList=0)
     {
         //Don't use if the user cannot afford power cost
-        if (powerCost != 0 && user.currentStats.power < powerCost)
+        if (powerCost != 0 && user.Stats.power < powerCost)
             return false;
 
         //Spend power and apply the effect
-        user.currentStats.power -= powerCost;
+        user.Stats.power -= powerCost;
         effectsWhenCast.ApplyEffect(user);
         return true;
     }

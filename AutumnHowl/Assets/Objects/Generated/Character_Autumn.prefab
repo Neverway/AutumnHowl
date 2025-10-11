@@ -1463,49 +1463,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff3da93cbd47d22bae22991c0c81eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStats:
-    modifier:
-      rid: -2
-    health: 100
-    level: 0
-    power: 10
-    corruption: 0
-    defense:
-      startValue: 0
-      multiplier: 0
-      addedValue: 0
-    attack:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    maxHealth:
-      startValue: 100
-      multiplier: 0
-      addedValue: 0
-    maxPower:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    maxCorruption:
-      startValue: 5
-      multiplier: 0
-      addedValue: 0
-    walkSpeed:
-      startValue: 2
-      multiplier: 0
-      addedValue: 0
-    runSpeed:
-      startValue: 3
-      multiplier: 0
-      addedValue: 0
+  template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
   isDead: 0
   animator: {fileID: 1867420067129031397}
   canPause: 1
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
 --- !u!4 &6972457444599413610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

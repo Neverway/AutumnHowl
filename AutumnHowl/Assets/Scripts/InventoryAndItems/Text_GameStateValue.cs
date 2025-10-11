@@ -43,7 +43,7 @@ public class Text_GameStateValue : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private TMP_Text text;
     private GI_AuHoGameState gameState;
-
+    private CharacterStats PlayerStats => gameState.currentGameState.player.Stats;
 
     #endregion
 
@@ -59,7 +59,7 @@ public class Text_GameStateValue : MonoBehaviour
 
     private void Update()
     {
-        if (!gameState)
+        if (gameState == null)
         {
             gameState = GameInstance.Get<GI_AuHoGameState>();
             return;
@@ -68,25 +68,25 @@ public class Text_GameStateValue : MonoBehaviour
         switch (gameStateVariable)
         {
             case GameStateVariable.level:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.level + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.level + textDecoratorEnd;
                 break;
             case GameStateVariable.currentHealth:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.health + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.health + textDecoratorEnd;
                 break;
             case GameStateVariable.maxHealth:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.health + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.health + textDecoratorEnd;
                 break;
             case GameStateVariable.power:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.power + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.power + textDecoratorEnd;
                 break;
             case GameStateVariable.corruption:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.corruption + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.corruption + textDecoratorEnd;
                 break;
             case GameStateVariable.attack:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.attack + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.attack + textDecoratorEnd;
                 break;
             case GameStateVariable.defense:
-                text.text = textDecoratorStart + gameState.currentGameState.playerStats.defense + textDecoratorEnd;
+                text.text = textDecoratorStart + PlayerStats.defense + textDecoratorEnd;
                 break;
             case GameStateVariable.money:
                 text.text = textDecoratorStart + gameState.currentGameState.money + textDecoratorEnd;

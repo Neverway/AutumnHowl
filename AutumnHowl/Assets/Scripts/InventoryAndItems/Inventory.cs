@@ -110,7 +110,7 @@ public class Inventory
         return false;
     }
     
-    public bool TryUseItem(int _atIndex, Character user, int _inList=0)
+    public bool TryUseItem(int _atIndex, CharacterIdentifier user, int _inList=0)
     {
         switch (_inList)
         {

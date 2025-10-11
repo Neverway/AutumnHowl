@@ -1,40 +1,36 @@
 using System;
 using static CharacterStats;
 
-public class AuHo_Modifiables { }
-
 public interface CharacterStat : INumberModifiable
 {
-    public Character linkedCharacter { get; set; }
-    public bool IsStat(StatType stat);
+    public CharacterIdentifier linkedCharacter { get; set; }
+    public bool IsStatType(StatType stat);
+    public CharacterStat GetClonedStat();
 }
 
 [Serializable]
 public class CharacterStatInt : ModifiableInt, CharacterStat
 {
-    public Character linkedCharacter { get; set; }
-
     private StatType statType;
     public CharacterStatInt(int startValue, StatType statType) : base(startValue)
-    {
-        this.statType = statType;
-    }
+        => this.statType = statType;
 
-
-    public bool IsStat(StatType stat) => statType == stat;
+    // CharacterStat implementation -------------------------------------------------------------------
+    public CharacterIdentifier linkedCharacter { get; set; }
+    public bool IsStatType(StatType stat) => statType == stat;
+    public CharacterStat GetClonedStat() => new CharacterStatInt(startValue, statType);
 }
+
 [Serializable]
 public class CharacterStatFloat : ModifiableFloat, CharacterStat
 {
-    public Character linkedCharacter { get; set; }
-
     private StatType statType;
     public CharacterStatFloat(float startValue, StatType statType) : base(startValue)
-    {
-        this.statType = statType;
-    }
+        => this.statType = statType;
 
-
-    public bool IsStat(StatType stat) => statType == stat;
+    // CharacterStat implementation -------------------------------------------------------------------
+    public CharacterIdentifier linkedCharacter { get; set; }
+    public bool IsStatType(StatType stat) => statType == stat;
+    public CharacterStat GetClonedStat() => new CharacterStatFloat(startValue, statType);
 }
 
