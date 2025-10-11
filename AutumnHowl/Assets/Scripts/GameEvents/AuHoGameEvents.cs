@@ -15,8 +15,8 @@ public static class AuHoGameEvents
 public class Event_UseItem : GameEvent<Event_UseItem>
 {
     public Item itemBeingUsed;
-    public Character user;
-    public Event_UseItem(Item itemBeingUsed, Character user) 
+    public CharacterIdentifier user;
+    public Event_UseItem(Item itemBeingUsed, CharacterIdentifier user) 
     { 
         this.itemBeingUsed = itemBeingUsed;
         this.user = user;

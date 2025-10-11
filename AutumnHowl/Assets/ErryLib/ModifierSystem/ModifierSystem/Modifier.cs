@@ -17,17 +17,15 @@ public abstract class Modifier
     /// Registers the <see cref="Modifier"/> to the global list <see cref="ActiveModifiers"/>. This will <b>enable</b> the
     /// <see cref="Modifier"/> to affect <see cref="Modifiable"/>s and react to <see cref="GameEvent"/>s
     /// </summary>
-    public void RegisterModifier(bool multiRegister = false)
+    public void RegisterModifier()
     {
         //Dont add modifier if it already exists in ActiveModifiers (unless multiRegister is true)
-        if ((!multiRegister) && ActiveModifiers.Contains(this))
+        if (ActiveModifiers.Contains(this))
             return;
 
         ActiveModifiers.Add(this);
         OnRegisterModifier();
     }
-
-    public int GetMultiRegisterCount() => ActiveModifiers.Where((mod) => mod == this).Count();
 
     /// <summary>
     /// Unregisters the <see cref="Modifier"/> from the global list <see cref="ActiveModifiers"/>. This will <b>disable</b> the
@@ -38,7 +36,9 @@ public abstract class Modifier
         if (ActiveModifiers.Remove(this))
             OnUnregisterModifier();
     }
+    /// <summary>Called when this modifier is successfully registered as active modifier</summary>
     protected virtual void OnRegisterModifier() { }
+    /// <summary>Called when this modifier is successfully removed from active modifiers</summary>
     protected virtual void OnUnregisterModifier() { }
     /// <summary>
     /// Whenever <see cref="Modifiable{T}.Get"/> is called to retrieve the modifiable's value, all

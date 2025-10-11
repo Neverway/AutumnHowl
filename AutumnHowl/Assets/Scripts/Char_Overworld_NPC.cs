@@ -35,7 +35,7 @@ public class Controller_Overworld_NPC : Character
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Update()
     {
-        currentMoveSpeed = currentStats.walkSpeed;
+        currentMoveSpeed = Stats.walkSpeed;
         if (frozen || isDead)
         {
             animator.SetBool("walking", false);

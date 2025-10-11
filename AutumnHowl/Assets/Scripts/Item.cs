@@ -21,7 +21,6 @@ public abstract class Item : ScriptableObject
     public int buyCost;
     public int sellCost;
 
-
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
 
@@ -43,14 +42,14 @@ public abstract class Item : ScriptableObject
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual string GetDescription() => description;
-    public bool Use(Character user, int _atIndex, int _inList = 0)
+    public bool Use(CharacterIdentifier user, int _atIndex, int _inList = 0)
     {
         if (new Event_UseItem(this, user).InvokeAndGetIfSuccess())
             return OnUse(user, _atIndex, _inList);
 
         return false;
     }
-    protected abstract bool OnUse(Character user, int _atIndex, int _inList = 0);
+    protected abstract bool OnUse(CharacterIdentifier user, int _atIndex, int _inList = 0);
 
 
     #endregion

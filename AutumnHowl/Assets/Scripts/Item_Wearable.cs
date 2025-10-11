@@ -7,7 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +15,7 @@ public class Item_Wearable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    [Box, Polymorphic, SerializeReference] public Modifier[] effectsWhileWorn;
-
+    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer effectWhenEquipped;
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -35,17 +33,43 @@ public class Item_Wearable : Item
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
-
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    protected override bool OnUse(CharacterIdentifier user, int _atIndex, int _inList = 0)
+    {
+        return false;
+    }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 
+    public EquippedInstance Equip(CharacterIdentifier user)
+    {
+        EquippedInstance newInstance = new EquippedInstance(this, user);
+        return newInstance;
+    }
+    public void UnEquip(EquippedInstance instance)
+    {
+        instance.UnEquip();
+    }
 
     #endregion
 
-    protected override bool OnUse(Character user, int _atIndex, int _inList=0)
+    /// <summary>This is required to keep track of unique instances of WHO is equipping the item and what modifiers its applying
+    /// <br/> - Todo: Try to remove this and do a better inventory setup that lets you identify unique instances of items</summary>
+    public class EquippedInstance
     {
-        return false;
+        public Item_Wearable equippedItem;
+        public Modifier appliedModifier;
+        public CharacterIdentifier user;
+
+        public EquippedInstance(Item_Wearable toEquip, CharacterIdentifier character)
+        {
+            user = character;
+            equippedItem = toEquip;
+            appliedModifier = toEquip.effectWhenEquipped
+                .GetNewRegisteredModifier(new TargetSelf().GetTargetsFrom(character));
+        }
+
+        public void UnEquip() => appliedModifier.UnregisterModifier();
     }
 }

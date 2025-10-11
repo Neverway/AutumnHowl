@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class EffectAction
 {
     public bool hideDescription = false;
-    public abstract void ApplyEffect(Character user);
+    public abstract void ApplyEffect(CharacterIdentifier user);
     public abstract string DescribeNoFormat();
     public string DescribeFormatted()
     {
@@ -52,7 +52,7 @@ public static class StatModTypeExtension
 public class MultipleEffectsAction : EffectAction
 {
     [Box, Polymorphic, SerializeReference] public EffectAction[] effects = new EffectAction[1];
-    public override void ApplyEffect(Character user)
+    public override void ApplyEffect(CharacterIdentifier user)
     {
         foreach(EffectAction effect in effects)
             effect.ApplyEffect(user);
@@ -71,7 +71,7 @@ public class ModifyHealthAction : EffectAction
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
-    public override void ApplyEffect(Character user)
+    public override void ApplyEffect(CharacterIdentifier user)
     {
         /*
         var targetCharacter = target.GetTarget(user);
@@ -125,7 +125,7 @@ public class ModifyCorruptionAction : EffectAction
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
-    public override void ApplyEffect(Character user)
+    public override void ApplyEffect(CharacterIdentifier user)
     {
         /*
         var targetCharacter = target.GetTarget(user);
@@ -166,7 +166,7 @@ public class GiveItemsEffect : EffectAction
     public Item itemToGive;
     public int count;
 
-    public override void ApplyEffect(Character user)
+    public override void ApplyEffect(CharacterIdentifier user)
     {
         Inventory inventoryToAddTo = GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory;
         for (int i = 0;  i < count; i++)
@@ -188,17 +188,17 @@ public class ModifierForTimedDuration : EffectAction
 {
     public float seconds;
     [Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
-    [Box, Polymorphic, SerializeReference] public UserTargetedModifier modifier;
+    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer modifier;
 
-    public override void ApplyEffect(Character user)
+    public override void ApplyEffect(CharacterIdentifier user)
     {
-        modifier.RegisterModifier(target.GetTargetsFrom(user));
-        GameInstance.SendCoroutine(RemoveModifierAfterTime());
+        Modifier appliedModifier = modifier.GetNewRegisteredModifier(target.GetTargetsFrom(user));
+        GameInstance.SendCoroutine(RemoveModifierAfterTime(appliedModifier));
     }
-    public IEnumerator RemoveModifierAfterTime()
+    public IEnumerator RemoveModifierAfterTime(Modifier toRemove)
     {
         yield return new WaitForSeconds(seconds);
-        modifier.UnRegisterModifier();
+        toRemove.UnregisterModifier();
     }
 
     public override string DescribeNoFormat()
@@ -221,6 +221,7 @@ public class ModifierForTimedDuration : EffectAction
     }
 }
 
+/*
 [Serializable]
 public class ModifierForever : EffectAction
 {
@@ -243,3 +244,4 @@ public class ModifierForever : EffectAction
         return "";
     }
 }
+// */

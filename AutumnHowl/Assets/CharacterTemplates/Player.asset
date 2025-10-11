@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  characterReferenceType: 0
+  characterName: 
+  baseStats:
+    health: 100
+    level: 0
+    power: 5
+    corruption: 0
+    defense:
+      startValue: 0
+      multiplier: 0
+      addedValue: 0
+    attack:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    maxHealth:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxPower:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    maxCorruption:
+      startValue: 5
+      multiplier: 0
+      addedValue: 0
+    walkSpeed:
+      startValue: 2
+      multiplier: 0
+      addedValue: 0
+    runSpeed:
+      startValue: 3
+      multiplier: 0
+      addedValue: 0

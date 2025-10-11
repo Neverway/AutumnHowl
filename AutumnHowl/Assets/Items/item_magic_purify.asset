@@ -25,6 +25,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1234355949659750423
       type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
       data:
@@ -35,4 +37,4 @@ MonoBehaviour:
         amount: 1
     - rid: 1234355949659750427
       type: {class: TargetAllEnemies, ns: , asm: Assembly-CSharp}
-      data: 
+      data: {}

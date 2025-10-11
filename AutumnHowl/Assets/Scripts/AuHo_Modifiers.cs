@@ -1,75 +1,79 @@
+using ErryLib.ModiferSystem.Instancers;
 using System;
-using System.Collections;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static CharacterStats;
 
-public class AuHo_Modifiers { }
-
-public interface UserTargetedModifier : IDescribable
+//------------------------------------------------
+//       MODIFIER BASE TYPES AND INTERFACES
+//------------------------------------------------
+public interface ICharacterStatModInstancer : IModifierInstancer<CharacterTargets>, IDescribable
 {
-    public CharacterTargets targets { get; set; }
-    public void RegisterModifier(CharacterTargets targets)
+    public void ModifyStat(CharacterStat stat);
+}
+public abstract class CharacterStatModInstancer : ICharacterStatModInstancer
+{
+    public abstract string Description { get; }
+    public abstract void ModifyStat(CharacterStat stat);
+
+    void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets)
     {
-        this.targets = targets;
-        PassModifier().RegisterModifier(multiRegister: true);
+        if (modifiableValue is CharacterStat charStat)
+            if (targets.IsTargeted(charStat.linkedCharacter))
+                ModifyStat(charStat);
     }
-    public void UnRegisterModifier() => PassModifier().UnregisterModifier();
-    protected Modifier PassModifier();
 }
 
-public interface IDescribable
-{
-    public string Description { get; }
-}
+public interface IDescribable { public string Description { get; } }
+
+
+
+//------------------------------------------------
+//            MODIFIERS READY TO USE
+//------------------------------------------------
+
 [Serializable]
-public class TimedModifier : Modifier, IDescribable
+public class GroupedModifiers : CharacterStatModInstancer, IDescribable
 {
     public bool hideDescription;
-    public float seconds;
-    [Box, Polymorphic, SerializeReference] public Modifier modifier;
-    public string Description
+    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer[] modifiers;
+
+    //CharacterStatModInstancer implementation ---------------------------------------------------
+    public override void ModifyStat(CharacterStat modifiableValue)
     {
-        get
-        {
-            if (hideDescription || seconds <= 0) return "";
-
-            if (modifier != null && modifier is IDescribable describable)
-            {
-                string description = describable.Description;
-                if (string.IsNullOrEmpty(description))
-                    return "";
-
-                int inMinutes = Mathf.FloorToInt(seconds / 60);
-                int inSeconds = Mathf.FloorToInt(seconds % 60);
-                string XXm = inMinutes > 0 ? $"{inMinutes}m" : "";
-                string XXs = inSeconds > 0 ? $"{inSeconds}s" : "";
-                return $"{describable.Description} for {XXm}{XXs}";
-            }
-            return "";
-        }
+        foreach(var modifierInstancer in modifiers.NotNull())
+            modifierInstancer.ModifyStat(modifiableValue);
     }
 
-    protected override void OnRegisterModifier()
-    {
-        modifier.RegisterModifier();
-        GameInstance.SendCoroutine(RemoveModifierAfterTime());
-    }
-    public override void ModifyValue(Modifiable modifiableValue) { }
-
-    public IEnumerator RemoveModifierAfterTime()
-    {
-        yield return new WaitForSeconds(seconds);
-        modifier.UnregisterModifier();
-        UnregisterModifier();
-    }
+    //IDescribable implementation --------------------------------------------------------------
+    public override string Description => 
+        string.Join(" ",                             // Join below array of strings together into one string seperated by " " 
+            modifiers.NotNull()                        // Skip all null modifiers
+            .Select((m) => m.Description)              // Get array of all descriptions from modifiers
+            .Where((m) => !string.IsNullOrEmpty(m)));  // Trim all empty or null strings from array
 }
 
 [Serializable]
-public class CharacterStatModifier : NumberModifier<CharacterStat>, UserTargetedModifier
+public class CharacterStatModifier : CharacterStatModInstancer
 {
     public bool hideDescription = false;
     public StatType statToModify;
-    public string Description
+    public NumberModifierType modifierType;
+    public float value;
+
+    //CharacterStatModInstancer implementation ---------------------------------------------------
+    public override void ModifyStat(CharacterStat stat)
+    {
+        if (modifierType == NumberModifierType.Add)
+            stat.OnModify_AddNumber(value);
+
+        if (modifierType == NumberModifierType.Multiply)
+            stat.OnModify_MultiplyNumber(value);
+    }
+
+    //IDescribable implementation --------------------------------------------------------------
+    public override string Description
     {
         get
         {
@@ -80,9 +84,9 @@ public class CharacterStatModifier : NumberModifier<CharacterStat>, UserTargeted
             if (stat == null)
                 return "Changes stat?";
 
-            if (modifierType == ModifierType.Add)
+            if (modifierType == NumberModifierType.Add)
                 return $"+{Mathf.RoundToInt(value)} {statToModify.GetStatName()}";
-            else if (modifierType == ModifierType.Multiply)
+            else if (modifierType == NumberModifierType.Multiply)
             {
                 //return $"x{value.ToString("0.0")} {stat}";
                 int percents = Mathf.RoundToInt((value - 1f) * 100f);
@@ -93,22 +97,59 @@ public class CharacterStatModifier : NumberModifier<CharacterStat>, UserTargeted
             }
             else
                 return $"Changes {stat}?";
-        } 
+        }
     }
 
-    public CharacterTargets targets { get; set; }
-
-    public override void ModifyValue(Modifiable modifiableValue)
-    {
-        //Only modify CharacterStats
-        if (modifiableValue is not CharacterStat characterStat) return;
-        //Only modify stats of specified type
-        if (!characterStat.IsStat(statToModify)) return;
-        //Only modify stats on targeted characters
-        if (targets.IsTargeted(characterStat.linkedCharacter))
-
-        base.ModifyValue(modifiableValue);
-    }
-
-    Modifier UserTargetedModifier.PassModifier() => this;
 }
+
+
+
+
+//------------------------------------------------
+//            Deprecated Modifiers
+//------------------------------------------------
+
+/*
+[Serializable]
+public class TimedModifier : CharacterStatModInstancer, IDescribable
+{
+    public bool hideDescription;
+    public float seconds;
+    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer modifier;
+
+    private IEnumerator RemoveModifierAfterTime(Modifier modifier)
+    {
+        yield return new WaitForSeconds(seconds);
+        modifier.UnregisterModifier();
+    }
+
+    //CharacterStatModInstancer implementation ---------------------------------------------------
+    protected virtual void OnInstanceRegistered(InstancedModifier<CharacterTargets> instancedModifier) =>
+        GameInstance.SendCoroutine(RemoveModifierAfterTime(instancedModifier));
+
+    public override void ModifyStat(CharacterStat modifiableValue) => modifier.ModifyStat(modifiableValue);
+
+    //IDescribable implementation --------------------------------------------------------------
+    public override string Description
+    {
+        get
+        {
+            if (hideDescription || seconds <= 0) return "";
+
+            if (modifier != null)
+            {
+                string description = modifier.Description;
+                if (string.IsNullOrEmpty(description))
+                    return "";
+
+                int inMinutes = Mathf.FloorToInt(seconds / 60);
+                int inSeconds = Mathf.FloorToInt(seconds % 60);
+                string XXm = inMinutes > 0 ? $"{inMinutes}m" : "";
+                string XXs = inSeconds > 0 ? $"{inSeconds}s" : "";
+                return $"{modifier.Description} for {XXm}{XXs}";
+            }
+            return "";
+        }
+    }
+}
+// */
