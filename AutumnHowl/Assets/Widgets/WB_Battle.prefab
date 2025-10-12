@@ -23,18 +23,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117006190998367059}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1693377834667941767}
   - {fileID: 6458420478074588325}
-  m_Father: {fileID: 4120627537271842407}
+  m_Father: {fileID: 6337908957369661926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 128}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &540991351708834827
@@ -70,6 +70,7 @@ RectTransform:
   - {fileID: 7723456684325025740}
   - {fileID: 2019664431504274890}
   - {fileID: 405579321109442903}
+  - {fileID: 747915716483167436}
   m_Father: {fileID: 5660586961485124273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1243,7 +1244,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5660586961485124273}
-  - {fileID: 747915716483167436}
   - {fileID: 2957217626289046487}
   - {fileID: 221579072378398014}
   m_Father: {fileID: 0}
@@ -1302,6 +1302,8 @@ MonoBehaviour:
   - {fileID: -1811649803, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
   - {fileID: -831521074, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
   heartAnimator: {fileID: 7431007868217375425}
+  items: {fileID: 8659747048306946717}
+  spells: {fileID: 1809668027880815439}
   actionBarAnimator: {fileID: 4485264024467070714}
   attackBar: {fileID: 767888301274442408}
   attackBarLeft: {fileID: 1731734110839919697}

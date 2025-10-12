@@ -12,7 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller_Overworld_Player : Character
+public class Controller_Overworld_Player : Character , IsPlayerCharacter
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
@@ -28,7 +28,6 @@ public class Controller_Overworld_Player : Character
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private GameObject inventoryWidget;
-    private GI_AuHoGameState gameState;
 
 
     #endregion
@@ -48,8 +47,9 @@ public class Controller_Overworld_Player : Character
             animator.SetBool("walking", false);
             return;
         }
+        
+        gameState.currentGameState.overworldPosition = new Vector2(transform.position.x, transform.position.y);
 
-        UpdateGameStateValues();
         UpdateMovementInput();
     }
 
@@ -76,18 +76,6 @@ public class Controller_Overworld_Player : Character
             inventoryWidget.SetActive(!inventoryWidget.activeInHierarchy);
             inMenu = inventoryWidget.activeInHierarchy;
         }
-    }
-
-    private void UpdateGameStateValues()
-    {
-        // Transfer player data to game state
-        if (gameState != null)
-        {
-            gameState.currentGameState.playtime += Time.deltaTime;
-            gameState.currentGameState.player = Identifier;
-            gameState.currentGameState.overworldPosition = new Vector2(transform.position.x, transform.position.y);
-        }
-        else gameState = GameInstance.Get<GI_AuHoGameState>();
     }
     
     private void UpdateMovementInput()
@@ -118,4 +106,8 @@ public class Controller_Overworld_Player : Character
 
 
     #endregion
+}
+
+public interface IsPlayerCharacter
+{
 }
