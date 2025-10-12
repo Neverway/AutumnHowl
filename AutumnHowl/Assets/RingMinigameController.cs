@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class RingMinigameController : MonoBehaviour
 {
 
     [SerializeField] private RawImage imageSword;
     [SerializeField] private GameObject canvas;
+    [SerializeField] private TMP_Text text;
     private ringstate currentState = ringstate.notStarted;
     private spindir spin;
     private float swordAngle = 0f;
@@ -24,6 +26,12 @@ public class RingMinigameController : MonoBehaviour
     public static float south { get; private set; } = 180;
     public static float west { get; private set; } = 270;
 
+    private Coroutine textCoroutine;
+    private float timeToShowText = .75f;
+
+    private bool bufferLeft = false;
+    private bool bufferRight = false;
+
     public enum direction
     {
         north, south, west, east
@@ -38,17 +46,14 @@ public class RingMinigameController : MonoBehaviour
         left, right
     }
 
-    public void SetStartDirection (float _direction)
-    {
-        swordAngle = _direction;
-    }
-
+    #region Monobehaviour
 
     // Start is called before the first frame update
     void Start ()
     {
         SetStartDirection (north);
         canvas.SetActive (false);
+        text.SetText ("");
     }
 
     // Update is called once per frame
@@ -58,12 +63,12 @@ public class RingMinigameController : MonoBehaviour
         {
             case ringstate.notStarted:
                 {
-                    if (Input.GetKeyDown (KeyCode.Z))
+                    if (bufferLeft || Input.GetKeyDown (KeyCode.Z))
                     {
                         currentState = ringstate.spinning;
                         spin = spindir.left;
                     }
-                    if (Input.GetKeyDown (KeyCode.X))
+                    if (bufferRight || Input.GetKeyDown (KeyCode.X))
                     {
                         currentState = ringstate.spinning;
                         spin = spindir.right;
@@ -72,18 +77,34 @@ public class RingMinigameController : MonoBehaviour
                 }
             case ringstate.spinning:
                 {
+                    bufferRight = false;
+                    bufferLeft = false;
                     canvas.SetActive (true);
                     DoSpinState ();
                     break;
                 }
             case ringstate.finish:
                 {
-                    //todo: hide minigame after like 0.2 seconds, and swing actual sword.
+                    if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        bufferLeft = true;
+                    }
+                    if (Input.GetKeyDown (KeyCode.X))
+                    {
+                        bufferRight = true;
+                    }
                     break;
                 }
         }
 
-        imageSword.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, swordAngle));
+        imageSword.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
+    }
+
+    #endregion
+
+    public void SetStartDirection (float _direction)
+    {
+        swordAngle = _direction;
     }
 
     private void DoSpinState ()
@@ -103,12 +124,7 @@ public class RingMinigameController : MonoBehaviour
         }
         if (stopByTapping == true)
         {
-            if (spin == spindir.left && Input.GetKeyDown(KeyCode.Z))
-            {
-                FinishSpin ();
-                return;
-            }
-            if (spin == spindir.right && Input.GetKeyDown (KeyCode.X))
+            if (Input.GetKeyDown (KeyCode.X) || Input.GetKeyDown(KeyCode.Z))
             {
                 FinishSpin ();
                 return;
@@ -161,14 +177,14 @@ public class RingMinigameController : MonoBehaviour
 
         if (distanceFromNearestAngle < perfectAngle)
         {
-            print ("Perfect!");
+            ShowText ("Perfect!");
         }
         else if (distanceFromNearestAngle < goodAngle) {
-            print ("Good.");
+            ShowText ("Good");
         }
         else
         {
-            print ("Miss!");
+            ShowText ("Miss!");
         }
         StartCoroutine (ResetRoutine());
     }
@@ -178,8 +194,24 @@ public class RingMinigameController : MonoBehaviour
         currentState = ringstate.finish;
         yield return new WaitForSeconds (0.3f);
         swordAngle = nearestAngleToSword;
-        currentState = ringstate.notStarted;
         yield return new WaitForSeconds (0.1f);
-        canvas.SetActive (false);
+        if (!bufferLeft && !bufferRight)
+        {
+            canvas.SetActive (false);
+        }
+        currentState = ringstate.notStarted;
+    }
+
+    private void ShowText(string _text)
+    {
+        if (textCoroutine != null) { StopCoroutine (textCoroutine); }
+        textCoroutine = StartCoroutine (TextRoutine (_text));
+    }
+
+    private IEnumerator TextRoutine (string _text)
+    {
+        text.SetText (_text);
+        yield return new WaitForSeconds (timeToShowText);
+        text.SetText ("");
     }
 }
