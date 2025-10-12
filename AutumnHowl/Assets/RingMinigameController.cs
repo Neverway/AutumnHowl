@@ -20,6 +20,10 @@ public class RingMinigameController : MonoBehaviour
     [SerializeField] public float goodAngle = 30f;
     [SerializeField] public float perfectAngle = 10f; //todo: procedurally draw angles
     [SerializeField] public bool stopByTapping = false;
+    //the 4 blue images for the "Good" ring fill
+    [SerializeField] public Image[] blueFills;
+    //the 4 green images for the "Perfect" ring fill
+    [SerializeField] public Image[] greenFills; 
 
     public static float north { get; private set; } = 0;
     public static float east { get; private set; } = 90;
@@ -54,6 +58,7 @@ public class RingMinigameController : MonoBehaviour
         SetStartDirection (north);
         canvas.SetActive (false);
         text.SetText ("");
+        SetupRingColors ();
     }
 
     // Update is called once per frame
@@ -213,5 +218,16 @@ public class RingMinigameController : MonoBehaviour
         text.SetText (_text);
         yield return new WaitForSeconds (timeToShowText);
         text.SetText ("");
+    }
+
+    private void SetupRingColors ()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            blueFills[i].gameObject.transform.localRotation = Quaternion.Euler (0, 0, goodAngle + (90 * i));
+            blueFills[i].fillAmount = ((goodAngle * 2f)) / 360;
+            greenFills[i].gameObject.transform.localRotation = Quaternion.Euler (0, 0, perfectAngle + (90 * i));
+            greenFills[i].fillAmount = ((perfectAngle * 2f)) / 360;
+        }
     }
 }
