@@ -71,20 +71,23 @@ public class RingMinigameController : MonoBehaviour
                     if (bufferLeft || Input.GetKeyDown (KeyCode.Z))
                     {
                         currentState = ringstate.spinning;
+                        canvas.SetActive (true);
+                        bufferRight = false;
+                        bufferLeft = false;
                         spin = spindir.left;
                     }
                     if (bufferRight || Input.GetKeyDown (KeyCode.X))
                     {
                         currentState = ringstate.spinning;
+                        canvas.SetActive (true);
+                        bufferRight = false;
+                        bufferLeft = false;
                         spin = spindir.right;
                     }
                     break;
                 }
             case ringstate.spinning:
                 {
-                    bufferRight = false;
-                    bufferLeft = false;
-                    canvas.SetActive (true);
                     DoSpinState ();
                     break;
                 }
@@ -116,6 +119,25 @@ public class RingMinigameController : MonoBehaviour
     {
         if (stopByTapping == false)
         {
+            //buffer the next spin if player presses the opposite direction input during the spin
+            if (spin == spindir.left && Input.GetKeyDown  (KeyCode.X))
+            {
+                bufferRight = true;
+            }
+            if (spin == spindir.right && Input.GetKeyDown (KeyCode.Z))
+            {
+                bufferLeft = true;
+            }
+            //cancel the buffered input if the player releases the direction input
+            if (bufferLeft && Input.GetKey (KeyCode.Z) == false)
+            {
+                bufferLeft = false;
+            }
+            if (bufferRight && Input.GetKey (KeyCode.X) == false)
+            {
+                bufferRight = false;
+            }
+            //End the spin upon key released
             if (spin == spindir.left && Input.GetKey (KeyCode.Z) == false)
             {
                 FinishSpin ();
