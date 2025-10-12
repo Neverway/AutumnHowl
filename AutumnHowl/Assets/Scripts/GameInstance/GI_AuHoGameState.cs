@@ -14,7 +14,7 @@ public class GI_AuHoGameState : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public AuHoGameState currentGameState;
+    [Box] public AuHoGameState currentGameState;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -49,7 +49,7 @@ public class AuHoGameState
     public string map = "Town";
     public Vector2 overworldPosition;
     public int money = 0;
-    public Inventory inventory = new Inventory();
+    [Box] public Inventory inventory = new Inventory();
     public int kills = 0;
     public int deaths = 0;
     public float playtime = 0;

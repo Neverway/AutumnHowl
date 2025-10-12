@@ -6,27 +6,41 @@ public abstract class EffectActionTarget : IDescribable
     public abstract string Description { get; }
 
     public CharacterTargets GetTargetsFrom(CharacterIdentifier user)
-        => new CharacterTargets(this, user);
+        => new CharacterTargetsFromUser(this, user);
     public abstract bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other);
     public override string ToString() => Description;
 }
 
-public struct CharacterTargets
+public abstract class CharacterTargets
+{
+    /// <summary>Returns true if this CharacterTargets is targeting the given character</summary>
+    public abstract bool IsTargeted(CharacterIdentifier character);
+}
+public class CharacterTargetsFromUser : CharacterTargets
+{
+    public EffectActionTarget TargetType { get; private set; }
+    public CharacterIdentifier User { get; private set; }
+    public CharacterTargetsFromUser(EffectActionTarget targetType, CharacterIdentifier user)
+    {
+        TargetType = targetType;
+        User = user;
+    }
+    public override bool IsTargeted(CharacterIdentifier character) => TargetType.IsTargeted(User, character);
+
+    /// <summary>Pass in the type of target you want, and the user that is doing the targeting, and will return the associated CharacterTargets
+    /// <br/> - Example: CharacterTargets.GetFrom<TargetNearestEnemy>(user)</summary>
+    public static CharacterTargets GetFrom<TTarget>(CharacterIdentifier user)
+        where TTarget : EffectActionTarget, new()
+        => new TTarget().GetTargetsFrom(user);
+}
+public class CharacterTargetsFromFunc : CharacterTargets
 {
     private Func<CharacterIdentifier, bool> filterFunc;
-    public CharacterTargets(EffectActionTarget targetType, CharacterIdentifier user)
+    public CharacterTargetsFromFunc(Func<CharacterIdentifier, bool> filterFunc)
     {
-        filterFunc = (other) => targetType.IsTargeted(user, other);
-    }
-    public CharacterTargets(Func<CharacterIdentifier, bool> filterFunc)
-    {
-        if (filterFunc == null)
-            throw new NullReferenceException();
-
         this.filterFunc = filterFunc;
     }
-    /// <summary>Returns true if this CharacterTargets is targeting the given character</summary>
-    public bool IsTargeted(CharacterIdentifier character) => filterFunc.Invoke(character);
+    public override bool IsTargeted(CharacterIdentifier character) => filterFunc.Invoke(character);
 
     /// <summary>Pass in the type of target you want, and the user that is doing the targeting, and will return the associated CharacterTargets
     /// <br/> - Example: CharacterTargets.GetFrom<TargetNearestEnemy>(user)</summary>

@@ -21,20 +21,18 @@ MonoBehaviour:
   sellCost: 0
   powerCost: 25
   effectsWhenCast:
-    rid: 1234355949659750423
+    rid: 1234355984407986178
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1234355949659750423
-      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+    - rid: 1234355984407986178
+      type: {class: ModifyCorruptionAction, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
         target:
-          rid: 1234355949659750427
+          rid: 1234355984407986179
         modifierType: 0
-        amount: 1
-    - rid: 1234355949659750427
-      type: {class: TargetAllEnemies, ns: , asm: Assembly-CSharp}
-      data: {}
+        amount: -25
+    - rid: 1234355984407986179
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

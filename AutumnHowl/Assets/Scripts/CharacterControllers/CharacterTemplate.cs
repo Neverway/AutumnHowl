@@ -70,6 +70,15 @@ public class CharacterIdentifier
                 throw new System.NotImplementedException("Unimplemented CharacterIdentifier.ReferenceType in constructor");
         }
         return toReturn;
-        
+    }
+
+    public override string ToString()
+    {
+        if (TemplateCreatedFrom == null)
+            return "Default Character";
+        if (string.IsNullOrWhiteSpace(TemplateCreatedFrom.name))
+            return "Unnamed Character";
+
+        return TemplateCreatedFrom.name;
     }
 }
