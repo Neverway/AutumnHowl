@@ -68,9 +68,11 @@ public abstract class Modifier
     }
 
     /// <summary>This is only ever called on loading of game to reset</summary>
-    [RuntimeInitializeOnLoadMethod]
-    private static void ClearAllActiveModifiers() => ActiveModifiers = null;
-
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void ClearAllActiveModifiers()
+    {
+        _activeModifiers = null;
+    }
 
     /// <summary>
     /// Attempts to modify the value of <paramref name="modifiable"/> via all <see cref="ActiveModifiers"/>

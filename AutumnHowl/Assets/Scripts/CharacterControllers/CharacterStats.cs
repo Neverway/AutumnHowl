@@ -40,6 +40,9 @@ public class CharacterStats
 
     public void SetupStatsLinkedToCharacter(CharacterIdentifier character)
     {
+        int someInt = attack + defense;
+
+
         bool hasNoTemplate = character.TemplateCreatedFrom == null;
 
         //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field

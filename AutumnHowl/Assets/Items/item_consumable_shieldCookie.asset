@@ -30,16 +30,16 @@ MonoBehaviour:
         hideDescription: 0
         seconds: 300
         target:
-          rid: 1234355949659750449
+          rid: 1234355984407986199
         modifier:
           rid: 1234355964234170371
-    - rid: 1234355949659750449
-      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
-      data: 
     - rid: 1234355964234170371
       type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
       data:
-        modifierType: 0
-        value: 25
         hideDescription: 0
         statToModify: 0
+        modifierType: 0
+        value: 25
+    - rid: 1234355984407986199
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

@@ -10,9 +10,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Windows;
-
+[DefaultExecutionOrder(-10000)]
 public class GameInstance : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
@@ -27,7 +25,15 @@ public class GameInstance : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private static GameInstance instance;
+    private static GameInstance _instance;
+    public static GameInstance Instance 
+    { 
+        get 
+        {
+            if (_instance == null) throw new NullReferenceException("GameInstance is missing");
+            return _instance;
+        } 
+    }
 
     
     #endregion
@@ -37,14 +43,14 @@ public class GameInstance : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        instance = this;
-        DontDestroyOnLoad(instance);
+        _instance = this;
+        DontDestroyOnLoad(_instance);
     }
     private void OnEnable()
     {
@@ -53,7 +59,7 @@ public class GameInstance : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (this == instance)
+        if (this == _instance)
             Inputs.Disable();
     }
 
@@ -67,19 +73,9 @@ public class GameInstance : MonoBehaviour
     /// <typeparam name="T">GameInstance component you wish to retrieve</typeparam>
     /// <returns>The component of type T from GameInstance</returns>
     /// <exception cref="NullReferenceException"></exception>
-    public static T Get<T>() where T : MonoBehaviour
-    {
-        if (instance == null)
-            throw new NullReferenceException($"Trying to get GameInstance component, but there is no GameInstance. " +
-                                             $"(or it is not stored in {nameof(GameInstance)}.{nameof(instance)}");
+    public static T Get<T>() where T : MonoBehaviour => Instance.GetComponent<T>();
 
-        return instance.GetComponent<T>();
-    }
-
-    public static void SendCoroutine(IEnumerator coroutine)
-    {
-        instance.StartCoroutine(coroutine);
-    }
+    public static void SendCoroutine(IEnumerator coroutine) => Instance.StartCoroutine(coroutine);
 
     #endregion
 }

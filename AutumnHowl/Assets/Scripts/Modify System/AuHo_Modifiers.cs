@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using static CharacterStats;
 
 //------------------------------------------------
 //       MODIFIER BASE TYPES AND INTERFACES

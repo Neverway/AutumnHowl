@@ -37,12 +37,9 @@ MonoBehaviour:
       data:
         hideDescription: 0
         target:
-          rid: 1234355984407986182
+          rid: 1234355984407986201
         modifierType: 0
         amount: 5
-    - rid: 1234355984407986182
-      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
-      data: 
     - rid: 1234355984407986183
       type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
       data:
@@ -82,3 +79,6 @@ MonoBehaviour:
         statToModify: 0
         modifierType: 0
         value: -3
+    - rid: 1234355984407986201
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

@@ -1,5 +1,4 @@
 using System;
-using static CharacterStats;
 
 public interface CharacterStat : INumberModifiable
 {

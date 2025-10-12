@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 
@@ -68,7 +69,7 @@ public class PolymorphicDrawer : PropertyDrawer
             {
                 Debug.Log(GetParent(property));
                 fieldInfo.SetValue(GetParent(property), null);
-                property.serializedObject.ApplyModifiedProperties();
+                //property.serializedObject.ApplyModifiedProperties();
                 //GetParent(property);
             }
             GUILayout.EndHorizontal();
@@ -258,5 +259,11 @@ public class PolymorphicDrawer : PropertyDrawer
         if (!drawContent)
             return EditorGUIUtility.singleLineHeight;
         return EditorGUI.GetPropertyHeight(property, true);
+    }
+
+    [InitializeOnLoadMethod]
+    public static void OnEditorLoad()
+    {
+        EditorApplication.delayCall += InternalEditorUtility.RepaintAllViews;
     }
 }
