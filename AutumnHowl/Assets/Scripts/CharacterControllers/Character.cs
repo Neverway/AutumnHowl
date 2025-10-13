@@ -29,7 +29,7 @@ public abstract class Character : MonoBehaviour
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    protected Vector2 movement;
+    public Vector2 movement;
     protected float currentMoveSpeed;
 
 
