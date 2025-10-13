@@ -33,6 +33,9 @@ public class WB_Battle : MonoBehaviour
     public List<Sprite> heartSprites, powerSprites, corruptionSprites;
     public Animator heartAnimator;
     private GI_AuHoGameState gameState;
+    [Header("Inventory Stuff")] 
+    public Text_Inventory items;
+    public Text_Inventory spells;
     [Header("Action Stuff")] 
     public Animator actionBarAnimator;
     public GameObject attackBar;
@@ -51,12 +54,18 @@ public class WB_Battle : MonoBehaviour
     {
         gameState = GameInstance.Get<GI_AuHoGameState>();
         SetActionBarVisible(false);
+        
+        // Set Inventory Stuff
+        items.UpdateItemList();
+        spells.UpdateItemList();
     }
 
     public void Update()
     {
+        if (gameState.currentGameState.player == null) return;
         var stats = gameState.currentGameState.player.Stats;
         
+        // Set heartbeat stuff
         float percentHealth = stats.health / stats.maxHealth;
         int index = Mathf.FloorToInt(heartSprites.Count * (1f-percentHealth));
         if (index == heartSprites.Count) index--;

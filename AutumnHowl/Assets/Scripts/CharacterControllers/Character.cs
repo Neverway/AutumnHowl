@@ -29,12 +29,13 @@ public abstract class Character : MonoBehaviour
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    protected Vector2 movement;
+    public Vector2 movement;
     protected float currentMoveSpeed;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     protected Rigidbody2D _rigidbody;
+    protected GI_AuHoGameState gameState;
     [SerializeField] protected Animator animator;
 
 
@@ -48,14 +49,31 @@ public abstract class Character : MonoBehaviour
     {
         //Grabs and assigns the CharacterIdentifier that gives this character its identity!!!
         Identifier = CharacterIdentifier.GetFromCharacterTemplate(template);
+        UpdateGameStateValues();
     }
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-
     }
 
+    public void LateUpdate()
+    {
+        UpdateGameStateValues();
+    }
+
+
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    private void UpdateGameStateValues()
+    {
+        if (this is not IsPlayerCharacter) return;
+        // Transfer player data to game state
+        if (gameState != null)
+        {
+            gameState.currentGameState.playtime += Time.deltaTime;
+            gameState.currentGameState.player = Identifier;
+        }
+        else gameState = GameInstance.Get<GI_AuHoGameState>();
+    }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/

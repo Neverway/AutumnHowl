@@ -1,0 +1,341 @@
+//==========================================( Neverway 2025 )=========================================================//
+// Author
+//  Liz M.
+//
+// Contributors
+//
+//
+//====================================================================================================================//
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Used in the battle widget to give functionality to the hit compass
+/// </summary>
+public class BattleAttackCompass : MonoBehaviour
+{
+    #region========================================( Variables )======================================================//
+    /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
+    [Tooltip("The size of the angle that registers as a good hit")]
+    [SerializeField] private float goodAngle = 30f;
+    [Tooltip("The size of the angle that registers as a perfect hit (this should be smaller than the good angle)")]
+    [SerializeField] private float perfectAngle = 10f;
+    [Tooltip("?")]
+    [SerializeField] public bool stopByTapping = false;
+    [Tooltip("The duration for the hit text to be visible")]
+    [SerializeField] private float hitTextDuration = 0.75f;
+    [Tooltip("How fast the sword needle travels around the compass")]
+    [SerializeField] private float spinSpeed = 130f;
+
+
+    /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+
+
+    /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+    [Tooltip("Used to keep track of when teh attack bar started")]
+    public bool hasInitialized;
+    [Tooltip("Used to track when the attack bar is in progress")]
+    private bool attackBarActive;
+    [Tooltip("The current angle the sword needle is pointing in")]
+    private float swordAngle = 0f;
+
+    private bool bufferLeft = false;
+    private bool bufferRight = false;
+    
+    public static float north { get; private set; } = 0;
+    public static float east { get; private set; } = 90;
+    public static float south { get; private set; } = 180;
+    public static float west { get; private set; } = 270;
+    public enum cardinalDirection { north, south, west, east }
+    private enum RingState { notStarted, spinning, finish }
+    private RingState currentState = RingState.notStarted;
+    private enum SpinDirection { left, right }
+    private SpinDirection currentSpinDirection;
+    
+    
+    private float nearestAngleToSword;
+    private float distanceFromNearestAngle;
+
+
+    /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    [Tooltip("Reference to the player so we can freeze them when attacking")]
+    private Char_Battle_Player player;
+    [Tooltip("Keep track of the active hit text coroutine so we make sure only one is running")]
+    private Coroutine showHitTextCoroutine;
+    [Tooltip("The 4 images that are used to fill the 4 bars for this hit angle")]
+    [SerializeField] private Image[] goodBarImages, perfectBarImages;
+    [Tooltip("Text used to display how good the hit angle was")]
+    [SerializeField] private TMP_Text hitText;
+    [Tooltip("The image that represents the sword angle on the attack compass")]
+    [SerializeField]private Image needleImage;
+
+
+    #endregion
+
+
+    #region=======================================( Functions )======================================================= //
+
+    /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    public void Start()
+    {
+        player = FindObjectOfType<Char_Battle_Player>();
+    }
+
+    public void Update()
+    {
+        // Update the needle based on the sword angle
+        needleImage.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
+        
+        // Detect activation
+        if (!attackBarActive)
+        {
+            SetNeedleDirection(player.movement);
+            // Start the attack timer on first press
+            if (GameInstance.Inputs.Interact.WasPressedThisFrame())
+            {
+                currentSpinDirection = SpinDirection.left;
+                Initialize();
+            }
+            else if (GameInstance.Inputs.Action.WasPressedThisFrame())
+            {
+                currentSpinDirection = SpinDirection.right;
+                Initialize();
+            }
+            return;
+        }
+        
+        // Get inputs when active
+        if (currentState == RingState.spinning)
+        {
+            DoSpinState();
+        }
+    }
+
+    public void OnEnable()
+    {
+        Reset();
+    }
+
+
+    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+
+    /// <summary>
+    /// Freeze the player movement and enable the attack bar
+    /// </summary>
+    private void Initialize()
+    {
+        if (hasInitialized) return;
+        currentState = RingState.spinning;
+        player.canMove = false;
+        attackBarActive = true;
+        hasInitialized = true;
+    }
+
+    /// <summary>
+    /// Coroutine to delay the reset of the compass after an attack, to add cooldown before the player can attack again
+    /// </summary>
+    private IEnumerator CoReset()
+    {
+        currentState = RingState.finish;
+        swordAngle = nearestAngleToSword;
+        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
+        Reset();
+    }
+
+    /// <summary>
+    /// Resets the attack compass so another attack can be performed
+    /// </summary>
+    private void Reset()
+    {
+        SetupRingColors();
+        
+        currentState = RingState.notStarted;
+        attackBarActive = false;
+        hasInitialized = false;
+    }
+    
+    /// <summary>
+    /// Performs or fails the attempted attack      
+    /// </summary>
+    private void OnAttackDone()
+    {
+        var attack = 0;
+        bool mirrorX = false;
+        bool mirrorY = false;
+
+        StartCoroutine(CoReset());
+    }
+    
+    /// <summary>
+    /// Adjust the bar images to match the defined hit angles
+    /// </summary>
+    private void SetupRingColors ()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            goodBarImages[i].gameObject.transform.localRotation = Quaternion.Euler (0, 0, goodAngle + (90 * i));
+            goodBarImages[i].fillAmount = ((goodAngle * 2f)) / 360;
+            perfectBarImages[i].gameObject.transform.localRotation = Quaternion.Euler (0, 0, perfectAngle + (90 * i));
+            perfectBarImages[i].fillAmount = ((perfectAngle * 2f)) / 360;
+        }
+    }
+    
+    private void SetNeedleDirection(float _direction)
+    {
+        swordAngle = _direction;
+    }
+    
+    private void SetNeedleDirection(Vector2 _movement)
+    {
+        switch (_movement.x , _movement.y)
+        {
+            case (0, 1):
+                SetNeedleDirection(south);
+                break;
+            case (0, -1):
+                SetNeedleDirection(north);
+                break;
+            case (-1, 0):
+                SetNeedleDirection(east);
+                break;
+            case (1, 0):
+                SetNeedleDirection(west);
+                break;
+        }
+    }
+    
+    private void DoSpinState ()
+    {/*
+        if (stopByTapping == false)
+        {
+            //buffer the next spin if player presses the opposite direction input during the spin
+            if (currentSpinDirection == SpinDirection.left && GameInstance.Inputs.Action.WasPressedThisFrame())
+            {
+                bufferRight = true;
+            }
+            if (currentSpinDirection == SpinDirection.right && GameInstance.Inputs.Interact.WasPressedThisFrame())
+            {
+                bufferLeft = true;
+            }
+            //cancel the buffered input if the player releases the direction input
+            if (bufferLeft && GameInstance.Inputs.Interact.WasPressedThisFrame() == false)
+            {
+                bufferLeft = false;
+            }
+            if (bufferRight && GameInstance.Inputs.Action.WasPressedThisFrame()== false)
+            {
+                bufferRight = false;
+            }
+            //End the spin upon key released
+            if (currentSpinDirection == SpinDirection.left && GameInstance.Inputs.Interact.WasPressedThisFrame() == false)
+            {
+                FinishSpin ();
+                return;
+            }
+            if (currentSpinDirection == SpinDirection.right && GameInstance.Inputs.Action.WasPressedThisFrame()== false)
+            {
+                FinishSpin ();
+                return;
+            }
+        }*/
+        if (stopByTapping == true)
+        {
+            if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.Interact.WasPressedThisFrame())
+            {
+                FinishSpin ();
+                return;
+            }
+        }
+        if (currentSpinDirection == SpinDirection.left)
+        {
+            swordAngle -= spinSpeed * Time.deltaTime;
+        }
+        if (currentSpinDirection == SpinDirection.right)
+        {
+            swordAngle += spinSpeed * Time.deltaTime;
+        }
+        while (swordAngle > 360f)
+        {
+            swordAngle -= 360f;
+        }
+        while (swordAngle < 0f)
+        {
+            swordAngle += 360f;
+        }
+    }
+
+    /// <summary>
+    /// Ends sword spinning and calculates the direction it was pointing.
+    /// </summary>
+    private void FinishSpin ()
+    {
+        nearestAngleToSword = north;
+        float test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, north));
+        distanceFromNearestAngle = test;
+        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, east));
+        if (test < distanceFromNearestAngle)
+        {
+            distanceFromNearestAngle = test;
+            nearestAngleToSword = east;
+        }
+        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, south));
+        if (test < distanceFromNearestAngle)
+        {
+            distanceFromNearestAngle = test;
+            nearestAngleToSword = south;
+        }
+        test = Mathf.Abs(Mathf.DeltaAngle (swordAngle, west));
+        if (test < distanceFromNearestAngle)
+        {
+            distanceFromNearestAngle = test;
+            nearestAngleToSword = west;
+        }
+
+        if (distanceFromNearestAngle < perfectAngle)
+        {
+            ShowHitText ("Perfect!");
+        }
+        else if (distanceFromNearestAngle < goodAngle) {
+            ShowHitText ("Good");
+        }
+        else
+        {
+            ShowHitText ("Miss!");
+        }
+        ExecuteAttack();
+    }    
+    
+    private void ShowHitText(string _text)
+    {
+        if (showHitTextCoroutine != null)
+        {
+            StopCoroutine (showHitTextCoroutine);
+        }
+        showHitTextCoroutine = StartCoroutine (CoShowHitText (_text));
+    }
+
+    private IEnumerator CoShowHitText(string _text)
+    {
+        hitText.SetText (_text);
+        yield return new WaitForSeconds (hitTextDuration);
+        hitText.SetText ("");
+    }
+
+
+    private void ExecuteAttack()
+    {
+        player.PerformAttack(1);
+        OnAttackDone();
+    }
+
+    /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+
+
+    #endregion
+}
