@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class RingMinigameController : MonoBehaviour
 {
+    [SerializeField] public UnityEvent onStoppedSpinning = new UnityEvent();
 
     [SerializeField] private RawImage imageSword;
     [SerializeField] private GameObject canvas;
@@ -23,7 +23,8 @@ public class RingMinigameController : MonoBehaviour
     //the 4 blue images for the "Good" ring fill
     [SerializeField] public Image[] blueFills;
     //the 4 green images for the "Perfect" ring fill
-    [SerializeField] public Image[] greenFills; 
+    [SerializeField] public Image[] greenFills;
+    [SerializeField] public Image centerFill;
 
     public static float north { get; private set; } = 0;
     public static float east { get; private set; } = 90;
@@ -35,6 +36,9 @@ public class RingMinigameController : MonoBehaviour
 
     private bool bufferLeft = false;
     private bool bufferRight = false;
+
+    //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
+    private float totalSpin = 0f;
 
     public enum direction
     {
@@ -75,6 +79,10 @@ public class RingMinigameController : MonoBehaviour
                         bufferRight = false;
                         bufferLeft = false;
                         spin = spindir.left;
+
+                        centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
+                        centerFill.fillAmount = 0f;
+                        totalSpin = 0f;
                     }
                     if (bufferRight || Input.GetKeyDown (KeyCode.X))
                     {
@@ -83,6 +91,10 @@ public class RingMinigameController : MonoBehaviour
                         bufferRight = false;
                         bufferLeft = false;
                         spin = spindir.right;
+
+                        centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
+                        centerFill.fillAmount = 0f;
+                        totalSpin = 0f;
                     }
                     break;
                 }
@@ -157,13 +169,26 @@ public class RingMinigameController : MonoBehaviour
                 return;
             }
         }
+        float spinAmount = 0f;
         if (spin == spindir.left)
         {
-            swordAngle -= spinSpeed * Time.deltaTime;
+            spinAmount = -spinSpeed * Time.deltaTime;
         }
         if (spin == spindir.right)
         {
-            swordAngle += spinSpeed * Time.deltaTime;
+            spinAmount = spinSpeed * Time.deltaTime;
+        }
+        swordAngle += spinAmount;
+        totalSpin += spinAmount;
+        //Clamps the totalSpin, but only if it goes far enough past 360 that we've looped around to a 90-degrees swing again.
+        //The cutoff is 45 degrees past 360, since that would clamp to 90 degrees.
+        if (totalSpin > 360 + 45)
+        {
+            totalSpin -= 360;
+        }
+        if (totalSpin < -360 - 45)
+        {
+            totalSpin += 360;
         }
         while (swordAngle > 360f)
         {
@@ -172,6 +197,21 @@ public class RingMinigameController : MonoBehaviour
         while (swordAngle < 0f)
         {
             swordAngle += 360f;
+        }
+        PlaceCenterFill ();
+    }
+
+    private void PlaceCenterFill ()
+    {
+        if (totalSpin > 0)
+        {
+            centerFill.fillAmount = totalSpin / 360f;
+            return;
+        }
+        if (totalSpin < 0f)
+        {
+            centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
+            centerFill.fillAmount = -totalSpin / 360;
         }
     }
 
@@ -214,6 +254,17 @@ public class RingMinigameController : MonoBehaviour
             ShowText ("Miss!");
         }
         StartCoroutine (ResetRoutine());
+
+        print ("Spin: " + totalSpin);
+        ClampTotalSpin ();
+        print("Clamped spin:" + totalSpin);
+
+        onStoppedSpinning?.Invoke ();
+    }
+
+    private void ClampTotalSpin ()
+    {
+        totalSpin = Mathf.RoundToInt (totalSpin / 90f);
     }
 
     private IEnumerator ResetRoutine ()
