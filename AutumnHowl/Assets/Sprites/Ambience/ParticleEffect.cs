@@ -1,0 +1,78 @@
+using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class ParticleEffect : MonoBehaviour
+{
+    public Animation currentAnimation;
+    public Animator animator;
+    [Space]
+    [Unbox] public AnimatedVariable animationSpeed;
+    [Unbox] public AnimatedVariable scale;
+    [Unbox] public AnimatedVariable velocity;
+    [Unbox] public AnimatedVariable rotationDegrees;
+    public bool startWithRandomRotation;
+    //public bool rotateInDirection;
+
+    [Space, Header("Animator inputs")]
+    public float animationTime = 0;
+
+    public Quaternion randomRotationDirection = Quaternion.identity;
+
+    private Vector3 direction;
+    private Transform cam;
+    Vector3 facingDirection => -cam.forward;
+
+    [Serializable]
+    public struct AnimatedVariable
+    {
+        public float baseFactor;
+        public float randomBaseOffset;
+        public AnimationCurve lifetime;
+
+        private float randomOffset;
+        public float ApplyRandomFactor() =>
+            randomOffset = Random.Range(randomBaseOffset, -randomBaseOffset);
+        public float Get(float time) => lifetime.Evaluate(time) * (baseFactor + randomOffset);
+    }
+
+    void Start()
+    {
+        cam = Camera.main.transform;
+        
+        direction = GetRandomDirection();
+        if (startWithRandomRotation)
+            randomRotationDirection = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
+
+        animationSpeed.ApplyRandomFactor();
+        scale.ApplyRandomFactor();
+        velocity.ApplyRandomFactor();
+        rotationDegrees.ApplyRandomFactor();
+    }
+
+    private void FixedUpdate()
+    {
+        if (animator.enabled == false)
+            Destroy(gameObject);
+
+        animator.speed = animationSpeed.Get(animationTime);
+        transform.rotation = Quaternion.identity;
+        transform.rotation = 
+            randomRotationDirection *
+            Quaternion.LookRotation(facingDirection, transform.up) * 
+            Quaternion.AngleAxis(rotationDegrees.Get(animationTime), facingDirection);
+
+        transform.localScale = Vector3.one * scale.Get(animationTime);
+        transform.position += direction * velocity.Get(animationTime) * Time.deltaTime;
+        //if (rotateInDirection) transform.LookAt(Vector3.forward);
+    }
+    public void OnAnimationDone()
+    {
+        animator.enabled = false;
+    }
+    public Vector2 GetRandomDirection()
+    {
+        float randomAngle = Random.Range(0f, 360f);
+        return Quaternion.AngleAxis(randomAngle, Vector3.forward) * Vector3.up;
+    }
+}
