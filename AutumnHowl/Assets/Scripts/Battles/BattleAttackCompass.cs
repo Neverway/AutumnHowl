@@ -399,6 +399,7 @@ public class BattleAttackCompass : MonoBehaviour
         sequence.attacks = new List<AttackElement> ();
         int n = spinStartIndex * 2;
         int increment = MathF.Sign (totalSpin);
+        //Generate an attack by looping through the swingPattern
         for (int i = 0; i < Mathf.Abs(totalSpin*2)+1; i++)
         {
             AttackElement attack = new AttackElement ();
@@ -412,10 +413,18 @@ public class BattleAttackCompass : MonoBehaviour
             }
             n = n % swingPattern.Length;
         }
+        //Decrement n by 1 so we can set player movement correctly.
+        n -= increment;
+        if (n < 0)
+        {
+            n += swingPattern.Length;
+        }
+        n = n % swingPattern.Length;
         player.AttackSequences[0] = sequence;
         player.PerformGeneratedAttack();
         OnAttackDone();
-        player.movement = swingPattern[n];
+        player.movement = swingPattern[n] * -1;
+        print (player.movement);
     }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
