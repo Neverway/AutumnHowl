@@ -917,59 +917,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
   isDead: 0
+  movement: {x: 0, y: 0}
   animator: {fileID: 8407677613216461500}
   AttackSequences:
-  - attacks:
-    - position: {x: -1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: -1, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 0, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-  - attacks:
-    - position: {x: -1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: -1, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 0, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 1, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-  - attacks:
-    - position: {x: -1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: -1, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 0, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 1, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 1, y: -1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: 0, y: -1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-    - position: {x: -1, y: -1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+  - attacks: []
+  - attacks: []
+  - attacks: []
   canMove: 0
   gridPawnController: {fileID: 2113060241678384352}
   gridPather: {fileID: 0}
