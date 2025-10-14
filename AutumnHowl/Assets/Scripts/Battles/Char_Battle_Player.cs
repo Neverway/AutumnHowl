@@ -39,6 +39,8 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     
     private void Update()
     {
+        animator.SetFloat("idleX", movement.x);
+        animator.SetFloat("idleY", movement.y);
         if (isDead) return;
         if (!canMove) return;
         UpdateMovementInput();
@@ -68,8 +70,6 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
             if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0); 
             
         }
-        animator.SetFloat("idleX", movement.x);
-        animator.SetFloat("idleY", movement.y);
     }
     
     protected override bool TryMoveInDirection(Vector2Int _direction)

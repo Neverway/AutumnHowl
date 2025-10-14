@@ -150,7 +150,7 @@ public class GI_WidgetManager : MonoBehaviour
             case 2:
                 textComponent.color = Color.white;
                 textComponent.text =
-                    $"<sprite index = 5>{_amount}";
+                    $"<sprite index=5> {_amount}";
                 break;
         }
     }
