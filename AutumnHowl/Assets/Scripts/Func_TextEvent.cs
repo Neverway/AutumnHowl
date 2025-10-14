@@ -17,7 +17,7 @@ public class Func_TextEvent : MonoBehaviour
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public bool overrideExistingEvents;
-    public TextEvent textEvent;
+    [Box] public TextEvent textEvent;
     public UnityEvent OnCallFailed = new UnityEvent();
 
 
@@ -45,7 +45,7 @@ public class Func_TextEvent : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void CallEvent()
     {
-        if (!textboxManager)
+        if (textboxManager == null)
         {
             textboxManager = GameInstance.Get<GI_TextboxManager>();
         }
