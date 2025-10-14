@@ -30,6 +30,7 @@ public class CharacterIdentifier
     public CharacterStats Stats { get; private set; }
 
     private static Dictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters = new();
+    [RuntimeInitializeOnLoadMethod] public static void OnDomainReload() { persistentCharacters = new(); }
 
     public CharacterIdentifier(CharacterTemplate fromTemplate)
     {
