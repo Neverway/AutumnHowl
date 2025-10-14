@@ -60,6 +60,7 @@ public class BattleStateController : MonoBehaviour
         gameState = GameInstance.Get<GI_AuHoGameState>();
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
+        FindObjectOfType<AudioManager> ().SetMusic (AudioManager.music.FinalBattle);
         initialized = true;
     }
 

@@ -124,7 +124,12 @@ public abstract class Character : MonoBehaviour
             }
         }
     }
-    
+
+    public float GetHealth ()
+    {
+        return Stats.health;
+    }
+
     public virtual void ModifyPower(int _amount)
     {
         if (_amount == 0) return;

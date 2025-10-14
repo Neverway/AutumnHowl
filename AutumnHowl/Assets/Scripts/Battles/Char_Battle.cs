@@ -108,11 +108,22 @@ public abstract class Char_Battle : Character
                 {
                     print($"Found obstcl at {appliedPosition}");
                     hasStopped = true;
+                    AudioManager.Instance.PlayClip (AudioManager.Instance.hitBounce);
                 }
                 else if (target.type == GridPawn.GridPawnType.character)
                 {
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
-                    target.GetComponent<Char_Battle>().ModifyHealth(-attackSequence.attacks[i].damage);
+                    var char_Battle = target.GetComponent<Char_Battle> ();
+                    char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
+                    if (char_Battle.GetHealth () <= 0)
+                    {
+                        AudioManager.Instance.PlayClip(AudioManager.Instance.hitKill);
+                    }
+                    else
+                    {
+                        hasStopped = true;
+                        AudioManager.Instance.PlayClip (AudioManager.Instance.hitDamage);
+                    }
                 }
                 else if (target.type == GridPawn.GridPawnType.attack)
                 {
