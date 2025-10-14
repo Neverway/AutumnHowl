@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using Random = UnityEngine.Random;
 
 public class ParticleEffect : MonoBehaviour
@@ -45,8 +47,6 @@ public class ParticleEffect : MonoBehaviour
 
     void Start()
     {
-        if (animator == null)
-            animator = GetComponent<Animator>();
         cam = Camera.main.transform;
         
         direction = GetRandomDirection();
@@ -58,7 +58,11 @@ public class ParticleEffect : MonoBehaviour
         velocity.ApplyRandomFactor();
         rotationDegrees.ApplyRandomFactor();
     }
-
+    private void OnValidate()
+    {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+    }
     private void FixedUpdate()
     {
         if (animator.enabled == false)
@@ -78,6 +82,17 @@ public class ParticleEffect : MonoBehaviour
     public void OnAnimationDone()
     {
         animator.enabled = false;
+    }
+    public void SetAnimatorToRandomTime()
+    {
+        // Ensure the animator is updated at least once before modifying its time
+        animator.Update(0f);
+
+        // Get random time between 0 and 1 normalized
+        float randomTime = Random.value;
+
+        animator.Play("", 0, randomTime);
+        animator.Update(0f);
     }
     public Vector2 GetRandomDirection()
     {
