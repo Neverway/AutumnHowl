@@ -101,7 +101,7 @@ public abstract class Character : MonoBehaviour
             if (isDefenseActive)
             {
                 totalAmount = _amount + Stats.defense;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform, 2);
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform, 2, 0.5f);
             }
             GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
             
