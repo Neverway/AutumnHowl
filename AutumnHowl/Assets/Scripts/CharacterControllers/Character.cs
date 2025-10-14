@@ -51,6 +51,10 @@ public abstract class Character : MonoBehaviour
     {
         //Grabs and assigns the CharacterIdentifier that gives this character its identity!!!
         Identifier = CharacterIdentifier.GetFromCharacterTemplate(template);
+        if (this is IsPlayerCharacter)
+        {
+            GameInstance.Get<GI_AuHoGameState>().currentGameState.player = Identifier;
+        }
         UpdateGameStateValues();
     }
     public virtual void Start()
@@ -72,7 +76,6 @@ public abstract class Character : MonoBehaviour
         if (gameState != null)
         {
             gameState.currentGameState.playtime += Time.deltaTime;
-            gameState.currentGameState.player = Identifier;
         }
         else gameState = GameInstance.Get<GI_AuHoGameState>();
     }
