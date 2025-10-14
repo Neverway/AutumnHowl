@@ -325,7 +325,7 @@ public class TextFrames
 [Serializable]
 public class TextEvent
 {
-    public List<TextFrames> frames;
+    [Box] public List<TextFrames> frames;
     public UnityEvent OnFinish = new UnityEvent();
 }
 
