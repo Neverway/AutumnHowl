@@ -4,13 +4,12 @@ using Random = UnityEngine.Random;
 
 public class ParticleEffect : MonoBehaviour
 {
-    public Animation currentAnimation;
     public Animator animator;
     [Space]
-    [Unbox] public AnimatedVariable animationSpeed;
-    [Unbox] public AnimatedVariable scale;
-    [Unbox] public AnimatedVariable velocity;
-    [Unbox] public AnimatedVariable rotationDegrees;
+    [Unbox] public AnimatedVariable animationSpeed = new AnimatedVariable(1, 0, new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1)));
+    [Unbox] public AnimatedVariable scale = new AnimatedVariable(1, 0, new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1)));
+    [Unbox] public AnimatedVariable velocity = new AnimatedVariable(0, 0, new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1)));
+    [Unbox] public AnimatedVariable rotationDegrees = new AnimatedVariable(0, 0, new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1)));
     public bool startWithRandomRotation;
     //public bool rotateInDirection;
 
@@ -21,11 +20,19 @@ public class ParticleEffect : MonoBehaviour
 
     private Vector3 direction;
     private Transform cam;
-    Vector3 facingDirection => -cam.forward;
+    Vector3 facingDirection => cam.forward;
 
     [Serializable]
     public struct AnimatedVariable
     {
+        public AnimatedVariable(float baseFactor, float randomBaseOffset, AnimationCurve lifetime)
+        {
+            this.baseFactor = baseFactor;
+            this.randomBaseOffset = randomBaseOffset;
+            this.lifetime = lifetime;
+            this.randomOffset = 0f;
+        }
+
         public float baseFactor;
         public float randomBaseOffset;
         public AnimationCurve lifetime;
@@ -38,6 +45,8 @@ public class ParticleEffect : MonoBehaviour
 
     void Start()
     {
+        if (animator == null)
+            animator = GetComponent<Animator>();
         cam = Camera.main.transform;
         
         direction = GetRandomDirection();
