@@ -229,6 +229,10 @@ public class BS_PlayerAction : BattleState
             case BattleStateController.PlayerAction.attack:
                 controller.battleWidget.SetAttackBarVisible(true);
                 break;
+            case BattleStateController.PlayerAction.defend:
+                controller.battlePlayer.Stats.power += 10;
+                controller.battlePlayer.isDefenseActive = true;
+                break;
         }
     }
 }
@@ -267,6 +271,9 @@ public class BS_GridAction : BattleState
         {
             case BattleStateController.PlayerAction.attack:
                 controller.battleWidget.SetAttackBarVisible(false);
+                break;
+            case BattleStateController.PlayerAction.defend:
+                controller.battlePlayer.isDefenseActive = false;
                 break;
         }
         controller.battlePlayer.canMove = false;
