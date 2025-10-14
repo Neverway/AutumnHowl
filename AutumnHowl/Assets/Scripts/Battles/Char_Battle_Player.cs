@@ -103,6 +103,14 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
                 break;
         }
     }
+    
+    public void PerformGeneratedAttack()
+    {
+        if (isDead) battleStateController.NextTurnStep();
+        
+        SetAttackDamageToCurrentATK();
+        TryAttackSequence(AttackSequences[0]);
+    }
 
 
     #endregion

@@ -56,6 +56,9 @@ public class BattleAttackCompass : MonoBehaviour
     private RingState currentState = RingState.notStarted;
     private enum SpinDirection { left, right }
     private SpinDirection currentSpinDirection;
+    //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
+    private float totalSpin = 0f;
+    [SerializeField] public Image centerFill;
     
     
     private float nearestAngleToSword;
@@ -131,6 +134,11 @@ public class BattleAttackCompass : MonoBehaviour
     {
         if (hasInitialized) return;
         currentState = RingState.spinning;
+        
+        centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
+        centerFill.fillAmount = 0f;
+        totalSpin = 0f;
+        
         player.canMove = false;
         attackBarActive = true;
         hasInitialized = true;
@@ -252,13 +260,26 @@ public class BattleAttackCompass : MonoBehaviour
                 return;
             }
         }
+        float spinAmount = 0f;
         if (currentSpinDirection == SpinDirection.left)
         {
-            swordAngle -= spinSpeed * Time.deltaTime;
+            spinAmount = -spinSpeed * Time.deltaTime;
         }
         if (currentSpinDirection == SpinDirection.right)
         {
-            swordAngle += spinSpeed * Time.deltaTime;
+            spinAmount = spinSpeed * Time.deltaTime;
+        }
+        swordAngle += spinAmount;
+        totalSpin += spinAmount;
+        //Clamps the totalSpin, but only if it goes far enough past 360 that we've looped around to a 90-degrees swing again.
+        //The cutoff is 45 degrees past 360, since that would clamp to 90 degrees.
+        if (totalSpin > 360 + 45)
+        {
+            totalSpin -= 360;
+        }
+        if (totalSpin < -360 - 45)
+        {
+            totalSpin += 360;
         }
         while (swordAngle > 360f)
         {
@@ -268,7 +289,23 @@ public class BattleAttackCompass : MonoBehaviour
         {
             swordAngle += 360f;
         }
+        PlaceCenterFill ();
     }
+
+    private void PlaceCenterFill ()
+    {
+        if (totalSpin > 0)
+        {
+            centerFill.fillAmount = totalSpin / 360f;
+            return;
+        }
+        if (totalSpin < 0f)
+        {
+            centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
+            centerFill.fillAmount = -totalSpin / 360;
+        }
+    }
+
 
     /// <summary>
     /// Ends sword spinning and calculates the direction it was pointing.
@@ -308,8 +345,17 @@ public class BattleAttackCompass : MonoBehaviour
         {
             ShowHitText ("Miss!");
         }
+        print ("Spin: " + totalSpin);
+        ClampTotalSpin ();
+        print("Clamped spin:" + totalSpin);
+        
         ExecuteAttack();
     }    
+
+    private void ClampTotalSpin ()
+    {
+        totalSpin = Mathf.RoundToInt (totalSpin / 90f);
+    }
     
     private void ShowHitText(string _text)
     {
@@ -330,7 +376,16 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void ExecuteAttack()
     {
-        player.PerformAttack(1);
+        // Generate an attack sequence for the sword path
+        // EXAMPLE FOR AN ATTACK SEQUENCE WITH A RELATIVE ATTACK TO THE NORTH OF PLAYER
+        // new AttackSequence().attacks[i].position = Vector2Int.up;
+        
+        // Set the player's attack sequence at index 0 to the new attack
+        // player.AttackSequences.Clear();
+        // player.AttackSequences.Add(NEW GENERATED ATTACK HERE);
+        
+        // Make the player character perform the new attack
+        player.PerformGeneratedAttack();
         OnAttackDone();
     }
 
