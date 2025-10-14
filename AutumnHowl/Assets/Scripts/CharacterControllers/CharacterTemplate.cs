@@ -29,8 +29,7 @@ public class CharacterIdentifier
     public CharacterTemplate TemplateCreatedFrom { get; private set; }
     public CharacterStats Stats { get; private set; }
 
-    private static Dictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters = new();
-    [RuntimeInitializeOnLoadMethod] public static void OnDomainReload() { persistentCharacters = new(); }
+    [Reload] private static Dictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters;
 
     public CharacterIdentifier(CharacterTemplate fromTemplate)
     {
@@ -53,6 +52,8 @@ public class CharacterIdentifier
                 "It will have default stats and not be persistent. May cause other errors");
             return new CharacterIdentifier(null);
         }
+        if (persistentCharacters == null)
+            persistentCharacters = new();
 
         CharacterIdentifier toReturn;
         switch (characterTemplate.characterReferenceType)
