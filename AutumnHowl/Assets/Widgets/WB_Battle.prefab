@@ -3230,6 +3230,7 @@ MonoBehaviour:
   - {fileID: 1531026903525344599}
   hitText: {fileID: 8835265821935406087}
   needleImage: {fileID: 1499245436176802199}
+  defaultAttackObject: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
 --- !u!1 &9076981291318541719
 GameObject:
   m_ObjectHideFlags: 0

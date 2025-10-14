@@ -64,9 +64,26 @@ public class BattleAttackCompass : MonoBehaviour
     private float nearestAngleToSword;
     private float distanceFromNearestAngle;
 
+    /// <summary>
+    /// The eight spaces around a tile in clockwise order.
+    /// Used for attack patterns.
+    /// </summary>
+    private Vector2Int[] swingPattern =
+    {
+        new Vector2Int(0,1),
+        new Vector2Int(1,1),
+        new Vector2Int(1,0),
+        new Vector2Int(1,-1),
+        new Vector2Int(0,-1),
+        new Vector2Int(-1,-1),
+        new Vector2Int(-1,0),
+        new Vector2Int(-1,1),
+    };
+
+    private int spinStartIndex = 0;
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [Tooltip("Reference to the player so we can freeze them when attacking")]
+    [Tooltip ("Reference to the player so we can freeze them when attacking")]
     private Char_Battle_Player player;
     [Tooltip("Keep track of the active hit text coroutine so we make sure only one is running")]
     private Coroutine showHitTextCoroutine;
@@ -76,6 +93,8 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] private TMP_Text hitText;
     [Tooltip("The image that represents the sword angle on the attack compass")]
     [SerializeField]private Image needleImage;
+    //The object used for generated sword swing attacks.
+    [SerializeField] private GameObject defaultAttackObject;
 
 
     #endregion
@@ -98,6 +117,7 @@ public class BattleAttackCompass : MonoBehaviour
         if (!attackBarActive)
         {
             SetNeedleDirection(player.movement);
+            spinStartIndex = (int)swordAngle / 90;
             // Start the attack timer on first press
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
@@ -345,7 +365,6 @@ public class BattleAttackCompass : MonoBehaviour
         {
             ShowHitText ("Miss!");
         }
-        print ("Spin: " + totalSpin);
         ClampTotalSpin ();
         print("Clamped spin:" + totalSpin);
         
@@ -376,17 +395,27 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void ExecuteAttack()
     {
-        // Generate an attack sequence for the sword path
-        // EXAMPLE FOR AN ATTACK SEQUENCE WITH A RELATIVE ATTACK TO THE NORTH OF PLAYER
-        // new AttackSequence().attacks[i].position = Vector2Int.up;
-        
-        // Set the player's attack sequence at index 0 to the new attack
-        // player.AttackSequences.Clear();
-        // player.AttackSequences.Add(NEW GENERATED ATTACK HERE);
-        
-        // Make the player character perform the new attack
+        var sequence = new AttackSequence ();
+        sequence.attacks = new List<AttackElement> ();
+        int n = spinStartIndex * 2;
+        int increment = MathF.Sign (totalSpin);
+        for (int i = 0; i < Mathf.Abs(totalSpin*2)+1; i++)
+        {
+            AttackElement attack = new AttackElement ();
+            attack.position = swingPattern[n];
+            attack.visualEffect = defaultAttackObject;
+            sequence.attacks.Add (attack);
+            n += increment;
+            if (n < 0)
+            {
+                n += swingPattern.Length;
+            }
+            n = n % swingPattern.Length;
+        }
+        player.AttackSequences[0] = sequence;
         player.PerformGeneratedAttack();
         OnAttackDone();
+        player.movement = swingPattern[n];
     }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
