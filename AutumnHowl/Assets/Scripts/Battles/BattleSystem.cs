@@ -27,6 +27,8 @@ public class BattleStateController : MonoBehaviour
         item,
         defend,
     }
+    // Used during defending to see if the player gets their bonus power for no hit
+    public bool playerWasHitThisStep;
 
     public int stepsRemaining;
     public List<Char_Battle> turnOrder;
@@ -230,10 +232,18 @@ public class BS_PlayerAction : BattleState
                 controller.battleWidget.SetAttackBarVisible(true);
                 break;
             case BattleStateController.PlayerAction.defend:
-                controller.battlePlayer.Stats.power += 10;
+                controller.battlePlayer.ModifyPower(10);
                 controller.battlePlayer.isDefenseActive = true;
+                controller.playerWasHitThisStep = false;
+                controller.battlePlayer.OnHurt -= SetPlayerHitThisStep;
+                controller.battlePlayer.OnHurt += SetPlayerHitThisStep;
                 break;
         }
+    }
+
+    public void SetPlayerHitThisStep()
+    {
+        controller.playerWasHitThisStep = true;
     }
 }
 
@@ -274,6 +284,11 @@ public class BS_GridAction : BattleState
                 break;
             case BattleStateController.PlayerAction.defend:
                 controller.battlePlayer.isDefenseActive = false;
+                // Give no-hit bonus
+                if (controller.playerWasHitThisStep == false)
+                {
+                    controller.battlePlayer.ModifyPower(5);
+                }
                 break;
         }
         controller.battlePlayer.canMove = false;
