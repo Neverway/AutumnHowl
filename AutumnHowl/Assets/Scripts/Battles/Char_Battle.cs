@@ -96,6 +96,8 @@ public abstract class Char_Battle : Character
             if (mirrorY) appliedPosition.y = -attackSequence.attacks[i].position.y;
             
             var currentPosition = gridPawnController.position + appliedPosition;
+
+            movement = -attackSequence.attacks[i].position;
             
             Instantiate(attackSequence.attacks[i].visualEffect, battleGrid.transform.position+new Vector3(currentPosition.x, currentPosition.y, 0), new Quaternion(), null);
             

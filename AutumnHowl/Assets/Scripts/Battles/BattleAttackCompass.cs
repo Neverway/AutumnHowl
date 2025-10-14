@@ -423,7 +423,7 @@ public class BattleAttackCompass : MonoBehaviour
         player.AttackSequences[0] = sequence;
         player.PerformGeneratedAttack();
         OnAttackDone();
-        player.movement = swingPattern[n] * -1;
+        //player.movement = swingPattern[n] * -1;
         print (player.movement);
     }
 

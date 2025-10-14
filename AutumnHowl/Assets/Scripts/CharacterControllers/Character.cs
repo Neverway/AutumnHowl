@@ -51,6 +51,10 @@ public abstract class Character : MonoBehaviour
     {
         //Grabs and assigns the CharacterIdentifier that gives this character its identity!!!
         Identifier = CharacterIdentifier.GetFromCharacterTemplate(template);
+        if (this is IsPlayerCharacter)
+        {
+            GameInstance.Get<GI_AuHoGameState>().currentGameState.player = Identifier;
+        }
         UpdateGameStateValues();
     }
     public virtual void Start()
@@ -72,7 +76,6 @@ public abstract class Character : MonoBehaviour
         if (gameState != null)
         {
             gameState.currentGameState.playtime += Time.deltaTime;
-            gameState.currentGameState.player = Identifier;
         }
         else gameState = GameInstance.Get<GI_AuHoGameState>();
     }
@@ -101,21 +104,53 @@ public abstract class Character : MonoBehaviour
             if (isDefenseActive)
             {
                 totalAmount = _amount + Stats.defense;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform, 2);
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform, 2, 0.5f);
             }
-            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
             
             // Damage killed
             if (Stats.health + totalAmount < 0)
             {
                 Stats.health = 0;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
                 OnDeath?.Invoke();
             }
             // Damage hurt
             else
             {
                 Stats.health += totalAmount;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
                 OnHurt?.Invoke();
+            }
+        }
+    }
+    
+    public virtual void ModifyPower(int _amount)
+    {
+        if (_amount == 0) return;
+
+        // Power Increase
+        if (_amount > 0)
+        {
+            if (Stats.power + _amount > Stats.maxPower) Stats.power = Stats.maxPower;
+            else Stats.power += _amount;
+            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform, 3);
+        }
+        
+        // Power Decrease
+        else if (_amount < 0)
+        {
+            // Clamp to minimum value of 0
+            if (Stats.power + _amount < 0)
+            {
+                Stats.power = 0;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform, 3);
+            }
+            // Subtract amount
+            else
+            {
+                Stats.power += _amount;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform, 3);
             }
         }
     }

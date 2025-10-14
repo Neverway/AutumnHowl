@@ -10,15 +10,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Func_TextEvent : MonoBehaviour
+public class GI_MusicManager : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public bool overrideExistingEvents;
-    [Box] public TextEvent textEvent;
-    public UnityEvent OnCallFailed = new UnityEvent();
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -28,14 +24,12 @@ public class Func_TextEvent : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    private GI_TextboxManager textboxManager;
 
 
     #endregion
 
 
-    #region=======================================( Functions )======================================================= //
-
+    #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
 
@@ -43,19 +37,6 @@ public class Func_TextEvent : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public void CallEvent()
-    {
-        if (textboxManager == null)
-        {
-            textboxManager = GameInstance.Get<GI_TextboxManager>();
-        }
-
-        var result = textboxManager.TryStartTextEvent(textEvent, overrideExistingEvents);
-        if (result is false)
-        {
-            OnCallFailed.Invoke();
-        }
-    }
 
 
     #endregion
