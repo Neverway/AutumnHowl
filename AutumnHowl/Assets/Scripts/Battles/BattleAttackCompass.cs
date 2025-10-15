@@ -369,6 +369,7 @@ public class BattleAttackCompass : MonoBehaviour
         print("Clamped spin:" + totalSpin);
         
         ExecuteAttack();
+        centerFill.fillAmount = 0;
     }    
 
     private void ClampTotalSpin ()
