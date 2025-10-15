@@ -115,7 +115,7 @@ public class WB_Shop : MonoBehaviour
 
     public void SetBuyDescription(int _index)
     {
-        print($"Set description to index {_index}");
+        //  print($"Set description to index {_index}");
         buyDescriptionTextEvent.textEvent.frames[0].chatContent = buyableItems[_index].GetDescription();
     }
 
