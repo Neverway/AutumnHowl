@@ -156,7 +156,7 @@ public class WidgetNavigator : MonoBehaviour
         activelyNavigating = _isNavigating;
         if (_isNavigating)
         {
-            StartCoroutine(StartInitialInputDelay());
+            GameInstance.SendCoroutine(StartInitialInputDelay());
             OnNavigatable.Invoke();
             if (hideIndicatorOnInactive && selectableElements.Count != 0)
             {
