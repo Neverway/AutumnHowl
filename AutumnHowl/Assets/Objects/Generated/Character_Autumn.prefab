@@ -632,7 +632,7 @@ Animator:
   m_GameObject: {fileID: 5969748246127259817}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fbb6cb07a5dbdfb64a879f120ac49b9a, type: 2}
+  m_Controller: {fileID: 9100000, guid: e14139777723c3e5f98b12f1de6535cb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1468,7 +1468,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
+  isDefenseActive: 0
+  startFaceDirection: {x: 0, y: -1}
   isDead: 0
+  movement: {x: 0, y: 0}
   animator: {fileID: 1867420067129031397}
   canPause: 1
 --- !u!4 &6972457444599413610 stripped

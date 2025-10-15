@@ -35,6 +35,7 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    
     private void Update()
     {
         if (isDead) return;
