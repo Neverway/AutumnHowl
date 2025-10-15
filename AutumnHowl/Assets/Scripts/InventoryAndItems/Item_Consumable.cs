@@ -7,9 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/Item/New Consumable", fileName = "item_consumable_")]

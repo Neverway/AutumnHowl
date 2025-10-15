@@ -10,37 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
-  m_Name: item_consumable_sugarcookie
+  m_Name: shieldCookie_item_consumable
   m_EditorClassIdentifier: 
-  id: item_consumable_sugarcookies
-  displayName: Sugar Cookie
-  description: '{col=stat}[+1 progression for Diabetes] {col=}A sweet delicious sugar
-    cookie! With extra sugar!'
+  id: item_consumable_shieldCookie
+  displayName: Shield Cookie
+  description: A small cookie shaped like a shield.
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 25
-  sellCost: 10
+  buyCost: 10
+  sellCost: 8
   effectsOnConsume:
-    rid: 1234355949659750450
+    rid: 1234355949659750448
   references:
     version: 2
     RefIds:
-    - rid: 1234355949659750450
+    - rid: 1234355949659750448
       type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        seconds: 30
+        seconds: 300
         target:
-          rid: 1234355949659750451
+          rid: 1234355984407986199
         modifier:
-          rid: 1234355964234170368
-    - rid: 1234355949659750451
-      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 1234355964234170368
+          rid: 1234355964234170371
+    - rid: 1234355964234170371
       type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
       data:
-        modifierType: 0
-        value: 1
         hideDescription: 0
-        statToModify: 5
+        statToModify: 0
+        modifierType: 0
+        value: 25
+    - rid: 1234355984407986199
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
-  m_Name: item_magic_purify
+  m_Name: purify_item_magic
   m_EditorClassIdentifier: 
   id: item_magic_purify
   displayName: Purify Spell

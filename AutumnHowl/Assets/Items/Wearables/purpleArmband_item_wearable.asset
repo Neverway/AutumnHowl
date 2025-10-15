@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
-  m_Name: item_wearable_purpleArmband
+  m_Name: purpleArmband_item_wearable
   m_EditorClassIdentifier: 
   id: item_wearable_purpleArmband
   displayName: Purp. Armband

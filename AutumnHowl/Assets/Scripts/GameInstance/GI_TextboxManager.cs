@@ -10,8 +10,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,7 +22,7 @@ public class GI_TextboxManager : MonoBehaviour
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     [Box] public TextEvent currentTextEvent;
-
+    public bool HasActiveTextEvent => textEventActive;
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private bool textEventActive;
@@ -311,6 +309,11 @@ public class GI_TextboxManager : MonoBehaviour
 [Serializable]
 public class TextFrames
 {
+    public TextFrames(string chatContent)
+    {
+        this.chatContent = chatContent;
+    }
+
     public string name;
     [TextArea] public string chatContent;
     public Sprite portrait;
@@ -325,8 +328,14 @@ public class TextFrames
 [Serializable]
 public class TextEvent
 {
-    [Box] public List<TextFrames> frames;
+    [Box] public List<TextFrames> frames = new();
     public UnityEvent OnFinish = new UnityEvent();
+
+    public void ClearFrames() => frames.Clear();
+    public void AddFrame(string text) => frames.Add(new TextFrames(text));
+    public bool TryDisplay(bool overrideExistingEvents = false) 
+        => GameInstance.Get<GI_TextboxManager>().TryStartTextEvent(this, overrideExistingEvents);
+
 }
 
 [Serializable]

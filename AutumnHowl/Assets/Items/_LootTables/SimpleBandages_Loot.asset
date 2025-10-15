@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: SimpleBandages_Loot
+  m_EditorClassIdentifier: 
+  notes: "5 pulls for 50% chance of bandage, \nbut each pull has a 1 in 2501 chance
+    to give 100 bandages"
+  itemsToGrant:
+    rid: 1234356074263347242
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356074263347242
+      type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 5
+          chanceToGet: 0.5
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        ignoreInvalidItems: 1
+        items:
+        - weight: 2500
+          item:
+            rid: 1234356074263347243
+        - weight: 1
+          item:
+            rid: 1234356074263347244
+    - rid: 1234356074263347243
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 212ecd547de670133b09a7fe60a3e367, type: 2}
+    - rid: 1234356074263347244
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 100
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 212ecd547de670133b09a7fe60a3e367, type: 2}

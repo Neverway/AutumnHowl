@@ -10,23 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
-  m_Name: item_wearable_spikedCuffs
+  m_Name: cloakedCollar_item_wearable
   m_EditorClassIdentifier: 
-  id: item_wearable_spikedCuffs
-  displayName: Spiked Cuffs
-  description: '{spd=stat, col=stat}[Grants +10 ATK while worn]{col=}'
+  id: item_wearable_cloakedCollar
+  displayName: Cloaked Collar
+  description: A small black collar with a silver engraving. Looking at it took long
+    makes your head spin.{col=stat}
   canNotDiscard: 1
   allowMultiple: 0
   buyCost: 25
   sellCost: 0
-  effectsWhileWorn:
-  - rid: 1234355927148920846
+  effectWhenEquipped:
+    rid: 1234355964234170398
   references:
     version: 2
     RefIds:
-    - rid: 1234355927148920846
+    - rid: 1234355964234170398
+      type: {class: GroupedModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        modifiers:
+        - rid: 1234355964234170399
+    - rid: 1234355964234170399
       type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
       data:
+        hideDescription: 0
+        statToModify: 0
         modifierType: 0
-        value: 10
-        statToModify: 1
+        value: 0
