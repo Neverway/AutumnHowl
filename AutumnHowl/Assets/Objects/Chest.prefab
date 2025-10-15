@@ -1,68 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1190018014587983491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4454395516116855505}
-  - component: {fileID: 1542863069169525993}
-  m_Layer: 0
-  m_Name: TextEvent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4454395516116855505
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190018014587983491}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7922009732942545860}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1542863069169525993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190018014587983491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overrideExistingEvents: 0
-  textEvent:
-    frames:
-    - name: SomeName
-      chatContent: Wowza, thats a lot o dabloons
-      portrait: {fileID: 21300000, guid: 841b6896bb48ce848ba358bdedee4b72, type: 3}
-      OnFrameCompleted:
-        m_PersistentCalls:
-          m_Calls: []
-      displayMode: 0
-      preventTextSkipping: 0
-      preventTextContinuing: 0
-      autoProgressOnComplete: 0
-    OnFinish:
-      m_PersistentCalls:
-        m_Calls: []
-  OnCallFailed:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &5063214991236437307
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +33,6 @@ Transform:
   - {fileID: 3102624798944333348}
   - {fileID: 5863852250340936820}
   - {fileID: 2956791076783355759}
-  - {fileID: 4454395516116855505}
   - {fileID: 2585939386589926344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,9 +48,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8c821e2ffe34c46976f64f02669c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsToGive:
+    rid: -2
   animator: {fileID: 6215337816074763489}
-  openChestTrigger: OpenChest
+  animator_openChestTrigger: OpenChest
+  animator_chestIsEmpty: ChestIsEmpty
   sparkles: {fileID: 6819710229984151113}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &6819710229984151113
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,11 +276,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: c11ed5c6d9cfffe47840e82b8a8ced60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.018168
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: c11ed5c6d9cfffe47840e82b8a8ced60, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.018168
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: c11ed5c6d9cfffe47840e82b8a8ced60, type: 3}
       propertyPath: m_LocalRotation.w
@@ -446,8 +390,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+      propertyPath: repeatable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -462,10 +410,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4620892889544084971}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
-      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1542863069169525993}
-    - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -475,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TriggerOpenChest
+      value: OpenChest
       objectReference: {fileID: 0}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

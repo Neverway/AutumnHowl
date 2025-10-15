@@ -47,11 +47,8 @@ public class CharacterIdentifier
     {
         //Create empty identifier as default if no template is provided (used for GetDefaultCharacter()
         if (characterTemplate == null)
-        {
-            Debug.LogWarning("Creating a CharacterIdentifier without a template. Using a default character identifier in its place. " +
-                "It will have default stats and not be persistent. May cause other errors");
             return new CharacterIdentifier(null);
-        }
+
         if (persistentCharacters == null)
             persistentCharacters = new();
 

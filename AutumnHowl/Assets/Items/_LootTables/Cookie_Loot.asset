@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: Cookie_Loot
+  m_EditorClassIdentifier: 
+  notes: '3 pulls for 33% chance of either: shield cookie, sugar cookie, or rarer
+    chance of pack of sugar cookies'
+  itemsToGrant:
+    rid: 1234356074263347225
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356074263347225
+      type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 3
+          chanceToGet: 0.33
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: 1234356074263347231
+        ignoreInvalidItems: 1
+        items:
+        - weight: 3
+          item:
+            rid: 1234356074263347228
+        - weight: 3
+          item:
+            rid: 1234356074263347227
+        - weight: 1
+          item:
+            rid: 1234356074263347232
+    - rid: 1234356074263347227
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 2a16e4cd34a1e3c4093b9f19f1fb9fad, type: 2}
+    - rid: 1234356074263347228
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}
+    - rid: 1234356074263347231
+      type: {class: ItemsRef_Items, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        items:
+        - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}
+        - {fileID: 11400000, guid: 2a16e4cd34a1e3c4093b9f19f1fb9fad, type: 2}
+    - rid: 1234356074263347232
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 62bfd89b5e7d0e244a873b2192cf11ea, type: 2}

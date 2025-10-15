@@ -27,7 +27,7 @@ MonoBehaviour:
     - rid: 1234355984407986202
       type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
       data:
-        hideDescription: 0
+        hideDescription: 1
         effects:
         - rid: 1234355984407986203
         - rid: 1234355984407986205

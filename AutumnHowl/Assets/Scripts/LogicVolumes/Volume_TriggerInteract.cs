@@ -7,9 +7,7 @@
 //
 //====================================================================================================================//
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,14 +17,14 @@ public class Volume_TriggerInteract : MonoBehaviour
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public bool repeatable;
     public UnityEvent OnInteract = new UnityEvent();
-    public bool activated;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    public bool inTrigger;
+    private bool activated;
+    private bool inTrigger;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -46,6 +44,9 @@ public class Volume_TriggerInteract : MonoBehaviour
             {
                 activated = true;
                 OnInteract.Invoke();
+
+                if (repeatable)
+                    GameInstance.SendCoroutine(CO_ResetActive());
             }
         }
     }
