@@ -102,6 +102,11 @@ public class BattleGrid : MonoBehaviour
     {
         grid[gridPawn.position.x, gridPawn.position.y].pawns.Add (gridPawn);
     }
+
+    internal void RemovePawnFromGrid (GridPawn gridPawn)
+    {
+        grid[gridPawn.position.x, gridPawn.position.y].pawns.Remove (gridPawn);
+    }
 }
 
 public class BattleTile

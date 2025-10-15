@@ -151,12 +151,13 @@ public abstract class Char_Battle : Character
     /// </summary>
     public virtual void Kill ()
     {
-        Destroy(gameObject);
         if (spawnOnDeath != null)
         {
             GameObject g = Instantiate (spawnOnDeath);
             g.transform.position = transform.position;
         }
+        FindObjectOfType<BattleStateController> ().RemoveCharacter (this);
+        Destroy (gameObject);
     }
 
 

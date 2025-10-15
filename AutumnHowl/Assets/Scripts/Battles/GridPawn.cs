@@ -59,4 +59,9 @@ public class GridPawn : MonoBehaviour
         position = _position;
         transform.localPosition = new Vector3 (_position.x, _position.y, transform.localPosition.z);
     }
+
+    public void OnDestroy ()
+    {
+        BattleGrid.Instance.RemovePawnFromGrid (this);
+    }
 }

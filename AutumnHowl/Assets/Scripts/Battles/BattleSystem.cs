@@ -7,6 +7,7 @@
 //
 //====================================================================================================================//
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -133,6 +134,11 @@ public class BattleStateController : MonoBehaviour
     public void NextTurnStep(float _delay=0.1f)
     {
         StartCoroutine(CoNextTurnStep(_delay));
+    }
+
+    internal void RemoveCharacter (Char_Battle char_Battle)
+    {
+        turnOrder.Remove (char_Battle);
     }
 
 
