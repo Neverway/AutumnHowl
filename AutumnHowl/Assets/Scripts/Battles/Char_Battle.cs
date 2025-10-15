@@ -87,9 +87,7 @@ public abstract class Char_Battle : Character
         var hasStopped = false;
         
         for (int i = 0; i < attackSequence.attacks.Count; i++)
-        {
-            if (hasStopped) continue;
-                
+        {                
             // Applied position is the position offset after mirroring has been applied
             var appliedPosition = attackSequence.attacks[i].position;
             if (mirrorX)
@@ -134,9 +132,23 @@ public abstract class Char_Battle : Character
                     hasStopped = true;
                 }
             }
-
             
             yield return new WaitForSeconds(0.1f);
+            //If we bonked something, go back to the last cardinal direction
+            if (hasStopped)
+            {
+                int dir = i;
+                if (dir > 0)
+                {
+                    dir--;
+                }
+                while (dir > 0 && dir % 2 != 0) //assuming cardinal direction = even numbers
+                {
+                    dir--;
+                }
+                movement = -attackSequence.attacks[dir].position;
+                break;
+            }
         }
         battleStateController.NextTurnStep(0.5f);
     }
