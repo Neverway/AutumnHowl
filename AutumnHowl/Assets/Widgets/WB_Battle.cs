@@ -38,6 +38,8 @@ public class WB_Battle : MonoBehaviour
     public Text_Inventory spells;
     [Header("Action Stuff")] 
     public Animator actionBarAnimator;
+
+    public WidgetNavigator actionBarNavigator;
     public GameObject attackBar;
     public Image attackBarLeft, attackBarRight;
     [Header("Step Stuff")] 
@@ -98,11 +100,14 @@ public class WB_Battle : MonoBehaviour
         switch (_isVisible)
         {
             case true:
-                actionBarAnimator.GetComponent<WidgetNavigator>().SetIsNavigating(true);
+                Debug.Log($"{actionBarAnimator}");
+                Debug.Log($"{actionBarAnimator.GetComponent<WidgetNavigator>()}");
+                Debug.Log($"Donzo");
+                actionBarNavigator.SetIsNavigating(true);
                 actionBarAnimator.Play("Open");
                 break;
             case false:
-                actionBarAnimator.GetComponent<WidgetNavigator>().SetIsNavigating(false);
+                actionBarNavigator.SetIsNavigating(false);
                 actionBarAnimator.Play("Close");
                 break;
         }
