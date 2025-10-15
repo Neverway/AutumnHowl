@@ -22,7 +22,7 @@ public class BattleData : ScriptableObject
     public TextEvent openingText;
     public BattleSequence battleSequence;
     public GameObject enemyPrefab;
-    public Vector2Int enemyStartPosition = new Vector2Int(3,6);
+    public List<EnemySpawnLocation> enemySpawnLocations;
 }
 
 /// <summary>
@@ -77,5 +77,12 @@ public class RandoBattleWave : BattleWaveSelector
         if (waves.Length == 0) { throw new Exception("WTF??? A random battle wave is defined, but with no waves."); }
         return waves[Random.Range(0, waves.Length)].GetBattleWave();
     }
+}
+
+[Serializable]
+public class EnemySpawnLocation
+{
+    public GameObject enemyPrefab;
+    public Vector2Int enemyStartPosition = new Vector2Int (3, 6);
 }
 

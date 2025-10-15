@@ -183,13 +183,16 @@ public class BS_Start : BattleState
         // Add the player to be first in the turn order
         controller.turnOrder.Add(controller.battlePlayer);
         
-        // Create the enemy on the grid
-        var newEnemy = controller.battleGrid.InstantiatePawn(
-            controller.gameState.currentGameState.currentBattle.enemyStartPosition,
-            controller.gameState.currentGameState.currentBattle.enemyPrefab);
-        
-        // Add the enemy to be next in the turn order
-        controller.turnOrder.Add(newEnemy.GetComponent<Char_Battle>());
+        foreach(var enemy in controller.gameState.currentGameState.currentBattle.enemySpawnLocations)
+        {
+            // Create the enemy on the grid
+            var newEnemy = controller.battleGrid.InstantiatePawn(
+            enemy.enemyStartPosition,
+            enemy.enemyPrefab);
+
+            // Add the enemy to be next in the turn order
+            controller.turnOrder.Add (newEnemy.GetComponent<Char_Battle> ());
+        }
         
         // Display opening text
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;
