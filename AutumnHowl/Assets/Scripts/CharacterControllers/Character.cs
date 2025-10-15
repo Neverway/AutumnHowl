@@ -18,6 +18,8 @@ public abstract class Character : MonoBehaviour
     [Tooltip("If this is true and this character takes DMG, the DMG will be reduced by the characters current defense, down to the limit of zero")]
     public bool isDefenseActive;
 
+    public Vector2Int startFaceDirection = Vector2Int.down;
+
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     public CharacterStats Stats => Identifier.Stats;
@@ -60,6 +62,8 @@ public abstract class Character : MonoBehaviour
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        animator.SetFloat("idleX", startFaceDirection.x);
+        animator.SetFloat("idleY", startFaceDirection.y);
     }
 
     public void LateUpdate()
