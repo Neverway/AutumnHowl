@@ -2018,6 +2018,7 @@ MonoBehaviour:
   items: {fileID: 8659747048306946717}
   spells: {fileID: 1809668027880815439}
   actionBarAnimator: {fileID: 4485264024467070714}
+  actionBarNavigator: {fileID: 8795853395902371105}
   attackBar: {fileID: 8283552058696633010}
   attackBarLeft: {fileID: 1731734110839919697}
   attackBarRight: {fileID: 3282055524119328642}
