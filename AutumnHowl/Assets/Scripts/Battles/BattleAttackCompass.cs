@@ -435,7 +435,7 @@ public class BattleAttackCompass : MonoBehaviour
         }
         else if (Mathf.Abs (totalSpin) > 0)
         {
-            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash2, 1);
+            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash1, 1);
         }
         else
         {
