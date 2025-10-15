@@ -42,6 +42,7 @@ public abstract class Char_Battle : Character
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     public override void Start()
     {
+        print ("START " + gameObject.name);
         base.Start();
         gridPather = FindObjectOfType<BattleGridPather>();
         battleGrid = FindObjectOfType<BattleGrid>();
@@ -57,13 +58,23 @@ public abstract class Char_Battle : Character
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    protected virtual bool TryMoveInDirection(Vector2Int _direction)
+
+    /// <summary>
+    /// Tests if the character can move to a tile, and returns true if it was able to move.
+    /// </summary>
+    /// <param name="_direction">Tile to move to; relative to current position.</param>
+    /// <param name="doNextTurn">Set to false if this object shouldn't trigger NextTurnStep, for example if it moves in realtime.</param>
+    /// <returns></returns>
+    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true)
     {
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
         {
             gridPawnController.MoveToTile (testPos.x, testPos.y);
-            battleStateController.NextTurnStep();
+            if (doNextTurn)
+            {
+                battleStateController.NextTurnStep();
+            }
             return true;
         }
 

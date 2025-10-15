@@ -72,10 +72,10 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         }
     }
     
-    protected override bool TryMoveInDirection(Vector2Int _direction)
+    protected override bool TryMoveInDirection(Vector2Int _direction, bool doNextTurn = true)
     {
         gridPather.GetPathToTarget(gridPawnController);
-        bool oldResult = base.TryMoveInDirection(_direction);
+        bool oldResult = base.TryMoveInDirection(_direction, doNextTurn);
         return oldResult;
     }
 
