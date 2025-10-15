@@ -31,6 +31,8 @@ public abstract class Char_Battle : Character
     public BattleGridPather gridPather;
     public BattleGrid battleGrid;
     public BattleStateController battleStateController;
+    //If this is not null, this object gets spawned when the character dies.
+    public GameObject spawnOnDeath;
 
 
     #endregion
@@ -44,6 +46,7 @@ public abstract class Char_Battle : Character
         gridPather = FindObjectOfType<BattleGridPather>();
         battleGrid = FindObjectOfType<BattleGrid>();
         battleStateController = FindObjectOfType<BattleStateController>();
+        OnDeath += Kill;
     }
     
     private void Update()
@@ -141,6 +144,19 @@ public abstract class Char_Battle : Character
     public virtual void TryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
     {
         StartCoroutine(CoTryAttackSequence(attackSequence, mirrorX, mirrorY));
+    }
+
+    /// <summary>
+    /// Triggered by OnDeath; Spawns spawnOnDeath if it exists.
+    /// </summary>
+    public virtual void Kill ()
+    {
+        Destroy(gameObject);
+        if (spawnOnDeath != null)
+        {
+            GameObject g = Instantiate (spawnOnDeath);
+            g.transform.position = transform.position;
+        }
     }
 
 

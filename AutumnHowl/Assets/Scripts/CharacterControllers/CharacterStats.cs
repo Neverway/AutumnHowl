@@ -71,6 +71,7 @@ public class CharacterStats
                 field.SetValue(this, myStat);
                 myStat.linkedCharacter = character;
             }
+        health = maxHealth;
     }
 
     #region HelperProperties
