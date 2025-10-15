@@ -112,7 +112,7 @@ public abstract class Character : MonoBehaviour
             if (Stats.health + totalAmount <= 0)
             {
                 Stats.health = 0;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
                 OnDeath?.Invoke();
             }
             // Damage hurt
