@@ -469,7 +469,7 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*Whatcha got for me?'
-      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -916,7 +916,7 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*What can I do for ya?'
-      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -1704,7 +1704,7 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*What ya wanna know?'
-      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3652,7 +3652,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*We don''t get many visitors out here. Being close to the barrier
         and all though, I suppose that makes sense.'
-      portrait: {fileID: 0}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3663,7 +3663,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*You''re here planning to slay {col=key, spd=0.05}The Beast{col=,
         spd=0.02}, right?'
-      portrait: {fileID: 0}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3674,7 +3674,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*It''s a long journey. I would recommend visiting {col=key}The
         Inn{col=} when you get tired.'
-      portrait: {fileID: 0}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3684,7 +3684,7 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Shop Keeper
       chatContent: '*Regardless, it''s nice to see a new face around.'
-      portrait: {fileID: 0}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3694,7 +3694,7 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Shop Keeper
       chatContent: '*That being said, please be careful out there, okay?'
-      portrait: {fileID: 0}
+      portrait: {fileID: -441779131, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5183,7 +5183,7 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*Ah, {col=key, spd=0.05}The Beast.{spd=0.02}'
-      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5195,7 +5195,7 @@ MonoBehaviour:
       chatContent: '*Legend says it lurks beyond the barrier and can only be defeated
         by a {col=key, spd=0.05}Mythical Blade.{spd=0.02, col=} Guess no one cared
         to mention it was so heavy, huh? '
-      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      portrait: {fileID: -441779131, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5205,7 +5205,7 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Autumn
       chatContent: '*...'
-      portrait: {fileID: 1916753404, guid: 02fc060e51d0dc80e819cd6e7310f2fb, type: 3}
+      portrait: {fileID: 1566977902, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
