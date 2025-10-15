@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7855895399501234818}
   - component: {fileID: 8607333023128904529}
   m_Layer: 0
-  m_Name: AttackEffect
+  m_Name: FXAttackEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

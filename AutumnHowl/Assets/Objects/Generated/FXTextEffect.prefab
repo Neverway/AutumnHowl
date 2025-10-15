@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 184982269351948050}
   - component: {fileID: 5905093788049993045}
   m_Layer: 5
-  m_Name: DMGEffect
+  m_Name: FXTextEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
