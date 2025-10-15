@@ -310,6 +310,7 @@ MonoBehaviour:
   hitBounce: {fileID: 8300000, guid: d4861d96383f17c4abbc5a000f3b80de, type: 3}
   hitDamage: {fileID: 8300000, guid: 7cfbf54315c4797498a0576290c45918, type: 3}
   hitKill: {fileID: 8300000, guid: 34fec3f6c7b6d7c45b6482cc32528165, type: 3}
+  failBuzz: {fileID: 8300000, guid: 00445dcb35847304487de4dcc3329cb2, type: 3}
   mus_FinalBattle: {fileID: 8300000, guid: af172e5b80f97689a96744bd6159dd69, type: 3}
   slashSource: {fileID: 5275027714552707982}
   musicSource: {fileID: 5545288310541291366}

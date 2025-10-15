@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip hitBounce;
     public AudioClip hitDamage;
     public AudioClip hitKill;
+    public AudioClip failBuzz;
 
     //==========Music============//
 
@@ -72,6 +74,11 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume"></param>
     public void PlayClip(AudioClip clip, float volume = 1f)
     {
+        if (clip == null)
+        {
+            Debug.LogError ("AudioClip wasn't assigned.");
+            return;
+        }
         soundSource.PlayOneShot(clip, volume);
     }
 
@@ -82,13 +89,31 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume"></param>
     public void PlaySlashClip (AudioClip clip, float volume = 1f)
     {
+        if (clip == null)
+        {
+            Debug.LogError ("AudioClip wasn't assigned.");
+            return;
+        }
         slashSource.Stop ();
         slashSource.PlayOneShot (clip, volume);
+    }
+    public void StopSlashClip ()
+    {
+        slashSource.Stop ();
     }
 
     //Play a random clip from the Goal Mix. Uesd when a level is completed.
     public void PlayRandomSound (AudioClip[] _list)
     {
+        if (_list == null)
+        {
+            Debug.LogError ("AudioClip wasn't assigned.");
+            return;
+        }
+        if (_list.Count()== 0)
+        {
+            return;
+        }
         int sound = Random.Range(0, _list.Length - 1);
         soundSource.PlayOneShot(_list[sound], 0.7f);
     }

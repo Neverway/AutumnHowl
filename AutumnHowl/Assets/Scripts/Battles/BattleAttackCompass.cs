@@ -425,9 +425,21 @@ public class BattleAttackCompass : MonoBehaviour
         OnAttackDone();
         //player.movement = swingPattern[n] * -1;
         print (player.movement);
-        if (Mathf.Abs(totalSpin) > 0)
+        if (Mathf.Abs(totalSpin) > 2)
         {
             AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash3, 1);
+        }
+        else if (Mathf.Abs (totalSpin) > 1)
+        {
+            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash2, 1);
+        }
+        else if (Mathf.Abs (totalSpin) > 0)
+        {
+            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash2, 1);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.failBuzz, 1);
         }
     }
 
