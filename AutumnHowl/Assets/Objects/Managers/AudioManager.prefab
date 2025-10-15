@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796bae5cf2146884bac46cfe3c3ab4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTrack: 1
+  currentTrack: 0
   slash1: {fileID: 8300000, guid: 350cff069d5a9ef48a3775dfc2846700, type: 3}
   slash2: {fileID: 8300000, guid: 71b4710dfc274e94aa7594898b7a00a3, type: 3}
   slash3: {fileID: 8300000, guid: 0622cafb1e4d1fe47ae95bf09aab13a5, type: 3}

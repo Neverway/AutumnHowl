@@ -26,6 +26,7 @@ public class LB_Overworld : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
 
+    [SerializeField] AudioManager.music music;
 
     #endregion
 
@@ -35,8 +36,14 @@ public class LB_Overworld : MonoBehaviour
     private void Start()
     {
         GameInstance.Get<GI_TransitionManager>().Fadein();
+        StartCoroutine(StartMusicRoutine());
     }
 
+    private IEnumerator StartMusicRoutine ()
+    {
+        yield return new WaitUntil (() => AudioManager.Instance != null);
+        AudioManager.Instance.SetMusic (music);
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
