@@ -239,12 +239,14 @@ public class BS_PlayerAction : BattleState
         {
             case BattleStateController.PlayerAction.attack:
                 controller.battleWidget.SetAttackBarVisible(true);
+                controller.battlePlayer.useBlock = false;
                 break;
             case BattleStateController.PlayerAction.defend:
                 controller.battlePlayer.ModifyPower(10);
                 controller.battlePlayer.isDefenseActive = true;
+                controller.battlePlayer.useBlock = true;
                 controller.playerWasHitThisStep = false;
-                controller.battlePlayer.OnHurt -= SetPlayerHitThisStep;
+                controller.battlePlayer.OnHurt -= SetPlayerHitThisStep; //b-but why?
                 controller.battlePlayer.OnHurt += SetPlayerHitThisStep;
                 break;
         }

@@ -35,7 +35,7 @@ public abstract class Char_Battle : Character
     public BattleStateController battleStateController;
     //If this is not null, this object gets spawned when the character dies.
     public GameObject spawnOnDeath;
-
+    public bool useBlock = false;
 
     #endregion
 

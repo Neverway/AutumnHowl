@@ -54,22 +54,34 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.up)) movement = new Vector2(0, 1);
-            
+            return;
         }
         else if (GameInstance.Inputs.MoveDown.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.down)) movement = new Vector2(0, -1);
-            
+            return;
         }
         else if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.left)) movement = new Vector2(-1, 0);
-            
+            return;
         }
         else if (GameInstance.Inputs.MoveRight.WasPressedThisFrame())
         {
-            if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0); 
-            
+            if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0);
+            return;
+        }
+
+        if (isDefenseActive)
+        {
+            if (GameInstance.Inputs.Interact.WasPressedThisFrame())
+            {
+                SpinBlock ("left");
+            }
+            else if (GameInstance.Inputs.Action.WasPressedThisFrame ())
+            {
+                SpinBlock("right");
+            }
         }
     }
     
@@ -121,6 +133,26 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         battleStateController.NextTurnStep (0.5f);
     }
 
+    private void SpinBlock(string _direction)
+    {
+        switch (_direction)
+        {
+            case "left":
+                {
+                    //rotate 90 degrees left
+                    movement = Vector2.Perpendicular (movement);
+                    battleStateController.NextTurnStep (0.5f);
+                    break;
+                }
+            case "right":
+                {
+                    //rotate 90 degrees right
+                    movement = -Vector2.Perpendicular (movement);
+                    battleStateController.NextTurnStep (0.5f);
+                    break;
+                }
+        }
+    }
 
     #endregion
 }

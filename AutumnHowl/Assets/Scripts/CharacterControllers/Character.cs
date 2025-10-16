@@ -62,6 +62,10 @@ public abstract class Character : MonoBehaviour
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        if (animator == null )
+        {
+            return;
+        }
         animator.SetFloat("idleX", startFaceDirection.x);
         animator.SetFloat("idleY", startFaceDirection.y);
     }
