@@ -440,19 +440,19 @@ public class BattleAttackCompass : MonoBehaviour
         print (player.movement);
         if (Mathf.Abs(totalSpin) > 2)
         {
-            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash3, 1);
+            GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash3, 1);
         }
         else if (Mathf.Abs (totalSpin) > 1)
         {
-            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash2, 1);
+            GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash2, 1);
         }
         else if (Mathf.Abs (totalSpin) > 0)
         {
-            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.slash1, 1);
+            GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash1, 1);
         }
         else
         {
-            AudioManager.Instance.PlaySlashClip (AudioManager.Instance.failBuzz, 1);
+            GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.failBuzz, 1);
         }
     }
 
