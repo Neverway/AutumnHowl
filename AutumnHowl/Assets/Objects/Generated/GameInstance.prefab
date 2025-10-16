@@ -114,7 +114,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.619
+  m_Volume: 0.495
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -598,9 +598,9 @@ MonoBehaviour:
   chatterAudioSource: {fileID: 3523726553420250166}
   defaultTextChatter: {fileID: 8300000, guid: f819891f812fc29e79cd9ff3a88ad402, type: 3}
   stopChatterClip: 1
-  chatterFrequency: 3
+  chatterFrequency: 4
   chatterPitchMin: 1
-  chatterPitchMax: 1.25
+  chatterPitchMax: 1.5
   useConsistentChatterLanguage: 1
 --- !u!82 &1503034516851819246
 AudioSource:
