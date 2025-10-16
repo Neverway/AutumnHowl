@@ -417,6 +417,7 @@ public class BattleAttackCompass : MonoBehaviour
             AttackElement attack = new AttackElement ();
             attack.position = swingPattern[n];
             attack.visualEffect = defaultAttackObject;
+            attack.pushing = true;
             sequence.attacks.Add (attack);
             n += increment;
             if (n < 0)

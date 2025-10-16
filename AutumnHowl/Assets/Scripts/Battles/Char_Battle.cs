@@ -21,6 +21,8 @@ public abstract class Char_Battle : Character
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     public bool canMove;
+    //If true, this character can be moved by "pushing" attacks
+    public bool pushable;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
@@ -95,6 +97,7 @@ public abstract class Char_Battle : Character
 
     public IEnumerator CoTryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
     {
+        //when hasStopped is true, it stops the rest of the sequence from firing.
         var hasStopped = false;
         
         for (int i = 0; i < attackSequence.attacks.Count; i++)
@@ -126,14 +129,20 @@ public abstract class Char_Battle : Character
                 {
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
+                    //deal damage
                     char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
-                    char_Battle.TryMoveInDirection (attackSequence.attacks[i].direction, false);
+                    //check if we should push the target
+                    if (pushable && attackSequence.attacks[i].pushing)
+                    {
+                        char_Battle.TryMoveInDirection (attackSequence.attacks[i].direction, false);
+                    }
                     if (char_Battle.GetHealth () <= 0)
                     {
                         AudioManager.Instance.PlayClip(AudioManager.Instance.hitKill);
                     }
                     else
                     {
+                        //Stop the attack because we hit something and didn't kill it.
                         hasStopped = true;
                         AudioManager.Instance.PlayClip (AudioManager.Instance.hitDamage);
                     }
@@ -209,10 +218,16 @@ public abstract class Char_Battle : Character
 [Serializable]
 public class AttackElement
 {
+    //The position to attack on the BattleGrid
     public Vector2Int position;
+    //amount of damage dealt to enemy
     public float damage;
+    //object that spawns on the attack's tile
     public GameObject visualEffect;
+    //direction the attack is moving.
     public Vector2Int direction = new Vector2Int(0, 0);
+    //if true, this attack can push the target.
+    public bool pushing = false;
 }       
 
 [Serializable]  
