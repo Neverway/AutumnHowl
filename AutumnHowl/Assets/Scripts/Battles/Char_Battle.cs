@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameFeatureConstants.Battle;
 
 public abstract class Char_Battle : Character
 {
@@ -191,7 +192,7 @@ public abstract class Char_Battle : Character
         if (movement != direction) {
             return;
         }
-        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, NumberModifierType.Multiply, 2f);
+        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
     }
     /// <summary>
     /// Removes the defense modifier applied by ApplyConditionalBlock.
