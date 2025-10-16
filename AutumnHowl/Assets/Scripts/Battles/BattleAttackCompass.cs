@@ -459,7 +459,7 @@ public class BattleAttackCompass : MonoBehaviour
     private void FailAttack ()
     {
         ShowHitText ("Miss!");
-        AudioManager.Instance.PlayClip (AudioManager.Instance.failBuzz);
+        GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;
         OnAttackDone ();
         player.SkipTurn ();
