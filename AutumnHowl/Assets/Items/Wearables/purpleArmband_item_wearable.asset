@@ -19,28 +19,29 @@ MonoBehaviour:
   allowMultiple: 1
   buyCost: 0
   sellCost: 0
-  effectsWhileWorn:
-  - rid: 26148788346028034
-  - rid: 26148788346028035
-  - rid: 26148788346028036
+  effectWhenEquipped:
+    rid: 1234356096328531978
   references:
     version: 2
     RefIds:
-    - rid: 26148788346028034
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+    - rid: 1234356096328531978
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
-        modifierType: 0
-        value: 10
-        statToModify: 4
-    - rid: 26148788346028035
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356096328531980
+        - rid: 1234356096328531981
+    - rid: 1234356096328531980
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
+        hideDescription: 0
+        statToModify: 1
         modifierType: 0
-        value: 10
+        value: 5
+    - rid: 1234356096328531981
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
         statToModify: 0
-    - rid: 26148788346028036
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
-      data:
         modifierType: 0
-        value: 10
-        statToModify: 3
+        value: 5

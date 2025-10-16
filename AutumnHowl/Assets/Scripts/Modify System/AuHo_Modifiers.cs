@@ -1,20 +1,104 @@
 using ErryLib.ModiferSystem.Instancers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+///=============================================== Shortcuts to Modifiers ====================================================
+/// For Polymorphic Serialization:
+///    <see cref="IStatModifierCreator"> for any modifiers you want to serialize that target chracters
+/// 
+/// 
+///===========================================================================================================================
+public static class AuHo_Modifiers { }
+
+
+
 
 //------------------------------------------------
 //       MODIFIER BASE TYPES AND INTERFACES
 //------------------------------------------------
-public interface ICharacterStatModInstancer : IModifierInstancer<CharacterTargets>, IDescribable
+public interface SerializedModifier : IDescribable
 {
-    public void ModifyStat(CharacterStat stat);
+    [Reload] public static Dictionary<object, List<Modifier>> idToRegisteredModifiers;
+
+    protected void RecordRegisteredModifier(object id, Modifier modifier)
+    {
+        //Created applied modifiers dictionary if not already existing
+        if (idToRegisteredModifiers == null) idToRegisteredModifiers = new Dictionary<object, List<Modifier>>();
+        //Create new list of modifiers for provided id 
+        if (!idToRegisteredModifiers.ContainsKey(id)) idToRegisteredModifiers.Add(id, new List<Modifier>());
+
+        //Finally, add the modifier to the list of activated modifiers for that ID
+        idToRegisteredModifiers[id].Add(modifier);
+    }
+
+
+    public Modifier GetNew_Flexible(CharacterTargets targets)
+    {
+        //Register modifiers for any modifier creators that have no input data
+        if (this is IModifierInstancer modifierCreator)
+            return modifierCreator.GetNewRegisteredModifier();
+
+        //Register modifiers for any modifier creators that have CharacterTargets as input data
+        if (this is IModifierInstancer<CharacterTargets> statModifierCreator)
+            return statModifierCreator.GetNewRegisteredModifier(targets);
+
+        Debug.LogError($"{nameof(SerializedModifier)}: Unimplemented type of ModifierInstancer was assigned. " +
+            $"This is because {GetType()} does not implement IModifierInstancer or an IModifierInstancer<TData> where " +
+            $"TData is an accounted-for type in the method this error comes from");
+        throw new NotImplementedException();
+    }
+
+    public void RegisterTo_Flexible(object id, CharacterTargets targets)
+    {
+        //Get a new modifier based on given paramters
+        Modifier createdModifier = GetNew_Flexible(targets);
+        //Apply the modifier
+        createdModifier.RegisterModifier();
+        //Record it to dictionary for removal by ID later
+        RecordRegisteredModifier(id, createdModifier);
+    }
+
+    public void UnregisterFrom(object id) => UnregisterModifierFrom(id);
+    public static void UnregisterModifierFrom(object id)
+    {
+        if (idToRegisteredModifiers.TryGetValue(id, out var modifiers))
+        {
+            foreach (var modifier in modifiers)
+                modifier.UnregisterModifier();
+
+            idToRegisteredModifiers.Remove(id);
+        }
+    }
 }
-public abstract class CharacterStatModInstancer : ICharacterStatModInstancer
+public interface SerializedModifier_NoInput : IModifierInstancer, SerializedModifier
+{
+    public Modifier GetNew() => GetNewModifier();
+    public void RegisterTo(object id)
+    {
+        Modifier createdModifier = GetNew();
+        createdModifier.RegisterModifier();
+        RecordRegisteredModifier(id, createdModifier);
+    }
+}
+public interface SerializedModifier_CharacterTargeting : IModifierInstancer<CharacterTargets>, SerializedModifier
+{
+    public Modifier GetNew(CharacterTargets targets) => GetNewModifier(targets);
+    public void RegisterTo(object id, CharacterTargets targets)
+    {
+        Modifier createdModifier = GetNew(targets);
+        createdModifier.RegisterModifier();
+        RecordRegisteredModifier(id, createdModifier);
+    }
+}
+
+[Serializable]
+public abstract class CharacterStatModifierCreator : SerializedModifier_CharacterTargeting
 {
     public abstract string Description { get; }
-
     /// <summary>Passes any stat that need to be modified by the modifier</summary>
     public abstract void ModifyStat(CharacterStat stat);
 
@@ -22,43 +106,49 @@ public abstract class CharacterStatModInstancer : ICharacterStatModInstancer
     void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets)
     {
         if (modifiableValue is CharacterStat charStat)
-            if (targets.IsTargeted(charStat.linkedCharacter))
+            if (targets.IsTargeted(charStat.LinkedCharacter))
                 ModifyStat(charStat);
     }
-
     public override string ToString() => Description;
 }
 /// <summary>Used by some classes to define a description for the object</summary>
 public interface IDescribable { public string Description { get; } }
 
+
+
+
+
+
+
+
 //------------------------------------------------
 //            MODIFIERS READY TO USE
 //------------------------------------------------
-//===========================================================================================================================
+
 [Serializable]
-public class GroupedModifiers : CharacterStatModInstancer, IDescribable
+public class MultipleCharacterStatModifiers : CharacterStatModifierCreator
 {
     public bool hideDescription;
-    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer[] modifiers;
+    [Box, Polymorphic, SerializeReference] public CharacterStatModifierCreator[] statModifiers;
 
     //CharacterStatModInstancer implementation ---------------------------------------------------
-    public override void ModifyStat(CharacterStat modifiableValue)
+    public override void ModifyStat(CharacterStat stat)
     {
-        foreach(var modifierInstancer in modifiers.NotNull())
-            modifierInstancer.ModifyStat(modifiableValue);
+        foreach (var modifierInstancer in statModifiers.NotNull())
+            modifierInstancer.ModifyStat(stat);
     }
 
     //IDescribable implementation --------------------------------------------------------------
-    public override string Description => 
+    public override string Description =>
         string.Join(", ",                             // Join below array of strings together into one string seperated by "] [" 
-            modifiers.NotNull()                        // Skip all null modifiers
+            statModifiers.NotNull()                        // Skip all null modifiers
             .Select((m) => m.Description)              // Get array of all descriptions from modifiers
             .Where((m) => !string.IsNullOrEmpty(m)));  // Trim all empty or null strings from array
 }
 
-//===========================================================================================================================
+
 [Serializable]
-public class CharacterStatModifier : CharacterStatModInstancer
+public class CharacterStatModifiers : CharacterStatModifierCreator
 {
     public bool hideDescription = false;
     public CharacterStatType statToModify;
@@ -107,7 +197,25 @@ public class CharacterStatModifier : CharacterStatModInstancer
     }
 
 }
-//===========================================================================================================================
+public partial class AuHo_ExtentionMethods
+{
+    public static void ModifyStatWith(this CharacterStat stat, object id, NumberModifierType modifierType, float value)
+    {
+        SerializedModifier_CharacterTargeting statModInstancer = new CharacterStatModifiers()
+        {
+            statToModify = stat.StatType,
+            modifierType = modifierType,
+            value = value
+        };
+        statModInstancer.RegisterTo(id, new TargetSelf().GetTargetsFrom(stat.LinkedCharacter));
+    }
+    public static void UnmodifyStatWith(this CharacterStat stat, object id) =>
+        SerializedModifier.UnregisterModifierFrom(id);
+}
+
+
+
+
 
 
 

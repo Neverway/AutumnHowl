@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_consumable_sugarcookies
   displayName: Sugar Cookie
-  description: '{col=stat}[+1 progression for Diabetes] {col=}A sweet delicious sugar
-    cookie! With extra sugar!'
+  description: A sweet delicious sugar cookie! With extra sugar!
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 25
@@ -29,18 +28,18 @@ MonoBehaviour:
       type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        seconds: 30
+        seconds: 120
         target:
           rid: 1234355949659750451
         modifier:
-          rid: 1234355964234170368
+          rid: 1234356096328531982
     - rid: 1234355949659750451
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 1234355964234170368
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+    - rid: 1234356096328531982
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
-        modifierType: 0
-        value: 1
         hideDescription: 0
         statToModify: 5
+        modifierType: 0
+        value: 0.3

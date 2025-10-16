@@ -195,11 +195,12 @@ public class ModifierForTimedDuration : EffectAction
 {
     public float seconds;
     [Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
-    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer modifier;
+    [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
 
     public override void ApplyEffect(CharacterIdentifier user)
     {
-        Modifier appliedModifier = modifier.GetNewRegisteredModifier(target.GetTargetsFrom(user));
+        Modifier appliedModifier = modifier.GetNew_Flexible(target.GetTargetsFrom(user));
+        appliedModifier.RegisterModifier();
         GameInstance.SendCoroutine(RemoveModifierAfterTime(appliedModifier));
     }
     public IEnumerator RemoveModifierAfterTime(Modifier toRemove)

@@ -42,7 +42,6 @@ public class CharacterStats
     {
         int someInt = attack + defense;
 
-
         bool hasNoTemplate = character.TemplateCreatedFrom == null;
 
         //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field
@@ -55,7 +54,7 @@ public class CharacterStats
                 if (hasNoTemplate)
                 {
                     CharacterStat stat = field.GetValue(this) as CharacterStat;
-                    stat.linkedCharacter = character; //Safe to assign linkedCharacter since it wont override any CharacterTemplate.baseStats
+                    stat.LinkedCharacter = character; //Safe to assign linkedCharacter since it wont override any CharacterTemplate.baseStats
                     continue;
                 }
                 //Get the base stat from the character template
@@ -69,7 +68,7 @@ public class CharacterStats
                 //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
                 CharacterStat myStat = statToClone.GetClonedStat();
                 field.SetValue(this, myStat);
-                myStat.linkedCharacter = character;
+                myStat.LinkedCharacter = character;
             }
         health = maxHealth;
     }

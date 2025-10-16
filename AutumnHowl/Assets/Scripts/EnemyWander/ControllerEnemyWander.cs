@@ -67,6 +67,7 @@ namespace Neverway.StateMachine
 
         internal void EnterBattle ()
         {
+            Debug.Log("Entering battle!");
             // I gotchu ~Liz
             gameState = FindObjectOfType<GI_AuHoGameState>();
             gameState.currentGameState.currentBattle = battleData;

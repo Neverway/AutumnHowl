@@ -13,6 +13,7 @@ using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -166,7 +167,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (useSeed)
         {
-            UnityEngine.Random.InitState (seed);
+            Random.InitState (seed);
         }
         branchLength = 0;
         mapNodes = new MapNode[mapWidth, mapHeight];
@@ -244,12 +245,12 @@ public class MapGenerator : MonoBehaviour
             Debug.LogError ("A props list was empty. Skipping.");
             return;
         }
-        GameObject prop = Instantiate (props[UnityEngine.Random.Range(0, props.Length)]);
+        GameObject prop = Instantiate (props[Random.Range(0, props.Length)]);
         prop.transform.position = new Vector3 (
-            x + UnityEngine.Random.Range (-1f, 1f),
-            y + UnityEngine.Random.Range (-1f, 1f) + 1,
+            x + Random.Range (-1f, 1f),
+            y + Random.Range (-1f, 1f) + 1,
             prop.transform.position.z);
-        if (UnityEngine.Random.Range (0f, 1f) > .5f)
+        if (Random.Range (0f, 1f) > .5f)
         {
             // 50/50 chance to flip the prop
             prop.transform.localScale = new Vector3 (-prop.transform.localScale.x,prop.transform.localScale.y,prop.transform.localScale.z);
@@ -319,7 +320,7 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-        int rand = UnityEngine.Random.Range (0, possibleNodes);
+        int rand = Random.Range (0, possibleNodes);
         int moveDirection = 0;
         int n = -1;
         //We're going to check foundPaths until
@@ -402,7 +403,7 @@ public class MapGenerator : MonoBehaviour
         {
             return;
         }
-        int rand = UnityEngine.Random.Range (0, nodes.Count);
+        int rand = Random.Range (0, nodes.Count);
         Debug.Log ("Generating from " + nodes[rand].x + "," + nodes[rand].y);
         GenerateFromNode (nodes[rand].x, nodes[rand].y, mapNodes[nodes[rand].x, nodes[rand].y].distanceFromStart) ;
     }
@@ -474,7 +475,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        float randomRadius = (float)pathRadius + .5f + UnityEngine.Random.Range (0f, pathWidthRandomness) - (pathWidthRandomness/2f);
+        float randomRadius = (float)pathRadius + .5f + Random.Range (0f, pathWidthRandomness) - (pathWidthRandomness/2f);
         for (int x = -(int)randomRadius; x < (int)randomRadius; x++)
         {
             for (int y = -(int)randomRadius; y < (int)randomRadius; y++)

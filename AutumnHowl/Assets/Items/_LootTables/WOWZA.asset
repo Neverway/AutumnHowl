@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: WOWZA
+  m_EditorClassIdentifier: 
+  notes: 
+  itemsToGrant:
+    rid: 1234356074263347277
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356074263347277
+      type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 5
+          chanceToGet: 0.2
+          itemCountCap: 1
+          toUseInsteadOfEmptyResult:
+            rid: 1234356074263347280
+        ignoreInvalidItems: 1
+        items:
+        - weight: 1
+          item:
+            rid: 1234356074263347278
+        - weight: 1
+          item:
+            rid: 1234356074263347279
+    - rid: 1234356074263347278
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: a88e35eb86f87db47a92364880453a42, type: 2}
+    - rid: 1234356074263347279
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: 75405f00ee6ec314a905b1a6fa1a64f9, type: 2}
+    - rid: 1234356074263347280
+      type: {class: ItemsRef_Items, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 3
+          chanceToGet: 0.503
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        items:
+        - {fileID: 11400000, guid: eb9d2e423d658764f97018e3afec7665, type: 2}
+        - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}

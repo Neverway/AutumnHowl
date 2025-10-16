@@ -39,8 +39,8 @@ public static partial class AuHo_ExtentionMethods
         else
             resultingString += "Unknown targets : ";
 
-        if (modifier.Instancer is ICharacterStatModInstancer instancer)
-            resultingString += $"[{instancer.Description}]";
+        if (modifier.Instancer is SerializedModifier serializedModInstancer)
+            resultingString += $"[{serializedModInstancer.Description}]";
         else
             resultingString += "???";
 
