@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class GI_TextboxManager : MonoBehaviour
 {
@@ -37,6 +38,17 @@ public class GI_TextboxManager : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private GI_WidgetManager widgetManager;
     private WB_Textbox textbox;
+    [SerializeField] private AudioSource chatterAudioSource;
+    [SerializeField] private AudioClip defaultTextChatter;
+    [SerializeField] private bool stopChatterClip;
+    [Range(1,5)]
+    [SerializeField] private int chatterFrequency;
+    [Range(-3,3)]
+    [SerializeField] private float chatterPitchMin;
+    [Range(-3,3)]
+    [SerializeField] private float chatterPitchMax;
+
+    [SerializeField] private bool useConsistentChatterLanguage;
 
 
     #endregion
@@ -135,6 +147,7 @@ public class GI_TextboxManager : MonoBehaviour
                 continue;
 
             //If there are no markups, add current character to text content and wait for text delay
+            PlayChatterSound(currentTextContent.Length, _fullTextContent[i]);
             currentTextContent += _fullTextContent[i];
             yield return new WaitForSeconds(currentTextTypeDelay);
         }
@@ -258,6 +271,44 @@ public class GI_TextboxManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    private void PlayChatterSound(int _currentDisplayCharactersCount, char _currentTextIndex)
+    {
+        // Check if the character count is cleanly divisible by two
+        // Apparently this is called a modulo expression? ~Liz
+        if (_currentDisplayCharactersCount % chatterFrequency == 0)
+        {
+            if (stopChatterClip) chatterAudioSource.Stop();
+            if (useConsistentChatterLanguage)
+            {
+                int hashCode = _currentTextIndex.GetHashCode();
+                // Pitch
+                int minPitchInt = (int)(chatterPitchMin * 100);
+                int maxPitchInt = (int)(chatterPitchMax * 100);
+                int pitchRangeInt = maxPitchInt - minPitchInt;
+                if (pitchRangeInt != 0)
+                {
+                    int consistentPitchInt = (hashCode % pitchRangeInt) + minPitchInt;
+                    float consistentPitch = consistentPitchInt / 100f;
+                    chatterAudioSource.pitch = consistentPitch;
+                }
+                // If no range, skip selection
+                else
+                {
+                    chatterAudioSource.pitch = minPitchInt;
+                }
+                
+                chatterAudioSource.pitch = Random.Range(chatterPitchMin, chatterPitchMax);
+            }
+            else
+            {
+                // Pitch
+                chatterAudioSource.pitch = Random.Range(chatterPitchMin, chatterPitchMax);
+            }
+            // Play
+            chatterAudioSource.PlayOneShot(defaultTextChatter);
+        }
     }
     
     

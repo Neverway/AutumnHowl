@@ -123,7 +123,7 @@ public abstract class Char_Battle : Character
                 {
                     print($"Found obstcl at {appliedPosition}");
                     hasStopped = true;
-                    AudioManager.Instance.PlayClip (AudioManager.Instance.hitBounce);
+                    GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.hitBounce);
                 }
                 else if (target.type == GridPawn.GridPawnType.character)
                 {
@@ -138,13 +138,13 @@ public abstract class Char_Battle : Character
                     }
                     if (char_Battle.GetHealth () <= 0)
                     {
-                        AudioManager.Instance.PlayClip(AudioManager.Instance.hitKill);
+                        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.hitKill);
                     }
                     else
                     {
                         //Stop the attack because we hit something and didn't kill it.
                         hasStopped = true;
-                        AudioManager.Instance.PlayClip (AudioManager.Instance.hitDamage);
+                        GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.hitDamage);
                     }
                 }
                 else if (target.type == GridPawn.GridPawnType.attack)
