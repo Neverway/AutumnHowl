@@ -27,6 +27,8 @@ public abstract class Char_Battle : Character
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
+    //unique identifier for a stat mod
+    private const string Mod_ConditionalBlock = "ConditionalBlock";
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public GridPawn gridPawnController;
@@ -130,7 +132,9 @@ public abstract class Char_Battle : Character
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
                     //deal damage
+                    char_Battle.ApplyConditionalBlock (attackSequence.attacks[i].direction);
                     char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
+                    char_Battle.RemoveConditionalBlock ();
                     //check if we should push the target
                     if (pushable && attackSequence.attacks[i].pushing)
                     {
@@ -173,6 +177,30 @@ public abstract class Char_Battle : Character
         }
         battleStateController.NextTurnStep(0.5f);
     }
+    /// <summary>
+    /// Applies a defense modifier, but only if blockDirection blocks the attack.
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void ApplyConditionalBlock (Vector2Int direction)
+    {
+        if (useBlock == false)
+        {
+            return;
+        }
+        if (movement != direction) {
+            return;
+        }
+        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, NumberModifierType.Multiply, 2f);
+    }
+    /// <summary>
+    /// Removes the defense modifier applied by ApplyConditionalBlock.
+    /// </summary>
+    private void RemoveConditionalBlock ()
+    {
+        Stats.defense.UnmodifyStatWith (Mod_ConditionalBlock);
+    }
+
 
     public virtual void TryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
     {

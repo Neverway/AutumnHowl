@@ -65,6 +65,7 @@ public interface SerializedModifier : IDescribable
     public void UnregisterFrom(object id) => UnregisterModifierFrom(id);
     public static void UnregisterModifierFrom(object id)
     {
+        if (idToRegisteredModifiers == null) idToRegisteredModifiers = new Dictionary<object, List<Modifier>> ();
         if (idToRegisteredModifiers.TryGetValue(id, out var modifiers))
         {
             foreach (var modifier in modifiers)
