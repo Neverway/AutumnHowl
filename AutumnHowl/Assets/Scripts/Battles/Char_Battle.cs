@@ -21,6 +21,8 @@ public abstract class Char_Battle : Character
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     public bool canMove;
+    //If true, this character can be moved by "pushing" attacks
+    public bool pushable;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
@@ -42,6 +44,7 @@ public abstract class Char_Battle : Character
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     public override void Start()
     {
+        print ("START " + gameObject.name);
         base.Start();
         gridPather = FindObjectOfType<BattleGridPather>();
         battleGrid = FindObjectOfType<BattleGrid>();
@@ -57,13 +60,23 @@ public abstract class Char_Battle : Character
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    protected virtual bool TryMoveInDirection(Vector2Int _direction)
+
+    /// <summary>
+    /// Tests if the character can move to a tile, and returns true if it was able to move.
+    /// </summary>
+    /// <param name="_direction">Tile to move to; relative to current position.</param>
+    /// <param name="doNextTurn">Set to false if this object shouldn't trigger NextTurnStep, for example if it moves in realtime.</param>
+    /// <returns></returns>
+    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true)
     {
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
         {
             gridPawnController.MoveToTile (testPos.x, testPos.y);
-            battleStateController.NextTurnStep();
+            if (doNextTurn)
+            {
+                battleStateController.NextTurnStep();
+            }
             return true;
         }
 
@@ -84,6 +97,7 @@ public abstract class Char_Battle : Character
 
     public IEnumerator CoTryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
     {
+        //when hasStopped is true, it stops the rest of the sequence from firing.
         var hasStopped = false;
         
         for (int i = 0; i < attackSequence.attacks.Count; i++)
@@ -109,21 +123,28 @@ public abstract class Char_Battle : Character
                 {
                     print($"Found obstcl at {appliedPosition}");
                     hasStopped = true;
-                    AudioManager.Instance.PlayClip (AudioManager.Instance.hitBounce);
+                    GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.hitBounce);
                 }
                 else if (target.type == GridPawn.GridPawnType.character)
                 {
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
+                    //deal damage
                     char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
+                    //check if we should push the target
+                    if (pushable && attackSequence.attacks[i].pushing)
+                    {
+                        char_Battle.TryMoveInDirection (attackSequence.attacks[i].direction, false);
+                    }
                     if (char_Battle.GetHealth () <= 0)
                     {
-                        AudioManager.Instance.PlayClip(AudioManager.Instance.hitKill);
+                        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.hitKill);
                     }
                     else
                     {
+                        //Stop the attack because we hit something and didn't kill it.
                         hasStopped = true;
-                        AudioManager.Instance.PlayClip (AudioManager.Instance.hitDamage);
+                        GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.hitDamage);
                     }
                 }
                 else if (target.type == GridPawn.GridPawnType.attack)
@@ -197,9 +218,16 @@ public abstract class Char_Battle : Character
 [Serializable]
 public class AttackElement
 {
+    //The position to attack on the BattleGrid
     public Vector2Int position;
+    //amount of damage dealt to enemy
     public float damage;
+    //object that spawns on the attack's tile
     public GameObject visualEffect;
+    //direction the attack is moving.
+    public Vector2Int direction = new Vector2Int(0, 0);
+    //if true, this attack can push the target.
+    public bool pushing = false;
 }       
 
 [Serializable]  

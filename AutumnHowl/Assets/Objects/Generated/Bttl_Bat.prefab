@@ -118,30 +118,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: 2e954964197096782a4b20683525e471, type: 2}
+  isDefenseActive: 0
+  startFaceDirection: {x: 0, y: -1}
   isDead: 0
+  movement: {x: 0, y: 0}
   animator: {fileID: 7931684597536962226}
   AttackSequences:
   - attacks:
     - position: {x: 0, y: 1}
       damage: 0
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+      direction: {x: 0, y: 0}
+      pushing: 0
   - attacks:
     - position: {x: 0, y: -1}
       damage: 0
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+      direction: {x: 0, y: 0}
+      pushing: 0
   - attacks:
     - position: {x: 1, y: 0}
       damage: 0
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+      direction: {x: 0, y: 0}
+      pushing: 0
   - attacks:
     - position: {x: -1, y: 0}
       damage: 0
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+      direction: {x: 0, y: 0}
+      pushing: 0
   canMove: 0
+  pushable: 1
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
+  spawnOnDeath: {fileID: 0}
 --- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0

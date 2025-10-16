@@ -39,8 +39,8 @@ public class Controller_Overworld_NPC : Character
         if (frozen || isDead)
         {
             animator.SetBool("walking", false);
-            animator.SetFloat("idleX", movement.x);
-            animator.SetFloat("idleY", movement.y);
+            //animator.SetFloat("idleX", movement.x);
+            //animator.SetFloat("idleY", movement.y);
             return;
         }
 

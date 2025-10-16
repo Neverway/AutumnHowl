@@ -28,7 +28,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 60
+      startValue: 30
       multiplier: 0
       addedValue: 0
     maxPower:

@@ -18,6 +18,8 @@ public abstract class Character : MonoBehaviour
     [Tooltip("If this is true and this character takes DMG, the DMG will be reduced by the characters current defense, down to the limit of zero")]
     public bool isDefenseActive;
 
+    public Vector2Int startFaceDirection = Vector2Int.down;
+
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     public CharacterStats Stats => Identifier.Stats;
@@ -60,9 +62,8 @@ public abstract class Character : MonoBehaviour
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-
-
-        
+        animator.SetFloat("idleX", startFaceDirection.x);
+        animator.SetFloat("idleY", startFaceDirection.y);
     }
 
     public void LateUpdate()
@@ -70,24 +71,6 @@ public abstract class Character : MonoBehaviour
         UpdateGameStateValues();
     }
 
-    [ContextMenu("Test Apply")]
-    public void TestApply()
-    {
-
-
-
-        Stats.runSpeed.ModifyStatWith("Test", NumberModifierType.Add, 4);
-
-
-
-    }
-    [ContextMenu("Test Remove")]
-    public void TestRemove()
-    {
-
-        Stats.runSpeed.UnmodifyStatWith("Test");
-
-    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void UpdateGameStateValues()
@@ -103,7 +86,7 @@ public abstract class Character : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public virtual void ModifyHealth(float _amount)
+    public virtual void ModifyHealth(float _amount, Vector2Int direction = new Vector2Int())
     {
         if (_amount == 0) return;
 
@@ -133,7 +116,7 @@ public abstract class Character : MonoBehaviour
             if (Stats.health + totalAmount <= 0)
             {
                 Stats.health = 0;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
                 OnDeath?.Invoke();
             }
             // Damage hurt
