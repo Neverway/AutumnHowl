@@ -50,6 +50,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1234355984407986194
       type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
       data:
@@ -471,6 +473,7 @@ GameObject:
   - component: {fileID: 8445139238223071731}
   - component: {fileID: 1503034516851819246}
   - component: {fileID: 3345775548847637491}
+  - component: {fileID: 8281286468007313123}
   m_Layer: 0
   m_Name: GameInstance
   m_TagString: Untagged
@@ -727,3 +730,25 @@ MonoBehaviour:
   mus_GameOver: {fileID: 0}
   slashSource: {fileID: 6518801790997160031}
   musicSource: {fileID: 747792850405150406}
+--- !u!114 &8281286468007313123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024666662515001753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e1c9fa8e9ac21418eb4c55c580626d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveDataStrategy:
+    rid: 1234356096328531984
+  doSaving: 1
+  saveSlotName: Game
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356096328531984
+      type: {class: PlayerPrefsSaveDataStrategy, ns: , asm: Assembly-CSharp}
+      data: 
