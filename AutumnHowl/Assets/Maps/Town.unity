@@ -19409,6 +19409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[World]'
       objectReference: {fileID: 0}
+    - target: {fileID: 7069582619323147952, guid: 48ac34da57253da52af73e65f88653d1, type: 3}
+      propertyPath: music
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
