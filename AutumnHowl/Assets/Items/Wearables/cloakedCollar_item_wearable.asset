@@ -21,20 +21,14 @@ MonoBehaviour:
   buyCost: 25
   sellCost: 0
   effectWhenEquipped:
-    rid: 1234355964234170398
+    rid: 1234356096328531975
   references:
     version: 2
     RefIds:
-    - rid: 1234355964234170398
-      type: {class: GroupedModifiers, ns: , asm: Assembly-CSharp}
-      data:
-        hideDescription: 0
-        modifiers:
-        - rid: 1234355964234170399
-    - rid: 1234355964234170399
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+    - rid: 1234356096328531975
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
         statToModify: 0
         modifierType: 0
-        value: 0
+        value: 25

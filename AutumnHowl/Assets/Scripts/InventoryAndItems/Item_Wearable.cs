@@ -15,7 +15,7 @@ public class Item_Wearable : Item
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer effectWhenEquipped;
+    [Box, Polymorphic, SerializeReference] public SerializedModifier effectWhenEquipped;
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -42,34 +42,13 @@ public class Item_Wearable : Item
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 
-    public EquippedInstance Equip(CharacterIdentifier user)
+    public void Equip(CharacterIdentifier user)
     {
-        EquippedInstance newInstance = new EquippedInstance(this, user);
-        return newInstance;
+        effectWhenEquipped.RegisterTo_Flexible(user, new TargetSelf().GetTargetsFrom(user));
     }
-    public void UnEquip(EquippedInstance instance)
+    public void UnEquip(CharacterIdentifier user)
     {
-        instance.UnEquip();
+        effectWhenEquipped.UnregisterFrom(user);
     }
-
     #endregion
-
-    /// <summary>This is required to keep track of unique instances of WHO is equipping the item and what modifiers its applying
-    /// <br/> - Todo: Try to remove this and do a better inventory setup that lets you identify unique instances of items</summary>
-    public class EquippedInstance
-    {
-        public Item_Wearable equippedItem;
-        public Modifier appliedModifier;
-        public CharacterIdentifier user;
-
-        public EquippedInstance(Item_Wearable toEquip, CharacterIdentifier character)
-        {
-            user = character;
-            equippedItem = toEquip;
-            appliedModifier = toEquip.effectWhenEquipped
-                .GetNewRegisteredModifier(new TargetSelf().GetTargetsFrom(character));
-        }
-
-        public void UnEquip() => appliedModifier.UnregisterModifier();
-    }
 }

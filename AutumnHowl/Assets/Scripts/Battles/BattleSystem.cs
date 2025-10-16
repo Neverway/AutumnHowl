@@ -57,7 +57,14 @@ public class BattleStateController : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private IEnumerator Start()
     {
+        if (textEvent == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Text Event is not set");
+        if (battleWidget == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Widget is not set");
+        if (battlePlayer == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Player is not set");
+        if (battleGrid == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Grid is not set");
+
+        Debug.Log("BattleSystem Start (wait)");
         yield return new WaitUntil(()=>BattleGrid.Instance != null);
+        Debug.Log("BattleSystem Start (continue)");
         gameState = GameInstance.Get<GI_AuHoGameState>();
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
@@ -69,7 +76,10 @@ public class BattleStateController : MonoBehaviour
         if (!initialized) return;
         currentBattleState.OnStateUpdate();
     }
-
+    private void OnDestroy()
+    {
+        Debug.Log("Battle destroyed!");
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
@@ -180,6 +190,7 @@ public class BS_Start : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        Debug.Log($"BS_START_ENTER: {controller.name}", controller);
         // Add the player to be first in the turn order
         controller.turnOrder.Add(controller.battlePlayer);
         
@@ -210,6 +221,7 @@ public class BS_Start : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
+        Debug.Log("BS_START_LEAVE", controller);
         controller.textEvent.textEvent.OnFinish.RemoveAllListeners();
     }
 }

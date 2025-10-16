@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TODELETE : MonoBehaviour
 {
-    public int field1; 
+    public int field1;  
     public int field2;
     public int field3;
     public int field4;

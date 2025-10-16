@@ -60,6 +60,9 @@ public abstract class Character : MonoBehaviour
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+
+
+        
     }
 
     public void LateUpdate()
@@ -67,6 +70,24 @@ public abstract class Character : MonoBehaviour
         UpdateGameStateValues();
     }
 
+    [ContextMenu("Test Apply")]
+    public void TestApply()
+    {
+
+
+
+        Stats.runSpeed.ModifyStatWith("Test", NumberModifierType.Add, 4);
+
+
+
+    }
+    [ContextMenu("Test Remove")]
+    public void TestRemove()
+    {
+
+        Stats.runSpeed.UnmodifyStatWith("Test");
+
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void UpdateGameStateValues()

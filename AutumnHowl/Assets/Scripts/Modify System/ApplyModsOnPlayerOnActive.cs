@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ApplyModsOnPlayerOnActive : MonoBehaviour
 {
-    [Box, Polymorphic, SerializeReference] protected ICharacterStatModInstancer modifier;
+    [Box, Polymorphic, SerializeReference] protected SerializedModifier_CharacterTargeting modifier;
     GI_AuHoGameState gameState;
     Modifier toRemove;
     bool onAwake = false;

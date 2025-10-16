@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_wearable_spikedCuffs
   displayName: Spiked Cuffs
-  description: '{spd=stat, col=stat}[Grants +10 ATK while worn]{col=}'
+  description: 
   canNotDiscard: 1
   allowMultiple: 0
   buyCost: 25
   sellCost: 0
-  effectsWhileWorn:
-  - rid: 1234355927148920846
+  effectWhenEquipped:
+    rid: 1234356096328531977
   references:
     version: 2
     RefIds:
-    - rid: 1234355927148920846
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
+    - rid: 1234356096328531977
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
+        hideDescription: 0
+        statToModify: 1
         modifierType: 0
         value: 10
-        statToModify: 1

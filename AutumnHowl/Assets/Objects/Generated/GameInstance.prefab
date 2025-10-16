@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7577233282566247981}
   - component: {fileID: 1129797565793594252}
   - component: {fileID: 8445139238223071731}
+  - component: {fileID: 8703766773733765903}
   m_Layer: 0
   m_Name: GameInstance
   m_TagString: Untagged
@@ -107,39 +108,6 @@ MonoBehaviour:
   currentGameState:
     map: Town
     overworldPosition: {x: 0, y: 0}
-    playerStats:
-      health: 100
-      level: 0
-      power: 10
-      corruption: 0
-      defense:
-        startValue: 0
-        multiplier: 0
-        addedValue: 0
-      attack:
-        startValue: 5
-        multiplier: 0
-        addedValue: 0
-      maxHealth:
-        startValue: 100
-        multiplier: 0
-        addedValue: 0
-      maxPower:
-        startValue: 100
-        multiplier: 0
-        addedValue: 0
-      maxCorruption:
-        startValue: 100
-        multiplier: 0
-        addedValue: 0
-      walkSpeed:
-        startValue: 2
-        multiplier: 0
-        addedValue: 0
-      runSpeed:
-        startValue: 3
-        multiplier: 0
-        addedValue: 0
     money: 99999
     inventory:
       items: []
@@ -149,7 +117,6 @@ MonoBehaviour:
     deaths: 0
     playtime: 0
     currentBattle: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
-  player: {fileID: 0}
 --- !u!114 &8445139238223071731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +136,17 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &8703766773733765903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024666662515001753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e1c9fa8e9ac21418eb4c55c580626d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doSaving: 1
+  saveSlot: 0
