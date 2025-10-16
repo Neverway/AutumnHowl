@@ -7,6 +7,7 @@
 //
 //====================================================================================================================//
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -110,6 +111,14 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         
         SetAttackDamageToCurrentATK();
         TryAttackSequence(AttackSequences[0]);
+    }
+
+    /// <summary>
+    /// Skip this turn of the battle.
+    /// </summary>
+    public void SkipTurn ()
+    {
+        battleStateController.NextTurnStep (0.5f);
     }
 
 

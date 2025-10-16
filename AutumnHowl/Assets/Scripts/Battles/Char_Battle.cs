@@ -127,6 +127,7 @@ public abstract class Char_Battle : Character
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
                     char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
+                    char_Battle.TryMoveInDirection (attackSequence.attacks[i].direction, false);
                     if (char_Battle.GetHealth () <= 0)
                     {
                         AudioManager.Instance.PlayClip(AudioManager.Instance.hitKill);
@@ -211,6 +212,7 @@ public class AttackElement
     public Vector2Int position;
     public float damage;
     public GameObject visualEffect;
+    public Vector2Int direction = new Vector2Int(0, 0);
 }       
 
 [Serializable]  

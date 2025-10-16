@@ -95,6 +95,7 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField]private Image needleImage;
     //The object used for generated sword swing attacks.
     [SerializeField] private GameObject defaultAttackObject;
+    private Coroutine resetRoutine;
 
 
     #endregion
@@ -174,6 +175,7 @@ public class BattleAttackCompass : MonoBehaviour
         //yield return new WaitForSeconds(0.5f);
         yield return new WaitForSeconds(0f);
         Reset();
+        resetRoutine = null;
     }
 
     /// <summary>
@@ -189,7 +191,7 @@ public class BattleAttackCompass : MonoBehaviour
     }
     
     /// <summary>
-    /// Performs or fails the attempted attack      
+    /// Resets the minigame.     
     /// </summary>
     private void OnAttackDone()
     {
@@ -197,7 +199,11 @@ public class BattleAttackCompass : MonoBehaviour
         bool mirrorX = false;
         bool mirrorY = false;
 
-        StartCoroutine(CoReset());
+        if (resetRoutine != null)
+        {
+            StopCoroutine (resetRoutine);
+        }
+        resetRoutine = StartCoroutine(CoReset());
     }
     
     /// <summary>
@@ -332,6 +338,11 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void FinishSpin ()
     {
+        if (Mathf.Abs(totalSpin) <= 45)
+        {
+            FailAttack ();
+            return;
+        }
         nearestAngleToSword = north;
         float test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, north));
         distanceFromNearestAngle = test;
@@ -421,6 +432,7 @@ public class BattleAttackCompass : MonoBehaviour
             n += swingPattern.Length;
         }
         n = n % swingPattern.Length;
+        GenerateAttackDirections (sequence);
         player.AttackSequences[0] = sequence;
         player.PerformGeneratedAttack();
         OnAttackDone();
@@ -441,6 +453,46 @@ public class BattleAttackCompass : MonoBehaviour
         else
         {
             AudioManager.Instance.PlaySlashClip (AudioManager.Instance.failBuzz, 1);
+        }
+    }
+
+    private void FailAttack ()
+    {
+        ShowHitText ("Miss!");
+        AudioManager.Instance.PlayClip (AudioManager.Instance.failBuzz);
+        centerFill.fillAmount = 0;
+        OnAttackDone ();
+        player.SkipTurn ();
+    }
+
+    /// <summary>
+    /// Generates attack directions for an AttackSequence based on the position of attacks.
+    /// </summary>
+    /// <param name="sequence"></param>
+    private void GenerateAttackDirections (AttackSequence sequence)
+    {
+        if (sequence.attacks.Count == 0)
+        {
+            return;
+        }
+        if (sequence.attacks.Count == 1)
+        {
+            sequence.attacks[0].direction = sequence.attacks[0].position;
+        }
+        Vector2Int dir;
+        for (int i = 0; i < sequence.attacks.Count; i+=2)
+        {
+            if (i + 1 == sequence.attacks.Count && i > 0)
+            {
+                sequence.attacks[i].direction = (sequence.attacks[i].position - sequence.attacks[i-1].position);
+                break;
+            }
+
+            dir = sequence.attacks[i].position - sequence.attacks[i + 1].position;
+            sequence.attacks[i].direction = -dir;
+            sequence.attacks[i+1].direction = -dir;
+            sequence.attacks[i + 1].direction = -dir;
+            print ("direction for " + i + " = " + -dir);
         }
     }
 

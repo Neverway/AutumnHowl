@@ -82,7 +82,7 @@ public abstract class Character : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public virtual void ModifyHealth(float _amount)
+    public virtual void ModifyHealth(float _amount, Vector2Int direction = new Vector2Int())
     {
         if (_amount == 0) return;
 
