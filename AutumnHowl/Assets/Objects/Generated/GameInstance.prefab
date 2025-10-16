@@ -599,7 +599,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   chatterAudioSource: {fileID: 3523726553420250166}
-  defaultTextChatter: {fileID: 8300000, guid: f819891f812fc29e79cd9ff3a88ad402, type: 3}
+  defaultVoice: {fileID: 11400000, guid: e38d897e25451da53b1c43ae096b37b0, type: 2}
+  currentTextChatter: {fileID: 0}
   stopChatterClip: 1
   chatterFrequency: 4
   chatterPitchMin: 1
