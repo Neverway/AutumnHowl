@@ -1,0 +1,178 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Linq;
+
+[RequireComponent(typeof(AudioSource))]
+public class GI_AudioManager : MonoBehaviour
+{
+    public static GI_AudioManager Instance => GameInstance.Get<GI_AudioManager>();
+
+    /// <summary>
+    /// enum for organizing our music so we can call it from scripts.
+    /// </summary>
+    public enum Music
+    {
+        none,
+        Title,
+        Town,
+        Shop,
+        Forest,
+        Battle,
+        FinalBattle,
+        GameOver,
+    }
+    /// <summary>
+    /// Stores the current music track.
+    /// </summary>
+    public Music currentTrack = Music.none;
+
+
+    //========Audio Clips========//
+
+    /// This space is for references to sounds, which are assigned in the Inspector in an AudioManager prefab.
+    public AudioClip slash1;
+    public AudioClip slash2;
+    public AudioClip slash3;
+    public AudioClip hitBounce;
+    public AudioClip hitDamage;
+    public AudioClip hitKill;
+    public AudioClip failBuzz;
+
+    //==========Music============//
+
+    public AudioClip mus_Title;
+    public AudioClip mus_Town;
+    public AudioClip mus_Shop;
+    public AudioClip mus_Forest;
+    public AudioClip mus_Battle;
+    public AudioClip mus_FinalBattle;
+    public AudioClip mus_GameOver;
+
+    //===========================//
+
+    /// <summary>
+    /// AudioSource for general sfx.
+    /// </summary>
+    AudioSource soundSource;
+    /// <summary>
+    /// Unique audio source for playing sword slash sounds, so that they will be interruptible.
+    /// </summary>
+    [SerializeField] private AudioSource slashSource;
+    /// <summary>
+    /// Unique audio source for looping music.
+    /// </summary>
+    [SerializeField] private AudioSource musicSource;
+
+    /// <summary>
+    ///Initialize some things.
+    /// </summary>
+    void Start()
+    {
+        soundSource = gameObject.GetComponent<AudioSource>();
+    }
+
+    /// <summary>
+    ///Play the given sound effect once at the specified volume.
+    /// </summary>
+    /// <param name="clip"></param>
+    /// <param name="volume"></param>
+    public void PlayClip(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null)
+        {
+            Debug.LogError ("AudioClip wasn't assigned.");
+            return;
+        }
+        soundSource.PlayOneShot(clip, volume);
+    }
+
+    /// <summary>
+    ///Play the given sound effect once at the specified volume, on the sword-slash AudioSource specifically.
+    /// </summary>
+    /// <param name="clip"></param>
+    /// <param name="volume"></param>
+    public void PlaySlashClip (AudioClip clip, float volume = 1f)
+    {
+        if (clip == null)
+        {
+            Debug.LogError ("AudioClip wasn't assigned.");
+            return;
+        }
+        slashSource.Stop ();
+        slashSource.PlayOneShot (clip, volume);
+    }
+    public void StopSlashClip ()
+    {
+        slashSource.Stop ();
+    }
+
+    //Play a random clip from the Goal Mix. Uesd when a level is completed.
+    public void PlayRandomSound (AudioClip[] _list)
+    {
+        if (_list == null)
+        {
+            Debug.LogError ("AudioClip wasn't assigned.");
+            return;
+        }
+        if (_list.Count()== 0)
+        {
+            return;
+        }
+        int sound = Random.Range(0, _list.Length - 1);
+        soundSource.PlayOneShot(_list[sound], 0.7f);
+    }
+
+    //Start playing the specified song, unless the song is already playing, in which case do nothing.
+    public void SetMusic(Music song)
+    {
+        if (song == currentTrack)
+            return;
+
+        currentTrack = song;
+
+        if (song == Music.none)
+        {
+            musicSource.Stop();
+            return;
+        }
+
+        switch (song)
+        {
+            case Music.Title:
+                musicSource.clip = mus_Title;
+                break;
+            case Music.Town:
+                musicSource.clip = mus_Town;
+                break;
+            case Music.Shop:
+                musicSource.clip = mus_Shop;
+                break;
+            case Music.Forest:
+                musicSource.clip = mus_Forest;
+                break;
+            case Music.Battle:
+                musicSource.clip = mus_Battle;
+                break;
+            case Music.FinalBattle:
+                musicSource.clip = mus_FinalBattle;
+                break;
+            case Music.GameOver:
+                musicSource.clip = mus_GameOver;
+                break;
+        }
+
+        musicSource.Play();
+    }
+
+    //Mute music, but not sound.
+    public void MuteMusic()
+    {
+        musicSource.Pause();
+    }
+
+    //Unmute music.
+    public void UnmuteMusic()
+    {
+        musicSource.UnPause();
+    }
+}

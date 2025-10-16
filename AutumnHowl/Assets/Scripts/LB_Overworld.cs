@@ -26,7 +26,7 @@ public class LB_Overworld : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
 
-    [SerializeField] AudioManager.music music;
+    [SerializeField] GI_AudioManager.Music music;
 
     #endregion
 
@@ -41,8 +41,8 @@ public class LB_Overworld : MonoBehaviour
 
     private IEnumerator StartMusicRoutine ()
     {
-        yield return new WaitUntil (() => AudioManager.Instance != null);
-        AudioManager.Instance.SetMusic (music);
+        yield return new WaitUntil (() => GI_AudioManager.Instance != null);
+        GI_AudioManager.Instance.SetMusic (music);
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
