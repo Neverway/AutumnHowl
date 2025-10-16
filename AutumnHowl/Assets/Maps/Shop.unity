@@ -788,7 +788,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1743078883}
   - component: {fileID: 1743078884}
-  - component: {fileID: 1743078885}
   m_Layer: 0
   m_Name: WorldSettings
   m_TagString: Untagged
@@ -823,19 +822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a435f06623016f790bb09fe206b9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1743078885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743078882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5342f04ca55e860a80a591624f31aef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: 3
 --- !u!1001 &1934771220
 PrefabInstance:
   m_ObjectHideFlags: 0
