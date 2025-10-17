@@ -50,6 +50,8 @@ public class CharacterStats
     [Box] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
     [Box] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
 
+    public Character owner;
+
     #endregion
 
 
@@ -100,12 +102,55 @@ public class CharacterStats
     /// </summary>
     /// <param name="_stat">Which of the character's stat is affected</param>
     /// <param name="_amount">How much to add to that stat</param>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public void Modify(CharacterStatType _stat, float _amount)
+    /// <param name="_direction">The direction in which this effect is coming from (used for detecting damage direction)</param>
+    public void Modify(CharacterStatType _stat, float _amount, Vector2Int _direction = new Vector2Int())
     {
         switch (_stat)
         {
             case Health:
+                // Character healed
+                if (_amount > 0)
+                {
+                    if (health + _amount > maxHealth) health = maxHealth;
+                    else health += _amount;
+                    GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform, 1);
+                    // TODO - HOW teH HeCk do I call this now? ~Liz
+                    //OnHeal?.Invoke();
+                }
+        
+                if (_amount == 0) return;
+        
+                // Character damaged
+                else if (_amount < 0)
+                {
+                    var totalAmount = _amount;
+            
+                    // Apply defense if active
+                    if (owner.isDefenseActive)
+                    {
+                        totalAmount = _amount + defense;
+                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform, 0);
+                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform, 2, 0.5f);
+                    }
+            
+                    // Damage killed
+                    if (health + totalAmount <= 0)
+                    {
+                        health = 0;
+                        //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                        owner.isDead = true;
+                        // TODO - HOW teH HeCk do I call this now? ~Liz
+                        //OnDeath?.Invoke();
+                    }
+                    // Damage hurt
+                    else
+                    {
+                        health += totalAmount;
+                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform, 0);
+                        // TODO - HOW teH HeCk do I call this now? ~Liz
+                        //OnHurt?.Invoke();
+                    }
+                }
                 break;
             case Level:
                 break;
