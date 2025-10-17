@@ -1,3 +1,12 @@
+//==========================================( Neverway 2025 )=========================================================//
+// Author
+//  Errynei
+//
+// Contributors
+//  Lizband
+//
+//====================================================================================================================//
+
 using ErryLib.Reflection;
 using System;
 using System.Reflection;
@@ -5,40 +14,51 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static CharacterStatType;
 
-public enum CharacterStatType
-{
-    [StatName("DEF")] Defense,
-    [StatName("ATK")] Attack,
-    [StatName("MAX HP")] MaxHealth,
-    [StatName("MAX PWR")] MaxPower,
-    [StatName("MAX COR")] MaxCorruption,
-    [StatName("SPD")] MoveSpeed
-}
-
 [Serializable]
 public class CharacterStats
 {
+    #region========================================( Variables )======================================================//
+    /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
+
+
+    /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+
+
+    /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+
+
+    /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public CharacterStats() { }
     public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
 
     [HideInInspector] public float health = 100;
     [HideInInspector] public float level = 0;
-    [HideInInspector] public int power = 5;
+    [HideInInspector] public int attack = 10;
+    [HideInInspector] public int defense = 10;
+    [HideInInspector] public int power = 10;
     [HideInInspector] public int corruption = 0;
 
-    [Tooltip("When damage is taken, this is how much damage is negated")]
     [Header("Combat Stats")]
-    [Box] public CharacterStatInt defense = new(0, Defense);
-    [Box] public CharacterStatInt attack = new(5, Attack);
-    [Box] public CharacterStatFloat maxHealth = new(100, MaxHealth);
-    [Box] public CharacterStatInt maxPower = new(5, MaxPower);
-    [Box] public CharacterStatInt maxCorruption = new(5, MaxCorruption);
+    [Box] public CharacterStatFloat maxHealth = new(100, Health);
+    [Box] public CharacterStatFloat maxLevel = new(100, Level);
+    [Box] public CharacterStatInt maxAttack = new(100, Attack);
+    [Box] public CharacterStatInt maxDefense = new(100, Defense);
+    [Box] public CharacterStatInt maxPower = new(100, Power);
+    [Box] public CharacterStatInt maxCorruption = new(100, Corruption);
 
     [Header("Overworld Stats")]
     [Box] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
     [Box] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
 
-    public void SetupStatsLinkedToCharacter(CharacterIdentifier character)
+    #endregion
+
+
+    #region=======================================( Functions )=======================================================//
+    /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+
+
+    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    private void SetupStatsLinkedToCharacter(CharacterIdentifier character)
     {
         int someInt = attack + defense;
 
@@ -62,7 +82,7 @@ public class CharacterStats
                 if (statToClone == null)
                 {
                     Debug.LogError($"{nameof(CharacterStats)}: Attempting to clone a " +
-                        $"CharacterStat {field.Name}, but it was null. Unable to link character to stat");
+                                   $"CharacterStat {field.Name}, but it was null. Unable to link character to stat");
                     continue;
                 }
                 //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
@@ -73,6 +93,40 @@ public class CharacterStats
         health = maxHealth;
     }
 
+
+    /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    /// <summary>
+    /// Modify the current stats on a character
+    /// </summary>
+    /// <param name="_stat">Which of the character's stat is affected</param>
+    /// <param name="_amount">How much to add to that stat</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public void Modify(CharacterStatType _stat, float _amount)
+    {
+        switch (_stat)
+        {
+            case Health:
+                break;
+            case Level:
+                break;
+            case Attack:
+                break;
+            case Defense:
+                break;
+            case Power:
+                break;
+            case Corruption:
+                break;
+            case MoveSpeed:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(_stat), _stat, null);
+        }
+    }
+
+
+    #endregion
+    
     #region HelperProperties
     public float PercentCurrentHealth => health / maxHealth;
     public float PercentMissingHealth => 1f - PercentCurrentHealth;
@@ -88,6 +142,18 @@ public class CharacterStats
     #endregion
 }
 
+
+public enum CharacterStatType
+{
+    [StatName("MAX HP")] Health,
+    [StatName("MAX LVL")] Level,
+    [StatName("MAX ATK")] Attack,
+    [StatName("MAX DEF")] Defense,
+    [StatName("MAX PWR")] Power,
+    [StatName("MAX COR")] Corruption,
+    [StatName("SPD")] MoveSpeed
+}
+
 public static partial class AuHo_ExtentionMethods
 {
     public static string GetStatName(this CharacterStatType statType)
@@ -98,6 +164,7 @@ public static partial class AuHo_ExtentionMethods
         return null;
     }
 }
+
 public class StatNameAttribute : Attribute
 {
     public string statName;
