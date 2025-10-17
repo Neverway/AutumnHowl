@@ -231,16 +231,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: 82ca5521bcd1abd46a9041978ea48a5d, type: 2}
   isDefenseActive: 0
+  startFaceDirection: {x: 0, y: -1}
   isDead: 0
   movement: {x: 0, y: 0}
   animator: {fileID: 0}
   AttackSequences: []
   canMove: 0
+  pushable: 0
   gridPawnController: {fileID: 8046438316640366819}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
-  spawnOnDeath: {fileID: 6659489718510107595, guid: f95e04793611a794c99a95aef2b78299, type: 3}
+  spawnOnDeath: {fileID: 6659489718510107595, guid: 7af05eeddb2dd804cb7980124c668d8b, type: 3}
+  useBlock: 0
 --- !u!114 &8046438316640366819
 MonoBehaviour:
   m_ObjectHideFlags: 0

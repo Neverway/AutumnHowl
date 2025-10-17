@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 5912680506581816234}
   - component: {fileID: 8046438316640366819}
   m_Layer: 0
-  m_Name: Boulder
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1995237446, guid: b97544932ebb7084abe77110ee3bc990, type: 3}
+  m_Sprite: {fileID: 822394928, guid: b97544932ebb7084abe77110ee3bc990, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   AttackSequences: []
   canMove: 0
-  pushable: 1
+  pushable: 0
   gridPawnController: {fileID: 8046438316640366819}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}

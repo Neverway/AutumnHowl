@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Char_ObstacleWithHP : Char_Battle
 {
-
+    new void Start ()
+    {
+        base.Start ();
+        isDefenseActive = true;
+    }
 }
