@@ -139,7 +139,6 @@ public class GI_TextboxManager : MonoBehaviour
         var characterVoice = currentTextEvent.frames[currentFrame].chatterVoice;
         if (characterVoice)
         {
-            print("Chose voice");
             chatterFrequency = characterVoice.chatterFrequency;
             currentTextChatter = characterVoice.textChatter;
             chatterPitchMin = characterVoice.chatterPitchMin;
@@ -147,7 +146,6 @@ public class GI_TextboxManager : MonoBehaviour
         }
         else
         {
-            print("Chose default");
             chatterFrequency = defaultVoice.chatterFrequency;
             currentTextChatter = defaultVoice.textChatter;
             chatterPitchMin = defaultVoice.chatterPitchMin;

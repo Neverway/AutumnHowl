@@ -22,6 +22,7 @@ public class GI_WorldLoader : MonoBehaviour
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+    private bool isLoading;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -37,6 +38,8 @@ public class GI_WorldLoader : MonoBehaviour
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private IEnumerator Co_Load(string _mapID, string _exitWarpID)
     {
+        isLoading = true;
+        
         // Load the map
         var loadingMap = SceneManager.LoadSceneAsync(_mapID);
         while (loadingMap.isDone == false)
@@ -55,18 +58,22 @@ public class GI_WorldLoader : MonoBehaviour
                 player.transform.root.position = warp.transform.position + warp.exitOffset;
             }
         }
+        
+        isLoading = false;
     }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void Load(string _mapID)
     {
+        if (isLoading) return;
         GameInstance.Get<GI_AuHoGameState>().currentGameState.map = _mapID;
         SceneManager.LoadSceneAsync(_mapID);
     }
     
     public void Load(string _mapID, string _exitWarpID)
     {
+        if (isLoading) return;
         GameInstance.Get<GI_AuHoGameState>().currentGameState.map = _mapID;
         StartCoroutine(Co_Load(_mapID, _exitWarpID));
     }
