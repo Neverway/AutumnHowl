@@ -470,6 +470,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*Whatcha got for me?'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -917,6 +918,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*What can I do for ya?'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -1513,6 +1515,7 @@ MonoBehaviour:
     - name: 
       chatContent: 
       portrait: {fileID: 0}
+      chatterVoice: {fileID: 0}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -1705,6 +1708,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*What ya wanna know?'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3388,6 +3392,7 @@ MonoBehaviour:
     - name: 
       chatContent: 
       portrait: {fileID: 0}
+      chatterVoice: {fileID: 0}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3653,6 +3658,7 @@ MonoBehaviour:
       chatContent: '*We don''t get many visitors out here. Being close to the barrier
         and all though, I suppose that makes sense.'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3664,6 +3670,7 @@ MonoBehaviour:
       chatContent: '*You''re here planning to slay {col=key, spd=0.05}The Beast{col=,
         spd=0.02}, right?'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3675,6 +3682,7 @@ MonoBehaviour:
       chatContent: '*It''s a long journey. I would recommend visiting {col=key}The
         Inn{col=} when you get tired.'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3685,6 +3693,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*Regardless, it''s nice to see a new face around.'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3695,6 +3704,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*That being said, please be careful out there, okay?'
       portrait: {fileID: -441779131, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5184,6 +5194,7 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*Ah, {col=key, spd=0.05}The Beast.{spd=0.02}'
       portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5196,6 +5207,7 @@ MonoBehaviour:
         by a {col=key, spd=0.05}Mythical Blade.{spd=0.02, col=} Guess no one cared
         to mention it was so heavy, huh? '
       portrait: {fileID: -441779131, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
+      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5206,6 +5218,7 @@ MonoBehaviour:
     - name: Autumn
       chatContent: '*...'
       portrait: {fileID: 1566977902, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 8627461905224cf4686012d99980d1c2, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5977,6 +5990,7 @@ MonoBehaviour:
     - name: 
       chatContent: 
       portrait: {fileID: 0}
+      chatterVoice: {fileID: 0}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []

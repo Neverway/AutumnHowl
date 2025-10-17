@@ -218,6 +218,7 @@ public abstract class Char_Battle : Character
             GameObject g = Instantiate (spawnOnDeath);
             g.transform.position = transform.position;
         }
+        if (this is IsPlayerCharacter) return;
         FindObjectOfType<BattleStateController> ().RemoveCharacter (this);
         Destroy (gameObject);
     }

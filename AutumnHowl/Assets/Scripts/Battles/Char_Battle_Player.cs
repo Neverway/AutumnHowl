@@ -42,7 +42,11 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     {
         animator.SetFloat("idleX", movement.x);
         animator.SetFloat("idleY", movement.y);
-        if (isDead) return;
+        if (isDead)
+        {
+            GameInstance.Get<GI_WorldLoader>().Load("GameOver");
+            return;
+        }
         if (!canMove) return;
         UpdateMovementInput();
     }
