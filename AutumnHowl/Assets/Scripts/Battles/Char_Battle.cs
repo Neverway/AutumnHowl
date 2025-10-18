@@ -196,14 +196,14 @@ public abstract class Char_Battle : Character
         if (movement != direction) {
             return;
         }
-        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
+        Stats.maxDefense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
     }
     /// <summary>
     /// Removes the defense modifier applied by ApplyConditionalBlock.
     /// </summary>
     private void RemoveConditionalBlock ()
     {
-        Stats.defense.UnmodifyStatWith (Mod_ConditionalBlock);
+        Stats.maxDefense.UnmodifyStatWith (Mod_ConditionalBlock);
     }
 
 

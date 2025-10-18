@@ -80,8 +80,13 @@ public class ModifyHealthAction : EffectAction
 
     public override void ApplyEffect(CharacterIdentifier user)
     {
-        //var characterTargets = target.GetTargetsFrom(user);
-        //targetCharacter.ModifyHealth();
+        // TODO - ERRYNEI HLP MEEE PLSSSSSSS ~Liz
+        /*
+        var targetCharacter = target.GetTarget(user);
+        var stats = targetCharacter.currentStats;
+        targetCharacter.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
+        // */
+        user.Stats.Modify(CharacterStatType.Health, amount);
     }
 
     public override string DescribeNoFormat()
@@ -138,6 +143,7 @@ public class ModifyCorruptionAction : EffectAction
                 modifierType.ApplyModInt(amount, stats.corruption, stats.maxCorruption);
 
         // */
+        user.Stats.Modify(CharacterStatType.Corruption, amount);
     }
 
     public override string DescribeNoFormat()
