@@ -1935,6 +1935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4120627537271842407}
   - component: {fileID: 5699039624150531221}
+  - component: {fileID: 8985564163241026172}
   m_Layer: 5
   m_Name: WB_Battle
   m_TagString: Untagged
@@ -2017,12 +2018,47 @@ MonoBehaviour:
   heartAnimator: {fileID: 7431007868217375425}
   items: {fileID: 8659747048306946717}
   spells: {fileID: 1809668027880815439}
+  ItemListNavigator: {fileID: 5362251981122109891}
+  SpellListNavigator: {fileID: 6472236083016363161}
+  inspectTextEvent: {fileID: 8985564163241026172}
   actionBarAnimator: {fileID: 4485264024467070714}
   actionBarNavigator: {fileID: 8795853395902371105}
   attackBar: {fileID: 8283552058696633010}
   attackBarLeft: {fileID: 1731734110839919697}
   attackBarRight: {fileID: 3282055524119328642}
   stepCountText: {fileID: 6863058152315021958}
+--- !u!114 &8985564163241026172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130124327870129743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideExistingEvents: 1
+  textEvent:
+    frames:
+    - name: 
+      chatContent: 
+      portrait: {fileID: 0}
+      chatterVoice: {fileID: 0}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 0
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []
+  OnCallFailed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5354782373467143850
 GameObject:
   m_ObjectHideFlags: 0

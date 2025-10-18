@@ -86,6 +86,7 @@ public class ModifyHealthAction : EffectAction
         var stats = targetCharacter.currentStats;
         targetCharacter.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
         // */
+        user.Stats.Modify(CharacterStatType.Health, amount);
     }
 
     public override string DescribeNoFormat()
@@ -142,6 +143,7 @@ public class ModifyCorruptionAction : EffectAction
                 modifierType.ApplyModInt(amount, stats.corruption, stats.maxCorruption);
 
         // */
+        user.Stats.Modify(CharacterStatType.Corruption, amount);
     }
 
     public override string DescribeNoFormat()
