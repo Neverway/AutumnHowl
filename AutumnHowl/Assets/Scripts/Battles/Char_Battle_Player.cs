@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
@@ -42,7 +43,11 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     {
         animator.SetFloat("idleX", movement.x);
         animator.SetFloat("idleY", movement.y);
-        if (isDead) return;
+        if (isDead)
+        {
+            GameInstance.Get<GI_WorldLoader>().Load("GameOver");
+            return;
+        }
         if (!canMove) return;
         UpdateMovementInput();
     }
@@ -54,29 +59,40 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.up)) movement = new Vector2(0, 1);
-            
+            return;
         }
         else if (GameInstance.Inputs.MoveDown.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.down)) movement = new Vector2(0, -1);
-            
+            return;
         }
         else if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.left)) movement = new Vector2(-1, 0);
-            
+            return;
         }
         else if (GameInstance.Inputs.MoveRight.WasPressedThisFrame())
         {
-            if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0); 
-            
+            if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0);
+            return;
+        }
+
+        if (isDefenseActive)
+        {
+            if (GameInstance.Inputs.Interact.WasPressedThisFrame())
+            {
+                SpinBlock ("left");
+            }
+            else if (GameInstance.Inputs.Action.WasPressedThisFrame ())
+            {
+                SpinBlock("right");
+            }
         }
     }
-    
-    protected override bool TryMoveInDirection(Vector2Int _direction, bool doNextTurn = true)
+
+    protected override bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null)
     {
-        gridPather.GetPathToTarget(gridPawnController);
-        bool oldResult = base.TryMoveInDirection(_direction, doNextTurn);
+        bool oldResult = base.TryMoveInDirection(_direction, doNextTurn, gridPawnController);
         return oldResult;
     }
 
@@ -111,6 +127,8 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         
         SetAttackDamageToCurrentATK();
         TryAttackSequence(AttackSequences[0]);
+        //We regenerate paths since the sword can affect pathing
+        gridPather.GetPathToTarget (gridPawnController);
     }
 
     /// <summary>
@@ -121,6 +139,26 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         battleStateController.NextTurnStep (0.5f);
     }
 
+    private void SpinBlock(string _direction)
+    {
+        switch (_direction)
+        {
+            case "left":
+                {
+                    //rotate 90 degrees left
+                    movement = Vector2.Perpendicular (movement);
+                    battleStateController.NextTurnStep (0.5f);
+                    break;
+                }
+            case "right":
+                {
+                    //rotate 90 degrees right
+                    movement = -Vector2.Perpendicular (movement);
+                    battleStateController.NextTurnStep (0.5f);
+                    break;
+                }
+        }
+    }
 
     #endregion
 }

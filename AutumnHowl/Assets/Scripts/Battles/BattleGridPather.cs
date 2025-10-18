@@ -24,11 +24,13 @@ public class BattleGridPather : MonoBehaviour
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
+    private Vector2Int swordPosition;
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+
     private BattleGrid battleGrid;
     private const int UnassignedTileNumber=99;
-
+    private const int SwordCost = 4;
 
     #endregion
 
@@ -81,24 +83,41 @@ public class BattleGridPather : MonoBehaviour
         if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
+            //Make the sword cost extra
+            if (checkPos == swordPosition)
+            {
+                grid[checkPos.x, checkPos.y] = n + SwordCost;
+            }
             foundTile = true;
         }
         checkPos = new Vector2Int(x - 1, y);
         if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
+            if (checkPos == swordPosition)
+            {
+                grid[checkPos.x, checkPos.y] = n + SwordCost;
+            }
             foundTile = true;
         }
         checkPos = new Vector2Int(x, y + 1);
         if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
+            if (checkPos == swordPosition)
+            {
+                grid[checkPos.x, checkPos.y] = n + SwordCost;
+            }
             foundTile = true;
         }
         checkPos = new Vector2Int(x, y - 1);
         if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
+            if (checkPos == swordPosition)
+            {
+                grid[checkPos.x, checkPos.y] = n + SwordCost;
+            }
             foundTile = true;
         }
         
@@ -126,10 +145,13 @@ public class BattleGridPather : MonoBehaviour
         RecursivePather(n);
     }
     
+    /// <summary>
+    /// Prints the path grid for debugging
+    /// </summary>
     private void PrintDistances ()
     {
-        string p = "\n";
-        for (int y = 0; y < battleGrid.height;y++)
+        string p = "DISTANCES:\n";
+        for (int y = battleGrid.height-1; y > -1; y--)
         {
             for (int x = 0; x < battleGrid.width; x++)
             {
@@ -147,8 +169,30 @@ public class BattleGridPather : MonoBehaviour
         SetDefaultTileWeights();
         
         grid[_targetGridPawn.position.x, _targetGridPawn.position.y]=1;
+        swordPosition = GetSwordPosition (_targetGridPawn);
         RecursivePather(1);
         //PrintDistances();
+    }
+
+    /// <summary>
+    /// find the position of the tile where the player's sword should be (can be out-of-bounds)
+    /// </summary>
+    /// <param name="_targetGridPawn"></param>
+    /// <returns></returns>
+    public Vector2Int GetSwordPosition (GridPawn _targetGridPawn)
+    {
+        //If we failed getting a Character for some reason, return (-1,-1),
+        //which is out-of-bounds and won't affect pathing.
+        var character = _targetGridPawn.GetComponent<Character> ();
+        if (character == null)
+        {
+            Debug.LogError ("You shouldn't be seeing this.");
+            return new Vector2Int(-1,-1);
+        }
+        //-movement gives the relative position of big sword
+        Vector2 movement = -character.movement;
+        Vector2Int movementInt = new Vector2Int ((int)movement.x, (int)movement.y);
+        return _targetGridPawn.position + movementInt;
     }
 
 

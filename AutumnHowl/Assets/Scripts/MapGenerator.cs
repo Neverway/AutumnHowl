@@ -49,7 +49,10 @@ public class MapGenerator : MonoBehaviour
     private int farthestDistance = 0;
     private Vector2Int farthestNode;
 
+    private int enemyPlacementCount;
+    [SerializeField] private int enemyFrequency = 3;
     private List<Vector2Int> poiLocations = new List<Vector2Int>();
+    private List<Vector2Int> enemyLocations = new List<Vector2Int>();
 
     //=-----------------=
     // Reference Variables
@@ -64,6 +67,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject[] treeList;
 
     [SerializeField] private GameObject[] poiList; //point of interest list. These get placed on deadends.
+    [SerializeField] private List<GameObject> enemyList; //Enemy spawn list. These get scattered at random.
 
     //=-----------------=
     // Mono Functions
@@ -178,6 +182,7 @@ public class MapGenerator : MonoBehaviour
                 mapNodes[x, y] = new MapNode ();
             }
         }
+        enemyPlacementCount = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
         Debug.Log ("Map Nodes Finished");
         GenerateTilesFromNodes ();
@@ -189,6 +194,7 @@ public class MapGenerator : MonoBehaviour
             print (loc);
         }
         PlacePOIs ();
+        PlaceEnemies ();
     }
 
     private void PlacePOIs ()
@@ -206,6 +212,26 @@ public class MapGenerator : MonoBehaviour
             GameObject poi = Instantiate (poiList[i]);
             poi.transform.position = new Vector3 (poiLocations[i].x * roomWidth + (roomWidth / 2),
                 poiLocations[i].y * roomHeight + (roomHeight/2), 0) ;
+        }
+    }
+    /// <summary>
+    /// Places enemies from the enemyList in order until it runs out of enemy locations.
+    /// </summary>
+    private void PlaceEnemies ()
+    {
+        RandomBag<GameObject> enemyBag = new RandomBag<GameObject> (enemyList);
+        if (poiList.Length == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < enemyLocations.Count; i++) {
+            if (i >= enemyLocations.Count)
+            {
+                return;
+            }
+            GameObject enemy = Instantiate (enemyBag.Grab());
+            enemy.transform.position = new Vector3 (enemyLocations[i].x * roomWidth + (roomWidth / 2),
+                enemyLocations[i].y * roomHeight + (roomHeight / 2), 0);
         }
     }
 
@@ -270,6 +296,16 @@ public class MapGenerator : MonoBehaviour
         PrintNodes ();
         
         branchLength++;
+        if (!mapNodes[x, y].visited)
+        {
+            enemyPlacementCount++;
+            if (enemyPlacementCount == enemyFrequency)
+            {
+                enemyPlacementCount = 0;
+                enemyLocations.Add (new Vector2Int(x, y));
+            }
+        }
+
         if (distanceFromStart > farthestDistance)
         {
             farthestDistance = distanceFromStart;

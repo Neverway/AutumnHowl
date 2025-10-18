@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameFeatureConstants.Battle;
 
 public abstract class Char_Battle : Character
 {
@@ -27,6 +28,8 @@ public abstract class Char_Battle : Character
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
+    //unique identifier for a stat mod
+    private const string Mod_ConditionalBlock = "ConditionalBlock";
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public GridPawn gridPawnController;
@@ -35,7 +38,7 @@ public abstract class Char_Battle : Character
     public BattleStateController battleStateController;
     //If this is not null, this object gets spawned when the character dies.
     public GameObject spawnOnDeath;
-
+    public bool useBlock = false;
 
     #endregion
 
@@ -67,7 +70,7 @@ public abstract class Char_Battle : Character
     /// <param name="_direction">Tile to move to; relative to current position.</param>
     /// <param name="doNextTurn">Set to false if this object shouldn't trigger NextTurnStep, for example if it moves in realtime.</param>
     /// <returns></returns>
-    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true)
+    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null)
     {
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
@@ -75,6 +78,10 @@ public abstract class Char_Battle : Character
             gridPawnController.MoveToTile (testPos.x, testPos.y);
             if (doNextTurn)
             {
+                if (_pathTargetPawn != null)
+                {
+                    gridPather.GetPathToTarget (gridPawnController);
+                }
                 battleStateController.NextTurnStep();
             }
             return true;
@@ -130,7 +137,9 @@ public abstract class Char_Battle : Character
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
                     //deal damage
+                    char_Battle.ApplyConditionalBlock (attackSequence.attacks[i].direction);
                     char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
+                    char_Battle.RemoveConditionalBlock ();
                     //check if we should push the target
                     if (pushable && attackSequence.attacks[i].pushing)
                     {
@@ -173,6 +182,30 @@ public abstract class Char_Battle : Character
         }
         battleStateController.NextTurnStep(0.5f);
     }
+    /// <summary>
+    /// Applies a defense modifier, but only if blockDirection blocks the attack.
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void ApplyConditionalBlock (Vector2Int direction)
+    {
+        if (useBlock == false)
+        {
+            return;
+        }
+        if (movement != direction) {
+            return;
+        }
+        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
+    }
+    /// <summary>
+    /// Removes the defense modifier applied by ApplyConditionalBlock.
+    /// </summary>
+    private void RemoveConditionalBlock ()
+    {
+        Stats.defense.UnmodifyStatWith (Mod_ConditionalBlock);
+    }
+
 
     public virtual void TryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
     {
@@ -189,6 +222,7 @@ public abstract class Char_Battle : Character
             GameObject g = Instantiate (spawnOnDeath);
             g.transform.position = transform.position;
         }
+        if (this is IsPlayerCharacter) return;
         FindObjectOfType<BattleStateController> ().RemoveCharacter (this);
         Destroy (gameObject);
     }

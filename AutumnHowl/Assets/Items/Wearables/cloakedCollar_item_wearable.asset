@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: item_wearable_cloakedCollar
   displayName: Cloaked Collar
-  description: A small black collar with a silver engraving. Looking at it took long
+  description: A small black collar with a silver engraving. Looking at it too long
     makes your head spin.{col=stat}
   canNotDiscard: 1
   allowMultiple: 0
