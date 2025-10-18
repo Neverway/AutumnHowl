@@ -73,6 +73,22 @@ public class CharacterStats
         health = maxHealth;
     }
 
+/// <summary>
+/// If there's enough Power, consume the given amount, otherwise return false.
+/// </summary>
+/// <param name="_amount">Amount of Power to consume</param>
+/// <returns></returns>
+    public bool TryUsePower (int _amount)
+    {
+        Debug.Log ("power:" + power + ", using:" + _amount);
+        if (power >= _amount)
+        {
+            power -= _amount;
+            return true;
+        }
+        return false;
+    }
+
     #region HelperProperties
     public float PercentCurrentHealth => health / maxHealth;
     public float PercentMissingHealth => 1f - PercentCurrentHealth;

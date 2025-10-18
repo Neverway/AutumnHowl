@@ -385,10 +385,18 @@ public class BattleAttackCompass : MonoBehaviour
         {
             ShowHitText ("Miss!");
             FailAttack ();
-            centerFill.fillAmount = 0;
             return;
         }
+
         ClampTotalSpin ();
+        //Try consuming amount of power corresponding to size of spin
+        //If there's not enough power, the attack fails.
+        if (player.Stats.TryUsePower(Mathf.Abs((int)totalSpin)) == false)
+        {
+            FailAttack ();
+            return;
+        }
+
         print("Clamped spin:" + totalSpin);
         
         ExecuteAttack();
