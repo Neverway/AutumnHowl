@@ -33,8 +33,8 @@ public class CharacterStats
 
     [HideInInspector] public float health = 100;
     [HideInInspector] public float level = 0;
-    [HideInInspector] public int attack = 10;
-    [HideInInspector] public int defense = 10;
+    [HideInInspector] public CharacterStatInt attack = new(10, Attack);
+    [HideInInspector] public CharacterStatInt defense = new(10, Attack);
     [HideInInspector] public int power = 10;
     [HideInInspector] public int corruption = 0;
 
@@ -168,7 +168,21 @@ public class CharacterStats
                 throw new ArgumentOutOfRangeException(nameof(_stat), _stat, null);
         }
     }
-
+    
+    /// <summary>
+    /// If there's enough Power, consume the given amount, otherwise return false.
+    /// </summary>
+    /// <param name="_amount">Amount of Power to consume</param>
+    /// <returns></returns>
+    public bool TryUsePower (int _amount)
+    {
+        if (power >= _amount)
+        {
+            power -= _amount;
+            return true;
+        }
+        return false;
+    }
 
     #endregion
     
