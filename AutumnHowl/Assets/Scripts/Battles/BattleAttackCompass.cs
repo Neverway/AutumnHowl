@@ -82,6 +82,13 @@ public class BattleAttackCompass : MonoBehaviour
 
     private int spinStartIndex = 0;
 
+    [Tooltip("Percent damage dealt after you hit the \"good\" zone")]
+    [SerializeField] private float goodDamageMultiplier = 0.75f;
+    //multiplier to use for attacks
+    private float currentDamageMultiplier;
+    //identifier for the compass multiplier
+    private const string Mod_DamageMult = "Mod_DamageMult";
+
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     [Tooltip ("Reference to the player so we can freeze them when attacking")]
     private Char_Battle_Player player;
@@ -368,13 +375,18 @@ public class BattleAttackCompass : MonoBehaviour
         if (distanceFromNearestAngle < perfectAngle)
         {
             ShowHitText ("Perfect!");
+            currentDamageMultiplier = 1f;
         }
         else if (distanceFromNearestAngle < goodAngle) {
             ShowHitText ("Good");
+            currentDamageMultiplier = goodDamageMultiplier;
         }
         else
         {
             ShowHitText ("Miss!");
+            FailAttack ();
+            centerFill.fillAmount = 0;
+            return;
         }
         ClampTotalSpin ();
         print("Clamped spin:" + totalSpin);
@@ -435,10 +447,13 @@ public class BattleAttackCompass : MonoBehaviour
         n = n % swingPattern.Length;
         GenerateAttackDirections (sequence);
         player.AttackSequences[0] = sequence;
+        //Apply minigame damage multiplier, perfom the attack and then remove the multiplier.
+        player.Stats.attack.ModifyStatWith (Mod_DamageMult, NumberModifierType.Multiply, currentDamageMultiplier);
         player.PerformGeneratedAttack();
+        player.Stats.attack.UnmodifyStatWith (Mod_DamageMult);
+
         OnAttackDone();
-        //player.movement = swingPattern[n] * -1;
-        print (player.movement);
+
         if (Mathf.Abs(totalSpin) > 2)
         {
             GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash3, 1);
