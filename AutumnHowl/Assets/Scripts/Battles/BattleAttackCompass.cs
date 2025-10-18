@@ -34,6 +34,7 @@ public class BattleAttackCompass : MonoBehaviour
     private float spinSpeed;
     [SerializeField] private float minSpinSpeed = 130f;
     [SerializeField] private float maxSpinSpeed = 200f;
+    [SerializeField] AnimationCurve spinSpeedCurve;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -313,7 +314,10 @@ public class BattleAttackCompass : MonoBehaviour
         clampedTotalSpin += spinAmount;
         totalSpin += spinAmount;
 
-        spinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, Mathf.Abs(totalSpin)/360);
+        float percent = Mathf.Abs (totalSpin) / 360;
+        float t = spinSpeedCurve.Evaluate (percent);
+
+        spinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, t);
 
         //Clamps the totalSpin, but only if it goes far enough past 360 that we've looped around to a 90-degrees swing again.
         //The cutoff is 45 degrees past 360, since that would clamp to 90 degrees.
