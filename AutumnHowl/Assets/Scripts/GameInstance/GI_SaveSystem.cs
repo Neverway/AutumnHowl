@@ -2,7 +2,6 @@ using ErryLib.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,7 +10,8 @@ public class GI_SaveSystem : MonoBehaviour
     [Polymorphic, SerializeReference] public SaveDataStrategy saveDataStrategy;
 
     public bool doSaving = true;
-    public string saveSlotName = "Slot 0";
+    public string gameSaveName = "AuHo";
+    public int saveSlot = 0;
 
     private List<Tuple<SaveAndLoadPropertyAttribute, PropertyInfo>> cachedSaveLoadProperties;
     private List<MethodInfo> cachedInvokeBeforeSaveMethods;
@@ -118,15 +118,16 @@ public class GI_SaveSystem : MonoBehaviour
     private void OnSaveGame()
     {
         if (!Application.isPlaying || !doSaving) return;
-        Debug.Log($"Saving Game to slot \"{saveSlotName}\"");
 
         //Call all methods with InvokeBeforeSave attributes
         foreach (var beforeSaveMethod in cachedInvokeBeforeSaveMethods)
             beforeSaveMethod.Invoke(null, null);
 
+        PlayerPrefs.Save();
         //Save all values from properties with SaveAndLoadProperty attributes
         foreach (var saveLoadProperty in cachedSaveLoadProperties)
         {
+            Debug.Log(saveLoadProperty.Item1.saveId);
             var value = saveLoadProperty.Item2.GetValue(null);
             var saveMethod = saveValueMethod.MakeGenericMethod(saveLoadProperty.Item2.PropertyType);
             saveMethod.Invoke(this, new object[] { value, saveLoadProperty.Item1.saveId });
@@ -136,7 +137,6 @@ public class GI_SaveSystem : MonoBehaviour
     private void OnLoadGame()
     {
         if (!Application.isPlaying || !doSaving) return;
-        Debug.Log($"Loading Game from slot \"{saveSlotName}\"");
 
         //Load all values to properties with SaveAndLoadProperty attributes
         foreach (var saveLoadProperty in cachedSaveLoadProperties)
@@ -157,14 +157,14 @@ public class GI_SaveSystem : MonoBehaviour
 
     public static void SaveValue<T>(T value, string id) => instance.saveDataStrategy.SaveValue(value, ToSaveSlotID(id));
     public static T LoadValue<T>(T defaultValue, string id) => instance.saveDataStrategy.LoadValue(defaultValue, ToSaveSlotID(id));
-    private static string ToSaveSlotID(string id) => $"Game_{instance.saveSlotName}_{id}";
+    private static string ToSaveSlotID(string id) => $"{instance.gameSaveName}_{instance.saveSlot}_{id}";
 }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class SaveAndLoadPropertyAttribute : Attribute 
 {
     public string saveId;
-    public SaveAndLoadPropertyAttribute([CallerMemberName] string saveId = "")
+    public SaveAndLoadPropertyAttribute(string saveId)
     {
         this.saveId = saveId;
     }
