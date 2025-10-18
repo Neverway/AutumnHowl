@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,8 +30,10 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] public bool stopByTapping = false;
     [Tooltip("The duration for the hit text to be visible")]
     [SerializeField] private float hitTextDuration = 0.75f;
-    [Tooltip("How fast the sword needle travels around the compass")]
-    [SerializeField] private float spinSpeed = 130f;
+    [Tooltip ("How fast the sword needle travels around the compass")]
+    private float spinSpeed;
+    [SerializeField] private float minSpinSpeed = 130f;
+    [SerializeField] private float maxSpinSpeed = 200f;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -57,6 +60,7 @@ public class BattleAttackCompass : MonoBehaviour
     private enum SpinDirection { left, right }
     private SpinDirection currentSpinDirection;
     //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
+    private float clampedTotalSpin = 0f;
     private float totalSpin = 0f;
     [SerializeField] public Image centerFill;
     
@@ -161,12 +165,15 @@ public class BattleAttackCompass : MonoBehaviour
     private void Initialize()
     {
         if (hasInitialized) return;
+        spinSpeed = minSpinSpeed;
+
         currentState = RingState.spinning;
         
         centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
         centerFill.fillAmount = 0f;
+        clampedTotalSpin = 0f;
         totalSpin = 0f;
-        
+
         player.canMove = false;
         attackBarActive = true;
         hasInitialized = true;
@@ -303,16 +310,20 @@ public class BattleAttackCompass : MonoBehaviour
             spinAmount = spinSpeed * Time.deltaTime;
         }
         swordAngle += spinAmount;
+        clampedTotalSpin += spinAmount;
         totalSpin += spinAmount;
+
+        spinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, Mathf.Abs(totalSpin)/360);
+
         //Clamps the totalSpin, but only if it goes far enough past 360 that we've looped around to a 90-degrees swing again.
         //The cutoff is 45 degrees past 360, since that would clamp to 90 degrees.
-        if (totalSpin > 360 + 45)
+        if (clampedTotalSpin > 360 + 45)
         {
-            totalSpin -= 360;
+            clampedTotalSpin -= 360;
         }
-        if (totalSpin < -360 - 45)
+        if (clampedTotalSpin < -360 - 45)
         {
-            totalSpin += 360;
+            clampedTotalSpin += 360;
         }
         while (swordAngle > 360f)
         {
@@ -327,15 +338,15 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void PlaceCenterFill ()
     {
-        if (totalSpin > 0)
+        if (clampedTotalSpin > 0)
         {
-            centerFill.fillAmount = totalSpin / 360f;
+            centerFill.fillAmount = clampedTotalSpin / 360f;
             return;
         }
-        if (totalSpin < 0f)
+        if (clampedTotalSpin < 0f)
         {
             centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
-            centerFill.fillAmount = -totalSpin / 360;
+            centerFill.fillAmount = -clampedTotalSpin / 360;
         }
     }
 
@@ -345,7 +356,7 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void FinishSpin ()
     {
-        if (Mathf.Abs(totalSpin) <= 45)
+        if (Mathf.Abs(clampedTotalSpin) <= 45)
         {
             FailAttack ();
             return;
@@ -391,13 +402,13 @@ public class BattleAttackCompass : MonoBehaviour
         ClampTotalSpin ();
         //Try consuming amount of power corresponding to size of spin
         //If there's not enough power, the attack fails.
-        if (player.Stats.TryUsePower(Mathf.Abs((int)totalSpin)) == false)
+        if (player.Stats.TryUsePower(Mathf.Abs((int)clampedTotalSpin)) == false)
         {
             FailAttack ();
             return;
         }
 
-        print("Clamped spin:" + totalSpin);
+        print("Clamped spin:" + clampedTotalSpin);
         
         ExecuteAttack();
         centerFill.fillAmount = 0;
@@ -405,7 +416,7 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void ClampTotalSpin ()
     {
-        totalSpin = Mathf.RoundToInt (totalSpin / 90f);
+        clampedTotalSpin = Mathf.RoundToInt (clampedTotalSpin / 90f);
     }
     
     private void ShowHitText(string _text)
@@ -430,9 +441,9 @@ public class BattleAttackCompass : MonoBehaviour
         var sequence = new AttackSequence ();
         sequence.attacks = new List<AttackElement> ();
         int n = spinStartIndex * 2;
-        int increment = MathF.Sign (totalSpin);
+        int increment = MathF.Sign (clampedTotalSpin);
         //Generate an attack by looping through the swingPattern
-        for (int i = 0; i < Mathf.Abs(totalSpin*2)+1; i++)
+        for (int i = 0; i < Mathf.Abs(clampedTotalSpin*2)+1; i++)
         {
             AttackElement attack = new AttackElement ();
             attack.position = swingPattern[n];
@@ -462,15 +473,15 @@ public class BattleAttackCompass : MonoBehaviour
 
         OnAttackDone();
 
-        if (Mathf.Abs(totalSpin) > 2)
+        if (Mathf.Abs(clampedTotalSpin) > 2)
         {
             GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash3, 1);
         }
-        else if (Mathf.Abs (totalSpin) > 1)
+        else if (Mathf.Abs (clampedTotalSpin) > 1)
         {
             GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash2, 1);
         }
-        else if (Mathf.Abs (totalSpin) > 0)
+        else if (Mathf.Abs (clampedTotalSpin) > 0)
         {
             GI_AudioManager.Instance.PlaySlashClip (GI_AudioManager.Instance.slash1, 1);
         }

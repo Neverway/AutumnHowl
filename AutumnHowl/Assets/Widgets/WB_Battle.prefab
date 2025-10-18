@@ -3216,9 +3216,11 @@ MonoBehaviour:
   perfectAngle: 6
   stopByTapping: 1
   hitTextDuration: 0.75
-  spinSpeed: 160
+  minSpinSpeed: 100
+  maxSpinSpeed: 200
   hasInitialized: 0
   centerFill: {fileID: 6253310279909178968}
+  goodDamageMultiplier: 0.75
   goodBarImages:
   - {fileID: 7897377619464235550}
   - {fileID: 2303643153096430706}
