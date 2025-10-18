@@ -159,7 +159,7 @@ public class WB_Battle : MonoBehaviour
         // If there is an item at the selected index
         if (itemAtIndex)
         {
-            Character player = FindObjectOfType<Controller_Overworld_Player>();
+            Character player = FindObjectOfType<Char_Battle_Player>();
         
             if (gameState.currentGameState.inventory.TryUseItem(_index, player.Identifier, itemList))
             {
