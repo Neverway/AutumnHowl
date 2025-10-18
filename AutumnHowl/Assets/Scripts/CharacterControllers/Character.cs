@@ -92,7 +92,6 @@ public abstract class Character : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual void ModifyHealth(float _amount, Vector2Int direction = new Vector2Int())
     {
-        if (_amount == 0) return;
 
         // Character healed
         if (_amount > 0)
@@ -102,6 +101,8 @@ public abstract class Character : MonoBehaviour
             GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform, 1);
             OnHeal?.Invoke();
         }
+        
+        if (_amount == 0) return;
         
         // Character damaged
         else if (_amount < 0)
@@ -121,6 +122,7 @@ public abstract class Character : MonoBehaviour
             {
                 Stats.health = 0;
                 //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                isDead = true;
                 OnDeath?.Invoke();
             }
             // Damage hurt

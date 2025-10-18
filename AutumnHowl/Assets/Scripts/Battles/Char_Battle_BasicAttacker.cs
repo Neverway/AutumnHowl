@@ -123,7 +123,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
         switch (GetTarget())
         {
             case "north":
-                if (Random.Range(0, 4) == 0)
+                if (Random.Range(0, 4) != 0)
                 {
                     TryAttackSequence(AttackSequences[0]);
                     return;
@@ -131,7 +131,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
                 if (TryMoveTo(new Vector2Int(x+0, y+-1))) { return; }
                 break;
             case "south":
-                if (Random.Range(0, 4) == 0)
+                if (Random.Range(0, 4) != 0)
                 {
                     TryAttackSequence(AttackSequences[1]);
                     return;
@@ -139,7 +139,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
                 if (TryMoveTo(new Vector2Int(x+0, y+1))) { return; }
                 break;
             case "east":
-                if (Random.Range(0, 4) == 0)
+                if (Random.Range(0, 4) != 0)
                 {
                     TryAttackSequence(AttackSequences[2]);
                     return;
@@ -147,7 +147,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
                 if (TryMoveTo(new Vector2Int(x+-1, y+0))) { return; }
                 break;
             case "west":
-                if (Random.Range(0, 4) == 0)
+                if (Random.Range(0, 4) != 0)
                 {
                     TryAttackSequence(AttackSequences[3]);
                     return;

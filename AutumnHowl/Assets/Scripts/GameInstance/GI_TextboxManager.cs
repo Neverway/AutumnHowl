@@ -39,7 +39,8 @@ public class GI_TextboxManager : MonoBehaviour
     private GI_WidgetManager widgetManager;
     private WB_Textbox textbox;
     [SerializeField] private AudioSource chatterAudioSource;
-    [SerializeField] private AudioClip defaultTextChatter;
+    [SerializeField][SerializeReference] private Char_ChatterVoice defaultVoice;
+    [SerializeField] private AudioClip currentTextChatter;
     [SerializeField] private bool stopChatterClip;
     [Range(1,5)]
     [SerializeField] private int chatterFrequency;
@@ -133,6 +134,23 @@ public class GI_TextboxManager : MonoBehaviour
     {
         // Set Displaymode
         textbox.displayMode = currentTextEvent.frames[currentFrame].displayMode;
+        
+        // Get voice override, if there is one
+        var characterVoice = currentTextEvent.frames[currentFrame].chatterVoice;
+        if (characterVoice)
+        {
+            chatterFrequency = characterVoice.chatterFrequency;
+            currentTextChatter = characterVoice.textChatter;
+            chatterPitchMin = characterVoice.chatterPitchMin;
+            chatterPitchMax = characterVoice.chatterPitchMax;
+        }
+        else
+        {
+            chatterFrequency = defaultVoice.chatterFrequency;
+            currentTextChatter = defaultVoice.textChatter;
+            chatterPitchMin = defaultVoice.chatterPitchMin;
+            chatterPitchMax = defaultVoice.chatterPitchMax;
+        }
         
         currentTextContent = "";
         currentlyPrinting = true;
@@ -275,6 +293,8 @@ public class GI_TextboxManager : MonoBehaviour
 
     private void PlayChatterSound(int _currentDisplayCharactersCount, char _currentTextIndex)
     {
+        
+        
         // Check if the character count is cleanly divisible by two
         // Apparently this is called a modulo expression? ~Liz
         if (_currentDisplayCharactersCount % chatterFrequency == 0)
@@ -307,7 +327,7 @@ public class GI_TextboxManager : MonoBehaviour
                 chatterAudioSource.pitch = Random.Range(chatterPitchMin, chatterPitchMax);
             }
             // Play
-            chatterAudioSource.PlayOneShot(defaultTextChatter);
+            chatterAudioSource.PlayOneShot(currentTextChatter);
         }
     }
     
@@ -368,6 +388,7 @@ public class TextFrames
     public string name;
     [TextArea] public string chatContent;
     public Sprite portrait;
+    public Char_ChatterVoice chatterVoice;
     public UnityEvent OnFrameCompleted = new UnityEvent();
     [Header("Frame Settings")] 
     public TextboxDisplayMode displayMode;
