@@ -80,11 +80,8 @@ public class ModifyHealthAction : EffectAction
 
     public override void ApplyEffect(CharacterIdentifier user)
     {
-        /*
-        var targetCharacter = target.GetTarget(user);
-        var stats = targetCharacter.currentStats;
-        targetCharacter.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
-        // */
+        //var characterTargets = target.GetTargetsFrom(user);
+        //targetCharacter.ModifyHealth();
     }
 
     public override string DescribeNoFormat()

@@ -62,7 +62,6 @@ public class DebugDisplayListAsStringsAttributeDrawer : PropertyDrawer
             return;
         }
 
-        int i = 0;
         foreach (var item in enumerable)
         {
             VisualElement ve = new Label($"{item}");

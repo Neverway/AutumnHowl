@@ -31,6 +31,7 @@ MonoBehaviour:
         effects:
         - rid: 1234355984407986203
         - rid: 1234355984407986205
+        - rid: 1234356096328531991
     - rid: 1234355984407986203
       type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
       data:
@@ -47,4 +48,15 @@ MonoBehaviour:
         count: 0
     - rid: 1234355984407986206
       type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356096328531991
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356096328531992
+        modifierType: 0
+        amount: 1
+    - rid: 1234356096328531992
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 
