@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1772189037599727315}
   m_Layer: 7
   m_Name: Colbox
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
