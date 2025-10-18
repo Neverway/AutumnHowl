@@ -30,7 +30,7 @@ public class BattleGridPather : MonoBehaviour
 
     private BattleGrid battleGrid;
     private const int UnassignedTileNumber=99;
-    private const int SwordCost = 8;
+    private const int SwordCost = 4;
 
     #endregion
 
@@ -145,6 +145,9 @@ public class BattleGridPather : MonoBehaviour
         RecursivePather(n);
     }
     
+    /// <summary>
+    /// Prints the path grid for debugging
+    /// </summary>
     private void PrintDistances ()
     {
         string p = "DISTANCES:\n";
@@ -168,7 +171,7 @@ public class BattleGridPather : MonoBehaviour
         grid[_targetGridPawn.position.x, _targetGridPawn.position.y]=1;
         swordPosition = GetSwordPosition (_targetGridPawn);
         RecursivePather(1);
-        PrintDistances();
+        //PrintDistances();
     }
 
     /// <summary>

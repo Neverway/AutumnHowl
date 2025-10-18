@@ -80,7 +80,6 @@ public class CharacterStats
 /// <returns></returns>
     public bool TryUsePower (int _amount)
     {
-        Debug.Log ("power:" + power + ", using:" + _amount);
         if (power >= _amount)
         {
             power -= _amount;

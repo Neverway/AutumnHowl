@@ -407,8 +407,6 @@ public class BattleAttackCompass : MonoBehaviour
             FailAttack ();
             return;
         }
-
-        print("Clamped spin:" + clampedTotalSpin);
         
         ExecuteAttack();
         centerFill.fillAmount = 0;
@@ -527,7 +525,6 @@ public class BattleAttackCompass : MonoBehaviour
             sequence.attacks[i].direction = -dir;
             sequence.attacks[i+1].direction = -dir;
             sequence.attacks[i + 1].direction = -dir;
-            print ("direction for " + i + " = " + -dir);
         }
     }
 
