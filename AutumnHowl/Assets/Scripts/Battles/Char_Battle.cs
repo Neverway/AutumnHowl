@@ -70,7 +70,7 @@ public abstract class Char_Battle : Character
     /// <param name="_direction">Tile to move to; relative to current position.</param>
     /// <param name="doNextTurn">Set to false if this object shouldn't trigger NextTurnStep, for example if it moves in realtime.</param>
     /// <returns></returns>
-    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true)
+    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null)
     {
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
@@ -78,6 +78,10 @@ public abstract class Char_Battle : Character
             gridPawnController.MoveToTile (testPos.x, testPos.y);
             if (doNextTurn)
             {
+                if (_pathTargetPawn != null)
+                {
+                    gridPather.GetPathToTarget (gridPawnController);
+                }
                 battleStateController.NextTurnStep();
             }
             return true;
