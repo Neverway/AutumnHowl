@@ -265,6 +265,7 @@ public class BS_PlayerAction : BattleState
             case BattleStateController.PlayerAction.defend:
                 controller.battlePlayer.ModifyPower(10);
                 controller.battlePlayer.isDefenseActive = true;
+                controller.battlePlayer.StartCoroutine(controller.battlePlayer.InputDelay());
                 controller.battlePlayer.useBlock = true;
                 controller.playerWasHitThisStep = false;
                 controller.battlePlayer.OnHurt -= SetPlayerHitThisStep; //b-but why?
