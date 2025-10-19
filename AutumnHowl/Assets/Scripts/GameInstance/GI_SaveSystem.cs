@@ -13,6 +13,8 @@ public class GI_SaveSystem : MonoBehaviour
     public string gameSaveName = "AuHo";
     public int saveSlot = 0;
 
+    public string SaveDataFileName => $"{gameSaveName}_{saveSlot}_Savedata";
+
     private List<Tuple<SaveAndLoadPropertyAttribute, PropertyInfo>> cachedSaveLoadProperties;
     private List<MethodInfo> cachedInvokeBeforeSaveMethods;
     private List<MethodInfo> cachedInvokeAfterLoadMethods;
@@ -114,6 +116,7 @@ public class GI_SaveSystem : MonoBehaviour
         loadValueMethod = typeof(GI_SaveSystem)
             .GetMethod(nameof(LoadValue), BindingFlags.Static | BindingFlags.Public);
     }
+    
     [ContextMenu("Trigger Save Game")]
     private void OnSaveGame()
     {
@@ -123,7 +126,7 @@ public class GI_SaveSystem : MonoBehaviour
         SaveValuesFromAttributes();
 
         //Commit all values to PlayerPrefs
-        saveDataStrategy.Save($"{gameSaveName}_{saveSlot}");
+        saveDataStrategy.Save(SaveDataFileName);
     }
     
     [ContextMenu("Trigger Load Game")]
@@ -132,26 +135,11 @@ public class GI_SaveSystem : MonoBehaviour
         if (!Application.isPlaying || !doSaving) return;
 
         //Load all values from PlayerPrefs
-        saveDataStrategy.Load($"{gameSaveName}_{saveSlot}");
+        saveDataStrategy.Load(SaveDataFileName);
 
         //Apply values to attributes made for this save system
         LoadValuesFromAttributes();
     }
-
-    public static void SaveGame() => instance.OnSaveGame();
-    public static void LoadGame() => instance.OnLoadGame();
-
-    public static void NotifyLeavingScene()
-    {
-        instance.SaveValuesFromAttributes();
-    }
-    public static void NotifyEnteredScene()
-    {
-        instance.LoadValuesFromAttributes();
-    }
-
-    public static void SaveValue<T>(T value, string id) => instance.saveDataStrategy.WriteValue(value, id);
-    public static T LoadValue<T>(T defaultValue, string id) => instance.saveDataStrategy.ReadValue(defaultValue, id);
 
     private void SaveValuesFromAttributes()
     {
@@ -184,6 +172,15 @@ public class GI_SaveSystem : MonoBehaviour
         foreach (var afterLoadMethod in cachedInvokeAfterLoadMethods)
             afterLoadMethod.Invoke(null, null);
     }
+
+
+
+    public static void SaveGame() => instance.OnSaveGame();
+    public static void LoadGame() => instance.OnLoadGame();
+    public static void NotifyLeavingScene() => instance.SaveValuesFromAttributes();
+    public static void NotifyEnteredScene() => instance.LoadValuesFromAttributes();
+    public static void SaveValue<T>(T value, string id) => instance.saveDataStrategy.WriteValue(value, id);
+    public static T LoadValue<T>(T defaultValue, string id) => instance.saveDataStrategy.ReadValue(defaultValue, id);
 }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]

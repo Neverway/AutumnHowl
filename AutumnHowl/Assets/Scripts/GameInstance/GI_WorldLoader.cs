@@ -47,7 +47,6 @@ public class GI_WorldLoader : MonoBehaviour
             yield return null;
         }
         //If an exit to warp to has been given, teleport player there
-        Debug.Log("Exit: " + _exitWarpID);
         if (!string.IsNullOrEmpty(_exitWarpID))
             TeleportPlayerToExit(_exitWarpID);
 
@@ -70,8 +69,8 @@ public class GI_WorldLoader : MonoBehaviour
         {
             if (warp.warpExitID == _exitWarpID)
             {
-                Debug.Log("Beep Boop, player moved!", player.transform.root);
                 player.transform.root.position = warp.transform.position + warp.exitOffset;
+                return true;
             }
         }
         return false;

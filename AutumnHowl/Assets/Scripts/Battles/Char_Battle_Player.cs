@@ -116,21 +116,9 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         
         SetAttackDamageToCurrentATK();
         
-        switch (_attackType)
-        {
-            case 0:
-                TryAttackSequence(AttackSequences[0], mirrorX, mirrorY);
-                break;
-            case 1:
-                TryAttackSequence(AttackSequences[1], mirrorX, mirrorY);
-                break;
-            case 2:
-                TryAttackSequence(AttackSequences[2], mirrorX, mirrorY);
-                break;
-            case 3:
-                TryAttackSequence(AttackSequences[3], mirrorX, mirrorY);
-                break;
-        }
+        //Try first 4 AttackSequences
+        for (int i = 0; i < 4; i++)
+            TryAttackSequence(AttackSequences[i], mirrorX, mirrorY);
     }
     
     public void PerformGeneratedAttack()

@@ -17,6 +17,37 @@ using static CharacterStatType;
 [Serializable]
 public class CharacterStats
 {
+
+    /*-----[ Constructors ]-------------------------------------------------------------------------------------------*/
+    public CharacterStats() { }
+    public CharacterStats(SaveData saveData) { LoadSaveData(saveData); }
+    public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
+
+    /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/
+    [Serializable]
+    public struct SaveData
+    {
+        public float health;
+        public float level;
+        public int power;
+        public int corruption;
+    }
+    public SaveData GetSaveData() => new SaveData()
+    {
+        health = health,
+        level = level,
+        power = power,
+        corruption = corruption
+    };
+    public void LoadSaveData(SaveData saveData)
+    {
+        health = saveData.health;
+        level = saveData.level;
+        power = saveData.power;
+        corruption = saveData.corruption;
+    }
+
+
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
 
@@ -28,23 +59,23 @@ public class CharacterStats
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    public CharacterStats() { }
-    public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
 
     [Box] public float health = 100;
     [Box] public float level = 0;
-    [Box] public CharacterStatInt attack = new(10, Attack);
-    [Box] public CharacterStatInt defense = new(10, Attack);
     [Box] public int power = 10;
     [Box] public int corruption = 0;
 
     [Header("Combat Stats")]
-    [Box] public CharacterStatFloat maxHealth = new(100, Health);
-    [Box] public CharacterStatFloat maxLevel = new(100, Level);
-    [Box] public CharacterStatInt maxAttack = new(100, Attack);
-    [Box] public CharacterStatInt maxDefense = new(100, Defense);
-    [Box] public CharacterStatInt maxPower = new(100, Power);
-    [Box] public CharacterStatInt maxCorruption = new(100, Corruption);
+    [Box] public CharacterStatInt attack = new(10, Attack);
+    [Box] public CharacterStatInt defense = new(10, Defense);
+
+    [Box] public CharacterStatFloat maxHealth = new(100, MaxHealth);
+    [Box] public CharacterStatFloat maxLevel = new(100, MaxLevel);
+    [Box] public CharacterStatInt maxAttack = new(100, MaxAttack);
+    [Box] public CharacterStatInt maxDefense = new(100, MaxDefense);
+    [Box] public CharacterStatInt maxPower = new(100, MaxPower);
+    [Box] public CharacterStatInt maxCorruption = new(100, MaxCorruption);
+
 
     [Header("Overworld Stats")]
     [Box] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
@@ -103,69 +134,50 @@ public class CharacterStats
     /// <param name="_stat">Which of the character's stat is affected</param>
     /// <param name="_amount">How much to add to that stat</param>
     /// <param name="_direction">The direction in which this effect is coming from (used for detecting damage direction)</param>
-    public void Modify(CharacterStatType _stat, float _amount, Vector2Int _direction = new Vector2Int())
+    public void ModifyHealth(float _amount, Vector2Int _direction = new Vector2Int())
     {
-        switch (_stat)
+        // Character healed
+        if (_amount > 0)
         {
-            case Health:
-                // Character healed
-                if (_amount > 0)
-                {
-                    if (health + _amount > maxHealth) health = maxHealth;
-                    else health += _amount;
-                    GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
-                    // TODO - HOW teH HeCk do I call this now? ~Liz
-                    //OnHeal?.Invoke();
-                }
+            if (health + _amount > maxHealth) health = maxHealth;
+            else health += _amount;
+            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
+            // TODO - HOW teH HeCk do I call this now? ~Liz
+            //OnHeal?.Invoke();
+        }
         
-                if (_amount == 0) return;
+        if (_amount == 0) return;
         
-                // Character damaged
-                else if (_amount < 0)
-                {
-                    var totalAmount = _amount;
+        // Character damaged
+        else if (_amount < 0)
+        {
+            var totalAmount = _amount;
             
-                    // Apply defense if active
-                    if (owner.isDefenseActive)
-                    {
-                        totalAmount = _amount + defense;
-                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
-                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
-                    }
+            // Apply defense if active
+            if (owner.isDefenseActive)
+            {
+                totalAmount = _amount + defense;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
+            }
             
-                    // Damage killed
-                    if (health + totalAmount <= 0)
-                    {
-                        health = 0;
-                        //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
-                        owner.isDead = true;
-                        // TODO - HOW teH HeCk do I call this now? ~Liz
-                        //OnDeath?.Invoke();
-                    }
-                    // Damage hurt
-                    else
-                    {
-                        health += totalAmount;
-                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
-                        // TODO - HOW teH HeCk do I call this now? ~Liz
-                        //OnHurt?.Invoke();
-                    }
-                }
-                break;
-            case Level:
-                break;
-            case Attack:
-                break;
-            case Defense:
-                break;
-            case Power:
-                break;
-            case Corruption:
-                break;
-            case MoveSpeed:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(_stat), _stat, null);
+            // Damage killed
+            if (health + totalAmount <= 0)
+            {
+                health = 0;
+                //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                owner.isDead = true;
+                // TODO - HOW teH HeCk do I call this now? ~Liz
+                //OnDeath?.Invoke();
+            }
+            // Damage hurt
+            else
+            {
+                health += totalAmount;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
+                // TODO - HOW teH HeCk do I call this now? ~Liz
+                //OnHurt?.Invoke();
+            }
         }
     }
     
@@ -185,7 +197,7 @@ public class CharacterStats
     }
 
     #endregion
-    
+
     #region HelperProperties
     public float PercentCurrentHealth => health / maxHealth;
     public float PercentMissingHealth => 1f - PercentCurrentHealth;
@@ -201,16 +213,19 @@ public class CharacterStats
     #endregion
 }
 
-
 public enum CharacterStatType
 {
-    [StatName("MAX HP")] Health,
-    [StatName("MAX LVL")] Level,
-    [StatName("MAX ATK")] Attack,
-    [StatName("MAX DEF")] Defense,
-    [StatName("MAX PWR")] Power,
-    [StatName("MAX COR")] Corruption,
-    [StatName("SPD")] MoveSpeed
+    [StatName("ATK")]     Attack,
+    [StatName("DEF")]     Defense,
+
+    [StatName("MAX HP")]  MaxHealth,
+    [StatName("MAX LVL")] MaxLevel,
+    [StatName("MAX ATK")] MaxAttack,
+    [StatName("MAX DEF")] MaxDefense,
+    [StatName("MAX PWR")] MaxPower,
+    [StatName("MAX COR")] MaxCorruption,
+
+    [StatName("SPD")]     MoveSpeed
 }
 
 public static partial class AuHo_ExtentionMethods

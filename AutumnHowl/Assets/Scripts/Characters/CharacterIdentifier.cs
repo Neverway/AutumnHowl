@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// The constructed object of this class is supposed to serve as total-game-consistent way to identify characters from each other
+/// <br/> - For UniqueAndPersistent characters: This identifier is stored and used consistently between new copies of that character, 
+/// including switching between scenes (good for players, unique NPCs)
+/// <br/> - For CloneableAndDisposable characters: This identifier is newly instantiated for each new instance of a character, 
+/// which will not persist between scenes (good for spawnable enemies)
+/// </summary>
+[Serializable]
+public class CharacterIdentifier
+{
+    public CharacterTemplate TemplateCreatedFrom { get; private set; }
+    public CharacterStats Stats { get; private set; }
+
+    [Reload]
+    private static SerializableDictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters;
+
+    public CharacterIdentifier(CharacterTemplate fromTemplate)
+    {
+        if (fromTemplate != null)
+        {
+            TemplateCreatedFrom = fromTemplate;
+            Stats = new CharacterStats(this);
+        }
+        else
+            Stats = new CharacterStats(this);
+    }
+
+    public static CharacterIdentifier GetDefaultCharacter() => GetFromCharacterTemplate(null);
+    public static CharacterIdentifier GetFromCharacterTemplate(CharacterTemplate characterTemplate)
+    {
+        //Create empty identifier as default if no template is provided (used for GetDefaultCharacter()
+        if (characterTemplate == null)
+            return new CharacterIdentifier(null);
+
+        if (persistentCharacters == null)
+            persistentCharacters = new();
+
+        CharacterIdentifier toReturn;
+        switch (characterTemplate.characterReferenceType)
+        {
+            case CharacterTemplateToIdentifierStrategy.UniqueAndPersistent:
+                if (!persistentCharacters.TryGetValue(characterTemplate, out toReturn))
+                {
+                    toReturn = new CharacterIdentifier(characterTemplate);
+                    persistentCharacters.Add(characterTemplate, toReturn);
+                }
+                break;
+            case CharacterTemplateToIdentifierStrategy.CloneableAndDisposable:
+                toReturn = new CharacterIdentifier(characterTemplate);
+                break;
+            default:
+                throw new NotImplementedException("Unimplemented CharacterTemplateToIdentifierStrategy in constructor");
+        }
+        return toReturn;
+    }
+
+    public override string ToString()
+    {
+        if (TemplateCreatedFrom == null)
+            return "Default Character";
+        if (string.IsNullOrWhiteSpace(TemplateCreatedFrom.name))
+            return "Unnamed Character";
+
+        return TemplateCreatedFrom.name;
+    }
+
+    //Save and Load for Persistent Characters ----------------------------------------------------------------------------------------
+
+    [InvokeBeforeSave]
+    public static void OnSave()
+    {
+        List<SaveData> saveDatas = new();
+
+        foreach (var character in persistentCharacters.Values)
+            saveDatas.Add(character.GetSaveData());
+
+        var toSave = new Wrapper<SaveData[]>(saveDatas.ToArray());
+        GI_SaveSystem.SaveValue(toSave, "PersistentCharacterData");
+    }
+    [InvokeAfterLoad]
+    public static void OnLoad()
+    {
+        var toLoad = GI_SaveSystem.LoadValue<Wrapper<SaveData[]>>(null, "PersistentCharacterData");
+        if (toLoad == null)
+            return;
+
+        var oldCharacters = persistentCharacters;
+        persistentCharacters = new();
+
+        Debug.Log(CharacterTemplate.Instances.Count);
+
+        foreach (SaveData data in toLoad.value)
+        {
+            if (CharacterTemplate.Instances.TryGetValue(data.templateID, out CharacterTemplate template))
+            {
+                CharacterIdentifier charToLoad = 
+                    oldCharacters.ContainsKey(template) ? oldCharacters[template] : new(template);
+
+                charToLoad.LoadSaveData(data);
+                persistentCharacters.Add(template, charToLoad);
+            }
+            else
+                Debug.LogError($"Invalid templateID save in persistent characters? ID: {data.templateID}");
+        }
+
+    }
+    [Serializable]
+    public struct SaveData
+    {
+        public string templateID;
+        public CharacterStats.SaveData statsData;
+    }
+    public SaveData GetSaveData() => new SaveData()
+    {
+        templateID = TemplateCreatedFrom.uniqueTemplateID,
+        statsData = Stats.GetSaveData()
+    };
+    public void LoadSaveData(SaveData saveData)
+    {
+        Stats.LoadSaveData(saveData.statsData);
+    }
+}
