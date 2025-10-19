@@ -101,12 +101,6 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         }
     }
 
-    protected override bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null, bool shouldProgressTurn = true)
-    {
-        bool oldResult = base.TryMoveInDirection(_direction, doNextTurn, gridPawnController);
-        return oldResult;
-    }
-
     private IEnumerator Die()
     {
         gameObject.transform.DORotate(new Vector3(45, 0, 0), 0.25f);
