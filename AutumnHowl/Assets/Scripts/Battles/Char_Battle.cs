@@ -70,7 +70,7 @@ public abstract class Char_Battle : Character
     /// <param name="_direction">Tile to move to; relative to current position.</param>
     /// <param name="doNextTurn">Set to false if this object shouldn't trigger NextTurnStep, for example if it moves in realtime.</param>
     /// <returns></returns>
-    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null)
+    protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null, bool shouldProgressTurn = true, bool ignoreObsticals=false)
     {
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
@@ -82,7 +82,7 @@ public abstract class Char_Battle : Character
                 {
                     gridPather.GetPathToTarget (gridPawnController);
                 }
-                battleStateController.NextTurnStep();
+                if (shouldProgressTurn) battleStateController.NextTurnStep();
             }
             return true;
         }
@@ -102,7 +102,7 @@ public abstract class Char_Battle : Character
         return false;
     }
 
-    public IEnumerator CoTryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
+    public IEnumerator CoTryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false, bool shouldProgressTurn = true)
     {
         //when hasStopped is true, it stops the rest of the sequence from firing.
         var hasStopped = false;
@@ -180,8 +180,9 @@ public abstract class Char_Battle : Character
                 break;
             }
         }
-        battleStateController.NextTurnStep(0.5f);
+        if (shouldProgressTurn) battleStateController.NextTurnStep(0.5f);
     }
+    
     /// <summary>
     /// Applies a defense modifier, but only if blockDirection blocks the attack.
     /// </summary>
@@ -198,6 +199,7 @@ public abstract class Char_Battle : Character
         }
         Stats.maxDefense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
     }
+    
     /// <summary>
     /// Removes the defense modifier applied by ApplyConditionalBlock.
     /// </summary>
@@ -207,9 +209,9 @@ public abstract class Char_Battle : Character
     }
 
 
-    public virtual void TryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false)
+    public virtual void TryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false, bool shouldProgressTurn = true)
     {
-        StartCoroutine(CoTryAttackSequence(attackSequence, mirrorX, mirrorY));
+        StartCoroutine(CoTryAttackSequence(attackSequence, mirrorX, mirrorY, shouldProgressTurn));
     }
 
     /// <summary>

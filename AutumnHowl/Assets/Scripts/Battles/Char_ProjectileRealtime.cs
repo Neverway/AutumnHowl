@@ -11,8 +11,9 @@ public class Char_ProjectileRealtime : Char_Battle
     #region Fields
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [SerializeField] private float movementDelay = 0.7f;
-    [SerializeField] private Vector2Int moveDirection = Vector2Int.down;
+    public bool ignoreObstacles;
+    public float movementDelay = 0.7f;
+    public Vector2Int moveDirection = Vector2Int.down;
     [SerializeField] private AttackSequence attackSequence;
     /*----------------------------------------------------------------------------------------------------------------*/
 
@@ -39,10 +40,12 @@ public class Char_ProjectileRealtime : Char_Battle
     {
         yield return new WaitForSeconds(movementDelay);
         //Try to move
-        if (TryMoveInDirection (moveDirection, false) == false)
+        if (TryMoveInDirection (moveDirection, doNextTurn:false, ignoreObstacles) == false)
         {
-            //If we failed to move, damage what's in front of us
-            TryAttackSequence (attackSequence);
+            //If we failed to move, damage what's in front of us (and where we are)
+            attackSequence.attacks[0].position = moveDirection;
+            attackSequence.attacks[0].position = Vector2Int.zero;
+            TryAttackSequence(attackSequence, shouldProgressTurn:false);
             //Kill the projectile
             Kill ();
             yield break;
