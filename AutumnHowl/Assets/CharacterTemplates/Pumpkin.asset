@@ -17,18 +17,30 @@ MonoBehaviour:
   baseStats:
     health: 100
     level: 0
-    power: 5
-    corruption: 0
+    attack:
+      startValue: 10
+      multiplier: 0
+      addedValue: 0
     defense:
       startValue: 0
       multiplier: 0
       addedValue: 0
-    attack:
-      startValue: 25
+    power: 5
+    corruption: 0
+    maxHealth:
+      startValue: 15
       multiplier: 0
       addedValue: 0
-    maxHealth:
-      startValue: 30
+    maxLevel:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxAttack:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxDefense:
+      startValue: 100
       multiplier: 0
       addedValue: 0
     maxPower:
@@ -47,3 +59,4 @@ MonoBehaviour:
       startValue: 3
       multiplier: 0
       addedValue: 0
+    owner: {fileID: 0}
