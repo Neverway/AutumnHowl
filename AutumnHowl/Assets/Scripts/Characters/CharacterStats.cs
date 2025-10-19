@@ -31,12 +31,12 @@ public class CharacterStats
     public CharacterStats() { }
     public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
 
-    [HideInInspector] public float health = 100;
-    [HideInInspector] public float level = 0;
-    [HideInInspector] public CharacterStatInt attack = new(10, Attack);
-    [HideInInspector] public CharacterStatInt defense = new(10, Attack);
-    [HideInInspector] public int power = 10;
-    [HideInInspector] public int corruption = 0;
+    [Box] public float health = 100;
+    [Box] public float level = 0;
+    [Box] public CharacterStatInt attack = new(10, Attack);
+    [Box] public CharacterStatInt defense = new(10, Attack);
+    [Box] public int power = 10;
+    [Box] public int corruption = 0;
 
     [Header("Combat Stats")]
     [Box] public CharacterStatFloat maxHealth = new(100, Health);
