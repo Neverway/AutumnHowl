@@ -31,12 +31,12 @@ public class CharacterStats
     public CharacterStats() { }
     public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
 
-    [HideInInspector] public float health = 100;
-    [HideInInspector] public float level = 0;
-    [HideInInspector] public CharacterStatInt attack = new(10, Attack);
-    [HideInInspector] public CharacterStatInt defense = new(10, Attack);
-    [HideInInspector] public int power = 10;
-    [HideInInspector] public int corruption = 0;
+    [Box] public float health = 100;
+    [Box] public float level = 0;
+    [Box] public CharacterStatInt attack = new(10, Attack);
+    [Box] public CharacterStatInt defense = new(10, Attack);
+    [Box] public int power = 10;
+    [Box] public int corruption = 0;
 
     [Header("Combat Stats")]
     [Box] public CharacterStatFloat maxHealth = new(100, Health);
@@ -113,7 +113,7 @@ public class CharacterStats
                 {
                     if (health + _amount > maxHealth) health = maxHealth;
                     else health += _amount;
-                    GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform, 1);
+                    GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
                     // TODO - HOW teH HeCk do I call this now? ~Liz
                     //OnHeal?.Invoke();
                 }
@@ -129,8 +129,8 @@ public class CharacterStats
                     if (owner.isDefenseActive)
                     {
                         totalAmount = _amount + defense;
-                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform, 0);
-                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform, 2, 0.5f);
+                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
+                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
                     }
             
                     // Damage killed
@@ -146,7 +146,7 @@ public class CharacterStats
                     else
                     {
                         health += totalAmount;
-                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform, 0);
+                        GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
                         // TODO - HOW teH HeCk do I call this now? ~Liz
                         //OnHurt?.Invoke();
                     }

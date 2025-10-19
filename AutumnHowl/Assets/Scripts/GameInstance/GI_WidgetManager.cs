@@ -127,12 +127,12 @@ public class GI_WidgetManager : MonoBehaviour
         return _result != null;
     }
 
-    private IEnumerator CoSpawnEffectText(string _amount, Transform _position, int _mode, float _delay)
+    private IEnumerator CoSpawnEffectText(string _amount, Vector3 _position, int _mode, float _delay)
     {
         yield return new WaitForSeconds(_delay);
         var newText = Instantiate(effectText, _canvas.transform);
         var viewCam = FindObjectOfType<Camera>();
-        newText.transform.position = viewCam.WorldToScreenPoint(_position.position);
+        newText.transform.position = viewCam.WorldToScreenPoint(_position);
         var textComponent = newText.transform.GetChild(0).GetComponent<TMP_Text>();
         Destroy(newText.gameObject, 1);
         
@@ -161,7 +161,7 @@ public class GI_WidgetManager : MonoBehaviour
         }
     }
 
-    public void SpawnEffectText(string _amount, Transform _position, int _mode, float _delay=0)
+    public void SpawnEffectText(string _amount, Vector3 _position, int _mode, float _delay=0)
     {
         StartCoroutine(CoSpawnEffectText(_amount, _position, _mode, _delay));
     }

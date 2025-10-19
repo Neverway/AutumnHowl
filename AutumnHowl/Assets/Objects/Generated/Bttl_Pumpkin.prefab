@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 576078956332330542, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
-      objectReference: {fileID: 7108339969198208228, guid: a68992f0c96f940829e7d91af3faf75b, type: 3}
+      objectReference: {fileID: 7108339969198208228, guid: 6e765e3d05b02754eaa9a94251a7a958, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Name
-      value: Bttl_Bat
+      value: Bttl_Pumpkin
       objectReference: {fileID: 0}
     - target: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Enabled
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: 2e954964197096782a4b20683525e471, type: 2}
+  template: {fileID: 11400000, guid: ba9669da7b16121419d66ad5780fde7f, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
@@ -156,6 +156,8 @@ MonoBehaviour:
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
+  randomRetreat: 0
+  skipFirstTurn: 1
 --- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0

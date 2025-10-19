@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using DG.Tweening;
 using UnityEngine;
 
 public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
@@ -23,6 +24,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+    private bool inTheProcessOfDying;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -41,13 +43,14 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     
     private void Update()
     {
-        animator.SetFloat("idleX", movement.x);
-        animator.SetFloat("idleY", movement.y);
-        if (isDead)
+        if (isDead && !inTheProcessOfDying)
         {
-            GameInstance.Get<GI_WorldLoader>().Load("GameOver");
+            inTheProcessOfDying = true;
+            StartCoroutine(Die());
             return;
         }
+        animator.SetFloat("idleX", movement.x);
+        animator.SetFloat("idleY", movement.y);
         if (!canMove) return;
         UpdateMovementInput();
     }
@@ -56,6 +59,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void UpdateMovementInput()
     {
+        // MOVEMENT
         if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
         {
             if (TryMoveInDirection(Vector2Int.up)) movement = new Vector2(0, 1);
@@ -77,6 +81,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
             return;
         }
 
+        // DEFEND
         if (isDefenseActive)
         {
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
@@ -88,12 +93,19 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
                 SpinBlock("right");
             }
         }
+        
+        // PASS TURN
+        if (GameInstance.Inputs.Select.WasPressedThisFrame())
+        {
+            battleStateController.NextTurnStep(0.5f);
+        }
     }
 
-    protected override bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null)
+    private IEnumerator Die()
     {
-        bool oldResult = base.TryMoveInDirection(_direction, doNextTurn, gridPawnController);
-        return oldResult;
+        gameObject.transform.DORotate(new Vector3(45, 0, 0), 0.25f);
+        yield return new WaitForSeconds(1);
+        GameInstance.Get<GI_WorldLoader>().Load("GameOver");
     }
 
 
