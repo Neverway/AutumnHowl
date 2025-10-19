@@ -119,6 +119,42 @@ public class GI_SaveSystem : MonoBehaviour
     {
         if (!Application.isPlaying || !doSaving) return;
 
+        //Grab values from attributes made for this save system
+        SaveValuesFromAttributes();
+
+        //Commit all values to PlayerPrefs
+        saveDataStrategy.Save($"{gameSaveName}_{saveSlot}");
+    }
+    
+    [ContextMenu("Trigger Load Game")]
+    private void OnLoadGame()
+    {
+        if (!Application.isPlaying || !doSaving) return;
+
+        //Load all values from PlayerPrefs
+        saveDataStrategy.Load($"{gameSaveName}_{saveSlot}");
+
+        //Apply values to attributes made for this save system
+        LoadValuesFromAttributes();
+    }
+
+    public static void SaveGame() => instance.OnSaveGame();
+    public static void LoadGame() => instance.OnLoadGame();
+
+    public static void NotifyLeavingScene()
+    {
+        instance.SaveValuesFromAttributes();
+    }
+    public static void NotifyEnteredScene()
+    {
+        instance.LoadValuesFromAttributes();
+    }
+
+    public static void SaveValue<T>(T value, string id) => instance.saveDataStrategy.WriteValue(value, id);
+    public static T LoadValue<T>(T defaultValue, string id) => instance.saveDataStrategy.ReadValue(defaultValue, id);
+
+    private void SaveValuesFromAttributes()
+    {
         //Call all methods with InvokeBeforeSave attributes
         foreach (var beforeSaveMethod in cachedInvokeBeforeSaveMethods)
             beforeSaveMethod.Invoke(null, null);
@@ -133,11 +169,8 @@ public class GI_SaveSystem : MonoBehaviour
             saveMethod.Invoke(this, new object[] { value, saveLoadProperty.Item1.saveId });
         }
     }
-    [ContextMenu("Trigger Load Game")]
-    private void OnLoadGame()
+    private void LoadValuesFromAttributes()
     {
-        if (!Application.isPlaying || !doSaving) return;
-
         //Load all values to properties with SaveAndLoadProperty attributes
         foreach (var saveLoadProperty in cachedSaveLoadProperties)
         {
@@ -151,13 +184,6 @@ public class GI_SaveSystem : MonoBehaviour
         foreach (var afterLoadMethod in cachedInvokeAfterLoadMethods)
             afterLoadMethod.Invoke(null, null);
     }
-
-    public static void SaveGame() => instance.OnSaveGame();
-    public static void LoadGame() => instance.OnLoadGame();
-
-    public static void SaveValue<T>(T value, string id) => instance.saveDataStrategy.SaveValue(value, ToSaveSlotID(id));
-    public static T LoadValue<T>(T defaultValue, string id) => instance.saveDataStrategy.LoadValue(defaultValue, ToSaveSlotID(id));
-    private static string ToSaveSlotID(string id) => $"{instance.gameSaveName}_{instance.saveSlot}_{id}";
 }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]

@@ -24,12 +24,16 @@ public enum CharacterTemplateToIdentifierStrategy
 /// <br/> - For CloneableAndDisposable characters: This identifier is newly instantiated for each new instance of a character, 
 /// which will not persist between scenes (good for spawnable enemies)
 /// </summary>
+[Serializable]
 public class CharacterIdentifier 
 {
     public CharacterTemplate TemplateCreatedFrom { get; private set; }
     public CharacterStats Stats { get; private set; }
 
-    [Reload] private static Dictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters;
+    [Reload] 
+    private static SerializableDictionary<CharacterTemplate, CharacterIdentifier> PersistentCharacters { get; set; }
+    [InvokeAfterLoad] public static void Test() 
+    { Debug.Log($"k:{PersistentCharacters.Keys.Count}, v:{PersistentCharacters.Values.Count}"); }
 
     public CharacterIdentifier(CharacterTemplate fromTemplate)
     {
@@ -49,17 +53,17 @@ public class CharacterIdentifier
         if (characterTemplate == null)
             return new CharacterIdentifier(null);
 
-        if (persistentCharacters == null)
-            persistentCharacters = new();
+        if (PersistentCharacters == null)
+            PersistentCharacters = new();
 
         CharacterIdentifier toReturn;
         switch (characterTemplate.characterReferenceType)
         {
             case CharacterTemplateToIdentifierStrategy.UniqueAndPersistent:
-                if (!persistentCharacters.TryGetValue(characterTemplate, out toReturn))
+                if (!PersistentCharacters.TryGetValue(characterTemplate, out toReturn))
                 {
                     toReturn = new CharacterIdentifier(characterTemplate);
-                    persistentCharacters.Add(characterTemplate, toReturn);
+                    PersistentCharacters.Add(characterTemplate, toReturn);
                 }
                 break;
             case CharacterTemplateToIdentifierStrategy.CloneableAndDisposable:

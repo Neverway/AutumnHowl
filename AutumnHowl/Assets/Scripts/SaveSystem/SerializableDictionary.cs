@@ -21,6 +21,13 @@ public class SerializableDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKe
         keys.Add(key);
         values.Add(value);
     }
+    public void AddOrReplace(TKey key, TValue value)
+    {
+        if (ContainsKey(key))
+            this[key] = value;
+        else
+            Add(key, value);
+    }
     public bool Remove(TKey key)
     {
         if (!ContainsKey(key))

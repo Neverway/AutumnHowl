@@ -67,15 +67,8 @@ public class Volume_LevelChange : MonoBehaviour
         GameInstance.Get<GI_TransitionManager>().Fadeout();
         
         yield return new WaitForSeconds(0.5f);
-        
-        if (warpExitID == "")
-        {
-            GameInstance.Get<GI_WorldLoader>().Load(_mapID: targetLevel, _exitWarpID: warpExitID);
-        }
-        else
-        {
-            GameInstance.Get<GI_WorldLoader>().Load(_mapID: targetLevel);
-        }
+
+        GameInstance.Get<GI_WorldLoader>().Load(_mapID: targetLevel, _exitWarpID: warpExitID);
     }
 
 

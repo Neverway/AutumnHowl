@@ -46,34 +46,45 @@ public class GI_WorldLoader : MonoBehaviour
         {
             yield return null;
         }
-        
+        //If an exit to warp to has been given, teleport player there
+        Debug.Log("Exit: " + _exitWarpID);
+        if (!string.IsNullOrEmpty(_exitWarpID))
+            TeleportPlayerToExit(_exitWarpID);
+
+        //Notify save system to load values for the scene
+        GI_SaveSystem.NotifyEnteredScene();
+
+        isLoading = false;
+    }
+
+
+
+    /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public bool TeleportPlayerToExit(string _exitWarpID)
+    {
         // Get a reference to the game state (for the saved player position)
         var player = GameObject.FindGameObjectWithTag("Player");
-        
+
         // Restore saved player position once loaded
         foreach (var warp in FindObjectsOfType<Volume_LevelChange>())
         {
             if (warp.warpExitID == _exitWarpID)
             {
+                Debug.Log("Beep Boop, player moved!", player.transform.root);
                 player.transform.root.position = warp.transform.position + warp.exitOffset;
             }
         }
-        
-        isLoading = false;
+        return false;
     }
 
+    public void Load(string _mapID, string _exitWarpID = null)
+    {
+        if (isLoading) return;
 
-    /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public void Load(string _mapID)
-    {
-        if (isLoading) return;
-        GameInstance.Get<GI_AuHoGameState>().currentGameState.map = _mapID;
-        SceneManager.LoadSceneAsync(_mapID);
-    }
-    
-    public void Load(string _mapID, string _exitWarpID)
-    {
-        if (isLoading) return;
+        //Notify save system to save values from the scene you are leaving
+        GI_SaveSystem.NotifyLeavingScene();
+
+        //Start loading the next map
         GameInstance.Get<GI_AuHoGameState>().currentGameState.map = _mapID;
         StartCoroutine(Co_Load(_mapID, _exitWarpID));
     }

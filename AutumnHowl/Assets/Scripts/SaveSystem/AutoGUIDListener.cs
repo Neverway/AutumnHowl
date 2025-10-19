@@ -9,7 +9,6 @@ public interface AutoGUIDListener
     public abstract void OnLoadGUID(string loadData);
     public abstract void OnLoadGUID_NoData();
 
-
     //Stored information for GUID instances and GUID Save Data ----------------------------------------------------------------------
     [SaveAndLoadProperty("GUIDInstanceSaveData")]
     public static SerializableDictionary<string, string> GUIDSaveData { get; set; }
@@ -33,7 +32,6 @@ public interface AutoGUIDListener
             Debug.LogError("Cannot register GUID that does not exist DUMMY", guid);
             throw new System.NullReferenceException();
         }
-        Debug.Log("Yippie! I registered!: " + guid.GetGUID(), guid);
         currentGUIDInstances.Add(guid.GetGUID(), instance);
     }
     public static void UnregisterGuidInstance(GUIDComponent guid)
