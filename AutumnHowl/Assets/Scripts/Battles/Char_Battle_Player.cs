@@ -24,7 +24,8 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    private bool inTheProcessOfDying;
+    private bool inTheProcessOfDying; // Used to block inputs while the player's death animation is playing out
+    private bool inputDelay; // Used to block inputs when the player first gains control to avoid accidental inputs
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -59,6 +60,8 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void UpdateMovementInput()
     {
+        if (inputDelay) return;
+        
         // MOVEMENT
         if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
         {
@@ -101,6 +104,10 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         }
     }
 
+    /// <summary>
+    /// Play a little death animation and switch to the game over screen
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Die()
     {
         gameObject.transform.DORotate(new Vector3(45, 0, 0), 0.25f);
@@ -158,6 +165,16 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
                     break;
                 }
         }
+    }
+
+    /// <summary>
+    /// Blocks inputs when the player's turn starts to avoid accidental inputs from being registered
+    /// </summary>
+    public IEnumerator InputDelay()
+    {
+        inputDelay = true;
+        yield return new WaitForSeconds(0.1f);
+        inputDelay = false;
     }
 
     #endregion

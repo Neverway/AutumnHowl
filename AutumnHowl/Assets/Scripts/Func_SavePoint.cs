@@ -7,11 +7,12 @@
 //
 //====================================================================================================================//
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WB_Title : MonoBehaviour
+public class Func_SavePoint : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
@@ -24,7 +25,7 @@ public class WB_Title : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-
+    [SerializeField] private Func_TextEvent textEvent;
 
     #endregion
 
@@ -37,20 +38,18 @@ public class WB_Title : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public void LoadGame()
+    public void SaveGame(bool _displaySaveText = true)
     {
-        GI_SaveSystem.LoadGame();
-        GameInstance.Get<GI_WorldLoader>().Load("Town");
+        if (_displaySaveText && textEvent)
+        {
+            var playtime = GameInstance.Get<GI_AuHoGameState>().currentGameState.playtime;
+            var formatedTime = TimeSpan.FromSeconds(playtime);
+            textEvent.textEvent.frames[0].chatContent = $"[ File 1 ] \n {formatedTime:hh':'mm':'ss} \n Game has been saved!";
+            textEvent.CallEvent();
+        }        
+        GI_SaveSystem.SaveGame();
     }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-    public void GoToTitle()
-    {
-        GameInstance.Get<GI_WorldLoader>().Load("Title");
-    }
-
+    
 
     #endregion
 }
