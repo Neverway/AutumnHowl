@@ -19,6 +19,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
+    public bool skipFirstTurn = false;
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
@@ -34,7 +35,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    private bool TestTile(Vector2Int checkPos, int lowestTileNumber)
+    protected bool TestTile(Vector2Int checkPos, int lowestTileNumber)
     {
         if (battleGrid.IsMoveable(checkPos.x, checkPos.y))
         {
@@ -47,7 +48,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
         return false;
     }
 
-    private bool TestForEnemy(Vector2Int checkPos)
+    protected bool TestForEnemy(Vector2Int checkPos)
     {
         var pawnAtTile = battleGrid.GetIsOccupied(new Vector2Int(checkPos.x, checkPos.y));
         if (pawnAtTile)
@@ -60,8 +61,8 @@ public class Char_Battle_BasicAttacker : Char_Battle
 
         return false;
     }
-    
-    private Vector2Int GetLowestTileToTarget()
+
+    protected Vector2Int GetLowestTileToTarget()
     {
         var x = gridPawnController.position.x;
         var y = gridPawnController.position.y;
@@ -99,7 +100,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
         return lowestTile;
     }
 
-    private string GetTarget()
+    protected string GetTarget()
     {
         var x = gridPawnController.position.x;
         var y = gridPawnController.position.y;
@@ -115,6 +116,12 @@ public class Char_Battle_BasicAttacker : Char_Battle
     private void TakeTurn()
     {
         if (isDead) battleStateController.NextTurnStep();
+        else if (skipFirstTurn)
+            {
+                skipFirstTurn = false;
+                battleStateController.NextTurnStep ();
+                return;
+            }
         
         SetAttackDamageToCurrentATK();
         var x = gridPawnController.position.x;

@@ -32,6 +32,8 @@ public class BattleStateController : MonoBehaviour
     public bool playerWasHitThisStep;
 
     public int stepsRemaining;
+    //Counts upward how many turns the wave has been going for.
+    public int waveStepCount = 0;
     public List<Char_Battle> turnOrder;
     public int currentTurn = 0;
 
@@ -135,6 +137,7 @@ public class BattleStateController : MonoBehaviour
         else
         {
             stepsRemaining--;
+            waveStepCount++;
             currentTurn = 0;
             turnOrder[0].SetTurnActive(true);
             print($"All turns completed, going to step {stepsRemaining}");
@@ -144,6 +147,17 @@ public class BattleStateController : MonoBehaviour
     public void NextTurnStep(float _delay=0.1f)
     {
         StartCoroutine(CoNextTurnStep(_delay));
+    }
+
+    public void AddCharacter (Char_Battle _char_Battle, Vector2Int _position)
+    {            
+        // Create the enemy on the grid
+        var newEnemy = battleGrid.InstantiatePawn (
+        _position,
+        _char_Battle.gameObject);
+
+        // Add the enemy to be next in the turn order
+        turnOrder.Add (newEnemy.GetComponent<Char_Battle>());
     }
 
     internal void RemoveCharacter (Char_Battle char_Battle)
@@ -193,16 +207,11 @@ public class BS_Start : BattleState
         Debug.Log($"BS_START_ENTER: {controller.name}", controller);
         // Add the player to be first in the turn order
         controller.turnOrder.Add(controller.battlePlayer);
-        
-        foreach(var enemy in controller.gameState.currentGameState.currentBattle.enemySpawnLocations)
-        {
-            // Create the enemy on the grid
-            var newEnemy = controller.battleGrid.InstantiatePawn(
-            enemy.enemyStartPosition,
-            enemy.enemyPrefab);
 
-            // Add the enemy to be next in the turn order
-            controller.turnOrder.Add (newEnemy.GetComponent<Char_Battle> ());
+        // Add enemies to the battle
+        foreach (var enemy in controller.gameState.currentGameState.currentBattle.enemySpawnLocations)
+        {
+            controller.AddCharacter(enemy.enemyPrefab.GetComponent<Char_Battle>(), enemy.enemyStartPosition);
         }
         
         // Display opening text
@@ -287,6 +296,7 @@ public class BS_GridAction : BattleState
         activeWave = controller.gameState.currentGameState.currentBattle.battleSequence.GetBattleWave();
         controller.stepsRemaining = activeWave.waveSteps;
         controller.battlePlayer.canMove = true;
+        controller.waveStepCount = 0;
     }
 
     public override void OnStateUpdate()
