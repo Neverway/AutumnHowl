@@ -15,7 +15,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 {
     //=-----------------=
     // Public Variables
@@ -43,8 +43,12 @@ public class MapGenerator : MonoBehaviour
     private int branchLength; //ticks up how long the generator has gone without branching.
     [SerializeField] private int maxBranchLength; //at this length, we jump to a new location
 
-    [SerializeField] private bool useSeed = false; //Whether to use specified seed
-    [SerializeField] private int seed = 1000; //Random seed. For testing only.
+    [SerializeField] private bool newMapUsesSetSeed = false; //Whether to use specified seed
+    [SerializeField] private int setSeed = 1000; //Random seed. For testing only.
+    private int seed = 0;
+
+    private bool mapGenerated = false;
+    private List<GameObject> generatedObjects = new List<GameObject>();
 
     private int farthestDistance = 0;
     private Vector2Int farthestNode;
@@ -69,17 +73,14 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject[] poiList; //point of interest list. These get placed on deadends.
     [SerializeField] private List<GameObject> enemyList; //Enemy spawn list. These get scattered at random.
 
+    [SerializeField] private InteractableChestRecreator chestRecreator;
+
     //=-----------------=
     // Mono Functions
     //=-----------------=
     private void Start ()
     {
-        GenerateMap ();
-    }
-
-    private void Update ()
-    {
-
+        GenerateMap();
     }
 
     //=-----------------=
@@ -167,12 +168,15 @@ public class MapGenerator : MonoBehaviour
         Debug.Log (p);
     }
 
+    [ContextMenu("Generate Map")]
     private void GenerateMap ()
     {
-        if (useSeed)
-        {
-            Random.InitState (seed);
-        }
+        //Set the seed of the map
+        Random.InitState (seed);
+
+        //Destroy current map if it is already generated
+        if (mapGenerated) DestroyMap();
+
         branchLength = 0;
         mapNodes = new MapNode[mapWidth, mapHeight];
         for (int y = 0; y < mapHeight; y++)
@@ -195,23 +199,50 @@ public class MapGenerator : MonoBehaviour
         }
         PlacePOIs ();
         PlaceEnemies ();
+
+
+        mapGenerated = true;
+    }
+
+    [ContextMenu("Destroy Map")]
+    private void DestroyMap()
+    {
+        tilemapGround.ClearAllTiles();
+        tilemapCollision.ClearAllTiles();
+
+        foreach (GameObject generated in generatedObjects)
+        {
+            if (generated != null)
+                Destroy (generated);
+        }
+        mapGenerated = false;
+        generatedObjects = new List<GameObject>();
     }
 
     private void PlacePOIs ()
     {
-        if (poiList.Length == 0)
+        List<ICreatesGameObject> gameObjectCreators = new();
+
+        //Add pois
+        foreach (var poi in poiList)
+            gameObjectCreators.Add(new BasicGameObjectCreator(poi));
+
+        //Add createable chests
+        gameObjectCreators.Add(chestRecreator);
+
+        RandomGameObjectBag gameObjectBag = new RandomGameObjectBag(gameObjectCreators);
+
+        if (poiLocations.Count == 0) return;
+
+        foreach (var loc in poiLocations)
         {
-            return;
-        }
-        for (int i = 0; i < poiList.Length; i++)
-        {
-            if (i >= poiLocations.Count)
-            {
-                return;
-            }
-            GameObject poi = Instantiate (poiList[i]);
-            poi.transform.position = new Vector3 (poiLocations[i].x * roomWidth + (roomWidth / 2),
-                poiLocations[i].y * roomHeight + (roomHeight/2), 0) ;
+            GameObject poi = gameObjectBag.Grab().GetCreatedGameObject();
+
+            poi.transform.position = new Vector3(
+                loc.x * roomWidth + (roomWidth / 2),
+                loc.y * roomHeight + (roomHeight / 2), 0);
+
+            generatedObjects.Add(poi);
         }
     }
     /// <summary>
@@ -219,6 +250,9 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void PlaceEnemies ()
     {
+        if (enemyList.IsEmptyOrNull())
+            return;
+
         RandomBag<GameObject> enemyBag = new RandomBag<GameObject> (enemyList);
         if (poiList.Length == 0)
         {
@@ -232,6 +266,8 @@ public class MapGenerator : MonoBehaviour
             GameObject enemy = Instantiate (enemyBag.Grab());
             enemy.transform.position = new Vector3 (enemyLocations[i].x * roomWidth + (roomWidth / 2),
                 enemyLocations[i].y * roomHeight + (roomHeight / 2), 0);
+
+            generatedObjects.Add (enemy);
         }
     }
 
@@ -272,10 +308,13 @@ public class MapGenerator : MonoBehaviour
             return;
         }
         GameObject prop = Instantiate (props[Random.Range(0, props.Length)]);
-        prop.transform.position = new Vector3 (
-            x + Random.Range (-1f, 1f),
-            y + Random.Range (-1f, 1f) + 1,
+        prop.transform.position = new Vector3(
+            x + Random.Range(-1f, 1f),
+            y + Random.Range(-1f, 1f) + 1,
             prop.transform.position.z);
+
+        generatedObjects.Add(prop);
+
         if (Random.Range (0f, 1f) > .5f)
         {
             // 50/50 chance to flip the prop
@@ -527,6 +566,40 @@ public class MapGenerator : MonoBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
+
+
+
+    // SaveData handling ----------------------------------------------------------------------------------------
+    public override SaveData OnSaveInstance() => new SaveData
+    {
+        seed = seed
+    };
+
+    public override void OnLoadInstance(SaveData data)
+    {
+        if (mapGenerated && seed != data.seed)
+        {
+            DestroyMap();
+        }
+        seed = data.seed;
+        GenerateMap();
+    }
+
+    public override void OnNewInstance() 
+    {
+        if (newMapUsesSetSeed)
+            seed = setSeed;
+        else
+            seed = Random.Range(int.MinValue, int.MaxValue);
+
+        GenerateMap();
+    }
+
+    [Serializable]
+    public struct SaveData
+    {
+        public int seed;
+    }
 }
 
 class MapNode
@@ -539,4 +612,22 @@ class MapNode
     {
         paths = new bool[MapGenerator.directionCount];
     }
+}
+
+//Setup for RandomBag to work with mixing different methods of generating GameObjects -------------------------------------------------
+
+public class RandomGameObjectBag : RandomBag<ICreatesGameObject>
+{
+    public RandomGameObjectBag(List<ICreatesGameObject> _sourceList) : base(_sourceList) { }
+}
+
+public interface ICreatesGameObject
+{
+    public GameObject GetCreatedGameObject();
+}
+public class BasicGameObjectCreator : ICreatesGameObject
+{
+    public BasicGameObjectCreator(GameObject toCreate) => this.toCreate = toCreate;
+    public GameObject toCreate;
+    public GameObject GetCreatedGameObject() => GameObject.Instantiate(toCreate);
 }

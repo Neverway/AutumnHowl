@@ -142,7 +142,6 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
     {
         hasBeenFullyLooted = data.looted;
 
-
         if (data.hasItems)
         {
             chestContents = new List<Item>();
