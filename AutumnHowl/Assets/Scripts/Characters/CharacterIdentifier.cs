@@ -9,12 +9,23 @@ using UnityEngine;
 /// <br/> - For CloneableAndDisposable characters: This identifier is newly instantiated for each new instance of a character, 
 /// which will not persist between scenes (good for spawnable enemies)
 /// </summary>
-[Serializable]
 public class CharacterIdentifier
 {
+    //Fields -----------------------------------------------------------------------------------------------------------------
     public CharacterTemplate TemplateCreatedFrom { get; private set; }
     public CharacterStats Stats { get; private set; }
 
+
+
+
+
+
+
+
+
+
+
+    //Character Identifier creation ------------------------------------------------------------------------------------------
     [Reload]
     private static SerializableDictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters;
 
@@ -58,15 +69,7 @@ public class CharacterIdentifier
         return toReturn;
     }
 
-    public override string ToString()
-    {
-        if (TemplateCreatedFrom == null)
-            return "Default Character";
-        if (string.IsNullOrWhiteSpace(TemplateCreatedFrom.name))
-            return "Unnamed Character";
 
-        return TemplateCreatedFrom.name;
-    }
 
     //Save and Load for Persistent Characters ----------------------------------------------------------------------------------------
 
@@ -91,11 +94,9 @@ public class CharacterIdentifier
         var oldCharacters = persistentCharacters;
         persistentCharacters = new();
 
-        Debug.Log(CharacterTemplate.Instances.Count);
-
         foreach (SaveData data in toLoad.value)
         {
-            if (CharacterTemplate.Instances.TryGetValue(data.templateID, out CharacterTemplate template))
+            if (IDToObj<CharacterTemplate>.TryGet(data.templateID, out CharacterTemplate template))
             {
                 CharacterIdentifier charToLoad = 
                     oldCharacters.ContainsKey(template) ? oldCharacters[template] : new(template);
@@ -116,11 +117,23 @@ public class CharacterIdentifier
     }
     public SaveData GetSaveData() => new SaveData()
     {
-        templateID = TemplateCreatedFrom.uniqueTemplateID,
+        templateID = TemplateCreatedFrom.UniqueID,
         statsData = Stats.GetSaveData()
     };
     public void LoadSaveData(SaveData saveData)
     {
         Stats.LoadSaveData(saveData.statsData);
+    }
+
+
+    //Basic C# class features ---------------------------------------------------------------------------------------------------------
+    public override string ToString()
+    {
+        if (TemplateCreatedFrom == null)
+            return "Default Character";
+        if (string.IsNullOrWhiteSpace(TemplateCreatedFrom.name))
+            return "Unnamed Character";
+
+        return TemplateCreatedFrom.name;
     }
 }

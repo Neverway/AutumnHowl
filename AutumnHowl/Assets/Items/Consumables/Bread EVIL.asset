@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
   m_Name: Bread EVIL
   m_EditorClassIdentifier: 
-  id: evil_bread
+  <UniqueID>k__BackingField: item_consumable_evil_bread
+  id: 
   displayName: Evil Bread
   description: bread, and its evil this time
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 9999
+  buyCost: 1
   sellCost: 1
   effectsOnConsume:
     rid: 1234355984407986202
@@ -30,33 +31,14 @@ MonoBehaviour:
         hideDescription: 1
         effects:
         - rid: 1234355984407986203
-        - rid: 1234355984407986205
-        - rid: 1234356096328531991
     - rid: 1234355984407986203
       type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
         target:
-          rid: 1234355984407986206
-        modifierType: 1
-        amount: 10
-    - rid: 1234355984407986205
-      type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
-      data:
-        hideDescription: 0
-        itemToGive: {fileID: 0}
-        count: 0
-    - rid: 1234355984407986206
-      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 1234356096328531991
-      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
-      data:
-        hideDescription: 0
-        target:
-          rid: 1234356096328531992
-        modifierType: 0
-        amount: 1
-    - rid: 1234356096328531992
+          rid: 1234356186880409600
+        modifierType: 2
+        amount: -50
+    - rid: 1234356186880409600
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 

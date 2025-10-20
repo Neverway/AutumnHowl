@@ -10,25 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
-  m_Name: Pumpkin
+  m_Name: ShopKeeper
   m_EditorClassIdentifier: 
-  characterReferenceType: 1
-  characterName: SaltBat
+  <UniqueID>k__BackingField: npc_shopkeeper
+  characterReferenceType: 0
+  characterName: 
   baseStats:
     health: 100
     level: 0
+    power: 10
+    corruption: 0
     attack:
       startValue: 10
       multiplier: 0
       addedValue: 0
     defense:
-      startValue: 0
+      startValue: 10
       multiplier: 0
       addedValue: 0
-    power: 5
-    corruption: 0
     maxHealth:
-      startValue: 15
+      startValue: 100
       multiplier: 0
       addedValue: 0
     maxLevel:
@@ -44,11 +45,11 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxPower:
-      startValue: 5
+      startValue: 100
       multiplier: 0
       addedValue: 0
     maxCorruption:
-      startValue: 5
+      startValue: 100
       multiplier: 0
       addedValue: 0
     walkSpeed:

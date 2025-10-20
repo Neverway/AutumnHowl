@@ -315,7 +315,7 @@ namespace ErryLib.Reflection
 
         public static IEnumerable<Type> GetAllTypesAssignableTo(this Type type)
         {
-            //beepbopboopbopbeepbop >:3   (credit to Jen, this helps the code work better)
+            //beepbopboopbopbeepbop >:3   (credit to Karsen, this helps the code work better)
             Type baseTypes = type;
             while (baseTypes != null)
             { 

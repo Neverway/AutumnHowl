@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
   m_Name: Purify
   m_EditorClassIdentifier: 
-  id: item_magic_purify
+  <UniqueID>k__BackingField: item_magic_purify
+  id: 
   displayName: Purify Spell
   description: Sacrifice your strength to restore sanity.
   canNotDiscard: 1

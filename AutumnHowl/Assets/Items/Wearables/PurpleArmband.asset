@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
   m_Name: PurpleArmband
   m_EditorClassIdentifier: 
-  id: item_wearable_purpleArmband
+  <UniqueID>k__BackingField: item_wearable_purpleArmband
+  id: 
   displayName: Purp. Armband
   description: A sign of a true adventuerer.
   canNotDiscard: 0

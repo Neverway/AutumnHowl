@@ -17,11 +17,15 @@ using static CharacterStatType;
 [Serializable]
 public class CharacterStats
 {
+    public Character owner { get; set; }
 
     /*-----[ Constructors ]-------------------------------------------------------------------------------------------*/
-    public CharacterStats() { }
-    public CharacterStats(SaveData saveData) { LoadSaveData(saveData); }
-    public CharacterStats(CharacterIdentifier character) => SetupStatsLinkedToCharacter(character);
+    public CharacterStats() 
+    { 
+        health = maxHealth; 
+    }
+    public CharacterStats(SaveData saveData) : base() { LoadSaveData(saveData); }
+    public CharacterStats(CharacterIdentifier character) : base() => SetupStatsLinkedToCharacter(character);
 
     /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/
     [Serializable]
@@ -60,10 +64,11 @@ public class CharacterStats
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
 
-    [Box] public float health = 100;
-    [Box] public float level = 0;
-    [Box] public int power = 10;
-    [Box] public int corruption = 0;
+    [Header("Starting Values for Valued-Stats")]
+    public float health = 100;
+    public float level = 0;
+    public int power = 10;
+    public int corruption = 0;
 
     [Header("Combat Stats")]
     [Box] public CharacterStatInt attack = new(10, Attack);
@@ -80,8 +85,6 @@ public class CharacterStats
     [Header("Overworld Stats")]
     [Box] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
     [Box] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
-
-    public Character owner;
 
     #endregion
 

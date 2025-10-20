@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1110102192039957940}
-  - component: {fileID: 74935532908232714}
   - component: {fileID: 7843920472673246470}
   m_Layer: 0
   m_Name: DEBUG - View Modifiers
@@ -33,32 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7072663644954034233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &74935532908232714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8061491413265137}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9837e10a15b193c4c85e23ba1ccdfcc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modifier:
-    rid: 1234355984407986194
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1234355984407986194
-      type: {class: CharacterStatModifier, ns: , asm: Assembly-CSharp}
-      data:
-        hideDescription: 0
-        statToModify: 5
-        modifierType: 1
-        value: 3
 --- !u!114 &7843920472673246470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,10 +719,14 @@ MonoBehaviour:
   saveDataStrategy:
     rid: 1234356096328531984
   doSaving: 1
-  saveSlotName: Game
+  gameSaveName: AuHo
+  saveSlot: 0
   references:
     version: 2
     RefIds:
     - rid: 1234356096328531984
       type: {class: PlayerPrefsSaveDataStrategy, ns: , asm: Assembly-CSharp}
-      data: 
+      data:
+        currentSaveData:
+          keys: []
+          values: []

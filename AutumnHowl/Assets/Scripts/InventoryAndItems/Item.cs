@@ -7,13 +7,18 @@
 //
 //====================================================================================================================//
 
+using ErryLib.Reflection;
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+public abstract class Item : ScriptableObject, UniquelyIdentifiable
 {
+    /*-----[ UniqueID Setup ]-----------------------------------------------------------------------------------------*/
+    [field: SerializeField] public string UniqueID { get; private set; }
+    [InvokeOnReflectionCacheLoadRuntime] public static void CacheIDs() => IDToObj<CharacterTemplate>.AddAllFromUnityResources();
+
+
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public string id;
     public string displayName;
     [TextArea, SerializeField] protected string description;
     public bool canNotDiscard;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 /// <summary>Base class for all EffectActions! 
@@ -86,7 +87,9 @@ public class ModifyHealthAction : EffectAction
         var stats = targetCharacter.currentStats;
         targetCharacter.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
         // */
-        user.Stats.ModifyHealth(amount);
+        CharacterStats toApplyTo = user.Stats;
+
+        toApplyTo.ModifyHealth(modifierType.ApplyMod(amount, toApplyTo.health, toApplyTo.maxHealth));
     }
 
     public override string DescribeNoFormat()

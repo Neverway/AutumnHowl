@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: char_tree
   m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: char_tree
   characterReferenceType: 1
   characterName: 
   baseStats:
@@ -19,16 +20,28 @@ MonoBehaviour:
     level: 0
     power: 5
     corruption: 0
-    defense:
-      startValue: 0
-      multiplier: 0
-      addedValue: 0
     attack:
       startValue: 5
       multiplier: 0
       addedValue: 0
+    defense:
+      startValue: 0
+      multiplier: 0
+      addedValue: 0
     maxHealth:
       startValue: 20
+      multiplier: 0
+      addedValue: 0
+    maxLevel:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxAttack:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxDefense:
+      startValue: 100
       multiplier: 0
       addedValue: 0
     maxPower:
@@ -47,3 +60,4 @@ MonoBehaviour:
       startValue: 3
       multiplier: 0
       addedValue: 0
+    owner: {fileID: 0}

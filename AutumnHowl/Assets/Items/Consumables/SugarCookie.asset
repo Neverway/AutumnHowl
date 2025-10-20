@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
   m_Name: SugarCookie
   m_EditorClassIdentifier: 
-  id: item_consumable_sugarcookies
+  <UniqueID>k__BackingField: item_consumable_sugarcookies
+  id: 
   displayName: Sugar Cookie
   description: A sweet delicious sugar cookie! With extra sugar!
   canNotDiscard: 0

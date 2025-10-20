@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
   m_Name: CloakedCollar
   m_EditorClassIdentifier: 
-  id: item_wearable_cloakedCollar
+  <UniqueID>k__BackingField: item_wearable_cloakedCollar
+  id: 
   displayName: Cloaked Collar
   description: A small black collar with a silver engraving. Looking at it too long
     makes your head spin.{col=stat}

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
   m_Name: Unveil
   m_EditorClassIdentifier: 
-  id: item_magic_unveil
+  <UniqueID>k__BackingField: item_magic_unveil
+  id: 
   displayName: Unveil Spell
   description: Reveal hidden things about the environment or a target.
   canNotDiscard: 1

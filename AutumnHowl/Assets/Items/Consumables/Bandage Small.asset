@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
   m_Name: Bandage Small
   m_EditorClassIdentifier: 
-  id: item_consumable_bandageSmall
+  <UniqueID>k__BackingField: item_consumable_bandageSmall
+  id: 
   displayName: Sm. Bandage
   description: A small bandage.
   canNotDiscard: 0

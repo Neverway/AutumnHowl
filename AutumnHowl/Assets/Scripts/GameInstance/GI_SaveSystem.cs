@@ -151,7 +151,6 @@ public class GI_SaveSystem : MonoBehaviour
         //Save all values from properties with SaveAndLoadProperty attributes
         foreach (var saveLoadProperty in cachedSaveLoadProperties)
         {
-            Debug.Log(saveLoadProperty.Item1.saveId);
             var value = saveLoadProperty.Item2.GetValue(null);
             var saveMethod = saveValueMethod.MakeGenericMethod(saveLoadProperty.Item2.PropertyType);
             saveMethod.Invoke(this, new object[] { value, saveLoadProperty.Item1.saveId });

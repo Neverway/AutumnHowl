@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: item_consumable_bread
   id: item_consumable_bread
   displayName: Bread
   description: 'It''s a loaf of bread. '
