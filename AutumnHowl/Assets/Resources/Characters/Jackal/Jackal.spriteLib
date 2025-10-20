@@ -21,82 +21,82 @@ MonoBehaviour:
       m_Hash: 886427421
       m_Sprite: {fileID: 779807480, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -764398582, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1663326520, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_27
       m_Hash: 64159627
       m_Sprite: {fileID: -1220483427, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -181699130, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1169305085, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_28
       m_Hash: 325968410
       m_Sprite: {fileID: -161900721, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 779353995, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 803648693, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_29
       m_Hash: 610980492
       m_Sprite: {fileID: 646360892, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -930218052, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 284167395, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_46
       m_Hash: 579823771
       m_Sprite: {fileID: -2095984217, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -9842709, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1880285782, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_47
       m_Hash: 361256973
       m_Sprite: {fileID: 1771782849, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1880053110, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -2033251685, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_48
       m_Hash: 87508380
       m_Sprite: {fileID: -1611658235, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 912821869, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 2108244077, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_49
       m_Hash: 842036490
       m_Sprite: {fileID: 1705788357, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1748224314, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 326817418, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_66
       m_Hash: 280562201
       m_Sprite: {fileID: 1566977902, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1989076999, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1801531472, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_67
       m_Hash: 666778255
       m_Sprite: {fileID: 1822914423, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1434477743, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1070189673, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_68
       m_Hash: 922822430
       m_Sprite: {fileID: 897608481, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1848793276, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1402583553, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_69
       m_Hash: 399240
       m_Sprite: {fileID: 923320642, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1667740315, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1432982235, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_86
       m_Hash: 238692247
       m_Sprite: {fileID: -1591991398, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -778507713, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -2054167022, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_87
       m_Hash: 960304897
       m_Sprite: {fileID: 973844746, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -2013415897, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -222097231, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_88
       m_Hash: 696388240
       m_Sprite: {fileID: -424658110, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 651398831, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1141081048, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_89
       m_Hash: 512047622
       m_Sprite: {fileID: 946389485, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 966819769, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1959908904, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     m_FromMain: 1
     m_EntryOverrideCount: 16
   - m_Name: Walk
@@ -107,82 +107,82 @@ MonoBehaviour:
       m_Hash: 866806783
       m_Sprite: {fileID: -115589674, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1053998325, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1819182816, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_32
       m_Hash: 715340357
       m_Sprite: {fileID: 34359432, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1385910767, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 529936883, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_33
       m_Hash: 497289939
       m_Sprite: {fileID: 2082776072, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1476137500, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 2053110874, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_34
       m_Hash: 62955376
       m_Sprite: {fileID: -1606950552, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 497742882, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -425596767, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_51
       m_Hash: 636537977
       m_Sprite: {fileID: -152931565, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 382471635, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -523858156, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_52
       m_Hash: 1022991811
       m_Sprite: {fileID: -202798824, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1944076782, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1191283717, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_53
       m_Hash: 201239893
       m_Sprite: {fileID: -1868120702, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 2065969774, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1238513415, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_54
       m_Hash: 362428662
       m_Sprite: {fileID: 912906342, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1114521637, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1934865196, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_71
       m_Hash: 398896891
       m_Sprite: {fileID: -857449625, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -543379722, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -497426245, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_72
       m_Hash: 248512321
       m_Sprite: {fileID: 644505684, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1207968337, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 608702520, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_73
       m_Hash: 969461719
       m_Sprite: {fileID: -2117598997, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1934826284, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 799335095, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_74
       m_Hash: 665606772
       m_Sprite: {fileID: -261939635, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 885183435, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1595420857, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_91
       m_Hash: 155550581
       m_Sprite: {fileID: 148685880, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1527380975, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 2092764867, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_92
       m_Hash: 273470159
       m_Sprite: {fileID: -329141598, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1787947262, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1215312273, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_93
       m_Hash: 659284569
       m_Sprite: {fileID: 71766993, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1472696623, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1294973585, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_94
       m_Hash: 959412218
       m_Sprite: {fileID: 1170565572, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1151191948, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -246633011, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     m_FromMain: 1
     m_EntryOverrideCount: 16
   - m_Name: Attack
@@ -193,84 +193,84 @@ MonoBehaviour:
       m_Hash: 768540252
       m_Sprite: {fileID: -278051552, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1425134853, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -581832949, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_37
       m_Hash: 449433290
       m_Sprite: {fileID: -92090484, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -612054783, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1491997538, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_38
       m_Hash: 175559515
       m_Sprite: {fileID: 204385449, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1534265245, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1202384327, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_39
       m_Hash: 1030874061
       m_Sprite: {fileID: 305979350, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1556271655, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1697342881, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_56
       m_Hash: 999578074
       m_Sprite: {fileID: -140950847, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 557772561, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 288015357, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_57
       m_Hash: 210987340
       m_Sprite: {fileID: -166742402, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -835849622, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -55929678, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_58
       m_Hash: 472675549
       m_Sprite: {fileID: -848206827, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -1580832159, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 350938055, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_59
       m_Hash: 724255819
       m_Sprite: {fileID: 107407425, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1250921969, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1522942767, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_76
       m_Hash: 161626968
       m_Sprite: {fileID: -595454131, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 894178407, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -51319832, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_77
       m_Hash: 1051003854
       m_Sprite: {fileID: -1593096842, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 465085053, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 2081574740, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_78
       m_Hash: 773461599
       m_Sprite: {fileID: -1520189173, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 886348452, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 36401856, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_79
       m_Hash: 421340873
       m_Sprite: {fileID: -1948277509, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: -783780533, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1592235124, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_96
       m_Hash: 388044502
       m_Sprite: {fileID: -905927501, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 680051910, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1410370755, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_97
       m_Hash: 539371072
       m_Sprite: {fileID: 1412013372, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 409754489, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -347663004, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_98
       m_Hash: 815348689
       m_Sprite: {fileID: -1283083315, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 981367014, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: -1714741520, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     - m_Name: Char_Autumn_99
       m_Hash: 127798087
       m_Sprite: {fileID: -22445022, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 1458084563, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      m_SpriteOverride: {fileID: 1653242285, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
     m_FromMain: 1
     m_EntryOverrideCount: 16
   m_PrimaryLibraryGUID: 69eb6475d3ac82c999546e03ab33fc93
-  m_ModificationHash: 638964958224837290
+  m_ModificationHash: 638965192780097100
   m_Version: 1
