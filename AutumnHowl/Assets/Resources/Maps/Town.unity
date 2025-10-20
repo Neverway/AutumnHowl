@@ -239,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 2723487152823040133, guid: 76eab6b94f506d24a9337b65a87ead7c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 369781939, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      objectReference: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
     - target: {fileID: 8756161298840459820, guid: 76eab6b94f506d24a9337b65a87ead7c, type: 3}
       propertyPath: m_Name
       value: ShopKeeper Overworld
@@ -19346,7 +19346,7 @@ PrefabInstance:
     - target: {fileID: 2723487152823040133, guid: 76eab6b94f506d24a9337b65a87ead7c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 369781939, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      objectReference: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
     - target: {fileID: 8756161298840459820, guid: 76eab6b94f506d24a9337b65a87ead7c, type: 3}
       propertyPath: m_Name
       value: ShopKeeper Overworld

@@ -11,14 +11,22 @@ PrefabInstance:
     - target: {fileID: 576078956332330542, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
-      objectReference: {fileID: 7108339969198208228, guid: e738ac69ff24ef65ca470df37594ff48, type: 3}
+      objectReference: {fileID: 7108339969198208228, guid: c47c2990b2a31f94f8b8e7b02cf89e7e, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -764398582, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_labelHash
+      value: 0.00000039825036
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteHash
       value: 1069177207
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_CategoryHash
+      value: 0.009161512
       objectReference: {fileID: 0}
     - target: {fileID: 4264719621217924197, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62,12 +70,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Name
-      value: NAME Overworld
+      value: SaltBat Overworld
       objectReference: {fileID: 0}
     - target: {fileID: 6601185223956943184, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: template
       value: 
-      objectReference: {fileID: 11400000, guid: 380a919475a3a43928630d31c0b60f85, type: 2}
+      objectReference: {fileID: 11400000, guid: 380949f715b9c0a9a8c8bbba10d30460, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
