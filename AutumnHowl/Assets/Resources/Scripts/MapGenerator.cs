@@ -80,7 +80,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     private void Start ()
     {
-        GenerateMap();
+        GenerateMapWithNewSeed();
     }
 
     //=-----------------=
@@ -168,7 +168,17 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         Debug.Log (p);
     }
 
-    [ContextMenu("Generate Map")]
+    [ContextMenu("Generate New Map")]
+    private void GenerateMapWithNewSeed()
+    {
+        if (newMapUsesSetSeed)
+            seed = setSeed;
+        else
+            seed = Random.Range(int.MinValue, int.MaxValue);
+
+        GenerateMap();
+    }
+
     private void GenerateMap ()
     {
         //Set the seed of the map
@@ -587,12 +597,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     public override void OnNewInstance() 
     {
-        if (newMapUsesSetSeed)
-            seed = setSeed;
-        else
-            seed = Random.Range(int.MinValue, int.MaxValue);
-
-        GenerateMap();
+        GenerateMapWithNewSeed();
     }
 
     [Serializable]

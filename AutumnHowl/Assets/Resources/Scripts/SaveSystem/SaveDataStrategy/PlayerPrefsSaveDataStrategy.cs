@@ -18,6 +18,12 @@ public class PlayerPrefsSaveDataStrategy : JsonBasedSaveDataStrategy
         else
             currentSaveData = DataStringinator.FromDataString<SerializableDictionary<string, string>>(data);
     }
+    public override void Clear(string fileName)
+    {
+        currentSaveData = new SerializableDictionary<string, string>();
+        PlayerPrefs.DeleteKey(fileName);
+    }
+
     protected override void SaveJsonValue(string value, string id)
     {
         currentSaveData.AddOrReplace(id, value);
