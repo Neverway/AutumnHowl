@@ -144,6 +144,8 @@ public class GI_SaveSystem : MonoBehaviour
     private void OnClearSave()
     {
         if (!Application.isPlaying) return;
+
+        saveDataStrategy.Clear(SaveDataFileName);
     }
 
     private void SaveValuesFromAttributes()
