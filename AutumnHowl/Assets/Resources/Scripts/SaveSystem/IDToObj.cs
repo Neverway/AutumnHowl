@@ -21,7 +21,6 @@ public static class IDToObj<T>
             obj = default(T);
             return false;
         }
-        Debug.Log($"{typeof(T).Name} id count: {idToInstance.Count}");
         return idToInstance.TryGetValue(id, out obj);
     }
 

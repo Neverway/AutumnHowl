@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Maps/Title.unity
+    path: Assets/Resources/Maps/Title.unity
     guid: 852da288f69184719b0bd4391b830ec5
   - enabled: 1
-    path: Assets/Maps/Town.unity
+    path: Assets/Resources/Maps/Town.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Maps/Shop.unity
+    path: Assets/Resources/Maps/Shop.unity
     guid: 52982295b80e67b7bb4f51df42f46f42
   - enabled: 1
-    path: Assets/Maps/Forest.unity
+    path: Assets/Resources/Maps/Forest.unity
     guid: f541c909f5cd54e46ac75e8e7da3ed47
   - enabled: 1
-    path: Assets/Maps/Battle.unity
+    path: Assets/Resources/Maps/Battle.unity
     guid: 23ba94449cea27896ba8a4ab2595882b
   - enabled: 1
-    path: Assets/Maps/GameOver.unity
+    path: Assets/Resources/Maps/GameOver.unity
     guid: 5bf591eeae924979eadab4e47ba332d7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 011789d2a193d404f91a8d9567e446d0, type: 3}

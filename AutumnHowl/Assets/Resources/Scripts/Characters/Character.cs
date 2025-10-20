@@ -71,7 +71,10 @@ public abstract class Character : MonoBehaviour
         animator.SetFloat("idleX", startFaceDirection.x);
         animator.SetFloat("idleY", startFaceDirection.y);
     }
-    public void OnDestroy() => GameInstance.Get<GI_CharacterReferencer>().UnRegister(this);
+    public void OnDestroy()
+    {
+        try { GameInstance.Get<GI_CharacterReferencer>().UnRegister(this); } catch { }
+    }
     public void LateUpdate() => UpdateGameStateValues();
 
 
