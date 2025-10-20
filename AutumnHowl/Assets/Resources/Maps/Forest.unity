@@ -474,6 +474,7 @@ MonoBehaviour:
   maxBranchLength: 5
   useSeed: 0
   seed: 1001
+  enemyFrequency: 3
   tilemapGround: {fileID: 1982810835}
   groundTile: {fileID: 11400000, guid: f4a0298d72d83d266a4115ba738bd4f5, type: 2}
   tilemapCollision: {fileID: 1994119680}
@@ -495,6 +496,7 @@ MonoBehaviour:
   - {fileID: 9175689047550027428, guid: bcb18d0d9616605218047da0b7397c3d, type: 3}
   - {fileID: 9175689047550027428, guid: bcb18d0d9616605218047da0b7397c3d, type: 3}
   - {fileID: 9175689047550027428, guid: bcb18d0d9616605218047da0b7397c3d, type: 3}
+  enemyList: []
 --- !u!1 &970689508
 GameObject:
   m_ObjectHideFlags: 0

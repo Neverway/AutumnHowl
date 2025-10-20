@@ -469,8 +469,8 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*Whatcha got for me?'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -917,8 +917,8 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*What can I do for ya?'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -1707,8 +1707,8 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*What ya wanna know?'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3657,8 +3657,8 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*We don''t get many visitors out here. Being close to the barrier
         and all though, I suppose that makes sense.'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3669,8 +3669,8 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*You''re here planning to slay {col=key, spd=0.05}The Beast{col=,
         spd=0.02}, right?'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3681,8 +3681,8 @@ MonoBehaviour:
     - name: Shop Keeper
       chatContent: '*It''s a long journey. I would recommend visiting {col=key}The
         Inn{col=} when you get tired.'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3692,8 +3692,8 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Shop Keeper
       chatContent: '*Regardless, it''s nice to see a new face around.'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 864773066, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -3703,8 +3703,8 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Shop Keeper
       chatContent: '*That being said, please be careful out there, okay?'
-      portrait: {fileID: -441779131, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5193,8 +5193,8 @@ MonoBehaviour:
     frames:
     - name: Shop Keeper
       chatContent: '*Ah, {col=key, spd=0.05}The Beast.{spd=0.02}'
-      portrait: {fileID: -1493513168, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -5204,10 +5204,20 @@ MonoBehaviour:
       autoProgressOnComplete: 0
     - name: Shop Keeper
       chatContent: '*Legend says it lurks beyond the barrier and can only be defeated
-        by a {col=key, spd=0.05}Mythical Blade.{spd=0.02, col=} Guess no one cared
-        to mention it was so heavy, huh? '
-      portrait: {fileID: -441779131, guid: 21650535b73c4e1f0b0bfc90d70faa8c, type: 3}
-      chatterVoice: {fileID: 11400000, guid: b68dcc9775c5ae7e981f47aab5941417, type: 2}
+        by a {col=key, spd=0.05}Mythical Blade.'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '{spd=, col=}*Guess no one cared to mention it was so heavy, huh? '
+      portrait: {fileID: 864773066, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
