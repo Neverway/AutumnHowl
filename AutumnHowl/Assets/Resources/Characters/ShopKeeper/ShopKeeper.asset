@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: ShopKeeper
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: npc_shopkeeper
+  <UniqueID>k__BackingField: ShopKeeper
   characterReferenceType: 0
-  characterName: 
+  characterName: ShopKeeper
   baseStats:
     health: 100
     level: 0
@@ -60,4 +60,3 @@ MonoBehaviour:
       startValue: 3
       multiplier: 0
       addedValue: 0
-    owner: {fileID: 0}

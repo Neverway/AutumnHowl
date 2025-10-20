@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: char_ShopKeeper_0
+      name: ShopKeeper_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd5ecb3de1cc1877683c90cc0ae9bb5d
-      internalID: -1850145415
+      spriteID: 79d868d098341c1c68153622e23ee345
+      internalID: -1255811422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_1
+      name: ShopKeeper_1
       rect:
         serializedVersion: 2
         x: 64
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cb1d11e6cad58893ad201a1f9ef7531
-      internalID: -1580939187
+      spriteID: b063ded643debf6ac857e2e9432daad3
+      internalID: 1547078371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_2
+      name: ShopKeeper_2
       rect:
         serializedVersion: 2
         x: 128
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11c1d9a1e66a87ca7b9fc973d5a539b9
-      internalID: 1071860861
+      spriteID: 4e6e3f933ae381049b7a17da11bf126c
+      internalID: 92836699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_3
+      name: ShopKeeper_3
       rect:
         serializedVersion: 2
         x: 192
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa0ac1961303e3000842bb0d8bdcbf1d
-      internalID: 307992371
+      spriteID: 7f1e3406a762f21e98b1141c38981780
+      internalID: 1733882023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_4
+      name: ShopKeeper_4
       rect:
         serializedVersion: 2
         x: 256
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dde3e6d59f2302ca99a90b5aa15192aa
-      internalID: 1582998175
+      spriteID: 32d9247774976cfe5a8a09625e00922a
+      internalID: -598672124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_5
+      name: ShopKeeper_5
       rect:
         serializedVersion: 2
         x: 320
@@ -255,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45e4d968483178b2fb426ca083165a8e
-      internalID: 705081803
+      spriteID: 60a31e1cc3f613d1fbd334eba3c27845
+      internalID: 1797228107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_6
+      name: ShopKeeper_6
       rect:
         serializedVersion: 2
         x: 384
@@ -276,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69d762485a54e2793a866fca420799f6
-      internalID: -2003083256
+      spriteID: 6ad1e7c9a99c0aa04b7adada748a620c
+      internalID: 1924245719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_7
+      name: ShopKeeper_7
       rect:
         serializedVersion: 2
         x: 448
@@ -297,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8a74e8d85f020d3bafcaa22a8386168
-      internalID: 857342041
+      spriteID: 8ce09dca0dee930a4a96d606e319cf59
+      internalID: 2026677554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_8
+      name: ShopKeeper_8
       rect:
         serializedVersion: 2
         x: 512
@@ -318,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed9bddd72f108805f9b4b24230693161
-      internalID: -31326212
+      spriteID: 7026731ff9d571e90b52e3598032a34e
+      internalID: 239033852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_9
+      name: ShopKeeper_9
       rect:
         serializedVersion: 2
         x: 576
@@ -339,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65ec09687e8c7069b8c1c08e7cc25226
-      internalID: 1438716753
+      spriteID: 2d2475ea229088a86acadfee290faebd
+      internalID: 441013348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_10
+      name: ShopKeeper_10
       rect:
         serializedVersion: 2
         x: 640
@@ -360,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bacb7c264e00f2acea3b942443ce1490
-      internalID: -1627405735
+      spriteID: fe87fbfc329b4b50fa9bb260817b9ca8
+      internalID: -32183301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_11
+      name: ShopKeeper_11
       rect:
         serializedVersion: 2
         x: 704
@@ -381,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35b2c36505926a4e9a22d7beeb35b5de
-      internalID: -839330860
+      spriteID: eaed58ebcf5185e199531e54a0b37528
+      internalID: -1960253195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_12
+      name: ShopKeeper_12
       rect:
         serializedVersion: 2
         x: 768
@@ -402,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fb9a8a5d55d3bf88a6c9dd8ec2b82ab
-      internalID: -2050220854
+      spriteID: 045f7b21f15fe9cc8ae5d908adaa92bb
+      internalID: -981229083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_13
+      name: ShopKeeper_13
       rect:
         serializedVersion: 2
         x: 832
@@ -423,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d43c374b3a1fb75a2a982d6e439e3991
-      internalID: 1894876500
+      spriteID: a0559961bcc649d2f8f16974d921f11b
+      internalID: -1589274385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_14
+      name: ShopKeeper_14
       rect:
         serializedVersion: 2
         x: 896
@@ -444,14 +444,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e820d330d13c59408c33bb3b88afedb
-      internalID: 1326601019
+      spriteID: 1b032fd60fbfe83e9a8e1141ccb93dd5
+      internalID: -364924724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_15
+      name: ShopKeeper_15
       rect:
         serializedVersion: 2
         x: 960
@@ -465,14 +465,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef00acf066260b7acad15450ff64e25c
-      internalID: -1461384509
+      spriteID: f7f5851afd16d9535a7965ea8147a9f6
+      internalID: 1941916253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_16
+      name: ShopKeeper_16
       rect:
         serializedVersion: 2
         x: 1024
@@ -486,14 +486,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4536cba97318b3eb1a74ab39792f4142
-      internalID: 1648542953
+      spriteID: 33d7a5c0ef67712d6aa34e8c65da2647
+      internalID: -347429759
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_17
+      name: ShopKeeper_17
       rect:
         serializedVersion: 2
         x: 1088
@@ -507,14 +507,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2839bcd55339b9f38ac5d5e7e399e5df
-      internalID: -571828751
+      spriteID: c05fe0ba516c7c2c1a7ed1b2987f47a4
+      internalID: -112220851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_18
+      name: ShopKeeper_18
       rect:
         serializedVersion: 2
         x: 1152
@@ -528,14 +528,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 492580cfb1479ef1297d1cb8df83f528
-      internalID: 2065679216
+      spriteID: e5dce0694e6450a6aa481eea006e4c34
+      internalID: 866904784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_19
+      name: ShopKeeper_19
       rect:
         serializedVersion: 2
         x: 1216
@@ -549,14 +549,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d64d7c38e4a06861b19a9defe4c9769
-      internalID: 1552518650
+      spriteID: b17b043a1f7f233e9a9f6514563e6c52
+      internalID: 1227805974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_20
+      name: ShopKeeper_20
       rect:
         serializedVersion: 2
         x: 0
@@ -570,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63b54e04620fecd27bdf6e4183d10ec4
-      internalID: -559336837
+      spriteID: 9a0789384529167f0a6ac010f20b3c31
+      internalID: 617291558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_21
+      name: ShopKeeper_21
       rect:
         serializedVersion: 2
         x: 64
@@ -591,14 +591,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 972cfbe28484aa47faa00875a74d5cb1
-      internalID: -1253891948
+      spriteID: 6c79e9353dc5698a786dbccc9b54782c
+      internalID: 90344351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_22
+      name: ShopKeeper_22
       rect:
         serializedVersion: 2
         x: 128
@@ -612,14 +612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17179bbc648877de5b433fab5d140af8
-      internalID: 396491863
+      spriteID: 88ad0056f326a6f7bbef58def74c7d51
+      internalID: -1955092497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_23
+      name: ShopKeeper_23
       rect:
         serializedVersion: 2
         x: 192
@@ -633,14 +633,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ab929f85a706fed294d18dfe9c82a07
-      internalID: 1870483812
+      spriteID: 7d880667eb7673a55a837889673e8d33
+      internalID: 1506784530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_24
+      name: ShopKeeper_24
       rect:
         serializedVersion: 2
         x: 256
@@ -654,14 +654,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fe16fb6407f35508b29186fac633229
-      internalID: -636965722
+      spriteID: ae3fc8142f66760ab8420810ed4b7b5f
+      internalID: -1401492287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_25
+      name: ShopKeeper_25
       rect:
         serializedVersion: 2
         x: 320
@@ -675,14 +675,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ebb9f94c0e8883d790d46927562a72a
-      internalID: 1666600248
+      spriteID: 12a1283d556a9484ba57fe84c6926b00
+      internalID: -1946169093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_26
+      name: ShopKeeper_26
       rect:
         serializedVersion: 2
         x: 384
@@ -696,14 +696,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34fa8d62a7db7b1b3b12a5eb1f0e16dc
-      internalID: 369781939
+      spriteID: 9486623c6750856cbb07b25fbfad7644
+      internalID: 1875603287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_27
+      name: ShopKeeper_27
       rect:
         serializedVersion: 2
         x: 448
@@ -717,14 +717,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ace02e2a78d0722eb03a4d4e473eef8
-      internalID: -3269065
+      spriteID: e1693f4b3464682b080508c19a1ea466
+      internalID: -1569756892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_28
+      name: ShopKeeper_28
       rect:
         serializedVersion: 2
         x: 512
@@ -738,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb7c286ac18659200b1604e11317ae0e
-      internalID: -773717525
+      spriteID: 818c12e41cb251ec3946d00d2909b71e
+      internalID: -555594068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_29
+      name: ShopKeeper_29
       rect:
         serializedVersion: 2
         x: 576
@@ -759,14 +759,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a5e5e05d22b999ff830bc4ee558b175
-      internalID: -1649496727
+      spriteID: da5ea51a4699676c58454ed7be4a6204
+      internalID: -1919899081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_30
+      name: ShopKeeper_30
       rect:
         serializedVersion: 2
         x: 640
@@ -780,14 +780,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5da8ca8273d509c1196fff0a5e6a54b2
-      internalID: -1333856298
+      spriteID: fc6572636d458e442b265fb1b9c918e6
+      internalID: 123044764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_31
+      name: ShopKeeper_31
       rect:
         serializedVersion: 2
         x: 704
@@ -801,14 +801,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7b73f7665be419fb93c206a07b2670a
-      internalID: -1063209549
+      spriteID: aae2c126bd8845461949604de0fa106b
+      internalID: -801855574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_32
+      name: ShopKeeper_32
       rect:
         serializedVersion: 2
         x: 768
@@ -822,14 +822,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: facb2ac5632a2b200a5ae12b8353223a
-      internalID: 236465413
+      spriteID: a1eabe53c2ae935f68c4d7518b8efbea
+      internalID: -1163001128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_33
+      name: ShopKeeper_33
       rect:
         serializedVersion: 2
         x: 832
@@ -843,14 +843,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 732ac2ae65e081d70b79c6a307ee5588
-      internalID: -1426282171
+      spriteID: b081c46c462ee1cfd9a9af302b841525
+      internalID: 1970728568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_34
+      name: ShopKeeper_34
       rect:
         serializedVersion: 2
         x: 896
@@ -864,14 +864,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 758d7e7034c003ab2afddb4eb6b8cb3c
-      internalID: -308538039
+      spriteID: 3be8b74fa9f5d7ffa9a12882023de40f
+      internalID: 2037710007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_35
+      name: ShopKeeper_35
       rect:
         serializedVersion: 2
         x: 960
@@ -885,14 +885,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b26d0aaf82f88c0cc9a108ac4f7304de
-      internalID: -660816529
+      spriteID: c85d868d490ccfdcbb34495faf955c37
+      internalID: 1091883597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_36
+      name: ShopKeeper_36
       rect:
         serializedVersion: 2
         x: 1024
@@ -906,14 +906,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f5bda11b29c8959eb1720f5df21113b
-      internalID: 734746773
+      spriteID: bb62f9decf3ac46c599a291945831c8c
+      internalID: 1437276894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_37
+      name: ShopKeeper_37
       rect:
         serializedVersion: 2
         x: 1088
@@ -927,14 +927,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1b7f6fcc422dec9ea93820dc2f559be
-      internalID: -679171799
+      spriteID: 9057f7cd93e7f8f7c9aa15b7a7e339ab
+      internalID: -2128479814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_38
+      name: ShopKeeper_38
       rect:
         serializedVersion: 2
         x: 1152
@@ -948,14 +948,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e6569f5a10ec9aaead5ceb304901ca7
-      internalID: 1837628226
+      spriteID: c13c36d9f3819199a8648ef63e5cbac4
+      internalID: -188115078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_39
+      name: ShopKeeper_39
       rect:
         serializedVersion: 2
         x: 1216
@@ -969,14 +969,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8914d07935ffcdadb8cc083823e5971f
-      internalID: -1622937946
+      spriteID: 944935fcc75bade9bbc6b23b0632db1a
+      internalID: -573262250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_40
+      name: ShopKeeper_40
       rect:
         serializedVersion: 2
         x: 0
@@ -990,14 +990,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 400c58c00a08e913c82fbf4bf62a84f8
-      internalID: 379763463
+      spriteID: 2ca1f12f8a02529b389c781507649691
+      internalID: 265413189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_41
+      name: ShopKeeper_41
       rect:
         serializedVersion: 2
         x: 64
@@ -1011,14 +1011,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 266dfedaff8d1b867bc21b304bda029c
-      internalID: -1570197686
+      spriteID: 5968aa31824ca13899acabce8bb43bfb
+      internalID: 995005044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_42
+      name: ShopKeeper_42
       rect:
         serializedVersion: 2
         x: 128
@@ -1032,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43e2faa1ebb7f3cfa9227667fac66eab
-      internalID: 382333319
+      spriteID: 5fcea68f45c440dafa5b0d796a2cb12b
+      internalID: 1578075472
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_43
+      name: ShopKeeper_43
       rect:
         serializedVersion: 2
         x: 192
@@ -1053,14 +1053,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94b2b59d7595ebed8a1c08193244a881
-      internalID: 1515887625
+      spriteID: 45d99bd1b54105293b0b93080ec5b5ce
+      internalID: 343548864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_44
+      name: ShopKeeper_44
       rect:
         serializedVersion: 2
         x: 256
@@ -1074,14 +1074,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8152b881fb3b3d43c89b9c3aa0a5829e
-      internalID: -515238303
+      spriteID: 20f29dd3e26193f229788c267bb62445
+      internalID: -744930039
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_45
+      name: ShopKeeper_45
       rect:
         serializedVersion: 2
         x: 320
@@ -1095,14 +1095,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d10ac8af311d210f89c2cfe73621944
-      internalID: -2039384527
+      spriteID: 20ff710a845087742a8eca163b824f62
+      internalID: 1986056283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_46
+      name: ShopKeeper_46
       rect:
         serializedVersion: 2
         x: 384
@@ -1116,14 +1116,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6eb7dacb5a12065d7b6051c2c5d3871e
-      internalID: -1990731004
+      spriteID: 08c24093dac31debda83c38b96e2a0f3
+      internalID: -313557891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_47
+      name: ShopKeeper_47
       rect:
         serializedVersion: 2
         x: 448
@@ -1137,14 +1137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed81dd639aa7462ecaef6c6657db4764
-      internalID: -299629514
+      spriteID: 425627723310170108ca7d9453ab0c72
+      internalID: -807500086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_48
+      name: ShopKeeper_48
       rect:
         serializedVersion: 2
         x: 512
@@ -1158,14 +1158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8641b89006d1c95a8477a80efffbdbe
-      internalID: -782823059
+      spriteID: ca0af2393635fcb06b94c8ff0655fbdd
+      internalID: 1324364481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_49
+      name: ShopKeeper_49
       rect:
         serializedVersion: 2
         x: 576
@@ -1179,14 +1179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6294c49f9d1fa6eaab3ca5d90ebfa49a
-      internalID: -1337600419
+      spriteID: bb4ab733cfdbe5248bd820fdd27d138f
+      internalID: 1632373310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_50
+      name: ShopKeeper_50
       rect:
         serializedVersion: 2
         x: 640
@@ -1200,14 +1200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69294d23c2949cbccb405c08ffa7eae7
-      internalID: 2112839617
+      spriteID: ceae1861d940781a890312a6eca0fdc1
+      internalID: -1764374977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_51
+      name: ShopKeeper_51
       rect:
         serializedVersion: 2
         x: 704
@@ -1221,14 +1221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e971878e493a97963a8a331c8fb474cc
-      internalID: -48091315
+      spriteID: 335501500ea1a2c9d8858eff4c4b58b1
+      internalID: 240177162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_52
+      name: ShopKeeper_52
       rect:
         serializedVersion: 2
         x: 768
@@ -1242,14 +1242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9017ba4eb0b0a604595c04c1ee55eaae
-      internalID: 2089352377
+      spriteID: a43cbbc97273a805b812b1de87b8e0bd
+      internalID: -225839910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_53
+      name: ShopKeeper_53
       rect:
         serializedVersion: 2
         x: 832
@@ -1263,14 +1263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b825235557930154fa4326f588b1bf7c
-      internalID: -1875946383
+      spriteID: 0c2ade995dd8fd89cb0fcfca09bf6030
+      internalID: 1033939033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_54
+      name: ShopKeeper_54
       rect:
         serializedVersion: 2
         x: 896
@@ -1284,14 +1284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ffaa900105e584c2b67c0a80eb14359
-      internalID: -1555554259
+      spriteID: 292a907f3882cd394975ae8d22de40ce
+      internalID: 709709935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_55
+      name: ShopKeeper_55
       rect:
         serializedVersion: 2
         x: 960
@@ -1305,14 +1305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa3f400434bb24bafb7f412460f0ac77
-      internalID: 1906615829
+      spriteID: 20fd3a6556d79442f8ad79ea2cf51356
+      internalID: 1732512398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_56
+      name: ShopKeeper_56
       rect:
         serializedVersion: 2
         x: 1024
@@ -1326,14 +1326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd314301d3a221eaf899e5b4d1d1bcc6
-      internalID: -201527380
+      spriteID: 9a7c22d2d353fe24d8edeb257d45e9db
+      internalID: 1859481238
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_57
+      name: ShopKeeper_57
       rect:
         serializedVersion: 2
         x: 1088
@@ -1347,14 +1347,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49171dcd1fbeda3eaa2868c525f51986
-      internalID: 2080261325
+      spriteID: 243dab6857857cdb6b7bd2918606a565
+      internalID: 2054130105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_58
+      name: ShopKeeper_58
       rect:
         serializedVersion: 2
         x: 1152
@@ -1368,14 +1368,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50edb9f346845e3b0ab1a1bde14a3993
-      internalID: -976246829
+      spriteID: 2298a26026d79a186acfb45f7cb97907
+      internalID: -254264319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_59
+      name: ShopKeeper_59
       rect:
         serializedVersion: 2
         x: 1216
@@ -1389,14 +1389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fde3918d0dbe6214f8d38ea4813dffee
-      internalID: -541180912
+      spriteID: e6f66a225344e28ea9f3e224bfddbae8
+      internalID: 2093964226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_60
+      name: ShopKeeper_60
       rect:
         serializedVersion: 2
         x: 0
@@ -1410,14 +1410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed7e10ff58bef098eafb40285abd3729
-      internalID: 1343915792
+      spriteID: f5e076f9a6ef2f501a1c1163dd68586e
+      internalID: 816590633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_61
+      name: ShopKeeper_61
       rect:
         serializedVersion: 2
         x: 64
@@ -1431,14 +1431,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 221ecb2633d7914919b55433fa007ef3
-      internalID: -1176502213
+      spriteID: 4a97731464ed4a3da93120b69c3cb71a
+      internalID: -1005376647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_62
+      name: ShopKeeper_62
       rect:
         serializedVersion: 2
         x: 128
@@ -1452,14 +1452,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08347dabc014875e1a718fcf9a29d1bf
-      internalID: -2032964176
+      spriteID: b147b7b5cd7c8deae9b8935db3f732aa
+      internalID: 200818270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_63
+      name: ShopKeeper_63
       rect:
         serializedVersion: 2
         x: 192
@@ -1473,14 +1473,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90506dbfe5b418cd0b80af0ec564567f
-      internalID: 457774799
+      spriteID: 8cd187a2c79d6f2478dc88b5a6bb3eae
+      internalID: -1508987891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_64
+      name: ShopKeeper_64
       rect:
         serializedVersion: 2
         x: 256
@@ -1494,14 +1494,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fbe0dcbb8c9dda68a2a65a58d85cd78
-      internalID: -1296529705
+      spriteID: 3ad6f9005f96654fd866fa9e9b8a06e1
+      internalID: -1290484382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_65
+      name: ShopKeeper_65
       rect:
         serializedVersion: 2
         x: 320
@@ -1515,14 +1515,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9c886cbe5667da3e86cd75d16e5200b
-      internalID: -2058284075
+      spriteID: 3ac2965ea38e732afbd6a3031ae240b2
+      internalID: 2080766735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_66
+      name: ShopKeeper_66
       rect:
         serializedVersion: 2
         x: 384
@@ -1536,14 +1536,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19826f847425299cd84b0e2f62d03b05
-      internalID: 2043107957
+      spriteID: 65314a780ad4fca939a9d797bb2c6037
+      internalID: 864773066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_67
+      name: ShopKeeper_67
       rect:
         serializedVersion: 2
         x: 448
@@ -1557,14 +1557,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10518f9a31a63a2f69ae6150f6d040dc
-      internalID: 1939511103
+      spriteID: e215f94d054add43a9d05e1a74013b4e
+      internalID: -1026773885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_68
+      name: ShopKeeper_68
       rect:
         serializedVersion: 2
         x: 512
@@ -1578,14 +1578,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d95d34a5bc472d4d9f55dffd7a57521
-      internalID: 1357247142
+      spriteID: edb3b8acbf9fda3198dafaa93b7a2e6e
+      internalID: 1175657187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_69
+      name: ShopKeeper_69
       rect:
         serializedVersion: 2
         x: 576
@@ -1599,14 +1599,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52a6aec59e7cfdb28bc53ae73a56f86d
-      internalID: -888187981
+      spriteID: a75242574086a390f8f4e1ee002b23d1
+      internalID: -484613123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_70
+      name: ShopKeeper_70
       rect:
         serializedVersion: 2
         x: 640
@@ -1620,14 +1620,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5168b39d452fe0c01b92c286a2bf325c
-      internalID: -579562150
+      spriteID: 92b4969484079c3998131bf8d003b970
+      internalID: -551730307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_71
+      name: ShopKeeper_71
       rect:
         serializedVersion: 2
         x: 704
@@ -1641,14 +1641,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b6cd20c6b01acbbf95c0a2ba4280886
-      internalID: -457568194
+      spriteID: 4d308a409387b3cde81260adb9973c40
+      internalID: -1106915600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_72
+      name: ShopKeeper_72
       rect:
         serializedVersion: 2
         x: 768
@@ -1662,14 +1662,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 189f636c15e029d218abaa99ce9e455f
-      internalID: -1187135195
+      spriteID: 47c61304bfe2cc74d9d7d2ca266cd33b
+      internalID: -1940628908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_73
+      name: ShopKeeper_73
       rect:
         serializedVersion: 2
         x: 832
@@ -1683,14 +1683,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63cffd48a7a828939b74635fa7bcf77a
-      internalID: 1150720275
+      spriteID: dbe44a874ac093e5ba15d3998ba9e64c
+      internalID: 115194802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_74
+      name: ShopKeeper_74
       rect:
         serializedVersion: 2
         x: 896
@@ -1704,14 +1704,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fedaa3cd84d36c1f687aa86b6fe87ffe
-      internalID: -1586008925
+      spriteID: e25f5ee9a769f280d9a28eb72c4c3ebc
+      internalID: -1818710673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_75
+      name: ShopKeeper_75
       rect:
         serializedVersion: 2
         x: 960
@@ -1725,14 +1725,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2331ba6e2de57462b8d7415c1abd7c69
-      internalID: -1931990922
+      spriteID: 5141e1a7a61c6fe0ba8b67433bfa661e
+      internalID: 73319479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_76
+      name: ShopKeeper_76
       rect:
         serializedVersion: 2
         x: 1024
@@ -1746,14 +1746,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c87b482dd206e43fabda72529818caf
-      internalID: 822523220
+      spriteID: 631b25b67a0d713de8d91225ecbbee68
+      internalID: 1337378945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_77
+      name: ShopKeeper_77
       rect:
         serializedVersion: 2
         x: 1088
@@ -1767,14 +1767,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b32b6398a29b2cd8e9ca1e908b92753b
-      internalID: 967706683
+      spriteID: 4217bc87274043517b223ab4640d068b
+      internalID: -1300457533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_78
+      name: ShopKeeper_78
       rect:
         serializedVersion: 2
         x: 1152
@@ -1788,14 +1788,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 382fccf89b10f57109aded31abb2ec91
-      internalID: -1826028508
+      spriteID: f34d10b99b443ae2089634c7ee46f12c
+      internalID: -1467223820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_79
+      name: ShopKeeper_79
       rect:
         serializedVersion: 2
         x: 1216
@@ -1809,14 +1809,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aea9e71f5bf13ce17ac4c2bf38b37d39
-      internalID: 543209823
+      spriteID: eb0fa275e60f89364b892f400d4b3fd3
+      internalID: -1545909956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_80
+      name: ShopKeeper_80
       rect:
         serializedVersion: 2
         x: 0
@@ -1830,14 +1830,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9da4b769411d3409f8ef3990d57d2b32
-      internalID: 1598665591
+      spriteID: 0dc1c5d359083e995ac944909ecf1b9a
+      internalID: -1686891267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_81
+      name: ShopKeeper_81
       rect:
         serializedVersion: 2
         x: 64
@@ -1851,14 +1851,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07c73df6febc691e49435677a1d08d2c
-      internalID: 1079952513
+      spriteID: 39fc6d474be04b1f3910c3cd9c8fc4af
+      internalID: -583274195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_82
+      name: ShopKeeper_82
       rect:
         serializedVersion: 2
         x: 128
@@ -1872,14 +1872,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc9dc163255a28162acfd1f36469fad3
-      internalID: -762861953
+      spriteID: 44a14283a5274b966a2dcb55822eba8c
+      internalID: -1604048872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_83
+      name: ShopKeeper_83
       rect:
         serializedVersion: 2
         x: 192
@@ -1893,14 +1893,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f82fdaded5271799db37f594631c3080
-      internalID: 885724105
+      spriteID: 3473540d3b9a9aa12a36139ae4e6c1e3
+      internalID: 433852640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_84
+      name: ShopKeeper_84
       rect:
         serializedVersion: 2
         x: 256
@@ -1914,14 +1914,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33378ba83ab19489c835b3a2ccd272c3
-      internalID: -8411580
+      spriteID: 1e9ba17c08479a0948b35a2b00d561f6
+      internalID: -1950901591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_85
+      name: ShopKeeper_85
       rect:
         serializedVersion: 2
         x: 320
@@ -1935,14 +1935,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 090ef4579997b05a78bfe555de5f2105
-      internalID: 194086503
+      spriteID: 2b431dd7cf24706a3a031ed32c492c0e
+      internalID: -923599493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_86
+      name: ShopKeeper_86
       rect:
         serializedVersion: 2
         x: 384
@@ -1956,14 +1956,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f14d35a5d79aa64a4bef8460d4ed231c
-      internalID: 1286665207
+      spriteID: cc852441a18eec88881ba9cbdd64a084
+      internalID: 837441683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_87
+      name: ShopKeeper_87
       rect:
         serializedVersion: 2
         x: 448
@@ -1977,14 +1977,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 859150504c975d4f4b68b25baa6ecb2e
-      internalID: 470730098
+      spriteID: 823f88e4bdc49f1bd99b288de7034a2c
+      internalID: 1097713884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_88
+      name: ShopKeeper_88
       rect:
         serializedVersion: 2
         x: 512
@@ -1998,14 +1998,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7cee5fca07ba109b9f9fe97affa36c7
-      internalID: -1406526613
+      spriteID: 1ba8cbbc9889850be859fdd7bcd7b1e9
+      internalID: 1808755753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_89
+      name: ShopKeeper_89
       rect:
         serializedVersion: 2
         x: 576
@@ -2019,14 +2019,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6019664476cd1810b8a85940cd9e8e56
-      internalID: 1440924762
+      spriteID: bb58dd1b9dfd535c49355c4422b85710
+      internalID: 558511632
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_90
+      name: ShopKeeper_90
       rect:
         serializedVersion: 2
         x: 640
@@ -2040,14 +2040,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6caa6751bee2b1a11bc3072ba2584f09
-      internalID: -1815322502
+      spriteID: ae628dc5fb1f87737bb59495767e8c4f
+      internalID: 1836131665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_91
+      name: ShopKeeper_91
       rect:
         serializedVersion: 2
         x: 704
@@ -2061,14 +2061,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86d24703bf13bd3f58e0d70c57e1494f
-      internalID: 1972114335
+      spriteID: 2606ab963e19fb99087fa3a8f3aca793
+      internalID: -1501661122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_92
+      name: ShopKeeper_92
       rect:
         serializedVersion: 2
         x: 768
@@ -2082,14 +2082,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e27a156353c46f4c95e547673836733
-      internalID: -853580606
+      spriteID: 2040973870dac26e5b2c5fbb68cc1345
+      internalID: 1759006042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_93
+      name: ShopKeeper_93
       rect:
         serializedVersion: 2
         x: 832
@@ -2103,14 +2103,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d1dd458874ea5ceaa19f74a2d2ba462
-      internalID: 326911493
+      spriteID: 61b832f106954ec93a2c3198b3a7c935
+      internalID: -1543824198
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_94
+      name: ShopKeeper_94
       rect:
         serializedVersion: 2
         x: 896
@@ -2124,14 +2124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdc626dcb282026f487088ea5ece72dd
-      internalID: -1310841403
+      spriteID: 56034e0504c457ee7bb8269f28b7f994
+      internalID: -593015536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_95
+      name: ShopKeeper_95
       rect:
         serializedVersion: 2
         x: 960
@@ -2145,14 +2145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e274df30a065b64f4a9d33a130e5198f
-      internalID: -1459411605
+      spriteID: ccd098831d15adc7e865c01968c6df32
+      internalID: 28977405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_96
+      name: ShopKeeper_96
       rect:
         serializedVersion: 2
         x: 1024
@@ -2166,14 +2166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 802bcb1133d69cfb79b75bb346b56a94
-      internalID: 874858124
+      spriteID: 852ea635d35609df7a2edde06e62c86c
+      internalID: 2065486728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_97
+      name: ShopKeeper_97
       rect:
         serializedVersion: 2
         x: 1088
@@ -2187,14 +2187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aac8e7db3ceca2942bb65d9d75673d2a
-      internalID: -1723643004
+      spriteID: d4460f2c3a8473cb89f4c1d5b49e00af
+      internalID: 2041453657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_98
+      name: ShopKeeper_98
       rect:
         serializedVersion: 2
         x: 1152
@@ -2208,14 +2208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b75a18bee1232c4ff895e368156e66fb
-      internalID: -1058605589
+      spriteID: a48239bbbcd17edb0a1ec320d5a1b8ff
+      internalID: -1808137588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_ShopKeeper_99
+      name: ShopKeeper_99
       rect:
         serializedVersion: 2
         x: 1216
@@ -2229,8 +2229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb62a29524dbd9cbfbd7f18c3ce53c04
-      internalID: 1875146157
+      spriteID: e9ca87ddfbbf4f850a2222dbbae9cda1
+      internalID: 824564650
       vertices: []
       indices: 
       edges: []
@@ -2246,106 +2246,106 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      char_ShopKeeper_0: -1850145415
-      char_ShopKeeper_1: -1580939187
-      char_ShopKeeper_10: -1627405735
-      char_ShopKeeper_11: -839330860
-      char_ShopKeeper_12: -2050220854
-      char_ShopKeeper_13: 1894876500
-      char_ShopKeeper_14: 1326601019
-      char_ShopKeeper_15: -1461384509
-      char_ShopKeeper_16: 1648542953
-      char_ShopKeeper_17: -571828751
-      char_ShopKeeper_18: 2065679216
-      char_ShopKeeper_19: 1552518650
-      char_ShopKeeper_2: 1071860861
-      char_ShopKeeper_20: -559336837
-      char_ShopKeeper_21: -1253891948
-      char_ShopKeeper_22: 396491863
-      char_ShopKeeper_23: 1870483812
-      char_ShopKeeper_24: -636965722
-      char_ShopKeeper_25: 1666600248
-      char_ShopKeeper_26: 369781939
-      char_ShopKeeper_27: -3269065
-      char_ShopKeeper_28: -773717525
-      char_ShopKeeper_29: -1649496727
-      char_ShopKeeper_3: 307992371
-      char_ShopKeeper_30: -1333856298
-      char_ShopKeeper_31: -1063209549
-      char_ShopKeeper_32: 236465413
-      char_ShopKeeper_33: -1426282171
-      char_ShopKeeper_34: -308538039
-      char_ShopKeeper_35: -660816529
-      char_ShopKeeper_36: 734746773
-      char_ShopKeeper_37: -679171799
-      char_ShopKeeper_38: 1837628226
-      char_ShopKeeper_39: -1622937946
-      char_ShopKeeper_4: 1582998175
-      char_ShopKeeper_40: 379763463
-      char_ShopKeeper_41: -1570197686
-      char_ShopKeeper_42: 382333319
-      char_ShopKeeper_43: 1515887625
-      char_ShopKeeper_44: -515238303
-      char_ShopKeeper_45: -2039384527
-      char_ShopKeeper_46: -1990731004
-      char_ShopKeeper_47: -299629514
-      char_ShopKeeper_48: -782823059
-      char_ShopKeeper_49: -1337600419
-      char_ShopKeeper_5: 705081803
-      char_ShopKeeper_50: 2112839617
-      char_ShopKeeper_51: -48091315
-      char_ShopKeeper_52: 2089352377
-      char_ShopKeeper_53: -1875946383
-      char_ShopKeeper_54: -1555554259
-      char_ShopKeeper_55: 1906615829
-      char_ShopKeeper_56: -201527380
-      char_ShopKeeper_57: 2080261325
-      char_ShopKeeper_58: -976246829
-      char_ShopKeeper_59: -541180912
-      char_ShopKeeper_6: -2003083256
-      char_ShopKeeper_60: 1343915792
-      char_ShopKeeper_61: -1176502213
-      char_ShopKeeper_62: -2032964176
-      char_ShopKeeper_63: 457774799
-      char_ShopKeeper_64: -1296529705
-      char_ShopKeeper_65: -2058284075
-      char_ShopKeeper_66: 2043107957
-      char_ShopKeeper_67: 1939511103
-      char_ShopKeeper_68: 1357247142
-      char_ShopKeeper_69: -888187981
-      char_ShopKeeper_7: 857342041
-      char_ShopKeeper_70: -579562150
-      char_ShopKeeper_71: -457568194
-      char_ShopKeeper_72: -1187135195
-      char_ShopKeeper_73: 1150720275
-      char_ShopKeeper_74: -1586008925
-      char_ShopKeeper_75: -1931990922
-      char_ShopKeeper_76: 822523220
-      char_ShopKeeper_77: 967706683
-      char_ShopKeeper_78: -1826028508
-      char_ShopKeeper_79: 543209823
-      char_ShopKeeper_8: -31326212
-      char_ShopKeeper_80: 1598665591
-      char_ShopKeeper_81: 1079952513
-      char_ShopKeeper_82: -762861953
-      char_ShopKeeper_83: 885724105
-      char_ShopKeeper_84: -8411580
-      char_ShopKeeper_85: 194086503
-      char_ShopKeeper_86: 1286665207
-      char_ShopKeeper_87: 470730098
-      char_ShopKeeper_88: -1406526613
-      char_ShopKeeper_89: 1440924762
-      char_ShopKeeper_9: 1438716753
-      char_ShopKeeper_90: -1815322502
-      char_ShopKeeper_91: 1972114335
-      char_ShopKeeper_92: -853580606
-      char_ShopKeeper_93: 326911493
-      char_ShopKeeper_94: -1310841403
-      char_ShopKeeper_95: -1459411605
-      char_ShopKeeper_96: 874858124
-      char_ShopKeeper_97: -1723643004
-      char_ShopKeeper_98: -1058605589
-      char_ShopKeeper_99: 1875146157
+      ShopKeeper_0: -1255811422
+      ShopKeeper_1: 1547078371
+      ShopKeeper_10: -32183301
+      ShopKeeper_11: -1960253195
+      ShopKeeper_12: -981229083
+      ShopKeeper_13: -1589274385
+      ShopKeeper_14: -364924724
+      ShopKeeper_15: 1941916253
+      ShopKeeper_16: -347429759
+      ShopKeeper_17: -112220851
+      ShopKeeper_18: 866904784
+      ShopKeeper_19: 1227805974
+      ShopKeeper_2: 92836699
+      ShopKeeper_20: 617291558
+      ShopKeeper_21: 90344351
+      ShopKeeper_22: -1955092497
+      ShopKeeper_23: 1506784530
+      ShopKeeper_24: -1401492287
+      ShopKeeper_25: -1946169093
+      ShopKeeper_26: 1875603287
+      ShopKeeper_27: -1569756892
+      ShopKeeper_28: -555594068
+      ShopKeeper_29: -1919899081
+      ShopKeeper_3: 1733882023
+      ShopKeeper_30: 123044764
+      ShopKeeper_31: -801855574
+      ShopKeeper_32: -1163001128
+      ShopKeeper_33: 1970728568
+      ShopKeeper_34: 2037710007
+      ShopKeeper_35: 1091883597
+      ShopKeeper_36: 1437276894
+      ShopKeeper_37: -2128479814
+      ShopKeeper_38: -188115078
+      ShopKeeper_39: -573262250
+      ShopKeeper_4: -598672124
+      ShopKeeper_40: 265413189
+      ShopKeeper_41: 995005044
+      ShopKeeper_42: 1578075472
+      ShopKeeper_43: 343548864
+      ShopKeeper_44: -744930039
+      ShopKeeper_45: 1986056283
+      ShopKeeper_46: -313557891
+      ShopKeeper_47: -807500086
+      ShopKeeper_48: 1324364481
+      ShopKeeper_49: 1632373310
+      ShopKeeper_5: 1797228107
+      ShopKeeper_50: -1764374977
+      ShopKeeper_51: 240177162
+      ShopKeeper_52: -225839910
+      ShopKeeper_53: 1033939033
+      ShopKeeper_54: 709709935
+      ShopKeeper_55: 1732512398
+      ShopKeeper_56: 1859481238
+      ShopKeeper_57: 2054130105
+      ShopKeeper_58: -254264319
+      ShopKeeper_59: 2093964226
+      ShopKeeper_6: 1924245719
+      ShopKeeper_60: 816590633
+      ShopKeeper_61: -1005376647
+      ShopKeeper_62: 200818270
+      ShopKeeper_63: -1508987891
+      ShopKeeper_64: -1290484382
+      ShopKeeper_65: 2080766735
+      ShopKeeper_66: 864773066
+      ShopKeeper_67: -1026773885
+      ShopKeeper_68: 1175657187
+      ShopKeeper_69: -484613123
+      ShopKeeper_7: 2026677554
+      ShopKeeper_70: -551730307
+      ShopKeeper_71: -1106915600
+      ShopKeeper_72: -1940628908
+      ShopKeeper_73: 115194802
+      ShopKeeper_74: -1818710673
+      ShopKeeper_75: 73319479
+      ShopKeeper_76: 1337378945
+      ShopKeeper_77: -1300457533
+      ShopKeeper_78: -1467223820
+      ShopKeeper_79: -1545909956
+      ShopKeeper_8: 239033852
+      ShopKeeper_80: -1686891267
+      ShopKeeper_81: -583274195
+      ShopKeeper_82: -1604048872
+      ShopKeeper_83: 433852640
+      ShopKeeper_84: -1950901591
+      ShopKeeper_85: -923599493
+      ShopKeeper_86: 837441683
+      ShopKeeper_87: 1097713884
+      ShopKeeper_88: 1808755753
+      ShopKeeper_89: 558511632
+      ShopKeeper_9: 441013348
+      ShopKeeper_90: 1836131665
+      ShopKeeper_91: -1501661122
+      ShopKeeper_92: 1759006042
+      ShopKeeper_93: -1543824198
+      ShopKeeper_94: -593015536
+      ShopKeeper_95: 28977405
+      ShopKeeper_96: 2065486728
+      ShopKeeper_97: 2041453657
+      ShopKeeper_98: -1808137588
+      ShopKeeper_99: 824564650
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

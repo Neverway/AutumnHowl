@@ -728,7 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc802781824505aa0b391e3d26bfa9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
+  template: {fileID: 11400000, guid: 380a919475a3a43928630d31c0b60f85, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   isDead: 0

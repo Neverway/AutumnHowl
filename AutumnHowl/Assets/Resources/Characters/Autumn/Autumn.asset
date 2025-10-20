@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: Autumn
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: player_autumn
+  <UniqueID>k__BackingField: Autumn
   characterReferenceType: 0
   characterName: Autumn
   baseStats:
@@ -60,4 +60,3 @@ MonoBehaviour:
       startValue: 3
       multiplier: 0
       addedValue: 0
-    owner: {fileID: 0}
