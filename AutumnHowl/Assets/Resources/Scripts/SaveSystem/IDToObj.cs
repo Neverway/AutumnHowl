@@ -52,7 +52,7 @@ public static class IDToObj<T>
             if (string.IsNullOrEmpty(ID))
             {
                 if (warnAboutEmptyIDs)
-                    Debug.LogWarning($"{typeof(T).Name} has no assigned UniqueID on {obj}, cannot add to IDToObj lookup " +
+                    Debug.LogWarning($"{typeof(T).Name} has no assigned UniqueID on {obj.name}, cannot add to IDToObj lookup " +
                         $"<color=grey>(Click to highlight)</color>", obj);
                 continue;
             }
