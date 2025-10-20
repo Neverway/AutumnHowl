@@ -14,7 +14,7 @@ public abstract class Item : ScriptableObject, UniquelyIdentifiable
 {
     /*-----[ UniqueID Setup ]-----------------------------------------------------------------------------------------*/
     [field: SerializeField] public string UniqueID { get; private set; }
-    [InvokeOnReflectionCacheLoadRuntime] public static void CacheIDs() => IDToObj<CharacterTemplate>.AddAllFromUnityResources();
+    [InvokeOnReflectionCacheLoadRuntime] public static void CacheIDs() => IDToObj<Item>.AddAllFromUnityResources();
 
 
     #region========================================( Variables )======================================================//

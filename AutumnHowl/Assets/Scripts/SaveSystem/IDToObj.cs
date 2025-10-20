@@ -17,9 +17,11 @@ public static class IDToObj<T>
     {
         if (idToInstance == null)
         {
+            Debug.Log("was empty");
             obj = default(T);
             return false;
         }
+        Debug.Log($"{typeof(T).Name} id count: {idToInstance.Count}");
         return idToInstance.TryGetValue(id, out obj);
     }
 

@@ -9,6 +9,10 @@ public class CharacterTemplate : ScriptableObject, UniquelyIdentifiable
     [field: SerializeField] public string UniqueID { get; private set; }
     [InvokeOnReflectionCacheLoadRuntime] public static void CacheIDs() => IDToObj<CharacterTemplate>.AddAllFromUnityResources();
 
+    public void Somethin()
+    {
+    }
+
     [Space]
     public CharacterTemplateToIdentifierStrategy characterReferenceType = CharacterTemplateToIdentifierStrategy.CloneableAndDisposable;
     public string characterName;
