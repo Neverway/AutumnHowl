@@ -24,7 +24,6 @@ public class CharacterStats
     { 
         health = maxHealth; 
     }
-    public CharacterStats(SaveData saveData) : base() { LoadSaveData(saveData); }
     public CharacterStats(CharacterIdentifier character) : base() => SetupStatsLinkedToCharacter(character);
 
     /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/
@@ -94,7 +93,7 @@ public class CharacterStats
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    private void SetupStatsLinkedToCharacter(CharacterIdentifier character)
+    public void SetupStatsLinkedToCharacter(CharacterIdentifier character)
     {
         int someInt = attack + defense;
 

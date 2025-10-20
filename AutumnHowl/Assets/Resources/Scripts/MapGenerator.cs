@@ -48,6 +48,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     private int seed = 0;
 
     private bool mapGenerated = false;
+    private bool mapIsBeingLoaded = false;
     private List<GameObject> generatedObjects = new List<GameObject>();
 
     private int farthestDistance = 0;
@@ -241,7 +242,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             gameObjectCreators.Add(new BasicGameObjectCreator(poi));
 
         //Add createable chests
-        gameObjectCreators.Add(chestRecreator);
+        gameObjectCreators.Add(mapIsBeingLoaded ? null : chestRecreator);
 
         RandomGameObjectBag gameObjectBag = new RandomGameObjectBag(gameObjectCreators);
 
@@ -249,7 +250,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
         foreach (var loc in poiLocations)
         {
-            GameObject poi = gameObjectBag.Grab().GetCreatedGameObject();
+            ICreatesGameObject objCreator = gameObjectBag.Grab();
+            if (objCreator == null) continue;
+
+            GameObject poi = objCreator.GetCreatedGameObject();
 
             poi.transform.position = new Vector3(
                 loc.x * roomWidth + (roomWidth / 2),
@@ -595,8 +599,11 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         {
             DestroyMap();
         }
+
         seed = data.seed;
+        mapIsBeingLoaded = true;
         GenerateMap();
+        mapIsBeingLoaded = false;
     }
 
     public override void OnNewInstance() 

@@ -122,7 +122,9 @@ public class CharacterIdentifier
     };
     public void LoadSaveData(SaveData saveData)
     {
+        Debug.Log("loading character instance");
         Stats.LoadSaveData(saveData.statsData);
+        Stats.SetupStatsLinkedToCharacter(this);
     }
 
 
