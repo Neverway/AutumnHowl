@@ -57,7 +57,9 @@ public abstract class Character : MonoBehaviour
         {
             GameInstance.Get<GI_AuHoGameState>().currentGameState.player = Identifier;
         }
+        GameInstance.Get<GI_CharacterReferencer>().Register(this);
         UpdateGameStateValues();
+        Stats.owner = this;
     }
     public virtual void Start()
     {
@@ -69,8 +71,7 @@ public abstract class Character : MonoBehaviour
         animator.SetFloat("idleX", startFaceDirection.x);
         animator.SetFloat("idleY", startFaceDirection.y);
     }
-    public void OnEnable() => GameInstance.Get<GI_CharacterReferencer>().Register(this);
-    public void OnDisable() => GameInstance.Get<GI_CharacterReferencer>().UnRegister(this);
+    public void OnDestroy() => GameInstance.Get<GI_CharacterReferencer>().UnRegister(this);
     public void LateUpdate() => UpdateGameStateValues();
 
 

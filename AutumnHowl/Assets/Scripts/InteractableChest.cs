@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [SelectionBase]
-public class InteractableChest : MonoBehaviour
+public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
 {
     [Header("Per Instance Parameters")]
     [Box, Polymorphic, SerializeReference] 
@@ -17,6 +17,7 @@ public class InteractableChest : MonoBehaviour
     public Animator animator;
     public string animator_openChestTrigger = "OpenChest";
     public string animator_chestIsEmpty = "ChestIsEmpty";
+    public string animator_chestLoadTrigger = "ChestLoaded";
     public GameObject sparkles;
 
     private TextEvent textEvent = new();
@@ -120,5 +121,53 @@ public class InteractableChest : MonoBehaviour
 
         //Return whether or not any items were actually removed
         return itemsToRemove.Count > 0;
+    }
+
+
+    // SaveData handling ----------------------------------------------------------------------------------------
+    public override SaveData OnSaveInstance()
+    {
+        SaveData data = new SaveData();
+
+        if (chestContents.IsNotEmptyOrNull())
+            data.heldItemsIDs = chestContents.Select(item => item.UniqueID).ToArray();
+
+        data.hasBeenFullyLooted = hasBeenFullyLooted;
+
+        return data;
+    }
+
+    public override void OnLoadInstance(SaveData data)
+    {
+        if (!data.heldItemsIDs.IsNotEmptyOrNull())
+        {
+            chestContents = new List<Item>();
+            foreach (string id in data.heldItemsIDs)
+            {
+                if (IDToObj<Item>.TryGet(id, out Item item))
+                {
+                    chestContents.Add(item);
+                }
+                else
+                    Debug.LogWarning($"Could not find item ID ({id}) for loading items in InteractableChest {name}", this);
+            }
+        }
+        else
+            chestContents = null;
+
+        hasBeenFullyLooted = data.hasBeenFullyLooted;
+
+        sparkles.SetActive(!hasBeenFullyLooted && chestContents == null);
+        animator.SetBool(animator_chestIsEmpty, hasBeenFullyLooted);
+        animator.SetTrigger(animator_chestLoadTrigger);
+    }
+
+    public override void OnNewInstance() { }
+
+    [Serializable]
+    public struct SaveData
+    {
+        public string[] heldItemsIDs;
+        public bool hasBeenFullyLooted;
     }
 }

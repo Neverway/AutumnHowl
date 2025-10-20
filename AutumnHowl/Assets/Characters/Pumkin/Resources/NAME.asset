@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: NAME
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: enemy_pumpkin
+  <UniqueID>k__BackingField: 
   characterReferenceType: 1
   characterName: 
   baseStats:
