@@ -60,6 +60,12 @@ public class Volume_LevelChange : MonoBehaviour
 #endif
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(transform.position + exitOffset, new Vector3(0.2f, 0.2f, 0.01f));
+        Gizmos.DrawLine(transform.position, transform.position + exitOffset);
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private IEnumerator Warp()

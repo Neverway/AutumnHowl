@@ -134,13 +134,13 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
             data.heldItemsIDs = chestContents.Select(item => item.UniqueID).ToArray();
 
         data.looted = hasBeenFullyLooted;
+        data.position = transform.position;
 
         return data;
     }
 
     public override void OnLoadInstance(SaveData data)
     {
-        hasBeenFullyLooted = data.looted;
 
         if (data.hasItems)
         {
@@ -158,6 +158,8 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
         else
             chestContents = null;
 
+        hasBeenFullyLooted = data.looted;
+        transform.position = data.position;
 
         sparkles.SetActive(!hasBeenFullyLooted && chestContents == null);
         animator.SetBool(animator_chestIsEmpty, hasBeenFullyLooted);
@@ -172,5 +174,6 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
         public string[] heldItemsIDs;
         public bool hasItems;
         public bool looted;
+        public Vector3 position;
     }
 }

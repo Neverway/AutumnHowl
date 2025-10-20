@@ -18818,8 +18818,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5398230392484373324, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
+      propertyPath: warpExitID
+      value: TownToForest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398230392484373324, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: targetLevel
       value: Forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398230392484373324, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
+      propertyPath: exitOffset.y
+      value: -1.22
       objectReference: {fileID: 0}
     - target: {fileID: 5398230392484373324, guid: 3ac0c94d56978b47fadc7796e2596724, type: 3}
       propertyPath: targetLevelScene

@@ -78,11 +78,14 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     // Mono Functions
     //=-----------------=
-    private void Start ()
+    public IEnumerator Start()
     {
-        GenerateMapWithNewSeed();
+        yield return new WaitForEndOfFrame();
+        if (!mapGenerated)
+        {
+            GI_SaveSystem.LoadGame();
+        }
     }
-
     //=-----------------=
     // Internal Functions
     //=-----------------=
@@ -587,6 +590,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     public override void OnLoadInstance(SaveData data)
     {
+        Debug.Log("Loaded Map!!!");
         if (mapGenerated && seed != data.seed)
         {
             DestroyMap();
@@ -597,6 +601,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     public override void OnNewInstance() 
     {
+        Debug.Log("New Map!!!");
         GenerateMapWithNewSeed();
     }
 
