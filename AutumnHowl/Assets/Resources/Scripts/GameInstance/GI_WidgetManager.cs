@@ -158,6 +158,11 @@ public class GI_WidgetManager : MonoBehaviour
                 textComponent.text =
                     $"<sprite index=3> {_amount}";
                 break;
+            case 4:
+                textComponent.color = new Color(0.25f,0.05f,0.75f);
+                textComponent.text =
+                    $"{_amount}";
+                break;
         }
     }
 

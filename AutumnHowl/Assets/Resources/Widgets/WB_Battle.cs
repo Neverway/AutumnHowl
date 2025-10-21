@@ -27,11 +27,6 @@ public class WB_Battle : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [Header("Heartbeat Stuff")]
-    public Image heartImage;
-    public Image powerImage, corruptionImage;
-    public List<Sprite> heartSprites, powerSprites, corruptionSprites;
-    public Animator heartAnimator;
     private GI_AuHoGameState gameState;
     [Header("Inventory Stuff")] 
     public Text_Inventory items;
@@ -57,12 +52,16 @@ public class WB_Battle : MonoBehaviour
     private void Start()
     {
         gameState = GameInstance.Get<GI_AuHoGameState>();
+        // Hide the action bar when the battle begins
+        // since the first thing that will be on screen is the intro text
+        // & the action bar is normally visible by default
         SetActionBarVisible(false);
         
         // Set Inventory Stuff
         items.UpdateItemList();
         spells.UpdateItemList();
         
+        // Assign each of the buttons in the items menu to fire the USE function from the same index in the player's inventory
         for (int i = 0; i < ItemListNavigator.selectableElements.Count; i++)
         {
             var selectable = ItemListNavigator.selectableElements[i];
@@ -70,6 +69,7 @@ public class WB_Battle : MonoBehaviour
             selectable.OnInteracted.AddListener(() => { Use("Items", cachedIndex);});
         }
         
+        // Assign each of the buttons in the spells menu to fire the USE function from the same index in the player's inventory
         for (int i = 0; i < SpellListNavigator.selectableElements.Count; i++)
         {
             var selectable = SpellListNavigator.selectableElements[i];
@@ -78,47 +78,19 @@ public class WB_Battle : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if (gameState.currentGameState.player == null) return;
-        var stats = gameState.currentGameState.player.Stats;
-        
-        // Set heartbeat stuff
-        float percentHealth = stats.health / stats.maxHealth;
-        int index = Mathf.FloorToInt(heartSprites.Count * (1f-percentHealth));
-        if (index == heartSprites.Count) index--;
-        heartImage.sprite = heartSprites[index];
-        
-        float percentPower = stats.power / (float)stats.maxPower;
-        int index2 = Mathf.FloorToInt(powerSprites.Count * (percentPower));
-        if (index2 == powerSprites.Count) index2--;
-        powerImage.sprite = powerSprites[index2];
-        
-        float percentCorruption = stats.corruption / (float)stats.maxCorruption;
-        int index3 = Mathf.FloorToInt(corruptionSprites.Count * (percentCorruption));
-        if (index3 == corruptionSprites.Count) index3--;
-        corruptionImage.sprite = corruptionSprites[index3];
-
-        float lowHealthSpeed = 3;
-        float maxHealthSpeed = 1;
-        float animationSpeed = Mathf.Lerp(lowHealthSpeed , maxHealthSpeed, percentHealth);
-        
-        heartAnimator.speed = animationSpeed;
-    }
-
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    /// <summary>
+    /// Set the visibility of the action menu
+    /// </summary>
     public void SetActionBarVisible(bool _isVisible)
     {
         switch (_isVisible)
         {
             case true:
-                Debug.Log($"{actionBarAnimator}");
-                Debug.Log($"{actionBarAnimator.GetComponent<WidgetNavigator>()}");
-                Debug.Log($"Donzo");
                 actionBarNavigator.SetIsNavigating(true);
                 actionBarAnimator.Play("Open");
                 break;
@@ -128,6 +100,10 @@ public class WB_Battle : MonoBehaviour
                 break;
         }
     }
+    
+    /// <summary>
+    /// Set the visibility of the attack compass
+    /// </summary>
     public void SetAttackBarVisible(bool _isVisible)
     {
         switch (_isVisible)
@@ -142,7 +118,7 @@ public class WB_Battle : MonoBehaviour
     }
 
     /// <summary>
-    /// Trys to use the selected item (or falls back to some default text if it's null item)
+    /// Trys to use the selected inventory item (or falls back to some default text if it's null item)
     /// </summary>
     /// <param name="_itemList">The name of the item list we want to check (Items or Spells)</param>
     /// <param name="_index">The index of the item we want to get</param>

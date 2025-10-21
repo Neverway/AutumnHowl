@@ -59,6 +59,8 @@ public class AuHoGameState
     public int kills = 0;
     public int deaths = 0;
     public float playtime = 0;
+    public float currentLanternTime = 1200;
+    public float lanternDuration = 1200;
 
     [InvokeBeforeSave]
     public static void OnGameSave()

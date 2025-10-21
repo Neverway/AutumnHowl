@@ -544,15 +544,17 @@ MonoBehaviour:
   currentGameState:
     map: Town
     overworldPosition: {x: 0, y: 0}
-    money: 99999
+    currentBattle: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
     inventory:
       items: []
       spells: []
       equippedWearables: []
+    money: 99999
     kills: 0
     deaths: 0
     playtime: 0
-    currentBattle: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
+    currentLanternTime: 120
+    lanternDuration: 120
 --- !u!114 &8445139238223071731
 MonoBehaviour:
   m_ObjectHideFlags: 0

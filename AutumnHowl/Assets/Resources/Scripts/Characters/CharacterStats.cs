@@ -33,7 +33,7 @@ public class CharacterStats
         public float health;
         public float level;
         public int power;
-        public int corruption;
+        public float corruption;
     }
     public SaveData GetSaveData() => new SaveData()
     {
@@ -67,7 +67,7 @@ public class CharacterStats
     public float health = 100;
     public float level = 0;
     public int power = 10;
-    public int corruption = 0;
+    public float corruption = 0;
 
     [Header("Combat Stats")]
     [Box] public CharacterStatInt attack = new(10, Attack);
@@ -180,6 +180,37 @@ public class CharacterStats
                 // TODO - HOW teH HeCk do I call this now? ~Liz
                 //OnHurt?.Invoke();
             }
+        }
+    }    
+    
+    /// <summary>
+    /// Modify the current stats on a character
+    /// </summary>
+    /// <param name="_stat">Which of the character's stat is affected</param>
+    /// <param name="_amount">How much to add to that stat</param>
+    /// <param name="_direction">The direction in which this effect is coming from (used for detecting damage direction)</param>
+    public void ModifyCorruption(float _amount)
+    {
+        // Corruption Increase
+        if (_amount > 0)
+        {
+            if (corruption + _amount > maxCorruption)
+            { 
+                corruption = maxCorruption;
+                owner.isDead = true;
+            }
+            else corruption += _amount;
+            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 4);
+        }
+        
+        // Corruption Decrease
+        else if (_amount < 0)
+        {
+            if (corruption - _amount > 0)
+            { 
+                corruption -= _amount;
+            }
+            else corruption = 0;
         }
     }
     
