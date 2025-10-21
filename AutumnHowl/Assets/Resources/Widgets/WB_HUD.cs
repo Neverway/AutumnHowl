@@ -24,11 +24,13 @@ public class WB_HUD : MonoBehaviour
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private Coroutine inflictCorruptionCoroutine;
+    private bool hasLightFaded;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image lanternFill;
     public GI_AuHoGameState gameState;
+    private PlayerLightController playerLightController;
 
 
     #endregion
@@ -52,6 +54,9 @@ public class WB_HUD : MonoBehaviour
         UpdateLanternMeter();
     }
 
+    /// <summary>
+    /// Update the time remaining in the lantern
+    /// </summary>
     private void UpdateTimer()
     {
         if (gameState.currentGameState.currentLanternTime > 0)
@@ -61,9 +66,13 @@ public class WB_HUD : MonoBehaviour
         else if (inflictCorruptionCoroutine == null)
         {
             inflictCorruptionCoroutine = StartCoroutine(InflictCorruption());
+            if (!hasLightFaded) FadeLights();
         }
     }
 
+    /// <summary>
+    /// Update the visuals for the lantern meter
+    /// </summary>
     private void UpdateLanternMeter()
     {
         var lanternDuration = gameState.currentGameState.lanternDuration;
@@ -71,11 +80,22 @@ public class WB_HUD : MonoBehaviour
         lanternFill.fillAmount = currentTime / lanternDuration;
     }
 
+    /// <summary>
+    /// Deal corruption damage to the player when their light is out
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator InflictCorruption()
     {
         yield return new WaitForSeconds(3f);
         gameState.currentGameState.player.Stats.ModifyCorruption(+5f);
         inflictCorruptionCoroutine = null;
+    }
+    
+    private void FadeLights()
+    {
+        hasLightFaded = true;
+        playerLightController = FindObjectOfType<PlayerLightController>();
+        playerLightController.SetLanternLightState(true);
     }
 
 
