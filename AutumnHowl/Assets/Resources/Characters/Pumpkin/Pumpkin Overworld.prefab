@@ -70,12 +70,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Name
-      value: Pumkin Overworld
+      value: Pumpkin Overworld
       objectReference: {fileID: 0}
     - target: {fileID: 6601185223956943184, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: template
       value: 
-      objectReference: {fileID: 11400000, guid: 2d9768b186af65399bbe864ceb3f1dd4, type: 2}
+      objectReference: {fileID: 11400000, guid: 221f814b320ae4dc9ad302d3071750c6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

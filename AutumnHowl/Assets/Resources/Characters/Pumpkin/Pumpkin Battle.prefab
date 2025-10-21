@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Name
-      value: Pumkin Battle
+      value: Pumpkin Battle
       objectReference: {fileID: 0}
     - target: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Enabled
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: 2d9768b186af65399bbe864ceb3f1dd4, type: 2}
+  template: {fileID: 11400000, guid: 221f814b320ae4dc9ad302d3071750c6, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
