@@ -66,6 +66,8 @@ public class CharacterIdentifier
                 throw new NotImplementedException("Unimplemented CharacterTemplateToIdentifierStrategy in constructor");
         }
         return toReturn;
+
+
     }
 
 

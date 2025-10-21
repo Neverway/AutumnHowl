@@ -228,6 +228,11 @@ public class CharacterStats
         return false;
     }
 
+    public void ModifyCorruption()
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 
     #region HelperProperties
