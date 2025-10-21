@@ -47,6 +47,7 @@ public class CharacterStats
         health = saveData.health;
         level = saveData.level;
         power = saveData.power;
+        Debug.Log($"Setting corruption from {corruption} to {saveData.corruption}");
         corruption = saveData.corruption;
     }
 
@@ -223,6 +224,7 @@ public class CharacterStats
     /// <param name="_direction">The direction in which this effect is coming from (used for detecting damage direction)</param>
     public void ModifyCorruption(float _amount)
     {
+        Debug.Log($"Modify corruption called with value {_amount}");
         // Corruption Increase
         if (_amount > 0)
         {
