@@ -30,7 +30,7 @@ MonoBehaviour:
       addedValue: 0
     maxHealth:
       startValue: 100
-      multiplier: 0
+      multiplier: 1
       addedValue: 0
     maxLevel:
       startValue: 100

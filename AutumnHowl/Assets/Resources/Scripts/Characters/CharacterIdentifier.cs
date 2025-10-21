@@ -23,11 +23,9 @@ public class CharacterIdentifier
 
 
 
-
-
     //Character Identifier creation ------------------------------------------------------------------------------------------
     [Reload]
-    private static SerializableDictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters;
+    public static SerializableDictionary<CharacterTemplate, CharacterIdentifier> persistentCharacters;
 
     public CharacterIdentifier(CharacterTemplate fromTemplate)
     {
@@ -109,6 +107,8 @@ public class CharacterIdentifier
         }
 
     }
+    
+    
     [Serializable]
     public struct SaveData
     {

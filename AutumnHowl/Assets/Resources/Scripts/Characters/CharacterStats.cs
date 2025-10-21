@@ -128,7 +128,39 @@ public class CharacterStats
         health = maxHealth;
     }
 
+    public void RefreshStatIDs()
+    {
+        CharacterStats defaults = new CharacterStats();
 
+        //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field
+        foreach (MemberInfo member in typeof(CharacterStats).GetCachedMemberInfos())
+            if (member is FieldInfo field && typeof(CharacterStat).IsAssignableFrom(field.FieldType))
+            {
+                //Ignore static fields (Should really not ever happen anyways)
+                if (member.IsStatic()) continue;
+
+                //Get the default stat from a new instance of CharacterStats
+                CharacterStat defaultStat = field.GetValue(defaults) as CharacterStat;
+                if (defaultStat == null)
+                {
+                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to get default ID on a " +
+                                   $"CharacterStat {field.Name}, but it was null. Unable to get default ID from stat");
+                    continue;
+                }
+
+                //Get the current stat
+                CharacterStat currentStat = field.GetValue(this) as CharacterStat;
+                if (defaultStat == null)
+                {
+                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to get a reference to our own stat on a " +
+                                   $"CharacterStat {field.Name}, but it was null. Unable to apply default ID to it");
+                    continue;
+                }
+
+                //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
+                currentStat.StatType = defaultStat.StatType;
+            }
+    }
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     /// <summary>
     /// Modify the current stats on a character
@@ -215,8 +247,9 @@ public class CharacterStats
     #endregion
 }
 
-public enum CharacterStatType
+public enum CharacterStatType 
 {
+    //Make sure the numbers stay the same and unique or we will have to reserialize the CharacterTemplates
     [StatName("ATK")]     Attack,
     [StatName("DEF")]     Defense,
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ApplyModsOnPlayerOnActive : MonoBehaviour
 {
     [Box, Polymorphic, SerializeReference] protected SerializedModifier_CharacterTargeting modifier;
-    GI_AuHoGameState gameState;
+    GI_AuHoGameState gameState => GameInstance.Get<GI_AuHoGameState>();
     Modifier toRemove;
     bool onAwake = false;
     public void Awake() => onAwake = true;
@@ -15,18 +15,20 @@ public class ApplyModsOnPlayerOnActive : MonoBehaviour
     }
     public void OnDisable()
     {
-        toRemove.UnregisterModifier();
+        try { toRemove.UnregisterModifier(); } catch { }
     }
     private IEnumerator RegisterModifiers()
     {
-        if (onAwake)
+        Debug.Log("Hmmm");
+        yield return new WaitUntil(() =>
         {
-            yield return null;
-            yield return null;
-        }
 
-        gameState = GameInstance.Get<GI_AuHoGameState>();
-        toRemove = modifier.GetNewRegisteredModifier(
-            new TargetSelf().GetTargetsFrom(gameState.currentGameState.player));
+            return gameState != null &&
+            gameState.currentGameState != null &&
+            gameState.currentGameState.player != null;
+        }
+        );
+
+        toRemove = modifier.GetNewRegisteredModifier(new TargetSelf().GetTargetsFrom(gameState.currentGameState.player));
     }
 }

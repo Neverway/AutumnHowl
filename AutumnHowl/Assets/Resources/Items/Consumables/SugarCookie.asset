@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SugarCookie
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_consumable_sugarcookies
-  id: 
   displayName: Sugar Cookie
   description: A sweet delicious sugar cookie! With extra sugar!
   canNotDiscard: 0
@@ -41,6 +40,6 @@ MonoBehaviour:
       type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        statToModify: 5
+        statToModify: 8
         modifierType: 0
         value: 0.3
