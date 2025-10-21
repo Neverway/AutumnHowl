@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Collision_0
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -1328204307, guid: ac08233c1c64e41cdb3b6880e2c9c752, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15294118}
   m_Transform:
     e00: 1
     e01: 0
