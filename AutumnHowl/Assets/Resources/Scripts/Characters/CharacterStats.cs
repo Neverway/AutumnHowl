@@ -22,7 +22,6 @@ public class CharacterStats
     /*-----[ Constructors ]-------------------------------------------------------------------------------------------*/
     public CharacterStats() 
     { 
-        health = maxHealth; 
     }
     public CharacterStats(CharacterIdentifier character) : base() => SetupStatsLinkedToCharacter(character);
 
@@ -37,17 +36,17 @@ public class CharacterStats
     }
     public SaveData GetSaveData() => new SaveData()
     {
-        health = health,
-        level = level,
-        power = power,
-        corruption = corruption
+        health = this.health,
+        level = this.level,
+        power = this.power,
+        corruption = this.corruption
     };
     public void LoadSaveData(SaveData saveData)
     {
-        health = saveData.health;
-        level = saveData.level;
-        power = saveData.power;
-        corruption = saveData.corruption;
+        this.health = saveData.health;
+        this.level = saveData.level;
+        this.power = saveData.power;
+        this.corruption = saveData.corruption;
     }
 
 
@@ -125,7 +124,6 @@ public class CharacterStats
                 field.SetValue(this, myStat);
                 myStat.LinkedCharacter = character;
             }
-        health = maxHealth;
     }
 
     public void RefreshStatIDs()
