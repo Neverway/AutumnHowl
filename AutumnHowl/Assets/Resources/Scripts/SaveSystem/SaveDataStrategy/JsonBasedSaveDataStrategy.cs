@@ -15,6 +15,7 @@ public abstract class JsonBasedSaveDataStrategy : SaveDataStrategy
         if (stringValue == null) return defaultValue;
         return DataStringinator.FromDataString<T>(stringValue);
     }
+
     protected abstract void SaveJsonValue(string value, string id);
     protected abstract string LoadJsonValue(string id);
 }

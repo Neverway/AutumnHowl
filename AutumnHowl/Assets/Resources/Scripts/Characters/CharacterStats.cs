@@ -22,7 +22,6 @@ public class CharacterStats
     /*-----[ Constructors ]-------------------------------------------------------------------------------------------*/
     public CharacterStats() 
     { 
-        health = maxHealth; 
     }
     public CharacterStats(CharacterIdentifier character) : base() => SetupStatsLinkedToCharacter(character);
 
@@ -33,22 +32,21 @@ public class CharacterStats
         public float health;
         public float level;
         public int power;
-        public float corruption;
+        public int corruption;
     }
     public SaveData GetSaveData() => new SaveData()
     {
-        health = health,
-        level = level,
-        power = power,
-        corruption = corruption
+        health = this.health,
+        level = this.level,
+        power = this.power,
+        corruption = this.corruption
     };
     public void LoadSaveData(SaveData saveData)
     {
-        health = saveData.health;
-        level = saveData.level;
-        power = saveData.power;
-        Debug.Log($"Setting corruption from {corruption} to {saveData.corruption}");
-        corruption = saveData.corruption;
+        this.health = saveData.health;
+        this.level = saveData.level;
+        this.power = saveData.power;
+        this.corruption = saveData.corruption;
     }
 
 
@@ -68,7 +66,7 @@ public class CharacterStats
     public float health = 100;
     public float level = 0;
     public int power = 10;
-    public float corruption = 0;
+    public int corruption = 0;
 
     [Header("Combat Stats")]
     [Box] public CharacterStatInt attack = new(10, Attack);
@@ -126,7 +124,6 @@ public class CharacterStats
                 field.SetValue(this, myStat);
                 myStat.LinkedCharacter = character;
             }
-        health = maxHealth;
     }
 
     public void RefreshStatIDs()
@@ -213,38 +210,6 @@ public class CharacterStats
                 // TODO - HOW teH HeCk do I call this now? ~Liz
                 //OnHurt?.Invoke();
             }
-        }
-    }    
-    
-    /// <summary>
-    /// Modify the current stats on a character
-    /// </summary>
-    /// <param name="_stat">Which of the character's stat is affected</param>
-    /// <param name="_amount">How much to add to that stat</param>
-    /// <param name="_direction">The direction in which this effect is coming from (used for detecting damage direction)</param>
-    public void ModifyCorruption(float _amount)
-    {
-        Debug.Log($"Modify corruption called with value {_amount}");
-        // Corruption Increase
-        if (_amount > 0)
-        {
-            if (corruption + _amount > maxCorruption)
-            { 
-                corruption = maxCorruption;
-                owner.isDead = true;
-            }
-            else corruption += _amount;
-            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 4);
-        }
-        
-        // Corruption Decrease
-        else if (_amount < 0)
-        {
-            if (corruption - _amount > 0)
-            { 
-                corruption -= _amount;
-            }
-            else corruption = 0;
         }
     }
     

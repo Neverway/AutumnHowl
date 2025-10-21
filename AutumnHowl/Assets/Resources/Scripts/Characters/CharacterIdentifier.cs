@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -131,9 +132,8 @@ public class CharacterIdentifier
     };
     public void LoadSaveData(SaveData saveData)
     {
-        Debug.Log("loading character instance");
-        Stats.LoadSaveData(saveData.statsData);
         Stats.SetupStatsLinkedToCharacter(this);
+        Stats.LoadSaveData(saveData.statsData);
     }
 
 

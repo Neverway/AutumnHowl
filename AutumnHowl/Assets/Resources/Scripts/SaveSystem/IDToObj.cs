@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 public static class IDToObj<T>
 {
-    private static Dictionary<string, T> idToInstance;
+    public static Dictionary<string, T> idToInstance;
 
     public static void ClearNew() => idToInstance = new();
     public static bool TryAdd(string id, T obj)

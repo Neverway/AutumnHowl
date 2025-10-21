@@ -7,6 +7,13 @@ using UnityEngine;
 
 public class GI_SaveSystem : MonoBehaviour
 {
+    [ContextMenu("Test the thinggyyyy")]
+    public void Test()
+    {
+        IDToObj<CharacterTemplate>.TryGet("Autumn", out CharacterTemplate test);
+        Debug.Log(test.UniqueID);
+    }
+
     [Polymorphic, SerializeReference] public SaveDataStrategy saveDataStrategy;
 
     public bool doSaving = true;
