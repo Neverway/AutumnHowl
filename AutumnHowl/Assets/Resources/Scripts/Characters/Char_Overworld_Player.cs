@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Controller_Overworld_Player : Character , IsPlayerCharacter
@@ -24,6 +25,7 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private bool inMenu;
+    private bool inTheProcessOfDying; // Used to block inputs while the player's death animation is playing out
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -38,6 +40,12 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
     
     private void Update()
     {
+        if (isDead && !inTheProcessOfDying)
+        {
+            inTheProcessOfDying = true;
+            StartCoroutine(Die());
+            return;
+        }
         if (isDead) return;
         
         // Menu pausing
@@ -102,6 +110,16 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
         }
     }
     
+    /// <summary>
+    /// Play a little death animation and switch to the game over screen
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Die()
+    {
+        gameObject.transform.DORotate(new Vector3(45, 0, 0), 0.25f);
+        yield return new WaitForSeconds(1);
+        GameInstance.Get<GI_WorldLoader>().Load("GameOver");
+    }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 
