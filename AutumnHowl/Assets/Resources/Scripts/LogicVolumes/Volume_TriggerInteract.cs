@@ -25,6 +25,7 @@ public class Volume_TriggerInteract : MonoBehaviour
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private bool activated;
     private bool inTrigger;
+    private Coroutine resetCoroutine;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -44,9 +45,7 @@ public class Volume_TriggerInteract : MonoBehaviour
             {
                 activated = true;
                 OnInteract.Invoke();
-
-                if (repeatable)
-                    GameInstance.SendCoroutine(CO_ResetActive());
+                if (repeatable && resetCoroutine == null) ResetActive();
             }
         }
     }
@@ -73,13 +72,14 @@ public class Volume_TriggerInteract : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         activated = false;
+        resetCoroutine = null;
     }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void ResetActive()
     {
-        StartCoroutine(CO_ResetActive());
+        resetCoroutine = StartCoroutine(CO_ResetActive());
     }
 
     #endregion

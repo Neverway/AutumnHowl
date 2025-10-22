@@ -26,13 +26,19 @@ public class GI_TextboxManager : MonoBehaviour
     public bool HasActiveTextEvent => textEventActive;
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    private bool textEventActive;
-    private bool currentlyPrinting;
-    private string currentTextContent;
-    private float currentTextTypeDelay;
-    private int currentFrame;
-    private bool performingRegularMarkup, performingSpecialMarkup;
-    private int markupStartIndex;
+    public bool _textEventActive;
+
+    public bool textEventActive;
+    //{
+//get { return _textEventActive; }
+        //set { Debug.Log($"Set textEventActive to {value}"); _textEventActive=value; }
+    //}
+    public bool currentlyPrinting;
+    public string currentTextContent;
+    public float currentTextTypeDelay;
+    public int currentFrame;
+    public bool performingRegularMarkup, performingSpecialMarkup;
+    public int markupStartIndex;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -65,6 +71,8 @@ public class GI_TextboxManager : MonoBehaviour
         {
             if (textbox == null)
             {
+                Debug.LogWarning("A text event is active, but the textbox is null! This is an error I don't know how to fix, so I'm just going to force reset the textbox now. (Pls fix) ~Liz");
+                textEventActive = false;
                 return;
             }
 
@@ -405,8 +413,7 @@ public class TextEvent
 
     public void ClearFrames() => frames.Clear();
     public void AddFrame(string text) => frames.Add(new TextFrames(text));
-    public bool TryDisplay(bool overrideExistingEvents = false) 
-        => GameInstance.Get<GI_TextboxManager>().TryStartTextEvent(this, overrideExistingEvents);
+    public bool TryDisplay(bool overrideExistingEvents = false) => GameInstance.Get<GI_TextboxManager>().TryStartTextEvent(this, overrideExistingEvents);
 
 }
 

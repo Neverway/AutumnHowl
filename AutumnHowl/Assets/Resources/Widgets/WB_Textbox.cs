@@ -72,6 +72,11 @@ public class WB_Textbox : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        //GameInstance.Get<GI_TextboxManager>().textEventActive = false;
+    }
+
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private void SetDrawInBack()
