@@ -101,15 +101,12 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         {
             case PumpkinState.SpawnEnemy:
                 {
-                    if (battleStateController.waveStepCount == 0)
+                    //spawn 3 pumptims
+                    for (int i = 0; i < 3; i++)
                     {
-                        //spawn 3 pumptims
-                        for (int i = 0; i < 3; i++)
-                        {
-                            SpawnEnemyAtRandomLocation();
-                        }
-                        state = PumpkinState.VineAttack;
+                        SpawnEnemyAtRandomLocation();
                     }
+                    state = PumpkinState.VineAttack;
                     break;
                 }
             case PumpkinState.VineAttack:
@@ -137,13 +134,22 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         //Spawn hazard signs
         var warnings = SpawnVineWarningsOnPlayer(pos);
         yield return new WaitForSeconds(1.3f);
-        //spawn attacks on that same location
-        SpawnVineAttacks(pos);
+        //spawn attacks on that same location (but only if the wave is active)
+        if (battleStateController.stepsRemaining > 0)
+        {
+            SpawnVineAttacks(pos);
+        }
         //Remove the hazard signs
         foreach(GameObject g in warnings)
         {
             Destroy(g);
         }
+        yield return new WaitForSeconds(0.5f);
+        if (battleStateController.stepsRemaining > 0)
+        {
+            StartCoroutine(VineAttackRoutine());
+        }
+
     }
     /// <summary>
     /// Spawns hazard effects and returns a list of the spawned GameObjects.
