@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: char_scarecrow
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: char_tree
+  <UniqueID>k__BackingField: char_scarecrow
   characterReferenceType: 1
   characterName: 
   baseStats:
