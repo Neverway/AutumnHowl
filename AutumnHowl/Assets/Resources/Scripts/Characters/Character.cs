@@ -34,6 +34,7 @@ public abstract class Character : MonoBehaviour
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     public Vector2 movement;
+    public Vector2 facingDirection;
     protected float currentMoveSpeed;
 
 

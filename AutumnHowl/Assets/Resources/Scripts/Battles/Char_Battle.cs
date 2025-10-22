@@ -119,7 +119,7 @@ public abstract class Char_Battle : Character
             
             var currentPosition = gridPawnController.position + appliedPosition;
 
-            movement = -attackSequence.attacks[i].position;
+            facingDirection = -attackSequence.attacks[i].position;
             
             Instantiate(attackSequence.attacks[i].visualEffect, battleGrid.transform.position+new Vector3(currentPosition.x, currentPosition.y, 0), new Quaternion(), null);
             
@@ -176,7 +176,7 @@ public abstract class Char_Battle : Character
                 {
                     dir--;
                 }
-                movement = -attackSequence.attacks[dir].position;
+                facingDirection = -attackSequence.attacks[dir].position;
                 break;
             }
         }
@@ -194,7 +194,7 @@ public abstract class Char_Battle : Character
         {
             return;
         }
-        if (movement != direction) {
+        if (facingDirection != direction) {
             return;
         }
         Stats.maxDefense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
