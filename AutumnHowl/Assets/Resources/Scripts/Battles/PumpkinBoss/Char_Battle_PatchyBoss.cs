@@ -45,15 +45,20 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
+    new private void Start()
+    {
+        base.Start();
+        battleStateController.OnStartWave.AddListener(DoCurrentAttack);
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
     private void TakeTurn ()
     {
-        if (battleStateController.waveStepCount == 0)
+        /*if (battleStateController.waveStepCount == 0)
         {
             DoCurrentAttack();
-        }
+        }*/
 
         if (isDead) battleStateController.NextTurnStep();
         
@@ -102,6 +107,7 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         {
             case PumpkinState.SpawnEnemy:
                 {
+                    print("Patchystate SpawnEnemy");
                     if (vineRoutine != null)
                     {
                         StopCoroutine(vineRoutine);
@@ -116,6 +122,7 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
                 }
             case PumpkinState.VineAttack:
                 {
+                    print("Patchystate VineAttack");
                     if (vineRoutine != null)
                     {
                         StopCoroutine(vineRoutine);
@@ -156,9 +163,8 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         yield return new WaitForSeconds(0.5f);
         if (battleStateController.stepsRemaining > 0)
         {
-            StartCoroutine(VineAttackRoutine());
+            vineRoutine = StartCoroutine(VineAttackRoutine());
         }
-
     }
     /// <summary>
     /// Spawns hazard effects and returns a list of the spawned GameObjects.

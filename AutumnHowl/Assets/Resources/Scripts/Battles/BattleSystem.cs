@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BattleStateController : MonoBehaviour
 {
@@ -36,6 +37,11 @@ public class BattleStateController : MonoBehaviour
     public int waveStepCount = 0;
     public List<Char_Battle> turnOrder;
     public int currentTurn = 0;
+
+    /// <summary>
+    /// Triggered when a wave starts.
+    /// </summary>
+    public UnityEvent OnStartWave = new UnityEvent();
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
@@ -297,6 +303,7 @@ public class BS_GridAction : BattleState
         controller.stepsRemaining = activeWave.waveSteps;
         controller.battlePlayer.canMove = true;
         controller.waveStepCount = 0;
+        controller.OnStartWave?.Invoke();
     }
 
     public override void OnStateUpdate()
