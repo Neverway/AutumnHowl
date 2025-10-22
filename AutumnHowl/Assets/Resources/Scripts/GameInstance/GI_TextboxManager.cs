@@ -407,7 +407,6 @@ public class TextEvent
     public void AddFrame(string text) => frames.Add(new TextFrames(text));
     public bool TryDisplay(bool overrideExistingEvents = false) 
         => GameInstance.Get<GI_TextboxManager>().TryStartTextEvent(this, overrideExistingEvents);
-
 }
 
 [Serializable]
