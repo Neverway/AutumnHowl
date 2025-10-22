@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: NAME
   m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: NAME_UNIQUEID
   characterReferenceType: 0
   characterName: 
   baseStats:
     health: 100
     level: 0
+    power: 10
+    corruption: 0
     attack:
       startValue: 10
       multiplier: 0
@@ -25,8 +28,6 @@ MonoBehaviour:
       startValue: 10
       multiplier: 0
       addedValue: 0
-    power: 10
-    corruption: 0
     maxHealth:
       startValue: 100
       multiplier: 0
@@ -59,4 +60,3 @@ MonoBehaviour:
       startValue: 3
       multiplier: 0
       addedValue: 0
-    owner: {fileID: 0}

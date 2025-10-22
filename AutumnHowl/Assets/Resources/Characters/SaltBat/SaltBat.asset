@@ -16,7 +16,7 @@ MonoBehaviour:
   characterReferenceType: 1
   characterName: SaltBat
   baseStats:
-    health: 100
+    health: 5
     level: 0
     power: 10
     corruption: 0
