@@ -77,6 +77,9 @@ public class AuHoGameState
             kills = gameState.kills,
             deaths = gameState.deaths,
             playtime = gameState.playtime,
+            
+            currentLanternTime = gameState.currentLanternTime,
+            lanternDuration = gameState.lanternDuration,
         };
         GI_SaveSystem.SaveValue(inventoryData, "PlayerInventory");
     }
@@ -126,6 +129,9 @@ public class AuHoGameState
             gameState.kills = data.kills;
             gameState.deaths = data.deaths;
             gameState.playtime = data.playtime;
+            
+            gameState.currentLanternTime = data.currentLanternTime;
+            gameState.lanternDuration = data.lanternDuration;
         }
     }
 
@@ -140,5 +146,8 @@ public class AuHoGameState
         public int kills;
         public int deaths;
         public float playtime;
+        
+        public float currentLanternTime;
+        public float lanternDuration;
     }
 }
