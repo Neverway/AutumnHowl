@@ -52,16 +52,16 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         // If target is in range, attack and end turn.
         switch (GetTarget())
         {
-            case "north":
+            case Direction.North:
                     TryAttackSequence(AttackSequences[0]);
                     return;
-            case "south":
+            case Direction.South:
                     TryAttackSequence(AttackSequences[1]);
                     return;
-            case "east":
+            case Direction.East:
                     TryAttackSequence(AttackSequences[2]);
                     return;
-            case "west":
+            case Direction.West:
                     TryAttackSequence(AttackSequences[3]);
                     return;
         }

@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,6 +85,8 @@ public static partial class DirectionUtility
 public static partial class DirectionUtility 
 {
     public static DirectionInfo Info(this Direction direction) => directionInfos[direction];
+    
+    
     public static Direction Turn(this Direction direction, SpinDirection spin)
     {
         switch(spin)
@@ -96,16 +97,17 @@ public static partial class DirectionUtility
         }
         throw new NotImplementedException($"Did not define how to turn Directions with SpinDirection {spin}");
     }
-    public static void InEachDireciton(Action<Direction> inEachDirection)
+    public static void ForEachDirection(Action<Direction> inEachDirection)
     {
         foreach (Direction direction in directionInfos.Keys)
             inEachDirection.Invoke(direction);
     }
-    public static void InEachDireciton(Action<Direction, DirectionInfo> inEachDirection)
+    public static void ForEachDirection(Action<Direction, DirectionInfo> inEachDirection)
     {
         foreach (var dirInfos in directionInfos)
             inEachDirection.Invoke(dirInfos.Key, dirInfos.Value);
     }
+
     public static bool TryConvertToDirection(this Vector2 vector, out Direction? direction)
     {
         foreach (var dirInfos in directionInfos)

@@ -65,53 +65,32 @@ public class Char_Battle_BasicAttacker : Char_Battle
 
     protected Vector2Int GetLowestTileToTarget()
     {
-        var x = gridPawnController.position.x;
-        var y = gridPawnController.position.y;
         var lowestTileNumber = 9999;
         var lowestTile = new Vector2Int(-1,-1);
-        
-        Vector2Int checkPos;
 
         // Check surrounding tiles
-        checkPos = new Vector2Int(x + 1, y);
-        if (TestTile(checkPos, lowestTileNumber))
+        DirectionUtility.ForEachDirection((direction) =>
         {
-            lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
-            lowestTile = checkPos;
-        }
-        checkPos = new Vector2Int(x - 1, y);
-        if (TestTile(checkPos, lowestTileNumber))
-        {
-            lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
-            lowestTile = checkPos;
-        }
-        checkPos = new Vector2Int(x, y + 1);
-        if (TestTile(checkPos, lowestTileNumber))
-        {
-            lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
-            lowestTile = checkPos;
-        }
-        checkPos = new Vector2Int(x, y - 1);
-        if (TestTile(checkPos, lowestTileNumber))
-        {
-            lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
-            lowestTile = checkPos;
-        }
-
+            Vector2Int checkPos = gridPawnController.position + direction.Info().vector2;
+            if (TestTile(checkPos, lowestTileNumber))
+            {
+                lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
+                lowestTile = checkPos;
+            }
+        });
         return lowestTile;
     }
 
-    protected string GetTarget()
+    protected Direction? GetTarget()
     {
-        var x = gridPawnController.position.x;
-        var y = gridPawnController.position.y;
-        Vector2Int checkPos;
+        Direction? targetDirection = null;
+        DirectionUtility.ForEachDirection(direction =>
+        {
+            if (TestForEnemy(gridPawnController.position + direction.Info().vector2))
+                targetDirection = direction;
+        });
 
-        if (TestForEnemy(new Vector2Int(x, y+1))) return "north";
-        if (TestForEnemy(new Vector2Int(x, y-1))) return "south";
-        if (TestForEnemy(new Vector2Int(x+1, y))) return "east";
-        if (TestForEnemy(new Vector2Int(x-1, y))) return "west";
-        return "none";
+        return targetDirection;
     }
     
     private void TakeTurn()
@@ -128,40 +107,26 @@ public class Char_Battle_BasicAttacker : Char_Battle
         var x = gridPawnController.position.x;
         var y = gridPawnController.position.y;
         // If target is in range, randomly decide to attack or back away
-        switch (GetTarget())
+        Direction? targetDirection = GetTarget();
+        if (targetDirection != null)
         {
-            case "north":
-                if (Random.Range(0, 100) < randomRetreat == false)
+            if (Random.Range(0, 100) < randomRetreat == false)
+            {
+                switch (targetDirection)
                 {
-                    TryAttackSequence(AttackSequences[0]);
-                    return;
+                    case Direction.North: TryAttackSequence(AttackSequences[0]); break;
+                    case Direction.South: TryAttackSequence(AttackSequences[1]); break;
+                    case Direction.East: TryAttackSequence(AttackSequences[2]); break;
+                    case Direction.West: TryAttackSequence(AttackSequences[3]); break;
                 }
-                if (TryMoveTo(new Vector2Int(x+0, y+-1))) { return; }
-                break;
-            case "south":
-                if (Random.Range (0, 100) < randomRetreat == false)
-                {
-                    TryAttackSequence(AttackSequences[1]);
-                    return;
-                }
-                if (TryMoveTo(new Vector2Int(x+0, y+1))) { return; }
-                break;
-            case "east":
-                if (Random.Range (0, 100) < randomRetreat == false)
-                {
-                    TryAttackSequence(AttackSequences[2]);
-                    return;
-                }
-                if (TryMoveTo(new Vector2Int(x+-1, y+0))) { return; }
-                break;
-            case "west":
-                if (Random.Range (0, 100) < randomRetreat == false)
-                {
-                    TryAttackSequence(AttackSequences[3]);
-                    return;
-                }
-                if (TryMoveTo(new Vector2Int(x+1, y+0))) { return; }
-                break;
+                return;
+            }
+
+            Vector2Int toPosition = gridPawnController.position;
+            toPosition += targetDirection.Value.Info().vector2 * -1;
+
+            if (TryMoveTo(toPosition)) 
+                return;
         }
         
         if (!TryMoveTo(GetLowestTileToTarget()))

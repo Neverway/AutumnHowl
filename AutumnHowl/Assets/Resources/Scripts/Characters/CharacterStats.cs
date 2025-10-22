@@ -20,47 +20,11 @@ public class CharacterStats
     public Character owner { get; set; }
 
     /*-----[ Constructors ]-------------------------------------------------------------------------------------------*/
-    public CharacterStats() 
-    { 
-    }
+    public CharacterStats() { }
     public CharacterStats(CharacterIdentifier character) : base() => SetupStatsLinkedToCharacter(character);
 
-    /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/
-    [Serializable]
-    public struct SaveData
-    {
-        public float health;
-        public float level;
-        public int power;
-        public float corruption;
-    }
-    public SaveData GetSaveData() => new SaveData()
-    {
-        health = this.health,
-        level = this.level,
-        power = this.power,
-        corruption = this.corruption
-    };
-    public void LoadSaveData(SaveData saveData)
-    {
-        this.health = saveData.health;
-        this.level = saveData.level;
-        this.power = saveData.power;
-        this.corruption = saveData.corruption;
-    }
-
-
     #region========================================( Variables )======================================================//
-    /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-
-
-    /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-
-
-    /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-
-
-    /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    /*-----[ Settable stats (Not modifiable) ]------------------------------------------------------------------------*/
 
     [Header("Starting Values for Valued-Stats")]
     public float health = 100;
@@ -68,6 +32,7 @@ public class CharacterStats
     public int power = 10;
     public float corruption = 0;
 
+    /*-----[ Modifiable stats (Not settable) ]------------------------------------------------------------------------*/
     [Header("Combat Stats")]
     [Box] public CharacterStatInt attack = new(10, Attack);
     [Box] public CharacterStatInt defense = new(10, Defense);
@@ -79,87 +44,15 @@ public class CharacterStats
     [Box] public CharacterStatInt maxPower = new(100, MaxPower);
     [Box] public CharacterStatInt maxCorruption = new(100, MaxCorruption);
 
-
     [Header("Overworld Stats")]
     [Box] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
     [Box] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
 
     #endregion
 
-
     #region=======================================( Functions )=======================================================//
-    /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-
-
-    /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    public void SetupStatsLinkedToCharacter(CharacterIdentifier character)
-    {
-        int someInt = attack + defense;
-
-        bool hasNoTemplate = character.TemplateCreatedFrom == null;
-
-        //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field
-        foreach (MemberInfo member in typeof(CharacterStats).GetCachedMemberInfos())
-            if (member is FieldInfo field && typeof(CharacterStat).IsAssignableFrom(field.FieldType))
-            {
-                //Ignore static fields (Should really not ever happen anyways)
-                if (member.IsStatic()) continue;
-                //If there is no template, it is likely created with no template.
-                if (hasNoTemplate)
-                {
-                    CharacterStat stat = field.GetValue(this) as CharacterStat;
-                    stat.LinkedCharacter = character; //Safe to assign linkedCharacter since it wont override any CharacterTemplate.baseStats
-                    continue;
-                }
-                //Get the base stat from the character template
-                CharacterStat statToClone = field.GetValue(character.TemplateCreatedFrom.baseStats) as CharacterStat;
-                if (statToClone == null)
-                {
-                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to clone a " +
-                                   $"CharacterStat {field.Name}, but it was null. Unable to link character to stat");
-                    continue;
-                }
-                //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
-                CharacterStat myStat = statToClone.GetClonedStat();
-                field.SetValue(this, myStat);
-                myStat.LinkedCharacter = character;
-            }
-    }
-
-    public void RefreshStatIDs()
-    {
-        CharacterStats defaults = new CharacterStats();
-
-        //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field
-        foreach (MemberInfo member in typeof(CharacterStats).GetCachedMemberInfos())
-            if (member is FieldInfo field && typeof(CharacterStat).IsAssignableFrom(field.FieldType))
-            {
-                //Ignore static fields (Should really not ever happen anyways)
-                if (member.IsStatic()) continue;
-
-                //Get the default stat from a new instance of CharacterStats
-                CharacterStat defaultStat = field.GetValue(defaults) as CharacterStat;
-                if (defaultStat == null)
-                {
-                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to get default ID on a " +
-                                   $"CharacterStat {field.Name}, but it was null. Unable to get default ID from stat");
-                    continue;
-                }
-
-                //Get the current stat
-                CharacterStat currentStat = field.GetValue(this) as CharacterStat;
-                if (defaultStat == null)
-                {
-                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to get a reference to our own stat on a " +
-                                   $"CharacterStat {field.Name}, but it was null. Unable to apply default ID to it");
-                    continue;
-                }
-
-                //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
-                currentStat.StatType = defaultStat.StatType;
-            }
-    }
-    /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    /*-----[ Modify Functions ]-------------------------------------------------------------------------------------*/
+    
     /// <summary>
     /// Modify the current stats on a character
     /// </summary>
@@ -259,14 +152,9 @@ public class CharacterStats
         return false;
     }
 
-    public void ModifyCorruption()
-    {
-        throw new NotImplementedException();
-    }
-
     #endregion
 
-    #region HelperProperties
+    #region====================================( Helper Properties )====================================================//
     public float PercentCurrentHealth => health / maxHealth;
     public float PercentMissingHealth => 1f - PercentCurrentHealth;
     public float MissingHealth => maxHealth - health;
@@ -278,6 +166,108 @@ public class CharacterStats
     public float PercentCurrentPower => ((float)power) / maxPower;
     public float PercentMissingPower => 1f - PercentCurrentPower;
     public float MissingPower => maxPower - power;
+
+    #endregion
+
+    #region==================================( System Integration )======================================================//
+    /*-----[ Stat setup functions ]-----------------------------------------------------------------------------------*/
+    public void SetupStatsLinkedToCharacter(CharacterIdentifier character)
+    {
+        int someInt = attack + defense;
+
+        bool hasNoTemplate = character.TemplateCreatedFrom == null;
+
+        //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field
+        foreach (MemberInfo member in typeof(CharacterStats).GetCachedMemberInfos())
+            if (member is FieldInfo field && typeof(CharacterStat).IsAssignableFrom(field.FieldType))
+            {
+                //Ignore static fields (Should really not ever happen anyways)
+                if (member.IsStatic()) continue;
+                //If there is no template, it is likely created with no template.
+                if (hasNoTemplate)
+                {
+                    CharacterStat stat = field.GetValue(this) as CharacterStat;
+                    stat.LinkedCharacter = character; //Safe to assign linkedCharacter since it wont override any CharacterTemplate.baseStats
+                    continue;
+                }
+                //Get the base stat from the character template
+                CharacterStat statToClone = field.GetValue(character.TemplateCreatedFrom.baseStats) as CharacterStat;
+                if (statToClone == null)
+                {
+                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to clone a " +
+                                   $"CharacterStat {field.Name}, but it was null. Unable to link character to stat");
+                    continue;
+                }
+                //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
+                CharacterStat myStat = statToClone.GetClonedStat();
+                field.SetValue(this, myStat);
+                myStat.LinkedCharacter = character;
+            }
+    }
+    public void RefreshStatIDs()
+    {
+        CharacterStats defaults = new CharacterStats();
+
+        //Loop through all fields in the CharacterStats class and process them if they are a CharacterStat field
+        foreach (MemberInfo member in typeof(CharacterStats).GetCachedMemberInfos())
+            if (member is FieldInfo field && typeof(CharacterStat).IsAssignableFrom(field.FieldType))
+            {
+                //Ignore static fields (Should really not ever happen anyways)
+                if (member.IsStatic()) continue;
+
+                //Get the default stat from a new instance of CharacterStats
+                CharacterStat defaultStat = field.GetValue(defaults) as CharacterStat;
+                if (defaultStat == null)
+                {
+                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to get default ID on a " +
+                                   $"CharacterStat {field.Name}, but it was null. Unable to get default ID from stat");
+                    continue;
+                }
+
+                //Get the current stat
+                CharacterStat currentStat = field.GetValue(this) as CharacterStat;
+                if (defaultStat == null)
+                {
+                    Debug.LogError($"{nameof(CharacterStats)}: Attempting to get a reference to our own stat on a " +
+                                   $"CharacterStat {field.Name}, but it was null. Unable to apply default ID to it");
+                    continue;
+                }
+
+                //Clone the stat, and replace this stat with the clone, and link the given character ID to this stat
+                currentStat.StatType = defaultStat.StatType;
+            }
+    }
+
+    /// <summary>Called upon a creation of a NEW set of stats for a NEW character</summary>
+    public void OnNewCharacter()
+    {
+        health = maxHealth;
+    }
+
+    /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/
+    [Serializable]
+    public struct SaveData
+    {
+        public float health;
+        public float level;
+        public int power;
+        public float corruption;
+    }
+    public SaveData GetSaveData() => new SaveData()
+    {
+        health = this.health,
+        level = this.level,
+        power = this.power,
+        corruption = this.corruption
+    };
+    public void LoadSaveData(SaveData saveData)
+    {
+        this.health = saveData.health;
+        this.level = saveData.level;
+        this.power = saveData.power;
+        this.corruption = saveData.corruption;
+    }
+    
     #endregion
 }
 

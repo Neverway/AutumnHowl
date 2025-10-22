@@ -17,12 +17,13 @@ public class CharacterIdentifier
     public CharacterStats Stats { get; private set; }
 
 
-
-
-
-
-
-
+    //Methods ----------------------------------------------------------------------------------------------------------------
+    
+    /// <summary>Called upon a creation of a NEW instance of a character</summary>
+    public void OnNewCharacter()
+    {
+        Stats.OnNewCharacter();
+    }
 
     //Character Identifier creation ------------------------------------------------------------------------------------------
     [Reload]
@@ -39,7 +40,7 @@ public class CharacterIdentifier
             Stats = new CharacterStats(this);
     }
 
-    public static CharacterIdentifier GetDefaultCharacter() => GetFromCharacterTemplate(null);
+    public static CharacterIdentifier NewDummyCharacter => GetFromCharacterTemplate(null);
     public static CharacterIdentifier GetFromCharacterTemplate(CharacterTemplate characterTemplate)
     {
         //Create empty identifier as default if no template is provided (used for GetDefaultCharacter()
@@ -56,11 +57,13 @@ public class CharacterIdentifier
                 if (!persistentCharacters.TryGetValue(characterTemplate, out toReturn))
                 {
                     toReturn = new CharacterIdentifier(characterTemplate);
+                    toReturn.OnNewCharacter();
                     persistentCharacters.Add(characterTemplate, toReturn);
                 }
                 break;
             case CharacterTemplateToIdentifierStrategy.CloneableAndDisposable:
                 toReturn = new CharacterIdentifier(characterTemplate);
+                toReturn.OnNewCharacter();
                 break;
             default:
                 {
@@ -73,7 +76,7 @@ public class CharacterIdentifier
 
     }
 
-
+    
 
     //Save and Load for Persistent Characters ----------------------------------------------------------------------------------------
 

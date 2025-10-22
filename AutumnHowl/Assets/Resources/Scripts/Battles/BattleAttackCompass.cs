@@ -48,10 +48,8 @@ public class BattleAttackCompass : MonoBehaviour
     [Tooltip("The current angle the sword needle is pointing in")]
     private float swordAngle = 0f;
 
-    public enum cardinalDirection { north, south, west, east }
     private enum RingState { notStarted, spinning, finish }
     private RingState currentState = RingState.notStarted;
-    private enum SpinDirection { left, right }
     private SpinDirection currentSpinDirection;
     //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
     private float clampedTotalSpin = 0f;
@@ -127,12 +125,12 @@ public class BattleAttackCompass : MonoBehaviour
             // Start the attack timer on first press
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
-                currentSpinDirection = SpinDirection.left;
+                currentSpinDirection = SpinDirection.Left;
                 Initialize();
             }
             else if (GameInstance.Inputs.Action.WasPressedThisFrame())
             {
-                currentSpinDirection = SpinDirection.right;
+                currentSpinDirection = SpinDirection.Right;
                 Initialize();
             }
             return;
@@ -231,9 +229,9 @@ public class BattleAttackCompass : MonoBehaviour
     
     private void SetNeedleDirection(Vector2 _movement)
     {
-        //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction
+        //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction rotated 18- degrees
         if (_movement.TryConvertToDirection(out Direction? direction))
-            SetNeedleDirection(direction.Value.Info().degreesRotation);
+            SetNeedleDirection(direction.Value.Info().turned180.Info().degreesRotation);
     }
     
     private void DoSpinState ()
@@ -279,11 +277,11 @@ public class BattleAttackCompass : MonoBehaviour
             }
         }
         float spinAmount = 0f;
-        if (currentSpinDirection == SpinDirection.left)
+        if (currentSpinDirection == SpinDirection.Left)
         {
             spinAmount = -spinSpeed * Time.deltaTime;
         }
-        if (currentSpinDirection == SpinDirection.right)
+        if (currentSpinDirection == SpinDirection.Right)
         {
             spinAmount = spinSpeed * Time.deltaTime;
         }
@@ -342,31 +340,18 @@ public class BattleAttackCompass : MonoBehaviour
             FailAttack ();
             return;
         }
-        nearestAngleToSword = Direction.North.Info().degreesRotation;
-        DirectionUtility.InEachDireciton((direction, directionInfo) =>
-        {
 
-        });
         distanceFromNearestAngle = Mathf.Abs(Mathf.DeltaAngle(swordAngle, Direction.North.Info().degreesRotation));
-        float test = 
-        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, Direction.East.Info().degreesRotation));
-        if (test < distanceFromNearestAngle)
+        nearestAngleToSword = Direction.North.Info().degreesRotation;
+        DirectionUtility.ForEachDirection((direction, directionInfo) =>
         {
-            distanceFromNearestAngle = test;
-            nearestAngleToSword = Direction.East.Info().degreesRotation;
-        }
-        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, Direction.South.Info().degreesRotation));
-        if (test < distanceFromNearestAngle)
-        {
-            distanceFromNearestAngle = test;
-            nearestAngleToSword = Direction.South.Info().degreesRotation;
-        }
-        test = Mathf.Abs(Mathf.DeltaAngle (swordAngle, Direction.West.Info().degreesRotation));
-        if (test < distanceFromNearestAngle)
-        {
-            distanceFromNearestAngle = test;
-            nearestAngleToSword = Direction.West.Info().degreesRotation;
-        }
+            var test = Mathf.Abs(Mathf.DeltaAngle(swordAngle, directionInfo.degreesRotation));
+            if (test < distanceFromNearestAngle)
+            {
+                distanceFromNearestAngle = test;
+                nearestAngleToSword = directionInfo.degreesRotation;
+            }
+        });
 
         if (distanceFromNearestAngle < perfectAngle)
         {
