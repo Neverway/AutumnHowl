@@ -15,11 +15,11 @@ PrefabInstance:
     - target: {fileID: 576078956332330542, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
-      objectReference: {fileID: 7108339969198208228, guid: 6e765e3d05b02754eaa9a94251a7a958, type: 3}
+      objectReference: {fileID: 7108339969198208228, guid: a5615630329b6317cb51516395d14596, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1220590367, guid: 2573121aba1a7f2949b906547c0bbc92, type: 3}
+      objectReference: {fileID: 623792036, guid: 796a763d451015fcf8ae10f7c7c901db, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Name
-      value: Bttl_Pumpkin
+      value: Bttl_Patchy
       objectReference: {fileID: 0}
     - target: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Enabled
@@ -95,17 +95,17 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3411343996498358984}
+      addedObject: {fileID: 1449108568966244714}
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1449108568966244714}
+      addedObject: {fileID: 7589726733599967005}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
 --- !u!1 &6242562417686465405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3411343996498358984
+--- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,14 +114,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242562417686465405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: ba9669da7b16121419d66ad5780fde7f, type: 2}
+  pawnName: Patchy
+  type: 1
+--- !u!114 &7589726733599967005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242562417686465405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6580171054a271d4d848f340591dc9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  template: {fileID: 11400000, guid: 221f814b320ae4dc9ad302d3071750c6, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
   movement: {x: 0, y: 0}
+  facingDirection: {x: 0, y: 0}
   animator: {fileID: 7931684597536962226}
   AttackSequences:
   - attacks:
@@ -149,7 +164,7 @@ MonoBehaviour:
       direction: {x: -1, y: 0}
       pushing: 0
   canMove: 0
-  pushable: 1
+  pushable: 0
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
@@ -157,21 +172,10 @@ MonoBehaviour:
   spawnOnDeath: {fileID: 0}
   useBlock: 0
   randomRetreat: 0
-  skipFirstTurn: 1
---- !u!114 &1449108568966244714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242562417686465405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawnName: 
-  type: 1
+  skipFirstTurn: 0
+  enemyToSpawn: {fileID: 3411343996498358984, guid: d08ddbf0347b6104282664330e9a6a08, type: 3}
+  vineEffectPrefab: {fileID: 466312007867241361, guid: 2bdeed1205ad00b4fb127643a11ad178, type: 3}
+  vineWarningPrefab: {fileID: 2649854570582670544, guid: 89cd7e8fa829005be8d7220bc5966009, type: 3}
 --- !u!95 &7931684597536962226 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
