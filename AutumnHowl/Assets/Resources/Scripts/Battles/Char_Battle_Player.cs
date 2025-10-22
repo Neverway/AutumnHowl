@@ -38,7 +38,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private new void Start()
     {
-        movement = new Vector2(0, 1);
+        facingDirection = new Vector2(0, 1);
         base.Start();
     }
     
@@ -50,8 +50,8 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
             StartCoroutine(Die());
             return;
         }
-        animator.SetFloat("idleX", movement.x);
-        animator.SetFloat("idleY", movement.y);
+        animator.SetFloat("idleX", facingDirection.x);
+        animator.SetFloat("idleY", facingDirection.y);
         if (!canMove) return;
         UpdateMovementInput();
     }
@@ -77,7 +77,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
             if (input.WasPressedThisFrame())
             {
-                if (TryMoveInDirection(direction)) movement = direction;
+                if (TryMoveInDirection(direction)) facingDirection = direction;
                 return;
             }
         }
@@ -87,11 +87,11 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         {
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
-                SpinBlock ("left");
+                SpinBlock (SpinDirection.Left);
             }
             else if (GameInstance.Inputs.Action.WasPressedThisFrame ())
             {
-                SpinBlock("right");
+                SpinBlock(SpinDirection.Right);
             }
         }
         
@@ -132,6 +132,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         
         SetAttackDamageToCurrentATK();
         TryAttackSequence(AttackSequences[0]);
+
         //We regenerate paths since the sword can affect pathing
         gridPather.GetPathToTarget (gridPawnController);
     }
@@ -144,21 +145,21 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         battleStateController.NextTurnStep (0.5f);
     }
 
-    private void SpinBlock(string _direction)
+    private void SpinBlock(SpinDirection _direction)
     {
         switch (_direction)
         {
-            case "left":
+            case SpinDirection.Left:
                 {
                     //rotate 90 degrees left
-                    movement = Vector2.Perpendicular (movement);
+                    facingDirection = Vector2.Perpendicular (facingDirection);
                     battleStateController.NextTurnStep (0.5f);
                     break;
                 }
-            case "right":
+            case SpinDirection.Right:
                 {
                     //rotate 90 degrees right
-                    movement = -Vector2.Perpendicular (movement);
+                    facingDirection = -Vector2.Perpendicular (facingDirection);
                     battleStateController.NextTurnStep (0.5f);
                     break;
                 }

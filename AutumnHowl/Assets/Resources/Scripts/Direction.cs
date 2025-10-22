@@ -8,17 +8,18 @@ public struct DirectionInfo
 {
     //Information to provide in DirectionUtility constructor
     public float degreesRotation;
-    public Vector2Int vector2;
+    public Vector2Int direction;
 
     public Direction turnedLeft;
     public Direction turnedRight;
     public Direction turned180;
 
-    public Func<bool> wasPressed;
+    public Func<bool> wasPressedMethod;
 
     //More information (derived from input information)
-    public int x => vector2.x;
-    public int y => vector2.y;
+    public int x => direction.x;
+    public int y => direction.y;
+    public bool wasPressed => wasPressedMethod.Invoke();
 }
 //Define DirectionInfo for each direciton here
 public static partial class DirectionUtility
@@ -33,49 +34,49 @@ public static partial class DirectionUtility
             //Info for NORTH direction ------------------
             { Direction.North, new() {
                 degreesRotation = 0f,
-                vector2 = Vector2Int.up,
+                direction = Vector2Int.up,
 
                 turnedLeft = Direction.West,
                 turnedRight = Direction.East,
                 turned180 = Direction.South,
 
-                wasPressed = () => GameInstance.Inputs.MoveUp.WasPressedThisFrame(),
+                wasPressedMethod = () => GameInstance.Inputs.MoveUp.WasPressedThisFrame(),
             } },
 
             //Info for EAST direction -------------------
             { Direction.East, new() {
                 degreesRotation = 90f,
-                vector2 = Vector2Int.right,
+                direction = Vector2Int.right,
 
                 turnedLeft = Direction.North,
                 turnedRight = Direction.South,
                 turned180 = Direction.West,
 
-                wasPressed = () => GameInstance.Inputs.MoveRight.WasPressedThisFrame(),
+                wasPressedMethod = () => GameInstance.Inputs.MoveRight.WasPressedThisFrame(),
             } },
 
             //Info for SOUTH direction ------------------
             { Direction.South, new() {
                 degreesRotation = 180f,
-                vector2 = Vector2Int.down,
+                direction = Vector2Int.down,
 
                 turnedLeft = Direction.East,
                 turnedRight = Direction.West,
                 turned180 = Direction.North,
 
-                wasPressed = () => GameInstance.Inputs.MoveDown.WasPressedThisFrame(),
+                wasPressedMethod = () => GameInstance.Inputs.MoveDown.WasPressedThisFrame(),
             } },
 
             //Info for WEST direction -------------------
             { Direction.West, new() {
                 degreesRotation = 270f,
-                vector2 = Vector2Int.left,
+                direction = Vector2Int.left,
 
                 turnedLeft = Direction.South,
                 turnedRight = Direction.North,
                 turned180 = Direction.East,
 
-                wasPressed = () => GameInstance.Inputs.MoveLeft.WasPressedThisFrame(),
+                wasPressedMethod = () => GameInstance.Inputs.MoveLeft.WasPressedThisFrame(),
             } }
         };
     }
@@ -111,7 +112,7 @@ public static partial class DirectionUtility
     public static bool TryConvertToDirection(this Vector2 vector, out Direction? direction)
     {
         foreach (var dirInfos in directionInfos)
-            if (dirInfos.Value.vector2 == vector)
+            if (dirInfos.Value.direction == vector)
             {
                 direction = dirInfos.Key;
                 return true;

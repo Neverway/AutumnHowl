@@ -156,7 +156,7 @@ MonoBehaviour:
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
-  randomRetreat: 75
+  randomRetreat: 20
   skipFirstTurn: 0
 --- !u!114 &1449108568966244714
 MonoBehaviour:

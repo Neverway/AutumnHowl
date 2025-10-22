@@ -120,7 +120,7 @@ public class BattleAttackCompass : MonoBehaviour
         // Detect activation
         if (!attackBarActive)
         {
-            SetNeedleDirection(player.movement);
+            SetNeedleDirection(player.facingDirection);
             spinStartIndex = (int)swordAngle / 90;
             // Start the attack timer on first press
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
@@ -403,7 +403,6 @@ public class BattleAttackCompass : MonoBehaviour
         hitText.SetText ("");
     }
 
-
     private void ExecuteAttack()
     {
         var sequence = new AttackSequence ();
@@ -481,6 +480,7 @@ public class BattleAttackCompass : MonoBehaviour
         if (sequence.attacks.Count == 1)
         {
             sequence.attacks[0].direction = sequence.attacks[0].position;
+            return;
         }
         Vector2Int dir;
         for (int i = 0; i < sequence.attacks.Count; i+=2)

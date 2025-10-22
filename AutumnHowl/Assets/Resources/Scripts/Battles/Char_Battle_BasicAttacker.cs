@@ -71,7 +71,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
         // Check surrounding tiles
         DirectionUtility.ForEachDirection((direction) =>
         {
-            Vector2Int checkPos = gridPawnController.position + direction.Info().vector2;
+            Vector2Int checkPos = gridPawnController.position + direction.Info().direction;
             if (TestTile(checkPos, lowestTileNumber))
             {
                 lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
@@ -86,7 +86,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
         Direction? targetDirection = null;
         DirectionUtility.ForEachDirection(direction =>
         {
-            if (TestForEnemy(gridPawnController.position + direction.Info().vector2))
+            if (TestForEnemy(gridPawnController.position + direction.Info().direction))
                 targetDirection = direction;
         });
 
@@ -97,20 +97,19 @@ public class Char_Battle_BasicAttacker : Char_Battle
     {
         if (isDead) battleStateController.NextTurnStep();
         else if (skipFirstTurn)
-            {
-                skipFirstTurn = false;
-                battleStateController.NextTurnStep ();
-                return;
-            }
+        {
+            skipFirstTurn = false;
+            battleStateController.NextTurnStep ();
+            return;
+        }
         
         SetAttackDamageToCurrentATK();
-        var x = gridPawnController.position.x;
-        var y = gridPawnController.position.y;
+
         // If target is in range, randomly decide to attack or back away
         Direction? targetDirection = GetTarget();
         if (targetDirection != null)
         {
-            if (Random.Range(0, 100) < randomRetreat == false)
+            if (!(Random.Range(0, 100) < randomRetreat))
             {
                 switch (targetDirection)
                 {
@@ -123,7 +122,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
             }
 
             Vector2Int toPosition = gridPawnController.position;
-            toPosition += targetDirection.Value.Info().vector2 * -1;
+            toPosition += targetDirection.Value.Info().direction * -1;
 
             if (TryMoveTo(toPosition)) 
                 return;
