@@ -77,7 +77,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
             if (input.WasPressedThisFrame())
             {
-                if (TryMoveInDirection(direction)) movement = direction;
+                if (TryMoveInDirection(direction, true, gridPawnController)) movement = direction;
                 return;
             }
         }
