@@ -7,13 +7,6 @@ using UnityEngine;
 
 public class GI_SaveSystem : MonoBehaviour
 {
-    [ContextMenu("Test the thinggyyyy")]
-    public void Test()
-    {
-        IDToObj<CharacterTemplate>.TryGet("Autumn", out CharacterTemplate test);
-        Debug.Log(test.UniqueID);
-    }
-
     [Polymorphic, SerializeReference] public SaveDataStrategy saveDataStrategy;
 
     public bool doSaving = true;
@@ -28,6 +21,9 @@ public class GI_SaveSystem : MonoBehaviour
     private MethodInfo saveValueMethod;
     private MethodInfo loadValueMethod;
     [Reload] private static GI_SaveSystem instance;
+
+    public static SavingType CurrentSavingType { get; private set; }
+    public enum SavingType { None, SwitchingScenes, SavingOrLoadingFile }
 
     public void Start()
     {
@@ -129,11 +125,15 @@ public class GI_SaveSystem : MonoBehaviour
     {
         if (!Application.isPlaying || !doSaving) return;
 
-        //Grab values from attributes made for this save system
-        SaveValuesFromAttributes();
+        CurrentSavingType = SavingType.SavingOrLoadingFile;
+        {
+            //Grab values from attributes made for this save system
+            SaveValuesFromAttributes();
 
-        //Commit all values to PlayerPrefs
-        saveDataStrategy.Save(SaveDataFileName);
+            //Commit all values to PlayerPrefs
+            saveDataStrategy.Save(SaveDataFileName);
+        }
+        CurrentSavingType = SavingType.None;
     }
     
     [ContextMenu("Trigger Load Game")]
@@ -141,11 +141,16 @@ public class GI_SaveSystem : MonoBehaviour
     {
         if (!Application.isPlaying || !doSaving) return;
 
-        //Load all values from PlayerPrefs
-        saveDataStrategy.Load(SaveDataFileName);
+        CurrentSavingType = SavingType.SavingOrLoadingFile;
+        {
+            //Load all values from PlayerPrefs
+            saveDataStrategy.Load(SaveDataFileName);
 
-        //Apply values to attributes made for this save system
-        LoadValuesFromAttributes();
+            //Apply values to attributes made for this save system
+            LoadValuesFromAttributes();
+        }
+        CurrentSavingType = SavingType.None;
+
     }
     
     [ContextMenu("Trigger Clear Save")]
@@ -194,11 +199,22 @@ public class GI_SaveSystem : MonoBehaviour
     }
 
 
-
     public static void SaveGame() => instance.OnSaveGame();
     public static void LoadGame() => instance.OnLoadGame();
-    public static void NotifyLeavingScene() => instance.SaveValuesFromAttributes();
-    public static void NotifyEnteredScene() => instance.LoadValuesFromAttributes();
+    public static void NotifyLeavingScene()
+    {
+        CurrentSavingType = SavingType.SwitchingScenes;
+        instance.SaveValuesFromAttributes();
+        CurrentSavingType = SavingType.None;
+    }
+
+    public static void NotifyEnteredScene()
+    {
+        CurrentSavingType = SavingType.SwitchingScenes;
+        instance.LoadValuesFromAttributes();
+        CurrentSavingType = SavingType.None;
+    }
+
     public static void SaveValue<T>(T value, string id) => instance.saveDataStrategy.WriteValue(value, id);
     public static T LoadValue<T>(T defaultValue, string id) => instance.saveDataStrategy.ReadValue(defaultValue, id);
 }

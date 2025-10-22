@@ -8,6 +8,7 @@
 //====================================================================================================================//
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -48,12 +49,14 @@ public class GI_AuHoGameState : MonoBehaviour
 public class AuHoGameState
 {
     public CharacterIdentifier player;
-    public string map = "Town";
-    public Vector2 overworldPosition;
     public BattleData currentBattle;
 
     //Saved Values --------------------------------------------------
     [Box] public Inventory inventory = new Inventory();
+
+    public string map = "Town";
+    public Vector2 overworldPosition;
+
     public int money = 0;
     public int kills = 0;
     public int deaths = 0;
@@ -79,7 +82,11 @@ public class AuHoGameState
             
             currentLanternTime = gameState.currentLanternTime,
             lanternDuration = gameState.lanternDuration,
+
+            map = gameState.map,
+            overworldPosition = gameState.overworldPosition,
         };
+
         GI_SaveSystem.SaveValue(inventoryData, "PlayerInventory");
     }
     [InvokeAfterLoad]
@@ -131,7 +138,38 @@ public class AuHoGameState
             
             gameState.currentLanternTime = data.currentLanternTime;
             gameState.lanternDuration = data.lanternDuration;
+
+            //Load the map and character position if currently loading a file
+            if (GI_SaveSystem.CurrentSavingType == GI_SaveSystem.SavingType.SavingOrLoadingFile)
+            {
+                gameState.map = data.map;
+                Vector2 characterPostiion = data.overworldPosition;
+                string map = gameState.map;
+                GameInstance.SendCoroutine(CoLoadMapFromLoadingGame(characterPostiion, map));
+            }
         }
+    }
+    public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
+    {
+        var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        var worldLoader = GameInstance.Get<GI_WorldLoader>();
+
+        //Wait for any previously loading maps to finish loading
+        while (worldLoader.IsLoading) yield return null;
+        //Load new map
+        worldLoader.Load(mapID);
+        //Wait for the new map to finish loading
+        while (worldLoader.IsLoading) yield return null;
+
+        //Look for the player, and wait until they are found
+        GameObject player;
+        do {
+            player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log("Trying to load map, Looking for player...");
+        } while(player == null);
+
+        //Teleport player to given character position
+        player.transform.root.position = characterPostiion;
     }
 
     [Serializable]
@@ -148,5 +186,8 @@ public class AuHoGameState
         
         public float currentLanternTime;
         public float lanternDuration;
+
+        public string map = "Town";
+        public Vector2 overworldPosition;
     }
 }

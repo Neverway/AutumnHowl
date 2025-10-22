@@ -22,7 +22,7 @@ public class GI_WorldLoader : MonoBehaviour
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    private bool isLoading;
+    public bool IsLoading { get; private set; }
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -38,7 +38,7 @@ public class GI_WorldLoader : MonoBehaviour
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     private IEnumerator Co_Load(string _mapID, string _exitWarpID)
     {
-        isLoading = true;
+        IsLoading = true;
         
         // Load the map
         var loadingMap = SceneManager.LoadSceneAsync(_mapID);
@@ -53,7 +53,7 @@ public class GI_WorldLoader : MonoBehaviour
         //Notify save system to load values for the scene
         GI_SaveSystem.NotifyEnteredScene();
 
-        isLoading = false;
+        IsLoading = false;
     }
 
 
@@ -78,7 +78,7 @@ public class GI_WorldLoader : MonoBehaviour
 
     public void Load(string _mapID, string _exitWarpID = null)
     {
-        if (isLoading) return;
+        if (IsLoading) return;
 
         //Notify save system to save values from the scene you are leaving
         GI_SaveSystem.NotifyLeavingScene();
