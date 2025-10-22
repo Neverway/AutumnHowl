@@ -64,9 +64,9 @@ public class BattleStateController : MonoBehaviour
         if (battlePlayer == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Player is not set");
         if (battleGrid == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Grid is not set");
 
-        Debug.Log("BattleSystem Start (wait)");
+        //Debug.Log("BattleSystem Start (wait)");
         yield return new WaitUntil(()=>BattleGrid.Instance != null);
-        Debug.Log("BattleSystem Start (continue)");
+        //Debug.Log("BattleSystem Start (continue)");
         gameState = GameInstance.Get<GI_AuHoGameState>();
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
@@ -80,7 +80,7 @@ public class BattleStateController : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Debug.Log("Battle destroyed!");
+        //Debug.Log("Battle destroyed!");
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
@@ -120,7 +120,7 @@ public class BattleStateController : MonoBehaviour
     {
         // Disable movement for the current character
         turnOrder[currentTurn].SetTurnActive(false);
-        print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
+        //print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
 
         yield return new WaitForSeconds(_delay);
         
@@ -129,7 +129,7 @@ public class BattleStateController : MonoBehaviour
         {
             currentTurn++;
             // Enable movement for the next character
-            print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
+            //print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
             turnOrder[currentTurn].SetTurnActive(true);
         }
         
@@ -140,7 +140,7 @@ public class BattleStateController : MonoBehaviour
             waveStepCount++;
             currentTurn = 0;
             turnOrder[0].SetTurnActive(true);
-            print($"All turns completed, going to step {stepsRemaining}");
+            //print($"All turns completed, going to step {stepsRemaining}");
         }
     }
 
@@ -204,7 +204,7 @@ public class BS_Start : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
-        Debug.Log($"BS_START_ENTER: {controller.name}", controller);
+        //Debug.Log($"BS_START_ENTER: {controller.name}", controller);
         // Add the player to be first in the turn order
         controller.turnOrder.Add(controller.battlePlayer);
 
@@ -230,7 +230,7 @@ public class BS_Start : BattleState
 
     public override void OnStateLeave(BattleState stateEntering)
     {
-        Debug.Log("BS_START_LEAVE", controller);
+        //Debug.Log("BS_START_LEAVE", controller);
         controller.textEvent.textEvent.OnFinish.RemoveAllListeners();
     }
 }

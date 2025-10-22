@@ -34,7 +34,7 @@ public class BattleGrid : MonoBehaviour
     public GameObject InstantiatePawn (Vector2Int _position, GameObject _pawn) {
         var newObject = Instantiate (_pawn, transform);
         GridPawn newPawn = newObject.GetComponent<GridPawn>();
-        print(newPawn);
+        //print(newPawn);
         newPawn.SetPosition(_position);
         grid[_position.x, _position.y].pawns.Add(newPawn);
         newPawn.InitPawn ();

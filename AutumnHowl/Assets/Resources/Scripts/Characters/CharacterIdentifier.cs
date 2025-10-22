@@ -83,7 +83,6 @@ public class CharacterIdentifier
     [InvokeBeforeSave]
     public static void OnSave()
     {
-        Debug.Log("OnSave");
         List<SaveData> saveDatas = new();
 
         foreach (var character in persistentCharacters.Values)
@@ -91,13 +90,11 @@ public class CharacterIdentifier
 
         var toSave = new Wrapper<SaveData[]>(saveDatas.ToArray());
         GI_SaveSystem.SaveValue(toSave, "PersistentCharacterData");
-        Debug.Log($"{toSave.value.Length}");
     }
     
     [InvokeAfterLoad]
     public static void OnLoad()
     {
-        Debug.Log("OnLoad");
         var toLoad = GI_SaveSystem.LoadValue<Wrapper<SaveData[]>>(null, "PersistentCharacterData");
         if (toLoad == null)
         {
@@ -108,10 +105,9 @@ public class CharacterIdentifier
         var oldCharacters = persistentCharacters;
         persistentCharacters = new();
 
-        Debug.Log($"{toLoad.value.Length}");
         foreach (SaveData data in toLoad.value)
         {
-            Debug.Log($"OnLoad - Character {data.templateID}");
+            //Debug.Log($"OnLoad - Character {data.templateID}");
             if (IDToObj<CharacterTemplate>.TryGet(data.templateID, out CharacterTemplate template))
             {
                 CharacterIdentifier charToLoad = 

@@ -36,6 +36,11 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] private float maxSpinSpeed = 200f;
     [SerializeField] AnimationCurve spinSpeedCurve;
 
+    // Bad me, this variable is confusing >:[
+    // ~Liz
+    [Tooltip("This is the amount of STR/PWR/SOUL that will be expended when performing an attack that passes this many cardinal directions on the compass")]
+    [SerializeField] private int[] powerRequiredForAttacks;
+
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -48,8 +53,17 @@ public class BattleAttackCompass : MonoBehaviour
     [Tooltip("The current angle the sword needle is pointing in")]
     private float swordAngle = 0f;
 
+    private bool bufferLeft = false;
+    private bool bufferRight = false;
+    
+    public static float north { get; private set; } = 0;
+    public static float east { get; private set; } = 90;
+    public static float south { get; private set; } = 180;
+    public static float west { get; private set; } = 270;
+    public enum cardinalDirection { north, south, west, east }
     private enum RingState { notStarted, spinning, finish }
     private RingState currentState = RingState.notStarted;
+    private enum SpinDirection { left, right }
     private SpinDirection currentSpinDirection;
     //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
     private float clampedTotalSpin = 0f;
@@ -117,6 +131,8 @@ public class BattleAttackCompass : MonoBehaviour
         // Update the needle based on the sword angle
         needleImage.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
         
+        // Update how much our current power can actually swing the sword
+        
         // Detect activation
         if (!attackBarActive)
         {
@@ -125,12 +141,12 @@ public class BattleAttackCompass : MonoBehaviour
             // Start the attack timer on first press
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
-                currentSpinDirection = SpinDirection.Left;
+                currentSpinDirection = SpinDirection.left;
                 Initialize();
             }
             else if (GameInstance.Inputs.Action.WasPressedThisFrame())
             {
-                currentSpinDirection = SpinDirection.Right;
+                currentSpinDirection = SpinDirection.right;
                 Initialize();
             }
             return;
@@ -201,6 +217,10 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void OnAttackDone()
     {
+        var attack = 0;
+        bool mirrorX = false;
+        bool mirrorY = false;
+
         if (resetRoutine != null)
         {
             StopCoroutine (resetRoutine);
@@ -229,9 +249,21 @@ public class BattleAttackCompass : MonoBehaviour
     
     private void SetNeedleDirection(Vector2 _movement)
     {
-        //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction rotated 18- degrees
-        if (_movement.TryConvertToDirection(out Direction? direction))
-            SetNeedleDirection(direction.Value.Info().turned180.Info().degreesRotation);
+        switch (_movement.x , _movement.y)
+        {
+            case (0, 1):
+                SetNeedleDirection(south);
+                break;
+            case (0, -1):
+                SetNeedleDirection(north);
+                break;
+            case (-1, 0):
+                SetNeedleDirection(east);
+                break;
+            case (1, 0):
+                SetNeedleDirection(west);
+                break;
+        }
     }
     
     private void DoSpinState ()
@@ -277,11 +309,11 @@ public class BattleAttackCompass : MonoBehaviour
             }
         }
         float spinAmount = 0f;
-        if (currentSpinDirection == SpinDirection.Left)
+        if (currentSpinDirection == SpinDirection.left)
         {
             spinAmount = -spinSpeed * Time.deltaTime;
         }
-        if (currentSpinDirection == SpinDirection.Right)
+        if (currentSpinDirection == SpinDirection.right)
         {
             spinAmount = spinSpeed * Time.deltaTime;
         }
@@ -340,18 +372,27 @@ public class BattleAttackCompass : MonoBehaviour
             FailAttack ();
             return;
         }
-
-        distanceFromNearestAngle = Mathf.Abs(Mathf.DeltaAngle(swordAngle, Direction.North.Info().degreesRotation));
-        nearestAngleToSword = Direction.North.Info().degreesRotation;
-        DirectionUtility.ForEachDirection((direction, directionInfo) =>
+        nearestAngleToSword = north;
+        float test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, north));
+        distanceFromNearestAngle = test;
+        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, east));
+        if (test < distanceFromNearestAngle)
         {
-            var test = Mathf.Abs(Mathf.DeltaAngle(swordAngle, directionInfo.degreesRotation));
-            if (test < distanceFromNearestAngle)
-            {
-                distanceFromNearestAngle = test;
-                nearestAngleToSword = directionInfo.degreesRotation;
-            }
-        });
+            distanceFromNearestAngle = test;
+            nearestAngleToSword = east;
+        }
+        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, south));
+        if (test < distanceFromNearestAngle)
+        {
+            distanceFromNearestAngle = test;
+            nearestAngleToSword = south;
+        }
+        test = Mathf.Abs(Mathf.DeltaAngle (swordAngle, west));
+        if (test < distanceFromNearestAngle)
+        {
+            distanceFromNearestAngle = test;
+            nearestAngleToSword = west;
+        }
 
         if (distanceFromNearestAngle < perfectAngle)
         {
@@ -372,8 +413,10 @@ public class BattleAttackCompass : MonoBehaviour
         ClampTotalSpin ();
         //Try consuming amount of power corresponding to size of spin
         //If there's not enough power, the attack fails.
+        print($"Tried to use {Mathf.Abs((int)clampedTotalSpin)} power!");
         if (player.Stats.TryUsePower(Mathf.Abs((int)clampedTotalSpin)) == false)
         {
+            ShowHitText ("NOT ENOUGH PWR!");
             FailAttack ();
             return;
         }
@@ -402,6 +445,7 @@ public class BattleAttackCompass : MonoBehaviour
         yield return new WaitForSeconds (hitTextDuration);
         hitText.SetText ("");
     }
+
 
     private void ExecuteAttack()
     {
@@ -460,7 +504,7 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void FailAttack ()
     {
-        ShowHitText ("Miss!");
+        //ShowHitText ("Miss!");
         GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;
         OnAttackDone ();
@@ -480,7 +524,6 @@ public class BattleAttackCompass : MonoBehaviour
         if (sequence.attacks.Count == 1)
         {
             sequence.attacks[0].direction = sequence.attacks[0].position;
-            return;
         }
         Vector2Int dir;
         for (int i = 0; i < sequence.attacks.Count; i+=2)
