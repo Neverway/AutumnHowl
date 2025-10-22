@@ -51,7 +51,14 @@ public class GI_SaveSystem : MonoBehaviour
         foreach(var saveSlotKey in saveSlotKeys)
         {
             if (Input.GetKeyDown(saveSlotKey.Item1))
+            {
                 saveSlot = saveSlotKey.Item2;
+                
+                // Show textbox for switching file
+                var textEvent = new TextEvent();
+                textEvent.AddFrame($"Switched to [ File {saveSlot} ]");
+                textEvent.TryDisplay();
+            }
         }
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
@@ -164,6 +171,16 @@ public class GI_SaveSystem : MonoBehaviour
             saveDataStrategy.Save(SaveDataFileName);
         }
         CurrentSavingType = SavingType.None;
+        
+        // Show textbox for saving file
+        var textEvent = new TextEvent();
+        
+        
+        var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        var playtime = gameState.playtime;
+        var formatedTime = TimeSpan.FromSeconds(playtime);
+        textEvent.AddFrame($"[ File {saveSlot} ] \n {formatedTime:hh':'mm':'ss} \n Game has been saved!");
+        textEvent.TryDisplay();
     }
     
     [ContextMenu("Trigger Load Game")]
@@ -189,6 +206,11 @@ public class GI_SaveSystem : MonoBehaviour
         if (!Application.isPlaying) return;
 
         saveDataStrategy.Clear(SaveDataFileName);
+        
+        // Show textbox for erasing file
+        var textEvent = new TextEvent();
+        textEvent.AddFrame($"[ File {saveSlot} ] has been erased!");
+        textEvent.TryDisplay();
     }
 
     [ContextMenu("Remove All PlayerPrefs")]
