@@ -34,6 +34,36 @@ public class GI_SaveSystem : MonoBehaviour
         CacheInvokeOnSaveAndLoadMethods();
         CacheSaveLoadValueMethods();
     }
+    public void Update()
+    {
+        Tuple<KeyCode, int>[] saveSlotKeys = {
+            new(KeyCode.Alpha1, 1),
+            new(KeyCode.Alpha2, 2),
+            new(KeyCode.Alpha3, 3),
+            new(KeyCode.Alpha4, 4),
+            new(KeyCode.Alpha5, 5),
+            new(KeyCode.Alpha6, 6),
+            new(KeyCode.Alpha7, 7),
+            new(KeyCode.Alpha8, 8),
+            new(KeyCode.Alpha9, 9),
+            new(KeyCode.Alpha0, 0),
+        };
+        foreach(var saveSlotKey in saveSlotKeys)
+        {
+            if (Input.GetKeyDown(saveSlotKey.Item1))
+                saveSlot = saveSlotKey.Item2;
+        }
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+                OnSaveGame();
+            if (Input.GetKeyDown(KeyCode.L))
+                OnLoadGame();
+            if (Input.GetKeyDown(KeyCode.Backspace))
+                OnClearSave();
+        }
+    }
+
     private void CacheSaveLoadProperties()
     {
         cachedSaveLoadProperties = new List<Tuple<SaveAndLoadPropertyAttribute, PropertyInfo>>();

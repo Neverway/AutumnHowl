@@ -7,8 +7,6 @@ public class ApplyModsOnPlayerOnActive : MonoBehaviour
     [Box, Polymorphic, SerializeReference] protected SerializedModifier_CharacterTargeting modifier;
     GI_AuHoGameState gameState => GameInstance.Get<GI_AuHoGameState>();
     Modifier toRemove;
-    bool onAwake = false;
-    public void Awake() => onAwake = true;
     public void OnEnable()
     {
         StartCoroutine(RegisterModifiers());

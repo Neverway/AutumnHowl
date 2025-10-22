@@ -96,18 +96,13 @@ public class CharacterIdentifier
     public static void OnLoad()
     {
         var toLoad = GI_SaveSystem.LoadValue<Wrapper<SaveData[]>>(null, "PersistentCharacterData");
-        if (toLoad == null)
-        {
-            Debug.Log($"toLoad was null!");
-            return;
-        }
+        if (toLoad == null) return;
 
         var oldCharacters = persistentCharacters;
         persistentCharacters = new();
 
         foreach (SaveData data in toLoad.value)
         {
-            //Debug.Log($"OnLoad - Character {data.templateID}");
             if (IDToObj<CharacterTemplate>.TryGet(data.templateID, out CharacterTemplate template))
             {
                 CharacterIdentifier charToLoad = 
