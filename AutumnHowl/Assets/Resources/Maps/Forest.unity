@@ -1608,30 +1608,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Autumn
       objectReference: {fileID: 0}
-    - target: {fileID: 5118247378045691292, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: extinguishedColor.b
-      value: 0.4339623
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118247378045691292, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: extinguishedColor.g
-      value: 0.11258457
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118247378045691292, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: extinguishedColor.r
-      value: 0.26815903
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118247378045691292, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: extinguishedColor2.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118247378045691292, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: extinguishedColor2.g
-      value: 0.14509805
-      objectReference: {fileID: 0}
-    - target: {fileID: 5118247378045691292, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: extinguishedColor2.r
-      value: 0.5019608
-      objectReference: {fileID: 0}
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalPosition.x
       value: 40
@@ -1671,10 +1647,6 @@ PrefabInstance:
     - target: {fileID: 5538993929549400674, guid: af80e5b6f006c0c1382521987dead533, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8530681385773721576, guid: af80e5b6f006c0c1382521987dead533, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
