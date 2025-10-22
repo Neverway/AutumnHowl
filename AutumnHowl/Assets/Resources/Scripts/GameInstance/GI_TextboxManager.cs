@@ -112,7 +112,6 @@ public class GI_TextboxManager : MonoBehaviour
         
         // Enable inputs to move next
         textEventActive = true;
-        print("Set event active!");
     }
 
     /// <summary>
@@ -348,7 +347,6 @@ public class GI_TextboxManager : MonoBehaviour
         }
         
         textEventActive = false;
-        print("Set event inactive");
         Destroy(textbox.gameObject);
         currentTextEvent.OnFinish.Invoke();
         Clear();

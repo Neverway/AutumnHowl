@@ -48,12 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8c821e2ffe34c46976f64f02669c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid: 
   itemsToGive:
     rid: -2
   animator: {fileID: 6215337816074763489}
   animator_openChestTrigger: OpenChest
   animator_chestIsEmpty: ChestIsEmpty
+  animator_chestLoadTrigger: ChestLoaded
   sparkles: {fileID: 6819710229984151113}
+  interactTrigger: {fileID: 2653336944543086963}
   references:
     version: 2
     RefIds:
@@ -446,6 +449,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+--- !u!114 &2653336944543086963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
+  m_PrefabInstance: {fileID: 8911246678438610599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151f2ff5e7fd2708dbf6b1618bc06957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5863852250340936820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3083713600096094931, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
