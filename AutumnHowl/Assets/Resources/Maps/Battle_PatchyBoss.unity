@@ -753,7 +753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2886879790751734807, guid: 6b426cb2a25f81341a0e8ad077283cd3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886879790751734807, guid: 6b426cb2a25f81341a0e8ad077283cd3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1165,6 +1165,9 @@ MonoBehaviour:
   waveStepCount: 0
   turnOrder: []
   currentTurn: 0
+  OnStartWave:
+    m_PersistentCalls:
+      m_Calls: []
   gameState: {fileID: 0}
   textEvent: {fileID: 1485981571}
   battleWidget: {fileID: 1891927975}

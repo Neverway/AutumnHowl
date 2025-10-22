@@ -198,6 +198,15 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         {
             for (int y = _pos.y - 1; y < _pos.y + 2; y++)
             {
+                //Try to skip tiles with enemy pawns.
+                var pawn = battleGrid.GetPawn(x, y);
+                if (pawn != null && pawn.GetComponent<Char_Battle_BasicAttacker>() != null) {
+                    continue;
+                }
+                if (pawn != null && pawn.GetComponent<Char_Battle_PatchyBoss>() != null)
+                {
+                    continue;
+                }
                 AttackElement attack = new AttackElement();
                 attack.damage = Stats.attack;
                 attack.visualEffect = vineEffectPrefab;
