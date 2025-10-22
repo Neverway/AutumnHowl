@@ -147,12 +147,19 @@ public class GI_SaveSystem : MonoBehaviour
         //Apply values to attributes made for this save system
         LoadValuesFromAttributes();
     }
+    
     [ContextMenu("Trigger Clear Save")]
     private void OnClearSave()
     {
         if (!Application.isPlaying) return;
 
         saveDataStrategy.Clear(SaveDataFileName);
+    }
+
+    [ContextMenu("Remove All PlayerPrefs")]
+    private void RemoveAllPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     private void SaveValuesFromAttributes()
