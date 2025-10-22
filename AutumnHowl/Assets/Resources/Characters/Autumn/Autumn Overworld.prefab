@@ -882,6 +882,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   animator: {fileID: 1867420067129031397}
   canPause: 1
+  inLightZone: 0
 --- !u!114 &5118247378045691292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,8 +896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalColor: {r: 1, g: 1, b: 1, a: 1}
-  extinguishedColor: {r: 0.5, g: 0.14604643, b: 0, a: 1}
-  extinguishedColor2: {r: 0.04654599, g: 0.029191881, b: 0.1509434, a: 1}
+  extinguishedColor: {r: 0.26815903, g: 0.11258457, b: 0.4339623, a: 1}
+  extinguishedColor2: {r: 0.5019608, g: 0.14509805, b: 0, a: 1}
   normalRange: 4.8
   extinguishedRange: 2.5
   lights:
