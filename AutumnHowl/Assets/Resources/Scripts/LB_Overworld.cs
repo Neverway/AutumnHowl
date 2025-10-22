@@ -7,9 +7,7 @@
 //
 //====================================================================================================================//
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LB_Overworld : MonoBehaviour
