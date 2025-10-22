@@ -35,6 +35,12 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] private float minSpinSpeed = 130f;
     [SerializeField] private float maxSpinSpeed = 200f;
     [SerializeField] AnimationCurve spinSpeedCurve;
+    
+    // Bad me, this variable is confusing >:[
+    // ~Liz
+    [Tooltip("This is the amount of STR/PWR/SOUL that will be expended when performing an attack that passes this many cardinal directions on the compass")]
+    [SerializeField] private int[] powerRequiredForAttacks;
+
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -54,7 +60,7 @@ public class BattleAttackCompass : MonoBehaviour
     //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
     private float clampedTotalSpin = 0f;
     private float totalSpin = 0f;
-    [SerializeField] public Image centerFill;
+    [SerializeField] public Image centerFill, powerMask1, powerMask2;
     
     
     private float nearestAngleToSword;
@@ -116,6 +122,9 @@ public class BattleAttackCompass : MonoBehaviour
     {
         // Update the needle based on the sword angle
         needleImage.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
+        
+        // Update how much our current power can actually swing the sword
+        UpdateMeterBasedOnAvailablePower();
         
         // Detect activation
         if (!attackBarActive)
@@ -235,39 +244,7 @@ public class BattleAttackCompass : MonoBehaviour
     }
     
     private void DoSpinState ()
-    {/*
-        if (stopByTapping == false)
-        {
-            //buffer the next spin if player presses the opposite direction input during the spin
-            if (currentSpinDirection == SpinDirection.left && GameInstance.Inputs.Action.WasPressedThisFrame())
-            {
-                bufferRight = true;
-            }
-            if (currentSpinDirection == SpinDirection.right && GameInstance.Inputs.Interact.WasPressedThisFrame())
-            {
-                bufferLeft = true;
-            }
-            //cancel the buffered input if the player releases the direction input
-            if (bufferLeft && GameInstance.Inputs.Interact.WasPressedThisFrame() == false)
-            {
-                bufferLeft = false;
-            }
-            if (bufferRight && GameInstance.Inputs.Action.WasPressedThisFrame()== false)
-            {
-                bufferRight = false;
-            }
-            //End the spin upon key released
-            if (currentSpinDirection == SpinDirection.left && GameInstance.Inputs.Interact.WasPressedThisFrame() == false)
-            {
-                FinishSpin ();
-                return;
-            }
-            if (currentSpinDirection == SpinDirection.right && GameInstance.Inputs.Action.WasPressedThisFrame()== false)
-            {
-                FinishSpin ();
-                return;
-            }
-        }*/
+    {
         if (stopByTapping == true)
         {
             if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.Interact.WasPressedThisFrame())
@@ -374,6 +351,7 @@ public class BattleAttackCompass : MonoBehaviour
         //If there's not enough power, the attack fails.
         if (player.Stats.TryUsePower(Mathf.Abs((int)clampedTotalSpin)) == false)
         {
+            ShowHitText ("POWER TOO LOW!");
             FailAttack ();
             return;
         }
@@ -460,7 +438,6 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void FailAttack ()
     {
-        ShowHitText ("Miss!");
         GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;
         OnAttackDone ();
@@ -496,6 +473,11 @@ public class BattleAttackCompass : MonoBehaviour
             sequence.attacks[i+1].direction = -dir;
             sequence.attacks[i + 1].direction = -dir;
         }
+    }
+
+    private void UpdateMeterBasedOnAvailablePower()
+    {
+        
     }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
