@@ -38,6 +38,7 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
     [SerializeField] private GameObject vineEffectPrefab;
     [SerializeField] private GameObject vineWarningPrefab;
 
+    private Coroutine vineRoutine;
     #endregion
 
 
@@ -101,6 +102,10 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         {
             case PumpkinState.SpawnEnemy:
                 {
+                    if (vineRoutine != null)
+                    {
+                        StopCoroutine(vineRoutine);
+                    }
                     //spawn 3 pumptims
                     for (int i = 0; i < 3; i++)
                     {
@@ -111,7 +116,11 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
                 }
             case PumpkinState.VineAttack:
                 {
-                    StartCoroutine(VineAttackRoutine());
+                    if (vineRoutine != null)
+                    {
+                        StopCoroutine(vineRoutine);
+                    }
+                    vineRoutine = StartCoroutine(VineAttackRoutine());
                     state = PumpkinState.SpawnEnemy;
                     break;
                 }
