@@ -120,10 +120,9 @@ public abstract class Char_Battle : Character
             var currentPosition = gridPawnController.position + appliedPosition;
 
             facingDirection = -attackSequence.attacks[i].position;
-            
-            Instantiate(attackSequence.attacks[i].visualEffect, battleGrid.transform.position+new Vector3(currentPosition.x, currentPosition.y, 0), new Quaternion(), null);
-            
-            var target = battleGrid.GetIsOccupied(currentPosition);
+
+            DoAttack(attackSequence.attacks[i], currentPosition);
+            GridPawn target = battleGrid.GetIsOccupied(currentPosition);
             if (target)
             {
                 if (target.type == GridPawn.GridPawnType.obstacle)
@@ -136,15 +135,6 @@ public abstract class Char_Battle : Character
                 {
                     print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
-                    //deal damage
-                    char_Battle.ApplyConditionalBlock (attackSequence.attacks[i].direction);
-                    char_Battle.ModifyHealth(-attackSequence.attacks[i].damage);
-                    char_Battle.RemoveConditionalBlock ();
-                    //check if we should push the target
-                    if (pushable && attackSequence.attacks[i].pushing)
-                    {
-                        char_Battle.TryMoveInDirection (attackSequence.attacks[i].direction, false);
-                    }
                     if (char_Battle.GetHealth () <= 0)
                     {
                         GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.hitKill);
@@ -181,6 +171,30 @@ public abstract class Char_Battle : Character
             }
         }
         if (shouldProgressTurn) battleStateController.NextTurnStep(0.5f);
+    }
+
+    /// <summary>
+    /// executes the attack on the specified grid tile
+    /// </summary>
+    /// <param name="attack"></param>
+    public void DoAttack(AttackElement attack, Vector2Int _position)
+    {
+        Instantiate(attack.visualEffect, battleGrid.transform.position + new Vector3(_position.x, _position.y, 0), new Quaternion(), null);
+        GridPawn target = battleGrid.GetIsOccupied(_position);
+        if (target == null)
+        {
+            return;
+        }
+        Char_Battle char_Battle = target.GetComponent<Char_Battle>();
+        //deal damage
+        char_Battle.ApplyConditionalBlock(attack.direction);
+        char_Battle.ModifyHealth(-attack.damage);
+        char_Battle.RemoveConditionalBlock();
+        //check if we should push the target
+        if (char_Battle.pushable && attack.pushing)
+        {
+            char_Battle.TryMoveInDirection(attack.direction, false);
+        }
     }
     
     /// <summary>

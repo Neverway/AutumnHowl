@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: PumpkinSmol
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: PumkinSmol
+  <UniqueID>k__BackingField: PumpkinSmol
   characterReferenceType: 1
-  characterName: PumkinSmol
+  characterName: PumpkinSmol
   baseStats:
-    health: 100
+    health: 10
     level: 0
     power: 10
     corruption: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 100
+      startValue: 15
       multiplier: 0
       addedValue: 0
     maxLevel:
