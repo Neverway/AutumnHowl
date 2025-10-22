@@ -925,6 +925,17 @@ MonoBehaviour:
   - attacks: []
   - attacks: []
   - attacks: []
+  - attacks:
+    - position: {x: 0, y: -1}
+      damage: 0
+      visualEffect: {fileID: 0}
+      direction: {x: 0, y: -1}
+      pushing: 0
+    - position: {x: 0, y: 0}
+      damage: 0
+      visualEffect: {fileID: 0}
+      direction: {x: 0, y: 0}
+      pushing: 0
   canMove: 0
   pushable: 0
   gridPawnController: {fileID: 2113060241678384352}

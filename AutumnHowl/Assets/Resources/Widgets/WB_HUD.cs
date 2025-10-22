@@ -31,6 +31,7 @@ public class WB_HUD : MonoBehaviour
     public Image lanternFill;
     public GI_AuHoGameState gameState;
     private PlayerLightController playerLightController;
+    private Controller_Overworld_Player player;
 
 
     #endregion
@@ -50,6 +51,18 @@ public class WB_HUD : MonoBehaviour
             return;
         }
 
+        if (!player)
+        {
+            player = FindObjectOfType<Controller_Overworld_Player>();
+            return;
+        }
+
+        // Don't deplete the lantern or take corruption damage when in a light zone
+        if (player.inLightZone)
+        {
+            return;
+        }
+        
         UpdateTimer();
         UpdateLanternMeter();
     }
@@ -87,6 +100,14 @@ public class WB_HUD : MonoBehaviour
     private IEnumerator InflictCorruption()
     {
         yield return new WaitForSeconds(3f);
+        
+        // Sanity check to absolutely make sure lightzones protect player from corruption
+        if (player.inLightZone)
+        {
+            inflictCorruptionCoroutine = null;
+            yield break;
+        }
+        
         gameState.currentGameState.player.Stats.ModifyCorruption(+5f);
         inflictCorruptionCoroutine = null;
     }

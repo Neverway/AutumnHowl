@@ -21,6 +21,7 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     [SerializeField] private bool canPause = true;
+    public bool inLightZone;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
