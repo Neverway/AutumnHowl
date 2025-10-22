@@ -25,7 +25,6 @@ public class Func_SavePoint : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [SerializeField] private Func_TextEvent textEvent;
 
     #endregion
 
@@ -40,6 +39,7 @@ public class Func_SavePoint : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void SaveGame(bool _displaySaveText = true)
     {
+        GameInstance.Get<GI_AuHoGameState>().currentGameState.player.Stats.ModifyHealth(int.MaxValue);
         GI_SaveSystem.SaveGame();
     }
     

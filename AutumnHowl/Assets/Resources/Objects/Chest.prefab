@@ -394,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: repeatable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6879688541591289812, guid: fc78b004e5c1293d4ac180547a0478b9, type: 3}
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size

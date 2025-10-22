@@ -71,6 +71,8 @@ public class GI_TextboxManager : MonoBehaviour
         {
             if (textbox == null)
             {
+                Debug.LogWarning("A text event is active, but the textbox is null! This is an error I don't know how to fix, so I'm just going to force reset the textbox now. (Pls fix) ~Liz");
+                textEventActive = false;
                 return;
             }
 
