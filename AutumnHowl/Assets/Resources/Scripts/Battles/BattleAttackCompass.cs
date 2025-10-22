@@ -48,13 +48,6 @@ public class BattleAttackCompass : MonoBehaviour
     [Tooltip("The current angle the sword needle is pointing in")]
     private float swordAngle = 0f;
 
-    private bool bufferLeft = false;
-    private bool bufferRight = false;
-    
-    public static float north { get; private set; } = 0;
-    public static float east { get; private set; } = 90;
-    public static float south { get; private set; } = 180;
-    public static float west { get; private set; } = 270;
     public enum cardinalDirection { north, south, west, east }
     private enum RingState { notStarted, spinning, finish }
     private RingState currentState = RingState.notStarted;
@@ -210,10 +203,6 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void OnAttackDone()
     {
-        var attack = 0;
-        bool mirrorX = false;
-        bool mirrorY = false;
-
         if (resetRoutine != null)
         {
             StopCoroutine (resetRoutine);
@@ -242,21 +231,9 @@ public class BattleAttackCompass : MonoBehaviour
     
     private void SetNeedleDirection(Vector2 _movement)
     {
-        switch (_movement.x , _movement.y)
-        {
-            case (0, 1):
-                SetNeedleDirection(south);
-                break;
-            case (0, -1):
-                SetNeedleDirection(north);
-                break;
-            case (-1, 0):
-                SetNeedleDirection(east);
-                break;
-            case (1, 0):
-                SetNeedleDirection(west);
-                break;
-        }
+        //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction
+        if (_movement.TryConvertToDirection(out Direction? direction))
+            SetNeedleDirection(direction.Value.Info().degreesRotation);
     }
     
     private void DoSpinState ()
@@ -365,26 +342,30 @@ public class BattleAttackCompass : MonoBehaviour
             FailAttack ();
             return;
         }
-        nearestAngleToSword = north;
-        float test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, north));
-        distanceFromNearestAngle = test;
-        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, east));
+        nearestAngleToSword = Direction.North.Info().degreesRotation;
+        DirectionUtility.InEachDireciton((direction, directionInfo) =>
+        {
+
+        });
+        distanceFromNearestAngle = Mathf.Abs(Mathf.DeltaAngle(swordAngle, Direction.North.Info().degreesRotation));
+        float test = 
+        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, Direction.East.Info().degreesRotation));
         if (test < distanceFromNearestAngle)
         {
             distanceFromNearestAngle = test;
-            nearestAngleToSword = east;
+            nearestAngleToSword = Direction.East.Info().degreesRotation;
         }
-        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, south));
+        test = Mathf.Abs (Mathf.DeltaAngle (swordAngle, Direction.South.Info().degreesRotation));
         if (test < distanceFromNearestAngle)
         {
             distanceFromNearestAngle = test;
-            nearestAngleToSword = south;
+            nearestAngleToSword = Direction.South.Info().degreesRotation;
         }
-        test = Mathf.Abs(Mathf.DeltaAngle (swordAngle, west));
+        test = Mathf.Abs(Mathf.DeltaAngle (swordAngle, Direction.West.Info().degreesRotation));
         if (test < distanceFromNearestAngle)
         {
             distanceFromNearestAngle = test;
-            nearestAngleToSword = west;
+            nearestAngleToSword = Direction.West.Info().degreesRotation;
         }
 
         if (distanceFromNearestAngle < perfectAngle)

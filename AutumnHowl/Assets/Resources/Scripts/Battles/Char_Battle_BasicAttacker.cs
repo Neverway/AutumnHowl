@@ -46,7 +46,6 @@ public class Char_Battle_BasicAttacker : Char_Battle
                 return true;
             }
         }
-
         return false;
     }
 

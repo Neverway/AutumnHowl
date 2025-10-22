@@ -286,7 +286,6 @@ public class BS_PlayerAction : BattleState
 public class BS_GridAction : BattleState
 {
     private BattleWave activeWave;
-    private bool initialized = false;
     
     public BS_GridAction(BattleStateController controller) : base(controller)
     {

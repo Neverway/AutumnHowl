@@ -7,12 +7,12 @@
 //
 //====================================================================================================================//
 
+using DG.Tweening;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 {
@@ -56,32 +56,30 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         UpdateMovementInput();
     }
 
-
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+
     private void UpdateMovementInput()
     {
         if (inputDelay) return;
-        
+
         // MOVEMENT
-        if (GameInstance.Inputs.MoveUp.WasPressedThisFrame())
+        Tuple<InputAction, Vector2Int>[] inputToDirection =
         {
-            if (TryMoveInDirection(Vector2Int.up)) movement = new Vector2(0, 1);
-            return;
-        }
-        else if (GameInstance.Inputs.MoveDown.WasPressedThisFrame())
+            new(GameInstance.Inputs.MoveUp,    Vector2Int.up),
+            new(GameInstance.Inputs.MoveDown,  Vector2Int.down),
+            new(GameInstance.Inputs.MoveLeft,  Vector2Int.left),
+            new(GameInstance.Inputs.MoveRight, Vector2Int.right)
+        };
+        foreach (var inputToDir in inputToDirection)
         {
-            if (TryMoveInDirection(Vector2Int.down)) movement = new Vector2(0, -1);
-            return;
-        }
-        else if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
-        {
-            if (TryMoveInDirection(Vector2Int.left)) movement = new Vector2(-1, 0);
-            return;
-        }
-        else if (GameInstance.Inputs.MoveRight.WasPressedThisFrame())
-        {
-            if (TryMoveInDirection(Vector2Int.right)) movement = new Vector2(1, 0);
-            return;
+            InputAction input = inputToDir.Item1;
+            Vector2Int direction = inputToDir.Item2;
+
+            if (input.WasPressedThisFrame())
+            {
+                if (TryMoveInDirection(direction)) movement = direction;
+                return;
+            }
         }
 
         // DEFEND

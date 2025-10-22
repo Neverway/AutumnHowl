@@ -63,7 +63,10 @@ public class CharacterIdentifier
                 toReturn = new CharacterIdentifier(characterTemplate);
                 break;
             default:
-                throw new NotImplementedException("Unimplemented CharacterTemplateToIdentifierStrategy in constructor");
+                {
+                    Debug.LogError("Unimplemented CharacterTemplateToIdentifierStrategy in constructor");
+                    throw new NotImplementedException("Unimplemented CharacterTemplateToIdentifierStrategy in constructor");
+                }
         }
         return toReturn;
 
