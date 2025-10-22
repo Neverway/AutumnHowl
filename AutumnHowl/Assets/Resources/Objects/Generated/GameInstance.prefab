@@ -466,7 +466,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3829273237967523124}
   - {fileID: 4270734911614796950}
@@ -542,13 +542,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState:
-    map: Town
-    overworldPosition: {x: 0, y: 0}
     currentBattle: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
     inventory:
       items: []
       spells: []
       equippedWearables: []
+    map: Town
+    overworldPosition: {x: 0, y: 0}
     money: 99999
     kills: 0
     deaths: 0
@@ -574,6 +574,15 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
+  _textEventActive: 0
+  textEventActive: 0
+  currentlyPrinting: 0
+  currentTextContent: 
+  currentTextTypeDelay: 0
+  currentFrame: 0
+  performingRegularMarkup: 0
+  performingSpecialMarkup: 0
+  markupStartIndex: 0
   chatterAudioSource: {fileID: 3523726553420250166}
   defaultVoice: {fileID: 11400000, guid: e38d897e25451da53b1c43ae096b37b0, type: 2}
   currentTextChatter: {fileID: 0}
@@ -698,6 +707,9 @@ MonoBehaviour:
   hitDamage: {fileID: 8300000, guid: 7cfbf54315c4797498a0576290c45918, type: 3}
   hitKill: {fileID: 8300000, guid: 34fec3f6c7b6d7c45b6482cc32528165, type: 3}
   failBuzz: {fileID: 8300000, guid: 00445dcb35847304487de4dcc3329cb2, type: 3}
+  splat: {fileID: 8300000, guid: deacd17ef79f1b04db74e98c9be9a4b7, type: 3}
+  vineRumble: {fileID: 8300000, guid: 1c4d21c1301b6ef43aa55d1836322431, type: 3}
+  vineAttack: {fileID: 8300000, guid: 351774d81c35f9c4395250972a0157dd, type: 3}
   mus_Title: {fileID: 8300000, guid: 8cc2b1ef5a375bf7f9642ad67a208f06, type: 3}
   mus_Town: {fileID: 8300000, guid: 8cc2b1ef5a375bf7f9642ad67a208f06, type: 3}
   mus_Shop: {fileID: 8300000, guid: 8cc2b1ef5a375bf7f9642ad67a208f06, type: 3}

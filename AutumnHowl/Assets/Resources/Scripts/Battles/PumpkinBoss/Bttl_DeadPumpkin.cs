@@ -32,6 +32,7 @@ public class Bttl_DeadPumpkin : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpDuration);
         patchyBoss.DoAttack(attack, patchyBoss.gridPawnController.position);
+        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.splat);
         Destroy(gameObject);
     }
 

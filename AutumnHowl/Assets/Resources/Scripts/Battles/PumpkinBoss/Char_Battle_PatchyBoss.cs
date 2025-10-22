@@ -168,6 +168,8 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
             }
         }
 
+        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineRumble);
+
         return vines;
     }
 
@@ -187,6 +189,7 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
                 DoAttack(attack, new Vector2Int(x,y));
             }
         }
+        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineAttack);
     }
 
 
