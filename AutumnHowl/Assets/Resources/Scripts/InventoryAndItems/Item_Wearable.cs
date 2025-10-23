@@ -7,7 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AuHo/Item/New Wearable", fileName = "item_wearable_")]
@@ -34,21 +33,23 @@ public class Item_Wearable : Item
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    protected override bool OnUse(CharacterIdentifier user, int _atIndex, int _inList = 0)
+    protected override bool OnUse(CharacterIdentifier user, int _atIndex, int _inList = Inventory.ITEMS_LIST_ID)
     {
+        var inventory = GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory;
+
+        //Equip item if this is from the items list
+        if (_inList == Inventory.ITEMS_LIST_ID)
+            return inventory.TryEquipItem(_atIndex);
+
+        //Unequip item if this si from the equipment list
+        if (_inList == Inventory.EQUIPMENT_LIST_ID)
+            return inventory.TryUnequipItem(_atIndex);
+
         return false;
     }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 
-    public void Equip(CharacterIdentifier user)
-    {
-        effectWhenEquipped.RegisterTo_Flexible(user, new TargetSelf().GetTargetsFrom(user));
-    }
-    public void UnEquip(CharacterIdentifier user)
-    {
-        effectWhenEquipped.UnregisterFrom(user);
-    }
     #endregion
 }
