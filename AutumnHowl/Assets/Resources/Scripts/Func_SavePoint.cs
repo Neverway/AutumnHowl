@@ -25,7 +25,6 @@ public class Func_SavePoint : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    [SerializeField] private Func_TextEvent textEvent;
 
     #endregion
 
@@ -40,13 +39,7 @@ public class Func_SavePoint : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void SaveGame(bool _displaySaveText = true)
     {
-        if (_displaySaveText && textEvent)
-        {
-            var playtime = GameInstance.Get<GI_AuHoGameState>().currentGameState.playtime;
-            var formatedTime = TimeSpan.FromSeconds(playtime);
-            textEvent.textEvent.frames[0].chatContent = $"[ File 1 ] \n {formatedTime:hh':'mm':'ss} \n Game has been saved!";
-            textEvent.CallEvent();
-        }        
+        GameInstance.Get<GI_AuHoGameState>().currentGameState.player.Stats.ModifyHealth(int.MaxValue);
         GI_SaveSystem.SaveGame();
     }
     

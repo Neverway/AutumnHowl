@@ -41,7 +41,10 @@ public class FX_AttackEffect : MonoBehaviour
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     public void Start()
     {
-        animator.Play(effectName);
+        if (animator != null)
+        {
+            animator.Play(effectName);
+        }
         Destroy(gameObject, destroyAfter);
     }
 
