@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum Direction { North, East, South, West }
 public enum SpinDirection { Left, Right, Spin180 }
 /// <summary>Meant to contain information about each direction (defined in DirectionUtility)</summary>
@@ -13,6 +15,9 @@ public struct DirectionInfo
     public Direction turnedLeft;
     public Direction turnedRight;
     public Direction turned180;
+
+    public Vector3 attackCompassFillRotationX;
+    public Vector3 attackCompassFillRotationZ;
 
     public Func<bool> wasPressedMethod;
 
@@ -39,6 +44,9 @@ public static partial class DirectionUtility
                 turnedLeft = Direction.West,
                 turnedRight = Direction.East,
                 turned180 = Direction.South,
+                
+                attackCompassFillRotationX = new Vector3(0,0,0),
+                attackCompassFillRotationZ = new Vector3(0,0,0),
 
                 wasPressedMethod = () => GameInstance.Inputs.MoveUp.WasPressedThisFrame(),
             } },
@@ -51,6 +59,9 @@ public static partial class DirectionUtility
                 turnedLeft = Direction.North,
                 turnedRight = Direction.South,
                 turned180 = Direction.West,
+                
+                attackCompassFillRotationX = new Vector3(0,0,-90),
+                attackCompassFillRotationZ = new Vector3(0,0,-90),
 
                 wasPressedMethod = () => GameInstance.Inputs.MoveRight.WasPressedThisFrame(),
             } },
@@ -63,6 +74,9 @@ public static partial class DirectionUtility
                 turnedLeft = Direction.East,
                 turnedRight = Direction.West,
                 turned180 = Direction.North,
+                
+                attackCompassFillRotationX = new Vector3(0,0,180),
+                attackCompassFillRotationZ = new Vector3(0,0,180),
 
                 wasPressedMethod = () => GameInstance.Inputs.MoveDown.WasPressedThisFrame(),
             } },
@@ -75,6 +89,9 @@ public static partial class DirectionUtility
                 turnedLeft = Direction.South,
                 turnedRight = Direction.North,
                 turned180 = Direction.East,
+                
+                attackCompassFillRotationX = new Vector3(0,0,90),
+                attackCompassFillRotationZ = new Vector3(0,0,90),
 
                 wasPressedMethod = () => GameInstance.Inputs.MoveLeft.WasPressedThisFrame(),
             } }

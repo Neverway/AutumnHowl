@@ -170,6 +170,10 @@ public class BattleAttackCompass : MonoBehaviour
 
         currentState = RingState.spinning;
         
+        // hide the power bar that's not relevant to the current spin
+        if (currentSpinDirection == SpinDirection.Left) powerMask1.enabled = false;
+        if (currentSpinDirection == SpinDirection.Right) powerMask2.enabled = false;
+        
         centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
         centerFill.fillAmount = 0f;
         clampedTotalSpin = 0f;
@@ -199,6 +203,9 @@ public class BattleAttackCompass : MonoBehaviour
     private void Reset()
     {
         SetupRingColors();
+        
+        powerMask1.enabled = true;
+        powerMask2.enabled = true;
         
         currentState = RingState.notStarted;
         attackBarActive = false;
@@ -349,7 +356,9 @@ public class BattleAttackCompass : MonoBehaviour
         ClampTotalSpin ();
         //Try consuming amount of power corresponding to size of spin
         //If there's not enough power, the attack fails.
-        if (player.Stats.TryUsePower(Mathf.Abs((int)clampedTotalSpin)) == false)
+        var index = Mathf.Abs((int)clampedTotalSpin)-1;
+        print($"{index} uses {powerRequiredForAttacks[index]}");
+        if (player.Stats.TryUsePower(powerRequiredForAttacks[index]) == false)
         {
             ShowHitText ("POWER TOO LOW!");
             FailAttack ();
@@ -477,7 +486,53 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void UpdateMeterBasedOnAvailablePower()
     {
+        DirectionUtility.TryConvertToDirection(player.facingDirection, out Direction? _direction);
         
+        powerMask1.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
+        powerMask2.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
+
+        /*float[] fillAmounts = { 1f, 0.9f, 0.8f, 0.5f, 0f };
+        int currentPower = player.Stats.power;
+
+        int lastAffordableAttackIndex = 4;
+        for (int i = 0; i < powerRequiredForAttacks.Length; i++)
+           if (currentPower >= powerRequiredForAttacks[i])
+               lastAffordableAttackIndex = i;
+
+        powerMask1.fillAmount = fillAmounts[lastAffordableAttackIndex];
+        powerMask2.fillAmount = fillAmounts[lastAffordableAttackIndex];*/
+        
+        if (Input.GetKeyDown(KeyCode.P)) player.Stats.power += 1;
+        if (Input.GetKeyDown(KeyCode.O)) player.Stats.power -= 1;
+        
+        switch (player.Stats.power)
+        {
+            case >= 40:
+                // Full Slash (360)
+                powerMask1.fillAmount = 1f;
+                powerMask2.fillAmount = 1f;
+                break;
+            case >= 30:
+                // Three-Quarts Slash (270)
+                powerMask1.fillAmount = 0.75f;
+                powerMask2.fillAmount = 0.75f;
+                break;
+            case >= 20:
+                // Half Slash (180)
+                powerMask1.fillAmount = 0.5f;
+                powerMask2.fillAmount = 0.5f;
+                break;
+            case >= 10:
+                // Quarter Slash (90 turn)
+                powerMask1.fillAmount = 0.25f;
+                powerMask2.fillAmount = 0.25f;
+                break;
+            case < 10:
+                // No Power
+                powerMask1.fillAmount = 0.0f;
+                powerMask2.fillAmount = 0.0f;
+                break;
+        }
     }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/

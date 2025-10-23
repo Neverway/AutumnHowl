@@ -13,6 +13,7 @@ namespace Neverway.StateMachine
     {
         public Controller_Overworld_Player player;
         public BattleData battleData;
+        public string mapID;
         public GI_AuHoGameState gameState;
         [SerializeField] public float searchDistance = 6;
         [SerializeField] public float comfyDistance = 3f;
@@ -71,7 +72,7 @@ namespace Neverway.StateMachine
             // I gotchu ~Liz
             gameState = FindObjectOfType<GI_AuHoGameState>();
             gameState.currentGameState.currentBattle = battleData;
-            gameState.GetComponent<GI_WorldLoader>().Load("Battle");
+            gameState.GetComponent<GI_WorldLoader>().Load(mapID);
         }
 
         internal void PickRandomDirection ()
