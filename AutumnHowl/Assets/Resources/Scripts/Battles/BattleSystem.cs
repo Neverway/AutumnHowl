@@ -269,7 +269,7 @@ public class BS_PlayerAction : BattleState
                 controller.battlePlayer.useBlock = false;
                 break;
             case BattleStateController.PlayerAction.defend:
-                controller.battlePlayer.ModifyPower(10);
+                controller.battlePlayer.ModifyPower(20);
                 controller.battlePlayer.isDefenseActive = true;
                 controller.battlePlayer.StartCoroutine(controller.battlePlayer.InputDelay());
                 controller.battlePlayer.useBlock = true;
