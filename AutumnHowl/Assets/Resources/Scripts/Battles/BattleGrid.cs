@@ -61,6 +61,15 @@ public class BattleGrid : MonoBehaviour
         }
         return false;
     }
+    /// <summary>
+    /// Allows using a Vector2Int for IsOccupied
+    /// </summary>
+    /// <param name="_tile"></param>
+    /// <returns></returns>
+    public bool IsOccupied(Vector2Int _tile)
+    {
+        return IsOccupied(_tile.x, _tile.y);
+    }
     public GridPawn GetIsOccupied (Vector2Int _gridPosition)
     {
         if (ValidTile (_gridPosition.x, _gridPosition.y) == false)

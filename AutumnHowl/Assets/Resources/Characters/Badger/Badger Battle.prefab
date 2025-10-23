@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -764398582, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      objectReference: {fileID: 1910286143, guid: 3c32ab61e00cc413aaec5f48a1879614, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -39,6 +39,14 @@ PrefabInstance:
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_CategoryHash
       value: 0.009161512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.136
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.136
       objectReference: {fileID: 0}
     - target: {fileID: 4264719621217924197, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -95,17 +103,17 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3411343996498358984}
+      addedObject: {fileID: 1449108568966244714}
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1449108568966244714}
+      addedObject: {fileID: -2999113054471996449}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
 --- !u!1 &6242562417686465405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3411343996498358984
+--- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +122,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242562417686465405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawnName: 
+  type: 1
+--- !u!114 &-2999113054471996449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242562417686465405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deaf328322dc8d54abb1cb7699cadb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: 666949eb36baa15a59ccf06a536bcd9e, type: 2}
@@ -122,7 +144,8 @@ MonoBehaviour:
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
   movement: {x: 0, y: 0}
-  animator: {fileID: 7931684597536962226}
+  facingDirection: {x: 0, y: 0}
+  animator: {fileID: 0}
   AttackSequences:
   - attacks:
     - position: {x: 0, y: 1}
@@ -149,31 +172,12 @@ MonoBehaviour:
       direction: {x: -1, y: 0}
       pushing: 0
   canMove: 0
-  pushable: 1
+  pushable: 0
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
-  randomRetreat: 75
+  randomRetreat: 50
   skipFirstTurn: 0
---- !u!114 &1449108568966244714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242562417686465405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawnName: 
-  type: 1
---- !u!95 &7931684597536962226 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
-  m_PrefabInstance: {fileID: 2339698727629392}
-  m_PrefabAsset: {fileID: 0}

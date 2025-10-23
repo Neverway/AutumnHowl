@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -764398582, guid: a8a582fafd5cbe1b48b785a0cd7b08a5, type: 3}
+      objectReference: {fileID: -378998117, guid: fe80d606587519e2397c2914ccb63e56, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -122,6 +122,7 @@ MonoBehaviour:
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
   movement: {x: 0, y: 0}
+  facingDirection: {x: 0, y: 0}
   animator: {fileID: 7931684597536962226}
   AttackSequences:
   - attacks:
@@ -149,7 +150,7 @@ MonoBehaviour:
       direction: {x: -1, y: 0}
       pushing: 0
   canMove: 0
-  pushable: 1
+  pushable: 0
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
