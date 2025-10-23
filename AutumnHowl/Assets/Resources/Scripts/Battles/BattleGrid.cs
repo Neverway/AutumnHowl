@@ -99,6 +99,10 @@ public class BattleGrid : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Add the pawn to the grid based on the pawn's position.
+    /// </summary>
+    /// <param name="gridPawn"></param>
     internal void AddPawnToGrid (GridPawn gridPawn)
     {
         grid[gridPawn.position.x, gridPawn.position.y].pawns.Add (gridPawn);

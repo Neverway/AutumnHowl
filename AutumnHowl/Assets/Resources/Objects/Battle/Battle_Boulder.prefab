@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 5912680506581816234}
   - component: {fileID: 8046438316640366819}
   m_Layer: 0
-  m_Name: FencePost_Breakable 2
+  m_Name: Battle_Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 83149614, guid: 5034c649aa29a7244a5d48137d062d74, type: 3}
+  m_Sprite: {fileID: 1995237446, guid: b97544932ebb7084abe77110ee3bc990, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -229,21 +229,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4704f9da8f055459bc849eb6e4a451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: 82ca5521bcd1abd46a9041978ea48a5d, type: 2}
+  template: {fileID: 11400000, guid: 625dd2c75b68fa44b8f6c519597e16d1, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
   movement: {x: 0, y: 0}
-  facingDirection: {x: 0, y: 0}
   animator: {fileID: 0}
   AttackSequences: []
   canMove: 0
-  pushable: 0
+  pushable: 1
   gridPawnController: {fileID: 8046438316640366819}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
-  spawnOnDeath: {fileID: 6659489718510107595, guid: 743c0b157f7979345b807d71d0592d88, type: 3}
+  spawnOnDeath: {fileID: 0}
   useBlock: 0
 --- !u!114 &8046438316640366819
 MonoBehaviour:
