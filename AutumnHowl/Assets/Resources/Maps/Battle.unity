@@ -784,6 +784,9 @@ MonoBehaviour:
   waveStepCount: 0
   turnOrder: []
   currentTurn: 0
+  OnStartWave:
+    m_PersistentCalls:
+      m_Calls: []
   gameState: {fileID: 0}
   textEvent: {fileID: 1485981571}
   battleWidget: {fileID: 1891927975}
@@ -1049,6 +1052,22 @@ PrefabInstance:
       propertyPath: OnInteracted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1485981572}
+    - target: {fileID: 1860145383273338643, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860145383273338643, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860145383273338643, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6555397
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860145383273338643, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4008989
+      objectReference: {fileID: 0}
     - target: {fileID: 2285694085166854729, guid: 38a317550efc9a63988daf152688b16f, type: 3}
       propertyPath: OnInteracted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1148,6 +1167,22 @@ PrefabInstance:
     - target: {fileID: 4120627537271842407, guid: 38a317550efc9a63988daf152688b16f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397649099726687736, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397649099726687736, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397649099726687736, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6555397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397649099726687736, guid: 38a317550efc9a63988daf152688b16f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4008989
       objectReference: {fileID: 0}
     - target: {fileID: 4737444233687840649, guid: 38a317550efc9a63988daf152688b16f, type: 3}
       propertyPath: OnInteracted.m_PersistentCalls.m_Calls.Array.data[0].m_Target

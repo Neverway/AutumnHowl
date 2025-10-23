@@ -35,6 +35,12 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] private float minSpinSpeed = 130f;
     [SerializeField] private float maxSpinSpeed = 200f;
     [SerializeField] AnimationCurve spinSpeedCurve;
+    
+    // Bad me, this variable is confusing >:[
+    // ~Liz
+    [Tooltip("This is the amount of STR/PWR/SOUL that will be expended when performing an attack that passes this many cardinal directions on the compass")]
+    [SerializeField] private int[] powerRequiredForAttacks;
+
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -54,7 +60,7 @@ public class BattleAttackCompass : MonoBehaviour
     //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
     private float clampedTotalSpin = 0f;
     private float totalSpin = 0f;
-    [SerializeField] public Image centerFill;
+    [SerializeField] public Image centerFill, powerMask1, powerMask2;
     
     
     private float nearestAngleToSword;
@@ -117,6 +123,9 @@ public class BattleAttackCompass : MonoBehaviour
         // Update the needle based on the sword angle
         needleImage.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
         
+        // Update how much our current power can actually swing the sword
+        UpdateMeterBasedOnAvailablePower();
+        
         // Detect activation
         if (!attackBarActive)
         {
@@ -161,6 +170,10 @@ public class BattleAttackCompass : MonoBehaviour
 
         currentState = RingState.spinning;
         
+        // hide the power bar that's not relevant to the current spin
+        if (currentSpinDirection == SpinDirection.Left) powerMask1.enabled = false;
+        if (currentSpinDirection == SpinDirection.Right) powerMask2.enabled = false;
+        
         centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
         centerFill.fillAmount = 0f;
         clampedTotalSpin = 0f;
@@ -190,6 +203,9 @@ public class BattleAttackCompass : MonoBehaviour
     private void Reset()
     {
         SetupRingColors();
+        
+        powerMask1.enabled = true;
+        powerMask2.enabled = true;
         
         currentState = RingState.notStarted;
         attackBarActive = false;
@@ -235,39 +251,7 @@ public class BattleAttackCompass : MonoBehaviour
     }
     
     private void DoSpinState ()
-    {/*
-        if (stopByTapping == false)
-        {
-            //buffer the next spin if player presses the opposite direction input during the spin
-            if (currentSpinDirection == SpinDirection.left && GameInstance.Inputs.Action.WasPressedThisFrame())
-            {
-                bufferRight = true;
-            }
-            if (currentSpinDirection == SpinDirection.right && GameInstance.Inputs.Interact.WasPressedThisFrame())
-            {
-                bufferLeft = true;
-            }
-            //cancel the buffered input if the player releases the direction input
-            if (bufferLeft && GameInstance.Inputs.Interact.WasPressedThisFrame() == false)
-            {
-                bufferLeft = false;
-            }
-            if (bufferRight && GameInstance.Inputs.Action.WasPressedThisFrame()== false)
-            {
-                bufferRight = false;
-            }
-            //End the spin upon key released
-            if (currentSpinDirection == SpinDirection.left && GameInstance.Inputs.Interact.WasPressedThisFrame() == false)
-            {
-                FinishSpin ();
-                return;
-            }
-            if (currentSpinDirection == SpinDirection.right && GameInstance.Inputs.Action.WasPressedThisFrame()== false)
-            {
-                FinishSpin ();
-                return;
-            }
-        }*/
+    {
         if (stopByTapping == true)
         {
             if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.Interact.WasPressedThisFrame())
@@ -372,8 +356,11 @@ public class BattleAttackCompass : MonoBehaviour
         ClampTotalSpin ();
         //Try consuming amount of power corresponding to size of spin
         //If there's not enough power, the attack fails.
-        if (player.Stats.TryUsePower(Mathf.Abs((int)clampedTotalSpin)) == false)
+        var index = Mathf.Abs((int)clampedTotalSpin)-1;
+        print($"{index} uses {powerRequiredForAttacks[index]}");
+        if (player.Stats.TryUsePower(powerRequiredForAttacks[index]) == false)
         {
+            ShowHitText ("POWER TOO LOW!");
             FailAttack ();
             return;
         }
@@ -460,7 +447,6 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void FailAttack ()
     {
-        ShowHitText ("Miss!");
         GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;
         OnAttackDone ();
@@ -495,6 +481,57 @@ public class BattleAttackCompass : MonoBehaviour
             sequence.attacks[i].direction = -dir;
             sequence.attacks[i+1].direction = -dir;
             sequence.attacks[i + 1].direction = -dir;
+        }
+    }
+
+    private void UpdateMeterBasedOnAvailablePower()
+    {
+        DirectionUtility.TryConvertToDirection(player.facingDirection, out Direction? _direction);
+        
+        powerMask1.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
+        powerMask2.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
+
+        /*float[] fillAmounts = { 1f, 0.9f, 0.8f, 0.5f, 0f };
+        int currentPower = player.Stats.power;
+
+        int lastAffordableAttackIndex = 4;
+        for (int i = 0; i < powerRequiredForAttacks.Length; i++)
+           if (currentPower >= powerRequiredForAttacks[i])
+               lastAffordableAttackIndex = i;
+
+        powerMask1.fillAmount = fillAmounts[lastAffordableAttackIndex];
+        powerMask2.fillAmount = fillAmounts[lastAffordableAttackIndex];*/
+        
+        if (Input.GetKeyDown(KeyCode.P)) player.Stats.power += 1;
+        if (Input.GetKeyDown(KeyCode.O)) player.Stats.power -= 1;
+        
+        switch (player.Stats.power)
+        {
+            case >= 40:
+                // Full Slash (360)
+                powerMask1.fillAmount = 1f;
+                powerMask2.fillAmount = 1f;
+                break;
+            case >= 30:
+                // Three-Quarts Slash (270)
+                powerMask1.fillAmount = 0.75f;
+                powerMask2.fillAmount = 0.75f;
+                break;
+            case >= 20:
+                // Half Slash (180)
+                powerMask1.fillAmount = 0.5f;
+                powerMask2.fillAmount = 0.5f;
+                break;
+            case >= 10:
+                // Quarter Slash (90 turn)
+                powerMask1.fillAmount = 0.25f;
+                powerMask2.fillAmount = 0.25f;
+                break;
+            case < 10:
+                // No Power
+                powerMask1.fillAmount = 0.0f;
+                powerMask2.fillAmount = 0.0f;
+                break;
         }
     }
 
