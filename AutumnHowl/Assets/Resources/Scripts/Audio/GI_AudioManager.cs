@@ -40,6 +40,7 @@ public class GI_AudioManager : MonoBehaviour
     public AudioClip splat;
     public AudioClip vineRumble;
     public AudioClip vineAttack;
+    public AudioClip growl;
 
     //==========Music============//
 

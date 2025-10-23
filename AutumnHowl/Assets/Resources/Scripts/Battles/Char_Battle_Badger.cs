@@ -125,6 +125,7 @@ public class Char_Battle_Badger : Char_Battle
             //Only retreat if we can't do the lunge attack AND we do the dice roll
             if (!(canLunge==false && Random.Range(0, 100) < randomRetreat))
             {
+                GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.growl);
                 switch (targetDirection)
                 {
                     case Direction.North:
