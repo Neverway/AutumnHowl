@@ -37,6 +37,9 @@ public class GI_AudioManager : MonoBehaviour
     public AudioClip hitDamage;
     public AudioClip hitKill;
     public AudioClip failBuzz;
+    public AudioClip splat;
+    public AudioClip vineRumble;
+    public AudioClip vineAttack;
 
     //==========Music============//
 
