@@ -181,7 +181,7 @@ public class GiveItemsEffect : EffectAction
 
     public override void ApplyEffect(CharacterIdentifier user)
     {
-        Inventory inventoryToAddTo = GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory;
+        Inventory inventoryToAddTo = GameInstance.Gamestate.inventory;
         for (int i = 0;  i < count; i++)
             inventoryToAddTo.TryAddItem(itemToGive);
     }

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: ReallyREALLYGoodShoes
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: really_really_good_shoes
+  displayName: Really REALLY Good Shoes
+  description: A pair of shoes that make you objectively better than everyone else
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 100000
+  sellCost: 100000
+  effectWhenEquipped:
+    rid: 1234356255560040450
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356255560040450
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356255560040451
+        - rid: 1234356255560040452
+        - rid: 1234356255560040455
+        - rid: 1234356255560040453
+        - rid: 1234356255560040456
+        - rid: 1234356255560040454
+        - rid: 1234356255560040457
+    - rid: 1234356255560040451
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 2
+        modifierType: 1
+        value: 11
+    - rid: 1234356255560040452
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 4
+        modifierType: 1
+        value: 11
+    - rid: 1234356255560040453
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 5
+        modifierType: 1
+        value: 11
+    - rid: 1234356255560040454
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 6
+        modifierType: 1
+        value: 11
+    - rid: 1234356255560040455
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 0
+        modifierType: 1
+        value: 11
+    - rid: 1234356255560040456
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 1
+        modifierType: 1
+        value: 11
+    - rid: 1234356255560040457
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 7
+        modifierType: 1
+        value: 11

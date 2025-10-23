@@ -46,7 +46,7 @@ public class Item_Consumable : Item
     }
     protected override bool OnUse(CharacterIdentifier user, int _atIndex, int _inList=0)
     {
-        GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory.TryRemoveItem(_atIndex, _inList);
+        GameInstance.Gamestate.inventory.TryRemoveItem(_atIndex, _inList);
         effectsOnConsume.ApplyEffect(user);
         return true;
     }

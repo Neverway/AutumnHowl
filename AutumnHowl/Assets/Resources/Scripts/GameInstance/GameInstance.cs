@@ -15,8 +15,9 @@ public class GameInstance : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-
+    public static AuHoGameState Gamestate => Get<GI_AuHoGameState>().currentGameState;
     public static InputActions.TopDownActions Inputs { get; private set; }
+
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
