@@ -26,6 +26,20 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     // Private Variables
     //=-----------------=
 
+
+
+    //Direction notes:
+    //I wrote the map gen with +y as South and -y as North for some reason.
+    //The debug print of the map is vertically inverted from the map in gameplay at the moment. :U
+    //The mapNodes have a Paths array saying which sides of that tile connect to the nearby tile.
+    //These are the 4 directions.
+    private const int NORTH = 0;
+    private const int SOUTH = 1;
+    private const int WEST = 2;
+    private const int EAST = 3;
+    //I did not use these constants consistently throughout the algorithm.
+    //Sorry bout that lmao maybe I'll refactor it some time.
+
     [SerializeField] private int mapWidth = 5; //width of node map
     [SerializeField] private int mapHeight = 5; //height of node map
     [SerializeField] private Vector2Int startPosition;
@@ -59,6 +73,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     private List<Vector2Int> poiLocations = new List<Vector2Int>();
     private List<Vector2Int> enemyLocations = new List<Vector2Int>();
 
+    [SerializeField] private int numberOfLoops = 3;
+
     //=-----------------=
     // Reference Variables
     //=-----------------=
@@ -75,6 +91,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     [SerializeField] private List<GameObject> enemyList; //Enemy spawn list. These get scattered at random.
 
     [SerializeField] private InteractableChestRecreator chestRecreator;
+
 
     //=-----------------=
     // Mono Functions
@@ -203,6 +220,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         enemyPlacementCount = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
         Debug.Log ("Map Nodes Finished");
+        AddRandomLoops();
         GenerateTilesFromNodes ();
         Debug.Log ("Map Tiles Finished");
         ScatterTrees ();
@@ -216,6 +234,90 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
 
         mapGenerated = true;
+    }
+
+    private void AddRandomLoops()
+    {
+        List<Vector2Int> tiles = new List<Vector2Int> ();
+        for (int x = 0; x < mapWidth; x++)
+        {
+            for (int y = 0; y < mapHeight; y++)
+            {
+                tiles.Add (new Vector2Int (x, y));
+            }
+        }
+        RandomBag<Vector2Int> bag = new RandomBag<Vector2Int>(tiles);
+        for (int i = 0; i < numberOfLoops; i++)
+        {
+            while (true)
+            {
+                //Try adding a loop until it works.
+                if (TryAddLoop(bag.Grab())) { break; }
+            }
+        }
+    }
+
+    private bool TryAddLoop(Vector2Int _pos)
+    {
+        List<int> validPaths = new List<int>();
+        if (_pos.x < mapWidth - 1 && mapNodes[_pos.x, _pos.y].paths[EAST] == false)
+        {
+            validPaths.Add(EAST);
+        }
+        if (_pos.x > 0 && mapNodes[_pos.x, _pos.y].paths[WEST] == false)
+        {
+            validPaths.Add(WEST);
+        }
+        if (_pos.y > 0 && mapNodes[_pos.x, _pos.y].paths[NORTH] == false)
+        {
+            validPaths.Add(NORTH);
+        }
+        if (_pos.y < mapHeight-1 && mapNodes[_pos.x, _pos.y].paths[SOUTH] == false)
+        {
+            validPaths.Add(SOUTH);
+        }
+        if (validPaths.Count == 0)
+        {
+            return false;
+        }
+        RandomBag<int> bag = new RandomBag<int>(validPaths);
+        AddPath(_pos, bag.Grab());
+        PrintNodes();
+        return true;
+    }
+    /// <summary>
+    /// Connects the given tile to a tile in the given direction.
+    /// </summary>
+    /// <param name="tile">The tile to path from</param>
+    /// <param name="dir">The direction to make a path in.</param>
+    private void AddPath(Vector2Int tile, int dir)
+    {
+        switch (dir) {
+            case NORTH:
+                {
+                    mapNodes[tile.x, tile.y].paths[NORTH] = true;
+                    mapNodes[tile.x, tile.y - 1].paths[SOUTH] = true;
+                    break;
+                }
+            case SOUTH:
+                {
+                    mapNodes[tile.x, tile.y].paths[SOUTH] = true;
+                    mapNodes[tile.x, tile.y + 1].paths[NORTH] = true;
+                    break;
+                }
+            case WEST:
+                {
+                    mapNodes[tile.x, tile.y].paths[WEST] = true;
+                    mapNodes[tile.x-1, tile.y].paths[EAST] = true;
+                    break;
+                }
+            case EAST:
+                {
+                    mapNodes[tile.x, tile.y].paths[EAST] = true;
+                    mapNodes[tile.x+1, tile.y].paths[WEST] = true;
+                    break;
+                }
+        }
     }
 
     [ContextMenu("Destroy Map")]
