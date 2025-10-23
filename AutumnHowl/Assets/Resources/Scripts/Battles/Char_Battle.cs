@@ -211,7 +211,7 @@ public abstract class Char_Battle : Character
         if (facingDirection != direction) {
             return;
         }
-        Stats.maxDefense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
+        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
     }
     
     /// <summary>
@@ -219,7 +219,7 @@ public abstract class Char_Battle : Character
     /// </summary>
     private void RemoveConditionalBlock ()
     {
-        Stats.maxDefense.UnmodifyStatWith (Mod_ConditionalBlock);
+        Stats.defense.UnmodifyStatWith (Mod_ConditionalBlock);
     }
 
 
