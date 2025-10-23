@@ -71,6 +71,8 @@ public class GI_TextboxManager : MonoBehaviour
         {
             if (textbox == null)
             {
+                Debug.LogWarning("A text event is active, but the textbox is null! This is an error I don't know how to fix, so I'm just going to force reset the textbox now. (Pls fix) ~Liz");
+                textEventActive = false;
                 return;
             }
 
@@ -112,7 +114,6 @@ public class GI_TextboxManager : MonoBehaviour
         
         // Enable inputs to move next
         textEventActive = true;
-        print("Set event active!");
     }
 
     /// <summary>
@@ -348,7 +349,6 @@ public class GI_TextboxManager : MonoBehaviour
         }
         
         textEventActive = false;
-        print("Set event inactive");
         Destroy(textbox.gameObject);
         currentTextEvent.OnFinish.Invoke();
         Clear();

@@ -64,9 +64,16 @@ public class CharacterStats
         // Character healed
         if (_amount > 0)
         {
-            if (health + _amount > maxHealth) health = maxHealth;
-            else health += _amount;
-            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
+            if (health + _amount > maxHealth)
+            {
+                health = maxHealth;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText("MAX", owner.transform.position, 1);
+            }
+            else
+            {
+                health += _amount;
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
+            }
             // TODO - HOW teH HeCk do I call this now? ~Liz
             //OnHeal?.Invoke();
         }
@@ -90,7 +97,7 @@ public class CharacterStats
             if (health + totalAmount <= 0)
             {
                 health = 0;
-                //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+                GameInstance.Get<GI_WidgetManager>().SpawnEffectText("DOWN", owner.transform.position, 0);
                 owner.isDead = true;
                 // TODO - HOW teH HeCk do I call this now? ~Liz
                 //OnDeath?.Invoke();

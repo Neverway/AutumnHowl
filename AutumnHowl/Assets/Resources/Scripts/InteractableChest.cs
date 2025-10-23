@@ -21,6 +21,7 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
     public GameObject sparkles;
 
     private TextEvent textEvent = new();
+    [SerializeField] private Volume_TriggerInteract interactTrigger;
 
     public void Awake()
     {
@@ -64,7 +65,10 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
     {
         //Clear text to display. Will be filled with description of what happens next
         textEvent.ClearFrames();
+        textEvent.OnFinish.RemoveAllListeners();
         GameInstance.Get<GI_TextboxManager>().Clear();
+        
+        textEvent.OnFinish.AddListener(() => { interactTrigger.ResetActive(); });
 
         //If no items were generated, explain chest was empty
         if (chestContents.Count == 0)

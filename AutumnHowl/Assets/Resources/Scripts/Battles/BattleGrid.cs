@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
@@ -106,6 +107,15 @@ public class BattleGrid : MonoBehaviour
     internal void RemovePawnFromGrid (GridPawn gridPawn)
     {
         grid[gridPawn.position.x, gridPawn.position.y].pawns.Remove (gridPawn);
+    }
+
+    internal GridPawn GetPawn(int x, int y)
+    {
+        if (ValidTile(x, y) && grid[x, y].pawns.Count > 0)
+        {
+            return grid[x, y].pawns[0];
+        }
+        return null;
     }
 }
 

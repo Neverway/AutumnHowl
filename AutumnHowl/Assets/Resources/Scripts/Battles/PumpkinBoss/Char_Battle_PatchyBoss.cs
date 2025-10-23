@@ -38,21 +38,27 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
     [SerializeField] private GameObject vineEffectPrefab;
     [SerializeField] private GameObject vineWarningPrefab;
 
+    private Coroutine vineRoutine;
     #endregion
 
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
+    new private void Start()
+    {
+        base.Start();
+        battleStateController.OnStartWave.AddListener(DoCurrentAttack);
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
     private void TakeTurn ()
     {
-        if (battleStateController.waveStepCount == 0)
+        /*if (battleStateController.waveStepCount == 0)
         {
             DoCurrentAttack();
-        }
+        }*/
 
         if (isDead) battleStateController.NextTurnStep();
         
@@ -101,20 +107,27 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         {
             case PumpkinState.SpawnEnemy:
                 {
-                    if (battleStateController.waveStepCount == 0)
+                    print("Patchystate SpawnEnemy");
+                    if (vineRoutine != null)
                     {
-                        //spawn 3 pumptims
-                        for (int i = 0; i < 3; i++)
-                        {
-                            SpawnEnemyAtRandomLocation();
-                        }
-                        state = PumpkinState.VineAttack;
+                        StopCoroutine(vineRoutine);
                     }
+                    //spawn 3 pumptims
+                    for (int i = 0; i < 3; i++)
+                    {
+                        SpawnEnemyAtRandomLocation();
+                    }
+                    state = PumpkinState.VineAttack;
                     break;
                 }
             case PumpkinState.VineAttack:
                 {
-                    StartCoroutine(VineAttackRoutine());
+                    print("Patchystate VineAttack");
+                    if (vineRoutine != null)
+                    {
+                        StopCoroutine(vineRoutine);
+                    }
+                    vineRoutine = StartCoroutine(VineAttackRoutine());
                     state = PumpkinState.SpawnEnemy;
                     break;
                 }
@@ -137,12 +150,20 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         //Spawn hazard signs
         var warnings = SpawnVineWarningsOnPlayer(pos);
         yield return new WaitForSeconds(1.3f);
-        //spawn attacks on that same location
-        SpawnVineAttacks(pos);
+        //spawn attacks on that same location (but only if the wave is active)
+        if (battleStateController.stepsRemaining > 0)
+        {
+            SpawnVineAttacks(pos);
+        }
         //Remove the hazard signs
         foreach(GameObject g in warnings)
         {
             Destroy(g);
+        }
+        yield return new WaitForSeconds(0.5f);
+        if (battleStateController.stepsRemaining > 0)
+        {
+            vineRoutine = StartCoroutine(VineAttackRoutine());
         }
     }
     /// <summary>
@@ -162,6 +183,8 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
             }
         }
 
+        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineRumble);
+
         return vines;
     }
 
@@ -175,12 +198,22 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         {
             for (int y = _pos.y - 1; y < _pos.y + 2; y++)
             {
+                //Try to skip tiles with enemy pawns.
+                var pawn = battleGrid.GetPawn(x, y);
+                if (pawn != null && pawn.GetComponent<Char_Battle_BasicAttacker>() != null) {
+                    continue;
+                }
+                if (pawn != null && pawn.GetComponent<Char_Battle_PatchyBoss>() != null)
+                {
+                    continue;
+                }
                 AttackElement attack = new AttackElement();
                 attack.damage = Stats.attack;
                 attack.visualEffect = vineEffectPrefab;
                 DoAttack(attack, new Vector2Int(x,y));
             }
         }
+        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineAttack);
     }
 
 
