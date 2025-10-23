@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: Bingus Bonkmobile
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: bingusbonkmobile
+  displayName: Bingus Bonkmobile
+  description: Vroom vroom bitch, watch out
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 5000
+  sellCost: 1000
+  effectWhenEquipped:
+    rid: 1234356255560040448
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356255560040448
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356255560040449
+    - rid: 1234356255560040449
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 8
+        modifierType: 1
+        value: 3

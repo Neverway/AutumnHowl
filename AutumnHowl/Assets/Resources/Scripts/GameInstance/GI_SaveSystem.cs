@@ -255,6 +255,9 @@ public class GI_SaveSystem : MonoBehaviour
     public static void LoadGame() => instance.OnLoadGame();
     public static void NotifyLeavingScene()
     {
+        if (CurrentSavingType == SavingType.SavingOrLoadingFile)
+            return;
+
         CurrentSavingType = SavingType.SwitchingScenes;
         instance.SaveValuesFromAttributes();
         CurrentSavingType = SavingType.None;

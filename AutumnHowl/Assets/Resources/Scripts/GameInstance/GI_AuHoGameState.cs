@@ -69,17 +69,15 @@ public class AuHoGameState
     {
         var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
 
-        GameStateSaveData inventoryData = new GameStateSaveData()
+        GameStateSaveData gameStateData = new GameStateSaveData()
         {
-            itemIDs = gameState.inventory.items.Select(item => item.UniqueID).ToArray(),
-            spellIds = gameState.inventory.spells.Select(item => item.UniqueID).ToArray(),
-            wearableIDs = gameState.inventory.equippedWearables.Select(item => item.UniqueID).ToArray(),
+            inventorySaveData = gameState.inventory.OnSaveData(),
 
             money = gameState.money,
             kills = gameState.kills,
             deaths = gameState.deaths,
             playtime = gameState.playtime,
-            
+
             currentLanternTime = gameState.currentLanternTime,
             lanternDuration = gameState.lanternDuration,
 
@@ -87,49 +85,18 @@ public class AuHoGameState
             overworldPosition = gameState.overworldPosition,
         };
 
-        GI_SaveSystem.SaveValue(inventoryData, "PlayerInventory");
+        GI_SaveSystem.SaveValue(gameStateData, "AuHoGameState");
     }
     [InvokeAfterLoad]
     public static void OnGameLoad()
     {
         var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
 
-        GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "PlayerInventory");
+        GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "AuHoGameState");
         
         if (data != null)
         {
-            //Load inventory save
-            {
-                //Load Items
-                gameState.inventory.items = new List<Item>();
-                foreach (var itemID in data.itemIDs)
-                {
-                    if (IDToObj<Item>.TryGet(itemID, out var item))
-                        gameState.inventory.items.Add(item);
-                    else
-                        Debug.LogWarning($"Unable to find item to load from UniqueID : {itemID}");
-                }
-
-                //Load Spells
-                gameState.inventory.spells = new List<Item_Magic>();
-                foreach (var itemID in data.spellIds)
-                {
-                    if (IDToObj<Item>.TryGet(itemID, out var item))
-                        gameState.inventory.spells.Add(item as Item_Magic);
-                    else
-                        Debug.LogWarning($"Unable to find item to load from UniqueID : {itemID}");
-                }
-
-                //Load Wearables
-                gameState.inventory.equippedWearables = new List<Item_Wearable>();
-                foreach (var itemID in data.wearableIDs)
-                {
-                    if (IDToObj<Item>.TryGet(itemID, out var item))
-                        gameState.inventory.equippedWearables.Add(item as Item_Wearable);
-                    else
-                        Debug.LogWarning($"Unable to find item to load from UniqueID : {itemID}");
-                }
-            }
+            gameState.inventory.OnLoadData(data.inventorySaveData);
 
             gameState.money = data.money;
             gameState.kills = data.kills;
@@ -175,9 +142,7 @@ public class AuHoGameState
     [Serializable]
     public class GameStateSaveData
     {
-        public string[] itemIDs;
-        public string[] spellIds;
-        public string[] wearableIDs;
+        public Inventory.SaveData inventorySaveData;
 
         public int money;
         public int kills;
