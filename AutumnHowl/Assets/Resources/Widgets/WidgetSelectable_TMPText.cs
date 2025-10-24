@@ -72,7 +72,7 @@ public class WidgetSelectable_TMPText : WidgetSelectable
 
     public void GetInitValues()
     {
-        if (!text) { text = GetComponent<TextMeshProUGUI>(); }
+        if (text == null) { text = GetComponent<TextMeshProUGUI>(); }
         
         originalTextContent = text.text;
         initialized = true;

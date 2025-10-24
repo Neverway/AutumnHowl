@@ -119,7 +119,7 @@ public class CharacterIdentifier
     
     
     [Serializable]
-    public struct SaveData
+    public class SaveData
     {
         public string templateID;
         public CharacterStats.SaveData statsData;
