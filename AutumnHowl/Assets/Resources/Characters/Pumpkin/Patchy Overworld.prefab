@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   battleData: {fileID: 11400000, guid: c6b7a16984be5604ea7ccaf1ac9fcfe7, type: 2}
-  mapID: Battle_PatchyBoss
+  mapID: Battle
   gameState: {fileID: 0}
   searchDistance: 6
   comfyDistance: 3
