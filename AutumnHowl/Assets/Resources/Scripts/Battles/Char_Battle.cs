@@ -95,12 +95,16 @@ public abstract class Char_Battle : Character
     
     protected virtual bool TryMoveTo(Vector2Int _direction)
     {
+        
+        print($"{gameObject.name} - try move called");
         if (BattleGrid.Instance.ValidTile (_direction.x, _direction.y) && !BattleGrid.Instance.IsOccupied(_direction.x, _direction.y))
         {
+            print($"{gameObject.name} - try move success");
             gridPawnController.MoveToTile (_direction.x, _direction.y);
-            battleStateController.NextTurnStep();
+            battleStateController.NextTurnStep(caller:gameObject.name);
             return true;
         }
+        print($"{gameObject.name} - try move failure");
 
         return false;
     }

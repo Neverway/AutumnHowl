@@ -95,9 +95,15 @@ public class Char_Battle_BasicAttacker : Char_Battle
     
     private void TakeTurn()
     {
-        if (isDead) battleStateController.NextTurnStep();
+        print($"{gameObject.name} - Started Turn");
+        if (isDead)
+        {
+            print($"{gameObject.name} - is dead");
+            battleStateController.NextTurnStep();
+        }
         else if (skipFirstTurn)
         {
+            print($"{gameObject.name} - skips first turn");
             skipFirstTurn = false;
             battleStateController.NextTurnStep ();
             return;
@@ -109,8 +115,10 @@ public class Char_Battle_BasicAttacker : Char_Battle
         Direction? targetDirection = GetTarget();
         if (targetDirection != null)
         {
+            print($"{gameObject.name} - found nearby target");
             if (!(Random.Range(0, 100) < randomRetreat))
             {
+                print($"{gameObject.name} - chose to attack");
                 switch (targetDirection)
                 {
                     case Direction.North: TryAttackSequence(AttackSequences[0]); break;
@@ -124,8 +132,11 @@ public class Char_Battle_BasicAttacker : Char_Battle
             Vector2Int toPosition = gridPawnController.position;
             toPosition += targetDirection.Value.Info().direction * -1;
 
-            if (TryMoveTo(toPosition)) 
+            if (TryMoveTo(toPosition))
+            {
+                print($"{gameObject.name} - calling try move");
                 return;
+            }
         }
         
         if (!TryMoveTo(GetLowestTileToTarget()))
