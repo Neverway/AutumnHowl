@@ -12,6 +12,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     [Space]
     [SerializeField] private Transform visualContainer_default;
     [SerializeField] private Transform visualContainer_swingSword;
+    [SerializeField] private Transform swordTrail;
 
     [Space]
     [Header("Input controls")]
@@ -25,17 +26,25 @@ public class SwordSwingAnimationHandler : MonoBehaviour
 
     public void Update()
     {
+        if (visualContainer_swingSword != null)
+            visualContainer_swingSword.gameObject.SetActive(swingState != SwingState.None);
+        if (visualContainer_default != null )
+            visualContainer_default.gameObject.SetActive(swingState == SwingState.None);
+
         switch (swingState)
         {
-            case SwingState.None: return;
+            case SwingState.None: OnNone(); return;
             case SwingState.Pullback: OnPullback(); break;
             case SwingState.Spin: OnSpin(); break;
             case SwingState.Recoil: OnRecoil(); break;
         }
     }
-
+    public void OnNone()
+    {
+    }
     public void OnPullback()
     {
+        swordTrail.gameObject.SetActive(false);
         Direction direcitonToUse = attackStartDirection;
         switch (spinDireciton)
         {
@@ -61,15 +70,16 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     }
     public void OnSpin()
     {
+        swordTrail.gameObject.SetActive(true);
         float degrees = spinDegreesRotation;
         switch (spinDireciton)
         {
             case SpinDirection.Left:
                 visualContainer_swingSword.localScale = new Vector3(1f, 1f, 1f);
+                degrees = -degrees;
                 break;
             case SpinDirection.Right:
                 visualContainer_swingSword.localScale = new Vector3(-1f, 1f, 1f);
-                degrees = -degrees;
                 break;
             default:
                 return;
