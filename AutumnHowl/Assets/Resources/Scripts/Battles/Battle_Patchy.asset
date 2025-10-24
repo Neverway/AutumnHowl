@@ -28,6 +28,8 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
+  victoryLevels: 5
+  victoryGold: 5
   battleSequence:
     waves:
     - rid: 26148788346028042
@@ -35,6 +37,8 @@ MonoBehaviour:
   enemySpawnLocations:
   - enemyPrefab: {fileID: 6242562417686465405, guid: c13edc94a5d22bb4aa18da688e77f99c, type: 3}
     enemyStartPosition: {x: 2, y: 5}
+  victoryState:
+    rid: 26149116751642627
   references:
     version: 2
     RefIds:
@@ -43,7 +47,6 @@ MonoBehaviour:
       data:
         waves:
         - rid: 26148788346028043
-        - rid: 26148788346028044
     - rid: 26148788346028043
       type: {class: BattleWave, ns: , asm: Assembly-CSharp}
       data:
@@ -65,24 +68,7 @@ MonoBehaviour:
               m_Calls: []
         waveAttack: {fileID: 0}
         waveSteps: 5
-    - rid: 26148788346028044
-      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+    - rid: 26149116751642627
+      type: {class: TargetEnemyDefeated, ns: , asm: Assembly-CSharp}
       data:
-        waveText:
-          frames:
-          - name: 
-            chatContent: The saltbat is preparing a melee attack!
-            portrait: {fileID: 0}
-            chatterVoice: {fileID: 0}
-            OnFrameCompleted:
-              m_PersistentCalls:
-                m_Calls: []
-            displayMode: 0
-            preventTextSkipping: 0
-            preventTextContinuing: 0
-            autoProgressOnComplete: 0
-          OnFinish:
-            m_PersistentCalls:
-              m_Calls: []
-        waveAttack: {fileID: 0}
-        waveSteps: 8
+        characterTemplate: {fileID: 11400000, guid: 221f814b320ae4dc9ad302d3071750c6, type: 2}

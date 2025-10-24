@@ -11,7 +11,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,39 +29,36 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] public bool stopByTapping = false;
     [Tooltip("The duration for the hit text to be visible")]
     [SerializeField] private float hitTextDuration = 0.75f;
-    [Tooltip ("How fast the sword needle travels around the compass")]
-    private float spinSpeed;
+    [Tooltip("The starting speed of the needle")] 
     [SerializeField] private float minSpinSpeed = 130f;
+    [Tooltip("The max speed of the needle")]
     [SerializeField] private float maxSpinSpeed = 200f;
     [SerializeField] AnimationCurve spinSpeedCurve;
-    
     // Bad me, this variable is confusing >:[
     // ~Liz
     [Tooltip("This is the amount of STR/PWR/SOUL that will be expended when performing an attack that passes this many cardinal directions on the compass")]
     [SerializeField] private int[] powerRequiredForAttacks;
 
-
-
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-    [Tooltip("Used to keep track of when teh attack bar started")]
-    public bool hasInitialized;
-    [Tooltip("Used to track when the attack bar is in progress")]
-    private bool attackBarActive;
     [Tooltip("The current angle the sword needle is pointing in")]
     private float swordAngle = 0f;
-
+    [Tooltip("Used to track when the attack bar is in progress")]
+    private bool attackBarActive;
+    private int spinStartIndex = 0;
+    private SpinDirection currentSpinDirection;
     private enum RingState { notStarted, spinning, finish }
     private RingState currentState = RingState.notStarted;
-    private SpinDirection currentSpinDirection;
-    //Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.
+    
+    [Tooltip ("How fast the sword needle travels around the compass")]
+    private float currentSpinSpeed;
+    [Tooltip("Used to keep track of when teh attack bar started")]
+    private bool hasInitialized;
+    [Tooltip("Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.")]
     private float clampedTotalSpin = 0f;
     private float totalSpin = 0f;
-    [SerializeField] public Image centerFill, powerMask1, powerMask2;
-    
-    
     private float nearestAngleToSword;
     private float distanceFromNearestAngle;
 
@@ -82,8 +78,6 @@ public class BattleAttackCompass : MonoBehaviour
         new Vector2Int(-1,1),
     };
 
-    private int spinStartIndex = 0;
-
     [Tooltip("Percent damage dealt after you hit the \"good\" zone")]
     [SerializeField] private float goodDamageMultiplier = 0.75f;
     //multiplier to use for attacks
@@ -94,17 +88,25 @@ public class BattleAttackCompass : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     [Tooltip ("Reference to the player so we can freeze them when attacking")]
     private Char_Battle_Player player;
+    
+    [Tooltip("The image that represents the sword angle on the attack compass")]
+    [SerializeField]private Image needleImage;
+    
     [Tooltip("Keep track of the active hit text coroutine so we make sure only one is running")]
     private Coroutine showHitTextCoroutine;
     [Tooltip("The 4 images that are used to fill the 4 bars for this hit angle")]
     [SerializeField] private Image[] goodBarImages, perfectBarImages;
     [Tooltip("Text used to display how good the hit angle was")]
     [SerializeField] private TMP_Text hitText;
-    [Tooltip("The image that represents the sword angle on the attack compass")]
-    [SerializeField]private Image needleImage;
     //The object used for generated sword swing attacks.
     [SerializeField] private GameObject defaultAttackObject;
     private Coroutine resetRoutine;
+    [Tooltip("")] 
+    [SerializeField] private Image centerFill;
+    [Tooltip("")] 
+    [SerializeField] private Image powerMask1;
+    [Tooltip("")] 
+    [SerializeField] private Image powerMask2;
 
 
     #endregion
@@ -113,9 +115,14 @@ public class BattleAttackCompass : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    public void Start()
+   public void Start()
     {
         player = FindObjectOfType<Char_Battle_Player>();
+    } 
+
+    public void OnEnable()
+    {
+        ResetCompass();
     }
 
     public void Update()
@@ -124,13 +131,14 @@ public class BattleAttackCompass : MonoBehaviour
         needleImage.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
         
         // Update how much our current power can actually swing the sword
-        UpdateMeterBasedOnAvailablePower();
+        UpdatePowerMeterBasedOnAvailablePower();
         
         // Detect activation
         if (!attackBarActive)
         {
+            // If we aren't in the process of attacking, update the needle direction to match the player's direction
             SetNeedleDirection(player.facingDirection);
-            spinStartIndex = (int)swordAngle / 90;
+            
             // Start the attack timer on first press
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
@@ -152,102 +160,109 @@ public class BattleAttackCompass : MonoBehaviour
         }
     }
 
-    public void OnEnable()
-    {
-        Reset();
-    }
-
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-
     /// <summary>
-    /// Freeze the player movement and enable the attack bar
+    /// Resets the attack compass so another attack can be performed
+    /// </summary>
+    private void ResetCompass()
+    {
+        SetupRingColors();
+        
+        // Unhide the power meters
+        powerMask1.enabled = true;
+        powerMask2.enabled = true;
+        
+        // Reset activation and initialization flags
+        currentState = RingState.notStarted;
+        attackBarActive = false;
+        hasInitialized = false;
+        
+        // Reset some other values that may still be filled out from a previous attack
+        centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
+        centerFill.fillAmount = 0f;
+        clampedTotalSpin = 0f;
+        totalSpin = 0f;
+    }
+    
+    /// <summary>
+    /// Called when reset, Adjust the hit bar images to match the defined hit angles
+    /// </summary>
+    private void SetupRingColors ()
+    {
+        const int hitBarCount = 4;
+
+        // Loop through each hit bar
+        for (int i = 0; i < hitBarCount; i++)
+        {
+            var someCalculation = (90 * i);
+            var goodRotation = Quaternion.Euler(0, 0, goodAngle + someCalculation);
+            var perfectRotation = Quaternion.Euler (0, 0, perfectAngle + someCalculation);
+            
+            // Adjust their rotation around the compass
+            goodBarImages[i].gameObject.transform.localRotation = goodRotation;
+            perfectBarImages[i].gameObject.transform.localRotation = perfectRotation;
+            
+            // Adjust their fill amount based on the success angles
+            goodBarImages[i].fillAmount = (goodAngle * 2f) / 360;
+            perfectBarImages[i].fillAmount = (perfectAngle * 2f) / 360;
+        }
+    }
+    
+    /// <summary>
+    /// Sets the fill amount and rotation of the power meter rings to match the current facing direction and power level
+    /// </summary>
+    private void UpdatePowerMeterBasedOnAvailablePower()
+    {
+        // Rotate the power meters to the direction of the sword
+        player.facingDirection.TryConvertToDirection(out Direction? _direction);
+        powerMask1.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
+        powerMask2.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
+        
+        // Set the fill amount based on the available power
+        float _fillAmount = 0;
+        if (player.Stats.power >= 40) _fillAmount = 1f;     // Full Slash (360)
+        if (player.Stats.power >= 30) _fillAmount = 0.75f;  // Three-Quarts Slash (270)
+        if (player.Stats.power >= 20) _fillAmount = 0.5f;   // Half Slash (180)
+        if (player.Stats.power >= 10) _fillAmount = 0.25f;  // Quarter Slash (90 turn)
+        powerMask1.fillAmount = _fillAmount;
+        powerMask2.fillAmount = _fillAmount;
+    }
+    
+    /// <summary>
+    /// Called when not currently attacking, updates the needle to the player's sword direction
+    /// </summary>
+    private void SetNeedleDirection(Vector2 _movement)
+    {
+        spinStartIndex = (int)swordAngle / 90;
+        
+        //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction rotated 18- degrees
+        if (_movement.TryConvertToDirection(out Direction? direction))
+        {
+            swordAngle = direction.Value.Info().turned180.Info().degreesRotation;
+        }
+    }
+    
+    /// <summary>
+    /// Freeze the player movement and enable inputs for the attack bar
     /// </summary>
     private void Initialize()
     {
+        // Keep from calling this function more than once (Need to call reset to call this function again)
         if (hasInitialized) return;
-        spinSpeed = minSpinSpeed;
-
+        hasInitialized = true;
+        
+        // Setup the ring state
+        currentSpinSpeed = minSpinSpeed;
         currentState = RingState.spinning;
         
         // hide the power bar that's not relevant to the current spin
         if (currentSpinDirection == SpinDirection.Left) powerMask1.enabled = false;
         if (currentSpinDirection == SpinDirection.Right) powerMask2.enabled = false;
-        
-        centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
-        centerFill.fillAmount = 0f;
-        clampedTotalSpin = 0f;
-        totalSpin = 0f;
 
+        // Freeze player and enable inputs
         player.canMove = false;
         attackBarActive = true;
-        hasInitialized = true;
-    }
-
-    /// <summary>
-    /// Coroutine to delay the reset of the compass after an attack, to add cooldown before the player can attack again
-    /// </summary>
-    private IEnumerator CoReset()
-    {
-        currentState = RingState.finish;
-        swordAngle = nearestAngleToSword;
-        //yield return new WaitForSeconds(0.5f);
-        yield return new WaitForSeconds(0f);
-        Reset();
-        resetRoutine = null;
-    }
-
-    /// <summary>
-    /// Resets the attack compass so another attack can be performed
-    /// </summary>
-    private void Reset()
-    {
-        SetupRingColors();
-        
-        powerMask1.enabled = true;
-        powerMask2.enabled = true;
-        
-        currentState = RingState.notStarted;
-        attackBarActive = false;
-        hasInitialized = false;
-    }
-    
-    /// <summary>
-    /// Resets the minigame.     
-    /// </summary>
-    private void OnAttackDone()
-    {
-        if (resetRoutine != null)
-        {
-            StopCoroutine (resetRoutine);
-        }
-        resetRoutine = StartCoroutine(CoReset());
-    }
-    
-    /// <summary>
-    /// Adjust the bar images to match the defined hit angles
-    /// </summary>
-    private void SetupRingColors ()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            goodBarImages[i].gameObject.transform.localRotation = Quaternion.Euler (0, 0, goodAngle + (90 * i));
-            goodBarImages[i].fillAmount = ((goodAngle * 2f)) / 360;
-            perfectBarImages[i].gameObject.transform.localRotation = Quaternion.Euler (0, 0, perfectAngle + (90 * i));
-            perfectBarImages[i].fillAmount = ((perfectAngle * 2f)) / 360;
-        }
-    }
-    
-    private void SetNeedleDirection(float _direction)
-    {
-        swordAngle = _direction;
-    }
-    
-    private void SetNeedleDirection(Vector2 _movement)
-    {
-        //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction rotated 18- degrees
-        if (_movement.TryConvertToDirection(out Direction? direction))
-            SetNeedleDirection(direction.Value.Info().turned180.Info().degreesRotation);
     }
     
     private void DoSpinState ()
@@ -263,11 +278,11 @@ public class BattleAttackCompass : MonoBehaviour
         float spinAmount = 0f;
         if (currentSpinDirection == SpinDirection.Left)
         {
-            spinAmount = -spinSpeed * Time.deltaTime;
+            spinAmount = -currentSpinSpeed * Time.deltaTime;
         }
         if (currentSpinDirection == SpinDirection.Right)
         {
-            spinAmount = spinSpeed * Time.deltaTime;
+            spinAmount = currentSpinSpeed * Time.deltaTime;
         }
         swordAngle += spinAmount;
         clampedTotalSpin += spinAmount;
@@ -276,7 +291,7 @@ public class BattleAttackCompass : MonoBehaviour
         float percent = Mathf.Abs (totalSpin) / 360;
         float t = spinSpeedCurve.Evaluate (percent);
 
-        spinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, t);
+        currentSpinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, t);
 
         //Clamps the totalSpin, but only if it goes far enough past 360 that we've looped around to a 90-degrees swing again.
         //The cutoff is 45 degrees past 360, since that would clamp to 90 degrees.
@@ -298,7 +313,33 @@ public class BattleAttackCompass : MonoBehaviour
         }
         PlaceCenterFill ();
     }
+    
+    
+    
+    
+    /// <summary>
+    /// Coroutine to delay the reset of the compass after an attack, to add cooldown before the player can attack again
+    /// </summary>
+    private IEnumerator CoReset()
+    {
+        currentState = RingState.finish;
+        swordAngle = nearestAngleToSword;
+        yield return new WaitForSeconds(0.25f);
+        ResetCompass();
+        resetRoutine = null;
+    }
 
+    
+    /// <summary> Resets the minigame. </summary>
+    private void OnAttackDone()
+    {
+        if (resetRoutine != null)
+        {
+            StopCoroutine (resetRoutine);
+        }
+        resetRoutine = StartCoroutine(CoReset());
+    }
+    
     private void PlaceCenterFill ()
     {
         if (clampedTotalSpin > 0)
@@ -312,7 +353,6 @@ public class BattleAttackCompass : MonoBehaviour
             centerFill.fillAmount = -clampedTotalSpin / 360;
         }
     }
-
 
     /// <summary>
     /// Ends sword spinning and calculates the direction it was pointing.
@@ -484,56 +524,6 @@ public class BattleAttackCompass : MonoBehaviour
         }
     }
 
-    private void UpdateMeterBasedOnAvailablePower()
-    {
-        DirectionUtility.TryConvertToDirection(player.facingDirection, out Direction? _direction);
-        
-        powerMask1.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
-        powerMask2.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
-
-        /*float[] fillAmounts = { 1f, 0.9f, 0.8f, 0.5f, 0f };
-        int currentPower = player.Stats.power;
-
-        int lastAffordableAttackIndex = 4;
-        for (int i = 0; i < powerRequiredForAttacks.Length; i++)
-           if (currentPower >= powerRequiredForAttacks[i])
-               lastAffordableAttackIndex = i;
-
-        powerMask1.fillAmount = fillAmounts[lastAffordableAttackIndex];
-        powerMask2.fillAmount = fillAmounts[lastAffordableAttackIndex];*/
-        
-        if (Input.GetKeyDown(KeyCode.P)) player.Stats.power += 1;
-        if (Input.GetKeyDown(KeyCode.O)) player.Stats.power -= 1;
-        
-        switch (player.Stats.power)
-        {
-            case >= 40:
-                // Full Slash (360)
-                powerMask1.fillAmount = 1f;
-                powerMask2.fillAmount = 1f;
-                break;
-            case >= 30:
-                // Three-Quarts Slash (270)
-                powerMask1.fillAmount = 0.75f;
-                powerMask2.fillAmount = 0.75f;
-                break;
-            case >= 20:
-                // Half Slash (180)
-                powerMask1.fillAmount = 0.5f;
-                powerMask2.fillAmount = 0.5f;
-                break;
-            case >= 10:
-                // Quarter Slash (90 turn)
-                powerMask1.fillAmount = 0.25f;
-                powerMask2.fillAmount = 0.25f;
-                break;
-            case < 10:
-                // No Power
-                powerMask1.fillAmount = 0.0f;
-                powerMask2.fillAmount = 0.0f;
-                break;
-        }
-    }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 

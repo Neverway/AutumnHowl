@@ -47,7 +47,6 @@ public abstract class Char_Battle : Character
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     public override void Start()
     {
-        print ("START " + gameObject.name);
         base.Start();
         gridPather = FindObjectOfType<BattleGridPather>();
         battleGrid = FindObjectOfType<BattleGrid>();
