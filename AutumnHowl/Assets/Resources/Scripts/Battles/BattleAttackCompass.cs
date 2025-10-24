@@ -173,16 +173,13 @@ public class BattleAttackCompass : MonoBehaviour
         powerMask1.enabled = true;
         powerMask2.enabled = true;
         
-        // Reset activation and initialization flags
-        currentState = RingState.notStarted;
-        attackBarActive = false;
-        hasInitialized = false;
         
         // Reset some other values that may still be filled out from a previous attack
         centerFill.gameObject.transform.localRotation = Quaternion.Euler (0, 0, -swordAngle);
         centerFill.fillAmount = 0f;
         clampedTotalSpin = 0f;
         totalSpin = 0f;
+        resetRoutine = null;
     }
     
     /// <summary>
@@ -329,7 +326,6 @@ public class BattleAttackCompass : MonoBehaviour
         swordAngle = nearestAngleToSword;
         yield return new WaitForSeconds(0.25f);
         ResetCompass();
-        resetRoutine = null;
     }
 
     
@@ -338,7 +334,7 @@ public class BattleAttackCompass : MonoBehaviour
     {
         if (resetRoutine != null)
         {
-            StopCoroutine (resetRoutine);
+            //StopCoroutine (resetRoutine);
         }
         resetRoutine = StartCoroutine(CoReset());
     }
@@ -431,6 +427,17 @@ public class BattleAttackCompass : MonoBehaviour
         hitText.SetText (_text);
         yield return new WaitForSeconds (hitTextDuration);
         hitText.SetText ("");
+    }
+
+    /// <summary>
+    /// Called by the battle system
+    /// </summary>
+    public void ReEnableCompassInputs()
+    {
+        // Reset activation and initialization flags
+        currentState = RingState.notStarted;
+        attackBarActive = false;
+        hasInitialized = false;
     }
 
     private void ExecuteAttack()

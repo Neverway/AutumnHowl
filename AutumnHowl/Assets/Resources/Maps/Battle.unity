@@ -646,14 +646,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerWasHitThisStep: 0
   stepsRemaining: 0
-  waveStepCount: 0
   turnOrder: []
   currentTurn: 0
   OnStartWave:
     m_PersistentCalls:
       m_Calls: []
-  gameState: {fileID: 0}
+  pendingNextTurnCalls: 0
   textEvent: {fileID: 1485981571}
+  gameState: {fileID: 0}
   battleWidget: {fileID: 1891927975}
   battlePlayer: {fileID: 1855222969}
   battleGrid: {fileID: 416025337}

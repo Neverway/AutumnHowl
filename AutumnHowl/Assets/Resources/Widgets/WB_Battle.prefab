@@ -2276,9 +2276,7 @@ MonoBehaviour:
   inspectTextEvent: {fileID: 8985564163241026172}
   actionBarAnimator: {fileID: 4485264024467070714}
   actionBarNavigator: {fileID: 8795853395902371105}
-  attackBar: {fileID: 8283552058696633010}
-  attackBarLeft: {fileID: 1731734110839919697}
-  attackBarRight: {fileID: 3282055524119328642}
+  attackCompass: {fileID: 4678868399235358971}
   stepCountText: {fileID: 6863058152315021958}
 --- !u!114 &8985564163241026172
 MonoBehaviour:
@@ -3688,11 +3686,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   powerRequiredForAttacks: 0a000000140000001e00000028000000
-  hasInitialized: 0
-  centerFill: {fileID: 6253310279909178968}
-  powerMask1: {fileID: 4397649099726687736}
-  powerMask2: {fileID: 1860145383273338643}
   goodDamageMultiplier: 0.75
+  needleImage: {fileID: 1499245436176802199}
   goodBarImages:
   - {fileID: 7897377619464235550}
   - {fileID: 2303643153096430706}
@@ -3704,8 +3699,10 @@ MonoBehaviour:
   - {fileID: 6227552750728131792}
   - {fileID: 1531026903525344599}
   hitText: {fileID: 8835265821935406087}
-  needleImage: {fileID: 1499245436176802199}
   defaultAttackObject: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
+  centerFill: {fileID: 6253310279909178968}
+  powerMask1: {fileID: 4397649099726687736}
+  powerMask2: {fileID: 1860145383273338643}
 --- !u!1 &8395404422115819891
 GameObject:
   m_ObjectHideFlags: 0

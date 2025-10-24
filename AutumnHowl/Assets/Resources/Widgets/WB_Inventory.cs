@@ -30,7 +30,9 @@ public class WB_Inventory : MonoBehaviour
     [SerializeField] private WidgetNavigator SpellListNavigator;
     [SerializeField] private WidgetNavigator inspectListNavigator;
     [SerializeField] private Func_TextEvent inspectTextEvent;
+    [SerializeField] private AudioSource audioSource;
     private GI_AuHoGameState gameState;
+    [SerializeField] private AudioClip bookOpen, bookClose;
 
 
     #endregion
@@ -41,6 +43,7 @@ public class WB_Inventory : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gameState = GameInstance.Get<GI_AuHoGameState>();
         
         for (int i = 0; i < ItemListNavigator.selectableElements.Count; i++)
@@ -56,6 +59,16 @@ public class WB_Inventory : MonoBehaviour
             var cachedIndex = i;
             selectable.OnInteracted.AddListener(() => { SetupInspectMenu(SpellListNavigator, cachedIndex);});
         }
+    }
+
+    private void OnEnable()
+    {
+        GameInstance.Get<GI_AudioManager>().PlayClip(bookOpen);
+    }
+
+    private void OnDisable()
+    {
+        GameInstance.Get<GI_AudioManager>().PlayClip(bookClose);
     }
 
 
@@ -239,6 +252,11 @@ public class WB_Inventory : MonoBehaviour
             inspectTextEvent.textEvent.frames[0].chatContent = "*You attempted to discard nothing,{spd=0.5} {spd=}but there is still nothing here.{spd=0.5} {spd=}Did you succeed?";
             inspectTextEvent.CallEvent();
         }
+    }
+
+    public void CloseMenu()
+    {
+        
     }
 
 
