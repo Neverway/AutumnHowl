@@ -16,12 +16,12 @@ MonoBehaviour:
   characterReferenceType: 1
   characterName: Jackal
   baseStats:
-    health: 100
+    health: 60
     level: 0
     power: 10
     corruption: 0
     attack:
-      startValue: 10
+      startValue: 25
       multiplier: 0
       addedValue: 0
     defense:
@@ -29,7 +29,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 100
+      startValue: 60
       multiplier: 0
       addedValue: 0
     maxLevel:

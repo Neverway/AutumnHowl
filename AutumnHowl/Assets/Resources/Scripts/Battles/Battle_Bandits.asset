@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
-  m_Name: Battle_Test
+  m_Name: Battle_Bandits
   m_EditorClassIdentifier: 
   openingText:
     frames:
     - name: 
-      chatContent: '*A wild Saltbat approaches!'
+      chatContent: '*A wild Badger lunges at you!'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 0}
       OnFrameCompleted:
@@ -28,17 +28,13 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
-  victoryLevels: 1
-  victoryGold: 5
   battleSequence:
     waves:
     - rid: 26148788346028042
-  layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
+  enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
   enemySpawnLocations:
-  - enemyPrefab: {fileID: 6242562417686465405, guid: fed31cd6da26849c88a813e194f32f06, type: 3}
+  - enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
     enemyStartPosition: {x: 2, y: 4}
-  victoryState:
-    rid: 26149116751642625
   references:
     version: 2
     RefIds:
@@ -90,6 +86,3 @@ MonoBehaviour:
               m_Calls: []
         waveAttack: {fileID: 0}
         waveSteps: 8
-    - rid: 26149116751642625
-      type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
-      data: 

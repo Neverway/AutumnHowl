@@ -58,12 +58,14 @@ public class BS_Start : BattleState
         {
             controller.AddCharacter(enemy.enemyPrefab.GetComponent<Char_Battle>(), enemy.enemyStartPosition);
         }
+        // Add layout to battle
+        controller.LoadLayout();
         
         // Display opening text
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;
         controller.textEvent.textEvent.OnFinish.AddListener(() =>
         {
-            controller.NewState(new BS_PlayerAction(controller));
+            controller.ChangeState(new BS_PlayerAction(controller));
         });
         controller.textEvent.CallEvent();
         
@@ -101,7 +103,7 @@ public class BS_PlayerAction : BattleState
     public override void OnStateLeave(BattleState stateEntering)
     {
         controller.battleWidget.SetActionBarVisible(false);
-        switch (controller.playerAction)
+        switch (controller.currentPlayerAction)
         {
             case BattleStateController.PlayerAction.attack:
                 controller.battleWidget.SetAttackBarVisible(true);
@@ -141,7 +143,6 @@ public class BS_GridAction : BattleState
         activeWave = controller.gameState.currentGameState.currentBattle.battleSequence.GetBattleWave();
         controller.stepsRemaining = activeWave.waveSteps;
         controller.battlePlayer.canMove = true;
-        controller.waveStepCount = 0;
         controller.OnStartWave?.Invoke();
     }
 
@@ -150,13 +151,13 @@ public class BS_GridAction : BattleState
         controller.battleWidget.stepCountText.text = controller.stepsRemaining.ToString();
         if (controller.stepsRemaining <= 0)
         {
-            controller.NewState(new BS_PlayerAction(controller));
+            controller.ChangeState(new BS_PlayerAction(controller));
         }
     }
 
     public override void OnStateLeave(BattleState stateEntering)
     {
-        switch (controller.playerAction)
+        switch (controller.currentPlayerAction)
         {
             case BattleStateController.PlayerAction.attack:
                 controller.battleWidget.SetAttackBarVisible(false);
