@@ -185,6 +185,11 @@ public class BattleStateController : MonoBehaviour
         currentBattle.victoryState.victoryConditionMet(aliveCharacters);
     }
 
+    public void LoadLayout()
+    {
+        Instantiate( gameState.currentGameState.currentBattle.layoutPrefab, battleGrid.transform);
+    }
+
 
     #endregion
 }

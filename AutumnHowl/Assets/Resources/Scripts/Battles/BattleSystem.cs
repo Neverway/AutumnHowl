@@ -58,6 +58,8 @@ public class BS_Start : BattleState
         {
             controller.AddCharacter(enemy.enemyPrefab.GetComponent<Char_Battle>(), enemy.enemyStartPosition);
         }
+        // Add layout to battle
+        controller.LoadLayout();
         
         // Display opening text
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;

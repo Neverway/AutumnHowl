@@ -24,7 +24,7 @@ public class BattleData : ScriptableObject
     public int victoryLevels;
     public int victoryGold;
     public BattleSequence battleSequence;
-    public GameObject enemyPrefab;
+    public GameObject layoutPrefab;
     public List<EnemySpawnLocation> enemySpawnLocations;
     [Box, SerializeReference, Polymorphic] public VictoryState victoryState;
 }
