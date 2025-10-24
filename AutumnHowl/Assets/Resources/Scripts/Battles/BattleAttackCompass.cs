@@ -265,6 +265,9 @@ public class BattleAttackCompass : MonoBehaviour
         attackBarActive = true;
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     private void DoSpinState ()
     {
         if (stopByTapping == true)

@@ -22,7 +22,6 @@ public class BattleStateController : MonoBehaviour
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-    public int currentWave;
     public PlayerAction playerAction {get; set;}
     public enum PlayerAction
     {
@@ -31,6 +30,7 @@ public class BattleStateController : MonoBehaviour
         item,
         defend,
     }
+    
     // Used during defending to see if the player gets their bonus power for no hit
     public bool playerWasHitThisStep;
 
