@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random=UnityEngine.Random;
 
@@ -20,9 +21,12 @@ using Random=UnityEngine.Random;
 public class BattleData : ScriptableObject
 {
     public TextEvent openingText;
+    public int victoryLevels;
+    public int victoryGold;
     public BattleSequence battleSequence;
     public GameObject enemyPrefab;
     public List<EnemySpawnLocation> enemySpawnLocations;
+    [Box, SerializeReference, Polymorphic] public VictoryState victoryState;
 }
 
 /// <summary>
@@ -84,5 +88,30 @@ public class EnemySpawnLocation
 {
     public GameObject enemyPrefab;
     public Vector2Int enemyStartPosition = new Vector2Int (3, 6);
+}
+
+[Serializable]
+public abstract class VictoryState
+{
+    public abstract bool victoryConditionMet(List<Char_Battle> _aliveFighters);
+}
+
+[Serializable]
+public class AllEnemiesDefeated : VictoryState
+{
+    public override bool victoryConditionMet(List<Char_Battle> _aliveFighters)
+    {
+        return !_aliveFighters.Any(character => character is not IsPlayerCharacter);
+    }
+}
+
+[Serializable]
+public class TargetEnemyDefeated : VictoryState
+{
+    public CharacterTemplate characterTemplate;
+    public override bool victoryConditionMet(List<Char_Battle> _aliveFighters)
+    {
+        return _aliveFighters.All(character => character.Identifier.TemplateCreatedFrom != characterTemplate);
+    }
 }
 
