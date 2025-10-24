@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Random=UnityEngine.Random;
 
@@ -20,6 +21,11 @@ using Random=UnityEngine.Random;
 [CreateAssetMenu(menuName = "AuHo/New Battle Data", fileName = "Battle_")]
 public class BattleData : ScriptableObject
 {
+#if UNITY_EDITOR
+    public SceneAsset targetLevelScene;
+#endif
+    public string mapID;
+
     public TextEvent openingText;
     public int victoryLevels;
     public int victoryGold;
@@ -27,6 +33,15 @@ public class BattleData : ScriptableObject
     public GameObject layoutPrefab;
     public List<EnemySpawnLocation> enemySpawnLocations;
     [Box, SerializeReference, Polymorphic] public VictoryState victoryState;
+
+
+    private void OnValidate()
+    {
+#if UNITY_EDITOR 
+        if (targetLevelScene == null) return;
+        mapID = targetLevelScene.name;
+#endif
+    }
 }
 
 /// <summary>
