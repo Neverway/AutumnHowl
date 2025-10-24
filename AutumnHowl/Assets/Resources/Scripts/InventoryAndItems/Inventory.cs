@@ -150,7 +150,7 @@ public class Inventory
         equippedWearables.RemoveAt(indexInEquipment);
 
         //Remove modifiers of equipment
-        var player = GameInstance.Get<GI_AuHoGameState>().currentGameState.player;
+        var player = GameInstance.Gamestate.player;
         var modID = EquipSlotModID(indexInEquipment);
         item.effectWhenEquipped.UnregisterFrom(EquipSlotModID(indexInEquipment));
         return true;
@@ -181,7 +181,7 @@ public class Inventory
         equippedWearables.Add(equipment);
 
         //Apply equip modifiers from object
-        var player = GameInstance.Get<GI_AuHoGameState>().currentGameState.player;
+        var player = GameInstance.Gamestate.player;
         var modID = EquipSlotModID(equippedWearables.Count - 1);
         equipment.effectWhenEquipped.RegisterTo_Flexible(modID, new TargetSelf().GetTargetsFrom(player));
 

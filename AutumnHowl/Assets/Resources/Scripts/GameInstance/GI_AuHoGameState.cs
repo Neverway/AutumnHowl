@@ -67,7 +67,7 @@ public class AuHoGameState
     [InvokeBeforeSave]
     public static void OnGameSave()
     {
-        var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        var gameState = GameInstance.Gamestate;
 
         GameStateSaveData gameStateData = new GameStateSaveData()
         {
@@ -90,7 +90,7 @@ public class AuHoGameState
     [InvokeAfterLoad]
     public static void OnGameLoad()
     {
-        var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        var gameState = GameInstance.Gamestate;
 
         GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "AuHoGameState");
         
@@ -118,7 +118,7 @@ public class AuHoGameState
     }
     public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
     {
-        var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        var gameState = GameInstance.Gamestate;
         var worldLoader = GameInstance.Get<GI_WorldLoader>();
 
         //Wait for any previously loading maps to finish loading

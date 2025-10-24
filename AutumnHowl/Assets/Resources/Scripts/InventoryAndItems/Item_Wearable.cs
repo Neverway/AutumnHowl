@@ -33,9 +33,15 @@ public class Item_Wearable : Item
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    public override string GetDescription()
+    {
+        if (effectWhenEquipped == null) return description;
+
+        return "{spd=stat, col=stat}While Equipped: " + effectWhenEquipped.Description + "\n{spd=, col=}" + description;
+    }
     protected override bool OnUse(CharacterIdentifier user, int _atIndex, int _inList = Inventory.ITEMS_LIST_ID)
     {
-        var inventory = GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory;
+        var inventory = GameInstance.Gamestate.inventory;
 
         //Equip item if this is from the items list
         if (_inList == Inventory.ITEMS_LIST_ID)

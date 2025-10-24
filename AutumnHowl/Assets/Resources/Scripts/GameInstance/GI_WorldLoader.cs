@@ -84,7 +84,7 @@ public class GI_WorldLoader : MonoBehaviour
         GI_SaveSystem.NotifyLeavingScene();
 
         //Start loading the next map
-        GameInstance.Get<GI_AuHoGameState>().currentGameState.map = _mapID;
+        GameInstance.Gamestate.map = _mapID;
         StartCoroutine(Co_Load(_mapID, _exitWarpID));
     }
 
