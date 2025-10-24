@@ -58,6 +58,10 @@ public abstract class Char_Battle : Character
     {
         if (isDead) return;
         if (!canMove) return;
+        if (animator == null) return;
+
+        animator.SetFloat("idleX", facingDirection.x);
+        animator.SetFloat("idleY", facingDirection.y);
     }
 
 
