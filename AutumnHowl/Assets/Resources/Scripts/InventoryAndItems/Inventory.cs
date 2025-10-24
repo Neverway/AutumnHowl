@@ -8,11 +8,9 @@
 //====================================================================================================================//
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [Serializable]
 public class Inventory
@@ -33,7 +31,7 @@ public class Inventory
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private int maxItems = 8;
     private int maxSpells = 4;
-    private int maxEquipment = 8;
+    private int maxEquipment = 4;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -80,13 +78,13 @@ public class Inventory
         switch (_inList)
         {
             case 0:
-                if (_atIndex < items.Count)
-                {
-                    return items[_atIndex];
-                }
+                if (_atIndex < items.Count) return items[_atIndex];
                 else return null;
             case 1:
                 if (_atIndex < spells.Count) return spells[_atIndex];
+                else return null;
+            case 2:
+                if (_atIndex < equippedWearables.Count) return equippedWearables[_atIndex];
                 else return null;
         }
 
@@ -109,6 +107,13 @@ public class Inventory
                 {
                     if (spells[_atIndex].canNotDiscard) { return false; }
                     else { spells.Remove(spells[_atIndex]); return true; }
+                }
+                break;
+            case 2:
+                if (_atIndex < equippedWearables.Count)
+                {
+                    if (equippedWearables[_atIndex].canNotDiscard) { return false; }
+                    else { equippedWearables.Remove(equippedWearables[_atIndex]); return true; }
                 }
                 break;
         }
@@ -153,6 +158,10 @@ public class Inventory
         var player = GameInstance.Gamestate.player;
         var modID = EquipSlotModID(indexInEquipment);
         item.effectWhenEquipped.UnregisterFrom(EquipSlotModID(indexInEquipment));
+
+        //Add to items
+        items.Add(item);
+
         return true;
     }
 

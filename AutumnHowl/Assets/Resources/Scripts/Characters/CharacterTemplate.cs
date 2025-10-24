@@ -13,7 +13,9 @@ public class CharacterTemplate : ScriptableObject, UniquelyIdentifiable
 
     [Space, Unbox] public CharacterStats baseStats = new CharacterStats();
 
+#if UNITY_EDITOR
     public void OnValidate() => baseStats.RefreshStatIDs();
+#endif
 
 }
 

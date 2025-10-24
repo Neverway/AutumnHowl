@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -39,9 +40,16 @@ namespace ErryLib.Reflection
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly assembly in assemblies)
             {
-                //assembly.DEBUG_PrintFolderLocation(assembly.IsProjectScriptAssembly() && !assembly.IsUnityAssembly());
-                if (assembly.IsProjectScriptAssembly() && !assembly.IsUnityAssembly())
+                if (Application.isEditor)
+                {
+                    //assembly.DEBUG_PrintFolderLocation(assembly.IsProjectScriptAssembly() && !assembly.IsUnityAssembly());
+                    if (assembly.IsProjectScriptAssembly() && !assembly.IsUnityAssembly())
+                        AddAssemblyToCache(assembly);
+                }
+                else
+                {
                     AddAssemblyToCache(assembly);
+                }
             }
         }
 
@@ -126,8 +134,19 @@ namespace ErryLib.Reflection
             //Retrieve from the cache the MemberInfos associated with the given Type (Throw Exception if not found)
             MemberInfo[] members;
             if (!typeToMemberInfos.TryGetValue(type, out members))
+            {
+                try
+                {
+                    AddAssemblyToCache(type.Assembly);
+                    if (typeToMemberInfos.TryGetValue(type, out members))
+                        return members.ToArray();
+                }
+                catch { }
+
                 throw new ArgumentOutOfRangeException($"The Type {type.Name}" +
                     $" has NOT been cached in ReflectionCache. Call caching methods to add to cache first");
+                
+            }
 
             //Return the members as a newly constructed copy of the array to avoid editing of the cached data
             return members.ToArray();
@@ -137,8 +156,28 @@ namespace ErryLib.Reflection
             //Retrieve from the cache the AttributeUsages associated with the given MemberInfo (Throw Exception if not found)
             List<AttributeInfo> infos;
             if (!memeberInfoToAttributeUsageInfo.TryGetValue(member, out infos))
+            {
+                try
+                {
+                    Type type = member.DeclaringType;
+                    AddAssemblyToCache(type.Assembly);
+                    if (memeberInfoToAttributeUsageInfo.TryGetValue(type, out infos))
+                    {
+                        //If there was no list, there was no attributes, return an empty array
+                        if (infos == null)
+                            return new AttributeInfo[0];
+
+                        //Return the list as an array to avoid the cached list from being edited
+                        return infos.ToArray();
+                    }
+                }
+                catch { }
+
                 throw new ArgumentOutOfRangeException($"The MemberInfo {member.DeclaringType}.{member.Name}" +
                     $" has NOT been cached in ReflectionCache. Call caching methods to add to cache first");
+
+            }
+            
 
             //If there was no list, there was no attributes, return an empty array
             if (infos == null)

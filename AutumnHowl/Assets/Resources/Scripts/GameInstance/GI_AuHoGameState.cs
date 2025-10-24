@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GI_AuHoGameState : MonoBehaviour
 {
@@ -27,17 +28,23 @@ public class GI_AuHoGameState : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    
+
     #endregion
 
 
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-
-
+    public void Awake()
+    {
+        currentGameState = new AuHoGameState();
+    }
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-
+    [ContextMenu("NEXT CYCLE")]
+    private void NextCycleTEST()
+    {
+        currentGameState.NextCycle();
+    }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 
@@ -48,6 +55,12 @@ public class GI_AuHoGameState : MonoBehaviour
 [Serializable]
 public class AuHoGameState
 {
+    public AuHoGameState()
+    {
+        currentCycleSeed = GetRandomSeedInt();
+        nextCycleSeed = GetRandomSeedInt();
+    }
+
     public CharacterIdentifier player;
     public BattleData currentBattle;
 
@@ -63,6 +76,20 @@ public class AuHoGameState
     public float playtime = 0;
     public float currentLanternTime = 1200;
     public float lanternDuration = 1200;
+    public int currentCycle = 0;
+    public int currentCycleSeed;
+    public int nextCycleSeed;
+    public void NextCycle()
+    {
+        currentCycle++;
+        NewSeed();
+    }
+    public void NewSeed()
+    {
+        currentCycleSeed = nextCycleSeed;
+        nextCycleSeed = GetRandomSeedInt();
+    }
+    public int GetRandomSeedInt() => new System.Random().Next(int.MinValue, int.MaxValue);
 
     [InvokeBeforeSave]
     public static void OnGameSave()
@@ -81,6 +108,10 @@ public class AuHoGameState
             currentLanternTime = gameState.currentLanternTime,
             lanternDuration = gameState.lanternDuration,
 
+            currentCycle = gameState.currentCycle,
+            currentCycleSeed = gameState.currentCycleSeed,
+            nextCycleSeed = gameState.nextCycleSeed,
+
             map = gameState.map,
             overworldPosition = gameState.overworldPosition,
         };
@@ -91,9 +122,11 @@ public class AuHoGameState
     public static void OnGameLoad()
     {
         var gameState = GameInstance.Gamestate;
+        gameState.NewSeed();
+
 
         GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "AuHoGameState");
-        
+
         if (data != null)
         {
             gameState.inventory.OnLoadData(data.inventorySaveData);
@@ -102,7 +135,11 @@ public class AuHoGameState
             gameState.kills = data.kills;
             gameState.deaths = data.deaths;
             gameState.playtime = data.playtime;
-            
+
+            gameState.currentCycle = data.currentCycle;
+            gameState.currentCycleSeed = data.currentCycleSeed;
+            gameState.nextCycleSeed = data.nextCycleSeed;
+
             gameState.currentLanternTime = data.currentLanternTime;
             gameState.lanternDuration = data.lanternDuration;
 
@@ -151,6 +188,10 @@ public class AuHoGameState
         
         public float currentLanternTime;
         public float lanternDuration;
+
+        public int currentCycle;
+        public int currentCycleSeed;
+        public int nextCycleSeed;
 
         public string map = "Town";
         public Vector2 overworldPosition;

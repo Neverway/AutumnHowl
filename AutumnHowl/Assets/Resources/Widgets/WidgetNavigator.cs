@@ -75,6 +75,12 @@ public class WidgetNavigator : MonoBehaviour
             selectableElements[currentIndex].SetSelected(false);
         }*/
     }
+    private void OnEnable()
+    {
+        //This just gives the widgetnavigator a change
+        if (selectableElements.IsIndexInRange(currentIndex) && selectableElements[currentIndex] is WidgetSelectable_Animator)
+            selectableElements[currentIndex].SetSelected(true);
+    }
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/

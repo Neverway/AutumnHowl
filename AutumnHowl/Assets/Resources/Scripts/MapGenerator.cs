@@ -8,9 +8,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -57,12 +54,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     private int branchLength; //ticks up how long the generator has gone without branching.
     [SerializeField] private int maxBranchLength; //at this length, we jump to a new location
 
-    [SerializeField] private bool newMapUsesSetSeed = false; //Whether to use specified seed
-    [SerializeField] private int setSeed = 1000; //Random seed. For testing only.
-    private int seed = 0;
+    [SerializeField] private int seedToGenerate;
 
     private bool mapGenerated = false;
-    private bool mapIsBeingLoaded = false;
+    private bool mapIsBeingLoaded;
     private List<GameObject> generatedObjects = new List<GameObject>();
 
     private int farthestDistance = 0;
@@ -189,21 +184,12 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         Debug.Log (p);
     }
 
-    [ContextMenu("Generate New Map")]
-    private void GenerateMapWithNewSeed()
+    /// <param name="isNewMap">Whether or not the generated map will LOAD instances like chests and enemies, or generate new instances</param>
+    private void GenerateMap(bool isNewMap = false)
     {
-        if (newMapUsesSetSeed)
-            seed = setSeed;
-        else
-            seed = Random.Range(int.MinValue, int.MaxValue);
-
-        GenerateMap();
-    }
-
-    private void GenerateMap ()
-    {
+        mapIsBeingLoaded = isNewMap;
         //Set the seed of the map
-        Random.InitState (seed);
+        Random.InitState (seedToGenerate);
 
         //Destroy current map if it is already generated
         if (mapGenerated) DestroyMap();
@@ -691,33 +677,27 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     // SaveData handling ----------------------------------------------------------------------------------------
     public override SaveData OnSaveInstance() => new SaveData
     {
-        seed = seed
+        previouslyGeneratedSeed = mapGenerated ? seedToGenerate : 0
     };
 
     public override void OnLoadInstance(SaveData data)
     {
-        Debug.Log("Loaded Map!!!");
-        if (mapGenerated && seed != data.seed)
-        {
-            DestroyMap();
-        }
+        seedToGenerate = GameInstance.Gamestate.currentCycleSeed;
+        if (mapGenerated) DestroyMap();
 
-        seed = data.seed;
-        mapIsBeingLoaded = true;
-        GenerateMap();
-        mapIsBeingLoaded = false;
+        GenerateMap(isNewMap: seedToGenerate != data.previouslyGeneratedSeed);
     }
 
     public override void OnNewInstance() 
     {
-        Debug.Log("New Map!!!");
-        GenerateMapWithNewSeed();
+        seedToGenerate = GameInstance.Gamestate.currentCycleSeed;
+        GenerateMap(isNewMap: true);
     }
 
     [Serializable]
     public struct SaveData
     {
-        public int seed;
+        public int previouslyGeneratedSeed;
     }
 }
 
