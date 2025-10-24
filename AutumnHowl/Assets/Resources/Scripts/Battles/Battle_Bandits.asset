@@ -28,13 +28,17 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
+  victoryLevels: 0
+  victoryGold: 0
   battleSequence:
     waves:
     - rid: 26148788346028042
-  enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
+  layoutPrefab: {fileID: 0}
   enemySpawnLocations:
-  - enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
+  - enemyPrefab: {fileID: 6242562417686465405, guid: 4e3c41e694fce0375bf8f9935ee30d39, type: 3}
     enemyStartPosition: {x: 2, y: 4}
+  victoryState:
+    rid: 5830042219069571072
   references:
     version: 2
     RefIds:
@@ -86,3 +90,6 @@ MonoBehaviour:
               m_Calls: []
         waveAttack: {fileID: 0}
         waveSteps: 8
+    - rid: 5830042219069571072
+      type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
+      data: 

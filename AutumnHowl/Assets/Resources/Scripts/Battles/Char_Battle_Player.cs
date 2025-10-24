@@ -39,6 +39,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     private new void Start()
     {
         facingDirection = new Vector2(0, 1);
+        invertAttackFacingDirections = true;
         base.Start();
     }
     
