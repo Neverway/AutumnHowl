@@ -27,7 +27,6 @@ public class Char_ShieldUser : Char_Battle_BasicAttacker
             shieldNextTurn = false;
             return;
         }
-        print("TakeTUrn ShieldUser");
         base.TakeTurn();
     }
 }
