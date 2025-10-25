@@ -56,7 +56,8 @@ public abstract class Character : MonoBehaviour
         Identifier = CharacterIdentifier.GetFromCharacterTemplate(template);
         if (this is IsPlayerCharacter)
         {
-            GameInstance.Get<GI_AuHoGameState>().currentGameState.player = Identifier;
+            GameInstance.Playerbody = this;
+            GameInstance.Gamestate.player = Identifier;
         }
         GameInstance.Get<GI_CharacterReferencer>().Register(this);
         UpdateGameStateValues();

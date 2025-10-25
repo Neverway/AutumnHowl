@@ -9,8 +9,6 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,7 +35,11 @@ public class GI_AuHoGameState : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     public void Awake()
     {
-        currentGameState = new AuHoGameState() { currentBattle = currentGameState.currentBattle };
+        currentGameState = new AuHoGameState()
+        {
+            player = currentGameState.player,
+            currentBattle = currentGameState.currentBattle
+        };
     }
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     [ContextMenu("NEXT CYCLE")]
@@ -57,8 +59,7 @@ public class AuHoGameState
 {
     public AuHoGameState()
     {
-        currentCycleSeed = GetRandomSeedInt();
-        nextCycleSeed = GetRandomSeedInt();
+        gameSeed = new System.Random().Next(int.MinValue, int.MaxValue);
     }
 
     public CharacterIdentifier player;
@@ -69,27 +70,61 @@ public class AuHoGameState
 
     public string map = "Town";
     public Vector2 overworldPosition;
+    public int gameSeed { get; private set; }
+
+    public bool leavingBattle;
+    public string enteredBattleFromMap;
+    public Vector2 enteredBattleFromLocation;
 
     public int money = 0;
     public int kills = 0;
     public int deaths = 0;
     public float playtime = 0;
+
     public float currentLanternTime = 1200;
     public float lanternDuration = 1200;
+
     public int currentCycle = 0;
-    public int currentCycleSeed;
-    public int nextCycleSeed;
+
     public void NextCycle()
     {
         currentCycle++;
-        NewSeed();
     }
-    public void NewSeed()
+    public int GetSubSeed(string id)
     {
-        currentCycleSeed = nextCycleSeed;
-        nextCycleSeed = GetRandomSeedInt();
+        string seedString = $"{gameSeed}{id}";
+        return seedString.GetHashCode();
     }
-    public int GetRandomSeedInt() => new System.Random().Next(int.MinValue, int.MaxValue);
+    public int GetCycleSubSeed(string id)
+    {
+        string seedString = $"{gameSeed}{currentCycle}{id}";
+        return seedString.GetHashCode();
+    }
+    public void EnterBattle(BattleData battleData)
+    {
+        //Store previous map and location before entering battle
+        enteredBattleFromMap = map;
+        enteredBattleFromLocation = overworldPosition;
+
+        //Setup battledata and load the battle map
+        currentBattle = battleData;
+        GameInstance.Get<GI_WorldLoader>().Load(battleData.mapID);
+    }
+    public void LeaveBattle()
+    {
+        //Unset the battle
+        currentBattle = null;
+
+        //Use default locations if there was no previous map you came from
+        if (string.IsNullOrEmpty(enteredBattleFromMap))
+        {
+            enteredBattleFromMap = "Town";
+            enteredBattleFromLocation = new Vector2(0, 8); //In front of fountain as default position
+        }
+
+        //load the player into the map and location they were before the battle
+        GameInstance.SendCoroutine(CoLoadMapFromLoadingGame(enteredBattleFromLocation, enteredBattleFromMap));
+    }
 
     [InvokeBeforeSave]
     public static void OnGameSave()
@@ -100,6 +135,13 @@ public class AuHoGameState
         {
             inventorySaveData = gameState.inventory.OnSaveData(),
 
+            map = gameState.map,
+            overworldPosition = gameState.overworldPosition,
+            gameSeed = gameState.gameSeed,
+
+            enteredBattleFromMap = gameState.enteredBattleFromMap,
+            enteredBattleFromLocation = gameState.enteredBattleFromLocation,
+
             money = gameState.money,
             kills = gameState.kills,
             deaths = gameState.deaths,
@@ -108,12 +150,8 @@ public class AuHoGameState
             currentLanternTime = gameState.currentLanternTime,
             lanternDuration = gameState.lanternDuration,
 
-            currentCycle = gameState.currentCycle,
-            currentCycleSeed = gameState.currentCycleSeed,
-            nextCycleSeed = gameState.nextCycleSeed,
+            currentCycle = gameState.currentCycle
 
-            map = gameState.map,
-            overworldPosition = gameState.overworldPosition,
         };
 
         GI_SaveSystem.SaveValue(gameStateData, "AuHoGameState");
@@ -122,26 +160,12 @@ public class AuHoGameState
     public static void OnGameLoad()
     {
         var gameState = GameInstance.Gamestate;
-        gameState.NewSeed();
-
 
         GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "AuHoGameState");
 
         if (data != null)
         {
             gameState.inventory.OnLoadData(data.inventorySaveData);
-
-            gameState.money = data.money;
-            gameState.kills = data.kills;
-            gameState.deaths = data.deaths;
-            gameState.playtime = data.playtime;
-
-            gameState.currentCycle = data.currentCycle;
-            gameState.currentCycleSeed = data.currentCycleSeed;
-            gameState.nextCycleSeed = data.nextCycleSeed;
-
-            gameState.currentLanternTime = data.currentLanternTime;
-            gameState.lanternDuration = data.lanternDuration;
 
             //Load the map and character position if currently loading a file
             if (GI_SaveSystem.CurrentSavingType == GI_SaveSystem.SavingType.SavingOrLoadingFile)
@@ -151,6 +175,20 @@ public class AuHoGameState
                 string map = gameState.map;
                 GameInstance.SendCoroutine(CoLoadMapFromLoadingGame(characterPostiion, map));
             }
+            gameState.gameSeed = data.gameSeed;
+
+            gameState.enteredBattleFromMap = data.enteredBattleFromMap;
+            gameState.enteredBattleFromLocation = data.enteredBattleFromLocation;
+
+            gameState.money = data.money;
+            gameState.kills = data.kills;
+            gameState.deaths = data.deaths;
+            gameState.playtime = data.playtime;
+
+            gameState.currentLanternTime = data.currentLanternTime;
+            gameState.lanternDuration = data.lanternDuration;
+
+            gameState.currentCycle = data.currentCycle;
         }
     }
     public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
@@ -181,6 +219,13 @@ public class AuHoGameState
     {
         public Inventory.SaveData inventorySaveData;
 
+        public string map = "Town";
+        public Vector2 overworldPosition;
+        public int gameSeed;
+
+        public string enteredBattleFromMap;
+        public Vector2 enteredBattleFromLocation;
+
         public int money;
         public int kills;
         public int deaths;
@@ -190,10 +235,6 @@ public class AuHoGameState
         public float lanternDuration;
 
         public int currentCycle;
-        public int currentCycleSeed;
-        public int nextCycleSeed;
 
-        public string map = "Town";
-        public Vector2 overworldPosition;
     }
 }

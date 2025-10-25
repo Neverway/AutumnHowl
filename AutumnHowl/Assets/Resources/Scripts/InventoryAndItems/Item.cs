@@ -13,7 +13,7 @@ using UnityEngine;
 public abstract class Item : ScriptableObject, UniquelyIdentifiable
 {
     /*-----[ UniqueID Setup ]-----------------------------------------------------------------------------------------*/
-    [field: SerializeField] public string UniqueID { get; private set; }
+    [field: SerializeField] public string UniqueID { get; protected set; }
     [InvokeOnReflectionCacheLoadRuntime] public static void CacheIDs() => IDToObj<Item>.AddAllFromUnityResources();
 
 

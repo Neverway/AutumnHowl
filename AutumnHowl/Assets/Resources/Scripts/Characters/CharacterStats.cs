@@ -27,7 +27,7 @@ public class CharacterStats
     /*-----[ Settable stats (Not modifiable) ]------------------------------------------------------------------------*/
 
     [Header("Starting Values for Valued-Stats")]
-    public float health = 100;
+    [HideInInspector] public float health;
     public float level = 0;
     public int power = 10;
     public float corruption = 0;
@@ -251,6 +251,7 @@ public class CharacterStats
     public void OnNewCharacter()
     {
         health = maxHealth;
+        power = maxPower;
     }
 
     /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/
