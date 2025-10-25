@@ -15,7 +15,9 @@ public class GameInstance : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public static AuHoGameState Gamestate => Get<GI_AuHoGameState>().currentGameState;
+    [Reload] private static GI_AuHoGameState _cachedGIGameState;
+    public static AuHoGameState Gamestate => _cachedGIGameState.currentGameState;
+    [Reload] public static Character Playerbody;
     public static InputActions.TopDownActions Inputs { get; private set; }
 
 
@@ -51,6 +53,7 @@ public class GameInstance : MonoBehaviour
         }
 
         _instance = this;
+        OnGameInstanceStart();
         DontDestroyOnLoad(_instance);
     }
     private void OnEnable()
@@ -62,6 +65,11 @@ public class GameInstance : MonoBehaviour
     {
         if (this == _instance)
             Inputs.Disable();
+    }
+
+    private void OnGameInstanceStart()
+    {
+        _cachedGIGameState = Get<GI_AuHoGameState>();
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/

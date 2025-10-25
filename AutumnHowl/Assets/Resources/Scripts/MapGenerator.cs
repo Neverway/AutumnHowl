@@ -83,9 +83,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     [SerializeField] private GameObject[] treeList;
 
     [SerializeField] private GameObject[] poiList; //point of interest list. These get placed on deadends.
-    [SerializeField] private List<GameObject> enemyList; //Enemy spawn list. These get scattered at random.
+    [SerializeField] private List<GameObject> pathObjects; //Objects to generate randomly on the path
+    [SerializeField] private List<OverworldEnemySpawner> enemySpawners; //Enemy spawn list. These get scattered at random.
 
-    [SerializeField] private InteractableChestRecreator chestRecreator;
+    [SerializeField] private InteractableChestSpawner chestRecreator;
 
 
     //=-----------------=
@@ -102,97 +103,70 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     // Internal Functions
     //=-----------------=
-
-    private void PrintNodes ()
+    private string storedDebugLog;
+    private void NewMapGenDebugLog() => storedDebugLog = "MAP GEN DEBUG:\n";
+    private void LogStoredMapGenDebugLog() => Debug.Log(storedDebugLog);
+    private void StoreDebugLogMapGenStep(string step) => storedDebugLog += step + "\n";
+    private void StoreDebugLogPOILocations() => storedDebugLog += $"POI positions: {string.Join(',', poiLocations)}\n";
+    private void StoreDebugLogMapSnapshot ()
     {
-        string p = "Map:\n";
+        storedDebugLog += "\n";
+        Tuple<bool, bool, bool, bool, char>[] mapPathChars = 
+            {
+            //  NORTH,  SOUTH,  WEST,   EAST
+            new(true , false, false, false, '╨'),
+            new(false, true , false, false, '╥'),
+            new(false, false, true , false, '╡'),
+            new(false, false, false, true , '╞'),
+            new(true , true , false, false, '║'),
+            new(false, false, true , true , '═'),
+            new(true , false, true , false, '╝'),
+            new(true , false, false, true , '╚'),
+            new(false, true , true , false, '╗'),
+            new(false, true , false, true , '╔'),
+            new(true , true , true , true , '╬'),
+            new(false, true , true , true , '╦'),
+            new(true , false, true , true , '╩'),
+            new(true , true , true , true , '╬'),
+            new(true , true , false, true , '╠'),
+            new(true , true , true , false, '╣'),
+        };
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
             {
+                char selectedChar = '?';
                 MapNode n = mapNodes[x, y];
-                if (mapNodes[x, y].visited)
-                {
-                    if (n.paths[0] && !n.paths[1] && !n.paths[2] && !n.paths[3])
-                    {
-                        p += "╨";
-                    }
-                    if (!n.paths[0] && n.paths[1] && !n.paths[2] && !n.paths[3])
-                    {
-                        p += "╥";
-                    }
-                    if (!n.paths[0] && !n.paths[1] && n.paths[2] && !n.paths[3])
-                    {
-                        p += "╡";
-                    }
-                    if (!n.paths[0] && !n.paths[1] && !n.paths[2] && n.paths[3])
-                    {
-                        p += "╞";
-                    }
-                    if (n.paths[0] && n.paths[1] && !n.paths[2] && !n.paths[3])
-                    {
-                        p += "║";
-                    }
-                    if (!n.paths[0] && !n.paths[1] && n.paths[2] && n.paths[3])
-                    {
-                        p += "═";
-                    }
-                    if (n.paths[0] && !n.paths[1] && n.paths[2] && !n.paths[3])
-                    {
-                        p += "╝";
-                    }
-                    if (n.paths[0] && !n.paths[1] && !n.paths[2] && n.paths[3])
-                    {
-                        p += "╚";
-                    }
-                    if (!n.paths[0] && n.paths[1] && n.paths[2] && !n.paths[3])
-                    {
-                        p += "╗";
-                    }
-                    if (!n.paths[0] && n.paths[1] && !n.paths[2] && n.paths[3])
-                    {
-                        p += "╔";
-                    }
-                    if (n.paths[0] && n.paths[1] && n.paths[2] && n.paths[3])
-                    {
-                        p += "╬";
-                    }
-                    if (!n.paths[0] && n.paths[1] && n.paths[2] && n.paths[3])
-                    {
-                        p += "╦";
-                    }
-                    if (n.paths[0] && !n.paths[1] && n.paths[2] && n.paths[3])
-                    {
-                        p += "╩";
-                    }
-                    if (n.paths[0] && n.paths[1] && !n.paths[2] && n.paths[3])
-                    {
-                        p += "╠";
-                    }
-                    if (n.paths[0] && n.paths[1] && n.paths[2] && !n.paths[3])
-                    {
-                        p += "╣";
-                    }
-                }
+                if (!mapNodes[x, y].visited)
+                    selectedChar = '░';
                 else
                 {
-                    p += "░";
+                    foreach (var mapPathInfo in mapPathChars)
+                        if (n.paths[0] == mapPathInfo.Item1 &&
+                            n.paths[1] == mapPathInfo.Item2 &&
+                            n.paths[2] == mapPathInfo.Item3 &&
+                            n.paths[3] == mapPathInfo.Item4)
+                        {
+                            selectedChar = mapPathInfo.Item5;
+                            break;
+                        }
                 }
+                storedDebugLog += selectedChar;
             }
-            p += "\n";
+            storedDebugLog += "\n";
         }
-        Debug.Log (p);
     }
 
     /// <param name="isNewMap">Whether or not the generated map will LOAD instances like chests and enemies, or generate new instances</param>
     private void GenerateMap(bool isNewMap = false)
     {
-        mapIsBeingLoaded = isNewMap;
+        mapIsBeingLoaded = !isNewMap;
         //Set the seed of the map
         Random.InitState (seedToGenerate);
 
         //Destroy current map if it is already generated
         if (mapGenerated) DestroyMap();
+        NewMapGenDebugLog();
 
         branchLength = 0;
         mapNodes = new MapNode[mapWidth, mapHeight];
@@ -205,20 +179,17 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         }
         enemyPlacementCount = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
-        Debug.Log ("Map Nodes Finished");
+         StoreDebugLogMapGenStep("Map Nodes Finished");
         AddRandomLoops();
         GenerateTilesFromNodes ();
-        Debug.Log ("Map Tiles Finished");
+         StoreDebugLogMapGenStep("Map Tiles Finished");
         ScatterTrees ();
         PrintDistances ();
-        foreach(var loc in poiLocations)
-        {
-            print (loc);
-        }
+         StoreDebugLogPOILocations();
         PlacePOIs ();
         PlaceEnemies ();
 
-
+        LogStoredMapGenDebugLog();
         mapGenerated = true;
     }
 
@@ -268,7 +239,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         }
         RandomBag<int> bag = new RandomBag<int>(validPaths);
         AddPath(_pos, bag.Grab());
-        PrintNodes();
+        StoreDebugLogMapSnapshot();
         return true;
     }
     /// <summary>
@@ -323,56 +294,61 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     private void PlacePOIs ()
     {
+        //=== Create the random gameobject bag to grab from for POIs ========
         List<ICreatesGameObject> gameObjectCreators = new();
-
         //Add pois
-        foreach (var poi in poiList)
-            gameObjectCreators.Add(new BasicGameObjectCreator(poi));
-
-        //Add createable chests
+        foreach (var poi in poiList) gameObjectCreators.Add(new BasicGameObjectCreator(poi));
+        //Add createable chests (if this is a new map, otherwise use null for no object to be created)
         gameObjectCreators.Add(mapIsBeingLoaded ? null : chestRecreator);
-
         RandomGameObjectBag gameObjectBag = new RandomGameObjectBag(gameObjectCreators);
 
+        //=== Loop through the POI locations and place random objects at each point ========
         if (poiLocations.Count == 0) return;
-
         foreach (var loc in poiLocations)
         {
+            //Generate the object
             ICreatesGameObject objCreator = gameObjectBag.Grab();
             if (objCreator == null) continue;
-
             GameObject poi = objCreator.GetCreatedGameObject();
+            generatedObjects.Add(poi); //Add to generated objects list in case you need to destroy the map
 
+            //Setup position of object
             poi.transform.position = new Vector3(
                 loc.x * roomWidth + (roomWidth / 2),
                 loc.y * roomHeight + (roomHeight / 2), 0);
-
-            generatedObjects.Add(poi);
         }
     }
-    /// <summary>
-    /// Places enemies from the enemyList in order until it runs out of enemy locations.
-    /// </summary>
+    /// <summary>Places enemies from the enemyList in order until it runs out of enemy locations.</summary>
     private void PlaceEnemies ()
     {
-        if (enemyList.IsEmptyOrNull())
-            return;
+        Debug.Log("Enemy locaiton count: " + enemyLocations.Count);
+        Debug.Log("Is Loading?: " + mapIsBeingLoaded);
+        //=== Create the random gameobject bag to grab from for POIs ========
+        List<ICreatesGameObject> gameObjectCreators = new();
+        //Add path objects
+        foreach (var obj in pathObjects) gameObjectCreators.Add(new BasicGameObjectCreator(obj));
+        //Add spawned enemies (if this is a new map, otherwise use null for no object to be created)
+        foreach (var enemySpawner in enemySpawners)
+            gameObjectCreators.Add(mapIsBeingLoaded ? null : enemySpawner);
+        RandomGameObjectBag pathObjectsAndEnemies = new RandomGameObjectBag(gameObjectCreators);
 
-        RandomBag<GameObject> enemyBag = new RandomBag<GameObject> (enemyList);
-        if (poiList.Length == 0)
+        //=== Loop through the POI locations and place random objects at each point ========
+        for (int i = 0; i < enemyLocations.Count; i++) 
         {
-            return;
-        }
-        for (int i = 0; i < enemyLocations.Count; i++) {
-            if (i >= enemyLocations.Count)
-            {
-                return;
-            }
-            GameObject enemy = Instantiate (enemyBag.Grab());
+            Debug.Log("Checking position : " + enemyLocations[i]);
+
+            //Generate the object
+            ICreatesGameObject objCreator = pathObjectsAndEnemies.Grab();
+            if (objCreator == null) continue;
+            GameObject enemy = objCreator.GetCreatedGameObject();
+            generatedObjects.Add (enemy); //Add to generated objects list in case you need to destroy the map
+
+            Debug.Log("Creating a guy! " + enemy);
+
+            //Setup position of object
             enemy.transform.position = new Vector3 (enemyLocations[i].x * roomWidth + (roomWidth / 2),
                 enemyLocations[i].y * roomHeight + (roomHeight / 2), 0);
 
-            generatedObjects.Add (enemy);
         }
     }
 
@@ -387,7 +363,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             }
             p += "\n";
         }
-        print (p);
+        StoreDebugLogMapGenStep(p);
     }
 
     private void ScatterTrees ()
@@ -437,7 +413,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     private void GenerateFromNode (int x, int y, int distanceFromStart, bool walking = false)
     {
-        PrintNodes ();
+        StoreDebugLogMapSnapshot ();
         
         branchLength++;
         if (!mapNodes[x, y].visited)
@@ -584,7 +560,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             return;
         }
         int rand = Random.Range (0, nodes.Count);
-        Debug.Log ("Generating from " + nodes[rand].x + "," + nodes[rand].y);
+        StoreDebugLogMapGenStep("Generating from " + nodes[rand].x + "," + nodes[rand].y);
         GenerateFromNode (nodes[rand].x, nodes[rand].y, mapNodes[nodes[rand].x, nodes[rand].y].distanceFromStart) ;
     }
 

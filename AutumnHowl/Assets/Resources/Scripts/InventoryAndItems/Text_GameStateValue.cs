@@ -89,7 +89,7 @@ public class Text_GameStateValue : MonoBehaviour
                 text.text = textDecoratorStart + PlayerStats.defense + textDecoratorEnd;
                 break;
             case GameStateVariable.money:
-                text.text = textDecoratorStart + gameState.currentGameState.money + textDecoratorEnd;
+                text.text = textDecoratorStart + GameInstance.Gamestate.money + textDecoratorEnd;
                 break;
         }
     }

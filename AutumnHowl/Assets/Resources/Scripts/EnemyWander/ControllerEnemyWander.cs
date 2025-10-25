@@ -11,19 +11,15 @@ namespace Neverway.StateMachine
 
     public class ControllerEnemyWander : StateMachine<ControllerEnemyWander>
     {
-        public Controller_Overworld_Player player;
-        public BattleData battleData;
-        public string mapID;
-        public GI_AuHoGameState gameState;
+        public OverworldEnemy enemyController;
         [SerializeField] public float searchDistance = 6;
         [SerializeField] public float comfyDistance = 3f;
         [SerializeField] public float enterBattleDistance = 0.75f;
         public Vector3 homePosition {  get; private set; }
+        [HideInInspector] public Controller_Overworld_Player player;
         // the attached Rigidbody2D component
         private Rigidbody2D rb;
-        /// <summary>
-        /// Normalized vector for movement direction.
-        /// </summary>
+        /// <summary>Normalized vector for movement direction.</summary>
         public Vector2 movement;
         public float currentMoveSpeed = 0;
         public float wanderSpeed = 1f;
@@ -38,12 +34,10 @@ namespace Neverway.StateMachine
             rb = GetComponent<Rigidbody2D> ();
             homePosition = transform.position;
             NewState (new EW_Idle(this));
-            gameState = FindObjectOfType<GI_AuHoGameState>();
+
+            //Setup animator if animator is found
             animator = GetComponent<Animator>();
-            if (animator == null)
-            {
-                return;
-            }
+            if (animator == null) return;
             animator.SetFloat("idleX", 0);
             animator.SetFloat("idleY", -1);
         }
@@ -53,11 +47,10 @@ namespace Neverway.StateMachine
         {
             base.Update ();
             rb.velocity = movement * currentMoveSpeed;
-            Debug.DrawLine (transform.position, homePosition, Color.yellow);
-            if (animator == null)
-            {
-                return;
-            }
+
+            //Update aniamtor if one exists
+            if (animator == null) return;
+
             if (currentMoveSpeed != 0)
             {
                 animator.SetBool("walking", true);
@@ -70,6 +63,42 @@ namespace Neverway.StateMachine
             }
             animator.SetFloat("idleX", movement.x);
             animator.SetFloat("idleY", movement.y);
+        }
+
+        private void OnDrawGizmos()
+        {
+            //Draw wander range
+            if (Application.isPlaying)
+                DrawGizmosCircle(Color.cyan, homePosition, comfyDistance);
+            else
+                DrawGizmosCircle(Color.cyan, transform.position, comfyDistance);
+
+            //Draw aggro range and enter battle range
+            DrawGizmosCircle(Color.yellow, transform.position, searchDistance);
+            DrawGizmosCircle(Color.red, transform.position, enterBattleDistance);
+
+            if (Application.isPlaying)
+            {
+                //Draw line between enemy and home position
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawLine(transform.position, homePosition);
+            }
+        }
+        private void DrawGizmosCircle(Color color, Vector3 center, float radius)
+        {
+            Gizmos.color = color;
+            int segments = 32;
+            // Build rotation matrix to orient circle
+            Quaternion rotation = Quaternion.LookRotation(Vector3.up);
+            Vector3 prevPoint = center + rotation * (Vector3.right * radius);
+
+            for (int i = 1; i <= segments; i++)
+            {
+                float angle = (i / (float)segments) * Mathf.PI * 2f;
+                Vector3 nextPoint = center + rotation * (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius);
+                Gizmos.DrawLine(prevPoint, nextPoint);
+                prevPoint = nextPoint;
+            }
         }
 
         internal void LookForPlayer ()
@@ -90,14 +119,7 @@ namespace Neverway.StateMachine
             }
         }
 
-        internal void EnterBattle ()
-        {
-            Debug.Log("Entering battle!");
-            // I gotchu ~Liz
-            gameState = FindObjectOfType<GI_AuHoGameState>();
-            gameState.currentGameState.currentBattle = battleData;
-            gameState.GetComponent<GI_WorldLoader>().Load(mapID);
-        }
+        internal void EnterBattle () => enemyController.EnterBattle();
 
         internal void PickRandomDirection ()
         {

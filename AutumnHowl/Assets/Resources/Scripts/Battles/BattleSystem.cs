@@ -190,9 +190,9 @@ public class BS_Victory : BattleState
         // Display opening text
         controller.textEvent.textEvent = new TextEvent();
         controller.textEvent.textEvent.AddFrame(
-            $"You Won!\n<col=stat>[+" +
-            $"{GameInstance.Get<GI_AuHoGameState>().currentGameState.currentBattle.victoryLevels}" +
-            $" LEVELS]\n[+${GameInstance.Get<GI_AuHoGameState>().currentGameState.currentBattle.victoryGold}]");
+            "You Won!\n{col=stat}[+" +
+            $"{GameInstance.Gamestate.currentBattle.victoryLevels}" +
+            $" LEVELS]\n[+${GameInstance.Gamestate.currentBattle.victoryGold}]");
            
         
         controller.textEvent.textEvent.OnFinish.AddListener(() =>
@@ -204,6 +204,10 @@ public class BS_Victory : BattleState
 
     public override void OnStateUpdate()
     {
+        if (!GameInstance.Get<GI_TextboxManager>().textEventActive)
+        {
+            GameInstance.Gamestate.LeaveBattle();
+        }
     }
 
     public override void OnStateLeave(BattleState stateEntering)
