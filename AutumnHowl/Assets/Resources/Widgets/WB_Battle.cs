@@ -37,8 +37,7 @@ public class WB_Battle : MonoBehaviour
     [Header("Action Stuff")] 
     public Animator actionBarAnimator;
     public WidgetNavigator actionBarNavigator;
-    public GameObject attackBar;
-    public Image attackBarLeft, attackBarRight;
+    public BattleAttackCompass attackCompass;
     [Header("Step Stuff")] 
     public TMP_Text stepCountText;
 
@@ -109,10 +108,10 @@ public class WB_Battle : MonoBehaviour
         switch (_isVisible)
         {
             case true:
-                attackBar.SetActive(true);
+                attackCompass.gameObject.SetActive(true);
                 break;
             case false:
-                attackBar.SetActive(false);
+                attackCompass.gameObject.SetActive(false);
                 break;
         }
     }

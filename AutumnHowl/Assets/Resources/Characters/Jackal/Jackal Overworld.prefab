@@ -76,8 +76,41 @@ PrefabInstance:
       propertyPath: template
       value: 
       objectReference: {fileID: 11400000, guid: d812dd04686e0b3e2a72b7c5665bc62f, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6601185223956943184, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4464297629934033587}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+--- !u!1 &8756161298840459820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 3399765610685915905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4464297629934033587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8756161298840459820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44348a9cb46e9064689e1df3d0980ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  battleData: {fileID: 11400000, guid: 0783e2f687d258841887818164d87638, type: 2}
+  mapID: Battle
+  gameState: {fileID: 0}
+  searchDistance: 6
+  comfyDistance: 3
+  enterBattleDistance: 0.75
+  movement: {x: 0, y: 0}
+  currentMoveSpeed: 0
+  wanderSpeed: 1
+  chaseSpeed: 2
+  chasesPlayer: 1

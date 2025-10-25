@@ -2149,6 +2149,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (23)
@@ -2904,6 +2908,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (21)
@@ -3836,6 +3844,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (44)
@@ -3910,6 +3922,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -4103,6 +4119,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (27)
@@ -5132,6 +5152,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -10418,6 +10442,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (50)
@@ -10872,6 +10900,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -11088,6 +11120,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -11451,6 +11487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (35)
@@ -11594,6 +11634,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (31)
@@ -12566,6 +12610,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree (42)
@@ -13738,6 +13786,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1149764754}
     m_Modifications:
+    - target: {fileID: 2754734305704233006, guid: b68833da8b6997ff49f918822253b713, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e0541317cd7536abe98001a21f169a, type: 3}
     - target: {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
       propertyPath: m_Name
       value: Tree

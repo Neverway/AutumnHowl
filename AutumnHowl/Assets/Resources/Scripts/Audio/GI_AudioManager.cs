@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using DG.Tweening;
 
-[RequireComponent(typeof(AudioSource))]
+// ReSharper disable once HollowTypeName
 public class GI_AudioManager : MonoBehaviour
 {
     public static GI_AudioManager Instance => GameInstance.Get<GI_AudioManager>();
@@ -66,6 +67,7 @@ public class GI_AudioManager : MonoBehaviour
     /// Unique audio source for looping music.
     /// </summary>
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource ambientSource;
 
     /// <summary>
     ///Initialize some things.
@@ -108,6 +110,12 @@ public class GI_AudioManager : MonoBehaviour
     public void StopSlashClip ()
     {
         slashSource.Stop ();
+    }
+
+    public void SetMusicPitch(float _pitch)
+    {
+        musicSource.DOPitch(_pitch, 0.5f);
+        //ambientSource.DOPitch(_pitch, 0.5f);
     }
 
     //Play a random clip from the Goal Mix. Uesd when a level is completed.

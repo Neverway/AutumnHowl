@@ -22,7 +22,8 @@ public class Text_Inventory : MonoBehaviour
     private enum InventoryType
     {
         listItems,
-        listSpells
+        listSpells,
+        listGear
     }
     public string textDecoratorStart = "*";
     public string textDecoratorEnd = "";
@@ -63,7 +64,7 @@ public class Text_Inventory : MonoBehaviour
     public void UpdateItemList()
     {
         textElements = GetComponentsInChildren<WidgetSelectable_TMPText>().ToList();
-        if (!gameState) { gameState = GameInstance.Get<GI_AuHoGameState>(); }
+        if (gameState == null) { gameState = GameInstance.Get<GI_AuHoGameState>(); }
         
         switch (inventoryType)
         {
@@ -83,11 +84,25 @@ public class Text_Inventory : MonoBehaviour
                 }
                 break;
             case InventoryType.listSpells:
-                for (int i = 0; i < gameState.currentGameState.inventory.spells.Count; i++)
+                for (int i = 0; i < textElements.Count; i++)
                 {
                     if (i < gameState.currentGameState.inventory.spells.Count)
                     {
                         var item = gameState.currentGameState.inventory.spells[i];
+                        textElements[i].SetText(textDecoratorStart + item.displayName + textDecoratorEnd);
+                    }
+                    else
+                    {
+                        textElements[i].SetText("*---");
+                    }
+                }
+                break;
+            case InventoryType.listGear:
+                for (int i = 0; i < textElements.Count; i++)
+                {
+                    if (i < gameState.currentGameState.inventory.equippedWearables.Count)
+                    {
+                        var item = gameState.currentGameState.inventory.equippedWearables[i];
                         textElements[i].SetText(textDecoratorStart + item.displayName + textDecoratorEnd);
                     }
                     else

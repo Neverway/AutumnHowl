@@ -15,6 +15,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // ReSharper disable once HollowTypeName
+[RequireComponent(typeof(Func_TextEvent))]
 public class BattleStateController : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
@@ -22,7 +23,8 @@ public class BattleStateController : MonoBehaviour
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-    public PlayerAction playerAction {get; set;}
+    [Tooltip("The action the player chose for this round")]
+    public PlayerAction currentPlayerAction {get; set;}
     public enum PlayerAction
     {
         attack,
@@ -30,34 +32,33 @@ public class BattleStateController : MonoBehaviour
         item,
         defend,
     }
-    
-    // Used during defending to see if the player gets their bonus power for no hit
+    [Tooltip("Used during defending to see if the player gets their bonus power for no hit")]
     public bool playerWasHitThisStep;
-
+    [Tooltip("How many turns each character gets before the end of this round")]
     public int stepsRemaining;
-    //Counts upward how many turns the wave has been going for.
-    public int waveStepCount = 0;
-    public List<Char_Battle> turnOrder;
+    [Tooltip("A list of each character that's currently fighting, in order of who's turn comes first")]
+    public List<Char_Battle> turnOrder; // <= BattleSystem.cs sets the contents of this in its battle start state
+    [Tooltip("Used to store who's turn it is in the turn order list")]
     public int currentTurn = 0;
-
-    /// <summary>
-    /// Triggered when a wave starts.
-    /// </summary>
-    public UnityEvent OnStartWave = new UnityEvent();
+    [Tooltip("Used by bosses to spawn their wave attacks")]
+    public UnityEvent OnStartWave;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+    [Tooltip("The active state of the battle state machine")]
     private BattleState currentBattleState;
+    [Tooltip("Used to prevent calling update on a battle state, if the state machine hasn't been initialized")]
     private bool initialized;
+    public Coroutine nextTurnCoroutine;
+    public int pendingNextTurnCalls;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    public GI_AuHoGameState gameState;
     public Func_TextEvent textEvent;
+    public GI_AuHoGameState gameState;
     public WB_Battle battleWidget;
     public Char_Battle_Player battlePlayer;
     public BattleGrid battleGrid;
-    private Coroutine nextTurnCoroutine;
 
 
     #endregion
@@ -68,17 +69,17 @@ public class BattleStateController : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private IEnumerator Start()
     {
-        if (textEvent == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Text Event is not set");
-        if (battleWidget == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Widget is not set");
-        if (battlePlayer == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Player is not set");
-        if (battleGrid == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Grid is not set");
-
-        //Debug.Log("BattleSystem Start (wait)");
+        CheckAndReportNullReferences();
+        
+        // Wait for the battle grid to initialize
         yield return new WaitUntil(()=>BattleGrid.Instance != null);
-        //Debug.Log("BattleSystem Start (continue)");
+        
+        
         gameState = GameInstance.Get<GI_AuHoGameState>();
+        
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
+        
         initialized = true;
     }
 
@@ -87,16 +88,41 @@ public class BattleStateController : MonoBehaviour
         if (!initialized) return;
         currentBattleState.OnStateUpdate();
     }
-    private void OnDestroy()
-    {
-        //Debug.Log("Battle destroyed!");
-    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    /// <summary>
+    /// Throw understandable error messages for missing references
+    /// </summary>
+    private void CheckAndReportNullReferences()
+    {
+        if (textEvent == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Text Event is not set");
+        if (battleWidget == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Widget is not set");
+        if (battlePlayer == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Player is not set");
+        if (battleGrid == null) throw new NullReferenceException($"{nameof(BattleStateController)}: Battle Grid is not set");
+    }
+    
+    /// <summary>
+    /// See if the current battle data's victory state has been reached,
+    /// If so, switch to the victory state in the battle state machine
+    /// </summary>
+    private void CheckForVictory()
+    {
+        var currentBattle = gameState.currentGameState.currentBattle;
+        List<Char_Battle> aliveCharacters = turnOrder.Where(_character => !_character.isDead).ToList();
+
+
+        if (currentBattle.victoryState.victoryConditionMet(aliveCharacters))
+        {
+            ChangeState(new BS_Victory(this));
+        }
+    }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public void NewState(BattleState newBS)
+    /// <summary>
+    /// Switch the current state on the battle state machine
+    /// </summary>
+    public void ChangeState(BattleState newBS)
     {
         BattleState oldBS = currentBattleState;
         oldBS.OnStateLeave(newBS);
@@ -105,31 +131,37 @@ public class BattleStateController : MonoBehaviour
         currentBattleState.OnStateEnter(oldBS);
     }
 
+    /// <summary>
+    /// Sets the player's action choice and switches the state machine to the grid action state
+    /// Called by WB_Battle's action button unity events,
+    /// </summary>
+    /// <param name="_action"></param>
     public void SetPlayerAction(int _action)
     {
+        // TODO this could probably be added to those unity events via code rather than an inspector reference
         switch (_action)
         {
             case 0:
-                playerAction = PlayerAction.attack;
+                currentPlayerAction = PlayerAction.attack;
                 break;
             case 2:
-                playerAction = PlayerAction.spell;
+                currentPlayerAction = PlayerAction.spell;
                 break;
             case 1:
-                playerAction = PlayerAction.item;
+                currentPlayerAction = PlayerAction.item;
                 break;
             case 3:
-                playerAction = PlayerAction.defend;
+                currentPlayerAction = PlayerAction.defend;
                 break;
         }
-        NewState(new BS_GridAction(this));
+        ChangeState(new BS_GridAction(this));
     }
 
     public IEnumerator CoNextTurnStep(float _delay = 0.1f)
     {
         // Disable movement for the current character
         turnOrder[currentTurn].SetTurnActive(false);
-        //print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
+        print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
 
         yield return new WaitForSeconds(_delay);
         
@@ -138,7 +170,7 @@ public class BattleStateController : MonoBehaviour
         {
             currentTurn++;
             // Enable movement for the next character
-            //print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
+            print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
             turnOrder[currentTurn].SetTurnActive(true);
         }
         
@@ -146,19 +178,34 @@ public class BattleStateController : MonoBehaviour
         else
         {
             stepsRemaining--;
-            waveStepCount++;
             currentTurn = 0;
             turnOrder[0].SetTurnActive(true);
-            //print($"All turns completed, going to step {stepsRemaining}");
+            print($"All turns completed, going to step {stepsRemaining}");
         }
-        CheckForVictory();
+        print($"nextTurnCoroutine Completed!");
         nextTurnCoroutine = null;
-        
+        CheckForVictory();
+
+        if (pendingNextTurnCalls > 0)
+        {
+            pendingNextTurnCalls--;
+            nextTurnCoroutine = StartCoroutine(CoNextTurnStep());
+        }
     }
 
-    public void NextTurnStep(float _delay=0.1f)
+    public void NextTurnStep(float _delay=0.1f, string caller="")
     {
-        if (nextTurnCoroutine == null) nextTurnCoroutine = StartCoroutine(CoNextTurnStep(_delay));
+        print($"BS {caller} Called next turn step");
+        if (nextTurnCoroutine == null)
+        {
+            print($"nextTurnCoroutine started!");
+            nextTurnCoroutine = StartCoroutine(CoNextTurnStep(_delay));
+        }
+        else
+        {
+            pendingNextTurnCalls++;
+            print($"nextTurnCoroutine failed, caching the request to start the call to waiting list");
+        }
     }
 
     public void AddCharacter (Char_Battle _char_Battle, Vector2Int _position)
@@ -177,17 +224,12 @@ public class BattleStateController : MonoBehaviour
         turnOrder.Remove (char_Battle);
     }
 
-    private void CheckForVictory()
-    {
-        var currentBattle = GameInstance.Get<GI_AuHoGameState>().currentGameState.currentBattle;
-        List<Char_Battle> aliveCharacters = turnOrder.Where(_character => !_character.isDead).ToList();
-
-        currentBattle.victoryState.victoryConditionMet(aliveCharacters);
-    }
 
     public void LoadLayout()
     {
-        Instantiate( gameState.currentGameState.currentBattle.layoutPrefab, battleGrid.transform);
+        GameObject layout = gameState.currentGameState.currentBattle.layoutPrefab;
+        if (layout == null) return;
+        Instantiate( layout, battleGrid.transform);
     }
 
 

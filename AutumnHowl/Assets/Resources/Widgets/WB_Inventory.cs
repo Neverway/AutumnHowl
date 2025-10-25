@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -26,12 +27,19 @@ public class WB_Inventory : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    [SerializeField] private WidgetNavigator ToNavigateToOnMenuOpen;
+    [Space]
     [SerializeField] private WidgetNavigator ItemListNavigator;
     [SerializeField] private WidgetNavigator SpellListNavigator;
+    [SerializeField] private WidgetNavigator GearListNavigator;
     [SerializeField] private WidgetNavigator inspectListNavigator;
     [SerializeField] private Func_TextEvent inspectTextEvent;
+    [SerializeField] private AudioSource audioSource;
     private GI_AuHoGameState gameState;
+    [SerializeField] private AudioClip bookOpen, bookClose;
 
+    public WidgetNavigator[] allNavigators => new[] { ItemListNavigator, SpellListNavigator, GearListNavigator, inspectListNavigator, ToNavigateToOnMenuOpen };
+    public WidgetNavigator[] allListNavigators => new[] { ItemListNavigator, SpellListNavigator, GearListNavigator };
 
     #endregion
 
@@ -41,23 +49,63 @@ public class WB_Inventory : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gameState = GameInstance.Get<GI_AuHoGameState>();
-        
-        for (int i = 0; i < ItemListNavigator.selectableElements.Count; i++)
+
+        foreach(var navigator in allListNavigators)
         {
-            var selectable = ItemListNavigator.selectableElements[i];
-            var cachedIndex = i;
-            selectable.OnInteracted.AddListener(() => { SetupInspectMenu(ItemListNavigator, cachedIndex);});
-        }
-        
-        for (int i = 0; i < SpellListNavigator.selectableElements.Count; i++)
-        {
-            var selectable = SpellListNavigator.selectableElements[i];
-            var cachedIndex = i;
-            selectable.OnInteracted.AddListener(() => { SetupInspectMenu(SpellListNavigator, cachedIndex);});
+            for (int i = 0; i < navigator.selectableElements.Count; i++)
+            {
+                var selectable = navigator.selectableElements[i];
+                var cachedIndex = i;
+                selectable.OnInteracted.AddListener(() => { SetupInspectMenu(navigator, cachedIndex);});
+            }
         }
     }
 
+    private void OnDisable()
+    {
+        // Move to navigating InspectMenu
+        SetNavigationTo(ToNavigateToOnMenuOpen);
+        StopAllCoroutines();
+    }
+
+    private int WidgetToItemListID(WidgetNavigator navigator)
+    {
+        if (navigator == ItemListNavigator) return 0;
+        if (navigator == SpellListNavigator) return 1;
+        if (navigator == GearListNavigator) return 2;
+        throw new NotImplementedException();
+    }
+    private void SetNavigationTo(WidgetNavigator navigatorToEnable)
+    {
+        foreach (var navigator in allNavigators)
+        {
+            navigator.GetComponent<Text_Inventory>()?.UpdateItemList();
+
+            //Set navigation to given navigator (but only if there is a change in navigation state)
+            bool shouldBeNavigating = navigator == navigatorToEnable;
+            if (shouldBeNavigating ^ navigator.activelyNavigating)
+                navigator.SetIsNavigating(shouldBeNavigating);
+
+        }
+        //Enable/Disable the Inspect Menu
+        inspectListNavigator.gameObject.SetActive(navigatorToEnable == inspectListNavigator);
+    }
+    private IEnumerator CoSetNavigationTo(WidgetNavigator navigatorToEnable)
+    {
+        SetNavigationTo(null);
+        while (GameInstance.Get<GI_TextboxManager>().textEventActive)
+        {
+            yield return null;
+        }
+        SetNavigationTo(navigatorToEnable);
+    }
+    private void DisplayTextEvent(string textToDisplay)
+    {
+        inspectTextEvent.textEvent.frames[0].chatContent = textToDisplay;
+        inspectTextEvent.CallEvent();
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     /// <summary>
@@ -68,29 +116,33 @@ public class WB_Inventory : MonoBehaviour
     /// <param name="_index">The index of the entry in the item list that this function is bound to</param>
     private void SetupInspectMenu(WidgetNavigator _parentNavigator, int _index)
     {
-        // un-navigate the parent navigator
-        _parentNavigator.SetIsNavigating(false);
-        
-        // Enable and navigate the inspect menu
-        inspectListNavigator.gameObject.SetActive(true);
-        inspectListNavigator.SetIsNavigating(true);
-        
+        // Move to navigating InspectMenu
+        SetNavigationTo(inspectListNavigator);
+
         // Set the buttons in the inspect menu for the current item
         for (int i = 0; i < inspectListNavigator.selectableElements.Count; i++)
         {
             inspectListNavigator.selectableElements[i].OnInteracted.RemoveAllListeners();
         }
-        inspectListNavigator.selectableElements[0].OnInteracted.AddListener(()=> { Inspect(_parentNavigator.name, _index); });
-        inspectListNavigator.selectableElements[1].OnInteracted.AddListener(()=> { Use(_parentNavigator.name, _index); });
-        inspectListNavigator.selectableElements[2].OnInteracted.AddListener(()=> { Discard(_parentNavigator.name, _index); });
-        
+        inspectListNavigator.selectableElements[0].OnInteracted.AddListener(()=> { Inspect(_parentNavigator, _index); });
+        inspectListNavigator.selectableElements[1].OnInteracted.AddListener(()=> { Use(_parentNavigator, _index); });
+        inspectListNavigator.selectableElements[2].OnInteracted.AddListener(()=> { Discard(_parentNavigator, _index); });
+
+        //Set the text for the "Use" button to be relative to what item you're trying to use
+        string useItemText = "Use";
+        if (_parentNavigator == ItemListNavigator)
+        {
+            Item item = GameInstance.Gamestate.inventory.GetItem(_index, 0);
+            if (item != null && item is Item_Wearable)
+                useItemText = "Equip";
+        }
+        if (_parentNavigator == SpellListNavigator) useItemText = "Cast";
+        if (_parentNavigator == GearListNavigator) useItemText = "Unequip";
+        ((WidgetSelectable_TMPText)inspectListNavigator.selectableElements[1]).SetText(useItemText);
+
         // Set the inspect menu to reactive parent nav on back
         inspectListNavigator.OnBack.RemoveAllListeners();
-        inspectListNavigator.OnBack.AddListener(() => {
-            _parentNavigator.SetIsNavigating(true);
-            inspectListNavigator.SetIsNavigating(false);
-            inspectListNavigator.gameObject.SetActive(false);
-        });
+        inspectListNavigator.OnBack.AddListener(() => SetNavigationTo(_parentNavigator));
     }
 
 
@@ -100,36 +152,17 @@ public class WB_Inventory : MonoBehaviour
     /// </summary>
     /// <param name="_itemList">The name of the item list we want to check (Items or Spells)</param>
     /// <param name="_index">The index of the item we want to get</param>
-    public void Inspect(string _itemList, int _index)
+    public void Inspect(WidgetNavigator _parentWidget, int _index)
     {
-        // Store if this is the items or spells list (items = 0, spells = 1)
-        int itemList = -1;
-        if (_itemList == "Items") itemList = 0;
-        else if (_itemList == "Spells") itemList = 1;
-        else { Debug.LogError("In WB_Inventory.cs Inspect() you tried passing in a navigator widget, but it wasn't named 'Items' or 'Spells'."); return; }
-        
-        var itemAtIndex = gameState.currentGameState.inventory.GetItem(_index, itemList);
-        
-        // If there is an item at the selected index
-        if (itemAtIndex)
-        {
-            // Stop navigation of the items or spells list
-            inspectListNavigator.SetIsNavigating(false);
-            SpellListNavigator.SetIsNavigating(false);
-            // Assign and show the textbox with the selected item's description
-            inspectTextEvent.textEvent.frames[0].chatContent = itemAtIndex.GetDescription();
-            inspectTextEvent.CallEvent();
-        }
-        // If there is NOT an item at the selected index
-        else
-        {
-            // Stop navigation of the items or spells list
-            inspectListNavigator.SetIsNavigating(false);
-            SpellListNavigator.SetIsNavigating(false);
-            // Assign and show the textbox with the default "can't inspect" text
-            inspectTextEvent.textEvent.frames[0].chatContent = "*You inspected nothing.{spd=0.2} {spd=}It's quite captivating.";
-            inspectTextEvent.CallEvent();
-        }
+        // Get selected item list and item
+        int itemList = WidgetToItemListID(_parentWidget);
+        Item itemAtIndex = gameState.currentGameState.inventory.GetItem(_index, itemList);
+
+        //Set chat content for selected index (use default text if there is no item there)
+        DisplayTextEvent(itemAtIndex ? itemAtIndex.GetDescription() : "*You inspected nothing.{spd=0.2} {spd=}It's quite captivating.");
+
+        //Switch navigation to parent widget
+        StartCoroutine(CoSetNavigationTo(_parentWidget));
     }
 
     /// <summary>
@@ -137,48 +170,25 @@ public class WB_Inventory : MonoBehaviour
     /// </summary>
     /// <param name="_itemList">The name of the item list we want to check (Items or Spells)</param>
     /// <param name="_index">The index of the item we want to get</param>
-    public void Use(string _itemList, int _index)
+    public void Use(WidgetNavigator _parentWidget, int _index)
     {
-        // Store if this is the items or spells list (items = 0, spells = 1)
-        int itemList = -1;
-        if (_itemList == "Items") itemList = 0;
-        else if (_itemList == "Spells") itemList = 1;
-        else { Debug.LogError("In WB_Inventory.cs Use() you tried passing in a navigator widget, but it wasn't named 'Items' or 'Spells'."); return; }
+        // Get selected item list and item
+        int itemList = WidgetToItemListID(_parentWidget);
+        Item itemAtIndex = GameInstance.Gamestate.inventory.GetItem(_index, itemList);
         
-        var itemAtIndex = gameState.currentGameState.inventory.GetItem(_index, itemList);
-        
-        // If there is an item at the selected index
-        if (itemAtIndex)
+        if (itemAtIndex != null)
         {
-            Character player = FindObjectOfType<Controller_Overworld_Player>();
-        
-            if (gameState.currentGameState.inventory.TryUseItem(_index, player.Identifier, itemList))
-            {
-                inspectListNavigator.SetIsNavigating(false);
-                inspectListNavigator.gameObject.SetActive(false);
-                switch (itemList)
-                {
-                    case 0:
-                        ItemListNavigator.GetComponent<Text_Inventory>().UpdateItemList();
-                        ItemListNavigator.SetIsNavigating(true);
-                        break;
-                    case 1:
-                        SpellListNavigator.GetComponent<Text_Inventory>().UpdateItemList();
-                        SpellListNavigator.SetIsNavigating(true);
-                        break;
-                }
-            }
+            if (!GameInstance.Gamestate.inventory.TryUseItem(_index, GameInstance.Gamestate.player, itemList))
+                DisplayTextEvent("*Not able to use that");
         }
-        // If there is NOT an item at the selected index
         else
         {
-            // Stop navigation of the items or spells list
-            inspectListNavigator.SetIsNavigating(false);
-            SpellListNavigator.SetIsNavigating(false);
-            // Assign and show the textbox with the default "can't use" text
-            inspectTextEvent.textEvent.frames[0].chatContent = "*You attempt to use nothing.{col=key,spd=0.2} {spd=}It did a trick!{col=,spd=1} {spd=}Never mind, it did nothing.";
-            inspectTextEvent.CallEvent();
+            // display default "can't use" text
+            DisplayTextEvent("*You attempt to use nothing.{col=key,spd=0.2} {spd=}It did a trick!{col=,spd=1} {spd=}Never mind, it did nothing.");
         }
+
+        //Switch navigation to parent widget
+        StartCoroutine(CoSetNavigationTo(_parentWidget));
     }
 
     /// <summary>
@@ -186,59 +196,43 @@ public class WB_Inventory : MonoBehaviour
     /// </summary>
     /// <param name="_itemList">The name of the item list we want to check (Items or Spells)</param>
     /// <param name="_index">The index of the item we want to get</param>
-    public void Discard(string _itemList, int _index)
+    public void Discard(WidgetNavigator _parentWidget, int _index)
     {
-        // Store if this is the items or spells list (items = 0, spells = 1)
-        int itemList = -1;
-        if (_itemList == "Items") itemList = 0;
-        else if (_itemList == "Spells") itemList = 1;
-        else { Debug.LogError("In WB_Inventory.cs Use() you tried passing in a navigator widget, but it wasn't named 'Items' or 'Spells'."); return; }
-        
-        var itemAtIndex = gameState.currentGameState.inventory.GetItem(_index, itemList);
+        // Get selected item list and item
+        int itemList = WidgetToItemListID(_parentWidget);
+        Item itemAtIndex = gameState.currentGameState.inventory.GetItem(_index, itemList);
         
         // If there is an item at the selected index
-        if (itemAtIndex)
+        if (itemAtIndex != null)
         {
             // Try to discard it
-            if (gameState.currentGameState.inventory.TryRemoveItem(_index, itemList))
+            if (GameInstance.Gamestate.inventory.TryRemoveItem(_index, itemList))
             {
-                inspectListNavigator.SetIsNavigating(false);
-                inspectListNavigator.gameObject.SetActive(false);
-                switch (itemList)
-                {
-                    case 0:
-                        ItemListNavigator.GetComponent<Text_Inventory>().UpdateItemList();
-                        ItemListNavigator.SetIsNavigating(true);
-                        break;
-                    case 1:
-                        SpellListNavigator.GetComponent<Text_Inventory>().UpdateItemList();
-                        SpellListNavigator.SetIsNavigating(true);
-                        break;
-                }
+
             }
-            // Item can't be discarded because it's a key item
-            else if (gameState.currentGameState.inventory.GetItem(_index, itemList))
-            { 
-                inspectTextEvent.textEvent.frames[0].chatContent = "*You probably shouldn't discard this item.";
-                inspectTextEvent.CallEvent();
-            }
-            // Item can't be discarded because... IT DISAPPEARED BETWEEN THE FIRST CHECK AND NOW??? HOW???!!
             else
             {
-                inspectTextEvent.textEvent.frames[0].chatContent = "*You probably shouldn't discard...{spd=0.5} {spd=}wait...{spd=0.5} {spd=}there is nothing here?!";
-                inspectTextEvent.CallEvent();
-            }
+                // Item can't be discarded because it's a key item (Or because... IT DISAPPEARED BETWEEN THE FIRST CHECK AND NOW??? HOW???!!)
+                if (itemAtIndex == null)
+                    DisplayTextEvent("*You probably shouldn't discard...{spd=0.5} {spd=}wait...{spd=0.5} {spd=}there is nothing here?!");
+                else
+                    DisplayTextEvent("*You probably shouldn't discard this item.");
+            }   
         }
         // If there is NOT an item at the selected index
         else
         {
-            // Stop navigation of the items or spells list
-            inspectListNavigator.SetIsNavigating(false);
-            SpellListNavigator.SetIsNavigating(false);
             // Assign and show the textbox with the default "can't discard" text
-            inspectTextEvent.textEvent.frames[0].chatContent = "*You attempted to discard nothing,{spd=0.5} {spd=}but there is still nothing here.{spd=0.5} {spd=}Did you succeed?";
-            inspectTextEvent.CallEvent();
+            DisplayTextEvent("*You attempted to discard nothing,{spd=0.5} {spd=}but there is still nothing here.{spd=0.5} {spd=}Did you succeed?");
         }
+
+        //Switch navigation to parent widget
+        StartCoroutine(CoSetNavigationTo(_parentWidget));
+    }
+
+    public void CloseMenu()
+    {
+        
     }
 
 

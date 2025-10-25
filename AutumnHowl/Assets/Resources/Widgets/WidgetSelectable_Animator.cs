@@ -35,12 +35,11 @@ public class WidgetSelectable_Animator : WidgetSelectable
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
-        if (!animator)
+        if (animator == null)
         {
             animator = GetComponent<Animator>();
         }
     }
-
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
@@ -51,9 +50,11 @@ public class WidgetSelectable_Animator : WidgetSelectable
         base.SetSelected(_isSelected);
         
         // ToDo - Had to add this null check because this is called before start finishes
-        if (!animator) return;
+        if (animator == null) return;
         animator.SetBool("IsSelected", _isSelected);
     }
+
+
 
 
     #endregion
