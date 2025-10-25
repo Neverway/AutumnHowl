@@ -37,7 +37,7 @@ public class GI_AuHoGameState : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     public void Awake()
     {
-        currentGameState = new AuHoGameState();
+        currentGameState = new AuHoGameState() { currentBattle = currentGameState.currentBattle };
     }
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     [ContextMenu("NEXT CYCLE")]
