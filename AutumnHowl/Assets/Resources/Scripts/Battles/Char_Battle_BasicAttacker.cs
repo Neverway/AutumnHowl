@@ -35,6 +35,11 @@ public class Char_Battle_BasicAttacker : Char_Battle
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
 
+    new private void Start()
+    {
+        base.Start();
+        facingDirection = new Vector2(0, -1);
+    }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     protected bool TestTile(Vector2Int checkPos, int lowestTileNumber)
@@ -130,16 +135,29 @@ public class Char_Battle_BasicAttacker : Char_Battle
             }
 
             Vector2Int toPosition = gridPawnController.position;
-            toPosition += targetDirection.Value.Info().direction * -1;
+            Vector2Int moveDirection = targetDirection.Value.Info().direction * -1;
+            toPosition += moveDirection;
 
             if (TryMoveTo(toPosition))
             {
                 print($"{gameObject.name} - calling try move");
+                //facingDirection.x = moveDirection.x;
+                //facingDirection.y = moveDirection.y;
                 return;
             }
         }
-        
-        if (!TryMoveTo(GetLowestTileToTarget()))
+        //Get a tile to move to from the pathfinding rules
+        Vector2Int pathTileToTry = GetLowestTileToTarget();
+        //Get the direcion that tile is in relative to pawn.
+        Vector2Int directionMoved = pathTileToTry - gridPawnController.position;
+        if (TryMoveTo(pathTileToTry))
+        {
+            //If we succesfully moved, make sure to set facingDirection
+            print("DIRECTIONMOVED " + directionMoved);
+            facingDirection.x = directionMoved.x;
+            facingDirection.y = directionMoved.y;
+        }
+        else
         {
             print($"{gameObject.name} couldn't find a path to target, skipping turn");
             battleStateController.NextTurnStep();

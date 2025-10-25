@@ -920,6 +920,7 @@ MonoBehaviour:
   startFaceDirection: {x: 0, y: -1}
   isDead: 0
   movement: {x: 0, y: 0}
+  facingDirection: {x: 0, y: 0}
   animator: {fileID: 8407677613216461500}
   AttackSequences:
   - attacks: []
@@ -944,6 +945,7 @@ MonoBehaviour:
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
+  invertAttackFacingDirection: 1
 --- !u!114 &2113060241678384352
 MonoBehaviour:
   m_ObjectHideFlags: 0

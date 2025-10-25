@@ -4,7 +4,6 @@ using UnityEngine;
 using Neverway.StateMachine;
 using System;
 using System.Threading;
-using JetBrains.Annotations;
 
 namespace Neverway.StateMachine
 {
@@ -12,71 +11,68 @@ namespace Neverway.StateMachine
 
     public class ControllerEnemyWander : StateMachine<ControllerEnemyWander>
     {
-        [HideInInspector] public Controller_Overworld_Player player;
-
-        public OverworldEnemy enemyController;
+        public Controller_Overworld_Player player;
+        public BattleData battleData;
+        public string mapID;
+        public GI_AuHoGameState gameState;
         [SerializeField] public float searchDistance = 6;
         [SerializeField] public float comfyDistance = 3f;
         [SerializeField] public float enterBattleDistance = 0.75f;
         public Vector3 homePosition {  get; private set; }
         // the attached Rigidbody2D component
         private Rigidbody2D rb;
-
-        /// <summary>Normalized vector for movement direction.</summary>
+        /// <summary>
+        /// Normalized vector for movement direction.
+        /// </summary>
         public Vector2 movement;
         public float currentMoveSpeed = 0;
         public float wanderSpeed = 1f;
         public float chaseSpeed = 2f;
         [Tooltip("Turn this off to make it wander but not attack. Useful for villagers and things.")]
         public bool chasesPlayer = true;
+        private Animator animator;
         // Start is called before the first frame update
         void Start ()
         {
             player = FindObjectOfType<Controller_Overworld_Player> ();
-            rb = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D> ();
             homePosition = transform.position;
             NewState (new EW_Idle(this));
+            gameState = FindObjectOfType<GI_AuHoGameState>();
+            animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                return;
+            }
+            animator.SetFloat("idleX", 0);
+            animator.SetFloat("idleY", -1);
         }
 
         // Update is called once per frame
-        public override void Update ()
+        new void Update ()
         {
             base.Update ();
             rb.velocity = movement * currentMoveSpeed;
             Debug.DrawLine (transform.position, homePosition, Color.yellow);
-        }
-
-        private void OnDrawGizmos()
-        {
-            //Draw wander range
-            if (Application.isPlaying)
-                DrawGizmosCircle(Color.cyan, homePosition, comfyDistance);
-            else
-                DrawGizmosCircle(Color.cyan, transform.position, comfyDistance);
-
-            //Draw aggro range and enter battle range
-            DrawGizmosCircle(Color.yellow, transform.position, searchDistance);
-            DrawGizmosCircle(Color.red, transform.position, enterBattleDistance);
-        }
-        private void DrawGizmosCircle(Color color, Vector3 center, float radius)
-        {
-            Gizmos.color = color;
-            int segments = 32;
-            // Build rotation matrix to orient circle
-            Quaternion rotation = Quaternion.LookRotation(Vector3.up);
-            Vector3 prevPoint = center + rotation * (Vector3.right * radius);
-
-            for (int i = 1; i <= segments; i++)
+            if (animator == null)
             {
-                float angle = (i / (float)segments) * Mathf.PI * 2f;
-                Vector3 nextPoint = center + rotation * (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius);
-                Gizmos.DrawLine(prevPoint, nextPoint);
-                prevPoint = nextPoint;
+                return;
             }
+            if (currentMoveSpeed != 0)
+            {
+                animator.SetBool("walking", true);
+                animator.SetFloat("walkX", movement.x);
+                animator.SetFloat("walkY", movement.y);
+            }
+            else
+            {
+                animator.SetBool("walking", false);
+            }
+            animator.SetFloat("idleX", movement.x);
+            animator.SetFloat("idleY", movement.y);
         }
 
-
-        internal void LookForPlayer()
+        internal void LookForPlayer ()
         {
             if (player == null)
             {
@@ -94,15 +90,22 @@ namespace Neverway.StateMachine
             }
         }
 
-        internal void EnterBattle () => enemyController.EnterBattle();
+        internal void EnterBattle ()
+        {
+            Debug.Log("Entering battle!");
+            // I gotchu ~Liz
+            gameState = FindObjectOfType<GI_AuHoGameState>();
+            gameState.currentGameState.currentBattle = battleData;
+            gameState.GetComponent<GI_WorldLoader>().Load(mapID);
+        }
 
-        internal void PickRandomDirection()
+        internal void PickRandomDirection ()
         {
             float randomAngle = UnityEngine.Random.Range (0f, 360f);
             movement = Quaternion.AngleAxis (randomAngle, Vector3.forward) * Vector3.up;
         }
 
-        internal void GetDirectionToPlayer()
+        internal void GetDirectionToPlayer ()
         {
             movement = (player.transform.position - transform.position).normalized;
         }
@@ -112,34 +115,40 @@ namespace Neverway.StateMachine
     {
         private float timer = 0f;
         private float maxTime = 2f;
-        public EW_Idle(ControllerEnemyWander _controller) : base(_controller) { }
+        public EW_Idle (ControllerEnemyWander _controller) : base (_controller)
+        {
+        }
 
-        public override void OnStateEnter(EW_State stateLeaving)
+        public override void OnStateEnter (EW_State stateLeaving)
         {
             timer = 0f;
             controller.currentMoveSpeed = 0f;
         }
 
-        public override void OnStateLeave(EW_State stateEntering) { }
+        public override void OnStateLeave (EW_State stateEntering)
+        {
+        }
 
-        public override void OnStateUpdate()
+        public override void OnStateUpdate ()
         {
             timer += Time.deltaTime;
             if (timer > maxTime)
             {
-                controller.NewState(new EW_Wander (controller));
+                controller.NewState (new EW_Wander (controller));
                 return;
             }
-            controller.LookForPlayer();
+            controller.LookForPlayer ();
         }
     }
     class EW_Wander : EW_State
     {
         private float timer = 0f;
         private float maxTime = 3f;
-        public EW_Wander(ControllerEnemyWander _controller) : base(_controller) { }
+        public EW_Wander (ControllerEnemyWander _controller) : base (_controller)
+        {
+        }
 
-        public override void OnStateEnter(EW_State stateLeaving)
+        public override void OnStateEnter (EW_State stateLeaving)
         {
             timer = 0f;
             controller.currentMoveSpeed = controller.wanderSpeed;
@@ -149,17 +158,19 @@ namespace Neverway.StateMachine
                 controller.movement = homeDirection.normalized;
                 return;
             }
-            controller.PickRandomDirection();
+            controller.PickRandomDirection ();
         }
 
-        public override void OnStateLeave(EW_State stateEntering) { }
+        public override void OnStateLeave (EW_State stateEntering)
+        {
+        }
 
-        public override void OnStateUpdate()
+        public override void OnStateUpdate ()
         {
             timer += Time.deltaTime;
             if (timer > maxTime)
             {
-                controller.NewState(new EW_Idle (controller));
+                controller.NewState (new EW_Idle (controller));
                 return;
             }
             controller.LookForPlayer ();
@@ -168,16 +179,20 @@ namespace Neverway.StateMachine
 
     class EW_Chase : EW_State
     {
-        public EW_Chase(ControllerEnemyWander _controller) : base(_controller) { }
+        public EW_Chase (ControllerEnemyWander _controller) : base (_controller)
+        {
+        }
 
-        public override void OnStateEnter(EW_State stateLeaving)
+        public override void OnStateEnter (EW_State stateLeaving)
         {
             controller.currentMoveSpeed = controller.chaseSpeed;
         }
 
-        public override void OnStateLeave(EW_State stateEntering) { }
+        public override void OnStateLeave (EW_State stateEntering)
+        {
+        }
 
-        public override void OnStateUpdate()
+        public override void OnStateUpdate ()
         {
             float playerDistance = (controller.transform.position - controller.player.transform.position).magnitude;
             if (playerDistance > controller.searchDistance)
@@ -187,10 +202,10 @@ namespace Neverway.StateMachine
             }
             if (playerDistance < controller.enterBattleDistance)
             {
-                controller.EnterBattle();
+                controller.EnterBattle ();
             }
 
-            controller.GetDirectionToPlayer();
+            controller.GetDirectionToPlayer ();
         }
 
     }
