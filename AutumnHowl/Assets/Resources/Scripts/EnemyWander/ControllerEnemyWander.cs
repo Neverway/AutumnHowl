@@ -12,8 +12,9 @@ namespace Neverway.StateMachine
 
     public class ControllerEnemyWander : StateMachine<ControllerEnemyWander>
     {
-        public Controller_Overworld_Player player;
-        public BattleData battleData;
+        [HideInInspector] public Controller_Overworld_Player player;
+
+        public OverworldEnemy enemyController;
         [SerializeField] public float searchDistance = 6;
         [SerializeField] public float comfyDistance = 3f;
         [SerializeField] public float enterBattleDistance = 0.75f;
@@ -93,12 +94,7 @@ namespace Neverway.StateMachine
             }
         }
 
-        internal void EnterBattle ()
-        {
-            // I gotchu ~Liz
-            GameInstance.Gamestate.currentBattle = battleData;
-            GameInstance.Get<GI_WorldLoader>().Load(battleData.mapID);
-        }
+        internal void EnterBattle () => enemyController.EnterBattle();
 
         internal void PickRandomDirection()
         {
