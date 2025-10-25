@@ -349,15 +349,17 @@ public class BattleAttackCompass : MonoBehaviour
     
     private void PlaceCenterFill ()
     {
+        centerFill.fillAmount = Mathf.Abs(clampedTotalSpin) / 360f;
         if (clampedTotalSpin > 0)
         {
-            centerFill.fillAmount = clampedTotalSpin / 360f;
+            print("POSITIVE " + spinStartIndex * 90);
+            centerFill.transform.localRotation = Quaternion.Euler(new Vector3(0, 0f, -spinStartIndex*90));
             return;
         }
         if (clampedTotalSpin < 0f)
         {
-            centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
-            centerFill.fillAmount = -clampedTotalSpin / 360;
+            print("NEGATIVE");
+            centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, (-spinStartIndex * 90)-clampedTotalSpin));
         }
     }
 

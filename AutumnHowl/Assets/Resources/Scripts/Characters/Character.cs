@@ -117,6 +117,8 @@ public abstract class Character : MonoBehaviour
             if (isDefenseActive)
             {
                 totalAmount = _amount + Stats.defense;
+                //Clamp to 0 so that it can't heal the character.
+                if (totalAmount > 0) { totalAmount = 0; }
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform.position, 2, 0.5f);
             }

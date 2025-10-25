@@ -16,16 +16,16 @@ MonoBehaviour:
   characterReferenceType: 1
   characterName: Shield Jackal
   baseStats:
-    health: 60
+    health: 50
     level: 0
     power: 10
     corruption: 0
     attack:
-      startValue: 25
+      startValue: 20
       multiplier: 0
       addedValue: 0
     defense:
-      startValue: 10
+      startValue: 5
       multiplier: 0
       addedValue: 0
     maxHealth:

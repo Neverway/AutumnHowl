@@ -15,11 +15,11 @@ PrefabInstance:
     - target: {fileID: 576078956332330542, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
-      objectReference: {fileID: 7108339969198208228, guid: 27d18a6514724f578b5905f38d876797, type: 3}
+      objectReference: {fileID: 7108339969198208228, guid: 019ed9d2f445e2346ab7291190b52708, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1663326520, guid: 894c31b543c326e5aa2f54b91f0d0798, type: 3}
+      objectReference: {fileID: 560039966, guid: 802287210571a4a4fb9c4672cf592993, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -95,17 +95,17 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3411343996498358984}
+      addedObject: {fileID: 1449108568966244714}
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1449108568966244714}
+      addedObject: {fileID: -5641105283910621029}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
 --- !u!1 &6242562417686465405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3411343996498358984
+--- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242562417686465405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawnName: Jackal
+  type: 1
+--- !u!114 &-5641105283910621029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242562417686465405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1500011d63c3a164db78c3790be8e24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   template: {fileID: 11400000, guid: 1f7700c5d799b0c4a93d53854912a0e2, type: 2}
@@ -160,20 +174,6 @@ MonoBehaviour:
   invertAttackFacingDirections: 0
   randomRetreat: 0
   skipFirstTurn: 0
---- !u!114 &1449108568966244714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242562417686465405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28412037b7f9f644f8d47e7eb73f98b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawnName: Jackal
-  type: 1
 --- !u!95 &7931684597536962226 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
