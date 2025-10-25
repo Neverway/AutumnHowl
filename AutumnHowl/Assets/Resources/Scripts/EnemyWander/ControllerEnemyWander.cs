@@ -30,6 +30,7 @@ namespace Neverway.StateMachine
         public float chaseSpeed = 2f;
         [Tooltip("Turn this off to make it wander but not attack. Useful for villagers and things.")]
         public bool chasesPlayer = true;
+        private Animator animator;
         // Start is called before the first frame update
         void Start ()
         {
@@ -38,6 +39,13 @@ namespace Neverway.StateMachine
             homePosition = transform.position;
             NewState (new EW_Idle(this));
             gameState = FindObjectOfType<GI_AuHoGameState>();
+            animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                return;
+            }
+            animator.SetFloat("idleX", 0);
+            animator.SetFloat("idleY", -1);
         }
 
         // Update is called once per frame
@@ -46,6 +54,22 @@ namespace Neverway.StateMachine
             base.Update ();
             rb.velocity = movement * currentMoveSpeed;
             Debug.DrawLine (transform.position, homePosition, Color.yellow);
+            if (animator == null)
+            {
+                return;
+            }
+            if (currentMoveSpeed != 0)
+            {
+                animator.SetBool("walking", true);
+                animator.SetFloat("walkX", movement.x);
+                animator.SetFloat("walkY", movement.y);
+            }
+            else
+            {
+                animator.SetBool("walking", false);
+            }
+            animator.SetFloat("idleX", movement.x);
+            animator.SetFloat("idleY", movement.y);
         }
 
         internal void LookForPlayer ()

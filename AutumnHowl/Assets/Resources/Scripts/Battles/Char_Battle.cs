@@ -39,6 +39,8 @@ public abstract class Char_Battle : Character
     //If this is not null, this object gets spawned when the character dies.
     public GameObject spawnOnDeath;
     public bool useBlock = false;
+    //This is so we can invert the direction the pawn faces when it attacks (currently only used for the Player pawn).
+    [HideInInspector] public bool invertAttackFacingDirections = false;
 
     #endregion
 
@@ -54,14 +56,14 @@ public abstract class Char_Battle : Character
         OnDeath += Kill;
     }
     
-    private void Update()
+    public void Update()
     {
         if (isDead) return;
-        if (!canMove) return;
         if (animator == null) return;
 
         animator.SetFloat("idleX", facingDirection.x);
         animator.SetFloat("idleY", facingDirection.y);
+        if (!canMove) return;
     }
 
 
@@ -126,9 +128,16 @@ public abstract class Char_Battle : Character
             
             var currentPosition = gridPawnController.position + appliedPosition;
 
-            facingDirection = -attackSequence.attacks[i].position;
+            if (invertAttackFacingDirections)
+            {
+                facingDirection = -attackSequence.attacks[i].position;
+            }
+            else
+            {
+                facingDirection = attackSequence.attacks[i].position;
+            }
 
-            DoAttack(attackSequence.attacks[i], currentPosition);
+                DoAttack(attackSequence.attacks[i], currentPosition);
             GridPawn target = battleGrid.GetIsOccupied(currentPosition);
             if (target)
             {
@@ -173,8 +182,15 @@ public abstract class Char_Battle : Character
                 {
                     dir--;
                 }
-                facingDirection = -attackSequence.attacks[dir].position;
-                break;
+                if (invertAttackFacingDirections)
+                {
+                    facingDirection = -attackSequence.attacks[dir].position;
+                }
+                else
+                {
+                    facingDirection = attackSequence.attacks[i].position;
+                }
+                    break;
             }
         }
         if (shouldProgressTurn) battleStateController.NextTurnStep(0.5f);
@@ -215,10 +231,23 @@ public abstract class Char_Battle : Character
         {
             return;
         }
-        if (facingDirection != direction) {
-            return;
+        //Autumn blocks in reverse, shield guy doesn't XD
+        if (invertAttackFacingDirections)
+        {
+            if (facingDirection != direction)
+            {
+                return;
+            }
         }
-        Stats.defense.ModifyStatWith (Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
+        else
+        {
+            if (facingDirection != -direction)
+            {
+                return;
+            }
+        }
+        print("ConditionalBlock activated");
+            Stats.defense.ModifyStatWith(Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
     }
     
     /// <summary>

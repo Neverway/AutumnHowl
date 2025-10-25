@@ -227,7 +227,9 @@ public class BattleStateController : MonoBehaviour
 
     public void LoadLayout()
     {
-        Instantiate( gameState.currentGameState.currentBattle.layoutPrefab, battleGrid.transform);
+        GameObject layout = gameState.currentGameState.currentBattle.layoutPrefab;
+        if (layout == null) return;
+        Instantiate( layout, battleGrid.transform);
     }
 
 
