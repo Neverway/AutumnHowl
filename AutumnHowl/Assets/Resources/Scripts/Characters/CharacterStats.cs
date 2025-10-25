@@ -44,6 +44,8 @@ public class CharacterStats
     [Box] public CharacterStatInt maxPower = new(100, MaxPower);
     [Box] public CharacterStatInt maxCorruption = new(100, MaxCorruption);
 
+    [Box] public CharacterStatInt shieldPower = new(10, ShieldPower);
+
     [Header("Overworld Stats")]
     [Box] public CharacterStatFloat walkSpeed = new(2, MoveSpeed);
     [Box] public CharacterStatFloat runSpeed = new(3, MoveSpeed);
@@ -291,7 +293,9 @@ public enum CharacterStatType
     [StatName("MAX PWR")] MaxPower,
     [StatName("MAX COR")] MaxCorruption,
 
-    [StatName("SPD")]     MoveSpeed
+    [StatName("SPD")]     MoveSpeed,
+
+    [StatName("SLD")] ShieldPower
 }
 
 public static partial class AuHo_ExtentionMethods

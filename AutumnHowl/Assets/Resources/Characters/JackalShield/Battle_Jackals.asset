@@ -38,12 +38,10 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 6242562417686465405, guid: 394cd80c17240ed49bc4e7598acd7037, type: 3}
     enemyStartPosition: {x: 2, y: 4}
   victoryState:
-    rid: -2
+    rid: 5830042227668418560
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 26148788346028042
       type: {class: RandoBattleWave, ns: , asm: Assembly-CSharp}
       data:
@@ -92,3 +90,6 @@ MonoBehaviour:
               m_Calls: []
         waveAttack: {fileID: 0}
         waveSteps: 8
+    - rid: 5830042227668418560
+      type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
+      data: 

@@ -253,7 +253,7 @@ public abstract class Char_Battle : Character
             }
         }
         print("ConditionalBlock activated");
-            Stats.defense.ModifyStatWith(Mod_ConditionalBlock, BLOCKDEFENSETYPE, BLOCKDEFENSEMOD);
+            Stats.defense.ModifyStatWith(Mod_ConditionalBlock, BLOCKDEFENSETYPE, Stats.shieldPower);
     }
     
     /// <summary>
