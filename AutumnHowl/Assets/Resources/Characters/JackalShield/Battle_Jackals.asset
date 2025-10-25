@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
-  m_Name: Battle_Bandits
+  m_Name: Battle_Jackals
   m_EditorClassIdentifier: 
   openingText:
     frames:
     - name: 
-      chatContent: '*You are ambushed by the Jackal Bandits!'
+      chatContent: '*You are ambushed by bandits!'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 0}
       OnFrameCompleted:
@@ -28,24 +28,22 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
+  victoryLevels: 0
+  victoryGold: 0
   battleSequence:
     waves:
     - rid: 26148788346028042
-  enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
+  layoutPrefab: {fileID: 0}
   enemySpawnLocations:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  - enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
-=======
   - enemyPrefab: {fileID: 6242562417686465405, guid: 394cd80c17240ed49bc4e7598acd7037, type: 3}
->>>>>>> Stashed changes
-=======
-  - enemyPrefab: {fileID: 6242562417686465405, guid: 394cd80c17240ed49bc4e7598acd7037, type: 3}
->>>>>>> Stashed changes
     enemyStartPosition: {x: 2, y: 4}
+  victoryState:
+    rid: -2
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 26148788346028042
       type: {class: RandoBattleWave, ns: , asm: Assembly-CSharp}
       data:
