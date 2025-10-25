@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class OverworldEnemySpawner : AutoGUIDObjectRecreator<OverworldEnemy>, ICreatesGameObject
 {
-    public GameObject GetCreatedGameObject()
+    GameObject ICreatesGameObject.GetCreatedGameObject()
     {
         OverworldEnemy enemy = CreateNew();
         enemy.OnNewInstance();
+        enemy.homeCycle = GameInstance.Gamestate.currentCycle;
         return enemy.gameObject;
     }
+    //int ICreatesGameObject.GetSeed() => GameInstance.Gamestate.GetCycleSubSeed(GetGUID());
 }

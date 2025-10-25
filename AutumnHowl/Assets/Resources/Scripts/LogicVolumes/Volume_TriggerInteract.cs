@@ -41,6 +41,9 @@ public class Volume_TriggerInteract : MonoBehaviour
     {
         if (inTrigger && !activated)
         {
+            if (GameInstance.Get<GI_TextboxManager>().textEventActive)
+                return;
+
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
                 activated = true;

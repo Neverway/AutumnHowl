@@ -7,5 +7,6 @@ public class LootTable : ScriptableObject
 
     [Box, Polymorphic, SerializeReference] 
     public ItemsReference itemsToGrant;
-    public Item[] GetLoot() => itemsToGrant.GetItems();
+    public Item[] GetLoot(int newSeed) => itemsToGrant.GetItems(newSeed);
+    public Item[] GetLootUnityRandomSeed() => itemsToGrant.GetItems(Random.Range(int.MinValue, int.MaxValue));
 }

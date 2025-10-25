@@ -33,30 +33,7 @@ MonoBehaviour:
         items:
         - weight: 1
           item:
-            rid: 1234356074263347278
-        - weight: 1
-          item:
-            rid: 1234356074263347279
-    - rid: 1234356074263347278
-      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
-      data:
-        settings:
-          repeatGetItems: 1
-          chanceToGet: 1
-          itemCountCap: -1
-          toUseInsteadOfEmptyResult:
-            rid: -2
-        lootTable: {fileID: 11400000, guid: a88e35eb86f87db47a92364880453a42, type: 2}
-    - rid: 1234356074263347279
-      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
-      data:
-        settings:
-          repeatGetItems: 1
-          chanceToGet: 1
-          itemCountCap: -1
-          toUseInsteadOfEmptyResult:
-            rid: -2
-        lootTable: {fileID: 11400000, guid: 75405f00ee6ec314a905b1a6fa1a64f9, type: 2}
+            rid: 1234356303417049099
     - rid: 1234356074263347280
       type: {class: ItemsRef_Items, ns: , asm: Assembly-CSharp}
       data:
@@ -69,3 +46,14 @@ MonoBehaviour:
         items:
         - {fileID: 11400000, guid: eb9d2e423d658764f97018e3afec7665, type: 2}
         - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}
+    - rid: 1234356303417049099
+      type: {class: ItemsRef_Money, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        minAmount: 100
+        maxAmount: 1000

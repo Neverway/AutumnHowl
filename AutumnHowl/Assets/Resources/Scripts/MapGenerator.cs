@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
@@ -280,6 +281,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     [ContextMenu("Destroy Map")]
     private void DestroyMap()
     {
+        Debug.Log("MAP DESTROYED");
+
         tilemapGround.ClearAllTiles();
         tilemapCollision.ClearAllTiles();
 
@@ -299,7 +302,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         //Add pois
         foreach (var poi in poiList) gameObjectCreators.Add(new BasicGameObjectCreator(poi));
         //Add createable chests (if this is a new map, otherwise use null for no object to be created)
-        gameObjectCreators.Add(mapIsBeingLoaded ? null : chestRecreator);
+        gameObjectCreators.Add(mapIsBeingLoaded ? new NoObjectCreator() : chestRecreator);
         RandomGameObjectBag gameObjectBag = new RandomGameObjectBag(gameObjectCreators);
 
         //=== Loop through the POI locations and place random objects at each point ========
@@ -308,9 +311,11 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         {
             //Generate the object
             ICreatesGameObject objCreator = gameObjectBag.Grab();
-            if (objCreator == null) continue;
-            GameObject poi = objCreator.GetCreatedGameObject();
-            generatedObjects.Add(poi); //Add to generated objects list in case you need to destroy the map
+            GameObject poi = objCreator.CreateNew();
+            if (poi == null) continue;
+
+            if (poi.GetComponent<GUIDComponent>() == null)
+                generatedObjects.Add(poi); //Add to generated objects list in case you need to destroy the map
 
             //Setup position of object
             poi.transform.position = new Vector3(
@@ -329,21 +334,22 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         foreach (var obj in pathObjects) gameObjectCreators.Add(new BasicGameObjectCreator(obj));
         //Add spawned enemies (if this is a new map, otherwise use null for no object to be created)
         foreach (var enemySpawner in enemySpawners)
-            gameObjectCreators.Add(mapIsBeingLoaded ? null : enemySpawner);
+            gameObjectCreators.Add(mapIsBeingLoaded ? new NoObjectCreator() : enemySpawner);
         RandomGameObjectBag pathObjectsAndEnemies = new RandomGameObjectBag(gameObjectCreators);
 
         //=== Loop through the POI locations and place random objects at each point ========
         for (int i = 0; i < enemyLocations.Count; i++) 
         {
-            Debug.Log("Checking position : " + enemyLocations[i]);
-
             //Generate the object
             ICreatesGameObject objCreator = pathObjectsAndEnemies.Grab();
-            if (objCreator == null) continue;
-            GameObject enemy = objCreator.GetCreatedGameObject();
-            generatedObjects.Add (enemy); //Add to generated objects list in case you need to destroy the map
+            GameObject enemy = objCreator.CreateNew();
+            if (enemy == null) continue;
 
-            Debug.Log("Creating a guy! " + enemy);
+            if (enemy.GetComponent<GUIDComponent>() == null)
+                generatedObjects.Add (enemy); //Add to generated objects list in case you need to destroy the map
+
+            if (enemy.TryGetComponent(out GUIDComponent component))
+                Debug.Log("Created guy! : " + component.GetGUID());
 
             //Setup position of object
             enemy.transform.position = new Vector3 (enemyLocations[i].x * roomWidth + (roomWidth / 2),
@@ -658,7 +664,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     public override void OnLoadInstance(SaveData data)
     {
-        seedToGenerate = GameInstance.Gamestate.currentCycleSeed;
+        seedToGenerate = GameInstance.Gamestate.GetCycleSubSeed(GetGUID());
         if (mapGenerated) DestroyMap();
 
         GenerateMap(isNewMap: seedToGenerate != data.previouslyGeneratedSeed);
@@ -666,7 +672,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     public override void OnNewInstance() 
     {
-        seedToGenerate = GameInstance.Gamestate.currentCycleSeed;
+        seedToGenerate = GameInstance.Gamestate.GetCycleSubSeed(GetGUID());
         GenerateMap(isNewMap: true);
     }
 
@@ -698,11 +704,26 @@ public class RandomGameObjectBag : RandomBag<ICreatesGameObject>
 
 public interface ICreatesGameObject
 {
-    public GameObject GetCreatedGameObject();
+    public GameObject CreateNew()
+    {
+        //Ensure only ONE random call happens instead of uncertain amounts
+        int newSeed = Random.Range(int.MinValue, int.MaxValue);
+        Random.State oldSeedState = Random.state;
+        Random.InitState(newSeed);
+        GameObject created = GetCreatedGameObject();
+        Random.state = oldSeedState;
+        return created;
+    }
+    protected GameObject GetCreatedGameObject();
+    //protected int GetSeed();
+}
+public class NoObjectCreator : ICreatesGameObject
+{
+    GameObject ICreatesGameObject.GetCreatedGameObject() => null;
 }
 public class BasicGameObjectCreator : ICreatesGameObject
 {
     public BasicGameObjectCreator(GameObject toCreate) => this.toCreate = toCreate;
     public GameObject toCreate;
-    public GameObject GetCreatedGameObject() => GameObject.Instantiate(toCreate);
+    GameObject ICreatesGameObject.GetCreatedGameObject() => GameObject.Instantiate(toCreate);
 }

@@ -14,6 +14,7 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
     bool isDefeated = false;
     bool hasShownDeathAnimation = false;
     Vector3 enteredBattlePosition;
+    public int homeCycle = -1;
 
     public void EnterBattle()
     {
@@ -38,6 +39,15 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
 
     public override void OnLoadInstance(SaveData saveData)
     {
+        if (saveData.homeCycle >= 0 && GameInstance.Gamestate.currentCycle != saveData.homeCycle)
+        {
+            Debug.Log($"[{saveData.homeCycle}] Guy destroyed!: " + GetGUID());
+            Destroy(gameObject);
+            return;
+        }
+        homeCycle = saveData.homeCycle;
+        transform.position = saveData.homePosition;
+
         isDefeated = saveData.isDefeated;
         hasShownDeathAnimation = saveData.hasShownDeathAnimation;
         enteredBattlePosition = saveData.enteredBattlePosition;
@@ -52,18 +62,29 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
         }
         enemyRemains.transform.position = enteredBattlePosition;
         enemyRemains.gameObject.SetActive(saveData.isDefeated && saveData.hasShownDeathAnimation);
+
     }
-    public override void OnNewInstance() => OnLoadInstance(new SaveData());
+    public override void OnNewInstance() => OnLoadInstance(new SaveData() 
+    { 
+        homePosition = transform.position,
+        homeCycle = homeCycle
+    } );
     public override SaveData OnSaveInstance() => new SaveData()
     {
         isDefeated = isDefeated,
         hasShownDeathAnimation = hasShownDeathAnimation,
-        enteredBattlePosition = enteredBattlePosition
+        enteredBattlePosition = enteredBattlePosition,
+
+        homePosition = transform.position,
+        homeCycle = homeCycle,
     };
 
     [Serializable]
     public class SaveData
     {
+        public int homeCycle = -1;
+        public Vector3 homePosition;
+
         public bool isDefeated = false;
         public bool hasShownDeathAnimation = false;
         public Vector3 enteredBattlePosition;

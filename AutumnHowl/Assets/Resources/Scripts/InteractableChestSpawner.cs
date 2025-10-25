@@ -4,12 +4,13 @@ using UnityEngine;
 public class InteractableChestSpawner : AutoGUIDObjectRecreator<InteractableChest>, ICreatesGameObject
 {
     public LootTable[] cycleLootTables;
-    public GameObject GetCreatedGameObject()
+    GameObject ICreatesGameObject.GetCreatedGameObject()
     {
         InteractableChest chest =  CreateNew();
         int cycle = GameInstance.Gamestate.currentCycle;
         if (cycleLootTables.IsIndexOutOfRange(cycle))
             cycle = cycleLootTables.Count() - 1;
+        chest.homeCycle = cycle;
 
         if (cycle == -1)
         {
@@ -23,4 +24,5 @@ public class InteractableChestSpawner : AutoGUIDObjectRecreator<InteractableChes
 
         return chest.gameObject;
     }
+    //int ICreatesGameObject.GetSeed() => GameInstance.Gamestate.GetCycleSubSeed(GetGUID());
 }
