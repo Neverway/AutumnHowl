@@ -47,6 +47,7 @@ public class BattleAttackCompass : MonoBehaviour
     private float swordAngle = 0f;
     [Tooltip("Used to track when the attack bar is in progress")]
     private bool attackBarActive;
+    //The position the sword started from, from 0-3
     private int spinStartIndex = 0;
     private SpinDirection currentSpinDirection;
     private enum RingState { notStarted, spinning, finish }
@@ -58,8 +59,11 @@ public class BattleAttackCompass : MonoBehaviour
     private bool hasInitialized;
     [Tooltip("Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.")]
     private float clampedTotalSpin = 0f;
+    //The total degrees rotated (no clamping)
     private float totalSpin = 0f;
+    //Calculated after sword swing is finished. Determines what cardinal direction you stopped at.
     private float nearestAngleToSword;
+    //How far the player was from the nearest target (for scoring)
     private float distanceFromNearestAngle;
 
     /// <summary>
@@ -347,20 +351,26 @@ public class BattleAttackCompass : MonoBehaviour
         resetRoutine = StartCoroutine(CoReset());
     }
     
+    /// <summary>
+    /// Places the fill based on where the sword started swinging from.
+    /// </summary>
     private void PlaceCenterFill ()
     {
         centerFill.fillAmount = Mathf.Abs(clampedTotalSpin) / 360f;
         if (clampedTotalSpin > 0)
         {
-            print("POSITIVE " + spinStartIndex * 90);
             centerFill.transform.localRotation = Quaternion.Euler(new Vector3(0, 0f, -spinStartIndex*90));
             return;
         }
         if (clampedTotalSpin < 0f)
         {
-            print("NEGATIVE");
             centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, (-spinStartIndex * 90)-clampedTotalSpin));
         }
+    }
+
+    private void DisableTargetsBasedOnPower()
+    {
+
     }
 
     /// <summary>
