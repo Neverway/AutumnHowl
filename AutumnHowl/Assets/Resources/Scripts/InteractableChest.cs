@@ -23,6 +23,8 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
     private TextEvent textEvent = new();
     [SerializeField] private Volume_TriggerInteract interactTrigger;
 
+    public int homeCycle = -1;
+
     public void Awake()
     {
         //Initialize chest variables
@@ -53,7 +55,7 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
         if (itemsToGive == null || !itemsToGive.CanGetItems())
             chestContents = new List<Item>();
         else
-            chestContents = itemsToGive.GetItems().ToList();
+            chestContents = itemsToGive.GetItemsGUIDGameSeed(this).ToList();
 
         //Set flag for chest to be closed
         hasBeenFullyLooted = false;
@@ -133,18 +135,31 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
     {
         SaveData data = new SaveData();
 
-        data.hasItems = chestContents.IsNotEmptyOrNull();
-        if (data.hasItems)
-            data.heldItemsIDs = chestContents.Select(item => item.UniqueID).ToArray();
-
-        data.looted = hasBeenFullyLooted;
+        data.homeCycle = homeCycle;
         data.position = transform.position;
 
+        data.hasItems = chestContents.IsNotEmptyOrNull();
+        if (data.hasItems)
+            data.heldItemsIDs = chestContents.Select(item => 
+            {
+                if (item is Item_Money money)
+                    return money.ConvertToDataString();
+                return item.UniqueID;
+            }).ToArray();
+
+        data.looted = hasBeenFullyLooted;
         return data;
     }
 
     public override void OnLoadInstance(SaveData data)
     {
+        if (data.homeCycle >= 0 && GameInstance.Gamestate.currentCycle != data.homeCycle)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        homeCycle = data.homeCycle;
+        transform.position = data.position;
 
         if (data.hasItems)
         {
@@ -156,14 +171,20 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
                     chestContents.Add(item);
                 }
                 else
+                {
+                    if (Item_Money.TryConvertDataStringToMoney(id, out var money))
+                    {
+                        chestContents.Add(money);
+                        continue;
+                    }
                     Debug.LogWarning($"Could not find item ID ({id}) for loading items in InteractableChest {name}", this);
+                }
             }
         }
         else
             chestContents = null;
 
         hasBeenFullyLooted = data.looted;
-        transform.position = data.position;
 
         sparkles.SetActive(!hasBeenFullyLooted && chestContents == null);
         animator.SetBool(animator_chestIsEmpty, hasBeenFullyLooted);
@@ -175,9 +196,11 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
     [Serializable]
     public struct SaveData
     {
+        public int homeCycle;
+        public Vector3 position;
+
         public string[] heldItemsIDs;
         public bool hasItems;
         public bool looted;
-        public Vector3 position;
     }
 }

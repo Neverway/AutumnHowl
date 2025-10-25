@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3492345835545664641}
   - component: {fileID: 1437672263915129538}
+  - component: {fileID: 9086645913422514365}
   - component: {fileID: 1736930980911985040}
   - component: {fileID: 5351969164555424201}
   m_Layer: 0
@@ -217,6 +218,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9086645913422514365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9062892661363900012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f988f5945fd29e143a61610d0b12456c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: e6969ca0-5462-4ae9-8d45-eb274df53911
+  isDefeated: 0
 --- !u!114 &1736930980911985040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   battleData: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
+  mapID: 
   gameState: {fileID: 0}
   searchDistance: 3
   comfyDistance: 3

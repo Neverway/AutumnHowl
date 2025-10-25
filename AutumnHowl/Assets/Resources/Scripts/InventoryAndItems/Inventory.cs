@@ -19,7 +19,6 @@ public class Inventory
     public const int SPELLS_LIST_ID = 1;
     public const int EQUIPMENT_LIST_ID = 2;
 
-
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public List<Item> items = new List<Item>();
@@ -51,6 +50,11 @@ public class Inventory
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public bool TryAddItem(Item _item)
     {
+        if (_item is Item_Money money)
+        {
+            money.GetMoney();
+            return true;
+        }
         if (_item is Item_Magic itemMagic)
         {
             if (spells.Count < maxSpells)

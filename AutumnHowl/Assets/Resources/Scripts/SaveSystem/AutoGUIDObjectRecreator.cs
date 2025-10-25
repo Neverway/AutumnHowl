@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class AutoGUIDObjectRecreator<TRecreatable> : AutoGUIDObject<string[]>
     where TRecreatable : AutoGUIDObjectBase
@@ -7,7 +8,15 @@ public class AutoGUIDObjectRecreator<TRecreatable> : AutoGUIDObject<string[]>
     public TRecreatable recreatablePrefab;
     private List<TRecreatable> recreatables = new List<TRecreatable>();
 
-    public TRecreatable CreateNew() => CreateNewWithGUID(System.Guid.NewGuid().ToString());
+    public TRecreatable CreateNew()
+    {
+        byte[] unityRandomGuidBytes = new byte[16];
+
+        for (int i = 0; i <  unityRandomGuidBytes.Length; i++)
+            unityRandomGuidBytes[i] = (byte)Random.Range(0, 256);
+
+        return CreateNewWithGUID(new System.Guid(unityRandomGuidBytes).ToString());
+    }
     public TRecreatable CreateNewWithGUID(string newGUID)
     {
         string oldGuid = recreatablePrefab.GetGUID();

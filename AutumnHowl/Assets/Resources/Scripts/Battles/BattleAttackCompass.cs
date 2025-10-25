@@ -205,7 +205,10 @@ public class BattleAttackCompass : MonoBehaviour
             perfectBarImages[i].fillAmount = (perfectAngle * 2f) / 360;
         }
     }
-    
+
+    //_direction could be null because facingDireciton was sometimes diagonal, using this in below method as failsafe? ~Erry
+    private Direction lastValidFacingDireciton = Direction.North;
+
     /// <summary>
     /// Sets the fill amount and rotation of the power meter rings to match the current facing direction and power level
     /// </summary>
@@ -213,7 +216,11 @@ public class BattleAttackCompass : MonoBehaviour
     {
         // Rotate the power meters to the direction of the sword
         player.facingDirection.TryConvertToDirection(out Direction? _direction);
-        if (_direction == null) return;
+
+        //_direction could be null because facingDireciton was sometimes diagonal, using this as failsafe? ~Erry
+        if (_direction == null) _direction = lastValidFacingDireciton;
+        else lastValidFacingDireciton = _direction.Value;
+
         powerMask1.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
         powerMask2.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
         
