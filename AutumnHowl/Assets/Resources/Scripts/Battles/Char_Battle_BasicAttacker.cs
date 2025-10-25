@@ -93,7 +93,7 @@ public class Char_Battle_BasicAttacker : Char_Battle
         return targetDirection;
     }
     
-    private void TakeTurn()
+    public virtual void TakeTurn()
     {
         if (isDead) battleStateController.NextTurnStep();
         else if (skipFirstTurn)

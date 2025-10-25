@@ -105,6 +105,11 @@ public abstract class Char_Battle : Character
         return false;
     }
 
+    public virtual void OnAttacked(AttackElement attack)
+    {
+
+    }
+
     public IEnumerator CoTryAttackSequence(AttackSequence attackSequence, bool mirrorX = false, bool mirrorY = false, bool shouldProgressTurn = true)
     {
         //when hasStopped is true, it stops the rest of the sequence from firing.
@@ -198,6 +203,7 @@ public abstract class Char_Battle : Character
         {
             char_Battle.TryMoveInDirection(attack.direction, false);
         }
+        char_Battle.OnAttacked(attack);
     }
     
     /// <summary>

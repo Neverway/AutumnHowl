@@ -216,6 +216,7 @@ public class BattleAttackCompass : MonoBehaviour
     {
         // Rotate the power meters to the direction of the sword
         player.facingDirection.TryConvertToDirection(out Direction? _direction);
+        if (_direction == null) return;
         powerMask1.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
         powerMask2.transform.localRotation = Quaternion.Euler(_direction.Value.Info().attackCompassFillRotationX);
         
