@@ -24,6 +24,7 @@ public struct DirectionInfo
     //More information (derived from input information)
     public int x => direction.x;
     public int y => direction.y;
+    public Vector3 directionVector3 => new Vector3(x, y, 0);
     public bool wasPressed => wasPressedMethod.Invoke();
 }
 //Define DirectionInfo for each direciton here
@@ -136,6 +137,24 @@ public static partial class DirectionUtility
             }
         direction = null;
         return false;
+    }
+    public static Direction DirectionIndexToDirection(this int index) => (Direction)(index % 4);
+
+
+    public static float DirectionTo2DAngle(this Vector3 direction)
+    {
+        // Project onto the X/Y plane just in case
+        Vector2 dir = new Vector2(direction.x, direction.y).normalized;
+
+        // atan2 gives angle in radians, where (1,0) = 0° (east)
+        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+
+        // Convert so that 0° = North (+Y)
+        // Atan2(x, y) swapped gives 0° at north instead of east
+        if (angle < 0)
+            angle += 360f;
+
+        return angle;
     }
 }
 

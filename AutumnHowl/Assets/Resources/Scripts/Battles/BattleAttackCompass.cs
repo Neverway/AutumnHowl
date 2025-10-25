@@ -7,6 +7,7 @@
 //
 //====================================================================================================================//
 
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -61,6 +62,8 @@ public class BattleAttackCompass : MonoBehaviour
     private float totalSpin = 0f;
     private float nearestAngleToSword;
     private float distanceFromNearestAngle;
+    private SwordSwingAnimationHandler swordSwingAnimator;
+
 
     /// <summary>
     /// The eight spaces around a tile in clockwise order.
@@ -117,7 +120,8 @@ public class BattleAttackCompass : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
    public void Start()
     {
-        player = FindObjectOfType<Char_Battle_Player>();
+        player = GameInstance.Playerbody as Char_Battle_Player;
+        swordSwingAnimator = player.GetComponentInChildren<SwordSwingAnimationHandler>();
     } 
 
     public void OnEnable()
@@ -237,12 +241,12 @@ public class BattleAttackCompass : MonoBehaviour
     /// <summary>
     /// Called when not currently attacking, updates the needle to the player's sword direction
     /// </summary>
-    private void SetNeedleDirection(Vector2 _movement)
+    private void SetNeedleDirection(Vector2 _facingDirection)
     {
         spinStartIndex = (int)swordAngle / 90;
         
         //Convert vector2 into a Direction, and set compass direction to degrees rotation of that direction rotated 18- degrees
-        if (_movement.TryConvertToDirection(out Direction? direction))
+        if (_facingDirection.TryConvertToDirection(out Direction? direction))
         {
             swordAngle = direction.Value.Info().turned180.Info().degreesRotation;
         }
@@ -270,11 +274,14 @@ public class BattleAttackCompass : MonoBehaviour
         attackBarActive = true;
     }
     
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary></summary>
     private void DoSpinState ()
     {
+        //Set animation to start pullback of sword
+        swordSwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.Pullback;
+        swordSwingAnimator.attackStartDirection = lastValidFacingDireciton;
+        swordSwingAnimator.spinDireciton = currentSpinDirection;
+
         if (stopByTapping == true)
         {
             if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.Interact.WasPressedThisFrame())
@@ -292,6 +299,10 @@ public class BattleAttackCompass : MonoBehaviour
         {
             spinAmount = currentSpinSpeed * Time.deltaTime;
         }
+
+        //Set spin animation degrees of rotation
+        swordSwingAnimator.spinDegreesRotation = spinAmount;
+
         swordAngle += spinAmount;
         clampedTotalSpin += spinAmount;
         totalSpin += spinAmount;
@@ -299,7 +310,9 @@ public class BattleAttackCompass : MonoBehaviour
         float percent = Mathf.Abs (totalSpin) / 360;
         float t = spinSpeedCurve.Evaluate (percent);
 
+        swordSwingAnimator.swordPullbackFactor = t;
         currentSpinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, t);
+
 
         //Clamps the totalSpin, but only if it goes far enough past 360 that we've looped around to a 90-degrees swing again.
         //The cutoff is 45 degrees past 360, since that would clamp to 90 degrees.
@@ -352,13 +365,13 @@ public class BattleAttackCompass : MonoBehaviour
         centerFill.fillAmount = Mathf.Abs(clampedTotalSpin) / 360f;
         if (clampedTotalSpin > 0)
         {
-            print("POSITIVE " + spinStartIndex * 90);
+            //print("POSITIVE " + spinStartIndex * 90);
             centerFill.transform.localRotation = Quaternion.Euler(new Vector3(0, 0f, -spinStartIndex*90));
             return;
         }
         if (clampedTotalSpin < 0f)
         {
-            print("NEGATIVE");
+            //print("NEGATIVE");
             centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, (-spinStartIndex * 90)-clampedTotalSpin));
         }
     }
@@ -368,6 +381,7 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void FinishSpin ()
     {
+
         if (Mathf.Abs(clampedTotalSpin) <= 45)
         {
             FailAttack ();
@@ -413,7 +427,10 @@ public class BattleAttackCompass : MonoBehaviour
             FailAttack ();
             return;
         }
-        
+
+        //Set animation to start spinning
+        swordSwingAnimator.StartSpin(spinStartIndex, Mathf.RoundToInt(clampedTotalSpin));
+
         ExecuteAttack();
         centerFill.fillAmount = 0;
     }    
@@ -507,6 +524,8 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void FailAttack ()
     {
+        swordSwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.None;
+
         GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;
         OnAttackDone ();

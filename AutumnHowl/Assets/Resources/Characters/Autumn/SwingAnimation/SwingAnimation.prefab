@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1209b096c0d88bd4dbadfdecb8a82b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHitParticle: {fileID: 90562084074109352, guid: 6a89f5a43d0549945a10821605cde12d, type: 3}
   animator: {fileID: 2979788812559178829}
   pullbackDirectionStates:
   - PullbackNorth
@@ -337,6 +338,7 @@ MonoBehaviour:
   spinDireciton: 0
   swordPullbackFactor: 0
   spinDegreesRotation: 0
+  useTrailOutsideOfSpin: 0
 --- !u!1 &5926114618441132951
 GameObject:
   m_ObjectHideFlags: 0

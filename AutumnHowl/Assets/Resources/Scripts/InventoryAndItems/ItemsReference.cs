@@ -52,6 +52,7 @@ public abstract class ItemsReference
             //Returned failed set of items (empty unless specified) if total count is 0
             if (totalItems.Count == 0) return GetFailedItemsSeedSafe(oldSeedState);
 
+            Random.state = oldSeedState;
             return totalItems.ToArray();
         }
         catch (Exception e) { Debug.LogError("Error trying to generate items somehow"); Debug.LogException(e); }

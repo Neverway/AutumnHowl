@@ -207,7 +207,8 @@ public abstract class Char_Battle : Character
     /// <param name="attack"></param>
     public void DoAttack(AttackElement attack, Vector2Int _position)
     {
-        Instantiate(attack.visualEffect, battleGrid.transform.position + new Vector3(_position.x, _position.y, 0), new Quaternion(), null);
+        Vector3 hitPosition = battleGrid.transform.position + new Vector3(_position.x, _position.y, 0);
+        Instantiate(attack.visualEffect, hitPosition, new Quaternion(), null);
         GridPawn target = battleGrid.GetIsOccupied(_position);
         if (target == null)
         {
@@ -224,6 +225,10 @@ public abstract class Char_Battle : Character
             char_Battle.TryMoveInDirection(attack.direction, false);
         }
         char_Battle.OnAttacked(attack);
+
+        //Register hit with swing animator for hitstuns
+        if (this is IsPlayerCharacter player)
+            player.SwingAnimator.RegisterHit(attack, hitPosition);
     }
     
     /// <summary>
