@@ -34,7 +34,9 @@ public class WB_Inventory : MonoBehaviour
     [SerializeField] private WidgetNavigator GearListNavigator;
     [SerializeField] private WidgetNavigator inspectListNavigator;
     [SerializeField] private Func_TextEvent inspectTextEvent;
+    [SerializeField] private AudioSource audioSource;
     private GI_AuHoGameState gameState;
+    [SerializeField] private AudioClip bookOpen, bookClose;
 
     public WidgetNavigator[] allNavigators => new[] { ItemListNavigator, SpellListNavigator, GearListNavigator, inspectListNavigator, ToNavigateToOnMenuOpen };
     public WidgetNavigator[] allListNavigators => new[] { ItemListNavigator, SpellListNavigator, GearListNavigator };
@@ -47,6 +49,7 @@ public class WB_Inventory : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gameState = GameInstance.Get<GI_AuHoGameState>();
 
         foreach(var navigator in allListNavigators)
@@ -225,6 +228,11 @@ public class WB_Inventory : MonoBehaviour
 
         //Switch navigation to parent widget
         StartCoroutine(CoSetNavigationTo(_parentWidget));
+    }
+
+    public void CloseMenu()
+    {
+        
     }
 
 

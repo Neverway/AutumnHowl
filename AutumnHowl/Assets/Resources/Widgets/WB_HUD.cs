@@ -107,7 +107,6 @@ public class WB_HUD : MonoBehaviour
             inflictCorruptionCoroutine = null;
             yield break;
         }
-        
         gameState.currentGameState.player.Stats.ModifyCorruption(+5f);
         inflictCorruptionCoroutine = null;
     }
@@ -117,6 +116,12 @@ public class WB_HUD : MonoBehaviour
         hasLightFaded = true;
         playerLightController = FindObjectOfType<PlayerLightController>();
         playerLightController.SetLanternLightState(true);
+        GameInstance.Get<GI_AudioManager>().SetMusicPitch(0.6f);
+    }
+
+    private void OnDestroy()
+    {
+        GameInstance.Get<GI_AudioManager>().SetMusicPitch(1f);
     }
 
 

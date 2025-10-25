@@ -115,8 +115,18 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public override void SetTurnActive(bool _isTurnActive)
+    {
+        canMove = _isTurnActive;
+        if (_isTurnActive)
+        {
+            battleStateController.battleWidget.attackCompass.ReEnableCompassInputs();
+        }
+    }
+    
     public void PerformAttack(int _attackType, bool mirrorX = false, bool mirrorY = false)
     {
+        if (!canMove) return;
         if (isDead) battleStateController.NextTurnStep();
         
         SetAttackDamageToCurrentATK();
@@ -142,6 +152,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     /// </summary>
     public void SkipTurn ()
     {
+        if (!canMove) return;
         battleStateController.NextTurnStep (0.5f);
     }
 
