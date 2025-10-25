@@ -153,7 +153,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
     /// </summary>
     public void SkipTurn ()
     {
-        if (!canMove) return;
+        //if (!canMove) return;
         battleStateController.NextTurnStep (0.5f);
     }
 
