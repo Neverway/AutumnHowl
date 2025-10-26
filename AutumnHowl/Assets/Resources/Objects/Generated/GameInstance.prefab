@@ -851,6 +851,7 @@ MonoBehaviour:
   mus_Battle: {fileID: 8300000, guid: af172e5b80f97689a96744bd6159dd69, type: 3}
   mus_FinalBattle: {fileID: 8300000, guid: 02ba689d6addd5aab80e7f416f882bd1, type: 3}
   mus_GameOver: {fileID: 0}
+  mus_Victory: {fileID: 8300000, guid: 3746c306da349524d9a82f4b1163eb78, type: 3}
   slashSource: {fileID: 6518801790997160031}
   musicSource: {fileID: 747792850405150406}
   ambientSource: {fileID: 6421664544378204748}
