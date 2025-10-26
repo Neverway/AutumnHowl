@@ -48,6 +48,7 @@ public class BattleAttackCompass : MonoBehaviour
     private float swordAngle = 0f;
     [Tooltip("Used to track when the attack bar is in progress")]
     private bool attackBarActive;
+    //The position the sword started from, from 0-3
     private int spinStartIndex = 0;
     private SpinDirection currentSpinDirection;
     private enum RingState { notStarted, spinning, finish }
@@ -59,8 +60,11 @@ public class BattleAttackCompass : MonoBehaviour
     private bool hasInitialized;
     [Tooltip("Tracks the amount the compass has spun (positive or negative) to determine what way to swing the sword.")]
     private float clampedTotalSpin = 0f;
+    //The total degrees rotated (no clamping)
     private float totalSpin = 0f;
+    //Calculated after sword swing is finished. Determines what cardinal direction you stopped at.
     private float nearestAngleToSword;
+    //How far the player was from the nearest target (for scoring)
     private float distanceFromNearestAngle;
     private SwordSwingAnimationHandler swordSwingAnimator;
 
@@ -172,7 +176,8 @@ public class BattleAttackCompass : MonoBehaviour
     private void ResetCompass()
     {
         SetupRingColors();
-        
+        EnableAllTargets();
+
         // Unhide the power meters
         powerMask1.enabled = true;
         powerMask2.enabled = true;
@@ -196,7 +201,7 @@ public class BattleAttackCompass : MonoBehaviour
         // Loop through each hit bar
         for (int i = 0; i < hitBarCount; i++)
         {
-            var someCalculation = (90 * i);
+            var someCalculation = (-90 * i);
             var goodRotation = Quaternion.Euler(0, 0, goodAngle + someCalculation);
             var perfectRotation = Quaternion.Euler (0, 0, perfectAngle + someCalculation);
             
@@ -230,12 +235,26 @@ public class BattleAttackCompass : MonoBehaviour
         
         // Set the fill amount based on the available power
         float _fillAmount = 0;
-        if (player.Stats.power >= 40) _fillAmount = 1f;     // Full Slash (360)
-        if (player.Stats.power >= 30) _fillAmount = 0.75f;  // Three-Quarts Slash (270)
-        if (player.Stats.power >= 20) _fillAmount = 0.5f;   // Half Slash (180)
-        if (player.Stats.power >= 10) _fillAmount = 0.25f;  // Quarter Slash (90 turn)
+        int power = AmountOfAvailableSlash();
+        if (power >= 1) _fillAmount = 0.25f;  // Quarter Slash (90 turn)dd
+        if (power >= 2) _fillAmount = 0.5f;   // Half Slash (180)
+        if (power >= 3) _fillAmount = 0.75f;  // Three-Quarts Slash (270)
+        if (power >= 4) _fillAmount = 1f;     // Full Slash (360)
         powerMask1.fillAmount = _fillAmount;
         powerMask2.fillAmount = _fillAmount;
+    }
+
+    /// <summary>
+    /// Calculates how far you can swing the sword, based on your power
+    /// </summary>
+    /// <returns>Integer from 0-4 where 4 = 360 degrees</returns>
+    private int AmountOfAvailableSlash()
+    {
+        if (player.Stats.power >= 40) return 4; //Full Slash (360)
+        if (player.Stats.power >= 30) return 3; //Three-Quarts Slash (270)
+        if (player.Stats.power >= 20) return 2; // Half Slash (180)
+        if (player.Stats.power >= 10) return 1; // Quarter Slash (90 turn)
+        return 0;
     }
     
     /// <summary>
@@ -272,6 +291,8 @@ public class BattleAttackCompass : MonoBehaviour
         // Freeze player and enable inputs
         player.canMove = false;
         attackBarActive = true;
+
+        EnableTargetsBasedOnPower();
     }
     
     /// <summary></summary>
@@ -360,20 +381,67 @@ public class BattleAttackCompass : MonoBehaviour
         resetRoutine = StartCoroutine(CoReset());
     }
     
+    /// <summary>
+    /// Places the fill based on where the sword started swinging from.
+    /// </summary>
     private void PlaceCenterFill ()
     {
         centerFill.fillAmount = Mathf.Abs(clampedTotalSpin) / 360f;
         if (clampedTotalSpin > 0)
         {
-            //print("POSITIVE " + spinStartIndex * 90);
             centerFill.transform.localRotation = Quaternion.Euler(new Vector3(0, 0f, -spinStartIndex*90));
             return;
         }
         if (clampedTotalSpin < 0f)
         {
-            //print("NEGATIVE");
             centerFill.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, (-spinStartIndex * 90)-clampedTotalSpin));
         }
+    }
+
+    /// <summary>
+    /// Determines which targets to show.
+    /// </summary>
+    private void EnableTargetsBasedOnPower()
+    {
+        //Loops through the 4 target graphics in either CW/CCW order and turns them off if you don't have enough stamina.
+       
+        int i = spinStartIndex; // index of the target we're setting
+        SetTargetActive(i, false);
+        for (int n = 1; n < 5; n++)
+        {
+            if (currentSpinDirection == SpinDirection.Left)
+            {
+                i--;
+            }
+            if ((currentSpinDirection == SpinDirection.Right))
+            {
+                i++;
+            }
+            //ensures "i" loops back around
+            if (i > 3) i -= 4;
+            if (i < 0) i += 4;
+            //n is how far around we are, so compare it to available degrees of spin
+            SetTargetActive(i, n <= AmountOfAvailableSlash());
+        }
+    }
+
+    private void EnableAllTargets()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            SetTargetActive(i, true);
+        }
+    }
+
+    /// <summary>
+    /// Sets a target's visibility on or off.
+    /// </summary>
+    /// <param name="_target">Index from 0-3</param>
+    /// <param name="_active">What state to set the images to.</param>
+    private void SetTargetActive(int _target, bool _active)
+    {
+        goodBarImages[_target].enabled = _active;
+        perfectBarImages[_target].enabled = _active;   
     }
 
     /// <summary>
