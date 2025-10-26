@@ -38,7 +38,7 @@ MonoBehaviour:
   layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
   enemySpawnLocations:
   - enemyPrefab: {fileID: 6242562417686465405, guid: fed31cd6da26849c88a813e194f32f06, type: 3}
-    enemyStartPosition: {x: 2, y: 4}
+    enemyStartPosition: {x: 4, y: 7}
   victoryState:
     rid: 26149116751642625
   references:

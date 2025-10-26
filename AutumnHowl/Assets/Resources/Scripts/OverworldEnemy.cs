@@ -41,7 +41,6 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
     {
         if (saveData.homeCycle >= 0 && GameInstance.Gamestate.currentCycle != saveData.homeCycle)
         {
-            Debug.Log($"[{saveData.homeCycle}] Guy destroyed!: " + GetGUID());
             Destroy(gameObject);
             return;
         }

@@ -95,11 +95,12 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     public IEnumerator Start()
     {
-        yield return new WaitForEndOfFrame();
-        if (!mapGenerated)
-        {
-            GI_SaveSystem.LoadGame();
-        }
+        yield break;
+        //yield return new WaitForEndOfFrame();
+        //if (!mapGenerated)
+        //{
+        //    GI_SaveSystem.LoadGame();
+        //}
     }
     //=-----------------=
     // Internal Functions
@@ -326,8 +327,6 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     /// <summary>Places enemies from the enemyList in order until it runs out of enemy locations.</summary>
     private void PlaceEnemies ()
     {
-        Debug.Log("Enemy locaiton count: " + enemyLocations.Count);
-        Debug.Log("Is Loading?: " + mapIsBeingLoaded);
         //=== Create the random gameobject bag to grab from for POIs ========
         List<ICreatesGameObject> gameObjectCreators = new();
         //Add path objects
@@ -347,9 +346,6 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
             if (enemy.GetComponent<GUIDComponent>() == null)
                 generatedObjects.Add (enemy); //Add to generated objects list in case you need to destroy the map
-
-            if (enemy.TryGetComponent(out GUIDComponent component))
-                Debug.Log("Created guy! : " + component.GetGUID());
 
             //Setup position of object
             enemy.transform.position = new Vector3 (enemyLocations[i].x * roomWidth + (roomWidth / 2),
@@ -664,9 +660,15 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
     public override void OnLoadInstance(SaveData data)
     {
+        Debug.Log(GI_SaveSystem.CurrentSavingType);
+        int newSeed = GameInstance.Gamestate.GetCycleSubSeed(GetGUID());
+        if (mapGenerated)
+        {
+            if (seedToGenerate == newSeed)
+                return;
+            DestroyMap();
+        }
         seedToGenerate = GameInstance.Gamestate.GetCycleSubSeed(GetGUID());
-        if (mapGenerated) DestroyMap();
-
         GenerateMap(isNewMap: seedToGenerate != data.previouslyGeneratedSeed);
     }
 
