@@ -29,7 +29,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 10
+      startValue: 30
       multiplier: 0
       addedValue: 0
     maxLevel:
@@ -50,6 +50,10 @@ MonoBehaviour:
       addedValue: 0
     maxCorruption:
       startValue: 100
+      multiplier: 0
+      addedValue: 0
+    shieldPower:
+      startValue: 10
       multiplier: 0
       addedValue: 0
     walkSpeed:

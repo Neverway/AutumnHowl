@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static GameFeatureConstants.Battle;
 
@@ -120,41 +121,33 @@ public abstract class Char_Battle : Character
     {
         //when hasStopped is true, it stops the rest of the sequence from firing.
         var hasStopped = false;
-        
+        //Start with last cardinal direction being the same as the characters CURRENT cardinal direction
+        Vector2Int lastCardinalDirection = new Vector2Int(Mathf.RoundToInt(facingDirection.x), Mathf.RoundToInt(facingDirection.y));
         for (int i = 0; i < attackSequence.attacks.Count; i++)
-        {                
+        {
             // Applied position is the position offset after mirroring has been applied
             var appliedPosition = attackSequence.attacks[i].position;
-            if (mirrorX)
-            {
-                appliedPosition.x = -attackSequence.attacks[i].position.x;
-            }
+            if (mirrorX) appliedPosition.x = -attackSequence.attacks[i].position.x;
             if (mirrorY) appliedPosition.y = -attackSequence.attacks[i].position.y;
-            
+
             var currentPosition = gridPawnController.position + appliedPosition;
 
-            if (invertAttackFacingDirections)
-            {
-                facingDirection = -attackSequence.attacks[i].position;
-            }
-            else
-            {
-                facingDirection = attackSequence.attacks[i].position;
-            }
+            //Set facing direction to attack position (mirror the position if invertAttackFacingDirections is true)
+            facingDirection = attackSequence.attacks[i].position * (invertAttackFacingDirections ? -1 : 1);
 
-                DoAttack(attackSequence.attacks[i], currentPosition);
+            DoAttack(attackSequence.attacks[i], currentPosition);
             GridPawn target = battleGrid.GetIsOccupied(currentPosition);
-            if (target)
+            if (target != null)
             {
                 if (target.type == GridPawn.GridPawnType.obstacle)
                 {
-                    print($"Found obstcl at {appliedPosition}");
+                    //print($"Found obstcl at {appliedPosition}");
                     hasStopped = true;
                     GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.hitBounce);
                 }
                 else if (target.type == GridPawn.GridPawnType.character)
                 {
-                    print($"Found char {target.gameObject.name} at {appliedPosition}");
+                    //print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
                     if (char_Battle.GetHealth () <= 0)
                     {
@@ -169,41 +162,42 @@ public abstract class Char_Battle : Character
                 }
                 else if (target.type == GridPawn.GridPawnType.attack)
                 {
-                    print($"Found attack at {appliedPosition}");
+                    //print($"Found attack at {appliedPosition}");
                     hasStopped = true;
                 }
             }
-            
-            yield return new WaitForSeconds(0.1f);
+
+            if (hasStopped && this is IsPlayerCharacter player)
+            {
+                //DONT stop the attack if this was the first attack in the sequence and its from the player 
+                if (i == 0 && hasStopped) hasStopped = false;
+                else //But if we truly are stopping, register the recoil with the animation
+                {
+                    Debug.Log("Erry: Last cardinal direction PLEASEEE : " + lastCardinalDirection);
+                    if (DirectionUtility.TryConvertToDirection(lastCardinalDirection, out var convertedDirection2))
+                        player.SwingAnimator.RegisterRecoil(convertedDirection2.Value.Info().turned180);
+                }
+            }
+
+            yield return new WaitForSeconds(0.075f);
+
             //If we bonked something, go back to the last cardinal direction
             if (hasStopped)
             {
-                int dir = i;
-                if (dir > 0)
-                {
-                    dir--;
-                }
-                while (dir > 0 && dir % 2 != 0) //assuming cardinal direction = even numbers
-                {
-                    dir--;
-                }
-                if (invertAttackFacingDirections)
-                {
-                    facingDirection = -attackSequence.attacks[dir].position;
-                }
-                else
-                {
-                    facingDirection = attackSequence.attacks[i].position;
-                }
-                    break;
+                //Set facing direction to last cardinal direciton (mirror the position if invertAttackFacingDirections is true)
+                facingDirection = lastCardinalDirection * (invertAttackFacingDirections ? -1 : 1);
+                Debug.Log($"Erry: facingDirection: {facingDirection}");
+                break;
             }
+
+            //Update last cardinal direciton if this attack IS in fact a cardinal direction
+            if (DirectionUtility.TryConvertToDirection(appliedPosition, out var convertedDirection))
+                lastCardinalDirection = convertedDirection.Value.Info().direction;
         }
         if (shouldProgressTurn) battleStateController.NextTurnStep(0.5f);
     }
 
-    /// <summary>
-    /// executes the attack on the specified grid tile
-    /// </summary>
+    /// <summary>executes the attack on the specified grid tile</summary>
     /// <param name="attack"></param>
     public void DoAttack(AttackElement attack, Vector2Int _position)
     {
@@ -212,6 +206,7 @@ public abstract class Char_Battle : Character
         GridPawn target = battleGrid.GetIsOccupied(_position);
         if (target == null)
         {
+            DebugDrawAttack(hitPosition, 0.3f);
             return;
         }
         Char_Battle char_Battle = target.GetComponent<Char_Battle>();
@@ -229,11 +224,18 @@ public abstract class Char_Battle : Character
         //Register hit with swing animator for hitstuns
         if (this is IsPlayerCharacter player)
             player.SwingAnimator.RegisterHit(attack, hitPosition);
+
+        DebugDrawAttack(hitPosition, 1f);
+    }
+    private void DebugDrawAttack(Vector3 pos, float size)
+    {
+        size *= 0.5f;
+        Color debugAttackColor = (this is IsPlayerCharacter) ? Color.cyan : Color.red;
+        Debug.DrawLine(pos + new Vector3(size, size), pos + new Vector3(-size, -size), debugAttackColor, 0.5f);
+        Debug.DrawLine(pos + new Vector3(-size, size), pos + new Vector3(size, -size), debugAttackColor, 0.5f);
     }
     
-    /// <summary>
-    /// Applies a defense modifier, but only if blockDirection blocks the attack.
-    /// </summary>
+    /// <summary>Applies a defense modifier, but only if blockDirection blocks the attack.</summary>
     /// <param name="direction"></param>
     /// <exception cref="NotImplementedException"></exception>
     private void ApplyConditionalBlock (Vector2Int direction)
@@ -258,12 +260,10 @@ public abstract class Char_Battle : Character
             }
         }
         print("ConditionalBlock activated");
-            Stats.defense.ModifyStatWith(Mod_ConditionalBlock, BLOCKDEFENSETYPE, Stats.shieldPower);
+        Stats.defense.ModifyStatWith(Mod_ConditionalBlock, BLOCKDEFENSETYPE, Stats.shieldPower);
     }
     
-    /// <summary>
-    /// Removes the defense modifier applied by ApplyConditionalBlock.
-    /// </summary>
+    /// <summary>Removes the defense modifier applied by ApplyConditionalBlock.</summary>
     private void RemoveConditionalBlock ()
     {
         Stats.defense.UnmodifyStatWith (Mod_ConditionalBlock);
@@ -275,9 +275,7 @@ public abstract class Char_Battle : Character
         StartCoroutine(CoTryAttackSequence(attackSequence, mirrorX, mirrorY, shouldProgressTurn));
     }
 
-    /// <summary>
-    /// Triggered by OnDeath; Spawns spawnOnDeath if it exists.
-    /// </summary>
+    /// <summary>Triggered by OnDeath; Spawns spawnOnDeath if it exists.</summary>
     public virtual void Kill ()
     {
         if (spawnOnDeath != null)

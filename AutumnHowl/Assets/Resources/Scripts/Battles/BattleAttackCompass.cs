@@ -524,7 +524,8 @@ public class BattleAttackCompass : MonoBehaviour
 
     private void FailAttack ()
     {
-        swordSwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.None;
+        //Use fail attack animation
+        swordSwingAnimator.FailAttack();
 
         GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;

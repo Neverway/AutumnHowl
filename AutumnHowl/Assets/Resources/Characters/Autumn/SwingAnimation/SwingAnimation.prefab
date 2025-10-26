@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6718665914940492641}
   - {fileID: 6931445024648007725}
   - {fileID: 2505472888821716791}
   m_Father: {fileID: 501421272150804315}
@@ -82,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8332048965761483013
 Transform:
   m_ObjectHideFlags: 0
@@ -324,12 +325,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHitParticle: {fileID: 90562084074109352, guid: 6a89f5a43d0549945a10821605cde12d, type: 3}
   animator: {fileID: 2979788812559178829}
-  pullbackDirectionStates:
+  animator_swingStateName: SpinLeft
+  animator_pullbackDirectionStateNamess:
   - PullbackNorth
   - PullbackEast
   - PullbackSouth
   - PullbackWest
-  spinState: SpinLeft
+  animator_failDirectionStateNamess:
+  - FailAttackNorth
+  - FailAttackEast
+  - FailAttackSouth
+  - FailAttackWest
   visualContainer_default: {fileID: 0}
   visualContainer_swingSword: {fileID: 1898125416559965265}
   swordTrail: {fileID: 8332048965761483013}
@@ -339,6 +345,37 @@ MonoBehaviour:
   swordPullbackFactor: 0
   spinDegreesRotation: 0
   useTrailOutsideOfSpin: 0
+--- !u!1 &5581197058445051537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6718665914940492641}
+  m_Layer: 0
+  m_Name: Bookmark
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6718665914940492641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5581197058445051537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1898125416559965265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5926114618441132951
 GameObject:
   m_ObjectHideFlags: 0

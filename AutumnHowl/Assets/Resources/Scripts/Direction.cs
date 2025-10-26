@@ -104,8 +104,7 @@ public static partial class DirectionUtility
 public static partial class DirectionUtility 
 {
     public static DirectionInfo Info(this Direction direction) => directionInfos[direction];
-    
-    
+
     public static Direction Turn(this Direction direction, SpinDirection spin)
     {
         switch(spin)
