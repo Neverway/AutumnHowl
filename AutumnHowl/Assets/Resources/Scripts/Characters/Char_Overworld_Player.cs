@@ -31,14 +31,14 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     private GameObject inventoryWidget;
-
+    [field: SerializeField] public SwordSwingAnimationHandler SwingAnimator { get; private set; }
 
     #endregion
 
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    
+
     private void Update()
     {
         if (isDead && !inTheProcessOfDying)
@@ -130,4 +130,5 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
 
 public interface IsPlayerCharacter
 {
+    public SwordSwingAnimationHandler SwingAnimator { get; }
 }

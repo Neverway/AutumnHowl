@@ -29,7 +29,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-
+    [field: SerializeField] public SwordSwingAnimationHandler SwingAnimator { get; private set; }
 
     #endregion
 
