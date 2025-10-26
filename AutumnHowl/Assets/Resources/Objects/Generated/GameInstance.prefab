@@ -678,12 +678,16 @@ MonoBehaviour:
       equippedWearables: []
     map: Town
     overworldPosition: {x: 0, y: 0}
+    leavingBattle: 0
+    enteredBattleFromMap: 
+    enteredBattleFromLocation: {x: 0, y: 0}
     money: 99999
     kills: 0
     deaths: 0
     playtime: 0
     currentLanternTime: 120
     lanternDuration: 120
+    currentCycle: 0
 --- !u!114 &8445139238223071731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,15 +844,16 @@ MonoBehaviour:
   vineRumble: {fileID: 8300000, guid: 1c4d21c1301b6ef43aa55d1836322431, type: 3}
   vineAttack: {fileID: 8300000, guid: 351774d81c35f9c4395250972a0157dd, type: 3}
   growl: {fileID: 8300000, guid: 5ff60343a6699d845a3f9b4e37809b82, type: 3}
-  mus_Title: {fileID: 8300000, guid: 837382cfe2222b2dfa63c7e2cdf2e935, type: 3}
-  mus_Town: {fileID: 8300000, guid: 96515d249feab911ab273024cb7dd6d0, type: 3}
-  mus_Shop: {fileID: 8300000, guid: 96515d249feab911ab273024cb7dd6d0, type: 3}
+  mus_Title: {fileID: 8300000, guid: ad42dbbaf580a494383dacd07d9188ef, type: 3}
+  mus_Town: {fileID: 8300000, guid: 3c12d29bd60498a40b2ffe5a7a140d38, type: 3}
+  mus_Shop: {fileID: 8300000, guid: 3c12d29bd60498a40b2ffe5a7a140d38, type: 3}
   mus_Forest: {fileID: 8300000, guid: 276b1a5f5b5e192bf8d8cdaa02b21863, type: 3}
   mus_Battle: {fileID: 8300000, guid: af172e5b80f97689a96744bd6159dd69, type: 3}
   mus_FinalBattle: {fileID: 8300000, guid: 02ba689d6addd5aab80e7f416f882bd1, type: 3}
   mus_GameOver: {fileID: 0}
   slashSource: {fileID: 6518801790997160031}
   musicSource: {fileID: 747792850405150406}
+  ambientSource: {fileID: 6421664544378204748}
 --- !u!114 &8281286468007313123
 MonoBehaviour:
   m_ObjectHideFlags: 0

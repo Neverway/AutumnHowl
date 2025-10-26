@@ -20753,6 +20753,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fountain
       objectReference: {fileID: 0}
+    - target: {fileID: 499378130028417013, guid: c0f64334b32f07610b812875bdc9cc86, type: 3}
+      propertyPath: MaxDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 499378130028417013, guid: c0f64334b32f07610b812875bdc9cc86, type: 3}
+      propertyPath: MinDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5453916192309156313, guid: c0f64334b32f07610b812875bdc9cc86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
