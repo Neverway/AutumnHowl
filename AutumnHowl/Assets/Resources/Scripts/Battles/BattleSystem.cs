@@ -199,6 +199,10 @@ public class BS_Victory : BattleState
         {
             //controller.NewState(new BS_PlayerAction(controller));
         });
+
+        var audioManager = GameInstance.Get<GI_AudioManager>();
+        
+        audioManager.SetMusic(GI_AudioManager.Music.Victory);
         controller.textEvent.CallEvent();
     }
 

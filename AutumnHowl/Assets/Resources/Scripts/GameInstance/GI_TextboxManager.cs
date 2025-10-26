@@ -64,6 +64,10 @@ public class GI_TextboxManager : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
+    private void Start()
+    {
+    }
+
 
     public void Update()
     {
@@ -299,10 +303,8 @@ public class GI_TextboxManager : MonoBehaviour
         return true;
     }
 
-    private void PlayChatterSound(int _currentDisplayCharactersCount, char _currentTextIndex)
+    public void PlayChatterSound(int _currentDisplayCharactersCount, char _currentTextIndex)
     {
-        
-        
         // Check if the character count is cleanly divisible by two
         // Apparently this is called a modulo expression? ~Liz
         if (_currentDisplayCharactersCount % chatterFrequency == 0)
@@ -369,6 +371,19 @@ public class GI_TextboxManager : MonoBehaviour
         
         // Failed to start, an event was already running
         return false;
+    }
+
+    
+    /// <summary>
+    /// I'm trashily copying some of the functions from here for the cycle info widget
+    /// This function is used by the cycle info widget so we can force the type text noise
+    /// </summary>
+    public void OverideSetChatterVoice(Char_ChatterVoice _voice)
+    {
+        chatterFrequency = _voice.chatterFrequency;
+        currentTextChatter = _voice.textChatter;
+        chatterPitchMin = _voice.chatterPitchMin;
+        chatterPitchMax = _voice.chatterPitchMax;
     }
 
     public void Clear()
