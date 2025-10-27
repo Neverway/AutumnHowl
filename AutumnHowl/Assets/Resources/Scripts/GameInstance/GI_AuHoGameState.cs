@@ -38,7 +38,8 @@ public class GI_AuHoGameState : MonoBehaviour
         currentGameState = new AuHoGameState()
         {
             player = currentGameState.player,
-            currentBattle = currentGameState.currentBattle
+            currentBattle = currentGameState.currentBattle,
+            currentCycle = currentGameState.currentCycle,
         };
     }
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
@@ -84,12 +85,28 @@ public class AuHoGameState
     public float currentLanternTime = 1200;
     public float lanternDuration = 1200;
 
-    public int currentCycle = 0;
+    public int currentCycle = 1;
+    public int lastDisplayedCycle = 0;
 
+    /// <summary>
+    /// Shift to the next cycle, update the actors that should appear, display the title card
+    /// </summary>
     public void NextCycle()
     {
         currentCycle++;
+        SetCurrentCycle();
+        SetCycleAppearances();
     }
+    
+    /// <summary>
+    /// Just update the actors that should appear and display the title card
+    /// </summary>
+    public void SetCurrentCycle()
+    {
+        GameInstance.Get<GI_WidgetManager>().AddWidget("WB_CycleInfo");
+        lastDisplayedCycle = currentCycle;
+    }
+    
     public int GetSubSeed(string id)
     {
         string seedString = $"{gameSeed}{id}";
@@ -150,15 +167,18 @@ public class AuHoGameState
             currentLanternTime = gameState.currentLanternTime,
             lanternDuration = gameState.lanternDuration,
 
-            currentCycle = gameState.currentCycle
+            currentCycle = gameState.currentCycle,
+            lastDisplayedCycle = gameState.lastDisplayedCycle
 
         };
 
         GI_SaveSystem.SaveValue(gameStateData, "AuHoGameState");
     }
+    
     [InvokeAfterLoad]
     public static void OnGameLoad()
     {
+        Debug.Log("Kevin is a stinky lil guy");
         var gameState = GameInstance.Gamestate;
 
         GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "AuHoGameState");
@@ -189,6 +209,13 @@ public class AuHoGameState
             gameState.lanternDuration = data.lanternDuration;
 
             gameState.currentCycle = data.currentCycle;
+            gameState.lastDisplayedCycle = data.lastDisplayedCycle;
+
+            if (gameState.lastDisplayedCycle != gameState.currentCycle)
+            {
+                GameInstance.SendCoroutine(CoLoadCycleData());
+            }
+            SetCycleAppearances();
         }
     }
     public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
@@ -213,6 +240,19 @@ public class AuHoGameState
         //Teleport player to given character position
         player.transform.root.position = characterPostiion;
     }
+    
+    public static IEnumerator CoLoadCycleData()
+    {
+        var gameState = GameInstance.Gamestate;
+        var worldLoader = GameInstance.Get<GI_WorldLoader>();
+
+        //Wait for any previously loading maps to finish loading
+        while (worldLoader.IsLoading) yield return null;
+        
+        Debug.Log("Kevin is a STINK STINK STINK STINKY STINKER");
+        // Set map flags
+        gameState.SetCurrentCycle();
+    }
 
     [Serializable]
     public class GameStateSaveData
@@ -234,7 +274,18 @@ public class AuHoGameState
         public float currentLanternTime;
         public float lanternDuration;
 
-        public int currentCycle;
+        public int currentCycle = 1;
+        public int lastDisplayedCycle;
 
+    }
+
+    private static void SetCycleAppearances()
+    {
+        var gameState = GameInstance.Gamestate;
+        foreach (var target in GameObject.FindObjectsOfType<Object_CycleAppearanceSelector>(true))
+        {
+            if (target.appearsOnCycle.Count > gameState.currentCycle) target.gameObject.SetActive(target.appearsOnCycle[gameState.currentCycle]);
+            else target.gameObject.SetActive(target.appearsOnCycle[0]);
+        }
     }
 }

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cycle 1
+  m_text: Cycle 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
   m_sharedMaterial: {fileID: -3348543016456799847, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3 remain until the beast arrives
+  m_text: ??? remain until the end of everything
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
   m_sharedMaterial: {fileID: -3348543016456799847, guid: 424625f6bc6aacce48bc766c50f9cd01, type: 2}
@@ -395,6 +395,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c2dac5106bfee039f9afad3f48ccfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cycleInfo:
+  - title: Howelfen
+    subtitle: 
+  - title: Cycle 1
+    subtitle: 2 remain until The Beast arrives
+  - title: Cycle 2
+    subtitle: 1 remains until The Beast arrives
+  - title: Cycle 3
+    subtitle: THE FINAL CYCLE
   titleText: Cycle 1
   subtitleText: 3 remain until the beast arrives
   title: {fileID: 3966560527356106766}

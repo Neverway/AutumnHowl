@@ -1330,7 +1330,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1411898940, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
+  m_Sprite: {fileID: -1611658235, guid: f4bcb4a75ef1466f192f8ea870ce6ae3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1495,13 +1495,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6366712938524607086}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.27059805, y: 0.27059805, z: 0.6532815, w: 0.6532815}
-  m_LocalPosition: {x: 0.4, y: 0.27, z: 0}
+  m_LocalRotation: {x: 0.0016500301, y: -0.3826804, z: -0.9238708, w: -0.0039842213}
+  m_LocalPosition: {x: 0.4, y: 0.26999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4264719621515025050}
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 179.506}
 --- !u!61 &1751871592498534362
 BoxCollider2D:
   m_ObjectHideFlags: 0
