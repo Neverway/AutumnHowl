@@ -140,7 +140,8 @@ public class BattleAttackCompass : MonoBehaviour
         
         // Update how much our current power can actually swing the sword
         UpdatePowerMeterBasedOnAvailablePower();
-        
+        UpdateTargetsBasedOnAvailablePower ();
+
         // Detect activation
         if (!attackBarActive)
         {
@@ -175,9 +176,7 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void ResetCompass()
     {
-        spinStartIndex = (int)swordAngle / 90;
-        SetupRingColors();
-        SetupTargetsForStartingState ();
+        SetupRingColors ();
 
         // Unhide the power meters
         powerMask1.enabled = true;
@@ -439,7 +438,7 @@ public class BattleAttackCompass : MonoBehaviour
     /// Sets target graphics on or off so that they match the spin fills,
     /// before you start swinging sword.
     /// </summary>
-    private void SetupTargetsForStartingState ()
+    private void UpdateTargetsBasedOnAvailablePower ()
     {
         SetAllTargets (true);
         int n = AmountOfAvailableSlash ();
