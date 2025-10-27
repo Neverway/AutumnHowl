@@ -64,8 +64,13 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     private int farthestDistance = 0;
     private Vector2Int farthestNode;
 
-    private int enemyPlacementCount;
+    //Used to track how many tiles have been generated, to decide when to place enemy locations.
+    private int pathStepCounterForEnemies;
+    [Tooltip("Generator will place an enemy spot every X tiles")]
     [SerializeField] private int enemyFrequency = 3;
+    [Tooltip ("Minimum number of enemies to place. If mapgen runs out of enemy spots, it will start adding them to random tiles.")]
+    [SerializeField] private int minimumEnemyCount = 5;
+
     private List<Vector2Int> poiLocations = new List<Vector2Int>();
     private List<Vector2Int> enemyLocations = new List<Vector2Int>();
 
@@ -179,7 +184,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
                 mapNodes[x, y] = new MapNode ();
             }
         }
-        enemyPlacementCount = 0;
+        pathStepCounterForEnemies = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
          StoreDebugLogMapGenStep("Map Nodes Finished");
         AddRandomLoops();
@@ -189,10 +194,42 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         PrintDistances ();
          StoreDebugLogPOILocations();
         PlacePOIs ();
+
+        MakeExtraEnemySpawns ();
         PlaceEnemies ();
 
         LogStoredMapGenDebugLog();
         mapGenerated = true;
+    }
+
+    /// <summary>
+    /// If there's fewer enemyLocations than the required number of enemies, add more at random...
+    /// </summary>
+    private void MakeExtraEnemySpawns ()
+    {
+        if (enemyLocations.Count >= minimumEnemyCount)
+        {
+            return;
+        }
+        List<Vector2Int> randomTileChoices = new List<Vector2Int> ();
+        for (int x = 0; x < mapWidth; x++)
+        {
+            for (int y = 0; y < mapHeight; y++)
+            {
+                Vector2Int location = new Vector2Int (x, y);
+                //Avoid adding locations that already had enemies, also avoid the start tile where Autumn spawns
+                if (!enemyLocations.Contains (location) && location != startPosition )
+                {
+                    randomTileChoices.Add (location);
+                }
+            }
+        }
+        RandomBag<Vector2Int> tileBag = new RandomBag<Vector2Int> (randomTileChoices);
+        int dif = minimumEnemyCount - enemyLocations.Count;
+        for (int i = 0; i < dif; i++)
+        {
+            enemyLocations.Add (tileBag.Grab ());
+        }
     }
 
     private void AddRandomLoops()
@@ -350,7 +387,6 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             //Setup position of object
             enemy.transform.position = new Vector3 (enemyLocations[i].x * roomWidth + (roomWidth / 2),
                 enemyLocations[i].y * roomHeight + (roomHeight / 2), 0);
-
         }
     }
 
@@ -420,10 +456,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         branchLength++;
         if (!mapNodes[x, y].visited)
         {
-            enemyPlacementCount++;
-            if (enemyPlacementCount == enemyFrequency)
+            pathStepCounterForEnemies++;
+            if (pathStepCounterForEnemies == enemyFrequency)
             {
-                enemyPlacementCount = 0;
+                pathStepCounterForEnemies = 0;
                 enemyLocations.Add (new Vector2Int(x, y));
             }
         }
@@ -465,6 +501,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             if (walking)
             {
                 poiLocations.Add(new Vector2Int(x, y));
+                print("POI: " + new Vector2Int (x, y));
             }
             branchLength = 0;
             return;
