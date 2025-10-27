@@ -68,8 +68,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     private int pathStepCounterForEnemies;
     [Tooltip("Generator will place an enemy spot every X tiles")]
     [SerializeField] private int enemyFrequency = 3;
-    [Tooltip ("Minimum number of enemies to place. If mapgen runs out of enemy spots, it will start adding them to random tiles.")]
+    [Tooltip ("Minimum number of enemy spawns. If mapgen runs out of enemy spots, it will start adding them to random tiles.")]
     [SerializeField] private int minimumEnemyCount = 5;
+    [Tooltip ("Minimum number of POI spawns. If mapgen runs out of standard spots (dead ends, certain intersections), it will start adding them to random tiles.")]
+    [SerializeField] private int minimumPOICount = 0;
 
     private List<Vector2Int> poiLocations = new List<Vector2Int>();
     private List<Vector2Int> enemyLocations = new List<Vector2Int>();
@@ -193,9 +195,11 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         ScatterTrees ();
         PrintDistances ();
          StoreDebugLogPOILocations();
-        PlacePOIs ();
 
+        MakeExtraPOIs ();
         MakeExtraEnemySpawns ();
+
+        PlacePOIs ();
         PlaceEnemies ();
 
         LogStoredMapGenDebugLog();
@@ -217,7 +221,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             for (int y = 0; y < mapHeight; y++)
             {
                 Vector2Int location = new Vector2Int (x, y);
-                //Avoid adding locations that already had enemies, also avoid the start tile where Autumn spawns
+                //Avoid adding duplicate locations, also avoid the start tile where Autumn spawns
                 if (!enemyLocations.Contains (location) && location != startPosition )
                 {
                     randomTileChoices.Add (location);
@@ -229,6 +233,36 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         for (int i = 0; i < dif; i++)
         {
             enemyLocations.Add (tileBag.Grab ());
+        }
+    }
+
+    /// <summary>
+    /// If there's fewer poiLocations than the required amount, add more at random...
+    /// </summary>
+    private void MakeExtraPOIs ()
+    {
+        if (poiLocations.Count >= minimumPOICount)
+        {
+            return;
+        }
+        List<Vector2Int> randomTileChoices = new List<Vector2Int> ();
+        for (int x = 0; x < mapWidth; x++)
+        {
+            for (int y = 0; y < mapHeight; y++)
+            {
+                Vector2Int location = new Vector2Int (x, y);
+                //Avoid adding duplicate locations, also avoid the start tile where Autumn spawns
+                if (!poiLocations.Contains (location) && location != startPosition)
+                {
+                    randomTileChoices.Add (location);
+                }
+            }
+        }
+        RandomBag<Vector2Int> tileBag = new RandomBag<Vector2Int> (randomTileChoices);
+        int dif = minimumPOICount - poiLocations.Count;
+        for (int i = 0; i < dif; i++)
+        {
+            poiLocations.Add (tileBag.Grab ());
         }
     }
 
