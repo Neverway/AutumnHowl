@@ -21,6 +21,7 @@ public class GI_AudioManager : MonoBehaviour
         Battle,
         FinalBattle,
         GameOver,
+        Victory,
     }
     /// <summary>
     /// Stores the current music track.
@@ -52,6 +53,7 @@ public class GI_AudioManager : MonoBehaviour
     public AudioClip mus_Battle;
     public AudioClip mus_FinalBattle;
     public AudioClip mus_GameOver;
+    public AudioClip mus_Victory;
 
     //===========================//
 
@@ -170,6 +172,9 @@ public class GI_AudioManager : MonoBehaviour
                 break;
             case Music.GameOver:
                 musicSource.clip = mus_GameOver;
+                break;
+            case Music.Victory:
+                musicSource.clip = mus_Victory;
                 break;
         }
 

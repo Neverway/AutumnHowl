@@ -26,8 +26,7 @@ public class LB_Generic : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public GI_AudioManager.Music musicTrack = GI_AudioManager.Music.none;
-
-
+    
     #endregion
 
 

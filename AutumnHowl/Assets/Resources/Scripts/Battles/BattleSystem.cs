@@ -200,6 +200,15 @@ public class BS_Victory : BattleState
             $"{GameInstance.Gamestate.currentBattle.victoryLevels}" +
             $" LEVELS]\n[+${GameInstance.Gamestate.currentBattle.victoryGold}]");
            
+        
+        controller.textEvent.textEvent.OnFinish.AddListener(() =>
+        {
+            //controller.NewState(new BS_PlayerAction(controller));
+        });
+
+        var audioManager = GameInstance.Get<GI_AudioManager>();
+        
+        audioManager.SetMusic(GI_AudioManager.Music.Victory);
         controller.textEvent.CallEvent();
     }
 
