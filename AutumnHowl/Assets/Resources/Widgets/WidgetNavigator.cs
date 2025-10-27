@@ -25,6 +25,8 @@ public class WidgetNavigator : MonoBehaviour
     [Tooltip("Which directional inputs to use to navigate the menu")]
     [SerializeField] private NavigationMode navigationMode;
     private enum NavigationMode { Vertical, Horizontal }
+    [Tooltip("If enabled, stops pressing right from activating the menu item (for the inspect menu mainly)")]
+    [SerializeField] private bool pressingRightDoesNotTryNavigate = true;
     [Tooltip("If enabled, reaching either end of the button list will wrap back around when navigating")]
     [SerializeField] private bool enableWrapping;
     [Tooltip("If enabled, all elements will appear unselected when this menu is not set as activelyNavigating")]
@@ -115,12 +117,13 @@ public class WidgetNavigator : MonoBehaviour
                 break;
         }
 
-        if (GameInstance.Inputs.Interact.WasPressedThisFrame())
+        if (GameInstance.Inputs.Interact.WasPressedThisFrame() || 
+            ((!pressingRightDoesNotTryNavigate) && GameInstance.Inputs.MoveRight.WasPressedThisFrame()))
         {
             if (selectableElements.Count != 0) selectableElements[currentIndex].Interact();
         }
 
-        if (GameInstance.Inputs.Action.WasPressedThisFrame())
+        if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
         {
             OnBack.Invoke();
         }

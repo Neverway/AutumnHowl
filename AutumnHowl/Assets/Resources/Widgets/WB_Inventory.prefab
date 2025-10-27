@@ -1725,6 +1725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 0
@@ -1845,6 +1846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 0
@@ -2389,6 +2391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 1
@@ -3263,6 +3266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 1
@@ -5484,6 +5488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 0
@@ -5743,6 +5748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 1
   enableWrapping: 1
   hideIndicatorOnInactive: 0
   resetSelectedOnInactive: 0
@@ -6620,6 +6626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 1
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 0
   resetSelectedOnInactive: 0
@@ -9564,6 +9571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 0
@@ -9759,6 +9767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 0
   enableWrapping: 1
   hideIndicatorOnInactive: 1
   resetSelectedOnInactive: 0
