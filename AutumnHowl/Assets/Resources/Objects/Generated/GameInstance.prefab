@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState:
-    currentBattle: {fileID: 11400000, guid: c6b7a16984be5604ea7ccaf1ac9fcfe7, type: 2}
+    currentBattle: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
     inventory:
       items: []
       spells: []

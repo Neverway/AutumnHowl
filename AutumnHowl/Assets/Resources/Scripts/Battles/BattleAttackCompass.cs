@@ -129,7 +129,7 @@ public class BattleAttackCompass : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    public void Start()
+    public void Awake()
     {
         player = GameInstance.Playerbody as Char_Battle_Player;
         swordSwingAnimator = player.GetComponentInChildren<SwordSwingAnimationHandler>();
