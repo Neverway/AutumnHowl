@@ -44,14 +44,20 @@ public class GridPawn : MonoBehaviour
         initialized = true;
     }
 
-    public void MoveToTile (int _x, int _y)
+    public void MoveToTile (int _x, int _y, Char_Battle toAnimate = null)
     {
         if (BattleGrid.Instance.ValidTile(_x, _y) == false)
         {
             Debug.LogError ("GridPawn " + gameObject.name + " tried to move out of bounds to" + _x + "," + _y);
             return;
         }
+        //Move pawn to position (get old and new position for hop animation while we're at it)
+        Vector3 oldPosition = BattleGrid.Instance.transform.TransformPoint(new Vector3(position.x, position.y, 0));
         BattleGrid.Instance.MovePawn (position.x, position.y, _x, _y, this);
+        Vector3 newPosition = BattleGrid.Instance.transform.TransformPoint(new Vector3(position.x, position.y, 0));
+
+        if (toAnimate != null) // if object was passed to animate, start it
+            toAnimate.AnimateGridHop(oldPosition, newPosition);
     }
 
     public void SetPosition (Vector2Int _position)

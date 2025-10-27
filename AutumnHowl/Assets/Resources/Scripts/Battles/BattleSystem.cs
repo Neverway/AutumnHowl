@@ -181,12 +181,18 @@ public class BS_GridAction : BattleState
 /// </summary>
 public class BS_Victory : BattleState
 {
+    BattleCameraManager battleCameraManager;
     public BS_Victory(BattleStateController controller) : base(controller)
     {
+        battleCameraManager = GameObject.FindObjectOfType<BattleCameraManager>();
     }
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        //Play victory dance!
+        if (GameInstance.Playerbody is IsPlayerCharacter player)
+            player.SwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.Victory;
+
         // Display opening text
         controller.textEvent.textEvent = new TextEvent();
         controller.textEvent.textEvent.AddFrame(
@@ -208,6 +214,10 @@ public class BS_Victory : BattleState
 
     public override void OnStateUpdate()
     {
+        //Update camera to be same zoom as full attack pullback
+        battleCameraManager.UpdateCameraOnAttack(1f);
+
+        //Leave battle as soon as text is cleared
         if (!GameInstance.Get<GI_TextboxManager>().textEventActive)
         {
             GameInstance.Gamestate.LeaveBattle();

@@ -175,7 +175,6 @@ public class GI_SaveSystem : MonoBehaviour
         // Show textbox for saving file
         var textEvent = new TextEvent();
         
-        
         var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
         var playtime = gameState.playtime;
         var formatedTime = TimeSpan.FromSeconds(playtime);
@@ -262,7 +261,6 @@ public class GI_SaveSystem : MonoBehaviour
         instance.SaveValuesFromAttributes();
         CurrentSavingType = SavingType.None;
     }
-
     public static void NotifyEnteredScene()
     {
         CurrentSavingType = SavingType.SwitchingScenes;
