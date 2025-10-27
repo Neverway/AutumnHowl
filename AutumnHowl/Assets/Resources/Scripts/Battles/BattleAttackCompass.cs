@@ -175,8 +175,9 @@ public class BattleAttackCompass : MonoBehaviour
     /// </summary>
     private void ResetCompass()
     {
+        spinStartIndex = (int)swordAngle / 90;
         SetupRingColors();
-        EnableAllTargets();
+        SetupTargetsForStartingState ();
 
         // Unhide the power meters
         powerMask1.enabled = true;
@@ -292,7 +293,7 @@ public class BattleAttackCompass : MonoBehaviour
         player.canMove = false;
         attackBarActive = true;
 
-        EnableTargetsBasedOnPower();
+        EnableTargetsForSpinningState();
     }
     
     /// <summary></summary>
@@ -401,7 +402,7 @@ public class BattleAttackCompass : MonoBehaviour
     /// <summary>
     /// Determines which targets to show.
     /// </summary>
-    private void EnableTargetsBasedOnPower()
+    private void EnableTargetsForSpinningState()
     {
         //Loops through the 4 target graphics in either CW/CCW order and turns them off if you don't have enough stamina.
        
@@ -425,11 +426,53 @@ public class BattleAttackCompass : MonoBehaviour
         }
     }
 
-    private void EnableAllTargets()
+    //Sets all the target indicator graphics on or off.
+    private void SetAllTargets (bool _active)
     {
         for (int i = 0; i < 4; i++)
         {
-            SetTargetActive(i, true);
+            SetTargetActive(i, _active);
+        }
+    }
+
+    /// <summary>
+    /// Sets target graphics on or off so that they match the spin fills,
+    /// before you start swinging sword.
+    /// </summary>
+    private void SetupTargetsForStartingState ()
+    {
+        SetAllTargets (true);
+        int n = AmountOfAvailableSlash ();
+        switch (n)
+        {
+            case 3:
+                {
+                    //Turn off the target for a 360 spin.
+                    SetTargetActive (spinStartIndex, false);
+                    break;
+                }
+            case 2:
+                {
+                    //Turn off the target for a 360 spin.
+                    SetTargetActive (spinStartIndex, false);
+                    break;
+                }
+            case 1:
+                {
+                    //Turn off the target for a 360 spin.
+                    SetTargetActive (spinStartIndex, false);
+                    //Turn off the index 180 degress from sword
+                    int i = spinStartIndex;
+                    i += 2;
+                    if (i > 3) i -= 4;
+                    SetTargetActive (i, false);
+                    break;
+                }
+                case 0:
+                {
+                    SetAllTargets(false);
+                    break;
+                }
         }
     }
 
