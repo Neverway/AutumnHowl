@@ -15,6 +15,7 @@ MonoBehaviour:
   <UniqueID>k__BackingField: SaltBat
   characterReferenceType: 1
   characterName: SaltBat
+  characterTags: 0100000064000000
   baseStats:
     health: 5
     level: 0
