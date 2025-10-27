@@ -176,24 +176,17 @@ public class ModifyCorruptionAction : EffectAction
 public class GiveItemsEffect : EffectAction
 {
     //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
-    public Item itemToGive;
-    public int count;
-
+    public string EffectDescription;
+    [Box, Polymorphic, SerializeReference] public ItemsReference itemToGive;
     public override void ApplyEffect(CharacterIdentifier user)
     {
         Inventory inventoryToAddTo = GameInstance.Gamestate.inventory;
-        for (int i = 0;  i < count; i++)
-            inventoryToAddTo.TryAddItem(itemToGive);
+        Item[] items = itemToGive.GetItems(UnityEngine.Random.Range(int.MinValue, int.MaxValue));
+        foreach (Item item in items)
+            inventoryToAddTo.TryAddItem(item);
     }
 
-    public override string DescribeNoFormat()
-    {
-        string target = "self"; //Placeholder until target is implemented for giving items
-        if (count == 0) return "";
-        if (count == 1) return $"[Give {target} {itemToGive.displayName}]";
-        return $"[Give {target} {count} {itemToGive.displayName}s]";
-
-    }
+    public override string DescribeNoFormat() => $"[{EffectDescription}]";
 }
 
 [Serializable]

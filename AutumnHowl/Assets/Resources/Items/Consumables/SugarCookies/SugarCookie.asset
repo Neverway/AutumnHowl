@@ -42,4 +42,4 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 8
         modifierType: 0
-        value: 0.3
+        value: 0.5

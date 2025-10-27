@@ -37,25 +37,28 @@ public class SwordSwingAnimationHandler : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private string animator_swingStateName;
+    [SerializeField] private string animator_victoryDanceStateName;
     [SerializeField] private string[] animator_pullbackDirectionStateNamess;
     [SerializeField] private string[] animator_failDirectionStateNamess;
     [Space]
     [SerializeField] private Transform visualContainer_default;
     [SerializeField] private Transform visualContainer_swingSword;
     [SerializeField] private Transform swordTrail;
+    [SerializeField] private Transform buryGround;
 
 
     //==================== [ Controls fields ] =======================================================================
 
     [Space, Header("Input controls")]
     public SwingState swingState;
-    public enum SwingState { None, Pullback, Spin, Other }
+    public enum SwingState { None, Pullback, Spin, Victory, Other }
     private Direction _attackStartDirection;
     public Direction attackStartDirection { get => (Direction)((int)_attackStartDirection % 4); set => _attackStartDirection = value; }
     public SpinDirection spinDireciton;
     [Range(0f, 1f)] public float swordPullbackFactor = 0f;
     public float spinDegreesRotation;
     public bool useTrailOutsideOfSpin = false;
+    public float victoryDanceSpeed = 0.25f;
 
     //==================== [ Controller Logic ] =======================================================================
     public void Update()
@@ -63,6 +66,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
         //If swing state is None, use default visuals, otherwise switch to swing visuals!
         if (visualContainer_swingSword != null) visualContainer_swingSword.gameObject.SetActive(swingState != SwingState.None);
         if (visualContainer_default != null ) visualContainer_default.gameObject.SetActive(swingState == SwingState.None);
+        if (buryGround != null ) buryGround.gameObject.SetActive(swingState == SwingState.Victory);
 
         //Use sword trail if spinning or "useTrailOutsideOfSpin" flag is true
         swordTrail.gameObject.SetActive(useTrailOutsideOfSpin || swingState == SwingState.Spin);
@@ -73,19 +77,24 @@ public class SwordSwingAnimationHandler : MonoBehaviour
             case SwingState.None: OnNone(); return;
             case SwingState.Pullback: OnPullback(); break;
             case SwingState.Spin: OnSpin(); break;
+            case SwingState.Victory: OnVictory(); break;
             case SwingState.Other: OnOther(); break;
         }
     }
     public void OnDrawGizmos()
     {
-        Vector3 dir = Quaternion.AngleAxis(spinDegreesRotation, Vector3.back) * Vector3.up;
-        dir = dir.normalized * -0.5f;
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(transform.position, dir);
+        try
+        {
+            Vector3 dir = Quaternion.AngleAxis(spinDegreesRotation, Vector3.back) * Vector3.up;
+            dir = dir.normalized * -0.5f;
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawRay(transform.position, dir);
 
-        Gizmos.color = Color.yellow;
-        Vector3 attackDireciton = attackStartDirection.Info().directionVector3;
-        Gizmos.DrawRay (transform.position + (Vector3.one * 0.01f), attackDireciton * 0.5f);
+            Gizmos.color = Color.yellow;
+            Vector3 attackDireciton = attackStartDirection.Info().directionVector3;
+            Gizmos.DrawRay(transform.position + (Vector3.one * 0.01f), attackDireciton * 0.5f);
+        }
+        catch { }
     }
 
     private void OnNone()
@@ -111,9 +120,14 @@ public class SwordSwingAnimationHandler : MonoBehaviour
             default:
                 return;
         }
-        string pullbackState = animator_pullbackDirectionStateNamess[(int)direcitonToUse];
-        
-        float factor = Mathf.Min(swordPullbackFactor, 0.99f);
+        string pullbackState = animator_pullbackDirectionStateNamess[Mathf.Abs((int)direcitonToUse % 4)];
+
+        //This is a hacky attempt to raise the start value when I should really just change the animations.
+        //To see what this does, compare "y = x" for original 0 to 1 with "y = x^(x+0.45)" for the new 0 to 1 range
+        float factor = Mathf.Pow(swordPullbackFactor, swordPullbackFactor + 0.45f);
+
+        factor = Mathf.Min(factor, 0.99f); //if it equals 1 exactly, it loops to beginning
+
         animator.Play(pullbackState, 0, factor);
         animator.speed = 0f;
     }
@@ -133,16 +147,20 @@ public class SwordSwingAnimationHandler : MonoBehaviour
                 return;
         }
         float factor = (degrees / 360f) % 1f;
+
         animator.Play(animator_swingStateName, 0, factor);
         animator.speed = 0f;
 
+    }
+    private void OnVictory()
+    {
+        animator.Play(animator_victoryDanceStateName, 0, Time.time * victoryDanceSpeed);
+        animator.speed = 0f;
     }
     private void OnOther()
     {
 
     }
-
-
 
     public void FailAttack()
     {
@@ -171,7 +189,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
         }
 
         string failState = animator_failDirectionStateNamess[(int)direcitonToUse];
-        float factor = Mathf.Min(swordPullbackFactor, 0.99f);
+        float factor = Mathf.Min(swordPullbackFactor, 0.99f); //if it equals 1 exactly, it loops to beginning
         float animationTime = 0f;
 
         while (true)
@@ -262,11 +280,13 @@ public class SwordSwingAnimationHandler : MonoBehaviour
             if (spinDireciton == SpinDirection.Left) spinDireciton = SpinDirection.Right;
             else if (spinDireciton == SpinDirection.Right) spinDireciton = SpinDirection.Left;
 
-            spinDegreesRotation %= 360;
+            spinDegreesRotation = Mathf.Abs(spinDegreesRotation % 360);
             startAngle = spinDegreesRotation;
             endAngle = toRecoilTo.Info().degreesRotation;
-
-            if (Mathf.Abs(startAngle - endAngle) > 180) endAngle += 360; //Make sure to use the shortest distance of angles
+            Debug.Log($"BEFORE: starts: {startAngle}, ends: {endAngle}");
+            if (endAngle - startAngle > 180) endAngle -= 360; //Make sure to use the shortest distance of angles
+            if (endAngle - startAngle < -180) endAngle += 360;
+            Debug.Log($"AFTER: starts: {startAngle}, ends: {endAngle}");
 
             secondsToSpin = (Mathf.Abs(startAngle - endAngle) / 90f) * SPIN_90DEGREES_SECONDS;
             timeStarted = Time.time;

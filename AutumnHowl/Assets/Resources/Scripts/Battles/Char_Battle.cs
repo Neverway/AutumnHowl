@@ -10,7 +10,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using static GameFeatureConstants.Battle;
 
@@ -20,13 +19,16 @@ public abstract class Char_Battle : Character
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public List<AttackSequence> AttackSequences;
 
-
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
     public bool canMove;
     //If true, this character can be moved by "pushing" attacks
     public bool pushable;
-
-
+    [Tooltip("Time in seconds it takes to hop from one grid position to another")]
+    public float gridHopAnimation_Seconds = 0.15f;
+    [Tooltip("Peak height to reach during hop animation")]
+    public float gridHopAnimation_Height = 0.35f;
+    [Tooltip("Transform to use for the hop animation")]
+    public Transform gridHopAnimationContainer;
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
     //unique identifier for a stat mod
@@ -43,6 +45,7 @@ public abstract class Char_Battle : Character
     //This is so we can invert the direction the pawn faces when it attacks (currently only used for the Player pawn).
     [HideInInspector] public bool invertAttackFacingDirections = false;
 
+    private Coroutine currentGridHop;
     #endregion
 
 
@@ -81,7 +84,7 @@ public abstract class Char_Battle : Character
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
         {
-            gridPawnController.MoveToTile (testPos.x, testPos.y);
+            gridPawnController.MoveToTile (testPos.x, testPos.y, this);
             if (doNextTurn)
             {
                 if (_pathTargetPawn != null)
@@ -100,16 +103,46 @@ public abstract class Char_Battle : Character
     {
         
         print($"{gameObject.name} - try move called");
-        if (BattleGrid.Instance.ValidTile (_direction.x, _direction.y) && !BattleGrid.Instance.IsOccupied(_direction.x, _direction.y))
+        if (BattleGrid.Instance.ValidTile(_direction.x, _direction.y) && !BattleGrid.Instance.IsOccupied(_direction.x, _direction.y))
         {
             print($"{gameObject.name} - try move success");
-            gridPawnController.MoveToTile (_direction.x, _direction.y);
+            gridPawnController.MoveToTile(_direction.x, _direction.y, this);
             battleStateController.NextTurnStep(caller:gameObject.name);
             return true;
         }
         print($"{gameObject.name} - try move failure");
 
         return false;
+    }
+    public void AnimateGridHop(Vector3 hopFrom, Vector3 hopTo)
+    {
+        if (currentGridHop != null) StopCoroutine(currentGridHop);
+
+        currentGridHop = StartCoroutine(CoAnimateGridHop(hopFrom, hopTo, gridHopAnimation_Seconds));
+    }
+    public IEnumerator CoAnimateGridHop(Vector3 hopFrom, Vector3 hopTo, float seconds)
+    {
+        if (gridHopAnimationContainer == null) yield break;
+        if (seconds <= 0f) {
+            Debug.LogWarning($"Hop animation set to {seconds} seconds, which make no gosh darn sense.. SO I AINT DOIN IT");
+            yield break;
+        }
+
+        float timer = 0f;
+        while (true)
+        {
+            timer += Time.deltaTime;
+            gridHopAnimationContainer.transform.position = Vector3.Lerp(hopFrom, hopTo, timer / seconds);
+            float height = (-1 * Mathf.Pow(((2 * timer / seconds) - 1), 2) + 1) * gridHopAnimation_Height;
+            gridHopAnimationContainer.transform.position += Vector3.up * height;
+
+            //Stay until timer reaches end
+            if (timer < seconds) yield return null;
+            else break;
+        }
+        gridHopAnimationContainer.transform.position = hopTo;
+
+        yield break;
     }
 
     public virtual void OnAttacked(AttackElement attack)
@@ -173,7 +206,7 @@ public abstract class Char_Battle : Character
                 if (i == 0 && hasStopped) hasStopped = false;
                 else //But if we truly are stopping, register the recoil with the animation
                 {
-                    Debug.Log("Erry: Last cardinal direction PLEASEEE : " + lastCardinalDirection);
+                    FindObjectOfType<BattleCameraManager>().GoBackHome();
                     if (DirectionUtility.TryConvertToDirection(lastCardinalDirection, out var convertedDirection2))
                         player.SwingAnimator.RegisterRecoil(convertedDirection2.Value.Info().turned180);
                 }
