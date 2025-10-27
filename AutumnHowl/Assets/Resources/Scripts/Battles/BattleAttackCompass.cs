@@ -37,6 +37,7 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] AnimationCurve spinSpeedCurve;
     [Tooltip("This is the amount of STR/PWR/SOUL that will be expended when performing an attack that passes this many cardinal directions on the compass")]
     [SerializeField] private int[] powerRequiredForAttacks;
+    [Space]
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
@@ -114,6 +115,13 @@ public class BattleAttackCompass : MonoBehaviour
     [Tooltip("")] 
     [SerializeField] private Image powerMask2;
 
+    [SerializeField] private Transform visual_ZButton;
+    [SerializeField] private Transform visual_ZButtonTarget;
+    [SerializeField] private Transform visual_ZDirection;
+
+    [SerializeField] private Transform visual_XButton;
+    [SerializeField] private Transform visual_XButtonTarget;
+    [SerializeField] private Transform visual_XDirection;
 
     #endregion
 
@@ -121,7 +129,7 @@ public class BattleAttackCompass : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-   public void Start()
+    public void Start()
     {
         player = GameInstance.Playerbody as Char_Battle_Player;
         swordSwingAnimator = player.GetComponentInChildren<SwordSwingAnimationHandler>();
@@ -135,6 +143,15 @@ public class BattleAttackCompass : MonoBehaviour
 
     public void Update()
     {
+        visual_ZButton.position = visual_ZButtonTarget.position;
+        visual_XButton.position = visual_XButtonTarget.position;
+        visual_ZButton.gameObject.SetActive(currentState == RingState.notStarted);
+        visual_XButton.gameObject.SetActive(currentState == RingState.notStarted);
+        visual_ZDirection.gameObject.SetActive(currentState == RingState.notStarted || 
+            (currentSpinDirection == SpinDirection.Left && currentState == RingState.spinning));
+        visual_XDirection.gameObject.SetActive(currentState == RingState.notStarted || 
+            (currentSpinDirection == SpinDirection.Right && currentState == RingState.spinning));
+
         // Update the needle based on the sword angle
         needleImage.transform.localRotation = Quaternion.Euler (new Vector3 (0, 0f, -swordAngle));
         
