@@ -228,6 +228,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  startWithRandomRotation: 1
+  startWithRandomRotation: 0
   animationTime: 0
   randomRotationDirection: {x: 0, y: 0, z: 0, w: 1}

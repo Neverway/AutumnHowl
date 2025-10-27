@@ -26,7 +26,7 @@ public class BattleAttackCompass : MonoBehaviour
     [SerializeField] private float goodAngle = 30f;
     [Tooltip("The size of the angle that registers as a perfect hit (this should be smaller than the good angle)")]
     [SerializeField] private float perfectAngle = 10f;
-    [Tooltip("?")]
+    [Tooltip("When true, you have to press and press again to trigger attack. When false, you press and hold and trigger attack on release")]
     [SerializeField] public bool stopByTapping = false;
     [Tooltip("The duration for the hit text to be visible")]
     [SerializeField] private float hitTextDuration = 0.75f;
@@ -35,8 +35,6 @@ public class BattleAttackCompass : MonoBehaviour
     [Tooltip("The max speed of the needle")]
     [SerializeField] private float maxSpinSpeed = 200f;
     [SerializeField] AnimationCurve spinSpeedCurve;
-    // Bad me, this variable is confusing >:[
-    // ~Liz
     [Tooltip("This is the amount of STR/PWR/SOUL that will be expended when performing an attack that passes this many cardinal directions on the compass")]
     [SerializeField] private int[] powerRequiredForAttacks;
 
@@ -63,6 +61,7 @@ public class BattleAttackCompass : MonoBehaviour
     private float nearestAngleToSword;
     private float distanceFromNearestAngle;
     private SwordSwingAnimationHandler swordSwingAnimator;
+    private BattleCameraManager battleCameraManager;
 
 
     /// <summary>
@@ -122,6 +121,7 @@ public class BattleAttackCompass : MonoBehaviour
     {
         player = GameInstance.Playerbody as Char_Battle_Player;
         swordSwingAnimator = player.GetComponentInChildren<SwordSwingAnimationHandler>();
+        battleCameraManager = FindObjectOfType<BattleCameraManager>();
     } 
 
     public void OnEnable()
@@ -282,7 +282,7 @@ public class BattleAttackCompass : MonoBehaviour
         swordSwingAnimator.attackStartDirection = lastValidFacingDireciton;
         swordSwingAnimator.spinDireciton = currentSpinDirection;
 
-        if (stopByTapping == true)
+        if (stopByTapping)
         {
             if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
@@ -290,6 +290,15 @@ public class BattleAttackCompass : MonoBehaviour
                 return;
             }
         }
+        else
+        {
+            if (GameInstance.Inputs.Action.WasReleasedThisFrame() || GameInstance.Inputs.Interact.WasReleasedThisFrame())
+            {
+                FinishSpin();
+                return;
+            }
+        }
+
         float spinAmount = 0f;
         if (currentSpinDirection == SpinDirection.Left)
         {
@@ -310,7 +319,10 @@ public class BattleAttackCompass : MonoBehaviour
         float percent = Mathf.Abs (totalSpin) / 360;
         float t = spinSpeedCurve.Evaluate (percent);
 
+        //Update sword-pullback and camera zoom based on factor
         swordSwingAnimator.swordPullbackFactor = t;
+        battleCameraManager.UpdateCameraOnAttack(t);
+
         currentSpinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, t);
 
 
@@ -376,15 +388,21 @@ public class BattleAttackCompass : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Ends sword spinning and calculates the direction it was pointing.
-    /// </summary>
+    /// <summary> Ends sword spinning and calculates the direction it was pointing.</summary>
     private void FinishSpin ()
     {
-
-        if (Mathf.Abs(clampedTotalSpin) <= 45)
+        if (Mathf.Abs(clampedTotalSpin) <= 45) //When swing is less than 45
         {
-            FailAttack ();
+            if (stopByTapping)
+            {
+                ShowHitText("Miss!");
+                FailAttack();
+            }
+            else
+            {
+                ShowHitText("Hold to attack");
+                FailAttack(advanceTurn: false);
+            }
             return;
         }
 
@@ -402,29 +420,29 @@ public class BattleAttackCompass : MonoBehaviour
 
         if (distanceFromNearestAngle < perfectAngle)
         {
-            ShowHitText ("Perfect!");
+            ShowHitText("Perfect!");
             currentDamageMultiplier = 1f;
         }
         else if (distanceFromNearestAngle < goodAngle) {
-            ShowHitText ("Good");
+            ShowHitText("Good");
             currentDamageMultiplier = goodDamageMultiplier;
         }
         else
         {
-            ShowHitText ("Miss!");
-            FailAttack ();
+            ShowHitText("Miss!");
+            FailAttack();
             return;
         }
 
-        ClampTotalSpin ();
+        ClampTotalSpin();
         //Try consuming amount of power corresponding to size of spin
         //If there's not enough power, the attack fails.
         var index = Mathf.Abs((int)clampedTotalSpin)-1;
         print($"{index} uses {powerRequiredForAttacks[index]}");
         if (player.Stats.TryUsePower(powerRequiredForAttacks[index]) == false)
         {
-            ShowHitText ("POWER TOO LOW!");
-            FailAttack ();
+            ShowHitText("POWER TOO LOW!");
+            FailAttack();
             return;
         }
 
@@ -465,6 +483,7 @@ public class BattleAttackCompass : MonoBehaviour
         currentState = RingState.notStarted;
         attackBarActive = false;
         hasInitialized = false;
+        battleCameraManager.GoBackHome();
     }
 
     private void ExecuteAttack()
@@ -522,15 +541,21 @@ public class BattleAttackCompass : MonoBehaviour
         }
     }
 
-    private void FailAttack ()
+    private void FailAttack (bool advanceTurn = true)
     {
-        //Use fail attack animation
-        swordSwingAnimator.FailAttack();
-
         GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.failBuzz);
         centerFill.fillAmount = 0;
-        OnAttackDone ();
-        player.SkipTurn ();
+        OnAttackDone();
+        if (advanceTurn)
+        {
+            swordSwingAnimator.FailAttack();
+            player.SkipTurn();
+        }
+        else
+        {
+            swordSwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.None;
+            ReEnableCompassInputs();
+        }
     }
 
     /// <summary>

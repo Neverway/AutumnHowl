@@ -173,7 +173,7 @@ public abstract class Char_Battle : Character
                 if (i == 0 && hasStopped) hasStopped = false;
                 else //But if we truly are stopping, register the recoil with the animation
                 {
-                    Debug.Log("Erry: Last cardinal direction PLEASEEE : " + lastCardinalDirection);
+                    FindObjectOfType<BattleCameraManager>().GoBackHome();
                     if (DirectionUtility.TryConvertToDirection(lastCardinalDirection, out var convertedDirection2))
                         player.SwingAnimator.RegisterRecoil(convertedDirection2.Value.Info().turned180);
                 }
