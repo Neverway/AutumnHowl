@@ -940,6 +940,9 @@ MonoBehaviour:
       pushing: 0
   canMove: 0
   pushable: 0
+  gridHopAnimationSeconds: 0.15
+  gridHopAnimationHeight: 0.35
+  gridHopAnimationContainer: {fileID: 1341769465767893047}
   gridPawnController: {fileID: 2113060241678384352}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}

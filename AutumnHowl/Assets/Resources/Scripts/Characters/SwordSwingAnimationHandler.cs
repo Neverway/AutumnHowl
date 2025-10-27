@@ -120,9 +120,14 @@ public class SwordSwingAnimationHandler : MonoBehaviour
             default:
                 return;
         }
-        string pullbackState = animator_pullbackDirectionStateNamess[(int)direcitonToUse];
-        
-        float factor = Mathf.Min(swordPullbackFactor, 0.99f);
+        string pullbackState = animator_pullbackDirectionStateNamess[Mathf.Abs((int)direcitonToUse % 4)];
+
+        //This is a hacky attempt to raise the start value when I should really just change the animations.
+        //To see what this does, compare "y = x" for original 0 to 1 with "y = x^(x+0.45)" for the new 0 to 1 range
+        float factor = Mathf.Pow(swordPullbackFactor, swordPullbackFactor + 0.45f);
+
+        factor = Mathf.Min(factor, 0.99f); //if it equals 1 exactly, it loops to beginning
+
         animator.Play(pullbackState, 0, factor);
         animator.speed = 0f;
     }
@@ -142,6 +147,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
                 return;
         }
         float factor = (degrees / 360f) % 1f;
+
         animator.Play(animator_swingStateName, 0, factor);
         animator.speed = 0f;
 
@@ -183,7 +189,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
         }
 
         string failState = animator_failDirectionStateNamess[(int)direcitonToUse];
-        float factor = Mathf.Min(swordPullbackFactor, 0.99f);
+        float factor = Mathf.Min(swordPullbackFactor, 0.99f); //if it equals 1 exactly, it loops to beginning
         float animationTime = 0f;
 
         while (true)

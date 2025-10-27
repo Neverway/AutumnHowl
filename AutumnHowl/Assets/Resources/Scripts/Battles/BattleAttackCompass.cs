@@ -554,7 +554,7 @@ public class BattleAttackCompass : MonoBehaviour
         else
         {
             swordSwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.None;
-            ReEnableCompassInputs();
+            player.SetTurnActive(true); //This resets the compass properly and allows them to move again
         }
     }
 
