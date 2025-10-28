@@ -80,7 +80,7 @@ public class BattleGridPather : MonoBehaviour
 
         // Check surrounding tiles
         checkPos = new Vector2Int(x + 1, y);
-        if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
+        if (battleGrid.IsPathable (checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
             //Make the sword cost extra
@@ -91,7 +91,7 @@ public class BattleGridPather : MonoBehaviour
             foundTile = true;
         }
         checkPos = new Vector2Int(x - 1, y);
-        if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
+        if (battleGrid.IsPathable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
             if (checkPos == swordPosition)
@@ -101,7 +101,7 @@ public class BattleGridPather : MonoBehaviour
             foundTile = true;
         }
         checkPos = new Vector2Int(x, y + 1);
-        if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
+        if (battleGrid.IsPathable (checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
             if (checkPos == swordPosition)
@@ -111,7 +111,7 @@ public class BattleGridPather : MonoBehaviour
             foundTile = true;
         }
         checkPos = new Vector2Int(x, y - 1);
-        if (battleGrid.IsMoveable(checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
+        if (battleGrid.IsPathable (checkPos.x, checkPos.y) && grid[checkPos.x, checkPos.y] == UnassignedTileNumber)
         {
             grid[checkPos.x, checkPos.y] = n+1;
             if (checkPos == swordPosition)

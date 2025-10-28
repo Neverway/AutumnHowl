@@ -8,6 +8,7 @@
 //====================================================================================================================//
 
 using System;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -145,6 +146,12 @@ public abstract class Character : MonoBehaviour
     public float GetHealth ()
     {
         return Stats.health;
+    }
+
+    public bool HasTag (CharacterTags _tag)
+    {
+        if (template.characterTags.Contains(_tag)) return true;
+        return false;
     }
 
     public virtual void ModifyPower(int _amount)
