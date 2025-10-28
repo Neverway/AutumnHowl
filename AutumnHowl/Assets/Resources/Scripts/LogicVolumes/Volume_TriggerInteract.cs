@@ -82,7 +82,7 @@ public class Volume_TriggerInteract : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void ResetActive()
     {
-        resetCoroutine = StartCoroutine(CO_ResetActive());
+        resetCoroutine = GameInstance.SendCoroutine(CO_ResetActive());
     }
 
     #endregion

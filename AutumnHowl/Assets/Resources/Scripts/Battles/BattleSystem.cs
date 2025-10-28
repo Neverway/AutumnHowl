@@ -197,6 +197,10 @@ public class BS_Victory : BattleState
             "You Won!\n{col=stat}[+" +
             $"{GameInstance.Gamestate.currentBattle.victoryLevels}" +
             $" LEVELS]\n[+${GameInstance.Gamestate.currentBattle.victoryGold}]");
+        
+        // Give victory loot
+        GameInstance.Gamestate.player.Stats.level += GameInstance.Gamestate.currentBattle.victoryLevels;
+        GameInstance.Gamestate.money += GameInstance.Gamestate.currentBattle.victoryGold;
            
         
         controller.textEvent.textEvent.OnFinish.AddListener(() =>
@@ -204,6 +208,7 @@ public class BS_Victory : BattleState
             //controller.NewState(new BS_PlayerAction(controller));
         });
 
+        // Play victory jingle
         var audioManager = GameInstance.Get<GI_AudioManager>();
         
         audioManager.SetMusic(GI_AudioManager.Music.Victory);
