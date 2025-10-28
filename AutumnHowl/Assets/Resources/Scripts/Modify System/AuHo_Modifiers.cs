@@ -251,6 +251,8 @@ public class DoEffectActionOnEvent : CharacterTargetingModifierCreatorBase
 
     protected override void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets) { }
 
+
+
     public override bool OnGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent, InvokeTiming timing)
     {
         if (timing != beforeOrAfter) return false;
