@@ -41,13 +41,16 @@ public class EventCounter<T> : ListensToGameEvent<BasicGameEvent> where T : AuHo
 
 public enum GameEventType
 {
-    UseItem = 0,
     TakeDamage = 1,
     Heal = 2,
     BattleTurnPassed = 3,
     BattleWon = 4,
     Died = 5,
-    BattleWavePassed = 6
+    BattleWavePassed = 6,
+
+    UseAnyItem = 0,
+    UseConsumable = 7,
+    UseSpell = 8,
 }
 
 
@@ -62,8 +65,46 @@ public class Event_UseItem : AuHoGameEvent_Interruptable
         this.itemBeingUsed = itemBeingUsed;
         this.user = user;
     }
-    public override GameEventType EventType => GameEventType.UseItem;
+    protected override void WhenInvoked() 
+    { 
+
+    }
+
+    public override GameEventType EventType => GameEventType.UseAnyItem;
 }
+public class Event_UseConsumable : AuHoGameEvent_Interruptable
+{
+    public Item itemBeingUsed;
+    public CharacterIdentifier user;
+    public Event_UseConsumable(Item itemBeingUsed, CharacterIdentifier user)
+    {
+        this.itemBeingUsed = itemBeingUsed;
+        this.user = user;
+    }
+    protected override void WhenInvoked()
+    {
+
+    }
+
+    public override GameEventType EventType => GameEventType.UseConsumable;
+}
+public class Event_UseSpell : AuHoGameEvent_Interruptable
+{
+    public Item itemBeingUsed;
+    public CharacterIdentifier user;
+    public Event_UseSpell(Item itemBeingUsed, CharacterIdentifier user)
+    {
+        this.itemBeingUsed = itemBeingUsed;
+        this.user = user;
+    }
+    protected override void WhenInvoked()
+    {
+
+    }
+
+    public override GameEventType EventType => GameEventType.UseAnyItem;
+}
+
 
 public class Event_TakeDamage : AuHoGameEvent_Interruptable
 {
