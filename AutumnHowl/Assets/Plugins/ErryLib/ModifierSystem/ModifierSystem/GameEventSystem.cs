@@ -37,7 +37,8 @@ namespace ErryLib.GameEvents
                 originalEvent = gameEvent;
 
             //Loop through all active modifiers and pass 'gameEvent' to any modifiers implementing ListensToGameEvent
-            foreach(Modifier mod in Modifier.ActiveModifiers)
+            Modifier[] modifiers = Modifier.ActiveModifiers.ToArray();
+            foreach (Modifier mod in modifiers)
                 if (mod is ListensToGameEvent)
                     (mod as ListensToGameEvent).TryReactToEvent(gameEvent, invokeTiming);
 

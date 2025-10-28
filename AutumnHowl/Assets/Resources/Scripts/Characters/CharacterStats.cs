@@ -17,12 +17,16 @@ using static CharacterStatType;
 [Serializable]
 public class CharacterStats
 {
+    public CharacterIdentifier Identifier;
     public Character owner { get; set; }
 
     /*-----[ Constructors ]-------------------------------------------------------------------------------------------*/
     public CharacterStats() { }
-    public CharacterStats(CharacterIdentifier character) : base() => SetupStatsLinkedToCharacter(character);
-
+    public CharacterStats(CharacterIdentifier character)
+    {
+        Identifier = character;
+        SetupStatsLinkedToCharacter(character);
+    }
     #region========================================( Variables )======================================================//
     /*-----[ Settable stats (Not modifiable) ]------------------------------------------------------------------------*/
 
@@ -66,6 +70,11 @@ public class CharacterStats
         // Character healed
         if (_amount > 0)
         {
+            //Create a heal event, stop if it gets interrupted by a modifier, and get modified value
+            Event_Heal healEvent = new Event_Heal(Identifier, _amount);
+            if (healEvent.IfInvokeInterrupted() || healEvent.healAmount <= 0) return;
+            _amount = healEvent.healAmount;
+
             if (health + _amount > maxHealth)
             {
                 health = maxHealth;
@@ -76,15 +85,19 @@ public class CharacterStats
                 health += _amount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
             }
-            // TODO - HOW teH HeCk do I call this now? ~Liz
-            //OnHeal?.Invoke();
+            return;
         }
         
         if (_amount == 0) return;
         
         // Character damaged
-        else if (_amount < 0)
+        if (_amount < 0)
         {
+            //Create a damage event, stop if it gets interrupted by a modifier, and get modified value
+            Event_TakeDamage damageEvent = new Event_TakeDamage(Identifier, _direction, -_amount);
+            if (damageEvent.IfInvokeInterrupted() || damageEvent.damage <= 0) return;
+            _amount = -damageEvent.damage;
+
             var totalAmount = _amount;
             
             // Apply defense if active

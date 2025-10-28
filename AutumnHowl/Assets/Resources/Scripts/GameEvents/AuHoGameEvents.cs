@@ -1,18 +1,59 @@
 using ErryLib.GameEvents;
+using ErryLib.ModiferSystem.Instancers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AuHoGameEvents 
+public abstract class AuHoGameEvent : BasicGameEvent
 {
-    public static bool InvokeAndGetIfSuccess(this GameEvent gameEvent)
+    protected override bool IsInterruptable => false;
+    public abstract GameEventType EventType { get; }
+    protected override void WhenInvoked() { }
+    public bool IfInvokeSuccess()
     {
-        gameEvent.Invoke();
-        return !gameEvent.isEventInterrupted;
+        Invoke();
+        return !isEventInterrupted;
+    }
+    public bool IfInvokeInterrupted()
+    {
+        Invoke();
+        return isEventInterrupted;
     }
 }
+public abstract class AuHoGameEvent_Interruptable : AuHoGameEvent 
+{ 
+    protected override bool IsInterruptable => true; 
+}
 
-public class Event_UseItem : GameEvent<Event_UseItem>
+public class EventCounter<T> : ListensToGameEvent<BasicGameEvent> where T : AuHoGameEvent
+{
+    public EventCounter() => GameEventSystem.Register(this);
+
+    public int counter = 0;
+    public bool ReactToEvent(BasicGameEvent gameEvent, InvokeTiming timing)
+    {
+        if (timing == InvokeTiming.After && gameEvent is T)
+            counter++;
+        return true;
+    }
+    public void Discard() => GameEventSystem.UnRegister(this);
+}
+
+public enum GameEventType
+{
+    UseItem = 0,
+    TakeDamage = 1,
+    Heal = 2,
+    BattleTurnPassed = 3,
+    BattleWon = 4,
+    Died = 5,
+    BattleWavePassed = 6
+}
+
+
+//========================================= [ All Events Here ] ==================================================
+
+public class Event_UseItem : AuHoGameEvent_Interruptable
 {
     public Item itemBeingUsed;
     public CharacterIdentifier user;
@@ -21,25 +62,49 @@ public class Event_UseItem : GameEvent<Event_UseItem>
         this.itemBeingUsed = itemBeingUsed;
         this.user = user;
     }
-
-    protected override bool IsInterruptable => true;
-
-    protected override void WhenInvoked() { }
+    public override GameEventType EventType => GameEventType.UseItem;
 }
-public class Event_GetItem : GameEvent<Event_UseItem>
+
+public class Event_TakeDamage : AuHoGameEvent_Interruptable
 {
-    protected override bool IsInterruptable => true;
-
-    protected override void WhenInvoked()
+    public float damage;
+    public Vector2Int direction;
+    public CharacterIdentifier target;
+    public Event_TakeDamage(CharacterIdentifier target, Vector2Int direction, float damage)
     {
-        throw new System.NotImplementedException();
+        this.target = target;
+        this.direction = direction;
+        this.damage = damage;
     }
+    public override GameEventType EventType => GameEventType.TakeDamage;
 }
-
-
-
-
-
+public class Event_Heal : AuHoGameEvent_Interruptable
+{
+    public float healAmount;
+    public CharacterIdentifier target;
+    public Event_Heal(CharacterIdentifier target, float healAmount)
+    {
+        this.target = target;
+        this.healAmount = healAmount;
+    }
+    public override GameEventType EventType => GameEventType.Heal;
+}
+public class Event_BattleTurnPassed : AuHoGameEvent
+{
+    public override GameEventType EventType => GameEventType.BattleTurnPassed;
+}
+public class Event_BattleWon : AuHoGameEvent
+{
+    public override GameEventType EventType => GameEventType.BattleWon;
+}
+public class Event_BattleWaveStarted : AuHoGameEvent
+{
+    public override GameEventType EventType => GameEventType.BattleWon;
+}
+public class Event_BattleWavePassed : AuHoGameEvent
+{
+    public override GameEventType EventType => GameEventType.BattleWavePassed;
+}
 
 
 

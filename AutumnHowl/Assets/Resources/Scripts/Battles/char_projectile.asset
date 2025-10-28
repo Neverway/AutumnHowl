@@ -15,6 +15,7 @@ MonoBehaviour:
   <UniqueID>k__BackingField: char_projectile
   characterReferenceType: 1
   characterName: 
+  characterTags: 04000000
   baseStats:
     health: 100
     level: 0
@@ -52,6 +53,10 @@ MonoBehaviour:
       startValue: 5
       multiplier: 0
       addedValue: 0
+    shieldPower:
+      startValue: 10
+      multiplier: 0
+      addedValue: 0
     walkSpeed:
       startValue: 2
       multiplier: 0
@@ -60,4 +65,3 @@ MonoBehaviour:
       startValue: 3
       multiplier: 0
       addedValue: 0
-    owner: {fileID: 0}

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ShieldCookie
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_consumable_shieldCookie
-  id: 
   displayName: Shield Cookie
   description: A small cookie shaped like a shield.
   canNotDiscard: 0
@@ -29,7 +28,7 @@ MonoBehaviour:
       type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        statToModify: 0
+        statToModify: 1
         modifierType: 0
         value: 20
     - rid: 1234355949659750448
