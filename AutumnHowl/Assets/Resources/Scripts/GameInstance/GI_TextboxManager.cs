@@ -399,6 +399,11 @@ public class GI_TextboxManager : MonoBehaviour
 
     #endregion
 }
+[Serializable]
+public class TextEventItem
+{
+
+}
 
 [Serializable]
 public class TextFrames
@@ -420,17 +425,21 @@ public class TextFrames
     public bool autoProgressOnComplete;
 }
 
+
+
+
 [Serializable]
 public class TextEvent
 {
-    [Box] public List<TextFrames> frames = new();
+    public List<TextFrames> frames = new();
     public UnityEvent OnFinish = new UnityEvent();
 
     public void ClearFrames() => frames.Clear();
     public void AddFrame(string text) => frames.Add(new TextFrames(text));
-    public bool TryDisplay(bool overrideExistingEvents = false) => GameInstance.Get<GI_TextboxManager>().TryStartTextEvent(this, overrideExistingEvents);
+    public virtual bool TryDisplay(bool overrideExistingEvents = false) => GameInstance.Get<GI_TextboxManager>().TryStartTextEvent(this, overrideExistingEvents);
 
 }
+
 
 [Serializable]
 public enum TextboxDisplayMode
