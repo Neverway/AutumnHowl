@@ -28,9 +28,11 @@ MonoBehaviour:
       type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        seconds: 120
         target:
           rid: 1234355949659750451
+        modifierIcons:
+        - {fileID: -2887579322783119589, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
+        seconds: 30
         modifier:
           rid: 1234356096328531982
     - rid: 1234355949659750451
@@ -42,4 +44,4 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 8
         modifierType: 0
-        value: 0.5
+        value: 5

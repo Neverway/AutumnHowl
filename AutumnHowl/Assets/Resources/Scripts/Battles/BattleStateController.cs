@@ -181,6 +181,9 @@ public class BattleStateController : MonoBehaviour
             currentTurn = 0;
             turnOrder[0].SetTurnActive(true);
             print($"All turns completed, going to step {stepsRemaining}");
+
+            //Trigger gameevent just to communicate that a turn has passed
+            new Event_BattleTurnPassed().Invoke();
         }
         print($"nextTurnCoroutine Completed!");
         nextTurnCoroutine = null;

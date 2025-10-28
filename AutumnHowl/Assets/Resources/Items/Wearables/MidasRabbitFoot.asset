@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: MidasRabbitFoot
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: midas_rabbit_foot
+  displayName: Midas's Rabbit Foot
+  description: 
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 0
+  sellCost: 0
+  effectWhenEquipped:
+    rid: 1234356373609775104
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356373609775104
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: '[0$ to 50$ on each battle won]'
+        beforeOrAfter: 1
+        gameEventType: 4
+        effectAction:
+          rid: 1234356373609775110
+    - rid: 1234356373609775110
+      type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        EffectDescription: 
+        itemToGive:
+          rid: 1234356373609775112
+    - rid: 1234356373609775112
+      type: {class: ItemsRef_Money, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        moneyRange: {x: 0, y: 50}
+        roundToNearest: 1
