@@ -200,7 +200,7 @@ public class GI_SaveSystem : MonoBehaviour
     }
     
     [ContextMenu("Trigger Clear Save")]
-    private void OnClearSave()
+    public void OnClearSave()
     {
         if (!Application.isPlaying) return;
 

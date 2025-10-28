@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
+  m_Name: Saviors Risk
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: spell_savioursrisk
+  displayName: Savior's Risk
+  description: Transfer damaged health into corruption. It seems the spell can also
+    target allies at the cost of the caster's corruption. You intend to stay alone
+    for the rest of this journey though, so you won't need that.
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 0
+  sellCost: 0
+  powerCost: 5
+  effectsWhenCast:
+    rid: 2578432377249857541
+  references:
+    version: 2
+    RefIds:
+    - rid: 2578432377249857541
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 2578432377249857542
+        - rid: 2578432377249857544
+    - rid: 2578432377249857542
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 2578432377249857543
+        modifierType: 0
+        amount: 20
+    - rid: 2578432377249857543
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2578432377249857544
+      type: {class: ModifyCorruptionAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 2578432377249857545
+        modifierType: 0
+        amount: 20
+    - rid: 2578432377249857545
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
