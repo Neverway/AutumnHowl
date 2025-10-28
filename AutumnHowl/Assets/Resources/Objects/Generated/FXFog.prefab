@@ -47,5 +47,5 @@ MonoBehaviour:
   particles: {fileID: 7285890379098545918, guid: 3f91b9c7940aefd418cb830f4dbfe8b6, type: 3}
   spawnsPerSecond: 0.5
   factorSpawnRateByArea: 1
-  secondsOfSpawningToPreload: 10
+  secondsOfSpawningToPreload: 15
   area: {x: 5, y: 5, z: 1}

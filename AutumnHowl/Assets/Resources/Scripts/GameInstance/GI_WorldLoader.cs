@@ -51,7 +51,6 @@ public class GI_WorldLoader : MonoBehaviour
             TeleportPlayerToExit(_exitWarpID);
 
         //Notify save system to load values for the scene
-        Debug.Log("Loading twice??");
         GI_SaveSystem.NotifyEnteredScene();
 
         IsLoading = false;
