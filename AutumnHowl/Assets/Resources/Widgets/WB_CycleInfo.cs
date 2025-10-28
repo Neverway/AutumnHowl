@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class WB_CycleInfo : MonoBehaviour
 {
+    public List<CycleInfo> cycleInfo;
     public string titleText;
     public string subtitleText;
     public TMP_Text title;
@@ -12,15 +14,13 @@ public class WB_CycleInfo : MonoBehaviour
     public string currentTextContent;
     public float currentTextTypeDelay;
     public Char_ChatterVoice voice;
-
+    public Animator animator;
     public bool printingSubtitle;
     
     // Start is called before the first frame update
     void Start()
     {
-        title.text = "";
-        subtitle.text = "";
-        StartCoroutine(TypeText(titleText));
+        DisplayCycleInfo();
     }
     
 
@@ -59,7 +59,53 @@ public class WB_CycleInfo : MonoBehaviour
         {
             yield return new WaitForSeconds(currentTextTypeDelay);
             StartCoroutine(TypeText(subtitleText, true));
-            Destroy(gameObject, 5);
+            print(animator.gameObject.name + " has finished");
+            StartCoroutine(CloseCycleInfoAfterDelay());
         }
     }
+
+    private IEnumerator CloseCycleInfoAfterDelay()
+    {
+        yield return new WaitForSeconds(2);
+        animator.Play("Close");
+        Destroy(gameObject, 3);
+    }
+
+    public void DisplayCycleInfo()
+    {
+        // Clear text elements
+        title.text = "";
+        subtitle.text = "";
+
+        GetCurrentCyclesInfo();
+        
+        animator.Play("Open");
+        StartCoroutine(TypeText(titleText));
+    }
+
+    /// <summary>
+    /// Use the list of cycle info's to display text for the start of each cycle
+    /// </summary>
+    public void GetCurrentCyclesInfo()
+    {
+        var gameState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        if (cycleInfo.Count > gameState.currentCycle)
+        {
+            titleText = cycleInfo[gameState.currentCycle].title;
+            subtitleText = cycleInfo[gameState.currentCycle].subtitle;
+        }
+        else
+        {
+            // Fallback to the first cycle info when over indexing past the intended cycles
+            titleText = cycleInfo[0].title;
+            subtitleText = cycleInfo[0].subtitle;
+        }
+    }
+}
+
+[Serializable]
+public class CycleInfo
+{
+    public string title;
+    public string subtitle;
 }

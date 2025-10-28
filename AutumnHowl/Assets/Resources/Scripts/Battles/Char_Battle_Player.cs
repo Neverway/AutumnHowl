@@ -121,7 +121,10 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         canMove = _isTurnActive;
         if (_isTurnActive)
         {
-            battleStateController.battleWidget.attackCompass.ReEnableCompassInputs();
+            if (battleStateController.currentPlayerAction == BattleStateController.PlayerAction.attack)
+            {
+                battleStateController.battleWidget.attackCompass.ReEnableCompassInputs();
+            }
         }
     }
     

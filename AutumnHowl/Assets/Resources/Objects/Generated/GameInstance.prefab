@@ -645,6 +645,7 @@ MonoBehaviour:
   - {fileID: 3436949595233855408, guid: a946690243749cb2aa4025ceee6536df, type: 3}
   - {fileID: 4208236378167866197, guid: aab2708306b8a9c54b924cc33d64e446, type: 3}
   - {fileID: 3989509737889599038, guid: feca747c589702e9786bf0886dfc1210, type: 3}
+  - {fileID: 5130124327870129743, guid: 6e764eebbdbcb13858ceab0cee439919, type: 3}
   effectText: {fileID: 6762578472735389017, guid: 1d0327bf08d2ad512a0399409003c53c, type: 3}
 --- !u!114 &7577233282566247981
 MonoBehaviour:
@@ -687,7 +688,8 @@ MonoBehaviour:
     playtime: 0
     currentLanternTime: 120
     lanternDuration: 120
-    currentCycle: 0
+    currentCycle: 1
+    lastDisplayedCycle: 0
 --- !u!114 &8445139238223071731
 MonoBehaviour:
   m_ObjectHideFlags: 0

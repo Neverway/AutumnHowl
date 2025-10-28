@@ -40,7 +40,9 @@ public class Func_SavePoint : MonoBehaviour
     public void SaveGame(bool _displaySaveText = true)
     {
         GameInstance.Get<GI_AuHoGameState>().currentGameState.player.Stats.ModifyHealth(int.MaxValue);
+        GameInstance.Gamestate.lastDisplayedCycle = 0;
         GI_SaveSystem.SaveGame();
+        GameInstance.Gamestate.lastDisplayedCycle = GameInstance.Gamestate.currentCycle;
     }
     
 
