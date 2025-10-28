@@ -75,6 +75,10 @@ public class CharacterStats
             if (healEvent.IfInvokeInterrupted() || healEvent.healAmount <= 0) return;
             _amount = healEvent.healAmount;
 
+            if (_amount <= 0) return;
+
+            owner.InvokeOnHeal();
+
             if (health + _amount > maxHealth)
             {
                 health = maxHealth;
@@ -85,6 +89,7 @@ public class CharacterStats
                 health += _amount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
             }
+
             return;
         }
         
@@ -99,7 +104,7 @@ public class CharacterStats
             _amount = -damageEvent.damage;
 
             var totalAmount = _amount;
-            
+
             // Apply defense if active
             if (owner.isDefenseActive)
             {
@@ -107,23 +112,23 @@ public class CharacterStats
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
             }
-            
+
+            if (totalAmount <= 0) return;
+
             // Damage killed
             if (health + totalAmount <= 0)
             {
                 health = 0;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText("DOWN", owner.transform.position, 0);
                 owner.isDead = true;
-                // TODO - HOW teH HeCk do I call this now? ~Liz
-                //OnDeath?.Invoke();
+                owner.InvokeOnDeath();
             }
             // Damage hurt
             else
             {
                 health += totalAmount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
-                // TODO - HOW teH HeCk do I call this now? ~Liz
-                //OnHurt?.Invoke();
+                owner.InvokeOnHurt();
             }
         }
     }

@@ -145,15 +145,15 @@ public class BS_GridAction : BattleState
         controller.battleWidget.stepCountText.text = controller.stepsRemaining.ToString();
         if (controller.stepsRemaining <= 0)
         {
-            //Trigger gameevent just to communicate that a wave has passed
-            new Event_BattleWavePassed().Invoke();
-
             controller.ChangeState(new BS_PlayerAction(controller));
         }
     }
 
     public override void OnStateLeave(BattleState stateEntering)
     {
+        //Trigger gameevent just to communicate that a wave has passed
+        new Event_BattleWavePassed().Invoke();
+
         switch (controller.currentPlayerAction)
         {
             case BattleStateController.PlayerAction.attack:
@@ -184,7 +184,9 @@ public class BS_Victory : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+
         //Trigger gameevent just to communicate that a win happened
+        new Event_BattleWavePassed().Invoke();
         new Event_BattleWon().Invoke();
 
         //Play victory dance!

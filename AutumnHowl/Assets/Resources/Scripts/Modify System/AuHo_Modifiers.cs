@@ -247,11 +247,10 @@ public class DoEffectActionOnEvent : CharacterTargetingModifierCreatorBase
 
     public InvokeTiming beforeOrAfter;
     public GameEventType gameEventType;
-    [Box, Polymorphic, SerializeReference] public EffectAction effectAction;
+    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget eventTargets = new TargetAll();
+    [Box,   Polymorphic, SerializeReference] public EffectAction effectAction;
 
     protected override void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets) { }
-
-
 
     public override bool OnGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent, InvokeTiming timing)
     {
@@ -260,6 +259,10 @@ public class DoEffectActionOnEvent : CharacterTargetingModifierCreatorBase
 
         foreach(CharacterIdentifier user in modifier.ModifierData.AllTargets)
         {
+            if (gameEvent.EventOwner != null && eventTargets != null)
+                if (!eventTargets.GetTargetsFrom(user).IsTargeted(gameEvent.EventOwner))
+                    return false;
+
             effectAction.ApplyEffect(user);
         }
 
