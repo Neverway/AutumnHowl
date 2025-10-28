@@ -39,8 +39,8 @@ public class WB_Title : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public void LoadGame()
     {
-        GI_SaveSystem.LoadGame();
         GameInstance.Get<GI_WorldLoader>().Load("Town");
+        GI_SaveSystem.LoadGame();
     }
     public void QuitGame()
     {
