@@ -97,10 +97,6 @@ public class Event_BattleWon : AuHoGameEvent
 {
     public override GameEventType EventType => GameEventType.BattleWon;
 }
-public class Event_BattleWaveStarted : AuHoGameEvent
-{
-    public override GameEventType EventType => GameEventType.BattleWon;
-}
 public class Event_BattleWavePassed : AuHoGameEvent
 {
     public override GameEventType EventType => GameEventType.BattleWavePassed;

@@ -15,7 +15,7 @@ MonoBehaviour:
   <UniqueID>k__BackingField: Autumn
   characterReferenceType: 0
   characterName: Autumn
-  characterTags: 00000000
+  characterTags: 0600000000000000
   baseStats:
     health: 100
     level: 0
