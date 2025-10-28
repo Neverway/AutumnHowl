@@ -686,8 +686,8 @@ MonoBehaviour:
     kills: 0
     deaths: 0
     playtime: 0
-    currentLanternTime: 120
-    lanternDuration: 120
+    currentLanternTime: 180
+    lanternDuration: 180
     currentCycle: 1
     lastDisplayedCycle: 0
 --- !u!114 &8445139238223071731
@@ -895,3 +895,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ba58e17d893be4ea75fcff5cd859cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeCharacterComponents: []

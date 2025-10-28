@@ -182,7 +182,7 @@ public abstract class Char_Battle : Character
                 {
                     //print($"Found char {target.gameObject.name} at {appliedPosition}");
                     var char_Battle = target.GetComponent<Char_Battle> ();
-                    if (char_Battle.GetHealth () <= 0)
+                    if (char_Battle.Stats.health <= 0)
                     {
                         GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.hitKill);
                     }
@@ -245,7 +245,7 @@ public abstract class Char_Battle : Character
         Char_Battle char_Battle = target.GetComponent<Char_Battle>();
         //deal damage
         char_Battle.ApplyConditionalBlock(attack.direction);
-        char_Battle.ModifyHealth(-attack.damage);
+        char_Battle.Stats.ModifyHealth(-attack.damage);
         char_Battle.RemoveConditionalBlock();
         //check if we should push the target
         if (char_Battle.pushable && attack.pushing)

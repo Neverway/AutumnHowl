@@ -246,8 +246,7 @@ public class ModifierForXWaves : TargetedEffectAction
         if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
         EventCounter<Event_BattleWavePassed> turnCounter = new EventCounter<Event_BattleWavePassed>();
 
-        while (turnCounter.counter < waves)
-            yield return null;
+        while (turnCounter.counter < waves) yield return null;
 
         toRemove.UnregisterModifier();
         turnCounter.Discard();

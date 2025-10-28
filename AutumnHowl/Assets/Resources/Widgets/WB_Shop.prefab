@@ -340,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 1
   enableWrapping: 1
   hideIndicatorOnInactive: 0
   resetSelectedOnInactive: 0
@@ -696,6 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5842279307202196180}
   - component: {fileID: 1101949522336164647}
+  - component: {fileID: 8711254171050051170}
   - component: {fileID: -3512612807026244129}
   m_Layer: 5
   m_Name: WB_Shop
@@ -735,6 +737,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4208236378167866197}
   m_CullTransparentMesh: 1
+--- !u!114 &8711254171050051170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208236378167866197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8693bdbf8d861b84dad60c96d404226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cycleShopItems:
+  - {fileID: 11400000, guid: fb25a6a641c30dc418663ec6c08c769e, type: 2}
+  - {fileID: 11400000, guid: ca766e7a74c9340498e25672d78084af, type: 2}
+  - {fileID: 11400000, guid: 3b73eee1a87739c48a0afa976a0ffb99, type: 2}
+  wb_shop: {fileID: -3512612807026244129}
 --- !u!114 &-3512612807026244129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,12 +768,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyDescriptionTextEvent: {fileID: 8606063772834655546}
   buyableItems:
-  - {fileID: 11400000, guid: 212ecd547de670133b09a7fe60a3e367, type: 2}
-  - {fileID: 11400000, guid: c9737e1ef110b8e5cb447213479bd251, type: 2}
-  - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}
-  - {fileID: 11400000, guid: 36c0c8bdc090101198faac4ead9252f6, type: 2}
-  - {fileID: 11400000, guid: b83b8afcd240af860b711ff6888948b6, type: 2}
-  - {fileID: 11400000, guid: 4f26d5fb7dfa68ebfa23a2636fe3f24e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   buySlots:
   - {fileID: 6193484794906443154}
   - {fileID: 992242656571392573}
@@ -840,6 +859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 1
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 1
   enableWrapping: 1
   hideIndicatorOnInactive: 0
   resetSelectedOnInactive: 0
@@ -1399,6 +1419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 1
   enableWrapping: 1
   hideIndicatorOnInactive: 0
   resetSelectedOnInactive: 0
@@ -1582,6 +1603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activelyNavigating: 0
   navigationMode: 0
+  pressingRightDoesNotTryNavigate: 1
   enableWrapping: 1
   hideIndicatorOnInactive: 0
   resetSelectedOnInactive: 0
@@ -3398,10 +3420,69 @@ MonoBehaviour:
   overrideExistingEvents: 1
   textEvent:
     frames:
-    - name: 
-      chatContent: 
-      portrait: {fileID: 0}
-      chatterVoice: {fileID: 0}
+    - name: Shop Keeper
+      chatContent: '*This town{spd=0.05} doesn''t have a name anymore.{spd=}'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*Before the barrier began shifting, many forrest-folk used to
+        dwell here.'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*The town was protected by an adventurer who lived in the <col=key>Castle
+        to the East.<col=>'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*When they fell, and the barrier drew closer, most of those remaining
+        chose to flee.'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*A few of us stayed, hoping that one day things may return to
+        normal.'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*Until then we''ll just call this town {col=key}"Home."{col=}'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
@@ -6300,10 +6381,68 @@ MonoBehaviour:
   overrideExistingEvents: 1
   textEvent:
     frames:
-    - name: 
-      chatContent: 
-      portrait: {fileID: 0}
-      chatterVoice: {fileID: 0}
+    - name: Shop Keeper
+      chatContent: '*Then name''s {col=key}Nicc{col=} & I love nick-nacks!'
+      portrait: {fileID: 864773066, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*If you have any junk you''re willing to part with, I wanna see
+        it! ''Kay?'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*{col=key}Magic items{col=} are my favourite. So I''ll give you
+        a special offer for them.'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*Wild spells and potions are great for mischife!'
+      portrait: {fileID: 864773066, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*My brothers and I love collecting stuff!'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 3
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Shop Keeper
+      chatContent: '*You should go talk to them! They run {col=key}The Inn{col=}
+        and {col=key}Tavern{col=} in town!'
+      portrait: {fileID: 1875603287, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []

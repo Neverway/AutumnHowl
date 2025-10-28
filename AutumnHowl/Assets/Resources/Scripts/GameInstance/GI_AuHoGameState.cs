@@ -82,8 +82,8 @@ public class AuHoGameState
     public int deaths = 0;
     public float playtime = 0;
 
-    public float currentLanternTime = 1200;
-    public float lanternDuration = 1200;
+    public float currentLanternTime = 180;
+    public float lanternDuration = 180;
 
     public int currentCycle = 1;
     public int lastDisplayedCycle = 0;
@@ -210,13 +210,15 @@ public class AuHoGameState
 
             gameState.currentCycle = data.currentCycle;
             gameState.lastDisplayedCycle = data.lastDisplayedCycle;
-
-            if (gameState.lastDisplayedCycle != gameState.currentCycle)
-            {
-                GameInstance.SendCoroutine(CoLoadCycleData());
-            }
-            SetCycleAppearances();
         }
+
+        if (gameState.lastDisplayedCycle != gameState.currentCycle)
+        {
+            GameInstance.SendCoroutine(CoLoadCycleData());
+        }
+            
+        Debug.Log("Appear");
+        SetCycleAppearances();
     }
     public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
     {

@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
@@ -18,7 +18,14 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     // Public Variables
     //=-----------------=
-
+    public Vector2Int VillageEntranceForMap;
+    public GameObject spriteObjectTemplate;
+    public Transform mapSpritesParent;
+    public RectTransform mapPlayerIcon;
+    public MapNodeSprite[] mapNodeSprites;
+    public Sprite fallbackSprite;
+    private Vector2 homePlayerIconPos;
+    private Vector2 homePlayerPos;
 
     //=-----------------=
     // Private Variables
@@ -103,11 +110,19 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     public IEnumerator Start()
     {
         yield break;
-        //yield return new WaitForEndOfFrame();
-        //if (!mapGenerated)
-        //{
-        //    GI_SaveSystem.LoadGame();
-        //}
+        yield return null;
+        homePlayerIconPos = mapPlayerIcon.transform.localPosition;
+        homePlayerPos = GameInstance.Playerbody.transform.position;
+    }
+
+    public void Update()
+    {
+        Vector2 playerBodyPos = new(GameInstance.Playerbody.transform.position.x, GameInstance.Playerbody.transform.position.y);
+        Vector2 playerPos = (playerBodyPos - homePlayerPos);
+        playerPos.x /= roomWidth;
+        playerPos.y /= roomHeight;
+
+        mapPlayerIcon.transform.localPosition = (playerBodyPos + homePlayerIconPos) + new Vector2(-40, +24 -(16*4));
     }
     //=-----------------=
     // Internal Functions
@@ -165,6 +180,42 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             storedDebugLog += "\n";
         }
     }
+    private void CreateForestMap()
+    {
+        for (int i = 0; i < mapSpritesParent.childCount; i++)
+            Destroy(mapSpritesParent.GetChild(i).gameObject);
+
+        Vector2Int villageTile = VillageEntranceForMap;
+        villageTile.y = (mapWidth - 1) - villageTile.y;
+
+        for (int y = mapHeight - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                MapNode n = mapNodes[x, y];
+                Sprite spriteToUse = fallbackSprite;
+                foreach (MapNodeSprite spriteInfo in mapNodeSprites)
+                {
+                    
+                    bool adjacentToVillageEntrance = new Vector2Int(x, y) == villageTile;
+
+                    if (n.paths[1] == spriteInfo.exitNorth &&
+                        (n.paths[0] == spriteInfo.exitSouth ^ adjacentToVillageEntrance) &&
+                        n.paths[2] == spriteInfo.exitWest &&
+                        n.paths[3] == spriteInfo.exitEast)
+                    {
+                        spriteToUse = spriteInfo.sprite;
+                        break;
+                    }
+                    
+                }
+                GameObject obj = Instantiate(spriteObjectTemplate);
+                obj.GetComponent<Image>().sprite = spriteToUse;
+                obj.transform.SetParent(mapSpritesParent.transform, false);
+                obj.SetActive(true);
+            }
+        }
+    }
 
     /// <param name="isNewMap">Whether or not the generated map will LOAD instances like chests and enemies, or generate new instances</param>
     private void GenerateMap(bool isNewMap = false)
@@ -203,6 +254,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         PlaceEnemies ();
 
         LogStoredMapGenDebugLog();
+        CreateForestMap();
         mapGenerated = true;
     }
 
@@ -799,4 +851,10 @@ public class BasicGameObjectCreator : ICreatesGameObject
     public BasicGameObjectCreator(GameObject toCreate) => this.toCreate = toCreate;
     public GameObject toCreate;
     GameObject ICreatesGameObject.GetCreatedGameObject() => GameObject.Instantiate(toCreate);
+}
+[Serializable]
+public struct MapNodeSprite
+{
+    public bool exitNorth, exitEast, exitWest, exitSouth;
+    public Sprite sprite;
 }

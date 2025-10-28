@@ -6,19 +6,17 @@ namespace ErryLib.GameEvents
     {
         private static GameEvent originalEvent;
 
-        private static List<ListensToGameEvent> eventListeners;
+        [Reload] private static List<ListensToGameEvent> eventListeners;
 
         public static void Register(ListensToGameEvent eventListener)
         {
-            if (eventListeners == null)
-                eventListeners = new List<ListensToGameEvent>();
+            if (eventListeners == null) eventListeners = new List<ListensToGameEvent>();
 
             eventListeners.Add(eventListener);
         }
         public static void UnRegister(ListensToGameEvent eventListener)
         {
-            if (eventListeners == null)
-                eventListeners = new List<ListensToGameEvent>();
+            if (eventListeners == null) eventListeners = new List<ListensToGameEvent>();
 
             eventListeners.Remove(eventListener);
         }
@@ -32,9 +30,7 @@ namespace ErryLib.GameEvents
         /// /// <param name="invokeTiming">Whether this method is being called before or after GameEvent.WhenInvoked()</param>
         public static void ProcessGameEvent<T>(T gameEvent, InvokeTiming invokeTiming) where T : GameEvent<T>
         {
-            //ADD COMMENT HERE
-            if (originalEvent == null)
-                originalEvent = gameEvent;
+            if (originalEvent == null) originalEvent = gameEvent;
 
             //Loop through all active modifiers and pass 'gameEvent' to any modifiers implementing ListensToGameEvent
             Modifier[] modifiers = Modifier.ActiveModifiers.ToArray();
@@ -46,7 +42,6 @@ namespace ErryLib.GameEvents
                 foreach(ListensToGameEvent listener in eventListeners)
                     listener.TryReactToEvent(gameEvent, invokeTiming);
 
-            //ADD COMMENT HERE
             if (originalEvent == gameEvent && invokeTiming == InvokeTiming.After)
             {
                 ListensToGameEvent.ClearTimeOuts();

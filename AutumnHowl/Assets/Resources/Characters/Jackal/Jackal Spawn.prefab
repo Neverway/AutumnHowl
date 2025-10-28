@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: c051f46a-6d53-4b6a-973f-eb8ad97ea09f
-  battleData: {fileID: 11400000, guid: 050dab5e50a01c84f805e4047502dcf0, type: 2}
+  battleData: {fileID: 11400000, guid: 21b042ac50966ed2584df1cd612532a3, type: 2}
   enemyWander: {fileID: 914898563591339920}
   enemyDefeatAnimation: {fileID: 3100782084754435406}
   enemyRemains: {fileID: 5377980545693577877}
