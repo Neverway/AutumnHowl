@@ -21,14 +21,14 @@ public class ParticleGenerator : MonoBehaviour
 
     bool playerTooFar = false;
 
-    public void Start() => PreSpawn();
+    public void OnEnable() => playerTooFar = true; //This will preload particles on first step
+    public void OnDisable() => DestroyAllParticles();
     public void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, GameInstance.Playerbody.transform.position) - (area.magnitude * 0.5f);
         if (distanceToPlayer > 6)
         {
-            for (int i = 0; i < transform.childCount; i++)
-                Destroy(transform.GetChild(i).gameObject);
+            DestroyAllParticles();
             playerTooFar = true;
             return;
         }
@@ -55,6 +55,11 @@ public class ParticleGenerator : MonoBehaviour
             SpawnParticleInArea().SetAnimatorToRandomTime();
             preloadSpawns -= 1f;
         }
+    }
+    public void DestroyAllParticles()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+            Destroy(transform.GetChild(i).gameObject);
     }
 
     public ParticleEffect SpawnParticleInArea()
