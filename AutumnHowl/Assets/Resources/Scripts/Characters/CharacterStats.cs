@@ -11,6 +11,7 @@ using ErryLib.Reflection;
 using System;
 using System.Reflection;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using static CharacterStatType;
 
@@ -109,11 +110,10 @@ public class CharacterStats
             if (owner.isDefenseActive)
             {
                 totalAmount = _amount + defense;
+                if (totalAmount > 0) { totalAmount = 0; }
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
             }
-
-            if (totalAmount <= 0) return;
 
             // Damage killed
             if (health + totalAmount <= 0)
@@ -128,11 +128,58 @@ public class CharacterStats
             {
                 health += totalAmount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
-                owner.InvokeOnHurt();
+                if (totalAmount > 0)
+                    owner.InvokeOnHurt();
             }
         }
+
+        /*
+         *         // Character healed
+       if (_amount > 0)
+       {
+           if (Stats.health + _amount > Stats.maxHealth) Stats.health = Stats.maxHealth;
+           else Stats.health += _amount;
+           GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform.position, 1);
+           OnHeal?.Invoke();
+       }
+
+       if (_amount == 0) return;
+
+       // Character damaged
+       else if (_amount < 0)
+       {
+           var totalAmount = _amount;
+
+           // Apply defense if active
+           if (isDefenseActive)
+           {
+               totalAmount = _amount + Stats.defense;
+               //Clamp to 0 so that it can't heal the character.
+               if (totalAmount > 0) { totalAmount = 0; }
+               GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
+               GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform.position, 2, 0.5f);
+           }
+
+           // Damage killed
+           if (Stats.health + totalAmount <= 0)
+           {
+               Stats.health = 0;
+               //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+               isDead = true;
+               OnDeath?.Invoke();
+           }
+           // Damage hurt
+           else
+           {
+               print($"{gameObject.name} took {totalAmount} DMG, HP {Stats.health}");
+               Stats.health += totalAmount;
+               GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
+               OnHurt?.Invoke();
+           }
+       }
+       // */
     }
-    
+
     /// <summary>
     /// Modify the current stats on a character
     /// </summary>

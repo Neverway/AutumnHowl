@@ -44,6 +44,7 @@ public class WB_Shop : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private void Start()
     {
+        GetComponent<ShopCycleHandler>().UpdateShopItems();
         UpdateBuyables();
         UpdateSellables();
         OnStart.Invoke();
