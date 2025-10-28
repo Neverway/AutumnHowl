@@ -103,6 +103,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -403397343939746182}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+--- !u!4 &1673734515386349373 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 2339698727629392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6242562417686465405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
@@ -154,12 +159,16 @@ MonoBehaviour:
       pushing: 0
   canMove: 0
   pushable: 1
+  gridHopAnimation_Seconds: 0.15
+  gridHopAnimation_Height: 0.35
+  gridHopAnimationContainer: {fileID: 1673734515386349373}
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 7706586741973341373, guid: e4935c9a6c5d26f42a8eeb06c49ea130, type: 3}
   useBlock: 0
+  invertAttackFacingDirections: 0
   randomRetreat: 0
   skipFirstTurn: 1
 --- !u!114 &1449108568966244714
