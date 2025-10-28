@@ -84,7 +84,7 @@ public class GameInstance : MonoBehaviour
     /// <exception cref="NullReferenceException"></exception>
     public static T Get<T>() where T : MonoBehaviour => Instance.GetComponent<T>();
 
-    public static void SendCoroutine(IEnumerator coroutine) => Instance.StartCoroutine(coroutine);
+    public static Coroutine SendCoroutine(IEnumerator coroutine) => Instance.StartCoroutine(coroutine);
 
     #endregion
 }

@@ -123,7 +123,8 @@ public class WidgetNavigator : MonoBehaviour
             if (selectableElements.Count != 0) selectableElements[currentIndex].Interact();
         }
 
-        if (GameInstance.Inputs.Action.WasPressedThisFrame() || GameInstance.Inputs.MoveLeft.WasPressedThisFrame())
+        if (GameInstance.Inputs.Action.WasPressedThisFrame() || 
+            (!pressingRightDoesNotTryNavigate && GameInstance.Inputs.MoveLeft.WasPressedThisFrame()))
         {
             OnBack.Invoke();
         }

@@ -46,6 +46,10 @@ public class WB_Title : MonoBehaviour
     {
         Application.Quit();
     }
+    public void EraseData()
+    {
+        GameInstance.Get<GI_SaveSystem>().OnClearSave();
+    }
     public void GoToTitle()
     {
         GameInstance.Get<GI_WorldLoader>().Load("Title");
