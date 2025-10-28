@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 1705829341235155590}
   - component: {fileID: 2516606950254116702}
   m_Layer: 5
-  m_Name: WB_Effects
+  m_Name: WB_ModifierIcons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

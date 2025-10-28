@@ -76,7 +76,13 @@ public class CharacterIdentifier
 
     }
 
-    
+
+    //Useful functions ----------------------------------------------------------------------
+
+    public bool IsPlayer() => TemplateCreatedFrom != null && TemplateCreatedFrom.characterTags.Contains(CharacterTags.Player);
+
+
+
 
     //Save and Load for Persistent Characters ----------------------------------------------------------------------------------------
 

@@ -27,6 +27,7 @@ public enum CharacterTemplateToIdentifierStrategy
 }
 public enum CharacterTags //Dont change the values if you can, it will change which values are assigned in inspectors
 {
+    Player = 6,
     Ally = 0,
     Enemy = 1,
     Boss = 2,

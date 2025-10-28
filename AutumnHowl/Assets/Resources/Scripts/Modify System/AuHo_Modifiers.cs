@@ -95,36 +95,48 @@ public interface SerializedModifier_CharacterTargeting : IModifierInstancer<Char
         createdModifier.RegisterModifier();
         RecordRegisteredModifier(id, createdModifier);
     }
+}
+[Serializable]
+public abstract class CharacterTargetingModifierCreatorBase : SerializedModifier_CharacterTargeting
+{
+    public abstract string Description { get; }
+    
+    void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets) =>
+        OnModifyValue(modifiableValue, targets);
+    protected abstract void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets);
 
     bool IModifierInstancer<CharacterTargets>.OnInstanceReactToGameEvent
-        (InstancedModifier<CharacterTargets> modifier, BasicGameEvent gameEvent, InvokeTiming timing)
+    (InstancedModifier<CharacterTargets> modifier, BasicGameEvent basicEvent, InvokeTiming timing)
     {
-        if (timing == InvokeTiming.After)
-            return OnAfterGameEvent(modifier, gameEvent);
-        else if (timing == InvokeTiming.Before)
-            return OnBeforeGameEvent(modifier, gameEvent);
-        else
-            return false;
+        if (basicEvent is not AuHoGameEvent gameEvent) return false;
+
+        if (OnGameEvent(modifier, gameEvent, timing)) return true;
+        if (timing == InvokeTiming.After) return OnAfterGameEvent(modifier, gameEvent);
+        if (timing == InvokeTiming.Before) return OnBeforeGameEvent(modifier, gameEvent);
+
+        return false;
     }
-    public virtual bool OnBeforeGameEvent(InstancedModifier<CharacterTargets> modifier, BasicGameEvent gameEvent) => false;
-    public virtual bool OnAfterGameEvent(InstancedModifier<CharacterTargets> modifier, BasicGameEvent gameEvent) => false;
+    public virtual bool OnGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent, InvokeTiming timing) => false;
+    public virtual bool OnBeforeGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent) => false;
+    public virtual bool OnAfterGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent) => false;
+
+    public override string ToString() => Description;
 }
 
 [Serializable]
-public abstract class CharacterStatModifierCreator : SerializedModifier_CharacterTargeting
+public abstract class CharacterStatModifierCreator : CharacterTargetingModifierCreatorBase
 {
-    public abstract string Description { get; }
+    
     /// <summary>Passes any stat that need to be modified by the modifier</summary>
     public abstract void ModifyStat(CharacterStat stat);
 
     /// <summary>Filters the modifiers for ones that are a CharacterStat and of a character that is targeted by the provided CharacterTargets</summary>
-    void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets)
+    protected override void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets)
     {
         if (modifiableValue is CharacterStat charStat)
             if (targets.IsTargeted(charStat.LinkedCharacter))
                 ModifyStat(charStat);
     }
-    public override string ToString() => Description;
 }
 /// <summary>Used by some classes to define a description for the object</summary>
 public interface IDescribable { public string Description { get; } }
@@ -225,4 +237,30 @@ public partial class AuHo_ExtentionMethods
     }
     public static void UnmodifyStatWith(this CharacterStat stat, object id) =>
         SerializedModifier.UnregisterModifierFrom(id);
+}
+
+[Serializable]
+public class DoEffectActionOnEvent : CharacterTargetingModifierCreatorBase
+{
+    public string description;
+    public override string Description => description;
+
+    public InvokeTiming beforeOrAfter;
+    public GameEventType gameEventType;
+    [Box, Polymorphic, SerializeReference] public EffectAction effectAction;
+
+    protected override void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets) { }
+
+    public override bool OnGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent, InvokeTiming timing)
+    {
+        if (timing != beforeOrAfter) return false;
+        if (gameEvent.EventType != gameEventType) return false;
+
+        foreach(CharacterIdentifier user in modifier.ModifierData.AllTargets)
+        {
+            effectAction.ApplyEffect(user);
+        }
+
+        return false;
+    }
 }

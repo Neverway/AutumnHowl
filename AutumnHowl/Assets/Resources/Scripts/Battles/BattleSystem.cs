@@ -38,9 +38,7 @@ public abstract class BattleState
 // -----------------------------------
 
 
-/// <summary>
-/// 
-/// </summary>
+/// <summary></summary>
 public class BS_Start : BattleState
 {
     public BS_Start(BattleStateController controller) : base(controller)
@@ -82,9 +80,7 @@ public class BS_Start : BattleState
     }
 }
 
-/// <summary>
-/// 
-/// </summary>
+/// <summary></summary>
 public class BS_PlayerAction : BattleState
 {
     public BS_PlayerAction(BattleStateController controller) : base(controller)
@@ -127,9 +123,7 @@ public class BS_PlayerAction : BattleState
     }
 }
 
-/// <summary>
-/// 
-/// </summary>
+/// <summary></summary>
 public class BS_GridAction : BattleState
 {
     private BattleWave activeWave;
@@ -151,6 +145,9 @@ public class BS_GridAction : BattleState
         controller.battleWidget.stepCountText.text = controller.stepsRemaining.ToString();
         if (controller.stepsRemaining <= 0)
         {
+            //Trigger gameevent just to communicate that a wave has passed
+            new Event_BattleWavePassed().Invoke();
+
             controller.ChangeState(new BS_PlayerAction(controller));
         }
     }
@@ -176,9 +173,7 @@ public class BS_GridAction : BattleState
 }
 
 
-/// <summary>
-/// 
-/// </summary>
+/// <summary></summary>
 public class BS_Victory : BattleState
 {
     BattleCameraManager battleCameraManager;
@@ -189,6 +184,9 @@ public class BS_Victory : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        //Trigger gameevent just to communicate that a win happened
+        new Event_BattleWon().Invoke();
+
         //Play victory dance!
         if (GameInstance.Playerbody is IsPlayerCharacter player)
             player.SwingAnimator.swingState = SwordSwingAnimationHandler.SwingState.Victory;
