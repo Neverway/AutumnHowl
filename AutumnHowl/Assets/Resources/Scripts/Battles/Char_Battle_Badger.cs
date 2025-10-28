@@ -126,6 +126,7 @@ public class Char_Battle_Badger : Char_Battle
             if (!(canLunge==false && Random.Range(0, 100) < randomRetreat))
             {
                 GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.growl);
+                DoAttackAnimation ();
                 switch (targetDirection)
                 {
                     case Direction.North:

@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1910286143, guid: 3c32ab61e00cc413aaec5f48a1879614, type: 3}
+      objectReference: {fileID: -1786157707, guid: 3c32ab61e00cc413aaec5f48a1879614, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteHash
-      value: 1069177207
+      value: 397304676
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_CategoryHash
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6601185223956943184, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
@@ -150,7 +150,7 @@ MonoBehaviour:
   isDead: 0
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 7931684597536962226}
   AttackSequences:
   - attacks:
     - position: {x: 0, y: 1}
@@ -190,3 +190,8 @@ MonoBehaviour:
   invertAttackFacingDirections: 0
   randomRetreat: 50
   skipFirstTurn: 0
+--- !u!95 &7931684597536962226 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 2339698727629392}
+  m_PrefabAsset: {fileID: 0}

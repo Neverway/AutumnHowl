@@ -123,7 +123,8 @@ public class Char_Battle_BasicAttacker : Char_Battle
             print($"{gameObject.name} - found nearby target");
             if (!(Random.Range(0, 100) < randomRetreat))
             {
-                print($"{gameObject.name} - chose to attack");
+                DoAttackAnimation ();
+                print ($"{gameObject.name} - chose to attack");
                 switch (targetDirection)
                 {
                     case Direction.North: TryAttackSequence(AttackSequences[0]); break;

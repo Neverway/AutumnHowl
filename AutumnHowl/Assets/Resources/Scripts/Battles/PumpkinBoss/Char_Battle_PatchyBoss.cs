@@ -53,7 +53,7 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
 
-    private void TakeTurn ()
+    new private void TakeTurn ()
     {
         /*if (battleStateController.waveStepCount == 0)
         {
@@ -65,7 +65,8 @@ public class Char_Battle_PatchyBoss : Char_Battle_BasicAttacker
         SetAttackDamageToCurrentATK();
         var x = gridPawnController.position.x;
         var y = gridPawnController.position.y;
-        // If target is in range, attack and end turn.
+        // If target is in range, attack.
+        DoAttackAnimation ();
         switch (GetTarget())
         {
             case Direction.North:
