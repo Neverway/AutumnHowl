@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+using ErryLib.GameEvents;
 
 namespace ErryLib.ModiferSystem.Instancers
 {
@@ -44,6 +40,7 @@ namespace ErryLib.ModiferSystem.Instancers
         /// and is passed here for the instancer to handle</summary>
         protected void OnInstanceModifyValue(Modifiable modifiableValue, TData data);
 
+        protected bool OnInstanceReactToGameEvent(InstancedModifier<TData> modifier, BasicGameEvent gameEvent, InvokeTiming timing);
 
         //-------------------------------------------------------------------------------------------------------------
         // Below methods are called from InstancedModifier itself to pass the methods to the Instancer
@@ -53,6 +50,8 @@ namespace ErryLib.ModiferSystem.Instancers
         internal void Invoke_OnInstanceUnregistered(InstancedModifier<TData> data) => OnInstanceUnregistered(data);
         internal void Invoke_OnInstanceModifyValue(Modifiable modifiableValue, TData data) =>
             OnInstanceModifyValue(modifiableValue, data);
+        internal bool Invoke_OnInstanceReactToGameEvent(InstancedModifier<TData> modifier, BasicGameEvent gameEvent, InvokeTiming timing) =>
+            OnInstanceReactToGameEvent(modifier, gameEvent, timing);
     }
 
 
@@ -62,7 +61,7 @@ namespace ErryLib.ModiferSystem.Instancers
     /// <br/> - To unregister the modifier, call UnregisterModifier()
     /// <br/> - You can also call RegisterModifier() to re-register the modifier again if you need to
     /// </summary>
-    public class InstancedModifier<TData> : Modifier 
+    public class InstancedModifier<TData> : Modifier, ListensToGameEvent<BasicGameEvent>
     {
         public IModifierInstancer<TData> Instancer { get; private set; }
         public TData ModifierData;
@@ -83,8 +82,12 @@ namespace ErryLib.ModiferSystem.Instancers
 
         public override void ModifyValue(Modifiable modifiableValue) =>
             Instancer.Invoke_OnInstanceModifyValue(modifiableValue, ModifierData);
+
+        public bool ReactToEvent(BasicGameEvent gameEvent, InvokeTiming timing) =>
+            Instancer.Invoke_OnInstanceReactToGameEvent(this, gameEvent, timing);
     }
 
+    public abstract class BasicGameEvent : GameEvent<BasicGameEvent> { }
 
     /// <summary>
     /// This allows classes to register themselves to the Modifier system, but by instancing dummy modifiers and registering them instead. 
@@ -123,6 +126,7 @@ namespace ErryLib.ModiferSystem.Instancers
         /// <summary>Called when a modifier created from this instancer is being applied to a modifiable, 
         /// and is passed here for the instancer to handle</summary>
         protected void OnInstanceModifyValue(Modifiable modifiableValue);
+        protected bool OnInstanceReactToGameEvent(InstancedModifier modifier, BasicGameEvent gameEvent, InvokeTiming timing);
 
 
         //-------------------------------------------------------------------------------------------------------------
@@ -133,6 +137,9 @@ namespace ErryLib.ModiferSystem.Instancers
         internal void Invoke_OnInstanceUnregistered(InstancedModifier data) => OnInstanceUnregistered(data);
         internal void Invoke_OnInstanceModifyValue(Modifiable modifiableValue) =>
             OnInstanceModifyValue(modifiableValue);
+
+        internal bool Invoke_OnInstanceReactToGameEvent(InstancedModifier modifier, BasicGameEvent gameEvent, InvokeTiming timing) =>
+            OnInstanceReactToGameEvent(modifier, gameEvent, timing);
     }
     /// <summary>
     /// A modifier generated through IModifierInstancer
@@ -140,7 +147,7 @@ namespace ErryLib.ModiferSystem.Instancers
     /// <br/> - To unregister the modifier, call UnregisterModifier()
     /// <br/> - You can also call RegisterModifier() to re-register the modifier again if you need to
     /// </summary>
-    public class InstancedModifier : Modifier
+    public class InstancedModifier : Modifier, ListensToGameEvent<BasicGameEvent>
     {
         public IModifierInstancer Instancer { get; private set; }
         internal InstancedModifier(IModifierInstancer from)
@@ -158,5 +165,8 @@ namespace ErryLib.ModiferSystem.Instancers
 
         public override void ModifyValue(Modifiable modifiableValue) =>
             Instancer.Invoke_OnInstanceModifyValue(modifiableValue);
+
+        public bool ReactToEvent(BasicGameEvent gameEvent, InvokeTiming timing) =>
+            Instancer.Invoke_OnInstanceReactToGameEvent(this, gameEvent, timing);
     }
 }

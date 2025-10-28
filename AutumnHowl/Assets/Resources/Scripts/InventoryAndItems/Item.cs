@@ -49,7 +49,7 @@ public abstract class Item : ScriptableObject, UniquelyIdentifiable
     public virtual string GetDescription() => description;
     public bool TryUse(CharacterIdentifier user, int _atIndex, int _inList = 0)
     {
-        if (new Event_UseItem(this, user).InvokeAndGetIfSuccess())
+        if (new Event_UseItem(this, user).IfInvokeSuccess())
             return OnUse(user, _atIndex, _inList);
 
         return false;

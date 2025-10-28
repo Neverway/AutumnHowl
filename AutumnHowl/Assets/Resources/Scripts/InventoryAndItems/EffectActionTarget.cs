@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using static UnityEngine.GraphicsBuffer;
 
 [Serializable]
 public abstract class EffectActionTarget : IDescribable
@@ -15,6 +19,15 @@ public abstract class CharacterTargets
 {
     /// <summary>Returns true if this CharacterTargets is targeting the given character</summary>
     public abstract bool IsTargeted(CharacterIdentifier character);
+
+    public CharacterIdentifier[] AllTargets
+    {
+        get => GameInstance.Get<GI_CharacterReferencer>().activeCharacterComponents
+            .Select((c) => c.Identifier)
+            .NotNull()
+            .Where((id) => IsTargeted(id))
+            .ToArray();
+    }
 }
 public class CharacterTargetsFromUser : CharacterTargets
 {

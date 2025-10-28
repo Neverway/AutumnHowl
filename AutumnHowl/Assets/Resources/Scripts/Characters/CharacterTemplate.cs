@@ -25,7 +25,7 @@ public enum CharacterTemplateToIdentifierStrategy
     UniqueAndPersistent,
     CloneableAndDisposable
 }
-public enum CharacterTags
+public enum CharacterTags //Dont change the values if you can, it will change which values are assigned in inspectors
 {
     Ally = 0,
     Enemy = 1,
