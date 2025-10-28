@@ -96,58 +96,9 @@ public abstract class Character : MonoBehaviour
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
-    public virtual void ModifyHealth(float _amount, Vector2Int direction = new Vector2Int())
-    {
-
-        // Character healed
-        if (_amount > 0)
-        {
-            if (Stats.health + _amount > Stats.maxHealth) Stats.health = Stats.maxHealth;
-            else Stats.health += _amount;
-            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform.position, 1);
-            OnHeal?.Invoke();
-        }
-        
-        if (_amount == 0) return;
-        
-        // Character damaged
-        else if (_amount < 0)
-        {
-            var totalAmount = _amount;
-            
-            // Apply defense if active
-            if (isDefenseActive)
-            {
-                totalAmount = _amount + Stats.defense;
-                //Clamp to 0 so that it can't heal the character.
-                if (totalAmount > 0) { totalAmount = 0; }
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform.position, 2, 0.5f);
-            }
-            
-            // Damage killed
-            if (Stats.health + totalAmount <= 0)
-            {
-                Stats.health = 0;
-                //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
-                isDead = true;
-                OnDeath?.Invoke();
-            }
-            // Damage hurt
-            else
-            {
-                print($"{gameObject.name} took {totalAmount} DMG, HP {Stats.health}");
-                Stats.health += totalAmount;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
-                OnHurt?.Invoke();
-            }
-        }
-    }
-
-    public float GetHealth ()
-    {
-        return Stats.health;
-    }
+    public void InvokeOnHurt() => OnHurt?.Invoke();
+    public void InvokeOnHeal() => OnHeal?.Invoke();
+    public void InvokeOnDeath() => OnDeath?.Invoke();
 
     public bool HasTag (CharacterTags _tag)
     {

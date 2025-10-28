@@ -45,11 +45,8 @@ public class WB_ModifierIcons : MonoBehaviour
     [Reload] private static UnityEvent OnIconUpdate;
     private static void InitializeIfNeeded()
     {
-        if (currentIcons == null)
-        {
-            currentIcons = new Dictionary<object, Sprite[]>();
-            OnIconUpdate = new UnityEvent();
-        }
+        if (currentIcons == null) currentIcons = new Dictionary<object, Sprite[]>();
+        if (OnIconUpdate == null) OnIconUpdate = new UnityEvent();
     }
     public static void AddIcon(object key, Sprite[] icon)
     {

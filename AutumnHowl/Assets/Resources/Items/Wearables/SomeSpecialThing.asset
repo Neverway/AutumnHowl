@@ -29,7 +29,9 @@ MonoBehaviour:
       data:
         description: '[Using Items heals 5 HP each turn for 1 wave]'
         beforeOrAfter: 1
-        gameEventType: 0
+        gameEventType: 7
+        eventTargets:
+          rid: 1234356373609775124
         effectAction:
           rid: 1234356373609775117
     - rid: 1234356373609775117
@@ -39,7 +41,7 @@ MonoBehaviour:
         target:
           rid: 1234356373609775118
         modifierIcons:
-        - {fileID: 4792262482116360285, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
+        - {fileID: 1566225214732755016, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
         waves: 1
         modifier:
           rid: 1234356373609775119
@@ -50,8 +52,10 @@ MonoBehaviour:
       type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
       data:
         description: 
-        beforeOrAfter: 0
-        gameEventType: 3
+        beforeOrAfter: 1
+        gameEventType: 1
+        eventTargets:
+          rid: 1234356373609775132
         effectAction:
           rid: 1234356373609775120
     - rid: 1234356373609775120
@@ -59,9 +63,15 @@ MonoBehaviour:
       data:
         hideDescription: 0
         target:
-          rid: 1234356373609775121
+          rid: 1234356373609775130
         modifierType: 0
         amount: 5
-    - rid: 1234356373609775121
+    - rid: 1234356373609775124
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356373609775130
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356373609775132
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 

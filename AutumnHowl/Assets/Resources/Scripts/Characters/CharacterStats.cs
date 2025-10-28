@@ -11,6 +11,7 @@ using ErryLib.Reflection;
 using System;
 using System.Reflection;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using static CharacterStatType;
 
@@ -75,6 +76,10 @@ public class CharacterStats
             if (healEvent.IfInvokeInterrupted() || healEvent.healAmount <= 0) return;
             _amount = healEvent.healAmount;
 
+            if (_amount <= 0) return;
+
+            owner.InvokeOnHeal();
+
             if (health + _amount > maxHealth)
             {
                 health = maxHealth;
@@ -85,6 +90,7 @@ public class CharacterStats
                 health += _amount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), owner.transform.position, 1);
             }
+
             return;
         }
         
@@ -99,35 +105,81 @@ public class CharacterStats
             _amount = -damageEvent.damage;
 
             var totalAmount = _amount;
-            
+
             // Apply defense if active
             if (owner.isDefenseActive)
             {
                 totalAmount = _amount + defense;
+                if (totalAmount > 0) { totalAmount = 0; }
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
             }
-            
+
             // Damage killed
             if (health + totalAmount <= 0)
             {
                 health = 0;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText("DOWN", owner.transform.position, 0);
                 owner.isDead = true;
-                // TODO - HOW teH HeCk do I call this now? ~Liz
-                //OnDeath?.Invoke();
+                owner.InvokeOnDeath();
             }
             // Damage hurt
             else
             {
                 health += totalAmount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
-                // TODO - HOW teH HeCk do I call this now? ~Liz
-                //OnHurt?.Invoke();
+                if (totalAmount > 0)
+                    owner.InvokeOnHurt();
             }
         }
+
+        /*
+         *         // Character healed
+       if (_amount > 0)
+       {
+           if (Stats.health + _amount > Stats.maxHealth) Stats.health = Stats.maxHealth;
+           else Stats.health += _amount;
+           GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform.position, 1);
+           OnHeal?.Invoke();
+       }
+
+       if (_amount == 0) return;
+
+       // Character damaged
+       else if (_amount < 0)
+       {
+           var totalAmount = _amount;
+
+           // Apply defense if active
+           if (isDefenseActive)
+           {
+               totalAmount = _amount + Stats.defense;
+               //Clamp to 0 so that it can't heal the character.
+               if (totalAmount > 0) { totalAmount = 0; }
+               GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
+               GameInstance.Get<GI_WidgetManager>().SpawnEffectText(Stats.defense.ToString(), transform.position, 2, 0.5f);
+           }
+
+           // Damage killed
+           if (Stats.health + totalAmount <= 0)
+           {
+               Stats.health = 0;
+               //GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform, 0);
+               isDead = true;
+               OnDeath?.Invoke();
+           }
+           // Damage hurt
+           else
+           {
+               print($"{gameObject.name} took {totalAmount} DMG, HP {Stats.health}");
+               Stats.health += totalAmount;
+               GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), transform.position, 0);
+               OnHurt?.Invoke();
+           }
+       }
+       // */
     }
-    
+
     /// <summary>
     /// Modify the current stats on a character
     /// </summary>

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: Shop Cycle 2
+  m_EditorClassIdentifier: 
+  notes: 
+  itemsToGrant:
+    rid: 1234356373609775137
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356373609775137
+      type: {class: ItemsRef_GroupOfItemRefs, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        itemRefs:
+        - rid: 1234356373609775138
+    - rid: 1234356373609775138
+      type: {class: ItemsRef_Items, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        items:
+        - {fileID: 11400000, guid: c9737e1ef110b8e5cb447213479bd251, type: 2}
+        - {fileID: 11400000, guid: eb9d2e423d658764f97018e3afec7665, type: 2}
+        - {fileID: 11400000, guid: 2cfab589d3e41ad46bed5a214d8ca171, type: 2}
+        - {fileID: 11400000, guid: 45a1fc3a62425684db5bde3ca3dc6274, type: 2}
