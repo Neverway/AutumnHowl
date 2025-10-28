@@ -108,6 +108,24 @@ public class BattleGrid : MonoBehaviour
         return true;
     }
 
+    public bool IsPathable (int _x, int _y)
+    {
+        if (ValidTile (_x, _y) == false)
+        {
+            return false;
+        }
+        if (grid[_x, _y].pawns.Count > 0)
+        {
+            //Return true for tiles with enemies.
+            var c = grid[_x, _y].pawns[0].GetComponent<Character> ();
+            if (c != null && c.HasTag (CharacterTags.Enemy)) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
     /// <summary>
     /// Add the pawn to the grid based on the pawn's position.
     /// </summary>

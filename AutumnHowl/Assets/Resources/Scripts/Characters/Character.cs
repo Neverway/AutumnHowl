@@ -8,6 +8,8 @@
 //====================================================================================================================//
 
 using System;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -147,6 +149,12 @@ public abstract class Character : MonoBehaviour
         return Stats.health;
     }
 
+    public bool HasTag (CharacterTags _tag)
+    {
+        if (template.characterTags.Contains(_tag)) return true;
+        return false;
+    }
+
     public virtual void ModifyPower(int _amount)
     {
         if (_amount == 0) return;
@@ -175,6 +183,20 @@ public abstract class Character : MonoBehaviour
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(_amount.ToString(), transform.position, 3);
             }
         }
+    }
+
+    public void DoAttackAnimation()
+    {
+        if (animator == null) return;
+        StartCoroutine (AttackAnimationRoutine ());
+    }
+
+    public IEnumerator AttackAnimationRoutine ()
+    {
+        print ("Set Animator Attacking");
+        animator.SetBool ("attacking", true);
+        yield return new WaitForSeconds (0.2f);
+        animator.SetBool ("attacking", false);
     }
 
     #endregion

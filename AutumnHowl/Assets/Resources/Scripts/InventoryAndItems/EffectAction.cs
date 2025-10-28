@@ -1,3 +1,4 @@
+using ErryLib.ModiferSystem.Instancers;
 using System;
 using System.Collections;
 using System.Linq;
@@ -52,6 +53,18 @@ public static class StatModTypeExtension
         Mathf.RoundToInt(ApplyMod(modType, amount, current, max));
 }
 
+[Serializable]
+public abstract class TargetedEffectAction : EffectAction
+{
+    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    public override void ApplyEffect(CharacterIdentifier user)
+    {
+        foreach (CharacterIdentifier target in target.GetTargetsFrom(user).AllTargets)
+            ApplyEffectToTarget(target);
+    }
+    public abstract void ApplyEffectToTarget(CharacterIdentifier target);
+}
+
 // ----------------------------
 // EFFECTS BELOW!!!!!!!
 // ----------------------------
@@ -73,23 +86,15 @@ public class MultipleEffectsAction : EffectAction
 }
 
 [Serializable]
-public class ModifyHealthAction : EffectAction
+public class ModifyHealthAction : TargetedEffectAction
 {
-    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
-    public override void ApplyEffect(CharacterIdentifier user)
+    public override void ApplyEffectToTarget(CharacterIdentifier target)
     {
-        // TODO - ERRYNEI HLP MEEE PLSSSSSSS ~Liz
-        /*
-        var targetCharacter = target.GetTarget(user);
-        var stats = targetCharacter.currentStats;
-        targetCharacter.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
-        // */
-        CharacterStats toApplyTo = user.Stats;
-
-        toApplyTo.ModifyHealth(modifierType.ApplyMod(amount, toApplyTo.health, toApplyTo.maxHealth));
+        CharacterStats stats = target.Stats;
+        stats.ModifyHealth(modifierType.ApplyMod(amount, stats.health, stats.maxHealth));
     }
 
     public override string DescribeNoFormat()
@@ -131,24 +136,12 @@ public class ModifyHealthAction : EffectAction
 }
 
 [Serializable]
-public class ModifyCorruptionAction : EffectAction
+public class ModifyCorruptionAction : TargetedEffectAction
 {
-    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target;
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
-    public override void ApplyEffect(CharacterIdentifier user)
-    {
-        /*
-        var targetCharacter = target.GetTarget(user);
-        var stats = targetCharacter.currentStats;
-        targetCharacter.currentStats.corruption += 
-                modifierType.ApplyModInt(amount, stats.corruption, stats.maxCorruption);
-
-        // */
-        user.Stats.ModifyHealth(amount);
-    }
-
+    public override void ApplyEffectToTarget(CharacterIdentifier user) => user.Stats.ModifyCorruption(amount);
     public override string DescribeNoFormat()
     {
         string corrupts = "Corrupts";
@@ -180,6 +173,8 @@ public class GiveItemsEffect : EffectAction
     [Box, Polymorphic, SerializeReference] public ItemsReference itemToGive;
     public override void ApplyEffect(CharacterIdentifier user)
     {
+        if (!user.IsPlayer()) return;
+
         Inventory inventoryToAddTo = GameInstance.Gamestate.inventory;
         Item[] items = itemToGive.GetItems(UnityEngine.Random.Range(int.MinValue, int.MaxValue));
         foreach (Item item in items)
@@ -189,23 +184,156 @@ public class GiveItemsEffect : EffectAction
     public override string DescribeNoFormat() => $"[{EffectDescription}]";
 }
 
+
+
 [Serializable]
-public class ModifierForTimedDuration : EffectAction
+public class ModifierForXTurns : TargetedEffectAction
 {
-    public float seconds;
-    [Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    public Sprite[] modifierIcons;
+    public int turns;
     [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
 
-    public override void ApplyEffect(CharacterIdentifier user)
+    public override void ApplyEffectToTarget(CharacterIdentifier target)
     {
-        Modifier appliedModifier = modifier.GetNew_Flexible(target.GetTargetsFrom(user));
+        Modifier appliedModifier = modifier.GetNew_Flexible(new TargetSelf().GetTargetsFrom(target));
         appliedModifier.RegisterModifier();
-        GameInstance.SendCoroutine(RemoveModifierAfterTime(appliedModifier));
+        GameInstance.SendCoroutine(RemoveModifierAfterTurns(appliedModifier, target.IsPlayer()));
     }
-    public IEnumerator RemoveModifierAfterTime(Modifier toRemove)
+    public IEnumerator RemoveModifierAfterTurns(Modifier toRemove, bool doIcons)
     {
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        EventCounter<Event_BattleTurnPassed> turnCounter = new EventCounter<Event_BattleTurnPassed>();
+
+        while (turnCounter.counter < turns)
+            yield return null;
+
+        toRemove.UnregisterModifier();
+        turnCounter.Discard();
+        if (doIcons) WB_ModifierIcons.RemoveIcon(toRemove);
+    }
+
+    public override string DescribeNoFormat()
+    {
+        if (hideDescription || turns <= 0) return "";
+
+        if (modifier != null && modifier is IDescribable describable)
+        {
+            string description = describable.Description;
+            if (string.IsNullOrEmpty(description))
+                return "";
+
+            return $"[{describable.Description} to {target} for {turns} step{(turns == 1 ? "" : "s" )}]";
+        }
+        return "";
+    }
+}
+
+[Serializable]
+public class ModifierForXWaves : TargetedEffectAction
+{
+    public Sprite[] modifierIcons;
+    public int waves;
+    [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
+
+    public override void ApplyEffectToTarget(CharacterIdentifier target)
+    {
+        Modifier appliedModifier = modifier.GetNew_Flexible(new TargetSelf().GetTargetsFrom(target));
+        appliedModifier.RegisterModifier();
+        GameInstance.SendCoroutine(RemoveModifierAfterWaves(appliedModifier, target.IsPlayer()));
+    }
+    public IEnumerator RemoveModifierAfterWaves(Modifier toRemove, bool doIcons)
+    {
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        EventCounter<Event_BattleWavePassed> turnCounter = new EventCounter<Event_BattleWavePassed>();
+
+        while (turnCounter.counter < waves)
+            yield return null;
+
+        toRemove.UnregisterModifier();
+        turnCounter.Discard();
+        if (doIcons) WB_ModifierIcons.RemoveIcon(toRemove);
+    }
+
+    public override string DescribeNoFormat()
+    {
+        if (hideDescription || waves <= 0) return "";
+
+        if (modifier != null && modifier is IDescribable describable)
+        {
+            string description = describable.Description;
+            if (string.IsNullOrEmpty(description))
+                return "";
+
+            return $"[{describable.Description} to {target} for {waves} wave{(waves == 1 ? "" : "s")}]";
+        }
+        return "";
+    }
+}
+
+[Serializable]
+public class ModifierUntilEndOfBattle : TargetedEffectAction
+{
+    public int battlesCount = 1;
+    public Sprite[] modifierIcons;
+    [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
+
+    public override void ApplyEffectToTarget(CharacterIdentifier target)
+    {
+        Modifier appliedModifier = modifier.GetNew_Flexible(new TargetSelf().GetTargetsFrom(target));
+        appliedModifier.RegisterModifier();
+        GameInstance.SendCoroutine(RemoveModifierAfterEndOfBattle(appliedModifier, target.IsPlayer()));
+    }
+    public IEnumerator RemoveModifierAfterEndOfBattle(Modifier toRemove, bool doIcons)
+    {
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        EventCounter<Event_BattleWon> turnCounter = new EventCounter<Event_BattleWon>();
+
+        while (turnCounter.counter < battlesCount)
+            yield return null;
+
+        toRemove.UnregisterModifier();
+        turnCounter.Discard();
+        if (doIcons) WB_ModifierIcons.RemoveIcon(toRemove);
+    }
+
+    public override string DescribeNoFormat()
+    {
+        if (hideDescription || battlesCount <= 0) return "";
+
+        if (modifier != null && modifier is IDescribable describable)
+        {
+            string description = describable.Description;
+            if (string.IsNullOrEmpty(description))
+                return "";
+
+            if (battlesCount == 1)
+                return $"[{describable.Description} to {target} for 1 battle]";
+            else
+                return $"[{describable.Description} to {target} for {battlesCount} battles]";
+        }
+        return "";
+    }
+}
+
+[Serializable]
+public class ModifierForTimedDuration : TargetedEffectAction
+{
+    public Sprite[] modifierIcons;
+    public float seconds;
+    [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
+
+    public override void ApplyEffectToTarget(CharacterIdentifier target)
+    {
+        Modifier appliedModifier = modifier.GetNew_Flexible(new TargetSelf().GetTargetsFrom(target));
+        appliedModifier.RegisterModifier();
+        GameInstance.SendCoroutine(RemoveModifierAfterTime(appliedModifier, target.IsPlayer()));
+    }
+    public IEnumerator RemoveModifierAfterTime(Modifier toRemove, bool doIcons)
+    {
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
         yield return new WaitForSeconds(seconds);
         toRemove.UnregisterModifier();
+        if (doIcons) WB_ModifierIcons.RemoveIcon(toRemove);
     }
 
     public override string DescribeNoFormat()

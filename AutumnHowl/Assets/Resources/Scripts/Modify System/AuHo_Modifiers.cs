@@ -1,3 +1,4 @@
+using ErryLib.GameEvents;
 using ErryLib.ModiferSystem.Instancers;
 using System;
 using System.Collections.Generic;
@@ -95,22 +96,47 @@ public interface SerializedModifier_CharacterTargeting : IModifierInstancer<Char
         RecordRegisteredModifier(id, createdModifier);
     }
 }
-
 [Serializable]
-public abstract class CharacterStatModifierCreator : SerializedModifier_CharacterTargeting
+public abstract class CharacterTargetingModifierCreatorBase : SerializedModifier_CharacterTargeting
 {
     public abstract string Description { get; }
+    
+    void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets) =>
+        OnModifyValue(modifiableValue, targets);
+    protected abstract void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets);
+
+    bool IModifierInstancer<CharacterTargets>.OnInstanceReactToGameEvent
+    (InstancedModifier<CharacterTargets> modifier, BasicGameEvent basicEvent, InvokeTiming timing)
+    {
+        if (basicEvent is not AuHoGameEvent gameEvent) return false;
+
+        if (OnGameEvent(modifier, gameEvent, timing)) return true;
+        if (timing == InvokeTiming.After) return OnAfterGameEvent(modifier, gameEvent);
+        if (timing == InvokeTiming.Before) return OnBeforeGameEvent(modifier, gameEvent);
+
+        return false;
+    }
+    public virtual bool OnGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent, InvokeTiming timing) => false;
+    public virtual bool OnBeforeGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent) => false;
+    public virtual bool OnAfterGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent) => false;
+
+    public override string ToString() => Description;
+}
+
+[Serializable]
+public abstract class CharacterStatModifierCreator : CharacterTargetingModifierCreatorBase
+{
+    
     /// <summary>Passes any stat that need to be modified by the modifier</summary>
     public abstract void ModifyStat(CharacterStat stat);
 
     /// <summary>Filters the modifiers for ones that are a CharacterStat and of a character that is targeted by the provided CharacterTargets</summary>
-    void IModifierInstancer<CharacterTargets>.OnInstanceModifyValue(Modifiable modifiableValue, CharacterTargets targets)
+    protected override void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets)
     {
         if (modifiableValue is CharacterStat charStat)
             if (targets.IsTargeted(charStat.LinkedCharacter))
                 ModifyStat(charStat);
     }
-    public override string ToString() => Description;
 }
 /// <summary>Used by some classes to define a description for the object</summary>
 public interface IDescribable { public string Description { get; } }
@@ -146,7 +172,6 @@ public class MultipleCharacterStatModifiers : CharacterStatModifierCreator
             .Select((m) => m.Description)              // Get array of all descriptions from modifiers
             .Where((m) => !string.IsNullOrEmpty(m)));  // Trim all empty or null strings from array
 }
-
 
 [Serializable]
 public class CharacterStatModifiers : CharacterStatModifierCreator
@@ -214,57 +239,30 @@ public partial class AuHo_ExtentionMethods
         SerializedModifier.UnregisterModifierFrom(id);
 }
 
-
-
-
-
-
-
-//------------------------------------------------
-//            Deprecated Modifiers
-//------------------------------------------------
-
-/*
 [Serializable]
-public class TimedModifier : CharacterStatModInstancer, IDescribable
+public class DoEffectActionOnEvent : CharacterTargetingModifierCreatorBase
 {
-    public bool hideDescription;
-    public float seconds;
-    [Box, Polymorphic, SerializeReference] public ICharacterStatModInstancer modifier;
+    public string description;
+    public override string Description => description;
 
-    private IEnumerator RemoveModifierAfterTime(Modifier modifier)
+    public InvokeTiming beforeOrAfter;
+    public GameEventType gameEventType;
+    [Box, Polymorphic, SerializeReference] public EffectAction effectAction;
+
+    protected override void OnModifyValue(Modifiable modifiableValue, CharacterTargets targets) { }
+
+
+
+    public override bool OnGameEvent(InstancedModifier<CharacterTargets> modifier, AuHoGameEvent gameEvent, InvokeTiming timing)
     {
-        yield return new WaitForSeconds(seconds);
-        modifier.UnregisterModifier();
-    }
+        if (timing != beforeOrAfter) return false;
+        if (gameEvent.EventType != gameEventType) return false;
 
-    //CharacterStatModInstancer implementation ---------------------------------------------------
-    protected virtual void OnInstanceRegistered(InstancedModifier<CharacterTargets> instancedModifier) =>
-        GameInstance.SendCoroutine(RemoveModifierAfterTime(instancedModifier));
-
-    public override void ModifyStat(CharacterStat modifiableValue) => modifier.ModifyStat(modifiableValue);
-
-    //IDescribable implementation --------------------------------------------------------------
-    public override string Description
-    {
-        get
+        foreach(CharacterIdentifier user in modifier.ModifierData.AllTargets)
         {
-            if (hideDescription || seconds <= 0) return "";
-
-            if (modifier != null)
-            {
-                string description = modifier.Description;
-                if (string.IsNullOrEmpty(description))
-                    return "";
-
-                int inMinutes = Mathf.FloorToInt(seconds / 60);
-                int inSeconds = Mathf.FloorToInt(seconds % 60);
-                string XXm = inMinutes > 0 ? $"{inMinutes}m" : "";
-                string XXs = inSeconds > 0 ? $"{inSeconds}s" : "";
-                return $"{modifier.Description} for {XXm}{XXs}";
-            }
-            return "";
+            effectAction.ApplyEffect(user);
         }
+
+        return false;
     }
 }
-// */

@@ -15,6 +15,7 @@ MonoBehaviour:
   <UniqueID>k__BackingField: Badger
   characterReferenceType: 1
   characterName: Badger
+  characterTags: 0100000003000000
   baseStats:
     health: 100
     level: 0
@@ -50,6 +51,10 @@ MonoBehaviour:
       addedValue: 0
     maxCorruption:
       startValue: 100
+      multiplier: 0
+      addedValue: 0
+    shieldPower:
+      startValue: 10
       multiplier: 0
       addedValue: 0
     walkSpeed:

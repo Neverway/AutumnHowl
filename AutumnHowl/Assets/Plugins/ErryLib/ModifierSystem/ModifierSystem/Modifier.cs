@@ -23,6 +23,9 @@ public abstract class Modifier
         if (ActiveModifiers.Contains(this))
             return;
 
+        if (ActiveModifiers is ListensToGameEvent gameEventListener)
+            GameEventSystem.Register(gameEventListener);
+
         ActiveModifiers.Add(this);
         OnRegisterModifier();
     }
@@ -35,6 +38,9 @@ public abstract class Modifier
     {
         if (ActiveModifiers.Remove(this))
             OnUnregisterModifier();
+
+        if (ActiveModifiers is ListensToGameEvent gameEventListener)
+            GameEventSystem.UnRegister(gameEventListener);
     }
     /// <summary>Called when this modifier is successfully registered as active modifier</summary>
     protected virtual void OnRegisterModifier() { }

@@ -9,9 +9,6 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WB_Inventory : MonoBehaviour
@@ -124,9 +121,9 @@ public class WB_Inventory : MonoBehaviour
         {
             inspectListNavigator.selectableElements[i].OnInteracted.RemoveAllListeners();
         }
-        inspectListNavigator.selectableElements[0].OnInteracted.AddListener(()=> { Inspect(_parentNavigator, _index); });
-        inspectListNavigator.selectableElements[1].OnInteracted.AddListener(()=> { Use(_parentNavigator, _index); });
-        inspectListNavigator.selectableElements[2].OnInteracted.AddListener(()=> { Discard(_parentNavigator, _index); });
+        inspectListNavigator.selectableElements[0].OnInteracted.AddListener(() => Inspect(_parentNavigator, _index));
+        inspectListNavigator.selectableElements[1].OnInteracted.AddListener(() => Use(_parentNavigator, _index));
+        inspectListNavigator.selectableElements[2].OnInteracted.AddListener(() => Discard(_parentNavigator, _index));
 
         //Set the text for the "Use" button to be relative to what item you're trying to use
         string useItemText = "Use";

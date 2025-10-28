@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1957450923, guid: 8db30d9c04e4f06fd8cd2af80dc7d8d4, type: 3}
+      objectReference: {fileID: -1415402274, guid: 8db30d9c04e4f06fd8cd2af80dc7d8d4, type: 3}
     - target: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteHash
-      value: 1069177207
+      value: 397304676
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_CategoryHash
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6601185223956943184, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
@@ -103,6 +103,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -403397343939746182}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+--- !u!4 &1673734515386349373 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 2339698727629392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6242562417686465405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
@@ -154,12 +159,16 @@ MonoBehaviour:
       pushing: 0
   canMove: 0
   pushable: 1
+  gridHopAnimation_Seconds: 0.15
+  gridHopAnimation_Height: 0.35
+  gridHopAnimationContainer: {fileID: 1673734515386349373}
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 7706586741973341373, guid: e4935c9a6c5d26f42a8eeb06c49ea130, type: 3}
   useBlock: 0
+  invertAttackFacingDirections: 0
   randomRetreat: 0
   skipFirstTurn: 1
 --- !u!114 &1449108568966244714

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: SomeSpecialThing
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: specialThing
+  displayName: Some Special Thing
+  description: 
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 0
+  sellCost: 0
+  effectWhenEquipped:
+    rid: 1234356373609775114
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356373609775114
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: '[Using Items heals 5 HP each turn for 1 wave]'
+        beforeOrAfter: 1
+        gameEventType: 0
+        effectAction:
+          rid: 1234356373609775117
+    - rid: 1234356373609775117
+      type: {class: ModifierForXWaves, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356373609775118
+        modifierIcons:
+        - {fileID: 4792262482116360285, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
+        waves: 1
+        modifier:
+          rid: 1234356373609775119
+    - rid: 1234356373609775118
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356373609775119
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: 
+        beforeOrAfter: 0
+        gameEventType: 3
+        effectAction:
+          rid: 1234356373609775120
+    - rid: 1234356373609775120
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356373609775121
+        modifierType: 0
+        amount: 5
+    - rid: 1234356373609775121
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
