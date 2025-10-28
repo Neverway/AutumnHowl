@@ -79,10 +79,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: c051f46a-6d53-4b6a-973f-eb8ad97ea09f
-  battleData: {fileID: 11400000, guid: e981bf267c320d9ddb2aba5b6b26c306, type: 2}
+  battleData: {fileID: 11400000, guid: 050dab5e50a01c84f805e4047502dcf0, type: 2}
   enemyWander: {fileID: 914898563591339920}
   enemyDefeatAnimation: {fileID: 3100782084754435406}
   enemyRemains: {fileID: 5377980545693577877}
+  homeCycle: -1
 --- !u!1 &7334491809790625422
 GameObject:
   m_ObjectHideFlags: 0
