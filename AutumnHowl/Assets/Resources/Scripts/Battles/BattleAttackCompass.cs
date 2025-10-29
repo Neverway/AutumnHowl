@@ -267,10 +267,10 @@ public class BattleAttackCompass : MonoBehaviour
     /// <returns>Integer from 0-4 where 4 = 360 degrees</returns>
     private int AmountOfAvailableSlash()
     {
-        if (player.Stats.power >= 40) return 4; //Full Slash (360)
-        if (player.Stats.power >= 30) return 3; //Three-Quarts Slash (270)
-        if (player.Stats.power >= 20) return 2; // Half Slash (180)
-        if (player.Stats.power >= 10) return 1; // Quarter Slash (90 turn)
+        if (player.Stats.power >= powerRequiredForAttacks[3]) return 4; //Full Slash (360)
+        if (player.Stats.power >= powerRequiredForAttacks[2]) return 3; //Three-Quarts Slash (270)
+        if (player.Stats.power >= powerRequiredForAttacks[1]) return 2; // Half Slash (180)
+        if (player.Stats.power >= powerRequiredForAttacks[0]) return 1; // Quarter Slash (90 turn)
         return 0;
     }
     
