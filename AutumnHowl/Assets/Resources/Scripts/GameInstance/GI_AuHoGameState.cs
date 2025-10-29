@@ -105,6 +105,7 @@ public class AuHoGameState
     {
         GameInstance.Get<GI_WidgetManager>().AddWidget("WB_CycleInfo");
         lastDisplayedCycle = currentCycle;
+        currentLanternTime = lanternDuration;
     }
     
     public int GetSubSeed(string id)
