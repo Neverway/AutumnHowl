@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_labelHash
-      value: 0.00000039825036
+      value: 2.3532447e-11
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_SpriteHash
@@ -38,15 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1015718231976184152, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_CategoryHash
-      value: 0.009161512
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.136
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.136
+      value: 9.932601e-39
       objectReference: {fileID: 0}
     - target: {fileID: 4264719621217924197, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       propertyPath: m_LocalPosition.x
