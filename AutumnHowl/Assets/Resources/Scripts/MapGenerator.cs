@@ -26,6 +26,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     public Sprite fallbackSprite;
     private Vector2 homePlayerIconPos;
     private Vector2 homePlayerPos;
+    public bool generateStraightPath;
+    public int straightPathColumnIndex;
 
     //=-----------------=
     // Private Variables
@@ -240,6 +242,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         pathStepCounterForEnemies = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
          StoreDebugLogMapGenStep("Map Nodes Finished");
+        if (generateStraightPath)
+        {
+            AddStraightPath();
+        }
         AddRandomLoops();
         GenerateTilesFromNodes ();
          StoreDebugLogMapGenStep("Map Tiles Finished");
@@ -336,6 +342,15 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
                 //Try adding a loop until it works.
                 if (TryAddLoop(bag.Grab())) { break; }
             }
+        }
+    }
+
+    private void AddStraightPath()
+    {
+        for (int y = 0; y < mapHeight; y++)
+        {
+            mapNodes[straightPathColumnIndex, y].paths[NORTH] = true;
+            mapNodes[straightPathColumnIndex, y].paths[SOUTH] = true;
         }
     }
 
