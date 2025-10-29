@@ -1676,10 +1676,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patchy_Spawn
       objectReference: {fileID: 0}
-    - target: {fileID: 2754862907565046826, guid: e4ad4170131783143923ce449581c87f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: cc913570de602ebb4a611d780d1c0cda, type: 2}
     - target: {fileID: 4642924554136743999, guid: e4ad4170131783143923ce449581c87f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.962215
