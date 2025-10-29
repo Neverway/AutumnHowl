@@ -120,6 +120,15 @@ public class GI_AudioManager : MonoBehaviour
         //ambientSource.DOPitch(_pitch, 0.5f);
     }
 
+    /// <summary>
+    /// Used during the boss cutscene to make the ambience disapear
+    /// </summary>
+    /// <param name="_pitch"></param>
+    public void SetAmbiencePitch(float _pitch)
+    {
+        ambientSource.DOPitch(_pitch, 0.5f);
+    }
+
     //Play a random clip from the Goal Mix. Uesd when a level is completed.
     public void PlayRandomSound (AudioClip[] _list)
     {

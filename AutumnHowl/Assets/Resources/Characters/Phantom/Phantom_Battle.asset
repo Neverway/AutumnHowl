@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
-  m_Name: Battle_Badger
+  m_Name: Phantom_Battle
   m_EditorClassIdentifier: 
   targetLevelScene: {fileID: 102900000, guid: 23ba94449cea27896ba8a4ab2595882b, type: 3}
   mapID: Battle
   openingText:
     frames:
     - name: 
-      chatContent: '*A wild Badger lunges at you!'
+      chatContent: '*A bandit wants to fight!'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 0}
       OnFrameCompleted:
@@ -30,17 +30,19 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
-  victoryLevels: 0
-  victoryGold: 0
+  victoryLevels: 1
+  victoryGold: 10
   battleSequence:
     waves:
     - rid: 26148788346028042
-  layoutPrefab: {fileID: 8695103665243705671, guid: 2c81aeeb80144294fbfe86e99e4372de, type: 3}
+  layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
   enemySpawnLocations:
-  - enemyPrefab: {fileID: 6242562417686465405, guid: fcfea0680b30111d6a509bbf32b1a11f, type: 3}
-    enemyStartPosition: {x: 2, y: 4}
+  - enemyPrefab: {fileID: 6242562417686465405, guid: 8855ff0d459a8c446a897a537f73a7b5, type: 3}
+    enemyStartPosition: {x: 3, y: 4}
+  - enemyPrefab: {fileID: 6242562417686465405, guid: 8855ff0d459a8c446a897a537f73a7b5, type: 3}
+    enemyStartPosition: {x: 1, y: 5}
   victoryState:
-    rid: 6522102354630410240
+    rid: 26149116751642625
   references:
     version: 2
     RefIds:
@@ -92,6 +94,6 @@ MonoBehaviour:
               m_Calls: []
         waveAttack: {fileID: 0}
         waveSteps: 8
-    - rid: 6522102354630410240
+    - rid: 26149116751642625
       type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
       data: 

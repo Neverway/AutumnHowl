@@ -47,7 +47,7 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
             StartCoroutine(Die());
             return;
         }
-        if (isDead) return;
+        if (isDead || freezeCharacterMovement) return;
         
         // Menu pausing
         UpdatePausingInput();

@@ -25,6 +25,7 @@ public class ParticleGenerator : MonoBehaviour
     public void OnDisable() => DestroyAllParticles();
     public void Update()
     {
+        if (GameInstance.Playerbody == null) return;
         float distanceToPlayer = Vector3.Distance(transform.position, GameInstance.Playerbody.transform.position) - (area.magnitude * 0.5f);
         if (distanceToPlayer > 6)
         {

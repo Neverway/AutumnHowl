@@ -21,6 +21,7 @@ public abstract class Character : MonoBehaviour
     public bool isDefenseActive;
 
     public Vector2Int startFaceDirection = Vector2Int.down;
+    public bool freezeCharacterMovement = false;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/

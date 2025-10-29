@@ -154,6 +154,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     }
     private void OnVictory()
     {
+        StopAllCoroutines();
         animator.Play(animator_victoryDanceStateName, 0, Time.time * victoryDanceSpeed);
         animator.speed = 0f;
     }
@@ -211,7 +212,6 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     private void RegisterHit() => hitStunTimer = HITSTUN_SECONDS;
     public void RegisterHit(AttackElement attack, Vector3 hitPosition)
     {
-        Debug.Log("Erry: Hitstun!!!");
         hitDirection = (hitPosition - transform.position).normalized;
         Debug.DrawLine(transform.position, hitPosition, Color.red, 1f);
 
@@ -224,7 +224,6 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     bool startRecoil; Direction toRecoilTo;
     public void RegisterRecoil(Direction returnToDirection)
     {
-        Debug.Log("Erry: REGISTERED RECOIL");
         startRecoil = true;
         toRecoilTo = returnToDirection;
     }
@@ -267,11 +266,9 @@ public class SwordSwingAnimationHandler : MonoBehaviour
         float timeStarted = Time.time;
 
         //Lower sword from pullback for a few frames to enter spin
-        Debug.Log("Erry: SpinPhase: Lower sword into spin");
         yield return SpinPhase_LowerSwordIntoSpin(startAngle, endAngle);
 
         //Start the spinning animation
-        Debug.Log("Erry: SpinPhase: Spin");
         yield return SpinPhase_Spin(startAngle, endAngle, timeStarted, secondsToSpin);
 
         if (startRecoil) //If a recoil occurred during spin, retry the spin in the other direction, but with new angle targets and time
@@ -283,20 +280,16 @@ public class SwordSwingAnimationHandler : MonoBehaviour
             spinDegreesRotation = Mathf.Abs(spinDegreesRotation % 360);
             startAngle = spinDegreesRotation;
             endAngle = toRecoilTo.Info().degreesRotation;
-            Debug.Log($"BEFORE: starts: {startAngle}, ends: {endAngle}");
             if (endAngle - startAngle > 180) endAngle -= 360; //Make sure to use the shortest distance of angles
             if (endAngle - startAngle < -180) endAngle += 360;
-            Debug.Log($"AFTER: starts: {startAngle}, ends: {endAngle}");
 
             secondsToSpin = (Mathf.Abs(startAngle - endAngle) / 90f) * SPIN_90DEGREES_SECONDS;
             timeStarted = Time.time;
 
-            Debug.Log("Erry: SpinPhase: Recoil spin");
             yield return SpinPhase_Spin(startAngle, endAngle, timeStarted, secondsToSpin);
         }
 
         //End spin by resting sword back to ground
-        Debug.Log("Erry: SpinPhase: Bring sword to rest");
         yield return SpinPhase_BringSwordToRest(endAngle);
     }
     private IEnumerator SpinPhase_LowerSwordIntoSpin(float startAngle, float endAngle)
