@@ -170,7 +170,7 @@ MonoBehaviour:
   useBlock: 0
   invertAttackFacingDirections: 0
   randomRetreat: 0
-  skipFirstTurn: 1
+  skipFirstTurn: 0
 --- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0
