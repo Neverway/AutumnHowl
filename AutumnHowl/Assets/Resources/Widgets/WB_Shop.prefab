@@ -6382,7 +6382,7 @@ MonoBehaviour:
   textEvent:
     frames:
     - name: Shop Keeper
-      chatContent: '*Then name''s {col=key}Nicc{col=} & I love knick-knacks!'
+      chatContent: '*The name''s {col=key}Nicc{col=} & I love knick-knacks!'
       portrait: {fileID: 864773066, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
       chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
@@ -6417,7 +6417,7 @@ MonoBehaviour:
       preventTextContinuing: 0
       autoProgressOnComplete: 0
     - name: Shop Keeper
-      chatContent: '*Wild spells and potions are great for mischife!'
+      chatContent: '*Wild spells and potions are great for mischief!'
       portrait: {fileID: 864773066, guid: 081740101fd2f03f9a9f9cc1d0baf3c0, type: 3}
       chatterVoice: {fileID: 11400000, guid: 20fd3f91257489347bd05e3cffb101fa, type: 2}
       OnFrameCompleted:
