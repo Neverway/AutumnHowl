@@ -479,6 +479,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         {
             //Generate the object
             ICreatesGameObject objCreator = pathObjectsAndEnemies.Grab();
+            if (objCreator == null) continue;
             GameObject enemy = objCreator.CreateNew();
             if (enemy == null) continue;
 
