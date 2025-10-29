@@ -2,6 +2,7 @@ using ErryLib.ModiferSystem.Instancers;
 using System;
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
@@ -189,7 +190,7 @@ public class GiveItemsEffect : EffectAction
 [Serializable]
 public class ModifierForXTurns : TargetedEffectAction
 {
-    public Sprite[] modifierIcons;
+    public SpriteRef[] modifierIcons;
     public int turns;
     [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
 
@@ -201,7 +202,7 @@ public class ModifierForXTurns : TargetedEffectAction
     }
     public IEnumerator RemoveModifierAfterTurns(Modifier toRemove, bool doIcons)
     {
-        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons.NotNull().Select(sr => sr.sprite).ToArray());
         EventCounter<Event_BattleTurnPassed> turnCounter = new EventCounter<Event_BattleTurnPassed>();
 
         while (turnCounter.counter < turns)
@@ -231,7 +232,7 @@ public class ModifierForXTurns : TargetedEffectAction
 [Serializable]
 public class ModifierForXWaves : TargetedEffectAction
 {
-    public Sprite[] modifierIcons;
+    public SpriteRef[] modifierIcons;
     public int waves;
     [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
 
@@ -243,7 +244,7 @@ public class ModifierForXWaves : TargetedEffectAction
     }
     public IEnumerator RemoveModifierAfterWaves(Modifier toRemove, bool doIcons)
     {
-        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons.NotNull().Select(sr => sr.sprite).ToArray());
         EventCounter<Event_BattleWavePassed> turnCounter = new EventCounter<Event_BattleWavePassed>();
 
         while (turnCounter.counter < waves) yield return null;
@@ -273,7 +274,7 @@ public class ModifierForXWaves : TargetedEffectAction
 public class ModifierUntilEndOfBattle : TargetedEffectAction
 {
     public int battlesCount = 1;
-    public Sprite[] modifierIcons;
+    public SpriteRef[] modifierIcons;
     [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
 
     public override void ApplyEffectToTarget(CharacterIdentifier target)
@@ -284,7 +285,7 @@ public class ModifierUntilEndOfBattle : TargetedEffectAction
     }
     public IEnumerator RemoveModifierAfterEndOfBattle(Modifier toRemove, bool doIcons)
     {
-        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons.NotNull().Select(sr => sr.sprite).ToArray());
         EventCounter<Event_BattleWon> turnCounter = new EventCounter<Event_BattleWon>();
 
         while (turnCounter.counter < battlesCount)
@@ -317,7 +318,7 @@ public class ModifierUntilEndOfBattle : TargetedEffectAction
 [Serializable]
 public class ModifierForTimedDuration : TargetedEffectAction
 {
-    public Sprite[] modifierIcons;
+    public SpriteRef[] modifierIcons;
     public float seconds;
     [Box, Polymorphic, SerializeReference] public SerializedModifier modifier;
 
@@ -329,7 +330,7 @@ public class ModifierForTimedDuration : TargetedEffectAction
     }
     public IEnumerator RemoveModifierAfterTime(Modifier toRemove, bool doIcons)
     {
-        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons);
+        if (doIcons) WB_ModifierIcons.AddIcon(toRemove, modifierIcons.NotNull().Select(sr => sr.sprite).ToArray());
         yield return new WaitForSeconds(seconds);
         toRemove.UnregisterModifier();
         if (doIcons) WB_ModifierIcons.RemoveIcon(toRemove);

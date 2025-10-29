@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 /// <summary>
 /// <b> For Polymorphic Serialization</b>
@@ -173,6 +173,87 @@ public class ItemsRef_WeightedItems : ItemsReference
         public float weight;
         [Box, Polymorphic, SerializeReference] 
         public ItemsReference item;
+    }
+}
+
+
+[Serializable]
+public class ItemsRef_RandomItem : ItemsReference
+{
+    public bool ignoreNullItems = true;
+    [Tooltip("This is the number of items to pull from the list, each one being a different index in the list")]
+    public int uniquePickCount = 1;
+    public Item[] items;
+    public override bool CanGetItems() => items.IsNotEmptyOrNull() && uniquePickCount > 0;
+    protected override Item[] OnGetItems()
+    {
+        List<Item> toGive = new();
+        List<Item> toPickFrom = items.ToList();
+        if (ignoreNullItems) toPickFrom = toPickFrom.NotNull().ToList();
+
+        for (int i = 0; i < uniquePickCount && toPickFrom.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, toPickFrom.Count - 1);
+            toGive.Add(toPickFrom[randomIndex]);
+            toPickFrom.RemoveAt(randomIndex);
+        }    
+        return toGive.ToArray();
+    }
+}
+[Serializable]
+public class ItemsRef_RandomLootTable : ItemsReference
+{
+    public bool ignoreEmptyLootTables = true;
+    [Tooltip("This is the number of loottables to pull from the list, each one being a different index in the list")]
+    public int uniquePickCount = 1;
+    public LootTable[] lootTables;
+    public override bool CanGetItems() => lootTables.IsNotEmptyOrNull() && uniquePickCount > 0;
+    protected override Item[] OnGetItems()
+    {
+        List<Item> toGive = new();
+        List<LootTable> toPickFrom = lootTables.ToList();
+        if (ignoreEmptyLootTables) toPickFrom = toPickFrom.NotNull().Where(lt => lt.itemsToGrant.CanGetItems()).ToList();
+
+        for (int i = 0; i < uniquePickCount && toPickFrom.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, toPickFrom.Count - 1);
+            if (toPickFrom[randomIndex] != null)
+            {
+                Item[] grabbedItems = toPickFrom[randomIndex].GetLootUnityRandomSeed();
+                if (grabbedItems != null && grabbedItems.Length > 0)
+                    toGive.AddRange(grabbedItems);
+            }
+            toPickFrom.RemoveAt(randomIndex);
+        }
+        return toGive.ToArray();
+    }
+}
+[Serializable]
+public class ItemsRef_RandomItemRefs : ItemsReference
+{
+    public bool ignoreEmptyItemRefs = true;
+    [Tooltip("This is the number of item refs to pull from the list, each one being a different index in the list")]
+    public int uniquePickCount = 1;
+    [Box, Polymorphic, SerializeReference] public ItemsReference[] itemRefs;
+    public override bool CanGetItems() => itemRefs.IsNotEmptyOrNull() && uniquePickCount > 0;
+    protected override Item[] OnGetItems()
+    {
+        List<Item> toGive = new();
+        List<ItemsReference> toPickFrom = itemRefs.ToList();
+        if (ignoreEmptyItemRefs) toPickFrom.NotNull().Where(ir => ir.CanGetItems()).ToList();
+
+        for (int i = 0; i < uniquePickCount && toPickFrom.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, toPickFrom.Count - 1);
+            if (toPickFrom[randomIndex] != null)
+            {
+                Item[] grabbedItems = toPickFrom[randomIndex].GetItemsUnityRandomSeed();
+                if (grabbedItems != null && grabbedItems.Length > 0)
+                    toGive.AddRange(grabbedItems);
+            }
+            toPickFrom.RemoveAt(randomIndex);
+        }
+        return toGive.ToArray();
     }
 }
 

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: RandomSugarCookie
+  m_EditorClassIdentifier: 
+  notes: Gives a random sugar cookie variant
+  itemsToGrant:
+    rid: 1234356373609775147
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356373609775147
+      type: {class: ItemsRef_RandomItem, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        ignoreNullItems: 1
+        uniquePickCount: 1
+        items:
+        - {fileID: 11400000, guid: 42efbfc923d54b940bde4cda8f2fe2da, type: 2}
+        - {fileID: 11400000, guid: d56239aba97d6994ab5dc0bb99be93f5, type: 2}
+        - {fileID: 11400000, guid: f115322d8d759bd4aaa82df55c160635, type: 2}
+        - {fileID: 11400000, guid: 2a16e4cd34a1e3c4093b9f19f1fb9fad, type: 2}
+        - {fileID: 11400000, guid: 51ea8e7d6b96c6d4c873f1b0ac737fbe, type: 2}
+        - {fileID: 11400000, guid: 2e81bfccf7c3e974286141a474828fc9, type: 2}
+        - {fileID: 11400000, guid: a52a9302538a77c438b962a8227a34c6, type: 2}
+        - {fileID: 11400000, guid: d8595c639e0d46b4abf1199548fb767d, type: 2}
