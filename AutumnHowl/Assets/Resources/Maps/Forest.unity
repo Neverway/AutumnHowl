@@ -604,6 +604,7 @@ MonoBehaviour:
   seedToGenerate: 0
   enemyFrequency: 3
   minimumEnemyCount: 12
+  minimumPOICount: 0
   numberOfLoops: 3
   tilemapGround: {fileID: 1982810835}
   groundTile: {fileID: 11400000, guid: f4a0298d72d83d266a4115ba738bd4f5, type: 2}
@@ -629,6 +630,7 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 6679076751848293570}
   chestRecreator: {fileID: 1651940431}
+  spawnPathToPatchyBoss: 0
 --- !u!1 &970689508
 GameObject:
   m_ObjectHideFlags: 0
