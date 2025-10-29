@@ -18,6 +18,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     // Public Variables
     //=-----------------=
+    public ParticleGenerator fog;
+    [Space]
     public Vector2Int VillageEntranceForMap;
     public GameObject spriteObjectTemplate;
     public Transform mapSpritesParent;
@@ -237,6 +239,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
                 mapNodes[x, y] = new MapNode ();
             }
         }
+
         pathStepCounterForEnemies = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
          StoreDebugLogMapGenStep("Map Nodes Finished");
@@ -291,7 +294,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     /// <summary>
     /// If there's fewer poiLocations than the required amount, add more at random...
     /// </summary>
-    private void MakeExtraPOIs ()
+    private void MakeExtraPOIs()
     {
         if (poiLocations.Count >= minimumPOICount)
         {

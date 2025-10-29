@@ -7,8 +7,6 @@
 //
 //====================================================================================================================//
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -56,7 +54,6 @@ public class Func_TextEvent : MonoBehaviour
             OnCallFailed.Invoke();
         }
     }
-
 
     #endregion
 }
