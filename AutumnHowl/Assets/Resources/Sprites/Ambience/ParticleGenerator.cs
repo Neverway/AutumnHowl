@@ -19,17 +19,26 @@ public class ParticleGenerator : MonoBehaviour
     private double true_pps => spawnsPerSecond * 
         (factorSpawnRateByArea ? (area.x * area.y * area.z * 0.125f) : 1f );
 
-    public void Start()
-    {
-        double preloadSpawns = true_pps * secondsOfSpawningToPreload;
-        while (preloadSpawns > 0)
-        {
-            SpawnParticleInArea().SetAnimatorToRandomTime();
-            preloadSpawns -= 1f;
-        }
-    }
+    bool playerTooFar = false;
+
+    public void OnEnable() => playerTooFar = true; //This will preload particles on first step
+    public void OnDisable() => DestroyAllParticles();
     public void Update()
     {
+        float distanceToPlayer = Vector3.Distance(transform.position, GameInstance.Playerbody.transform.position) - (area.magnitude * 0.5f);
+        if (distanceToPlayer > 6)
+        {
+            DestroyAllParticles();
+            playerTooFar = true;
+            return;
+        }
+        if (playerTooFar)
+        {
+            playerTooFar = false;
+            PreSpawn();
+            return;
+        }
+
         particlesToSpawn += true_pps * Time.deltaTime;
         while (particlesToSpawn > 0)
         {
@@ -38,6 +47,21 @@ public class ParticleGenerator : MonoBehaviour
         }
 
     }
+    public void PreSpawn()
+    {
+        double preloadSpawns = true_pps * secondsOfSpawningToPreload;
+        while (preloadSpawns > 0)
+        {
+            SpawnParticleInArea().SetAnimatorToRandomTime();
+            preloadSpawns -= 1f;
+        }
+    }
+    public void DestroyAllParticles()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+            Destroy(transform.GetChild(i).gameObject);
+    }
+
     public ParticleEffect SpawnParticleInArea()
     {
         ParticleEffect particle = Instantiate(particles, transform);

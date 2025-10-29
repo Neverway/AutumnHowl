@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
   m_Name: Battle_Jackals
   m_EditorClassIdentifier: 
-  targetLevelScene: {fileID: 0}
-  mapID: 
+  targetLevelScene: {fileID: 102900000, guid: 23ba94449cea27896ba8a4ab2595882b, type: 3}
+  mapID: Battle
   openingText:
     frames:
     - name: 
