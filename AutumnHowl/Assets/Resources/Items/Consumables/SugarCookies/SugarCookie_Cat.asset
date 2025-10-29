@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: SugarCookie_Cat
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: sugarcookie_cat
+  displayName: Sugar Cookie
+  description: A sweet delicious sugar cookie! It's got a cat black design on it.
+    Meow meoww, meow meooowww~
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 25
+  sellCost: 10
+  effectsOnConsume:
+    rid: 1234356373609775140
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356373609775140
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234356373609775141
+    - rid: 1234356373609775141
+      type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356373609775142
+        modifierIcons:
+        - {fileID: 11400000, guid: e031d301b42708f4783e66a6e1f1e713, type: 2}
+        seconds: 60
+        modifier:
+          rid: 1234356373609775143
+    - rid: 1234356373609775142
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356373609775143
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 8
+        modifierType: 0
+        value: 1

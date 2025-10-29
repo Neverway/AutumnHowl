@@ -18,6 +18,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     // Public Variables
     //=-----------------=
+    public ParticleGenerator fog;
+    [Space]
     public Vector2Int VillageEntranceForMap;
     public GameObject spriteObjectTemplate;
     public Transform mapSpritesParent;
@@ -104,6 +106,9 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     [SerializeField] private List<OverworldEnemySpawner> enemySpawners; //Enemy spawn list. These get scattered at random.
 
     [SerializeField] private InteractableChestSpawner chestRecreator;
+
+    [Header ("Day 2 specific:")]
+    [SerializeField] private bool spawnPathToPatchyBoss = false;
 
 
     //=-----------------=
@@ -239,13 +244,22 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
                 mapNodes[x, y] = new MapNode ();
             }
         }
+
         pathStepCounterForEnemies = 0;
         GenerateFromNode (startPosition.x, startPosition.y, -1);
+
          StoreDebugLogMapGenStep("Map Nodes Finished");
         if (generateStraightPath)
         {
             AddStraightPath();
         }
+
+        if (spawnPathToPatchyBoss)
+        {
+            AddPathToPatchyBoss ();
+        }
+        StoreDebugLogMapGenStep ("Map Nodes Finished");
+
         AddRandomLoops();
         GenerateTilesFromNodes ();
          StoreDebugLogMapGenStep("Map Tiles Finished");
@@ -259,9 +273,18 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         PlacePOIs ();
         PlaceEnemies ();
 
+
         LogStoredMapGenDebugLog();
         CreateForestMap();
         mapGenerated = true;
+    }
+
+    /// <summary>
+    /// Creates a path at the north end of the map, specifically for pumpkin patch boss.
+    /// </summary>
+    private void AddPathToPatchyBoss ()
+    {
+            mapNodes[2, 4].paths[SOUTH] = true;
     }
 
     /// <summary>
@@ -297,7 +320,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     /// <summary>
     /// If there's fewer poiLocations than the required amount, add more at random...
     /// </summary>
-    private void MakeExtraPOIs ()
+    private void MakeExtraPOIs()
     {
         if (poiLocations.Count >= minimumPOICount)
         {

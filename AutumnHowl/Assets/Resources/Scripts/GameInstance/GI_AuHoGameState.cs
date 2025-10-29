@@ -144,7 +144,7 @@ public class AuHoGameState
         GameInstance.SendCoroutine(CoLoadMapFromLoadingGame(enteredBattleFromLocation, enteredBattleFromMap));
     }
 
-    [InvokeBeforeSave]
+    [InvokeBeforeSave(int.MaxValue - 100)]
     public static void OnGameSave()
     {
         var gameState = GameInstance.Gamestate;
@@ -176,7 +176,7 @@ public class AuHoGameState
         GI_SaveSystem.SaveValue(gameStateData, "AuHoGameState");
     }
     
-    [InvokeAfterLoad]
+    [InvokeAfterLoad(int.MaxValue - 100)]
     public static void OnGameLoad()
     {
         Debug.Log("Kevin is a stinky lil guy");
@@ -221,8 +221,11 @@ public class AuHoGameState
         Debug.Log("Appear");
         SetCycleAppearances();
     }
+    [Reload] static bool isLoadingMap = false;
     public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
     {
+        if (isLoadingMap) yield break;
+        isLoadingMap = true;
         var gameState = GameInstance.Gamestate;
         var worldLoader = GameInstance.Get<GI_WorldLoader>();
 
@@ -236,12 +239,13 @@ public class AuHoGameState
         //Look for the player, and wait until they are found
         GameObject player;
         do {
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = GameInstance.Playerbody.gameObject;
             Debug.Log("Trying to load map, Looking for player...");
         } while(player == null);
 
         //Teleport player to given character position
         player.transform.root.position = characterPostiion;
+        isLoadingMap = false;
     }
     
     public static IEnumerator CoLoadCycleData()

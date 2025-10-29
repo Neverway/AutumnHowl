@@ -1,6 +1,7 @@
 using ErryLib.Reflection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -102,8 +103,9 @@ public class GI_SaveSystem : MonoBehaviour
     private void CacheInvokeOnSaveAndLoadMethods()
     {
         cachedInvokeBeforeSaveMethods = new List<MethodInfo>();
-
-        foreach (var attribute in ReflectionCache.GetAttributeUsageInfos<InvokeBeforeSaveAttribute>())
+        AttributeInfo[] saveAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeBeforeSaveAttribute>()
+            .OrderBy(at => at.As<InvokeBeforeSaveAttribute>().priority).ToArray();
+        foreach (var attribute in saveAttributes)
         {
             if (attribute.Member is MethodInfo method)
             {
@@ -126,8 +128,10 @@ public class GI_SaveSystem : MonoBehaviour
         }
 
         cachedInvokeAfterLoadMethods = new List<MethodInfo>();
+        AttributeInfo[] loadAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeAfterLoadAttribute>()
+            .OrderBy(at => at.As<InvokeAfterLoadAttribute>().priority).ToArray();
 
-        foreach (var attribute in ReflectionCache.GetAttributeUsageInfos<InvokeAfterLoadAttribute>())
+        foreach (var attribute in loadAttributes)
         {
             if (attribute.Member is MethodInfo method)
             {
@@ -282,8 +286,16 @@ public class SaveAndLoadPropertyAttribute : Attribute
     }
 }
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-public class InvokeBeforeSaveAttribute : Attribute { public InvokeBeforeSaveAttribute() { } }
+public class InvokeBeforeSaveAttribute : Attribute 
+{
+    public int priority = 0;
+    public InvokeBeforeSaveAttribute(int priority = 0) => this.priority = priority;
+}
 
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-public class InvokeAfterLoadAttribute : Attribute { public InvokeAfterLoadAttribute() { } }
+public class InvokeAfterLoadAttribute : Attribute 
+{
+    public int priority = 0;
+    public InvokeAfterLoadAttribute(int priority = 0) => this.priority = priority;
+}
