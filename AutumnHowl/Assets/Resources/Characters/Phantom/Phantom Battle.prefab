@@ -156,7 +156,7 @@ MonoBehaviour:
       pushing: 0
   canMove: 0
   pushable: 1
-  gridHopAnimation_Seconds: 0.35
+  gridHopAnimation_Seconds: 0.5
   gridHopAnimation_Height: 0.15
   gridHopAnimationContainer: {fileID: 1673734515386349373}
   gridPawnController: {fileID: 1449108568966244714}
@@ -166,7 +166,7 @@ MonoBehaviour:
   spawnOnDeath: {fileID: 0}
   useBlock: 0
   invertAttackFacingDirections: 0
-  randomRetreat: 75
+  randomRetreat: 0
   skipFirstTurn: 0
 --- !u!114 &1449108568966244714
 MonoBehaviour:

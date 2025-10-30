@@ -31,7 +31,7 @@ public class WB_Textbox : MonoBehaviour
     public new TMP_Text name;
     public TMP_Text chat;
     public TextboxDisplayMode displayMode;
-
+    public bool allowPlayerToAdvanceText = true;
 
     #endregion
 

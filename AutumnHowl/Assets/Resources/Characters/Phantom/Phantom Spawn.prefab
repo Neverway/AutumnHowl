@@ -215,7 +215,7 @@ MonoBehaviour:
   comfyDistance: 6
   enterBattleDistance: 0.3
   player: {fileID: 0}
-  wanderSpeed: 2
+  wanderSpeed: 1.4
   chaseSpeed: 13
   timeToChooseNewDirection: 2
   followingPlayerTimeToChooseDirectionFactor: 0.9

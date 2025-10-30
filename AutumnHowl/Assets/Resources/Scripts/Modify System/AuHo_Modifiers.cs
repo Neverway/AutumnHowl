@@ -221,8 +221,45 @@ public class CharacterStatModifiers : CharacterStatModifierCreator
                 return $"Changes {stat}?";
         }
     }
-
 }
+
+[Serializable]
+public class StatPerCorruptionModifiers : CharacterStatModifierCreator
+{
+    public bool hideDescription = false;
+    public CharacterStatType statToModify;
+    public bool subtractFromStatInsteadOfAdd = false;
+    public float corruptionToStatFactor = 1f;
+
+    //CharacterStatModInstancer implementation ---------------------------------------------------
+    public override void ModifyStat(CharacterStat stat)
+    {
+        if (!stat.IsStatType(statToModify)) return;
+        float corruption = stat.LinkedCharacter.Stats.corruption;
+        stat.OnModify_AddNumber(corruption * corruptionToStatFactor);
+    }
+
+    //IDescribable implementation --------------------------------------------------------------
+    public override string Description
+    {
+        get
+        {
+            if (hideDescription)
+                return "";
+
+            string stat = statToModify.GetStatName();
+            if (stat == null)
+                return "Changes stat?";
+
+            int percents = Mathf.RoundToInt(corruptionToStatFactor * 100f);
+            if (percents == 0f)
+                return "";
+
+            return $"{(subtractFromStatInsteadOfAdd ? "-" : "+")} {percents}% of COR as {stat}";
+        }
+    }
+}
+
 public partial class AuHo_ExtentionMethods
 {
     public static void ModifyStatWith(this CharacterStat stat, object id, NumberModifierType modifierType, float value)

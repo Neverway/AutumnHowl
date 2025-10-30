@@ -35,7 +35,7 @@ MonoBehaviour:
   battleSequence:
     waves:
     - rid: 26148788346028042
-  layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
+  layoutPrefab: {fileID: 3517858853650949840, guid: 271df6af406e8ed4a85d4ce58fba6e6b, type: 3}
   enemySpawnLocations:
   - enemyPrefab: {fileID: 6242562417686465405, guid: 8855ff0d459a8c446a897a537f73a7b5, type: 3}
     enemyStartPosition: {x: 3, y: 4}

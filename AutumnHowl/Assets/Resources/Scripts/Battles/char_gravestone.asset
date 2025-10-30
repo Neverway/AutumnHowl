@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
-  m_Name: Phantom
+  m_Name: char_gravestone
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: enemy_Phantom
+  <UniqueID>k__BackingField: char_gravestone
   characterReferenceType: 1
-  characterName: Phantom
-  characterTags: 0100000065000000
+  characterName: gravestone
+  characterTags: 03000000
   baseStats:
     health: 100
     level: 0
-    power: 10
+    power: 5
     corruption: 0
     attack:
-      startValue: 25
+      startValue: 5
       multiplier: 0
       addedValue: 0
     defense:
-      startValue: 10
+      startValue: 5
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 10
+      startValue: 5
       multiplier: 0
       addedValue: 0
     maxLevel:
@@ -46,11 +46,11 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxPower:
-      startValue: 100
+      startValue: 5
       multiplier: 0
       addedValue: 0
     maxCorruption:
-      startValue: 100
+      startValue: 5
       multiplier: 0
       addedValue: 0
     shieldPower:

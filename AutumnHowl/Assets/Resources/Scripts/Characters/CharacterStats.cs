@@ -203,12 +203,9 @@ public class CharacterStats
         // Corruption Decrease
         else if (_amount < 0)
         {
-            if (corruption - _amount > 0)
-            { 
-                corruption -= _amount;
-            }
-            else corruption = 0;
+            corruption += _amount;
         }
+        corruption = Mathf.Clamp(corruption, 0, maxCorruption);
     }
     
     /// <summary>

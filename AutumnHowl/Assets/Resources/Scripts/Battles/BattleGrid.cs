@@ -38,6 +38,7 @@ public class BattleGrid : MonoBehaviour
         //print(newPawn);
         newPawn.SetPosition(_position);
         grid[_position.x, _position.y].pawns.Add(newPawn);
+
         newPawn.InitPawn ();
         return newObject;
     }
