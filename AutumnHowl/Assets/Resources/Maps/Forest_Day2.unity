@@ -1397,6 +1397,87 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &503516507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 605608650}
+    m_Modifications:
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029169606769828848, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: guid
+      value: 1104f3af-f1b6-41bb-9940-59c489348e2f
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029169606769828848, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: recreatablePrefab
+      value: 
+      objectReference: {fileID: 8037564537701802603, guid: 798e5289ae32f1c41a2a012ec32cb6b4, type: 3}
+    - target: {fileID: 2742192081338225174, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_Name
+      value: Enemy Spawner (2 Jackals)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+--- !u!4 &503516508 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+  m_PrefabInstance: {fileID: 503516507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &503516509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2029169606769828848, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+  m_PrefabInstance: {fileID: 503516507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284002ca50c168c4e85d605ec27fee5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &605608649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,6 +1509,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 654053967}
+  - {fileID: 503516508}
   - {fileID: 652490707}
   - {fileID: 1942974171}
   - {fileID: 1086935288}
@@ -1572,6 +1654,7 @@ MonoBehaviour:
   - {fileID: 652490708}
   - {fileID: 1942974172}
   - {fileID: 654053968}
+  - {fileID: 503516509}
   chestRecreator: {fileID: 1086935289}
   spawnPathToPatchyBoss: 1
 --- !u!1 &615507824

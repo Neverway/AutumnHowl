@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
-  m_Name: Jackal_Battle
+  m_Name: Battle_2Jackals
   m_EditorClassIdentifier: 
   targetLevelScene: {fileID: 102900000, guid: 23ba94449cea27896ba8a4ab2595882b, type: 3}
   mapID: Battle
   openingText:
     frames:
     - name: 
-      chatContent: '*A bandit wants to fight!'
+      chatContent: '*You are ambushed by bandits!'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 0}
       OnFrameCompleted:
@@ -30,17 +30,19 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
-  victoryLevels: 1
+  victoryLevels: 0
   victoryGold: 20
   battleSequence:
     waves:
     - rid: 26148788346028042
-  layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
+  layoutPrefab: {fileID: 8926173013155095757, guid: 895b2994ec2cfab4e8483c2e1fbdcc9c, type: 3}
   enemySpawnLocations:
+  - enemyPrefab: {fileID: 6242562417686465405, guid: 394cd80c17240ed49bc4e7598acd7037, type: 3}
+    enemyStartPosition: {x: 2, y: 4}
   - enemyPrefab: {fileID: 6242562417686465405, guid: 4e3c41e694fce0375bf8f9935ee30d39, type: 3}
     enemyStartPosition: {x: 2, y: 4}
   victoryState:
-    rid: 26149116751642625
+    rid: 5830042227668418560
   references:
     version: 2
     RefIds:
@@ -92,6 +94,6 @@ MonoBehaviour:
               m_Calls: []
         waveAttack: {fileID: 0}
         waveSteps: 8
-    - rid: 26149116751642625
+    - rid: 5830042227668418560
       type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
       data: 
