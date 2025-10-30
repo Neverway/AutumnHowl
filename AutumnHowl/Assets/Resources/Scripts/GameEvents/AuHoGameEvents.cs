@@ -51,6 +51,8 @@ public enum GameEventType
     PlayerTakeDamage = 9,
     EnemyTakeDamage = 10,
     ObstacleTakeDamage = 11,
+    ObstacleDestroyed = 12,
+    EnemyDefeated = 13,
 
     Heal = 2,
     BattleTurnPassed = 3,
@@ -202,6 +204,27 @@ public class Event_ObstacleTakeDamage : AuHoGameEvent_Interruptable
     public override GameEventType EventType => GameEventType.ObstacleTakeDamage;
     public override CharacterIdentifier EventOwner { get => target; }
 }
+public class Event_ObstacleDestroyed : AuHoGameEvent
+{
+    public CharacterIdentifier target;
+    public Event_ObstacleDestroyed(CharacterIdentifier target)
+    {
+        this.target = target;
+    }
+    public override GameEventType EventType => GameEventType.ObstacleDestroyed;
+    public override CharacterIdentifier EventOwner { get => target; }
+}
+public class Event_EnemyDefeated : AuHoGameEvent
+{
+    public CharacterIdentifier target;
+    public Event_EnemyDefeated(CharacterIdentifier target)
+    {
+        this.target = target;
+    }
+    public override GameEventType EventType => GameEventType.EnemyDefeated;
+    public override CharacterIdentifier EventOwner { get => target; }
+}
+
 public class Event_Heal : AuHoGameEvent_Interruptable
 {
     public float healAmount;

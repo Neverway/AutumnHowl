@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static GameFeatureConstants.Battle;
 
@@ -311,6 +312,12 @@ public abstract class Char_Battle : Character
     /// <summary>Triggered by OnDeath; Spawns spawnOnDeath if it exists.</summary>
     public virtual void Kill ()
     {
+        //Obstacle and enemy destroyed events
+        if (Identifier.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Obstacle))
+            new Event_ObstacleDestroyed(Identifier).Invoke();
+        if (Identifier.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Enemy))
+            new Event_EnemyDefeated(Identifier).Invoke();
+
         if (spawnOnDeath != null)
         {
             GameObject g = Instantiate (spawnOnDeath);
