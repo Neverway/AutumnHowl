@@ -12,17 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
   m_Name: AmberGreaves
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: 
-  displayName: 
-  description: 
+  <UniqueID>k__BackingField: item_wearable_ambergreaves
+  displayName: Amber Greaves
+  description: The armor plating has a layer of shiny orange material that gives
+    a static shock when you touch it.
   canNotDiscard: 0
-  allowMultiple: 1
-  buyCost: 0
-  sellCost: 0
+  allowMultiple: 0
+  buyCost: 80
+  sellCost: 65
   effectWhenEquipped:
-    rid: -2
+    rid: 6522102444378816526
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 6522102444378816526
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: Deal 5 damage to nearby enemies upon taking damage.
+        beforeOrAfter: 1
+        gameEventType: 1
+        eventTargets:
+          rid: 6522102444378816534
+        effectAction:
+          rid: 6522102444378816529
+    - rid: 6522102444378816529
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 1
+        target:
+          rid: 6522102444378816533
+        modifierType: 0
+        amount: -5
+    - rid: 6522102444378816533
+      type: {class: TargetBattleAdjacent, ns: , asm: Assembly-CSharp}
+      data:
+        includeSelf: 0
+        includeDiagonal: 1
+    - rid: 6522102444378816534
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

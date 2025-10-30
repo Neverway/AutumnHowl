@@ -14,9 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notes: 
   itemsToGrant:
-    rid: -2
+    rid: 6522102444378816570
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 6522102444378816570
+      type: {class: ItemsRef_GroupOfItemRefs, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        itemRefs:
+        - rid: 6522102444378816571
+    - rid: 6522102444378816571
+      type: {class: ItemsRef_Items, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        items:
+        - {fileID: 11400000, guid: c9737e1ef110b8e5cb447213479bd251, type: 2}
+        - {fileID: 11400000, guid: 7029393221bba3042bfd3a371db80ed5, type: 2}
+        - {fileID: 11400000, guid: 62bfd89b5e7d0e244a873b2192cf11ea, type: 2}
+        - {fileID: 11400000, guid: 1d0784f7fd161d1bd8b435422f12fc11, type: 2}

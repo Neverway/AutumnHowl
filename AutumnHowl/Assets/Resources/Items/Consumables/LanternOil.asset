@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
-  m_Name: SugarCookie Pack
+  m_Name: LanternOil
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: item_consumable_packofsugarcookies
-  displayName: Pack of Sugar Cookies
-  description: A small pack of sugar cookies! Yum!
+  <UniqueID>k__BackingField: item_consumable_lanternoil
+  displayName: Lantern OIl
+  description: A small bottle
   canNotDiscard: 0
   allowMultiple: 1
   buyCost: 100

@@ -12,6 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class WB_HUD : MonoBehaviour
 {
@@ -29,7 +30,10 @@ public class WB_HUD : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image lanternFill;
-    public GI_AuHoGameState gameState;
+    //public Transform lanternParticles;
+    public Color onLanternDrain;
+    public Color onLanternSafe;
+
     private PlayerLightController playerLightController;
     private Controller_Overworld_Player player;
 
@@ -45,23 +49,22 @@ public class WB_HUD : MonoBehaviour
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     public void LateUpdate()
     {
-        if (gameState == null)
+        if (GameInstance.Gamestate == null) return;
+        if (player == null)
         {
-            gameState = GameInstance.Get<GI_AuHoGameState>();
+            if (GameInstance.Playerbody is Controller_Overworld_Player playerbody)
+                player = playerbody;
+            else
+                player = FindObjectOfType<Controller_Overworld_Player>();
             return;
         }
 
-        if (!player)
-        {
-            player = FindObjectOfType<Controller_Overworld_Player>();
-            return;
-        }
+        //Set color of lantern and activate particles based on if player is in light
+        lanternFill.color = player.inLightZone ? onLanternSafe : onLanternDrain;
+        //lanternParticles.gameObject.SetActive(!player.inLightZone);
 
         // Don't deplete the lantern or take corruption damage when in a light zone
-        if (player.inLightZone)
-        {
-            return;
-        }
+        if (player.inLightZone) return;
         
         UpdateTimer();
         UpdateLanternMeter();
@@ -72,9 +75,9 @@ public class WB_HUD : MonoBehaviour
     /// </summary>
     private void UpdateTimer()
     {
-        if (gameState.currentGameState.currentLanternTime > 0)
+        if (GameInstance.Gamestate.currentLanternTime > 0)
         {
-            gameState.currentGameState.currentLanternTime -= Time.deltaTime;
+            GameInstance.Gamestate.currentLanternTime -= Time.deltaTime;
         }
         else if (inflictCorruptionCoroutine == null)
         {
@@ -88,8 +91,8 @@ public class WB_HUD : MonoBehaviour
     /// </summary>
     private void UpdateLanternMeter()
     {
-        var lanternDuration = gameState.currentGameState.lanternDuration;
-        var currentTime = gameState.currentGameState.currentLanternTime;
+        var lanternDuration = GameInstance.Gamestate.lanternDuration;
+        var currentTime = GameInstance.Gamestate.currentLanternTime;
         lanternFill.fillAmount = currentTime / lanternDuration;
     }
 
@@ -107,7 +110,7 @@ public class WB_HUD : MonoBehaviour
             inflictCorruptionCoroutine = null;
             yield break;
         }
-        gameState.currentGameState.player.Stats.ModifyCorruption(+5f);
+        GameInstance.Gamestate.player.Stats.ModifyCorruption(+5f);
         inflictCorruptionCoroutine = null;
     }
     
@@ -127,6 +130,31 @@ public class WB_HUD : MonoBehaviour
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
 
+
+    //public struct LanternParticle
+    //{
+    //    public Transform transform;
+    //    public Vector2 velocity;
+    //    public float size;
+    //    public float timer;
+    //    public float maxTimer;
+    //
+    //    public void InitParticle(Transform transform)
+    //    {
+    //        Random.State oldState = Random.state;
+    //
+    //        Random.InitState(new System.Random().Next());
+    //        this.transform = transform;
+    //        velocity = Vector2.up * Random.Range(-1, -3);
+    //        velocity = Vector2.right * Random.Range(-2, 2);
+    //
+    //        Random.state = oldState;
+    //    }
+    //    public void UpdateParticle()
+    //    {
+    //
+    //    }
+    //}
 
     #endregion
 }

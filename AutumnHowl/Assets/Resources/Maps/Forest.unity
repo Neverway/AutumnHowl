@@ -647,6 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: 2186f847-0912-4cee-88ec-74950bc53638
+  fog: {fileID: 0}
   VillageEntranceForMap: {x: 2, y: 4}
   spriteObjectTemplate: {fileID: 1814623019}
   mapSpritesParent: {fileID: 2132586140}
@@ -765,14 +766,14 @@ MonoBehaviour:
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: c88afa07151b9f34a800069a3e562ca3, type: 3}
-  poiList:
-  - {fileID: 6659489718510107595, guid: a1cb4128d92c45824bbcc2365e28ef7d, type: 3}
+  poiList: []
   pathObjects:
   - {fileID: 6659489718510107595, guid: a1cb4128d92c45824bbcc2365e28ef7d, type: 3}
   enemySpawners:
   - {fileID: 280379363}
   - {fileID: 1617142524}
   chestRecreator: {fileID: 1651940431}
+  spawnPathToPatchyBoss: 0
 --- !u!1001 &902932604
 PrefabInstance:
   m_ObjectHideFlags: 0

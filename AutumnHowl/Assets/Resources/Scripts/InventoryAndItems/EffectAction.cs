@@ -57,11 +57,15 @@ public static class StatModTypeExtension
 [Serializable]
 public abstract class TargetedEffectAction : EffectAction
 {
-    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    [Box, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
     public override void ApplyEffect(CharacterIdentifier user)
     {
-        foreach (CharacterIdentifier target in target.GetTargetsFrom(user).AllTargets)
-            ApplyEffectToTarget(target);
+        try
+        {
+            foreach (CharacterIdentifier target in target.GetTargetsFrom(user).AllTargets)
+                ApplyEffectToTarget(target);
+        }
+        catch { Debug.LogWarning("There was an error applying effect, just ignoring it for game jam"); }
     }
     public abstract void ApplyEffectToTarget(CharacterIdentifier target);
 }
@@ -161,6 +165,38 @@ public class ModifyCorruptionAction : TargetedEffectAction
             case StatModType.PercentMax: return $"[{corrupts} {target} by {positiveAmount}% max corruption]";
         }
         Debug.LogError($"{nameof(ModifyCorruptionAction)}: Does not have a description for ModifyCorruption {modifierType}: " +
+            $"Falling back to back to ??? as description");
+        return $"[???] ";
+    }
+}
+
+[Serializable]
+public class ModifyPowerAction : TargetedEffectAction
+{
+    public StatModType modifierType = StatModType.Flat;
+    public int amount = 1;
+
+    public override void ApplyEffectToTarget (CharacterIdentifier user) => user.Stats.ModifyPower (amount);
+    public override string DescribeNoFormat ()
+    {
+        string power = "Restores Power of";
+        string restores = "Restores ";
+        int positiveAmount = amount;
+        if (amount == 0) return "";
+        if (amount < 0)
+        {
+            power = "Removes power from";
+            restores = "Consumes ";
+            positiveAmount *= -1;
+        }
+        switch (modifierType)
+        {
+            case StatModType.Flat: return $"[{restores} {positiveAmount} Power of {target}]";
+            case StatModType.PercentMissing: return $"[{power} {target} by {positiveAmount}% of missing power]";
+            case StatModType.PercentCurrent: return $"[{power} {target} by {positiveAmount}% of power]";
+            case StatModType.PercentMax: return $"[{power} {target} by {positiveAmount}% max power]";
+        }
+        Debug.LogError ($"{nameof (ModifyCorruptionAction)}: Does not have a description for ModifyPower {modifierType}: " +
             $"Falling back to back to ??? as description");
         return $"[???] ";
     }

@@ -207,7 +207,18 @@ public class CharacterStats
         }
         corruption = Mathf.Clamp(corruption, 0, maxCorruption);
     }
-    
+   
+    /// <summary>
+    /// Modify the power of a character
+    /// </summary>
+    /// <param name="_amount">Amount added to total power</param>
+    public void ModifyPower (int _amount)
+    {
+        power += _amount;
+        GameInstance.Get<GI_WidgetManager> ().SpawnEffectText (_amount.ToString (), owner.transform.position, 5);
+        power = Mathf.Clamp (power, 0, maxPower);
+    }
+
     /// <summary>
     /// If there's enough Power, consume the given amount, otherwise return false.
     /// </summary>

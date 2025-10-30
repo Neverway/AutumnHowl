@@ -213,6 +213,11 @@ public class GI_WidgetManager : MonoBehaviour
                 textComponent.text =
                     $"{_amount}";
                 break;
+            case 5:
+                textComponent.color = Color.yellow;
+                textComponent.text =
+                    $"{_amount}";
+                break;
         }
     }
 
