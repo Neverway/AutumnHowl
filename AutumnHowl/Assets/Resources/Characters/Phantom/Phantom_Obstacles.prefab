@@ -52,4 +52,4 @@ MonoBehaviour:
   - {fileID: 787874854148035970, guid: 7658a252ae11e304d894df6e6b6141ba, type: 3}
   - {fileID: 2702253734167480065, guid: e72fbbc1f89fa944cbcf8b4e549c4d9f, type: 3}
   - {fileID: 787874854148035970, guid: 7658a252ae11e304d894df6e6b6141ba, type: 3}
-  numberOfObstacles: 6
+  numberOfObstacles: 8

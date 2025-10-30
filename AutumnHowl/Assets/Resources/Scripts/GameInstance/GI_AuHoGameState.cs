@@ -38,7 +38,6 @@ public class GI_AuHoGameState : MonoBehaviour
         currentGameState = new AuHoGameState()
         {
             player = currentGameState.player,
-            currentBattle = currentGameState.currentBattle,
             currentCycle = currentGameState.currentCycle,
         };
     }
@@ -143,6 +142,7 @@ public class AuHoGameState
         //load the player into the map and location they were before the battle
         GameInstance.SendCoroutine(CoLoadMapFromLoadingGame(enteredBattleFromLocation, enteredBattleFromMap));
     }
+    public bool IsInBattle => currentBattle != null;
 
     [InvokeBeforeSave(int.MaxValue - 100)]
     public static void OnGameSave()

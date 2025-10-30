@@ -100,7 +100,12 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
 
         if (GameInstance.Inputs.Action.IsPressed()) currentMoveSpeed = Stats.runSpeed;
         else currentMoveSpeed = Stats.walkSpeed;
-        
+
+        //This is janky way to make sure speed curves off after certain value
+        float spd = currentMoveSpeed;
+        if (spd > 3f) spd = Mathf.Pow((1.5f * spd), 0.5f) + 0.4f;
+        currentMoveSpeed = Mathf.Lerp(spd, currentMoveSpeed, 1f - Mathf.InverseLerp(3f, 15f, currentMoveSpeed));
+
         animator.SetFloat("walkX", movement.x);
         animator.SetFloat("walkY", movement.y);
         animator.SetBool("walking", movement.x != 0 || movement.y != 0);

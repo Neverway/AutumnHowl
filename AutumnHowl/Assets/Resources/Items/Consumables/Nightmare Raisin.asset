@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: Nightmare Raisin
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: item_nightmareraisin
+  displayName: Nightmare Raisin
+  description: Even the shortest of glance at this causes shivers down your spine,
+    and it feels unnaturally cold in your paws. Eating this would definitely be a
+    terrible idea
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 0
+  useableInOverworld: 1
+  buyCost: 0
+  sellCost: 0
+  effectsOnConsume:
+    rid: 1234356420671701000
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701000
+      type: {class: StartBattleEffect, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        EffectDescription: ???
+        battleToStart: {fileID: 11400000, guid: d5e75d3635d7962469f88f890be7d585, type: 2}

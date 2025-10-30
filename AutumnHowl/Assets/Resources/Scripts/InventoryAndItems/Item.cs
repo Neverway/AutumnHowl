@@ -23,6 +23,8 @@ public abstract class Item : ScriptableObject, UniquelyIdentifiable
     [TextArea, SerializeField] protected string description;
     public bool canNotDiscard;
     public bool allowMultiple = true;
+    public bool useableInBattle = true;
+    public bool useableInOverworld = true;
     public int buyCost;
     public int sellCost;
 
@@ -49,6 +51,9 @@ public abstract class Item : ScriptableObject, UniquelyIdentifiable
     public virtual string GetDescription() => description;
     public bool TryUse(CharacterIdentifier user, int _atIndex, int _inList = 0)
     {
+        if ((!useableInBattle) && GameInstance.Gamestate.IsInBattle) return false;
+        if ((!useableInOverworld) && (!GameInstance.Gamestate.IsInBattle)) return false;
+
         if (new Event_UseItem(this, user).IfInvokeSuccess())
             return OnUse(user, _atIndex, _inList);
 

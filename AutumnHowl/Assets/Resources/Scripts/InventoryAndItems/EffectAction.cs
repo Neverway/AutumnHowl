@@ -221,7 +221,22 @@ public class GiveItemsEffect : EffectAction
     public override string DescribeNoFormat() => $"[{EffectDescription}]";
 }
 
+[Serializable]
+public class StartBattleEffect : EffectAction
+{
+    public string EffectDescription;
+    public BattleData battleToStart;
+    public override void ApplyEffect(CharacterIdentifier user)
+    {
+        if (!user.IsPlayer()) return;
+        if (battleToStart == null) return;
+        if (GameInstance.Gamestate.IsInBattle) return;
 
+        GameInstance.Gamestate.EnterBattle(battleToStart);
+    }
+
+    public override string DescribeNoFormat() => $"[{EffectDescription}]";
+}
 
 [Serializable]
 public class ModifierForXTurns : TargetedEffectAction
