@@ -80,6 +80,26 @@ public class TargetSelf : EffectActionTarget
     public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other) => user == other;
     public override string Description => "self";
 }
+[Serializable]
+public class TargetPlayer : EffectActionTarget
+{
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other) => other.IsPlayer();
+    public override string Description => "autumn";
+}
+[Serializable]
+public class TargetEnemies : EffectActionTarget
+{
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other) 
+        => other.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Enemy);
+    public override string Description => "all enemies";
+}
+[Serializable]
+public class TargetObstacles : EffectActionTarget
+{
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other)
+        => other.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Obstacle);
+    public override string Description => "all obstacles";
+}
 
 [Serializable]
 public class TargetBattleAdjacent : EffectActionTarget
@@ -113,12 +133,75 @@ public class TargetBattleAdjacent : EffectActionTarget
 [Serializable]
 public class TargetHasTag : EffectActionTarget
 {
-    public bool includeSelf = false;
-    public CharacterTags tags;
-    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other)
-    {
-        throw new Exception();
-    }
-    public override string Description => "";
+    public CharacterTags tag;
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other) =>
+        other.TemplateCreatedFrom.characterTags.Contains(tag);
+    public override string Description => tag.ToString();
+}
+[Serializable]
+public class TargetIsFromTemplate : EffectActionTarget
+{
+    public CharacterTemplate template;
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other) =>
+        other.TemplateCreatedFrom.UniqueID == template.UniqueID;
+    public override string Description => template.characterName;
 }
 
+[Serializable]
+public class MultiTargets_AND : EffectActionTarget
+{
+    [Box, Polymorphic, SerializeReference] public EffectActionTarget[] targets;
+
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other)
+    {
+        foreach (var target in targets) 
+            if (!target.IsTargeted(user, other))
+                return false;
+        return true;
+    }
+    public override string Description { get 
+        {
+            int count = targets.Count();
+            if (count == 1) return targets[0].Description;
+            if (count == 2) return targets[0].Description + " and " + targets[1].Description;
+
+            string desc = "";
+            for (int i = 0; i < count - 1; i++)
+                desc += targets[i].Description + ", ";
+
+            desc += "and " + targets[count - 1];
+
+            return desc;
+        } 
+    }
+}
+[Serializable]
+public class MultiTargets_OR : EffectActionTarget
+{
+    [Box, Polymorphic, SerializeReference] public EffectActionTarget[] targets;
+
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other)
+    {
+        foreach (var target in targets)
+            if (target.IsTargeted(user, other))
+                return true;
+        return false;
+    }
+    public override string Description
+    {
+        get
+        {
+            int count = targets.Count();
+            if (count == 1) return targets[0].Description;
+            if (count == 2) return targets[0].Description + " or " + targets[1].Description;
+
+            string desc = "";
+            for (int i = 0; i < count - 1; i++)
+                desc += targets[i].Description + ", ";
+
+            desc += "or " + targets[count - 1];
+
+            return desc;
+        }
+    }
+}
