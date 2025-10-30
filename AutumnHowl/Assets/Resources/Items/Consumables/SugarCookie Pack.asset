@@ -20,21 +20,21 @@ MonoBehaviour:
   buyCost: 100
   sellCost: 80
   effectsOnConsume:
-    rid: 1234355927148920854
+    rid: 6522102444378816521
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1234355927148920854
+    - rid: 6522102444378816521
       type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
         EffectDescription: 
         itemToGive:
-          rid: 2578432377249857539
-    - rid: 2578432377249857539
-      type: {class: ItemsRef_Items, ns: , asm: Assembly-CSharp}
+          rid: 6522102444378816522
+    - rid: 6522102444378816522
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
       data:
         settings:
           repeatGetItems: 3
@@ -42,5 +42,4 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        items:
-        - {fileID: 11400000, guid: 2a16e4cd34a1e3c4093b9f19f1fb9fad, type: 2}
+        lootTable: {fileID: 11400000, guid: dc6698c03a41fe74887a70caf9013d23, type: 2}

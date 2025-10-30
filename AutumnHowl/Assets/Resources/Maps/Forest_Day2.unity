@@ -1581,6 +1581,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: 2186f847-0912-4cee-88ec-74950bc53638
+  fog: {fileID: 0}
+  VillageEntranceForMap: {x: 0, y: 0}
+  spriteObjectTemplate: {fileID: 0}
+  mapSpritesParent: {fileID: 0}
+  mapPlayerIcon: {fileID: 0}
+  mapNodeSprites: []
+  fallbackSprite: {fileID: 0}
+  generateStraightPath: 0
+  straightPathColumnIndex: 0
   mapWidth: 5
   mapHeight: 5
   startPosition: {x: 2, y: 0}
@@ -1611,8 +1620,7 @@ MonoBehaviour:
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: b68833da8b6997ff49f918822253b713, type: 3}
   - {fileID: 6659489718510107595, guid: c88afa07151b9f34a800069a3e562ca3, type: 3}
-  poiList:
-  - {fileID: -2253911629886400664, guid: 84e803978b545c749a934664c53b62ef, type: 3}
+  poiList: []
   pathObjects:
   - {fileID: 6659489718510107595, guid: a1cb4128d92c45824bbcc2365e28ef7d, type: 3}
   enemySpawners:

@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Maps/Tests/Battle_PatchyBoss.unity
     guid: d26e01d57dc5eb149a23cc5c2da18a0f
+  - enabled: 1
+    path: Assets/Resources/Maps/Forest_Day2.unity
+    guid: 6c19bd0cda029f34c861f8414df9a0b1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 011789d2a193d404f91a8d9567e446d0, type: 3}

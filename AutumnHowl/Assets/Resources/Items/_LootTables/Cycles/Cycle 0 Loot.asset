@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notes: 
   itemsToGrant:
-    rid: 1234356303417049113
+    rid: 6522102444378816516
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1234356303417049113
-      type: {class: ItemsRef_GroupOfItemRefs, ns: , asm: Assembly-CSharp}
+    - rid: 6522102444378816516
+      type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
       data:
         settings:
           repeatGetItems: 1
@@ -29,10 +29,18 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        itemRefs:
-        - rid: 1234356303417049114
-        - rid: 1234356303417049115
-    - rid: 1234356303417049114
+        ignoreInvalidItems: 1
+        items:
+        - weight: 2
+          item:
+            rid: 6522102444378816517
+        - weight: 3
+          item:
+            rid: 6522102444378816518
+        - weight: 1
+          item:
+            rid: 6522102444378816540
+    - rid: 6522102444378816517
       type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
       data:
         settings:
@@ -41,9 +49,9 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        lootTable: {fileID: 11400000, guid: a88e35eb86f87db47a92364880453a42, type: 2}
-    - rid: 1234356303417049115
-      type: {class: ItemsRef_Money, ns: , asm: Assembly-CSharp}
+        lootTable: {fileID: 11400000, guid: dc6698c03a41fe74887a70caf9013d23, type: 2}
+    - rid: 6522102444378816518
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
       data:
         settings:
           repeatGetItems: 1
@@ -51,5 +59,14 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        moneyRange: {x: 1, y: 1000}
-        roundToNearest: 5
+        lootTable: {fileID: 11400000, guid: 75405f00ee6ec314a905b1a6fa1a64f9, type: 2}
+    - rid: 6522102444378816540
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: f974acae48cb929419896040825b84cd, type: 2}

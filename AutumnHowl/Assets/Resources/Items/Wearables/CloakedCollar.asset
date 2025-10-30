@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CloakedCollar
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_wearable_cloakedCollar
-  id: 
   displayName: Cloaked Collar
   description: A small black collar with a silver engraving. Looking at it too long
     makes your head spin.{col=stat}
@@ -32,4 +31,4 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 0
         modifierType: 0
-        value: 25
+        value: 10
