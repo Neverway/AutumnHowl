@@ -51,6 +51,7 @@ public enum GameEventType
     PlayerTakeDamage = 9,
     EnemyTakeDamage = 10,
     ObstacleTakeDamage = 11,
+
     Heal = 2,
     BattleTurnPassed = 3,
     BattleWon = 4,

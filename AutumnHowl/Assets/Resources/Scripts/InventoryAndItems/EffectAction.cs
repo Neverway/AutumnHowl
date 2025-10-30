@@ -57,11 +57,15 @@ public static class StatModTypeExtension
 [Serializable]
 public abstract class TargetedEffectAction : EffectAction
 {
-    [Unbox, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    [Box, Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
     public override void ApplyEffect(CharacterIdentifier user)
     {
-        foreach (CharacterIdentifier target in target.GetTargetsFrom(user).AllTargets)
-            ApplyEffectToTarget(target);
+        try
+        {
+            foreach (CharacterIdentifier target in target.GetTargetsFrom(user).AllTargets)
+                ApplyEffectToTarget(target);
+        }
+        catch { Debug.LogWarning("There was an error applying effect, just ignoring it for game jam"); }
     }
     public abstract void ApplyEffectToTarget(CharacterIdentifier target);
 }

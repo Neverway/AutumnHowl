@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ApplyModsOnPlayerOnActive : MonoBehaviour
+public class ApplyModsAsPlayerOnActive : MonoBehaviour
 {
+    [Box, Polymorphic, SerializeReference] protected EffectActionTarget targets = new TargetSelf();
     [Box, Polymorphic, SerializeReference] protected SerializedModifier_CharacterTargeting modifier;
     Modifier toRemove;
     public void OnEnable()
@@ -22,7 +23,7 @@ public class ApplyModsOnPlayerOnActive : MonoBehaviour
             GameInstance.Gamestate.player != null;
         }
         );
-
-        toRemove = modifier.GetNewRegisteredModifier(new TargetSelf().GetTargetsFrom(GameInstance.Gamestate.player));
+        if (targets == null) targets = new TargetSelf();
+        toRemove = modifier.GetNewRegisteredModifier(targets.GetTargetsFrom(GameInstance.Gamestate.player));
     }
 }
