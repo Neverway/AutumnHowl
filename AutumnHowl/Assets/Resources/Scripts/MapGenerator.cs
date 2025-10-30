@@ -19,6 +19,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     // Public Variables
     //=-----------------=
     [Space]
+    public Vector2 miniMapIconOffset = new Vector2(-40, +24 - (16 * 4));
     public Vector2Int VillageEntranceForMap;
     public GameObject spriteObjectTemplate;
     public Transform mapSpritesParent;
@@ -128,7 +129,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         playerPos.x /= roomWidth;
         playerPos.y /= roomHeight;
 
-        mapPlayerIcon.transform.localPosition = (playerBodyPos + homePlayerIconPos) + new Vector2(-40, +24 -(16*4));
+        mapPlayerIcon.transform.localPosition = (playerBodyPos + homePlayerIconPos) + miniMapIconOffset;
     }
     //=-----------------=
     // Internal Functions
@@ -186,13 +187,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             storedDebugLog += "\n";
         }
     }
-    private void CreateForestMap()
+    private void CreateForestMiniMap()
     {
         for (int i = 0; i < mapSpritesParent.childCount; i++)
             Destroy(mapSpritesParent.GetChild(i).gameObject);
-
-        //Vector2Int villageTile = VillageEntranceForMap;
-        //villageTile.y = (mapWidth - 1) - villageTile.y;
 
         for (int y = mapHeight - 1; y >= 0; y--)
         {
@@ -274,7 +272,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
 
         LogStoredMapGenDebugLog();
-        CreateForestMap();
+        CreateForestMiniMap();
         mapGenerated = true;
     }
 
