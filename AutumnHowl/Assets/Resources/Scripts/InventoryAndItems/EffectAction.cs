@@ -167,6 +167,38 @@ public class ModifyCorruptionAction : TargetedEffectAction
 }
 
 [Serializable]
+public class ModifyPowerAction : TargetedEffectAction
+{
+    public StatModType modifierType = StatModType.Flat;
+    public int amount = 1;
+
+    public override void ApplyEffectToTarget (CharacterIdentifier user) => user.Stats.ModifyPower (amount);
+    public override string DescribeNoFormat ()
+    {
+        string power = "Restores Power of";
+        string restores = "Restores ";
+        int positiveAmount = amount;
+        if (amount == 0) return "";
+        if (amount < 0)
+        {
+            power = "Removes power from";
+            restores = "Consumes ";
+            positiveAmount *= -1;
+        }
+        switch (modifierType)
+        {
+            case StatModType.Flat: return $"[{restores} {positiveAmount} Power of {target}]";
+            case StatModType.PercentMissing: return $"[{power} {target} by {positiveAmount}% of missing power]";
+            case StatModType.PercentCurrent: return $"[{power} {target} by {positiveAmount}% of power]";
+            case StatModType.PercentMax: return $"[{power} {target} by {positiveAmount}% max power]";
+        }
+        Debug.LogError ($"{nameof (ModifyCorruptionAction)}: Does not have a description for ModifyPower {modifierType}: " +
+            $"Falling back to back to ??? as description");
+        return $"[???] ";
+    }
+}
+
+[Serializable]
 public class GiveItemsEffect : EffectAction
 {
     //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();

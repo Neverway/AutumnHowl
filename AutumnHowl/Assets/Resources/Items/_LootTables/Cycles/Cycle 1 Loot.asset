@@ -33,14 +33,47 @@ MonoBehaviour:
         items:
         - weight: 2
           item:
-            rid: 6522102444378816525
+            rid: 6522102444378816565
         - weight: 3
           item:
-            rid: 6522102444378816525
+            rid: 6522102444378816566
         - weight: 1
           item:
-            rid: 6522102444378816525
-    - rid: 6522102444378816525
+            rid: 6522102444378816567
+        - weight: 3
+          item:
+            rid: 6522102444378816564
+    - rid: 6522102444378816564
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: 36a1fa42f507ccf42b4f569ede3197a7, type: 2}
+    - rid: 6522102444378816565
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: dc6698c03a41fe74887a70caf9013d23, type: 2}
+    - rid: 6522102444378816566
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: 75405f00ee6ec314a905b1a6fa1a64f9, type: 2}
+    - rid: 6522102444378816567
       type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
       data:
         settings:

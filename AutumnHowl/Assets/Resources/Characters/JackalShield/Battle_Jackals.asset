@@ -31,7 +31,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   victoryLevels: 0
-  victoryGold: 0
+  victoryGold: 20
   battleSequence:
     waves:
     - rid: 26148788346028042

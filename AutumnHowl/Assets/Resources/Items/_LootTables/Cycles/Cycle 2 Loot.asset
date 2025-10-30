@@ -40,6 +40,9 @@ MonoBehaviour:
         - weight: 1
           item:
             rid: 6522102444378816545
+        - weight: 3
+          item:
+            rid: 6522102444378816569
     - rid: 6522102444378816542
       type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
       data:
@@ -70,3 +73,13 @@ MonoBehaviour:
           toUseInsteadOfEmptyResult:
             rid: -2
         lootTable: {fileID: 11400000, guid: f974acae48cb929419896040825b84cd, type: 2}
+    - rid: 6522102444378816569
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: 36a1fa42f507ccf42b4f569ede3197a7, type: 2}
