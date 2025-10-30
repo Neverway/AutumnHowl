@@ -46,7 +46,6 @@ public class WB_TextChoice : MonoBehaviour
             Debug.LogError("Trying to display textchoice but was unable to add or get the widget");
             yield break;
         }
-        Debug.Log("Is textchoice manager null?? " + (textChoiceManager == null));
         textChoiceManager.SetupChoices(dialog, choices); //Setup widget
 
         while (lastSelectedChoice < 0)

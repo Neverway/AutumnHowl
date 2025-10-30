@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: PurpleArmband
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_wearable_purpleArmband
-  id: 
   displayName: Purp. Armband
   description: A sign of a true adventuerer.
   canNotDiscard: 0
   allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
   buyCost: 0
   sellCost: 0
   effectWhenEquipped:
@@ -25,6 +26,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 26149269160329220
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 6
+        modifierType: 0
+        value: 20
     - rid: 1234356096328531978
       type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
@@ -32,6 +40,7 @@ MonoBehaviour:
         statModifiers:
         - rid: 1234356096328531980
         - rid: 1234356096328531981
+        - rid: 26149269160329220
     - rid: 1234356096328531980
       type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:

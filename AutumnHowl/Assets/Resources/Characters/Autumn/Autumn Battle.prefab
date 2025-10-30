@@ -919,6 +919,7 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
+  freezeCharacterMovement: 0
   isDead: 0
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
@@ -940,8 +941,8 @@ MonoBehaviour:
       pushing: 0
   canMove: 0
   pushable: 0
-  gridHopAnimationSeconds: 0.15
-  gridHopAnimationHeight: 0.35
+  gridHopAnimation_Seconds: 0.15
+  gridHopAnimation_Height: 0.35
   gridHopAnimationContainer: {fileID: 1341769465767893047}
   gridPawnController: {fileID: 2113060241678384352}
   gridPather: {fileID: 0}
