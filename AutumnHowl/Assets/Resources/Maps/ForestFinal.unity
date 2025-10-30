@@ -927,6 +927,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1cb4128d92c45824bbcc2365e28ef7d, type: 3}
+--- !u!1001 &566352667
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 901748083}
+    m_Modifications:
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029169606769828848, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: guid
+      value: 30ad809f-8482-4536-8080-f51b6f47d23e
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029169606769828848, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: recreatablePrefab
+      value: 
+      objectReference: {fileID: 6773400060312980916, guid: 11a9802f045c1824daa58545a9178f7e, type: 3}
+    - target: {fileID: 2742192081338225174, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+      propertyPath: m_Name
+      value: Enemy Spawner (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+--- !u!4 &566352668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 621548684583739436, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+  m_PrefabInstance: {fileID: 566352667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &566352669 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2029169606769828848, guid: f184398144162a840ae62d2c43ccbb17, type: 3}
+  m_PrefabInstance: {fileID: 566352667}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284002ca50c168c4e85d605ec27fee5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &616707177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1559,6 +1640,7 @@ Transform:
   - {fileID: 6679076751848293569}
   - {fileID: 1651940430}
   - {fileID: 1617142523}
+  - {fileID: 566352668}
   m_Father: {fileID: 1589659525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &901748084
@@ -1695,7 +1777,8 @@ MonoBehaviour:
   - {fileID: 6659489718510107595, guid: c88afa07151b9f34a800069a3e562ca3, type: 3}
   poiList: []
   pathObjects: []
-  enemySpawners: []
+  enemySpawners:
+  - {fileID: 566352669}
   chestRecreator: {fileID: 1651940431}
   spawnPathToPatchyBoss: 0
 --- !u!1001 &902932604
