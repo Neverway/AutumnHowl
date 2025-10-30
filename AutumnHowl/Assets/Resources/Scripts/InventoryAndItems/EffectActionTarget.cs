@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 [Serializable]
@@ -81,13 +82,31 @@ public class TargetSelf : EffectActionTarget
 }
 
 [Serializable]
-public class TargetNearestEnemy : EffectActionTarget
+public class TargetBattleAdjacent : EffectActionTarget
 {
+    public bool includeSelf = false;
+    public bool includeDiagonal = false;
     public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other)
     {
-        throw new NotImplementedException("Need to define how to get " +
-            "nearest target");
+        //Check for self target
+        if (user == other && includeSelf) return true;
+
+        //Ensure these are Char_Battle characters
+        if (user.Stats.owner is not Char_Battle battle_user) return false;
+        if (other.Stats.owner is not Char_Battle battle_other) return false;
+
+        //Get difference in position
+        Vector2Int positionDelta = battle_other.gridPawnController.position - battle_user.gridPawnController.position;
+
+        //Check if cardinally adjacent
+        if (positionDelta.magnitude <= 1) return true;
+
+        //Check if diagonally adjacent 
+        if (includeDiagonal && positionDelta.magnitude <= Vector2Int.one.magnitude) return true;
+
+        //If all fails, you are not adjacent
+        return false;
     }
-    public override string Description => "nearest enemy";
+    public override string Description => "adjacent enemy";
 }
 
