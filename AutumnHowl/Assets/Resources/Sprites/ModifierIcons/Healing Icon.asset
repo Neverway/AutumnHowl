@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90dbe169515f7d846838915f0a0e9035, type: 3}
-  m_Name: ConfuseIcon
+  m_Name: Healing Icon
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1566225214732755016, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
+  sprite: {fileID: 4792262482116360285, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}

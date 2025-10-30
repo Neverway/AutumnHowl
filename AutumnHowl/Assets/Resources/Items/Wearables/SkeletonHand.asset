@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: SkeletonHand
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: equip_skeletonHand
+  displayName: Skeleton Hand
+  description: This hand fuels you with rage and a desire for revenge against those
+    who hurt you
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 100
+  sellCost: 50
+  effectWhenEquipped:
+    rid: 1234356420671700993
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671700993
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: Taking damage gives +5 ATK for 10 turns
+        beforeOrAfter: 1
+        gameEventType: 9
+        eventTargets:
+          rid: 1234356420671700994
+        effectAction:
+          rid: 1234356420671700996
+    - rid: 1234356420671700994
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671700996
+      type: {class: ModifierForXTurns, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671700997
+        modifierIcons:
+        - {fileID: 11400000, guid: cd979adfd1be24a428d47a048bcc1453, type: 2}
+        turns: 10
+        modifier:
+          rid: 1234356420671700998
+    - rid: 1234356420671700997
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671700998
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 0
+        modifierType: 0
+        value: 5

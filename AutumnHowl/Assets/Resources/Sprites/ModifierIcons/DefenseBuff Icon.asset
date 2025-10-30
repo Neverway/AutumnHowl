@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90dbe169515f7d846838915f0a0e9035, type: 3}
-  m_Name: SpeedIcon
+  m_Name: DefenseBuff Icon
   m_EditorClassIdentifier: 
-  sprite: {fileID: -2887579322783119589, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
+  sprite: {fileID: -4406965624353156679, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
