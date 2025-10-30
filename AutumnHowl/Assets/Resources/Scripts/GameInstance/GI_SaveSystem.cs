@@ -166,6 +166,8 @@ public class GI_SaveSystem : MonoBehaviour
     {
         if (!Application.isPlaying || !doSaving) return;
 
+        Debug.Log("<size=24>SAVED GAME</size>");
+
         CurrentSavingType = SavingType.SavingOrLoadingFile;
         {
             //Grab values from attributes made for this save system

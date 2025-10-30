@@ -18,8 +18,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     // Public Variables
     //=-----------------=
-    public ParticleGenerator fog;
     [Space]
+    public Vector2 miniMapIconOffset = new Vector2(-40, +24 - (16 * 4));
     public Vector2Int VillageEntranceForMap;
     public GameObject spriteObjectTemplate;
     public Transform mapSpritesParent;
@@ -129,7 +129,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         playerPos.x /= roomWidth;
         playerPos.y /= roomHeight;
 
-        mapPlayerIcon.transform.localPosition = (playerBodyPos + homePlayerIconPos) + new Vector2(-40, +24 -(16*4));
+        mapPlayerIcon.transform.localPosition = (playerBodyPos + homePlayerIconPos) + miniMapIconOffset;
     }
     //=-----------------=
     // Internal Functions
@@ -187,13 +187,10 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             storedDebugLog += "\n";
         }
     }
-    private void CreateForestMap()
+    private void CreateForestMiniMap()
     {
         for (int i = 0; i < mapSpritesParent.childCount; i++)
             Destroy(mapSpritesParent.GetChild(i).gameObject);
-
-        Vector2Int villageTile = VillageEntranceForMap;
-        villageTile.y = (mapWidth - 1) - villageTile.y;
 
         for (int y = mapHeight - 1; y >= 0; y--)
         {
@@ -204,10 +201,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
                 foreach (MapNodeSprite spriteInfo in mapNodeSprites)
                 {
                     
-                    bool adjacentToVillageEntrance = new Vector2Int(x, y) == villageTile;
-
                     if (n.paths[1] == spriteInfo.exitNorth &&
-                        (n.paths[0] == spriteInfo.exitSouth ^ adjacentToVillageEntrance) &&
+                        n.paths[0] == spriteInfo.exitSouth &&
                         n.paths[2] == spriteInfo.exitWest &&
                         n.paths[3] == spriteInfo.exitEast)
                     {
@@ -254,6 +249,8 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
             AddStraightPath();
         }
 
+        mapNodes[startPosition.x, startPosition.y].paths[NORTH] = true;
+
         if (spawnPathToPatchyBoss)
         {
             AddPathToPatchyBoss ();
@@ -275,7 +272,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
 
 
         LogStoredMapGenDebugLog();
-        CreateForestMap();
+        CreateForestMiniMap();
         mapGenerated = true;
     }
 
