@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: Ribcage
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: equip_ribcage
+  displayName: Ribcage
+  description: A wearable ribcage. ..Why are you even thinking of wearing this?
+  canNotDiscard: 0
+  allowMultiple: 1
+  buyCost: 250
+  sellCost: 100
+  effectWhenEquipped:
+    rid: 1234356373609775168
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356373609775168
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356373609775169
+        - rid: 1234356373609775170
+    - rid: 1234356373609775169
+      type: {class: StatPerCorruptionModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 0
+        subtractFromStatInsteadOfAdd: 0
+        corruptionToStatFactor: 0.1
+    - rid: 1234356373609775170
+      type: {class: StatPerCorruptionModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 1
+        subtractFromStatInsteadOfAdd: 0
+        corruptionToStatFactor: 0.1

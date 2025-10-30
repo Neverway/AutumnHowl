@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GI_WidgetManager : MonoBehaviour
@@ -86,7 +87,56 @@ public class GI_WidgetManager : MonoBehaviour
         newWidget.name = _widgetObject.name;
         return true;
     }
-    
+
+    /// <summary>Gets the widget of the specified type (or creates a new one if one does not exist)
+    /// <br/>Returns false if widget could not be created or retrieved (like if the Canvas was null)</summary>
+    public bool TryAddOrGetWidget<T>(out T addedWidget) where T : MonoBehaviour
+    {
+        addedWidget = null; //Initialize with default value
+        //Do not add widget if no canvas exists
+        if (Canvas == null) return false;
+
+        //Try finding an existing widget of that type
+        foreach (Transform child in Canvas.transform)
+        {
+            addedWidget = child.GetComponent<T>();
+            if (addedWidget != null) return true;
+        }
+        
+        //Try to get the widget prefab
+        T widgetPrefab = null;
+        foreach (var widget in widgets) 
+            if (widget.TryGetComponent(out widgetPrefab)) 
+                break;
+        if (widgetPrefab == null)
+        {
+            Debug.LogError($"No Widget with component of type {typeof(T)} was found. Maybe you forgot to" +
+                $"add it to {nameof(GI_WidgetManager)}?");
+            return false;
+        }
+
+        GameObject widgetObj = Instantiate(widgetPrefab.gameObject, Canvas.transform, false);
+        T newWidget = widgetObj.GetComponent<T>();
+        newWidget.transform.localScale = Vector3.one;
+        newWidget.name = widgetPrefab.name;
+        addedWidget = newWidget;
+        return true;
+    }
+    public bool RemoveWidget<T>() where T : MonoBehaviour
+    {
+        if (Canvas == null) return false;
+
+        foreach (Transform child in Canvas.transform)
+        {
+            if (child.TryGetComponent(out T component))
+            {
+                Destroy(child.gameObject);
+                return true;
+            }
+        }
+        return false;
+    }
+
     /// <summary>
     /// Adds the specified widget if it's no present on the interface, or removes it if it already is
     /// </summary>
