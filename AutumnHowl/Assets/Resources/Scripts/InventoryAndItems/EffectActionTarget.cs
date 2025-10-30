@@ -110,3 +110,15 @@ public class TargetBattleAdjacent : EffectActionTarget
     public override string Description => "adjacent enemy";
 }
 
+[Serializable]
+public class TargetHasTag : EffectActionTarget
+{
+    public bool includeSelf = false;
+    public CharacterTags tags;
+    public override bool IsTargeted(CharacterIdentifier user, CharacterIdentifier other)
+    {
+        throw new Exception();
+    }
+    public override string Description => "";
+}
+

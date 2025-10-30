@@ -2,6 +2,7 @@ using ErryLib.GameEvents;
 using ErryLib.ModiferSystem.Instancers;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class AuHoGameEvent : BasicGameEvent
@@ -47,10 +48,13 @@ public class EventCounter<T> : ListensToGameEvent<BasicGameEvent> where T : AuHo
 public enum GameEventType
 {
     TakeDamage = 1,
+    PlayerTakeDamage = 9,
+    EnemyTakeDamage = 10,
+    ObstacleTakeDamage = 11,
     Heal = 2,
     BattleTurnPassed = 3,
     BattleWon = 4,
-    Died = 5,
+    //Died = 5,
     BattleWavePassed = 6,
 
     UseAnyItem = 0,
@@ -129,7 +133,72 @@ public class Event_TakeDamage : AuHoGameEvent_Interruptable
         this.direction = direction;
         this.damage = damage;
     }
+
+    protected override void WhenInvoked()
+    {
+        if (target.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Player))
+            if (new Event_PlayerTakeDamage(target, direction, damage).IfInvokeInterrupted())
+            {
+                InterruptEvent();
+                return;
+            }
+        if (target.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Enemy))
+            if (new Event_EnemyTakeDamage(target, direction, damage).IfInvokeInterrupted())
+            {
+                InterruptEvent();
+                return;
+            }
+        if (target.TemplateCreatedFrom.characterTags.Contains(CharacterTags.Obstacle))
+            if (new Event_ObstacleTakeDamage(target, direction, damage).IfInvokeInterrupted())
+            {
+                InterruptEvent();
+                return;
+            }
+    }
+
     public override GameEventType EventType => GameEventType.TakeDamage;
+    public override CharacterIdentifier EventOwner { get => target; }
+}
+public class Event_PlayerTakeDamage : AuHoGameEvent_Interruptable
+{
+    public float damage;
+    public Vector2Int direction;
+    public CharacterIdentifier target;
+    public Event_PlayerTakeDamage(CharacterIdentifier target, Vector2Int direction, float damage)
+    {
+        this.target = target;
+        this.direction = direction;
+        this.damage = damage;
+    }
+    public override GameEventType EventType => GameEventType.PlayerTakeDamage;
+    public override CharacterIdentifier EventOwner { get => target; }
+}
+public class Event_EnemyTakeDamage : AuHoGameEvent_Interruptable
+{
+    public float damage;
+    public Vector2Int direction;
+    public CharacterIdentifier target;
+    public Event_EnemyTakeDamage(CharacterIdentifier target, Vector2Int direction, float damage)
+    {
+        this.target = target;
+        this.direction = direction;
+        this.damage = damage;
+    }
+    public override GameEventType EventType => GameEventType.EnemyTakeDamage;
+    public override CharacterIdentifier EventOwner { get => target; }
+}
+public class Event_ObstacleTakeDamage : AuHoGameEvent_Interruptable
+{
+    public float damage;
+    public Vector2Int direction;
+    public CharacterIdentifier target;
+    public Event_ObstacleTakeDamage(CharacterIdentifier target, Vector2Int direction, float damage)
+    {
+        this.target = target;
+        this.direction = direction;
+        this.damage = damage;
+    }
+    public override GameEventType EventType => GameEventType.ObstacleTakeDamage;
     public override CharacterIdentifier EventOwner { get => target; }
 }
 public class Event_Heal : AuHoGameEvent_Interruptable
