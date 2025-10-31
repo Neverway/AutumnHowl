@@ -324,7 +324,7 @@ public class CharacterStats
     public void OnNewCharacter()
     {
         health = maxHealth;
-        power = maxPower;
+        power = 20;
     }
 
     /*-----[ Save/Load SaveData ]-------------------------------------------------------------------------------------*/

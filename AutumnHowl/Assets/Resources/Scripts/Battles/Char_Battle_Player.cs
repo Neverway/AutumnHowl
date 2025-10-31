@@ -21,7 +21,7 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
-
+    [HideInInspector] public bool tileHopDelay { get; private set; }// Used to block inputs during movement between tiles.
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private bool inTheProcessOfDying; // Used to block inputs while the player's death animation is playing out
@@ -78,7 +78,11 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
 
             if (input.WasPressedThisFrame())
             {
-                if (TryMoveInDirection(direction, true, gridPawnController)) facingDirection = direction;
+                if (TryMoveInDirection (direction, true, gridPawnController))
+                {
+                    facingDirection = direction;
+                    StartCoroutine (TileHopDelay ());
+                }
                 return;
             }
         }
@@ -101,6 +105,13 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         {
             battleStateController.NextTurnStep(0.5f);
         }
+    }
+
+    private IEnumerator TileHopDelay ()
+    {
+        tileHopDelay = true;
+        yield return new WaitForSeconds (gridHopAnimation_Seconds);
+        tileHopDelay = false;
     }
 
     /// <summary>

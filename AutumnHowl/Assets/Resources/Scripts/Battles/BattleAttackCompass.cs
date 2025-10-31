@@ -164,17 +164,19 @@ public class BattleAttackCompass : MonoBehaviour
         {
             // If we aren't in the process of attacking, update the needle direction to match the player's direction
             SetNeedleDirection(player.facingDirection);
-            
-            // Start the attack timer on first press
-            if (GameInstance.Inputs.Interact.WasPressedThisFrame())
+            if (!player.tileHopDelay)
             {
-                currentSpinDirection = SpinDirection.Left;
-                Initialize();
-            }
-            else if (GameInstance.Inputs.Action.WasPressedThisFrame())
-            {
-                currentSpinDirection = SpinDirection.Right;
-                Initialize();
+                // Start the attack timer on first press
+                if (GameInstance.Inputs.Interact.WasPressedThisFrame ())
+                {
+                    currentSpinDirection = SpinDirection.Left;
+                    Initialize ();
+                }
+                else if (GameInstance.Inputs.Action.WasPressedThisFrame ())
+                {
+                    currentSpinDirection = SpinDirection.Right;
+                    Initialize ();
+                }
             }
             return;
         }

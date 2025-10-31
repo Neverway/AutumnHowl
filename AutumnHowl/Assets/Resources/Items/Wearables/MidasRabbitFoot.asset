@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: midas_rabbit_foot
   displayName: Midas's Rabbit Foot
-  description: 
+  description: A lucky rabbit's foot made of rusted brass.
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 0
-  sellCost: 0
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 50
+  sellCost: 45
   effectWhenEquipped:
     rid: 1234356373609775104
   references:
@@ -26,12 +28,17 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 26149269160329219
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
     - rid: 1234356373609775104
       type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
       data:
-        description: '[0$ to 50$ on each battle won]'
+        description: '[+0$ to +50$ on each battle won]'
         beforeOrAfter: 1
         gameEventType: 4
+        eventTargets:
+          rid: 26149269160329219
         effectAction:
           rid: 1234356373609775110
     - rid: 1234356373609775110

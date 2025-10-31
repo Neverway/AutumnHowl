@@ -345,6 +345,47 @@ public abstract class Char_Battle : Character
             }
         }
     }
+    
+    /// <summary>
+    /// Compares tiles numbers, for pathfinding
+    /// </summary>
+    /// <param name="checkPos"></param>
+    /// <param name="lowestTileNumber"></param>
+    /// <returns></returns>
+    protected bool TestTile (Vector2Int checkPos, int lowestTileNumber)
+    {
+        if (battleGrid.IsMoveable (checkPos.x, checkPos.y))
+        {
+            //Check if tile is "unassigned" to avoid stepping on tiles that aren't part of the path.
+            if (gridPather.grid[checkPos.x, checkPos.y] == BattleGridPather.UnassignedTileNumber)
+            {
+                return false;
+            }
+            if (gridPather.grid[checkPos.x, checkPos.y] < lowestTileNumber)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected Vector2Int GetLowestTileToTarget ()
+    {
+        var lowestTileNumber = 9999;
+        var lowestTile = new Vector2Int (-1, -1);
+
+        // Check surrounding tiles
+        DirectionUtility.ForEachDirection ((direction) =>
+        {
+            Vector2Int checkPos = gridPawnController.position + direction.Info ().direction;
+            if (TestTile (checkPos, lowestTileNumber))
+            {
+                lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
+                lowestTile = checkPos;
+            }
+        });
+        return lowestTile;
+    }
 
 
     #endregion

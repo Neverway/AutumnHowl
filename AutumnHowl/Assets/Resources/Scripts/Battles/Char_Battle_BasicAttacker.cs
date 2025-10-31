@@ -42,17 +42,6 @@ public class Char_Battle_BasicAttacker : Char_Battle
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-    protected bool TestTile(Vector2Int checkPos, int lowestTileNumber)
-    {
-        if (battleGrid.IsMoveable(checkPos.x, checkPos.y))
-        {
-            if (gridPather.grid[checkPos.x, checkPos.y] < lowestTileNumber)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     protected bool TestForEnemy(Vector2Int checkPos)
     {
@@ -66,24 +55,6 @@ public class Char_Battle_BasicAttacker : Char_Battle
         }
 
         return false;
-    }
-
-    protected Vector2Int GetLowestTileToTarget()
-    {
-        var lowestTileNumber = 9999;
-        var lowestTile = new Vector2Int(-1,-1);
-
-        // Check surrounding tiles
-        DirectionUtility.ForEachDirection((direction) =>
-        {
-            Vector2Int checkPos = gridPawnController.position + direction.Info().direction;
-            if (TestTile(checkPos, lowestTileNumber))
-            {
-                lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
-                lowestTile = checkPos;
-            }
-        });
-        return lowestTile;
     }
 
     protected Direction? GetTarget()

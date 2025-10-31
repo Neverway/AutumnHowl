@@ -29,7 +29,7 @@ public class BattleGridPather : MonoBehaviour
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
 
     private BattleGrid battleGrid;
-    private const int UnassignedTileNumber=99;
+    public static int UnassignedTileNumber { get; private set; } = 99;
     private const int SwordCost = 4;
 
     #endregion
