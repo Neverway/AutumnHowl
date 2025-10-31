@@ -45,7 +45,13 @@ public class Inventory
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
-
+    private void UpdateInventoryUIs()
+    {
+        var inventoryUIs = GameObject.FindObjectsByType<Text_Inventory>(
+            FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var inventoryUI in inventoryUIs)
+            inventoryUI.UpdateItemList();
+    }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public bool TryAddItem(Item _item)
@@ -61,6 +67,7 @@ public class Inventory
             {
                 if (spells.Contains(itemMagic) && itemMagic.allowMultiple is false) return false;
                 spells.Add(itemMagic);
+                UpdateInventoryUIs();
                 return true;
             }
         }
@@ -70,13 +77,13 @@ public class Inventory
             {
                 if (items.Contains(_item) && _item.allowMultiple is false) return false;
                 items.Add(_item);
+                UpdateInventoryUIs();
                 return true;
             }
         }
 
         return false;
     }
-    
     public Item GetItem(int _atIndex, int _inList=0)
     {
         switch (_inList)
@@ -103,21 +110,21 @@ public class Inventory
                 if (_atIndex < items.Count)
                 {
                     if (items[_atIndex].canNotDiscard) { return false; }
-                    else { items.Remove(items[_atIndex]); return true; }
+                    else { items.Remove(items[_atIndex]); UpdateInventoryUIs(); return true; }
                 }
                 break;
             case 1:
                 if (_atIndex < spells.Count)
                 {
                     if (spells[_atIndex].canNotDiscard) { return false; }
-                    else { spells.Remove(spells[_atIndex]); return true; }
+                    else { spells.Remove(spells[_atIndex]); UpdateInventoryUIs(); return true; }
                 }
                 break;
             case 2:
                 if (_atIndex < equippedWearables.Count)
                 {
                     if (equippedWearables[_atIndex].canNotDiscard) { return false; }
-                    else { equippedWearables.Remove(equippedWearables[_atIndex]); return true; }
+                    else { equippedWearables.Remove(equippedWearables[_atIndex]); UpdateInventoryUIs(); return true; }
                 }
                 break;
         }
@@ -165,7 +172,7 @@ public class Inventory
 
         //Add to items
         items.Add(item);
-
+        UpdateInventoryUIs();
         return true;
     }
 
@@ -183,6 +190,7 @@ public class Inventory
 
         //If equip succeeds, remove from items list
         items.RemoveAt(indexInItems);
+        UpdateInventoryUIs();
         return true;
     }
     public bool TryEquipItem(Item_Wearable equipment)

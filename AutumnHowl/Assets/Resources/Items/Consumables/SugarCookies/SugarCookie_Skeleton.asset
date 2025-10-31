@@ -18,6 +18,8 @@ MonoBehaviour:
     but, looks like they accidently got a bit of blue frosting on one of the eyes
   canNotDiscard: 0
   allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
   buyCost: 25
   sellCost: 10
   effectsOnConsume:

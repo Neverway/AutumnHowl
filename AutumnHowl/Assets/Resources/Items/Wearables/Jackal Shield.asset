@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: Jackal Shield
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: item_jackalshield
+  displayName: Jackal Shield
+  description: A sturdy shield often used by Jackals
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 100
+  sellCost: 75
+  effectWhenEquipped:
+    rid: 1234356420671701073
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701073
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356420671701074
+        - rid: 1234356420671701078
+    - rid: 1234356420671701074
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 1
+        modifierType: 0
+        value: 5
+    - rid: 1234356420671701078
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 2
+        modifierType: 0
+        value: 20

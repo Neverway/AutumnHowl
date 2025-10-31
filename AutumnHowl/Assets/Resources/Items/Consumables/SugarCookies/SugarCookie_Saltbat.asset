@@ -18,6 +18,8 @@ MonoBehaviour:
     the cookie isn't salty...
   canNotDiscard: 0
   allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
   buyCost: 25
   sellCost: 10
   effectsOnConsume:
