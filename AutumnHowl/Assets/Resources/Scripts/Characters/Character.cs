@@ -21,7 +21,13 @@ public abstract class Character : MonoBehaviour
     public bool isDefenseActive;
 
     public Vector2Int startFaceDirection = Vector2Int.down;
-    public bool freezeCharacterMovement = false;
+    private bool _freezeCharacterMovement = false;
+    public bool freezeCharacterMovement { get => _freezeCharacterMovement; set 
+        {
+            animator.SetBool("walking", false);
+            movement = Vector2.zero;
+            _freezeCharacterMovement = value;
+        } }
     [Tooltip("Skips certain behaviors when at 0 HP; used only for final boss right now.")]
     public bool uniqueDeathBehavior = false;
 
