@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StorageBoxAnimator
+  m_Controller: {fileID: 9100000, guid: e369bfa2b89ccbd4b97181e7aab963b6, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 344a0e8fa9adf3a488ff32cfff4ff982, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 83b9c4bb58c57114297898a4775f5b4e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1197c66d6bbf4ee48b996d1e429ccffc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2f134c01ca9a0174baecb6b482f72ff2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 70804d780df30a748b8bb10d02204c3f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8f78acf8ae22c34469120f48c1535ad2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4b1faaf2ffc9feb46893b7a6ba5d047d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bd16aad6c62cc454c92bb75e75f99f3f, type: 2}

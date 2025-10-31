@@ -10,31 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
-  m_Name: PowerPotion
+  m_Name: Power Pastry
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: item_consumable_powerpotion
-  displayName: Power Potion
-  description: A bitter drink that reinvigorates strength. The label warns against
-    drinking more than one bottle within a short time.
+  <UniqueID>k__BackingField: item_powerpastry
+  displayName: Power Pastry
+  description: Its a pastry, and it restores your power, what else can I say?
   canNotDiscard: 0
   allowMultiple: 1
   useableInBattle: 1
   useableInOverworld: 1
-  buyCost: 20
-  sellCost: 15
+  buyCost: 65
+  sellCost: 50
   effectsOnConsume:
-    rid: 6522102444378816560
+    rid: 1234356420671701071
   references:
     version: 2
     RefIds:
-    - rid: 6522102444378816560
+    - rid: 1234356420671701071
       type: {class: ModifyPowerAction, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
         target:
-          rid: 6522102444378816561
-        modifierType: 0
-        amount: 25
-    - rid: 6522102444378816561
+          rid: 1234356420671701072
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701072
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 
