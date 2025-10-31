@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
+  m_Name: Airbutter
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: spell_airbutter
+  displayName: Airbutter
+  description: Makes the air buttery smooth for your blade to slice right through
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 50
+  sellCost: 30
+  powerCost: 10
+  effectsWhenCast:
+    rid: 1234356420671701133
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701133
+      type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701136
+        modifierIcons:
+        - {fileID: 11400000, guid: cd979adfd1be24a428d47a048bcc1453, type: 2}
+        seconds: 6
+        modifier:
+          rid: 1234356420671701135
+    - rid: 1234356420671701135
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 0
+        modifierType: 0
+        value: 5
+    - rid: 1234356420671701136
+      type: {class: TargetPlayer, ns: , asm: Assembly-CSharp}
+      data: 
