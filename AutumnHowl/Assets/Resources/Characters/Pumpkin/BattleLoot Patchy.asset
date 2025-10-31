@@ -14,9 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notes: 
   itemsToGrant:
-    rid: -2
+    rid: 1234356420671701138
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1234356420671701138
+      type: {class: ItemsRef_GroupOfItemRefs, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        itemRefs:
+        - rid: 1234356420671701139
+        - rid: 1234356420671701141
+        - rid: 1234356420671701140
+    - rid: 1234356420671701139
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 84283bcfdd3e7b343b5eccbb63d25fa4, type: 2}
+    - rid: 1234356420671701140
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 2
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: cc6a1d73770808845b85b196d78bcb0c, type: 2}
+    - rid: 1234356420671701141
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 74dcda300a575c843af7015e81c6618b, type: 2}

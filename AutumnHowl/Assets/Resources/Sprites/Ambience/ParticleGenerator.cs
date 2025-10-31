@@ -24,20 +24,25 @@ public class ParticleGenerator : MonoBehaviour
     public void OnDisable() => DestroyAllParticles();
     public void Update()
     {
-        if (GameInstance.Playerbody == null) return;
-        float distanceToPlayer = Vector3.Distance(transform.position, GameInstance.Playerbody.transform.position) - (area.magnitude * 0.5f);
-        if (distanceToPlayer > 6)
+        if (GameInstance.Playerbody != null)
         {
-            DestroyAllParticles();
-            playerTooFar = true;
-            return;
+            float distanceToPlayer = Vector3.Distance(transform.position, GameInstance.Playerbody.transform.position) - (area.magnitude * 0.5f);
+            if (distanceToPlayer > 6)
+            {
+                DestroyAllParticles();
+                playerTooFar = true;
+                return;
+            }
+            if (playerTooFar)
+            {
+                playerTooFar = false;
+                PreSpawn();
+                return;
+            }
         }
-        if (playerTooFar)
-        {
+        else
             playerTooFar = false;
-            PreSpawn();
-            return;
-        }
+
 
         particlesToSpawn += true_pps * Time.deltaTime;
         while (particlesToSpawn > 0)

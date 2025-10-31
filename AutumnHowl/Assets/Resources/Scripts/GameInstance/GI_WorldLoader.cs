@@ -51,7 +51,8 @@ public class GI_WorldLoader : MonoBehaviour
             TeleportPlayerToExit(_exitWarpID);
 
         //Notify save system to load values for the scene
-        GI_SaveSystem.NotifyEnteredScene();
+        if (_mapID != "End Credits")
+            GI_SaveSystem.NotifyEnteredScene();
 
         IsLoading = false;
     }
@@ -81,7 +82,8 @@ public class GI_WorldLoader : MonoBehaviour
         if (IsLoading) return;
 
         //Notify save system to save values from the scene you are leaving
-        GI_SaveSystem.NotifyLeavingScene();
+        if (_mapID != "End Credits")
+            GI_SaveSystem.NotifyLeavingScene();
 
         //Start loading the next map
         GameInstance.Gamestate.map = _mapID;
