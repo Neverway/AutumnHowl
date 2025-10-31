@@ -46,6 +46,10 @@ public class WB_TextChoice : MonoBehaviour
             Debug.LogError("Trying to display textchoice but was unable to add or get the widget");
             yield break;
         }
+        //Freeze player
+        bool wasPlayerFrozen = GameInstance.Playerbody.freezeCharacterMovement;
+        GameInstance.Playerbody.freezeCharacterMovement = true;
+
         textChoiceManager.SetupChoices(dialog, choices); //Setup widget
 
         while (lastSelectedChoice < 0)
@@ -59,6 +63,8 @@ public class WB_TextChoice : MonoBehaviour
         }
 
         Destroy(textChoiceManager.gameObject); //Get rid of widget
+        GameInstance.Playerbody.freezeCharacterMovement = wasPlayerFrozen;
+        yield return null;
     }
 
     public static int GetLastSelectedChoice() => lastSelectedChoice;

@@ -591,41 +591,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd230f50ccad4d4dbf66fe8a47f51e1, type: 3}
---- !u!1 &39697256
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 39697257}
-  m_Layer: 8
-  m_Name: Read_Book
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &39697257
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39697256}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.999, y: 5.47, z: 0}
-  m_LocalScale: {x: 1.7042695, y: 0.3, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5088213504542352979}
-  - {fileID: 1583982050}
-  - {fileID: 687407625}
-  - {fileID: 1263223721}
-  m_Father: {fileID: 1589166614}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &42286937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6956,128 +6921,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8392324193076840830, guid: b68833da8b6997ff49f918822253b713, type: 3}
   m_PrefabInstance: {fileID: 554078974}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &530553296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 530553297}
-  - component: {fileID: 530553299}
-  - component: {fileID: 530553298}
-  m_Layer: 8
-  m_Name: Page (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &530553297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530553296}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1263223721}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &530553298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530553296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25315a3f6e12e1b46b110c7e7392065e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogText: Page 1 text here
-  allowQuittingMenu: 1
-  onQuitMenu:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7221741643838105110}
-        m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-        m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  choices:
-  - choiceName: Previous Page
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1793678387}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - choiceName: Close Book
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7221741643838105110}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &530553299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530553296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66163f98cd3754247a9544f30e0a1e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnInvoke:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 530553298}
-        m_TargetAssemblyTypeName: Func_TextChoice, Assembly-CSharp
-        m_MethodName: StartChoices
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &547352583
 GameObject:
   m_ObjectHideFlags: 0
@@ -8635,88 +8478,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68833da8b6997ff49f918822253b713, type: 3}
---- !u!1 &687407624
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 687407625}
-  - component: {fileID: 687407626}
-  m_Layer: 8
-  m_Name: Choice
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &687407625
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687407624}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 39697257}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &687407626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687407624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25315a3f6e12e1b46b110c7e7392065e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogText: Would you like to give it a read?
-  allowQuittingMenu: 1
-  onQuitMenu:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7221741643838105110}
-        m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-        m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  choices:
-  - choiceName: Yes
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1263223722}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - choiceName: No
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &691954378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10880,6 +10641,88 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6902784518409319072, guid: d0374ca551637144490a4aaf0393cd74, type: 3}
   m_PrefabInstance: {fileID: 904338921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &906489820
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6264062680107862786}
+    m_Modifications:
+    - target: {fileID: 1526803805362369133, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_Name
+      value: Desk (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953982660675238964, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 47ee10e2d6429013ea48bfd7b3b3de7e, type: 3}
+    - target: {fileID: 1953982660675238964, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -49.227
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 33.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029610465314030829, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+--- !u!4 &906489821 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3763273838442648847, guid: dc485ce0b9f86c130b3a5d312fbddfa8, type: 3}
+  m_PrefabInstance: {fileID: 906489820}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &907159004
 PrefabInstance:
@@ -15033,68 +14876,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6902784518409319072, guid: d0374ca551637144490a4aaf0393cd74, type: 3}
   m_PrefabInstance: {fileID: 1253757002}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1263223720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1263223721}
-  - component: {fileID: 1263223722}
-  m_Layer: 8
-  m_Name: BookToRead
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1263223721
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263223720}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1824736421}
-  - {fileID: 1793678389}
-  - {fileID: 530553297}
-  m_Father: {fileID: 39697257}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1263223722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263223720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66163f98cd3754247a9544f30e0a1e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnInvoke:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1824736419}
-        m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-        m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1264177721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8392324193076840830, guid: dfd230f50ccad4d4dbf66fe8a47f51e1, type: 3}
@@ -19121,94 +18902,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2886879790751734807, guid: f76331226e341bc42872ecafa0ed8b85, type: 3}
   m_PrefabInstance: {fileID: 1581057510}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1583982049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1583982050}
-  - component: {fileID: 1583982051}
-  m_Layer: 8
-  m_Name: BookIntro
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1583982050
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583982049}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 39697257}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1583982051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583982049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdcdaaf8da5a1891ba5d7c844bf7a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overrideExistingEvents: 0
-  textEvent:
-    frames:
-    - name: Bookshelf
-      chatContent: A book called BOOKNAME catches your eye
-      portrait: {fileID: 0}
-      chatterVoice: {fileID: 0}
-      OnFrameCompleted:
-        m_PersistentCalls:
-          m_Calls: []
-      displayMode: 0
-      preventTextSkipping: 0
-      preventTextContinuing: 0
-      autoProgressOnComplete: 0
-    OnFinish:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 687407626}
-          m_TargetAssemblyTypeName: Func_TextChoice, Assembly-CSharp
-          m_MethodName: StartChoices
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  OnCallFailed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7221741643838105110}
-        m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-        m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1588634868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19321,7 +19014,7 @@ Transform:
   - {fileID: 917319426}
   - {fileID: 1096426987}
   - {fileID: 1637374361}
-  - {fileID: 39697257}
+  - {fileID: 1663125587}
   - {fileID: 791508917}
   - {fileID: 697118705}
   - {fileID: 934743085}
@@ -20686,6 +20379,156 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 055270785e699a84588252c56bc8a546, type: 3}
+--- !u!1 &1663125586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1663125587}
+  - component: {fileID: 1663125589}
+  - component: {fileID: 1663125588}
+  m_Layer: 0
+  m_Name: ReadBook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1663125587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663125586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5088213504542352979}
+  m_Father: {fileID: 1589166614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1663125588
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663125586}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3038455504d8bf7e59987ffdd5fda35e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1663125589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663125586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2f88b84d040c440b50f52c254e2159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bookName: Reading Books for Dummies
+  pages:
+  - This is page 1
+  - This is page 2
+  - This is page 3
+  - This is last page, end of book, good job! You learned how to read books
+  interactTrigger: {fileID: 3688142775583036244}
+  pageOpenSound: {fileID: 1663125588}
 --- !u!1001 &1684675058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22242,128 +22085,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8392324193076840830, guid: b68833da8b6997ff49f918822253b713, type: 3}
   m_PrefabInstance: {fileID: 957473208}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1793678386
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1793678389}
-  - component: {fileID: 1793678387}
-  - component: {fileID: 1793678388}
-  m_Layer: 8
-  m_Name: Page (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1793678387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793678386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66163f98cd3754247a9544f30e0a1e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnInvoke:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1793678388}
-        m_TargetAssemblyTypeName: Func_TextChoice, Assembly-CSharp
-        m_MethodName: StartChoices
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1793678388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793678386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25315a3f6e12e1b46b110c7e7392065e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogText: Page 1 text here
-  allowQuittingMenu: 1
-  onQuitMenu:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7221741643838105110}
-        m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-        m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  choices:
-  - choiceName: Previous Page
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1824736419}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - choiceName: Next Page
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 530553299}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!4 &1793678389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793678386}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1263223721}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1805973640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22648,128 +22369,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8392324193076840830, guid: b68833da8b6997ff49f918822253b713, type: 3}
   m_PrefabInstance: {fileID: 1824046498}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1824736418
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1824736421}
-  - component: {fileID: 1824736419}
-  - component: {fileID: 1824736420}
-  m_Layer: 8
-  m_Name: Page (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1824736419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824736418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66163f98cd3754247a9544f30e0a1e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnInvoke:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1824736420}
-        m_TargetAssemblyTypeName: Func_TextChoice, Assembly-CSharp
-        m_MethodName: StartChoices
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1824736420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824736418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25315a3f6e12e1b46b110c7e7392065e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogText: Page 1 text here
-  allowQuittingMenu: 1
-  onQuitMenu:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7221741643838105110}
-        m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-        m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  choices:
-  - choiceName: Close Book
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7221741643838105110}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - choiceName: Next Page
-    OnChoiceSelected:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1793678387}
-          m_TargetAssemblyTypeName: UNITY___EVENT___WRAPPER, Assembly-CSharp
-          m_MethodName: INVOKE___UNITY___EVENT___WRAPPER
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!4 &1824736421
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824736418}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1263223721}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1831455590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34837,9 +34436,9 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1583982051}
-        m_TargetAssemblyTypeName: Func_TextEvent, Assembly-CSharp
-        m_MethodName: CallEvent
+      - m_Target: {fileID: 1663125589}
+        m_TargetAssemblyTypeName: ReadBook, Assembly-CSharp
+        m_MethodName: StartReadingBook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34964,11 +34563,11 @@ Transform:
   m_GameObject: {fileID: 5464503557950105314}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -49.999, y: 5.47, z: 0}
+  m_LocalScale: {x: 1.7042695, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 39697257}
+  m_Father: {fileID: 1663125587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5290166208289039625
 PrefabInstance:
@@ -35043,7 +34642,6 @@ GameObject:
   - component: {fileID: 322907669870823994}
   - component: {fileID: 7221741643838105109}
   - component: {fileID: 3688142775583036244}
-  - component: {fileID: 7221741643838105110}
   m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
@@ -35233,6 +34831,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5649406181007035631, guid: a0133517d295423b09dfcb2a59e698f1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1735863536}
+    - targetCorrespondingSourceObject: {fileID: 5649406181007035631, guid: a0133517d295423b09dfcb2a59e698f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 906489821}
     - targetCorrespondingSourceObject: {fileID: 5649406181007035631, guid: a0133517d295423b09dfcb2a59e698f1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1449662234}
@@ -35549,33 +35150,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7221741643838105110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5464503557950105314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66163f98cd3754247a9544f30e0a1e56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnInvoke:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3688142775583036244}
-        m_TargetAssemblyTypeName: Volume_TriggerInteract, Assembly-CSharp
-        m_MethodName: ResetActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &7561542943064459314
 MonoBehaviour:
   m_ObjectHideFlags: 0
