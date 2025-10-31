@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: BattleLoot Saltbat
+  m_EditorClassIdentifier: 
+  notes: 
+  itemsToGrant:
+    rid: 1234356420671701124
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356420671701124
+      type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 4
+          chanceToGet: 0.6
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: 1234356420671701132
+        ignoreInvalidItems: 1
+        items:
+        - weight: 3
+          item:
+            rid: 1234356420671701125
+        - weight: 3
+          item:
+            rid: 1234356420671701126
+        - weight: 3
+          item:
+            rid: 1234356420671701131
+        - weight: 1
+          item:
+            rid: 1234356420671701130
+    - rid: 1234356420671701125
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 8e12243b4088b2b4da9e318b3383f09f, type: 2}
+    - rid: 1234356420671701126
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 82cc27778f1495341a45641101ff1f91, type: 2}
+    - rid: 1234356420671701130
+      type: {class: ItemsRef_RandomItem, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        ignoreNullItems: 1
+        uniquePickCount: 1
+        items:
+        - {fileID: 11400000, guid: 089f5d134c8826e4cb50539128469c27, type: 2}
+        - {fileID: 11400000, guid: 1f9414ed559038642ba8c25a8320cfa6, type: 2}
+    - rid: 1234356420671701131
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 51ea8e7d6b96c6d4c873f1b0ac737fbe, type: 2}
+    - rid: 1234356420671701132
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 09b36b6d20320be4ca2be7ecfeae3cbd, type: 2}

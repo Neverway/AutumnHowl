@@ -188,12 +188,12 @@ public class GI_WidgetManager : MonoBehaviour
         
         switch (_mode)
         {
-            case 0:
+            case 0: //Damage
                 textComponent.color = Color.red;
                 textComponent.text =
                     $"{_amount}";
                 break;
-            case 1:
+            case 1: //Heal
                 textComponent.color = Color.green;
                 textComponent.text =
                     $"{_amount}";
@@ -217,6 +217,11 @@ public class GI_WidgetManager : MonoBehaviour
                 textComponent.color = Color.yellow;
                 textComponent.text =
                     $"{_amount}";
+                break;
+            case 6: //Money
+                textComponent.color = new Color(1f, .9f, .33f);
+                textComponent.text =
+                    $"+{_amount}$";
                 break;
         }
     }

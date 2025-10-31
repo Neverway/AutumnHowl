@@ -100,7 +100,7 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        lootTable: {fileID: 11400000, guid: dc6698c03a41fe74887a70caf9013d23, type: 2}
+        lootTable: {fileID: 11400000, guid: c465ffa454e17cf44b271dceed965103, type: 2}
 --- !u!1 &7334491809790625422
 GameObject:
   m_ObjectHideFlags: 0

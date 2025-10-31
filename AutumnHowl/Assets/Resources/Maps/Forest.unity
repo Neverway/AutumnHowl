@@ -390,6 +390,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: 2186f847-0912-4cee-88ec-74950bc53638
+  miniMapIconOffset: {x: -40, y: -40}
+  stupidLastMinuteXScaleForPlayerIcon: 1
   VillageEntranceForMap: {x: 2, y: 0}
   spriteObjectTemplate: {fileID: 1814623019}
   mapSpritesParent: {fileID: 2132586140}

@@ -111,10 +111,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: 4b0c0a98-51a1-458d-900a-63c22a1bb91d
   battleData: {fileID: 11400000, guid: 8d08d22e58392a544a2a526014a2d4aa, type: 2}
+  itemsOnDefeat:
+    rid: 1234356420671701120
   enemyWander: {fileID: 8333578898153896570}
   enemyDefeatAnimation: {fileID: 3451226474176550932}
   enemyRemains: {fileID: 8801018545373622369}
   homeCycle: -1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356420671701120
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: 9c8fe6d69e0d96748ab3b09f35ae4dae, type: 2}
 --- !u!1001 &7469192441824259358
 PrefabInstance:
   m_ObjectHideFlags: 0

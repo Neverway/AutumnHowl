@@ -58,6 +58,7 @@ public class Inventory
     {
         if (_item is Item_Money money)
         {
+            GameInstance.Get<GI_WidgetManager>().SpawnEffectText(money.moneyValue.ToString(), GameInstance.Playerbody.transform.position, 6);
             money.GetMoney();
             return true;
         }

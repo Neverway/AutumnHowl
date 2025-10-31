@@ -9,7 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90dbe169515f7d846838915f0a0e9035, type: 3}
-  m_Name: Midas Touch Icon
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: BattleLoot JackalShield
   m_EditorClassIdentifier: 
-  sprite: {fileID: -8689885291595746588, guid: b59240bae0d3d644f933ae8ec80c650d, type: 3}
+  notes: 
+  itemsToGrant:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

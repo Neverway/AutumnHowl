@@ -80,10 +80,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: c051f46a-6d53-4b6a-973f-eb8ad97ea09f
   battleData: {fileID: 11400000, guid: 21b042ac50966ed2584df1cd612532a3, type: 2}
+  itemsOnDefeat:
+    rid: 1234356420671701116
   enemyWander: {fileID: 914898563591339920}
   enemyDefeatAnimation: {fileID: 3100782084754435406}
   enemyRemains: {fileID: 5377980545693577877}
   homeCycle: -1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356420671701116
+      type: {class: ItemsRef_LootTable, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        lootTable: {fileID: 11400000, guid: 571f9361bfb570447893b3e86d2254e6, type: 2}
 --- !u!1 &7334491809790625422
 GameObject:
   m_ObjectHideFlags: 0
