@@ -11,7 +11,6 @@ using ErryLib.Reflection;
 using System;
 using System.Reflection;
 using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using static CharacterStatType;
 
@@ -114,6 +113,10 @@ public class CharacterStats
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(defense.ToString(), owner.transform.position, 2, 0.5f);
             }
+            else
+            {
+                totalAmount = _amount + Mathf.RoundToInt(defense * 0.5f);
+            }
 
             // Damage killed
             if (health + totalAmount <= 0)
@@ -121,9 +124,9 @@ public class CharacterStats
                 health = 0;
                 if (owner.uniqueDeathBehavior == false)
                 {
-                    GameInstance.Get<GI_WidgetManager> ().SpawnEffectText ("DOWN", owner.transform.position, 0);
+                    GameInstance.Get<GI_WidgetManager>().SpawnEffectText("DOWN", owner.transform.position, 0);
                     owner.isDead = true;
-                    owner.InvokeOnDeath ();
+                    owner.InvokeOnDeath();
                 }
             }
             // Damage hurt

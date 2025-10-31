@@ -13,11 +13,13 @@ public class BattleCameraManager : MonoBehaviour
     public Transform onAttackPosition;
     public Transform homePosition;
 
-    private bool goBackHome;
+    public bool goBackHome;
 
     public void Update()
     {
-        onAttackPositionPivot.transform.position = GameInstance.Playerbody.transform.position;
+        if (GameInstance.Playerbody != null)
+            onAttackPositionPivot.transform.position = GameInstance.Playerbody.transform.position;
+
         if (goBackHome) EaseCameraToPosition(homePosition.position, homePosition.rotation, goHomeEaseSpeed);
     }
 
