@@ -17,8 +17,10 @@ MonoBehaviour:
   description: A small pack of sugar cookies! Yum!
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 100
-  sellCost: 80
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 30
+  sellCost: 25
   effectsOnConsume:
     rid: 6522102444378816521
   references:

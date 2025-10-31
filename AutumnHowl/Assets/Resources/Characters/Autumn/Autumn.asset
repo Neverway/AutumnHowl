@@ -46,7 +46,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxPower:
-      startValue: 100
+      startValue: 80
       multiplier: 0
       addedValue: 0
     maxCorruption:
