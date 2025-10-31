@@ -22,7 +22,7 @@ public abstract class Character : MonoBehaviour
     public bool isDefenseActive;
 
     public Vector2Int startFaceDirection = Vector2Int.down;
-    private bool _freezeCharacterMovement = false;
+    [SerializeField] private bool _freezeCharacterMovement = false;
     public bool freezeCharacterMovement { get => _freezeCharacterMovement; set 
         {
             animator.SetBool("walking", false);
