@@ -22974,11 +22974,11 @@ PrefabInstance:
     - target: {fileID: 4620892889544084971, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: managedReferences[1234356420671701070].items.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: 41cc582389ed31d40af70298478f93a9, type: 2}
+      objectReference: {fileID: 11400000, guid: 5bde37325753f5f4cb8c0b4d40dc72cc, type: 2}
     - target: {fileID: 4620892889544084971, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: managedReferences[1234356420671701070].items.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 20810ea1ae1283148874d870a4625515, type: 2}
+      objectReference: {fileID: 11400000, guid: 076f9b103da9bf544a3c357e957ca375, type: 2}
     - target: {fileID: 4620892889544084971, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: managedReferences[1234356303417049100].settings.chanceToGet
       value: 1
