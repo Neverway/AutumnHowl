@@ -35,8 +35,10 @@ MonoBehaviour:
   battleSequence:
     waves:
     - rid: 26148788346028042
-  layoutPrefab: {fileID: 8695103665243705671, guid: d2a70d136499f63599cc8355da9a2518, type: 3}
-  enemySpawnLocations: []
+  layoutPrefab: {fileID: 0}
+  enemySpawnLocations:
+  - enemyPrefab: {fileID: 6242562417686465405, guid: 209d85d742b395483998975ef4b0bbf3, type: 3}
+    enemyStartPosition: {x: 2, y: 8}
   victoryState:
     rid: 26149252946722817
   references:
