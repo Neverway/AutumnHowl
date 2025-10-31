@@ -26,6 +26,11 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+
+    private int[] echoVerticalPositionsA = { 0, 2, 4 }; 
+    private int[] echoVerticalPositionsB = { 1, 3,};
+    private bool echoA = false;
+    
     private enum BossState
     {
         EchoAttack, // Bark then send fast echo projectiles down columns (Reflectable)
@@ -62,6 +67,9 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     {
         if (isDead) battleStateController.NextTurnStep();
         
+        //I've disabled the normal attacks, they were accessing unassigned Attack Sequences. -Connor
+        
+        /*
         SetAttackDamageToCurrentATK();
         var x = gridPawnController.position.x;
         var y = gridPawnController.position.y;
@@ -82,7 +90,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
             case Direction.West:
                     TryAttackSequence(AttackSequences[3]);
                     return;
-        }
+        }*/
 
         // Finish turn
         battleStateController.NextTurnStep();
@@ -189,11 +197,17 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     private List<GameObject> SpawnEchoWarningsOnPlayer(Vector2Int pos)
     {
         List<GameObject> warnings = new List<GameObject>();
-        for (int y = pos.y-12; y < pos.y+12; y++)
+        for (int y = 0; y < battleGrid.height; y++)
         {
-            GameObject echoEffect = Instantiate(warningPrefab, battleGrid.gameObject.transform);
-            echoEffect.transform.localPosition = new Vector3(pos.x, y, 0);
-            warnings.Add(echoEffect);
+            for (int x = pos.x-2; x < pos.x+3; x+=2)
+            {
+                if (x > -1 && x < battleGrid.width)
+                {
+                    GameObject echoEffect = Instantiate (warningPrefab, battleGrid.gameObject.transform);
+                    echoEffect.transform.localPosition = new Vector3 (x, y, 0);
+                    warnings.Add (echoEffect);
+                }
+            }
         }
 
         GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineRumble);
@@ -207,11 +221,14 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     /// <param name="_pos"></param>
     private void SpawnEchoAttacks(Vector2Int _pos)
     {
-        for (int x = _pos.x - 1; x < _pos.x + 1; x++)
+        for (int x = _pos.x - 2; x < _pos.x + 3; x += 2)
         {
+            if (x > -1 && x < battleGrid.width)
+            {
+                SpawnProjectile (x, 8, Vector2Int.down, echoProjectile, 0.1f);
+                GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.vineAttack);
+            }
         }
-        SpawnProjectile(_pos.x, 8, Vector2Int.down, echoProjectile, 0.1f);
-        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineAttack);
     }
 
 

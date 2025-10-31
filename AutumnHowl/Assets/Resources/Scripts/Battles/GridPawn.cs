@@ -68,7 +68,7 @@ public class GridPawn : MonoBehaviour
 
     public void OnDestroy ()
     {
-        print(BattleGrid.Instance);
+        if (BattleGrid.Instance == null) return;
         BattleGrid.Instance.RemovePawnFromGrid (this);
     }
 }

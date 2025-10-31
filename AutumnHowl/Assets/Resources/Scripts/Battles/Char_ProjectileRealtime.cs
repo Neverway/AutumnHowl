@@ -41,7 +41,7 @@ public class Char_ProjectileRealtime : Char_Battle
     {
         yield return new WaitForSeconds(movementDelay);
         //Try to move
-        if (TryMoveInDirection (moveDirection, doNextTurn:false, ignoreObsticals:ignoreObstacles) == false)
+        if (TryMoveInDirection (moveDirection, doNextTurn:false, ignoreObsticals:ignoreObstacles, shouldProgressTurn:false) == false)
         {
             //If we failed to move, damage what's in front of us (and where we are)
             attackSequence.attacks[0].position = moveDirection;
