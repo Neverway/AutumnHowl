@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
+  m_Name: Safeguard
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: spell_safeguard
+  displayName: Safeguard
+  description: Gain a short burst of improved instinct to protect yourself from attacks
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 50
+  sellCost: 30
+  powerCost: 25
+  effectsWhenCast:
+    rid: 1234356420671701060
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701060
+      type: {class: ModifierForXTurns, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701061
+        modifierIcons:
+        - {fileID: 11400000, guid: 66e708d5f29ec6a45a83660e7cff6a02, type: 2}
+        turns: 2
+        modifier:
+          rid: 1234356420671701064
+    - rid: 1234356420671701061
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701064
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 1
+        modifierType: 0
+        value: 100

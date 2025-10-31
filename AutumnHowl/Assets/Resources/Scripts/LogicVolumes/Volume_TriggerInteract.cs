@@ -47,7 +47,7 @@ public class Volume_TriggerInteract : MonoBehaviour
             if (GameInstance.Inputs.Interact.WasPressedThisFrame())
             {
                 activated = true;
-                OnInteract.Invoke();
+                OnInteract?.Invoke();
                 if (repeatable && resetCoroutine == null) ResetActive();
             }
         }

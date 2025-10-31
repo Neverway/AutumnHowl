@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: Pumpkin Flesh
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: item_pumpkinflesh
+  displayName: Pumpkin Flesh
+  description: A piece of pumpkin shell from a pumpkin that was once living
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 0
+  sellCost: 0
+  effectsOnConsume:
+    rid: 1234356420671701004
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701004
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234356420671701005
+        - rid: 1234356420671701008
+    - rid: 1234356420671701005
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234356420671701006
+    - rid: 1234356420671701006
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701007
+        modifierType: 0
+        amount: 20
+    - rid: 1234356420671701007
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701008
+      type: {class: ModifyPowerAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701009
+        modifierType: 0
+        amount: 20
+    - rid: 1234356420671701009
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

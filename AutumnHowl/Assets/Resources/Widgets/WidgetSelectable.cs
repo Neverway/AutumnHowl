@@ -41,7 +41,7 @@ public class WidgetSelectable : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual void Interact()
     {
-        OnInteracted.Invoke();
+        OnInteracted?.Invoke();
     }
 
     public virtual void SetSelected(bool _isSelected)

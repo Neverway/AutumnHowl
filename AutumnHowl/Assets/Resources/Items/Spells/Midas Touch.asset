@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac53ce4196f29888a88a284bb2269f48, type: 3}
+  m_Name: Midas Touch
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: spell_midas_touch
+  displayName: Midas Touch
+  description: The blood that touches your paws turns to gold
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 50
+  sellCost: 30
+  powerCost: 30
+  effectsWhenCast:
+    rid: 1234356420671701054
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356420671701054
+      type: {class: ModifierForXWaves, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701055
+        modifierIcons:
+        - {fileID: 11400000, guid: fbe97f0e130523340ad267fb126d7f82, type: 2}
+        waves: 3
+        modifier:
+          rid: 1234356420671701056
+    - rid: 1234356420671701055
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701056
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: Defeating enemies gives 5$
+        beforeOrAfter: 1
+        gameEventType: 13
+        eventTargets:
+          rid: 1234356420671701057
+        effectAction:
+          rid: 1234356420671701058
+    - rid: 1234356420671701057
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701058
+      type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        EffectDescription: 
+        itemToGive:
+          rid: 1234356420671701059
+    - rid: 1234356420671701059
+      type: {class: ItemsRef_Money, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        moneyRange: {x: 0, y: 0}
+        roundToNearest: 5

@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
 {
     public BattleData battleData;
+    [Box, Polymorphic, SerializeReference] public ItemsReference itemsOnDefeat;
     [Space]
     public Transform enemyWander;
     public Transform enemyDefeatAnimation;
@@ -37,6 +39,48 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
         enemyRemains.gameObject.SetActive(true);
     }
 
+    public IEnumerator CoGivePlayerDefeatLoot()
+    {
+        yield return null;
+        yield return null;
+
+        if (itemsOnDefeat == null || (!itemsOnDefeat.CanGetItems()))
+            yield break;
+
+        Item[] generatedItems = itemsOnDefeat.GetItemsGUIDGameSeed(this);
+
+        if (generatedItems.Length == 0) yield break;
+
+        //Initialize some variables for easy access and for storing information
+        var inventory = GameInstance.Get<GI_AuHoGameState>().currentGameState.inventory;
+        Dictionary<Item, int> givenItems = new Dictionary<Item, int>();
+
+        //Try to give all items from contained items, and create a text event for each successfully given item
+        foreach (Item item in generatedItems)
+            if (inventory.TryAddItem(item))
+            {
+                //Also keep track of dictionary for counting number of each unique items
+                if (givenItems.ContainsKey(item))
+                    givenItems[item] += 1;
+                else
+                    givenItems.Add(item, 1);
+            }
+
+        //Add text to text event for all uniqely added items (combining multiple of same type into one text)
+        TextEvent gotItemsTextEvent = new TextEvent();
+        foreach (var uniqueItem in givenItems)
+        {
+            if (uniqueItem.Value == 1)
+                gotItemsTextEvent.AddFrame($"You got {uniqueItem.Key.displayName}!");
+            else
+                gotItemsTextEvent.AddFrame($"You got {uniqueItem.Value}x {uniqueItem.Key.displayName}!");
+        }
+
+        //Display text event to the screen
+        gotItemsTextEvent.TryDisplay();
+    }
+
+
     public override void OnLoadInstance(SaveData saveData)
     {
         if (saveData.homeCycle >= 0 && GameInstance.Gamestate.currentCycle != saveData.homeCycle)
@@ -56,6 +100,7 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
         enemyDefeatAnimation.gameObject.SetActive(showDeathAnimation);
         if (showDeathAnimation)
         {
+            GameInstance.SendCoroutine(CoGivePlayerDefeatLoot());
             enemyDefeatAnimation.transform.position = enteredBattlePosition;
             hasShownDeathAnimation = true;
         }

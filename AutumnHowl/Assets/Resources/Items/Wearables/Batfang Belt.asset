@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e87db8e29c97d7b8b2f24f10330c6, type: 3}
+  m_Name: Batfang Belt
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: equip_batfangbelt
+  displayName: Batfang Belt
+  description: A belt made out of the fangs of Saltbats
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 30
+  sellCost: 20
+  effectWhenEquipped:
+    rid: 1234356420671701022
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701022
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356420671701023
+        - rid: 1234356420671701026
+    - rid: 1234356420671701023
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 0
+        modifierType: 0
+        value: 2
+    - rid: 1234356420671701026
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 2
+        modifierType: 0
+        value: 10
