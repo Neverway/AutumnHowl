@@ -131,7 +131,7 @@ public class CharacterStats
             {
                 health += totalAmount;
                 GameInstance.Get<GI_WidgetManager>().SpawnEffectText(totalAmount.ToString(), owner.transform.position, 0);
-                if (totalAmount > 0)
+                if (totalAmount <= 0)
                     owner.InvokeOnHurt();
             }
         }

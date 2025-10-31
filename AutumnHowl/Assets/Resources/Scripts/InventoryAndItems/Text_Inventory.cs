@@ -7,11 +7,8 @@
 //
 //====================================================================================================================//
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public class Text_Inventory : MonoBehaviour
@@ -63,9 +60,8 @@ public class Text_Inventory : MonoBehaviour
 
     public void UpdateItemList()
     {
-        textElements = GetComponentsInChildren<WidgetSelectable_TMPText>().ToList();
+        textElements = GetComponentsInChildren<WidgetSelectable_TMPText>(true).ToList();
         if (gameState == null) { gameState = GameInstance.Get<GI_AuHoGameState>(); }
-        
         switch (inventoryType)
         {
             case InventoryType.listItems:

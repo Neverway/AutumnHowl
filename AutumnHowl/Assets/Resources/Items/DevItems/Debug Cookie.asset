@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: Debug Cookie
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: DEBUG_COOKIE
+  displayName: DEBUG COOKIE
+  description: Wow, what a cookie, you can never run out of it, and it fixes all
+    your problems. Just amazing, why didnt they make these sooner?
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 0
+  sellCost: 99999
+  effectsOnConsume:
+    rid: 1234356420671701079
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1234356420671701079
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234356420671701080
+        - rid: 1234356420671701082
+        - rid: 1234356420671701100
+        - rid: 1234356420671701109
+        - rid: 1234356420671701111
+        - rid: 1234356420671701113
+    - rid: 1234356420671701080
+      type: {class: GiveItemsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        EffectDescription: 
+        itemToGive:
+          rid: 1234356420671701081
+    - rid: 1234356420671701081
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000}
+    - rid: 1234356420671701082
+      type: {class: ModifierUntilEndOfBattle, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701083
+        battlesCount: 1
+        modifierIcons:
+        - {fileID: 11400000, guid: e868da89b61630f42b85a26ac01980a2, type: 2}
+        modifier:
+          rid: 1234356420671701086
+    - rid: 1234356420671701083
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701086
+      type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
+      data:
+        description: Fully restore yourself every turn
+        beforeOrAfter: 1
+        gameEventType: 3
+        eventTargets:
+          rid: 1234356420671701087
+        effectAction:
+          rid: 1234356420671701090
+    - rid: 1234356420671701087
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701090
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234356420671701094
+        - rid: 1234356420671701096
+        - rid: 1234356420671701098
+    - rid: 1234356420671701094
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701095
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701095
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701096
+      type: {class: ModifyCorruptionAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701097
+        modifierType: 2
+        amount: -100
+    - rid: 1234356420671701097
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701098
+      type: {class: ModifyPowerAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701099
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701099
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701100
+      type: {class: ModifierUntilEndOfBattle, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701101
+        battlesCount: 1
+        modifierIcons: []
+        modifier:
+          rid: 1234356420671701103
+    - rid: 1234356420671701101
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701103
+      type: {class: MultipleCharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statModifiers:
+        - rid: 1234356420671701104
+        - rid: 1234356420671701106
+        - rid: 1234356420671701108
+    - rid: 1234356420671701104
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 2
+        modifierType: 0
+        value: 1000
+    - rid: 1234356420671701106
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 6
+        modifierType: 0
+        value: 1000
+    - rid: 1234356420671701108
+      type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        statToModify: 7
+        modifierType: 0
+        value: 1000
+    - rid: 1234356420671701109
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701110
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701110
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701111
+      type: {class: ModifyPowerAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701112
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701112
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701113
+      type: {class: ModifyCorruptionAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701114
+        modifierType: 2
+        amount: -100
+    - rid: 1234356420671701114
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 
