@@ -20,6 +20,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
     //=-----------------=
     [Space]
     public Vector2 miniMapIconOffset = new Vector2(-40, +24 - (16 * 4));
+    public float stupidLastMinuteXScaleForPlayerIcon = 1.3f;
     public Vector2Int VillageEntranceForMap;
     public GameObject spriteObjectTemplate;
     public Transform mapSpritesParent;
@@ -128,6 +129,7 @@ public class MapGenerator : AutoGUIDObject<MapGenerator.SaveData>
         Vector2 playerPos = (playerBodyPos - homePlayerPos);
         playerPos.x /= roomWidth;
         playerPos.y /= roomHeight;
+        playerBodyPos.x *= stupidLastMinuteXScaleForPlayerIcon;
 
         mapPlayerIcon.transform.localPosition = (playerBodyPos + homePlayerIconPos) + miniMapIconOffset;
     }

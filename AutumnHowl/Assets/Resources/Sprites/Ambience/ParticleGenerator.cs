@@ -20,7 +20,6 @@ public class ParticleGenerator : MonoBehaviour
         (factorSpawnRateByArea ? (area.x * area.y * area.z * 0.125f) : 1f );
 
     bool playerTooFar = false;
-
     public void OnEnable() => playerTooFar = true; //This will preload particles on first step
     public void OnDisable() => DestroyAllParticles();
     public void Update()
