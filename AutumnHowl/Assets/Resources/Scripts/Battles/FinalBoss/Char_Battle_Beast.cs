@@ -40,6 +40,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         CorruptionPillarAttack, // Spawn a bunch of pillars that do corruption damage randomly
         SuperAttack, // Do a fast combo of all moves in one turn
     }
+    private BossState statePrevious = BossState.EchoAttack;
     private BossState state = BossState.EchoAttack;
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -62,8 +63,8 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
 
     new private void Update ()
     {
-        spriteObject.transform.position = spriteDefaultPosition;
         base.Update ();
+        spriteObject.transform.position = spriteDefaultPosition;
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
@@ -97,7 +98,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         }*/
 
         //Try to move side to side to follow player
-        var autumn = FindObjectOfType<Char_Battle_Player> ();
+        var autumn = GameInstance.Playerbody as Char_Battle_Player;
         Vector2Int move = new Vector2Int (0, 0);
         if (autumn.gridPawnController.position.x > gridPawnController.position.x)
         {
@@ -107,12 +108,27 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         {
             move = new Vector2Int (-1, 0);
         }
-
-
-        if (move == Vector2Int.zero || !TryMoveTo (gridPawnController.position + move))
+        
+        move += gridPawnController.position;
+        
+        Debug.Log("YORM Bef Y "+move.y);
+        Debug.Log("YORM STATE "+state);
+        if (statePrevious == BossState.BurntOut)
+        {
+            move.y = 6;
+        }
+        else
+        {
+            move.y = battleGrid.height-1;
+        }
+        Debug.Log("YORM Aft Y "+move.y);
+        
+        // ReSharper disable once ComplexConditionExpression
+        if (move == Vector2Int.zero || !TryMoveTo (move))
         {
             battleStateController.NextTurnStep ();
         }
+        spriteObject.transform.position = spriteDefaultPosition;
     }
 
     private void DoCurrentAttack()
@@ -128,6 +144,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
                 animator.Play("Beast_Idle");
                 currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
                 echoCoroutine = StartCoroutine(EchoAttackCoroutine());
+                statePrevious = state;
                 state = BossState.SpawnEnemy;
                 break;
             }
@@ -138,6 +155,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
                 {
                     SpawnEnemyAtRandomLocation();
                 }
+                statePrevious = state;
                 state = BossState.EchoAttackTurbo;
                 break;
             }
@@ -145,12 +163,14 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
             {
                 currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout*2;
                 echoCoroutine = StartCoroutine(EchoAttackCoroutine(0.0f, 0.0f));
+                statePrevious = state;
                 state = BossState.BurntOut;
                 break;
             }
             case BossState.BurntOut:
             {
                 animator.Play("Beast_BurntOut");
+                statePrevious = state;
                 state = BossState.EchoAttack;
                 break;
             }
@@ -244,7 +264,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         {
             if (x > -1 && x < battleGrid.width)
             {
-                SpawnProjectile (x, 8, Vector2Int.down, echoProjectile, 0.1f);
+                SpawnProjectile (x, battleGrid.height-2, Vector2Int.down, echoProjectile, 0.1f);
                 GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.vineAttack);
             }
         }
