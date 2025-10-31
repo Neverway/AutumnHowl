@@ -191,7 +191,13 @@ public class InteractableChest : AutoGUIDObject<InteractableChest.SaveData>
         animator.SetTrigger(animator_chestLoadTrigger);
     }
 
-    public override void OnNewInstance() { }
+    public override void OnNewInstance() => OnLoadInstance(new SaveData
+    {
+        homeCycle = -1,
+        position = transform.position,
+        hasItems = chestContents.IsNotEmptyOrNull(),
+        looted = hasBeenFullyLooted,
+    });
 
     [Serializable]
     public struct SaveData

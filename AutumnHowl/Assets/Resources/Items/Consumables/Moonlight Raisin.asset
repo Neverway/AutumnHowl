@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: Moonlight Raisin
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: item_moonlightraisin
+  displayName: Moonlight Raisin
+  description: The moon shines brighter as you hold it in this in the air, it gives
+    you a warm feeling
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 65
+  sellCost: 35
+  effectsOnConsume:
+    rid: 1234356420671701037
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701037
+      type: {class: MultipleEffectsAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        effects:
+        - rid: 1234356420671701038
+        - rid: 1234356420671701040
+        - rid: 1234356420671701044
+    - rid: 1234356420671701038
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701042
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701040
+      type: {class: ModifyCorruptionAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701043
+        modifierType: 2
+        amount: -100
+    - rid: 1234356420671701042
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701043
+      type: {class: TargetAll, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1234356420671701044
+      type: {class: ModifyPowerAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701045
+        modifierType: 1
+        amount: 100
+    - rid: 1234356420671701045
+      type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
+      data: 

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: Salt
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: item_salt
+  displayName: Salt
+  description: I'm getting thirsty just looking at this... Could be good for warding
+    off spirits
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 10
+  sellCost: 5
+  effectsOnConsume:
+    rid: 1234356420671701051
+  references:
+    version: 2
+    RefIds:
+    - rid: 1234356420671701051
+      type: {class: ModifyHealthAction, ns: , asm: Assembly-CSharp}
+      data:
+        hideDescription: 0
+        target:
+          rid: 1234356420671701053
+        modifierType: 0
+        amount: 20
+    - rid: 1234356420671701053
+      type: {class: TargetIsFromTemplate, ns: , asm: Assembly-CSharp}
+      data:
+        template: {fileID: 11400000, guid: f53287037b7a70e46a7ea0277185fc74, type: 2}
