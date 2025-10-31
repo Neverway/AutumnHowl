@@ -33,6 +33,7 @@ public class BattleData : ScriptableObject
     public GameObject layoutPrefab;
     public List<EnemySpawnLocation> enemySpawnLocations;
     [Box, SerializeReference, Polymorphic] public VictoryState victoryState;
+    public GI_AudioManager.Music music;
 
 
     private void OnValidate()

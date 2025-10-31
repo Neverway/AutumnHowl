@@ -27,14 +27,13 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
-
-    
     private enum BossState
     {
         EchoAttack, // Bark then send fast echo projectiles down columns (Reflectable)
         EchoAttackTurbo,
         SpawnEnemy, // Spawn a bunch of specters
         BurntOut,
+        BurntOut2,
         ClawSwipeAttack, // Swipe paws down rows (Damageable)
         LaneRushAttack, // Bark then charge down column (Damageable)
         CorruptionPillarAttack, // Spawn a bunch of pillars that do corruption damage randomly
@@ -42,12 +41,15 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     }
     private BossState statePrevious = BossState.EchoAttack;
     private BossState state = BossState.EchoAttack;
+    private float lastRecordedHealth;
+    public int currentWave;
+    private bool swipeAttackFlipper;
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     [SerializeField] private Char_Battle enemyToSpawn;
     [SerializeField] private GameObject warningPrefab;
     [SerializeField] private GameObject echoProjectile;
-    [SerializeField] private GameObject clawProjectile;
+    [SerializeField] private GameObject clawProjectileLeft, clawProjectileRight;
 
     private Coroutine echoCoroutine;
     private Coroutine clawSwipeCoroutine;
@@ -60,12 +62,34 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     {
         base.Start();
         battleStateController.OnStartWave.AddListener(DoCurrentAttack);
+        lastRecordedHealth = Stats.health;
     }
 
     new private void Update ()
     {
         base.Update ();
         spriteObject.transform.position = spriteDefaultPosition;
+        
+        // Check for a wave progression by seeing if the boss took damage since last turn
+        if (lastRecordedHealth > Stats.health)
+        {
+            var autumn = GameInstance.Playerbody as Char_Battle_Player;
+            autumn.gridPawnController.MoveToTile(2,2);
+            
+            battleStateController.ChangeState(new BS_EarlyExitFromBattleGrid(battleStateController));
+            currentWave++;
+            // Special wave begins
+            if (currentWave == 2)
+            {
+                state = BossState.SuperAttack;
+            }
+            // End cutscene?
+            if (currentWave == 3)
+            {
+                GameInstance.Get<GI_WorldLoader>().Load("Ending");
+            }
+            lastRecordedHealth = Stats.health;
+        }
     }
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
@@ -112,9 +136,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         
         move += gridPawnController.position;
         
-        Debug.Log("YORM Bef Y "+move.y);
-        Debug.Log("YORM STATE "+state);
-        if (statePrevious == BossState.BurntOut)
+        if (statePrevious == BossState.BurntOut || statePrevious == BossState.BurntOut2)
         {
             move.y = 6;
         }
@@ -122,7 +144,6 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         {
             move.y = battleGrid.height-1;
         }
-        Debug.Log("YORM Aft Y "+move.y);
         
         // ReSharper disable once ComplexConditionExpression
         if (move == Vector2Int.zero || !TryMoveTo (move))
@@ -138,51 +159,75 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         {
             StopCoroutine(echoCoroutine);
         }
-        switch (state)
+
+        if (currentWave == 0 || currentWave == 1 || currentWave == 2 || currentWave == 3)
         {
-            case BossState.EchoAttack:
+            switch (state)
             {
-                animator.Play("Beast_Idle");
-                currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
-                echoCoroutine = StartCoroutine(EchoAttackCoroutine());
-                statePrevious = state;
-                state = BossState.SpawnEnemy;
-                break;
-            }
-            case BossState.SpawnEnemy:
-            {
-                //spawn X enemies
-                for (int i = 0; i < 5; i++)
+                case BossState.EchoAttack:
                 {
-                    SpawnEnemyAtRandomLocation();
+                    animator.Play("Beast_Idle");
+                    currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
+                    echoCoroutine = StartCoroutine(EchoAttackCoroutine());
+                    statePrevious = state;
+                    state = BossState.SpawnEnemy;
+                    break;
                 }
-                statePrevious = state;
-                state = BossState.EchoAttackTurbo;
-                break;
-            }
-            case BossState.EchoAttackTurbo:
-            {
-                currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout*2;
-                echoCoroutine = StartCoroutine(EchoAttackCoroutine(0.0f, 0.0f));
-                statePrevious = state;
-                state = BossState.ClawSwipeAttack;
-                break;
-            }
-            case BossState.ClawSwipeAttack:
-            {
-                print("Realtime attacks = "+currentRealTimeAttacksTilBurnout);
-                currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
-                clawSwipeCoroutine = StartCoroutine(ClawSwipeAttackCoroutine());
-                statePrevious = state;
-                state = BossState.BurntOut;
-                break;
-            }
-            case BossState.BurntOut:
-            {
-                animator.Play("Beast_BurntOut");
-                statePrevious = state;
-                state = BossState.EchoAttack;
-                break;
+                case BossState.SpawnEnemy:
+                {
+                    //spawn X enemies
+                    for (int i = 0; i < 3; i++)
+                    {
+                        SpawnEnemyAtRandomLocation();
+                    }
+                    statePrevious = state;
+                    state = BossState.EchoAttackTurbo;
+                    break;
+                }
+                case BossState.EchoAttackTurbo:
+                {
+                    currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout*2;
+                    echoCoroutine = StartCoroutine(EchoAttackCoroutine(0.0f, 0.0f));
+                    statePrevious = state;
+                    state = BossState.ClawSwipeAttack;
+                    break;
+                }
+                case BossState.ClawSwipeAttack:
+                {
+                    print("Realtime attacks = "+currentRealTimeAttacksTilBurnout);
+                    currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
+                    clawSwipeCoroutine = StartCoroutine(ClawSwipeAttackCoroutine());
+                    statePrevious = state;
+                    state = BossState.BurntOut;
+                    break;
+                }
+                case BossState.BurntOut:
+                {
+                    animator.Play("Beast_BurntOut");
+                    statePrevious = state;
+                    state = BossState.EchoAttack;
+                    break;
+                }
+                case BossState.SuperAttack:
+                {
+                    for (int i = 0; i < 1; i++)
+                    {
+                        //SpawnEnemyAtRandomLocation();
+                    }
+                    currentRealTimeAttacksTilBurnout = 9999999;
+                    echoCoroutine = StartCoroutine(EchoAttackCoroutine(0.5f, 0.5f));
+                    clawSwipeCoroutine = StartCoroutine(ClawSwipeAttackCoroutine(0.5f, 0.5f));
+                    statePrevious = state;
+                    state = BossState.BurntOut2;
+                    break;
+                }
+                case BossState.BurntOut2:
+                {
+                    animator.Play("Beast_BurntOut");
+                    statePrevious = state;
+                    state = BossState.SuperAttack;
+                    break;
+                }
             }
         }
     }
@@ -197,7 +242,6 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     private void SpawnProjectile(int _column, int _row, Vector2Int direction, GameObject prefab, float moveDelay = -1f)
     {
         var newProjectile = battleGrid.InstantiatePawn(new Vector2Int(_column, _row), prefab).GetComponent<Char_ProjectileRealtime>();
-        print("RAT, VALUE IS "+direction+" OBJECT IS " + prefab.gameObject.name);
         newProjectile.moveDirection = direction;
         if (moveDelay != -1) newProjectile.movementDelay = moveDelay;
     }
@@ -353,7 +397,16 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         {
             if (y > -1 && y < battleGrid.height)
             {
-                SpawnProjectile (0, y, Vector2Int.right, clawProjectile, 0.1f);
+                if (swipeAttackFlipper)
+                {
+                    SpawnProjectile (0, y, Vector2Int.right, clawProjectileLeft, 0.1f);
+                }
+                else
+                {
+                    SpawnProjectile (battleGrid.width-1, y, Vector2Int.left, clawProjectileRight, 0.1f);
+                }
+
+                swipeAttackFlipper = !swipeAttackFlipper;
                 GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.vineAttack);
             }
         }
