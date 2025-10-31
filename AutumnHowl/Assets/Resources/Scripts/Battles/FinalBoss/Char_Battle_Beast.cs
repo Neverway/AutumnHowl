@@ -20,16 +20,14 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
     public int realTimeAttacksTilBurnout = 5;
     public int currentRealTimeAttacksTilBurnout = 5;
-
+    public GameObject spriteObject; //The sprite of the boss graphics.
+    public Vector3 spriteDefaultPosition; //Position that the sprite is sent to, separate from the actual boss position.
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
-    private int[] echoVerticalPositionsA = { 0, 2, 4 }; 
-    private int[] echoVerticalPositionsB = { 1, 3,};
-    private bool echoA = false;
     
     private enum BossState
     {
@@ -62,13 +60,19 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         battleStateController.OnStartWave.AddListener(DoCurrentAttack);
     }
 
+    new private void Update ()
+    {
+        spriteObject.transform.position = spriteDefaultPosition;
+        base.Update ();
+    }
+
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     new private void TakeTurn ()
     {
         if (isDead) battleStateController.NextTurnStep();
-        
+
         //I've disabled the normal attacks, they were accessing unassigned Attack Sequences. -Connor
-        
+
         /*
         SetAttackDamageToCurrentATK();
         var x = gridPawnController.position.x;
@@ -92,8 +96,23 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
                     return;
         }*/
 
-        // Finish turn
-        battleStateController.NextTurnStep();
+        //Try to move side to side to follow player
+        var autumn = FindObjectOfType<Char_Battle_Player> ();
+        Vector2Int move = new Vector2Int (0, 0);
+        if (autumn.gridPawnController.position.x > gridPawnController.position.x)
+        {
+            move = new Vector2Int (1, 0);
+        }
+        if (autumn.gridPawnController.position.x < gridPawnController.position.x)
+        {
+            move = new Vector2Int (-1, 0);
+        }
+
+
+        if (move == Vector2Int.zero || !TryMoveTo (gridPawnController.position + move))
+        {
+            battleStateController.NextTurnStep ();
+        }
     }
 
     private void DoCurrentAttack()

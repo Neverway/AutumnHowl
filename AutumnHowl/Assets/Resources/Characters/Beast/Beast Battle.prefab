@@ -168,6 +168,7 @@ MonoBehaviour:
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   freezeCharacterMovement: 0
+  uniqueDeathBehavior: 1
   isDead: 0
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
@@ -189,6 +190,8 @@ MonoBehaviour:
   skipFirstTurn: 0
   realTimeAttacksTilBurnout: 5
   currentRealTimeAttacksTilBurnout: 5
+  spriteObject: {fileID: 6364523465175834305}
+  spriteDefaultPosition: {x: 0.5, y: 9.5, z: 0}
   enemyToSpawn: {fileID: 3411343996498358984, guid: 8855ff0d459a8c446a897a537f73a7b5, type: 3}
   warningPrefab: {fileID: 2649854570582670544, guid: 89cd7e8fa829005be8d7220bc5966009, type: 3}
   echoEffectPrefab: {fileID: 466312007867241361, guid: 2bdeed1205ad00b4fb127643a11ad178, type: 3}
@@ -245,6 +248,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6364523465175834305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6366712938765167761, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 2339698727629392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &7931684597536962226 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

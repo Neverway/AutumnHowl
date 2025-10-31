@@ -43,6 +43,7 @@ public abstract class Char_Battle : Character
     //If this is not null, this object gets spawned when the character dies.
     public GameObject spawnOnDeath;
     public bool useBlock = false;
+
     //This is so we can invert the direction the pawn faces when it attacks (currently only used for the Player pawn).
     [HideInInspector] public bool invertAttackFacingDirections = false;
 
@@ -114,6 +115,16 @@ public abstract class Char_Battle : Character
         print($"{gameObject.name} - try move failure");
 
         return false;
+    }
+
+    /// <summary>
+    /// Moves the pawn directly to a tile, without calling NextTurnStep.
+    /// DOES NOT CHECK FOR OBSTACLES.
+    /// </summary>
+    /// <param name="_direction"></param>
+    public void TeleportPawnTo(Vector2Int _position)
+    {
+        gridPawnController.MoveToTile (_position.x, _position.y, this);
     }
     public void AnimateGridHop(Vector3 hopFrom, Vector3 hopTo)
     {

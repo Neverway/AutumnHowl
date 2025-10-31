@@ -22,6 +22,8 @@ public abstract class Character : MonoBehaviour
 
     public Vector2Int startFaceDirection = Vector2Int.down;
     public bool freezeCharacterMovement = false;
+    [Tooltip("Skips certain behaviors when at 0 HP; used only for final boss right now.")]
+    public bool uniqueDeathBehavior = false;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/

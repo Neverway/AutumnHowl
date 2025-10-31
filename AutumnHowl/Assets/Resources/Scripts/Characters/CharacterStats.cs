@@ -119,9 +119,12 @@ public class CharacterStats
             if (health + totalAmount <= 0)
             {
                 health = 0;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText("DOWN", owner.transform.position, 0);
-                owner.isDead = true;
-                owner.InvokeOnDeath();
+                if (owner.uniqueDeathBehavior == false)
+                {
+                    GameInstance.Get<GI_WidgetManager> ().SpawnEffectText ("DOWN", owner.transform.position, 0);
+                    owner.isDead = true;
+                    owner.InvokeOnDeath ();
+                }
             }
             // Damage hurt
             else
