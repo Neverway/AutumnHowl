@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_bewitchedBiscuit
   displayName: Bewitched Biscuit
-  description: A yummy biscuit with magical powers!
+  description: A biscuit with a blessing
   canNotDiscard: 0
   allowMultiple: 1
   useableInBattle: 1
   useableInOverworld: 1
-  buyCost: 30
-  sellCost: 15
+  buyCost: 25
+  sellCost: 10
   effectsOnConsume:
     rid: 1234356420671701153
   references:
@@ -40,7 +40,7 @@ MonoBehaviour:
         target:
           rid: 1234356420671701155
         modifierType: 0
-        amount: -20
+        amount: -10
     - rid: 1234356420671701155
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 
@@ -51,7 +51,7 @@ MonoBehaviour:
         target:
           rid: 1234356420671701157
         modifierType: 0
-        amount: 20
+        amount: 10
     - rid: 1234356420671701157
       type: {class: TargetSelf, ns: , asm: Assembly-CSharp}
       data: 
