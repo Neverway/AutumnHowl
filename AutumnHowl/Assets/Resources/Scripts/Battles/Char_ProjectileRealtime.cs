@@ -16,6 +16,8 @@ public class Char_ProjectileRealtime : Char_Battle
     public float movementDelay = 0.7f;
     public Vector2Int moveDirection = Vector2Int.down;
     [SerializeField] private AttackSequence attackSequence;
+    private float timeOfLastReflect;//For checking how long it's been since projectile deflected.
+    private BattleGrid battleGrid;
     /*----------------------------------------------------------------------------------------------------------------*/
 
     #endregion
@@ -25,8 +27,17 @@ public class Char_ProjectileRealtime : Char_Battle
     new void Start ()
     {
         base.Start ();
-        OnHurt += ReverseProjectile;
+        //OnHurt += ReverseProjectile;
         StartCoroutine(MoveOnTimer());
+    }
+
+    new private void Update ()
+    {
+        base.Update ();
+        if (BattleGrid.playerAttackPositions.Contains (gridPawnController.position))
+        {
+            ReverseProjectile ();
+        }
     }
 
     #endregion
@@ -57,16 +68,21 @@ public class Char_ProjectileRealtime : Char_Battle
         StartCoroutine(MoveOnTimer ());
     }
 
+    //Reverses projectile
     private void ReverseProjectile ()
     {
-        //Turn the projectile around when it's hit
-        moveDirection = -moveDirection;
-        foreach (var attack in attackSequence.attacks)
+        //Don't reverse if we've been reversed within the last .3 seconds
+        if (Time.timeSinceLevelLoad - timeOfLastReflect > 0.5f)
         {
-            attack.position = attack.position * -1;
+            timeOfLastReflect = Time.timeSinceLevelLoad;
         }
-        StopAllCoroutines ();
-        StartCoroutine (MoveOnTimer ());
+        else
+        {
+            return;
+        }
+        //Turn the projectile around when it's hit
+        print ("ReverseProjectile");
+        moveDirection = -moveDirection;
     }
 
     #endregion

@@ -177,6 +177,11 @@ public abstract class Char_Battle : Character
 
             var currentPosition = gridPawnController.position + appliedPosition;
 
+            if (this is Char_Battle_Player)
+            {
+                battleGrid.AddPlayerAttackPosition(currentPosition);
+            }
+
             //Set facing direction to attack position (mirror the position if invertAttackFacingDirections is true)
             facingDirection = attackSequence.attacks[i].position * (invertAttackFacingDirections ? -1 : 1);
 

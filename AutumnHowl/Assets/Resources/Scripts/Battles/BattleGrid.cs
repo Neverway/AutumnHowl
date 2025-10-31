@@ -13,6 +13,10 @@ public class BattleGrid : MonoBehaviour
     private BattleTile[,] grid;
     public static BattleGrid Instance { get; private set; }
 
+    [Reload]
+    public static List<Vector2Int> playerAttackPositions; //Stores tiles recently attacked by the player, used for reflecting boss projetiles...
+    private const float playerAttackPositionLifetime = 0.2f;
+
     void Start ()
     {
         if (Instance != null)
@@ -30,6 +34,7 @@ public class BattleGrid : MonoBehaviour
                 grid[x, y] = new BattleTile();
             }
         }
+        playerAttackPositions = new List<Vector2Int> ();
     }
 
     public GameObject InstantiatePawn (Vector2Int _position, GameObject _pawn) {
@@ -148,6 +153,19 @@ public class BattleGrid : MonoBehaviour
             return grid[x, y].pawns[0];
         }
         return null;
+    }
+
+    public void AddPlayerAttackPosition (Vector2Int _pos)
+    {
+        print ("AddPlayerAttackPosition " + _pos);
+        StartCoroutine (TemporarilyAddAttackPosition (_pos));
+    }
+
+    private IEnumerator TemporarilyAddAttackPosition(Vector2Int _pos)
+    {
+        playerAttackPositions.Add (_pos);
+        yield return new WaitForSeconds (playerAttackPositionLifetime);
+        playerAttackPositions.Remove(_pos);
     }
 }
 

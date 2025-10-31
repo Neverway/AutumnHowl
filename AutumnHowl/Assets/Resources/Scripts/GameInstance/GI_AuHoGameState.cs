@@ -35,6 +35,7 @@ public class GI_AuHoGameState : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     public void Awake()
     {
+        return;
         currentGameState = new AuHoGameState()
         {
             player = currentGameState.player,
