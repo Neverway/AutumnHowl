@@ -7058,8 +7058,8 @@ MonoBehaviour:
       preventTextContinuing: 0
       autoProgressOnComplete: 0
     - name: Barkeeper
-      chatContent: '*If you are plannin on headin'' in there now, do you wanna scrap
-        with me? I can show you the basics of fighting around here!'
+      chatContent: '*If you are plannin on headin'' in there now, do you want some
+        fighting tips?'
       portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
       chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
       OnFrameCompleted:
@@ -7099,7 +7099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25315a3f6e12e1b46b110c7e7392065e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogText: Learn to fight?
+  dialogText: Ask for tips?
   allowQuittingMenu: 0
   onQuitMenu:
     m_PersistentCalls:
@@ -9494,8 +9494,21 @@ MonoBehaviour:
   textEvent:
     frames:
     - name: Barkeeper
-      chatContent: Alright! Let's do this!
+      chatContent: I'd recommend checking out the library, there are some good books
+        in there that'll teach ya the ropes on fighting.
       portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 1
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Barkeeper
+      chatContent: Also don't forget to check in at the Inn to save your progress
+        before entering the forest!
+      portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
       chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
@@ -9511,18 +9524,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 807316011}
-          m_TargetAssemblyTypeName: func_StartBattle, Assembly-CSharp
-          m_MethodName: StartBattle
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15996,7 +15997,8 @@ MonoBehaviour:
       preventTextContinuing: 0
       autoProgressOnComplete: 0
     - name: Barkeeper
-      chatContent: '*But come by sometime if you wanna drink or a {col=key}Real Challenge!'
+      chatContent: '*But come by sometime when we reopen if you wanna drink or a
+        {col=key}Real Challenge!'
       portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
       chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
       OnFrameCompleted:
@@ -16665,7 +16667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5063214991236437307, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7922009732942545860, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20943,6 +20945,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5063214991236437307, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7922009732942545860, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.89
@@ -23046,6 +23052,10 @@ PrefabInstance:
     - target: {fileID: 5063214991236437307, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: m_Name
       value: Chest (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063214991236437307, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7922009732942545860, guid: 5bafb04b20bbfd34aa01ab62fc191bc6, type: 3}
       propertyPath: m_LocalPosition.x

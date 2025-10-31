@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SpikedCuffs
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_wearable_spikedCuffs
-  id: 
   displayName: Spiked Cuffs
   description: 
   canNotDiscard: 1
   allowMultiple: 0
+  useableInBattle: 1
+  useableInOverworld: 1
   buyCost: 25
   sellCost: 0
   effectWhenEquipped:
@@ -29,6 +30,6 @@ MonoBehaviour:
       type: {class: CharacterStatModifiers, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        statToModify: 1
+        statToModify: 0
         modifierType: 0
         value: 10

@@ -35,6 +35,8 @@ public class WB_Shop : MonoBehaviour
     public Text_Inventory inventoryList;
     public UnityEvent OnStart;
     private GI_AuHoGameState gameState;
+    public AudioSource audioSource;
+    public AudioClip buySound;
 
 
     #endregion
@@ -110,6 +112,7 @@ public class WB_Shop : MonoBehaviour
             {
                 // All good, yoink their dubloons
                 gameState.currentGameState.money -= buyableItems[_index].buyCost;
+                audioSource.PlayOneShot(buySound);
             }
         }
     }
@@ -135,6 +138,7 @@ public class WB_Shop : MonoBehaviour
         // All good, un-yoink their dubloons
         gameState.currentGameState.money += item.sellCost;
         inventory.TryRemoveItem(_index);
+        audioSource.PlayOneShot(buySound);
         
         // Update the list
         inventoryList.UpdateItemList();

@@ -50,5 +50,5 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        moneyRange: {x: 1, y: 10}
+        moneyRange: {x: 99, y: 99}
         roundToNearest: 10
