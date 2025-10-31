@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Purify
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_magic_purify
-  id: 
   displayName: Purify Spell
   description: Sacrifice your strength to restore sanity.
   canNotDiscard: 1
   allowMultiple: 0
+  useableInBattle: 1
+  useableInOverworld: 1
   buyCost: 50
   sellCost: 0
-  powerCost: 25
+  powerCost: 20
   effectsWhenCast:
     rid: 1234355984407986178
   references:
