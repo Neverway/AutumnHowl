@@ -17,7 +17,7 @@ MonoBehaviour:
   openingText:
     frames:
     - name: 
-      chatContent: '*A bandit wants to fight!'
+      chatContent: '*A shadowy Phantom haunts you!'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 0}
       OnFrameCompleted:
