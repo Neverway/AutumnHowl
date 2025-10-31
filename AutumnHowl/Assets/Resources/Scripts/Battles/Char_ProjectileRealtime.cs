@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -14,7 +15,8 @@ public class Char_ProjectileRealtime : Char_Battle
     public bool ignoreObstacles;
     public bool destroyOnHit = true;
     public float movementDelay = 0.7f;
-    public Vector2Int moveDirection = Vector2Int.down;
+    public Vector2Int moveDirection = Vector2Int.zero;
+    public List<Vector2Int> additionalCollisionPoints = new List<Vector2Int>();
     [SerializeField] private AttackSequence attackSequence;
     private float timeOfLastReflect;//For checking how long it's been since projectile deflected.
     private BattleGrid battleGrid;
@@ -27,6 +29,7 @@ public class Char_ProjectileRealtime : Char_Battle
     new void Start ()
     {
         base.Start ();
+        battleGrid = FindObjectOfType<BattleGrid>();
         //OnHurt += ReverseProjectile;
         StartCoroutine(MoveOnTimer());
     }
@@ -51,13 +54,31 @@ public class Char_ProjectileRealtime : Char_Battle
     private IEnumerator MoveOnTimer ()
     {
         yield return new WaitForSeconds(movementDelay);
+        
+        foreach (var collisionPoint in additionalCollisionPoints)
+        {
+            if (BattleGrid.Instance.IsOccupied(gridPawnController.position + collisionPoint))
+            {
+                //If we failed to move, damage what's in front of us
+                TryAttackSequence(attackSequence, shouldProgressTurn:false);
+        
+                //Kill the projectile
+                if (destroyOnHit)
+                {
+                    Kill ();
+                }
+                yield break;
+            }
+        }
+        
         //Try to move
         if (TryMoveInDirection (moveDirection, doNextTurn:false, ignoreObsticals:ignoreObstacles, shouldProgressTurn:false) == false)
         {
-            //If we failed to move, damage what's in front of us (and where we are)
-            attackSequence.attacks[0].position = moveDirection;
-            //attackSequence.attacks[0].position = Vector2Int.zero;
+            print("RAT CORE, VALUE IS " + moveDirection);
+            //If we failed to move, damage what's in front of us
+            attackSequence.attacks[0].position = moveDirection; // 0, 1
             TryAttackSequence(attackSequence, shouldProgressTurn:false);
+        
             //Kill the projectile
             if (destroyOnHit)
             {
@@ -65,6 +86,11 @@ public class Char_ProjectileRealtime : Char_Battle
             }
             yield break;
         }
+        // Test additional collisions
+        else
+        {
+        }
+        
         StartCoroutine(MoveOnTimer ());
     }
 

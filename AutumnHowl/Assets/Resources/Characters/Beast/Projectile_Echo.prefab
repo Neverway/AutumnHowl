@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4429b1d9c674e1e4085c35c37b15190e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: 380a919475a3a43928630d31c0b60f85, type: 2}
+  template: {fileID: 11400000, guid: 83f8e8ce6e69c129583ab3a09b9377af, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
   freezeCharacterMovement: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   attackSequence:
     attacks:
     - position: {x: 0, y: 0}
-      damage: 1
+      damage: 10
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
       direction: {x: 0, y: 0}
       pushing: 0

@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
-  m_Name: Phantom
+  m_Name: BeastProjectile
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: enemy_Phantom
+  <UniqueID>k__BackingField: BeastProjectile
   characterReferenceType: 1
-  characterName: Phantom
-  characterTags: 0100000065000000
+  characterName: BeastProjectile
+  characterTags: 
   baseStats:
     health: 100
-    level: 0
-    power: 10
+    level: 999
+    power: 999
     corruption: 0
     attack:
-      startValue: 5
+      startValue: 50
       multiplier: 0
       addedValue: 0
     defense:
-      startValue: 5
+      startValue: 0
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 75
+      startValue: 2.1474836e+9
       multiplier: 0
       addedValue: 0
     maxLevel:
@@ -42,7 +42,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxDefense:
-      startValue: 100
+      startValue: 2147483647
       multiplier: 0
       addedValue: 0
     maxPower:
