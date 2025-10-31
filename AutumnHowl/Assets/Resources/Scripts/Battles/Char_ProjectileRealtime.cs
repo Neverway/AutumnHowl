@@ -29,6 +29,7 @@ public class Char_ProjectileRealtime : Char_Battle
     new void Start ()
     {
         base.Start ();
+        battleGrid = FindObjectOfType<BattleGrid>();
         //OnHurt += ReverseProjectile;
         StartCoroutine(MoveOnTimer());
     }
@@ -56,7 +57,7 @@ public class Char_ProjectileRealtime : Char_Battle
         
         foreach (var collisionPoint in additionalCollisionPoints)
         {
-            if (battleGrid.GetIsOccupied(gridPawnController.position + collisionPoint))
+            if (BattleGrid.Instance.IsOccupied(gridPawnController.position + collisionPoint))
             {
                 //If we failed to move, damage what's in front of us
                 TryAttackSequence(attackSequence, shouldProgressTurn:false);

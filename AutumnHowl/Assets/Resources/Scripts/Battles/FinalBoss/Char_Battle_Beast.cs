@@ -170,6 +170,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
             }
             case BossState.ClawSwipeAttack:
             {
+                print("Realtime attacks = "+currentRealTimeAttacksTilBurnout);
                 currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
                 clawSwipeCoroutine = StartCoroutine(ClawSwipeAttackCoroutine());
                 statePrevious = state;
