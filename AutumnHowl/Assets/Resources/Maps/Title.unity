@@ -734,7 +734,7 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
-  freezeCharacterMovement: 1
+  _freezeCharacterMovement: 1
   uniqueDeathBehavior: 0
   isDead: 0
   movement: {x: 0, y: 0}
@@ -861,6 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5342f04ca55e860a80a591624f31aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnOffMusicSelection: 0
   music: 1
 --- !u!4 &1748106790
 Transform:
