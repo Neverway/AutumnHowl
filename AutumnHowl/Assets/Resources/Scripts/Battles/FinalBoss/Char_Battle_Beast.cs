@@ -46,10 +46,11 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     [SerializeField] private Char_Battle enemyToSpawn;
     [SerializeField] private GameObject warningPrefab;
-    [SerializeField] private GameObject echoEffectPrefab;
     [SerializeField] private GameObject echoProjectile;
+    [SerializeField] private GameObject clawProjectile;
 
     private Coroutine echoCoroutine;
+    private Coroutine clawSwipeCoroutine;
     #endregion
 
 
@@ -164,6 +165,14 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
                 currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout*2;
                 echoCoroutine = StartCoroutine(EchoAttackCoroutine(0.0f, 0.0f));
                 statePrevious = state;
+                state = BossState.ClawSwipeAttack;
+                break;
+            }
+            case BossState.ClawSwipeAttack:
+            {
+                currentRealTimeAttacksTilBurnout = realTimeAttacksTilBurnout;
+                clawSwipeCoroutine = StartCoroutine(ClawSwipeAttackCoroutine());
+                statePrevious = state;
                 state = BossState.BurntOut;
                 break;
             }
@@ -187,10 +196,16 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
     private void SpawnProjectile(int _column, int _row, Vector2Int direction, GameObject prefab, float moveDelay = -1f)
     {
         var newProjectile = battleGrid.InstantiatePawn(new Vector2Int(_column, _row), prefab).GetComponent<Char_ProjectileRealtime>();
+        print("RAT, VALUE IS "+direction+" OBJECT IS " + prefab.gameObject.name);
         newProjectile.moveDirection = direction;
         if (moveDelay != -1) newProjectile.movementDelay = moveDelay;
     }
 
+    
+    // =======================================
+    // ECHO ATTACK
+    // =======================================
+    
     /// <summary>
     /// Coroutine that repeatedly spawns vines on the player's location.
     /// </summary>
@@ -242,9 +257,9 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
             {
                 if (x > -1 && x < battleGrid.width)
                 {
-                    GameObject echoEffect = Instantiate (warningPrefab, battleGrid.gameObject.transform);
-                    echoEffect.transform.localPosition = new Vector3 (x, y, 0);
-                    warnings.Add (echoEffect);
+                    GameObject attackWarning = Instantiate (warningPrefab, battleGrid.gameObject.transform);
+                    attackWarning.transform.localPosition = new Vector3 (x, y, 0);
+                    warnings.Add (attackWarning);
                 }
             }
         }
@@ -265,6 +280,79 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
             if (x > -1 && x < battleGrid.width)
             {
                 SpawnProjectile (x, battleGrid.height-2, Vector2Int.down, echoProjectile, 0.1f);
+                GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.vineAttack);
+            }
+        }
+    }
+    
+    
+    
+    // =======================================
+    // SWIPE ATTACK
+    // =======================================
+    
+    private IEnumerator ClawSwipeAttackCoroutine(float delayBeforeAttack = 1.3f, float delayBetweenAttacks = 0.5f)
+    {
+        // Store the location of Autumn
+        var autumn = FindObjectOfType<Char_Battle_Player>();
+        if (autumn == null)
+        {
+            yield break;
+        }
+        Vector2Int pos = autumn.gridPawnController.position;
+        
+        // Spawn hazard signs
+        var warnings = SpawnClawSwipeWarningsOnPlayer(pos);
+        yield return new WaitForSeconds(delayBeforeAttack);
+        
+        //spawn attacks on that same location (but only if the wave is active)
+        if (battleStateController.stepsRemaining > 0)
+        {
+            animator.Play("Beast_Bark");
+            SpawnClawSwipeAttacks(pos);
+        }
+        
+        // Remove the hazard signs
+        foreach(GameObject g in warnings)
+        {
+            Destroy(g);
+        }
+        yield return new WaitForSeconds(delayBetweenAttacks);
+        if (battleStateController.stepsRemaining > 0 && currentRealTimeAttacksTilBurnout > 0)
+        {
+            currentRealTimeAttacksTilBurnout--;
+            echoCoroutine = StartCoroutine(ClawSwipeAttackCoroutine());
+        }
+    }
+    
+    private List<GameObject> SpawnClawSwipeWarningsOnPlayer(Vector2Int pos)
+    {
+        List<GameObject> warnings = new List<GameObject>();
+        for (int y = pos.y-1; y <= pos.y+1; y++)
+        {
+            for (int x = 0; x < battleGrid.width; x+=1)
+            {
+                if (y > -1 && y < battleGrid.height)
+                {
+                    GameObject attackWarning = Instantiate (warningPrefab, battleGrid.gameObject.transform);
+                    attackWarning.transform.localPosition = new Vector3 (x, y, 0);
+                    warnings.Add (attackWarning);
+                }
+            }
+        }
+
+        GI_AudioManager.Instance.PlayClip(GI_AudioManager.Instance.vineRumble);
+
+        return warnings;
+    }
+
+    private void SpawnClawSwipeAttacks(Vector2Int _pos)
+    {
+        for (int y = _pos.y; y < _pos.y+1; y++)
+        {
+            if (y > -1 && y < battleGrid.height)
+            {
+                SpawnProjectile (0, y, Vector2Int.right, clawProjectile, 0.1f);
                 GI_AudioManager.Instance.PlayClip (GI_AudioManager.Instance.vineAttack);
             }
         }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: BeastProjectile
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: Beast
+  <UniqueID>k__BackingField: BeastProjectile
   characterReferenceType: 1
-  characterName: Beast
+  characterName: BeastProjectile
   characterTags: 
   baseStats:
     health: 100

@@ -194,8 +194,8 @@ MonoBehaviour:
   spriteDefaultPosition: {x: 0.5, y: 9.5, z: 0}
   enemyToSpawn: {fileID: 3411343996498358984, guid: 8855ff0d459a8c446a897a537f73a7b5, type: 3}
   warningPrefab: {fileID: 2649854570582670544, guid: 89cd7e8fa829005be8d7220bc5966009, type: 3}
-  echoEffectPrefab: {fileID: 466312007867241361, guid: 2bdeed1205ad00b4fb127643a11ad178, type: 3}
   echoProjectile: {fileID: 9143309561817315775, guid: 2f145e3b14360cedebfba9731ebb834d, type: 3}
+  clawProjectile: {fileID: 9143309561817315775, guid: 6c953e289f878c3f29084c6d1d0c9426, type: 3}
 --- !u!212 &4993598428679069078
 SpriteRenderer:
   m_ObjectHideFlags: 0
