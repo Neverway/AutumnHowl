@@ -60,7 +60,8 @@ public class func_clearHud : MonoBehaviour
 
     public void ClearMusic()
     {
-        GameInstance.Get<GI_AudioManager>().SetMusic(GI_AudioManager.Music.none);
+        GameInstance.Get<GI_AudioManager>().SetMusicPitch(1.25f, 0);
+        GameInstance.Get<GI_AudioManager>().SetMusic(GI_AudioManager.Music.FinalBattleIntro);
         StartCoroutine(WaitForAnimationToFinish());
     }
 
