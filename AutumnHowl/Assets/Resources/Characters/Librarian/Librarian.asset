@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
   m_Name: Librarian
   m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField: BarKeeper
+  <UniqueID>k__BackingField: Librarian
   characterReferenceType: 0
-  characterName: BarKeeper
+  characterName: Librarian
   characterTags: 05000000
   baseStats:
     health: 100
