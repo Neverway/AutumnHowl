@@ -24,6 +24,8 @@ public class GI_AudioManager : MonoBehaviour
         FinalBattle,
         GameOver,
         Victory,
+        Neverway,
+        Credits,
     }
     /// <summary>
     /// Stores the current music track.
@@ -58,6 +60,8 @@ public class GI_AudioManager : MonoBehaviour
     public AudioClip mus_FinalBattle;
     public AudioClip mus_GameOver;
     public AudioClip mus_Victory;
+    public AudioClip mus_Neverway;
+    public AudioClip mus_Credits;
 
     //===========================//
 
@@ -194,6 +198,12 @@ public class GI_AudioManager : MonoBehaviour
                 break;
             case Music.Victory:
                 musicSource.clip = mus_Victory;
+                break;
+            case Music.Neverway:
+                musicSource.clip = mus_Neverway;
+                break;
+            case Music.Credits:
+                musicSource.clip = mus_Credits;
                 break;
         }
 
