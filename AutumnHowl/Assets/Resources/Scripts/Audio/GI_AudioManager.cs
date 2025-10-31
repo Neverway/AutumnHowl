@@ -19,6 +19,8 @@ public class GI_AudioManager : MonoBehaviour
         Shop,
         Forest,
         Battle,
+        BattleExtra,
+        FinalBattleIntro,
         FinalBattle,
         GameOver,
         Victory,
@@ -30,7 +32,7 @@ public class GI_AudioManager : MonoBehaviour
 
 
     //========Audio Clips========//
-
+    [Header("Audio Tracks")]
     /// This space is for references to sounds, which are assigned in the Inspector in an AudioManager prefab.
     public AudioClip slash1;
     public AudioClip slash2;
@@ -45,12 +47,14 @@ public class GI_AudioManager : MonoBehaviour
     public AudioClip growl;
 
     //==========Music============//
-
+    [Header("Music Tracks")]
     public AudioClip mus_Title;
     public AudioClip mus_Town;
     public AudioClip mus_Shop;
     public AudioClip mus_Forest;
     public AudioClip mus_Battle;
+    public AudioClip mus_BattleExtra;
+    public AudioClip mus_FinalBattleIntro;
     public AudioClip mus_FinalBattle;
     public AudioClip mus_GameOver;
     public AudioClip mus_Victory;
@@ -114,9 +118,9 @@ public class GI_AudioManager : MonoBehaviour
         slashSource.Stop ();
     }
 
-    public void SetMusicPitch(float _pitch)
+    public void SetMusicPitch(float _pitch, float _speed = 0.5f)
     {
-        musicSource.DOPitch(_pitch, 0.5f);
+        musicSource.DOPitch(_pitch, _speed);
         //ambientSource.DOPitch(_pitch, 0.5f);
     }
 
@@ -175,6 +179,12 @@ public class GI_AudioManager : MonoBehaviour
                 break;
             case Music.Battle:
                 musicSource.clip = mus_Battle;
+                break;
+            case Music.BattleExtra:
+                musicSource.clip = mus_BattleExtra;
+                break;
+            case Music.FinalBattleIntro:
+                musicSource.clip = mus_FinalBattleIntro;
                 break;
             case Music.FinalBattle:
                 musicSource.clip = mus_FinalBattle;

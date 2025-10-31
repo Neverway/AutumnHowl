@@ -848,14 +848,16 @@ MonoBehaviour:
   vineRumble: {fileID: 8300000, guid: 1c4d21c1301b6ef43aa55d1836322431, type: 3}
   vineAttack: {fileID: 8300000, guid: 351774d81c35f9c4395250972a0157dd, type: 3}
   growl: {fileID: 8300000, guid: 5ff60343a6699d845a3f9b4e37809b82, type: 3}
-  mus_Title: {fileID: 8300000, guid: ad42dbbaf580a494383dacd07d9188ef, type: 3}
-  mus_Town: {fileID: 8300000, guid: 3c12d29bd60498a40b2ffe5a7a140d38, type: 3}
-  mus_Shop: {fileID: 8300000, guid: 3c12d29bd60498a40b2ffe5a7a140d38, type: 3}
-  mus_Forest: {fileID: 8300000, guid: 276b1a5f5b5e192bf8d8cdaa02b21863, type: 3}
-  mus_Battle: {fileID: 8300000, guid: af172e5b80f97689a96744bd6159dd69, type: 3}
-  mus_FinalBattle: {fileID: 8300000, guid: 02ba689d6addd5aab80e7f416f882bd1, type: 3}
-  mus_GameOver: {fileID: 0}
-  mus_Victory: {fileID: 8300000, guid: 3746c306da349524d9a82f4b1163eb78, type: 3}
+  mus_Title: {fileID: 8300000, guid: 1cc3541659f42103da51285e625206f6, type: 3}
+  mus_Town: {fileID: 8300000, guid: 2c7cf2e15c504e891bd1aaa164462739, type: 3}
+  mus_Shop: {fileID: 8300000, guid: 2c7cf2e15c504e891bd1aaa164462739, type: 3}
+  mus_Forest: {fileID: 8300000, guid: b0610b463fa1ed8deb85e5351ffec3c8, type: 3}
+  mus_Battle: {fileID: 8300000, guid: d5441836beccf918880c933dc9181fd3, type: 3}
+  mus_BattleExtra: {fileID: 8300000, guid: 208444feeb889be28b827bbeecd084ea, type: 3}
+  mus_FinalBattleIntro: {fileID: 8300000, guid: dfa1dbe45015e8323a10e45af3cb987c, type: 3}
+  mus_FinalBattle: {fileID: 8300000, guid: 14ddfe443348f71958a369739f4c2847, type: 3}
+  mus_GameOver: {fileID: 8300000, guid: 28fbb2f0bfcc223cab330d721a7aa661, type: 3}
+  mus_Victory: {fileID: 8300000, guid: f3fbb872cb2374584827f9074a028be1, type: 3}
   slashSource: {fileID: 6518801790997160031}
   musicSource: {fileID: 747792850405150406}
   ambientSource: {fileID: 6421664544378204748}
