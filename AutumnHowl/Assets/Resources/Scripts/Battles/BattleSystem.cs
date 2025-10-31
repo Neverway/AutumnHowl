@@ -94,6 +94,8 @@ public class BS_PlayerAction : BattleState
 
     public override void OnStateUpdate()
     {
+        controller.battlePlayer.canMove = false;
+        controller.stepsRemaining = 0;
     }
 
     public override void OnStateLeave(BattleState stateEntering)
@@ -169,6 +171,46 @@ public class BS_GridAction : BattleState
                 break;
         }
         controller.battlePlayer.canMove = false;
+    }
+}
+
+/// <summary></summary>
+public class BS_EarlyExitFromBattleGrid : BattleState
+{
+    public BS_EarlyExitFromBattleGrid(BattleStateController controller) : base(controller)
+    {
+    }
+
+    public override void OnStateEnter(BattleState stateLeaving)
+    {
+        controller.stepsRemaining = 0;
+        //Trigger gameevent just to communicate that a wave has passed
+        new Event_BattleWavePassed().Invoke();
+
+        switch (controller.currentPlayerAction)
+        {
+            case BattleStateController.PlayerAction.attack:
+                controller.battleWidget.SetAttackBarVisible(false);
+                break;
+            case BattleStateController.PlayerAction.defend:
+                controller.battlePlayer.isDefenseActive = false;
+                // Give no-hit bonus
+                if (controller.playerWasHitThisStep == false)
+                {
+                    controller.battlePlayer.ModifyPower(5);
+                }
+                break;
+        }
+        controller.battlePlayer.canMove = false;
+        controller.ChangeState(new BS_PlayerAction(controller));
+    }
+
+    public override void OnStateUpdate()
+    {
+    }
+
+    public override void OnStateLeave(BattleState stateEntering)
+    {
     }
 }
 

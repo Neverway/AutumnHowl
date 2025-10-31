@@ -167,7 +167,6 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: 6d1fcf2e884176ccea0afb8723e2ac6b, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
-  freezeCharacterMovement: 0
   uniqueDeathBehavior: 1
   isDead: 0
   movement: {x: 0, y: 0}
@@ -192,10 +191,12 @@ MonoBehaviour:
   currentRealTimeAttacksTilBurnout: 5
   spriteObject: {fileID: 6364523465175834305}
   spriteDefaultPosition: {x: 0.5, y: 9.5, z: 0}
+  currentWave: 0
   enemyToSpawn: {fileID: 3411343996498358984, guid: 8855ff0d459a8c446a897a537f73a7b5, type: 3}
   warningPrefab: {fileID: 2649854570582670544, guid: 89cd7e8fa829005be8d7220bc5966009, type: 3}
   echoProjectile: {fileID: 9143309561817315775, guid: 2f145e3b14360cedebfba9731ebb834d, type: 3}
-  clawProjectile: {fileID: 9143309561817315775, guid: 6c953e289f878c3f29084c6d1d0c9426, type: 3}
+  clawProjectileLeft: {fileID: 9143309561817315775, guid: 6c953e289f878c3f29084c6d1d0c9426, type: 3}
+  clawProjectileRight: {fileID: 9143309561817315775, guid: 10b947a59f635f7d3b852d21f52723f4, type: 3}
 --- !u!212 &4993598428679069078
 SpriteRenderer:
   m_ObjectHideFlags: 0

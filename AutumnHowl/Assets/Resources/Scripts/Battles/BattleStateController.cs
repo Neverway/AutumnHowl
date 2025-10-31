@@ -79,6 +79,12 @@ public class BattleStateController : MonoBehaviour
         
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
+        var newTrack = GameInstance.Gamestate.currentBattle.music;
+        if (newTrack != GI_AudioManager.Music.none) GameInstance.Get<GI_AudioManager>().SetMusic(newTrack);
+        else
+        {
+            GameInstance.Get<GI_AudioManager>().SetMusic(GI_AudioManager.Music.Battle);
+        }
         
         initialized = true;
     }

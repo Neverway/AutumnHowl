@@ -14,6 +14,7 @@ public class LB_Overworld : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
+    public bool turnOffMusicSelection = false;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -34,7 +35,7 @@ public class LB_Overworld : MonoBehaviour
     private void Start()
     {
         GameInstance.Get<GI_TransitionManager>().Fadein();
-        StartCoroutine(StartMusicRoutine());
+        if (turnOffMusicSelection == false) StartCoroutine(StartMusicRoutine());
     }
 
     private IEnumerator StartMusicRoutine ()

@@ -938,7 +938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5342f04ca55e860a80a591624f31aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: 5
+  turnOffMusicSelection: 1
+  music: 0
 --- !u!4 &1748106790
 Transform:
   m_ObjectHideFlags: 0
