@@ -26,7 +26,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     defense:
-      startValue: 10
+      startValue: 4
       multiplier: 0
       addedValue: 0
     maxHealth:

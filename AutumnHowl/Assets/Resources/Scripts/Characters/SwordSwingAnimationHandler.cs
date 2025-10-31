@@ -52,7 +52,7 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     [Space, Header("Input controls")]
     public SwingState swingState;
     public enum SwingState { None, Pullback, Spin, Victory, Other }
-    private Direction _attackStartDirection;
+    [SerializeField] private Direction _attackStartDirection;
     public Direction attackStartDirection { get => (Direction)((int)_attackStartDirection % 4); set => _attackStartDirection = value; }
     public SpinDirection spinDireciton;
     [Range(0f, 1f)] public float swordPullbackFactor = 0f;
