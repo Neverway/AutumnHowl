@@ -35669,6 +35669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[World]'
       objectReference: {fileID: 0}
+    - target: {fileID: 5204044836869286210, guid: 48ac34da57253da52af73e65f88653d1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7069582619323147952, guid: 48ac34da57253da52af73e65f88653d1, type: 3}
       propertyPath: music
       value: 2

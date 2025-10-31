@@ -17,8 +17,10 @@ MonoBehaviour:
   description: A small cookie shaped like a shield.
   canNotDiscard: 0
   allowMultiple: 1
-  buyCost: 10
-  sellCost: 8
+  useableInBattle: 1
+  useableInOverworld: 1
+  buyCost: 20
+  sellCost: 12
   effectsOnConsume:
     rid: 1234355949659750448
   references:
@@ -30,14 +32,15 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 1
         modifierType: 0
-        value: 20
+        value: 5
     - rid: 1234355949659750448
       type: {class: ModifierForTimedDuration, ns: , asm: Assembly-CSharp}
       data:
         hideDescription: 0
-        seconds: 300
         target:
           rid: 1234355984407986199
+        modifierIcons: []
+        seconds: 120
         modifier:
           rid: 26148972302696455
     - rid: 1234355984407986199
