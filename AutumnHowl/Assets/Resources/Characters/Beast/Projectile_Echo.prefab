@@ -78,7 +78,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.75
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -105,7 +105,7 @@ TrailRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 30840
+      ctime1: 58018
       ctime2: 65535
       ctime3: 0
       ctime4: 0
@@ -113,11 +113,11 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 31804
+      atime1: 58596
       atime2: 65535
-      atime3: 0
-      atime4: 0
-      atime5: 0
+      atime3: 65535
+      atime4: 65535
+      atime5: 65535
       atime6: 0
       atime7: 0
       m_Mode: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 1386291910739802743}
   - component: {fileID: 2301574754548831689}
   m_Layer: 0
-  m_Name: Projectile_Test
+  m_Name: Projectile_Echo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,15 +163,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9143309561817315775}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 2, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2141924244604221219}
   - {fileID: 8366342791649717978}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6377997341840455716
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1770754003, guid: be4c7d5ad31a9aa41a58e17b3d630621, type: 3}
+  m_Sprite: {fileID: -15978605, guid: a30cbf04a34c537059d59559ad845e48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -236,28 +236,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4429b1d9c674e1e4085c35c37b15190e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 0}
+  template: {fileID: 11400000, guid: 380a919475a3a43928630d31c0b60f85, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
+  freezeCharacterMovement: 0
   isDead: 0
   movement: {x: 0, y: 0}
+  facingDirection: {x: 0, y: 0}
   animator: {fileID: 0}
   AttackSequences: []
   canMove: 0
   pushable: 0
+  gridHopAnimation_Seconds: 0.15
+  gridHopAnimation_Height: 0.35
+  gridHopAnimationContainer: {fileID: 0}
   gridPawnController: {fileID: 2301574754548831689}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
+  invertAttackFacingDirections: 0
   ignoreObstacles: 0
+  destroyOnHit: 1
   movementDelay: 0.1
   moveDirection: {x: 0, y: 0}
   attackSequence:
     attacks:
     - position: {x: 0, y: 0}
-      damage: 5
+      damage: 1
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
       direction: {x: 0, y: 0}
       pushing: 0
