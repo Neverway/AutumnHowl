@@ -1810,12 +1810,12 @@ MonoBehaviour:
   roomHeight: 16
   pathWidth: 2
   pathWidthRandomness: 2
-  maxBranchLength: 5
+  maxBranchLength: 10
   seedToGenerate: 0
   enemyFrequency: 3
   minimumEnemyCount: 12
   minimumPOICount: 0
-  numberOfLoops: 0
+  numberOfLoops: 1
   tilemapGround: {fileID: 1982810835}
   groundTile: {fileID: 11400000, guid: f4a0298d72d83d266a4115ba738bd4f5, type: 2}
   tilemapCollision: {fileID: 1994119680}
