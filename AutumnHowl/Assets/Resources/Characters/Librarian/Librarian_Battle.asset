@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
+  m_Name: Librarian_Battle
+  m_EditorClassIdentifier: 
+  targetLevelScene: {fileID: 102900000, guid: 23ba94449cea27896ba8a4ab2595882b, type: 3}
+  mapID: Battle
+  openingText:
+    frames:
+    - name: 
+      chatContent: '*'
+      portrait: {fileID: 0}
+      chatterVoice: {fileID: 0}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 0
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []
+  victoryLevels: 0
+  victoryGold: 10
+  battleSequence:
+    waves:
+    - rid: 26148788346028042
+  layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
+  enemySpawnLocations:
+  - enemyPrefab: {fileID: 6242562417686465405, guid: 728f8ba85c083bb29af7b6babc146b0a, type: 3}
+    enemyStartPosition: {x: 2, y: 4}
+  victoryState:
+    rid: 26149116751642625
+  references:
+    version: 2
+    RefIds:
+    - rid: 26148788346028042
+      type: {class: RandoBattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waves:
+        - rid: 26148788346028043
+        - rid: 26148788346028044
+    - rid: 26148788346028043
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveText:
+          frames:
+          - name: 
+            chatContent: The saltbat is preparing a ranged attack!
+            portrait: {fileID: 0}
+            chatterVoice: {fileID: 0}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 0
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveAttack: {fileID: 0}
+        waveSteps: 5
+    - rid: 26148788346028044
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveText:
+          frames:
+          - name: 
+            chatContent: The saltbat is preparing a melee attack!
+            portrait: {fileID: 0}
+            chatterVoice: {fileID: 0}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 0
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveAttack: {fileID: 0}
+        waveSteps: 8
+    - rid: 26149116751642625
+      type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
+      data: 

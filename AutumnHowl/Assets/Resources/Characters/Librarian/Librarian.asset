@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456a1e31220cbcd4697d79e32c9fba56, type: 3}
+  m_Name: Librarian
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: BarKeeper
+  characterReferenceType: 0
+  characterName: BarKeeper
+  characterTags: 05000000
+  baseStats:
+    health: 100
+    level: 0
+    power: 10
+    corruption: 0
+    attack:
+      startValue: 10
+      multiplier: 0
+      addedValue: 0
+    defense:
+      startValue: 10
+      multiplier: 0
+      addedValue: 0
+    maxHealth:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxLevel:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxAttack:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxDefense:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxPower:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    maxCorruption:
+      startValue: 100
+      multiplier: 0
+      addedValue: 0
+    shieldPower:
+      startValue: 10
+      multiplier: 0
+      addedValue: 0
+    walkSpeed:
+      startValue: 2
+      multiplier: 0
+      addedValue: 0
+    runSpeed:
+      startValue: 3
+      multiplier: 0
+      addedValue: 0
