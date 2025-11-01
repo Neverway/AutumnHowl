@@ -4117,7 +4117,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 261944315003184775, guid: 2c287864a7fd2b7449ecfd37ab32beff, type: 3}
       propertyPath: swingState
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 501421272150804315, guid: 2c287864a7fd2b7449ecfd37ab32beff, type: 3}
       propertyPath: m_LocalPosition.x

@@ -63,6 +63,8 @@ public class SwordSwingAnimationHandler : MonoBehaviour
     //==================== [ Controller Logic ] =======================================================================
     public void Update()
     {
+        animator.enabled = false;
+        animator.enabled = true;
         //If swing state is None, use default visuals, otherwise switch to swing visuals!
         if (visualContainer_swingSword != null) visualContainer_swingSword.gameObject.SetActive(swingState != SwingState.None);
         if (visualContainer_default != null ) visualContainer_default.gameObject.SetActive(swingState == SwingState.None);

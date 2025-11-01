@@ -24,16 +24,25 @@ MonoBehaviour:
       type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
       data:
         settings:
-          repeatGetItems: 1
-          chanceToGet: 1
+          repeatGetItems: 3
+          chanceToGet: 0.7
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
         ignoreInvalidItems: 1
         items:
-        - weight: 0
+        - weight: 10
           item:
             rid: 1234356420671701146
+        - weight: 5
+          item:
+            rid: 1234356420671701173
+        - weight: 1
+          item:
+            rid: 1234356420671701174
+        - weight: 1
+          item:
+            rid: 1234356420671701176
     - rid: 1234356420671701146
       type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
       data:
@@ -44,3 +53,33 @@ MonoBehaviour:
           toUseInsteadOfEmptyResult:
             rid: -2
         item: {fileID: 11400000, guid: 09b36b6d20320be4ca2be7ecfeae3cbd, type: 2}
+    - rid: 1234356420671701173
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: cc3b6dd47cf61424bb27fdec900559ca, type: 2}
+    - rid: 1234356420671701174
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 076f9b103da9bf544a3c357e957ca375, type: 2}
+    - rid: 1234356420671701176
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 74dcda300a575c843af7015e81c6618b, type: 2}

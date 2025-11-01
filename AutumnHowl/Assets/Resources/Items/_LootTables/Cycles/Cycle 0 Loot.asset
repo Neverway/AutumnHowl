@@ -24,8 +24,8 @@ MonoBehaviour:
       type: {class: ItemsRef_WeightedItems, ns: , asm: Assembly-CSharp}
       data:
         settings:
-          repeatGetItems: 1
-          chanceToGet: 1
+          repeatGetItems: 3
+          chanceToGet: 0.9
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2

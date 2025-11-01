@@ -38,18 +38,24 @@ MonoBehaviour:
             rid: -2
         ignoreInvalidItems: 1
         items:
-        - weight: 15
-          item:
-            rid: -2
         - weight: 5
           item:
             rid: 1234356074263347249
         - weight: 3
           item:
             rid: 1234356074263347250
+        - weight: 3
+          item:
+            rid: 1234356420671701179
         - weight: 2
           item:
             rid: 1234356074263347247
+        - weight: 2
+          item:
+            rid: 1234356420671701180
+        - weight: 2
+          item:
+            rid: 1234356420671701181
     - rid: 1234356074263347247
       type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
       data:
@@ -80,3 +86,33 @@ MonoBehaviour:
           toUseInsteadOfEmptyResult:
             rid: -2
         item: {fileID: 11400000, guid: 18951b285d02c8261869d6e1a4154a39, type: 2}
+    - rid: 1234356420671701179
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: cb3cf423d7147274b868b996f9276113, type: 2}
+    - rid: 1234356420671701180
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 20810ea1ae1283148874d870a4625515, type: 2}
+    - rid: 1234356420671701181
+      type: {class: ItemsRef_Item, ns: , asm: Assembly-CSharp}
+      data:
+        settings:
+          repeatGetItems: 1
+          chanceToGet: 1
+          itemCountCap: -1
+          toUseInsteadOfEmptyResult:
+            rid: -2
+        item: {fileID: 11400000, guid: 82cc27778f1495341a45641101ff1f91, type: 2}
