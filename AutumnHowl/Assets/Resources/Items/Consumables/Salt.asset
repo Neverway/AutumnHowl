@@ -34,7 +34,7 @@ MonoBehaviour:
         target:
           rid: 1234356420671701053
         modifierType: 0
-        amount: 20
+        amount: -20
     - rid: 1234356420671701053
       type: {class: TargetIsFromTemplate, ns: , asm: Assembly-CSharp}
       data:

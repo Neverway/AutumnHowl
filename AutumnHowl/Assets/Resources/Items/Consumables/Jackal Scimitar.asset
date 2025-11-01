@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <UniqueID>k__BackingField: item_jackalscimitar
   displayName: Jackal Scimitar
-  description: 'A blade often used by Jackals. '
+  description: A blade often used by Jackals. I already got a sword but maybe I can
+    still sell this
   canNotDiscard: 0
   allowMultiple: 1
-  useableInBattle: 1
-  useableInOverworld: 1
-  buyCost: 0
-  sellCost: 0
+  useableInBattle: 0
+  useableInOverworld: 0
+  buyCost: 40
+  sellCost: 20
   effectsOnConsume:
     rid: -2
   references:

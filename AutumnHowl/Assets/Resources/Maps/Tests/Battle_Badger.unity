@@ -517,11 +517,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 64
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 640, y: 360}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -652,14 +652,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerWasHitThisStep: 0
   stepsRemaining: 0
-  waveStepCount: 0
   turnOrder: []
   currentTurn: 0
   OnStartWave:
     m_PersistentCalls:
       m_Calls: []
-  gameState: {fileID: 0}
+  pendingNextTurnCalls: 0
   textEvent: {fileID: 1485981571}
+  gameState: {fileID: 0}
   battleWidget: {fileID: 1891927975}
   battlePlayer: {fileID: 1855222969}
   battleGrid: {fileID: 416025337}
@@ -727,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5342f04ca55e860a80a591624f31aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnOffMusicSelection: 0
   music: 5
 --- !u!4 &1748106790
 Transform:

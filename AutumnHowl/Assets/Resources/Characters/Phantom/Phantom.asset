@@ -22,7 +22,7 @@ MonoBehaviour:
     power: 10
     corruption: 0
     attack:
-      startValue: 5
+      startValue: 20
       multiplier: 0
       addedValue: 0
     defense:
