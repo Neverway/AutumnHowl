@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Cloaked Collar
   description: A small black collar with a silver engraving. Looking at it too long
     makes your head spin.{col=stat}
-  canNotDiscard: 1
+  canNotDiscard: 0
   allowMultiple: 0
   useableInBattle: 1
   useableInOverworld: 1
@@ -33,4 +33,4 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 1
         modifierType: 0
-        value: 10
+        value: 5

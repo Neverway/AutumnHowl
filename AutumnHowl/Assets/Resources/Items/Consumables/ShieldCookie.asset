@@ -39,7 +39,8 @@ MonoBehaviour:
         hideDescription: 0
         target:
           rid: 1234355984407986199
-        modifierIcons: []
+        modifierIcons:
+        - {fileID: 11400000, guid: 66e708d5f29ec6a45a83660e7cff6a02, type: 2}
         seconds: 120
         modifier:
           rid: 26148972302696455
