@@ -15,7 +15,7 @@ MonoBehaviour:
   <UniqueID>k__BackingField: item_wearable_spikedCuffs
   displayName: Spiked Cuffs
   description: 
-  canNotDiscard: 1
+  canNotDiscard: 0
   allowMultiple: 0
   useableInBattle: 1
   useableInOverworld: 1
@@ -32,4 +32,4 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 0
         modifierType: 0
-        value: 10
+        value: 5

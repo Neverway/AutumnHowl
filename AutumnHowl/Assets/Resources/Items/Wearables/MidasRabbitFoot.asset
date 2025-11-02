@@ -34,7 +34,7 @@ MonoBehaviour:
     - rid: 1234356373609775104
       type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
       data:
-        description: '[+0$ to +50$ on each battle won]'
+        description: '[+0$ to +15$ on each battle won]'
         beforeOrAfter: 1
         gameEventType: 4
         eventTargets:
@@ -57,5 +57,5 @@ MonoBehaviour:
           itemCountCap: -1
           toUseInsteadOfEmptyResult:
             rid: -2
-        moneyRange: {x: 0, y: 50}
+        moneyRange: {x: 0, y: 15}
         roundToNearest: 1

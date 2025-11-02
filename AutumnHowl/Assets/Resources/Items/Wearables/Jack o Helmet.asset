@@ -30,7 +30,7 @@ MonoBehaviour:
     - rid: 1234356420671701011
       type: {class: DoEffectActionOnEvent, ns: , asm: Assembly-CSharp}
       data:
-        description: +5 ATK per obstacle destroyed for 3 waves
+        description: +10 ATK per obstacle destroyed for 3 waves
         beforeOrAfter: 1
         gameEventType: 12
         eventTargets:
@@ -60,4 +60,4 @@ MonoBehaviour:
         hideDescription: 0
         statToModify: 0
         modifierType: 0
-        value: 5
+        value: 10
