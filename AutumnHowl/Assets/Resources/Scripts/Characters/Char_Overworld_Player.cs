@@ -124,7 +124,7 @@ public class Controller_Overworld_Player : Character , IsPlayerCharacter
     {
         gameObject.transform.DORotate(new Vector3(45, 0, 0), 0.25f);
         yield return new WaitForSeconds(1);
-        GameInstance.Get<GI_WorldLoader>().Load("GameOver");
+        GameInstance.Get<GI_WorldLoader>().Load("Game Over");
     }
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
