@@ -18,22 +18,22 @@ EditorBuildSettings:
     path: Assets/Resources/Maps/Forest.unity
     guid: f541c909f5cd54e46ac75e8e7da3ed47
   - enabled: 1
-    path: Assets/Resources/Maps/Forest_Day2.unity
+    path: Assets/Resources/Maps/Forest 2.unity
     guid: 6c19bd0cda029f34c861f8414df9a0b1
   - enabled: 1
-    path: Assets/Resources/Maps/ForestFinal.unity
+    path: Assets/Resources/Maps/Forest Final.unity
     guid: f7b8d5c16d22287e5b8e835d29233266
   - enabled: 1
     path: Assets/Resources/Maps/Battle.unity
     guid: 23ba94449cea27896ba8a4ab2595882b
   - enabled: 1
-    path: Assets/Resources/Maps/GameOver.unity
+    path: Assets/Resources/Maps/Game Over.unity
     guid: 5bf591eeae924979eadab4e47ba332d7
   - enabled: 1
     path: Assets/Resources/Maps/Tests/Battle_PatchyBoss.unity
     guid: d26e01d57dc5eb149a23cc5c2da18a0f
   - enabled: 1
-    path: Assets/Resources/Maps/Forest_Day2.unity
+    path: Assets/Resources/Maps/Forest 2.unity
     guid: 6c19bd0cda029f34c861f8414df9a0b1
   - enabled: 1
     path: Assets/Resources/Maps/Ending.unity
