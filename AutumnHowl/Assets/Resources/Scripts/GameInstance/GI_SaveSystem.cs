@@ -19,6 +19,7 @@ public class GI_SaveSystem : MonoBehaviour
     private List<Tuple<SaveAndLoadPropertyAttribute, PropertyInfo>> cachedSaveLoadProperties;
     private List<MethodInfo> cachedInvokeBeforeSaveMethods;
     private List<MethodInfo> cachedInvokeAfterLoadMethods;
+    private List<MethodInfo> cachedInvokeOnNewGameMethods;
     private MethodInfo saveValueMethod;
     private MethodInfo loadValueMethod;
     [Reload] private static GI_SaveSystem instance;
@@ -102,55 +103,90 @@ public class GI_SaveSystem : MonoBehaviour
     }
     private void CacheInvokeOnSaveAndLoadMethods()
     {
-        cachedInvokeBeforeSaveMethods = new List<MethodInfo>();
-        AttributeInfo[] saveAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeBeforeSaveAttribute>()
-            .OrderBy(at => at.As<InvokeBeforeSaveAttribute>().priority).ToArray();
-        foreach (var attribute in saveAttributes)
+        //[InvokeBeforeSave] method caching
         {
-            if (attribute.Member is MethodInfo method)
+            cachedInvokeBeforeSaveMethods = new List<MethodInfo>();
+            AttributeInfo[] saveAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeBeforeSaveAttribute>()
+                .OrderBy(at => at.As<InvokeBeforeSaveAttribute>().priority).ToArray();
+            foreach (var attribute in saveAttributes)
             {
-                if (!method.IsStatic())
+                if (attribute.Member is MethodInfo method)
                 {
-                    Debug.LogError($"{method.DeclaringType}.{method.Name}: You cant put an " +
-                        $"InvokeBeforeSave attribute on a non-static method");
-                    continue;
+                    if (!method.IsStatic())
+                    {
+                        Debug.LogError($"{method.DeclaringType}.{method.Name}: You cant put an " +
+                            $"InvokeBeforeSave attribute on a non-static method");
+                        continue;
+                    }
+                    if (method.ContainsGenericParameters || !method.HasParametersNone())
+                    {
+                        Debug.LogError($"{method.DeclaringType}.{method.Name}: This method with the " +
+                            $"InvokeBeforeSave attribute must have no parameters of any kind");
+                        continue;
+                    }
+                    cachedInvokeBeforeSaveMethods.Add(method);
                 }
-                if (method.ContainsGenericParameters || !method.HasParametersNone())
-                {
-                    Debug.LogError($"{method.DeclaringType}.{method.Name}: This method with the " +
-                        $"InvokeBeforeSave attribute must have no parameters of any kind");
-                    continue;
-                }
-                cachedInvokeBeforeSaveMethods.Add(method);
+                else
+                    Debug.LogError("You cant put an InvokeBeforeSave attribute on a non-property");
             }
-            else
-                Debug.LogError("You cant put an InvokeBeforeSave attribute on a non-property");
         }
 
-        cachedInvokeAfterLoadMethods = new List<MethodInfo>();
-        AttributeInfo[] loadAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeAfterLoadAttribute>()
-            .OrderBy(at => at.As<InvokeAfterLoadAttribute>().priority).ToArray();
-
-        foreach (var attribute in loadAttributes)
+        //[InvokeAfterLoad] method caching
         {
-            if (attribute.Member is MethodInfo method)
+            cachedInvokeAfterLoadMethods = new List<MethodInfo>();
+            AttributeInfo[] loadAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeAfterLoadAttribute>()
+                .OrderBy(at => at.As<InvokeAfterLoadAttribute>().priority).ToArray();
+
+            foreach (var attribute in loadAttributes)
             {
-                if (!method.IsStatic())
+                if (attribute.Member is MethodInfo method)
                 {
-                    Debug.LogError($"{method.DeclaringType}.{method.Name}: You cant put an " +
-                        $"InvokeAfterLoad attribute on a non-static method");
-                    continue;
+                    if (!method.IsStatic())
+                    {
+                        Debug.LogError($"{method.DeclaringType}.{method.Name}: You cant put an " +
+                            $"InvokeAfterLoad attribute on a non-static method");
+                        continue;
+                    }
+                    if (method.ContainsGenericParameters || !method.HasParametersNone())
+                    {
+                        Debug.LogError($"{method.DeclaringType}.{method.Name}: This method with the " +
+                            $"InvokeAfterLoad attribute must have no parameters of any kind");
+                        continue;
+                    }
+                    cachedInvokeAfterLoadMethods.Add(method);
                 }
-                if (method.ContainsGenericParameters || !method.HasParametersNone())
-                {
-                    Debug.LogError($"{method.DeclaringType}.{method.Name}: This method with the " +
-                        $"InvokeAfterLoad attribute must have no parameters of any kind");
-                    continue;
-                }
-                cachedInvokeAfterLoadMethods.Add(method);
+                else
+                    Debug.LogError("You cant put an InvokeAfterLoad attribute on a non-property");
             }
-            else
-                Debug.LogError("You cant put an InvokeAfterLoad attribute on a non-property");
+        }
+
+        //[InvokeOnNewGame] method caching
+        {
+            cachedInvokeOnNewGameMethods = new List<MethodInfo>();
+            AttributeInfo[] newGameAttributes = ReflectionCache.GetAttributeUsageInfos<InvokeBeforeNewGameAttribute>()
+                .OrderBy(at => at.As<InvokeBeforeNewGameAttribute>().priority).ToArray();
+
+            foreach (var attribute in newGameAttributes)
+            {
+                if (attribute.Member is MethodInfo method)
+                {
+                    if (!method.IsStatic())
+                    {
+                        Debug.LogError($"{method.DeclaringType}.{method.Name}: You cant put an " +
+                            $"InvokeOnNewGame attribute on a non-static method");
+                        continue;
+                    }
+                    if (method.ContainsGenericParameters || !method.HasParametersNone())
+                    {
+                        Debug.LogError($"{method.DeclaringType}.{method.Name}: This method with the " +
+                            $"InvokeOnNewGame attribute must have no parameters of any kind");
+                        continue;
+                    }
+                    cachedInvokeOnNewGameMethods.Add(method);
+                }
+                else
+                    Debug.LogError("You cant put an InvokeOnNewGame attribute on a non-property");
+            }
         }
     }
     private void CacheSaveLoadValueMethods()
@@ -193,6 +229,17 @@ public class GI_SaveSystem : MonoBehaviour
     {
         if (!Application.isPlaying || !doSaving) return;
 
+        if (!HasSave())
+        {
+            CurrentSavingType = SavingType.SavingOrLoadingFile;
+            Debug.Log("NO SAVE FOUND, CLEARING VALUES, LOADING TOWN");
+            saveDataStrategy.ClearValues();
+            ResetValuesFromAttributes();
+            GameInstance.Get<GI_WorldLoader>().Load("Town");
+            CurrentSavingType = SavingType.None;
+            return;
+        }
+
         CurrentSavingType = SavingType.SavingOrLoadingFile;
         {
             //Load all values from PlayerPrefs
@@ -217,6 +264,8 @@ public class GI_SaveSystem : MonoBehaviour
         textEvent.AddFrame($"[ File {saveSlot} ] has been erased!");
         textEvent.TryDisplay();
     }
+
+    public bool HasSave() => saveDataStrategy.HasSave(SaveDataFileName);
 
     [ContextMenu("Remove All PlayerPrefs")]
     private void RemoveAllPlayerPrefs()
@@ -253,6 +302,17 @@ public class GI_SaveSystem : MonoBehaviour
         //Call all methods with InvokeAfterLoad attributes
         foreach (var afterLoadMethod in cachedInvokeAfterLoadMethods)
             afterLoadMethod.Invoke(null, null);
+    }
+    private void ResetValuesFromAttributes()
+    {
+        //Load all values to properties with SaveAndLoadProperty attributes
+        foreach (var saveLoadProperty in cachedSaveLoadProperties)
+        {
+            saveLoadProperty.Item2.SetValue(null, null);
+        }
+        //Call all methods with InvokeAfterLoad attributes
+        foreach (var onNewGameMethod in cachedInvokeOnNewGameMethods)
+            onNewGameMethod.Invoke(null, null);
     }
 
 
@@ -300,4 +360,11 @@ public class InvokeAfterLoadAttribute : Attribute
 {
     public int priority = 0;
     public InvokeAfterLoadAttribute(int priority = 0) => this.priority = priority;
+}
+
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+public class InvokeBeforeNewGameAttribute : Attribute
+{
+    public int priority = 0;
+    public InvokeBeforeNewGameAttribute(int priority = 0) => this.priority = priority;
 }

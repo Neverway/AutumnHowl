@@ -8,7 +8,6 @@
 //====================================================================================================================//
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -131,3 +130,18 @@ public class TargetEnemyDefeated : VictoryState
     }
 }
 
+[Serializable]
+public class PuzzleCompleted : VictoryState
+{
+    private PuzzleFlag flag;
+
+    public override bool victoryConditionMet(List<Char_Battle> _aliveFighters)
+    {
+        if (flag == null)
+        {
+            if (!IDToObj<PuzzleFlag>.TryGet(PuzzleFlag.REFERENCE_ID, out flag) || flag == null)
+                return false;
+        }
+        return flag.CheckForWin();
+    }
+}

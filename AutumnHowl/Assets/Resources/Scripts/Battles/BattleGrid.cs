@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class BattleGrid : MonoBehaviour
@@ -36,6 +32,27 @@ public class BattleGrid : MonoBehaviour
         }
         playerAttackPositions = new List<Vector2Int> ();
     }
+
+    private void OnDrawGizmos()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3 pos = transform.position + new Vector3(x, y, 0);
+                Vector3 corner_NE = pos + new Vector3(+0.5f, +0.5f, 0);
+                Vector3 corner_SE = pos + new Vector3(-0.5f, +0.5f, 0);
+                Vector3 corner_NW = pos + new Vector3(+0.5f, -0.5f, 0);
+                Vector3 corner_SW = pos + new Vector3(-0.5f, -0.5f, 0);
+
+                Gizmos.DrawLine(corner_NE, corner_SE);
+                Gizmos.DrawLine(corner_NW, corner_SW);
+                Gizmos.DrawLine(corner_NE, corner_NW);
+                Gizmos.DrawLine(corner_SE, corner_SW);
+            }
+        }
+    }
+
 
     public GameObject InstantiatePawn (Vector2Int _position, GameObject _pawn) {
         var newObject = Instantiate (_pawn, transform);

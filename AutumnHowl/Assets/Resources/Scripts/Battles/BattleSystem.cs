@@ -56,9 +56,22 @@ public class BS_Start : BattleState
         {
             controller.AddCharacter(enemy.enemyPrefab.GetComponent<Char_Battle>(), enemy.enemyStartPosition);
         }
+
         // Add layout to battle
         controller.LoadLayout();
         
+        //Check to see if a player start position was loaded and move the player there
+        if (IDToObj<BattlePlayerStartPos>.TryGet(BattlePlayerStartPos.REFERENCE_ID, out var playerStart))
+        {
+            GameInstance.Playerbody.transform.position = playerStart.transform.position;
+            Vector3 startPos = BattleGrid.Instance.transform.InverseTransformPoint(playerStart.transform.position);
+
+            ((Char_Battle_Player)GameInstance.Playerbody).TeleportPawnTo(
+                new Vector2Int(Mathf.RoundToInt(startPos.x), Mathf.RoundToInt(startPos.y)));
+
+            GameObject.Destroy(playerStart.gameObject);
+        }
+
         // Display opening text
         controller.textEvent.textEvent = controller.gameState.currentGameState.currentBattle.openingText;
         controller.textEvent.textEvent.OnFinish.AddListener(() =>

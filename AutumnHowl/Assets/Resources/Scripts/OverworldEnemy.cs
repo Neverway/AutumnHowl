@@ -18,6 +18,8 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
     Vector3 enteredBattlePosition;
     public int homeCycle = -1;
 
+    private SaveData DEBUG_LastLoadedData;
+
     public void EnterBattle()
     {
         //Setup values to show death animation when they reenter the scene
@@ -83,6 +85,10 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
 
     public override void OnLoadInstance(SaveData saveData)
     {
+        DEBUG_LastLoadedData = saveData;
+        if (saveData == null)
+            return;
+
         if (saveData.homeCycle >= 0 && GameInstance.Gamestate.currentCycle != saveData.homeCycle)
         {
             Destroy(gameObject);
@@ -108,11 +114,7 @@ public class OverworldEnemy : AutoGUIDObject<OverworldEnemy.SaveData>
         enemyRemains.gameObject.SetActive(saveData.isDefeated && saveData.hasShownDeathAnimation);
 
     }
-    public override void OnNewInstance() => OnLoadInstance(new SaveData() 
-    { 
-        homePosition = transform.position,
-        homeCycle = homeCycle
-    } );
+    public override void OnNewInstance() { }
     public override SaveData OnSaveInstance() => new SaveData()
     {
         isDefeated = isDefeated,

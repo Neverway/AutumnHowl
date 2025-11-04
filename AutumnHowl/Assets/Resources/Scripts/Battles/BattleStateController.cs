@@ -69,6 +69,12 @@ public class BattleStateController : MonoBehaviour
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
     private IEnumerator Start()
     {
+        while (battlePlayer == null)
+        {
+            if (GameInstance.Playerbody != null && GameInstance.Playerbody is Char_Battle_Player player)
+                battlePlayer = player;
+        }
+
         CheckAndReportNullReferences();
         
         // Wait for the battle grid to initialize
