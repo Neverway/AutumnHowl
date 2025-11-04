@@ -138,7 +138,7 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
         
         if (statePrevious == BossState.BurntOut || statePrevious == BossState.BurntOut2)
         {
-            move.y = 6;
+            move.y = 5;
         }
         else
         {
@@ -214,6 +214,8 @@ public class Char_Battle_Beast : Char_Battle_BasicAttacker
                     {
                         //SpawnEnemyAtRandomLocation();
                     }
+
+                    battleStateController.stepsRemaining = 20;
                     currentRealTimeAttacksTilBurnout = 9999999;
                     echoCoroutine = StartCoroutine(EchoAttackCoroutine(0.5f, 0.5f));
                     clawSwipeCoroutine = StartCoroutine(ClawSwipeAttackCoroutine(0.5f, 0.5f));
