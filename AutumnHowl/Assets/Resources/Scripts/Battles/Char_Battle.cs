@@ -406,30 +406,34 @@ public abstract class Char_Battle : Character
 
         //Compare the distance of the tiles before picking one.
         //If there's equadistant options, pick at random.
-        float closestDistance = 9999;
-        List<Vector2Int> sameDistanceTiles = new List<Vector2Int> ();
+        float farthest = 0;
+        //Note: I went with the farthest tiles as-the-crow-flies because
+        //      while all these tiles are the same number of steps from
+        //      the player, this behavior makes enemies prefer approach from cardinal directions.
+        //      In theory we could make it a setting: have them prefer cardinal, diagonal (nearest), or random!
+        List<Vector2Int> sameScoreTiles = new List<Vector2Int> ();
         foreach (var tile in possibleTiles)
         {
             float distance = (tile - playerPos).magnitude;
-            if (distance < closestDistance)
+            if (distance > farthest)
             {
-                sameDistanceTiles.Clear ();
-                sameDistanceTiles.Add (tile);
-                closestDistance = distance;
+                sameScoreTiles.Clear ();
+                sameScoreTiles.Add (tile);
+                farthest = distance;
                 lowestTile = tile;
             }
-            else if (distance == closestDistance)
+            else if (distance == farthest)
             {
-                sameDistanceTiles.Add(tile);
+                sameScoreTiles.Add(tile);
             }
         }
-        if (sameDistanceTiles.Count == 1)
+        if (sameScoreTiles.Count == 1)
         {
-            return sameDistanceTiles[0];
+            return sameScoreTiles[0];
         }
 
-        int n = UnityEngine.Random.Range(0,sameDistanceTiles.Count);
-        return sameDistanceTiles[n];
+        int n = UnityEngine.Random.Range(0,sameScoreTiles.Count);
+        return sameScoreTiles[n];
     }
 
 
