@@ -202,5 +202,14 @@ public class Char_Battle_Player : Char_Battle , IsPlayerCharacter
         inputDelay = false;
     }
 
+    /// <summary>
+    /// Tells gridPather to update the pathfinding values for finding this pawn.
+    /// </summary>
+    public void UpdatePathing ()
+    {
+        gridPather.GetPathToTarget (gridPawnController);
+    }
+
+
     #endregion
 }

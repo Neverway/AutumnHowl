@@ -153,6 +153,7 @@ public class BS_GridAction : BattleState
         controller.stepsRemaining = activeWave.waveSteps;
         controller.battlePlayer.canMove = true;
         controller.OnStartWave?.Invoke();
+        controller.battlePlayer.UpdatePathing ();
     }
 
     public override void OnStateUpdate()
