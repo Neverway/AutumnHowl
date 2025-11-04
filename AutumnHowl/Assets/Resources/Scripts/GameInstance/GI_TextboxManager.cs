@@ -352,8 +352,6 @@ public class GI_TextboxManager : MonoBehaviour
         
         textEventActive = false;
         Destroy(textbox.gameObject);
-        Debug.Log($"Erry: currentTextEvent {currentTextEvent == null}");
-        Debug.Log($"Erry: currentTextEvent.OnFinish {currentTextEvent.OnFinish == null}");
         currentTextEvent.OnFinish?.Invoke();
         Clear();
         return false;

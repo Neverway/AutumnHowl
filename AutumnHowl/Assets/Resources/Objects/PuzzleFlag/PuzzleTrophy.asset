@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288f5928cc8e36947805ceeac194d1f1, type: 3}
+  m_Name: PuzzleTrophy
+  m_EditorClassIdentifier: 
+  <UniqueID>k__BackingField: PuzzleTrophy
+  displayName: Puzzle Trophy
+  description: A well deserved reward for beating all of the puzzles
+  canNotDiscard: 0
+  allowMultiple: 1
+  useableInBattle: 0
+  useableInOverworld: 0
+  buyCost: 5000
+  sellCost: 500
+  effectsOnConsume:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

@@ -93,4 +93,10 @@ public interface AutoGUIDListener
                 guidInstance.Value.OnLoadGUID_NoData();
         }
     }
+    [InvokeBeforeNewGame]
+    private static void OnNewGame()
+    {
+        //Clear all GUIDSaveData
+        GUIDSaveData = new();
+    }
 }

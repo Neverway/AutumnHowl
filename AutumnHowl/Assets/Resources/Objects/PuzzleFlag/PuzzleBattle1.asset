@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
+  m_Name: PuzzleBattle1
+  m_EditorClassIdentifier: 
+  targetLevelScene: {fileID: 102900000, guid: 61833eeb48caac84ca7e58e19a0f18a9, type: 3}
+  mapID: PuzzleBattle
+  openingText:
+    frames:
+    - name: 
+      chatContent: Get to the flag!
+      portrait: {fileID: 0}
+      chatterVoice: {fileID: 0}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 0
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    OnFinish:
+      m_PersistentCalls:
+        m_Calls: []
+  victoryLevels: 1
+  victoryGold: 20
+  battleSequence:
+    waves:
+    - rid: 275979688053833729
+  layoutPrefab: {fileID: 6746692692892835251, guid: d635416995363044a855f16916a2f7a4, type: 3}
+  enemySpawnLocations: []
+  victoryState:
+    rid: 275979688053833730
+  music: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 275979688053833729
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveText:
+          frames: []
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveAttack: {fileID: 0}
+        waveSteps: 100
+    - rid: 275979688053833730
+      type: {class: PuzzleCompleted, ns: , asm: Assembly-CSharp}
+      data: 

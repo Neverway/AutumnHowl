@@ -33,14 +33,7 @@ public class GI_AuHoGameState : MonoBehaviour
     #region=======================================( Functions )======================================================= //
 
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    public void Awake()
-    {
-        currentGameState = new AuHoGameState()
-        {
-            player = currentGameState.player,
-            currentCycle = currentGameState.currentCycle,
-        };
-    }
+
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
     [ContextMenu("NEXT CYCLE")]
     private void NextCycleTEST()
@@ -221,6 +214,18 @@ public class AuHoGameState
         Debug.Log("Appear");
         SetCycleAppearances();
     }
+    
+    [InvokeBeforeNewGame(int.MaxValue - 100)]
+    public static void OnNewGame()
+    {
+        var currentState = GameInstance.Get<GI_AuHoGameState>().currentGameState;
+        currentState = new AuHoGameState()
+        {
+            player = currentState.player,
+        };
+    }
+
+
     [Reload] static bool isLoadingMap = false;
     public static IEnumerator CoLoadMapFromLoadingGame(Vector2 characterPostiion, string mapID)
     {

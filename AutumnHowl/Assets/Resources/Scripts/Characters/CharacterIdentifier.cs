@@ -122,8 +122,12 @@ public class CharacterIdentifier
         }
 
     }
-    
-    
+    [InvokeBeforeNewGame]
+    public static void OnNewGame()
+    {
+        persistentCharacters = new();
+    }
+
     [Serializable]
     public class SaveData
     {
