@@ -361,46 +361,79 @@ public abstract class Char_Battle : Character
             }
         }
     }
-    
-    /// <summary>
-    /// Compares tiles numbers, for pathfinding
-    /// </summary>
-    /// <param name="checkPos"></param>
-    /// <param name="lowestTileNumber"></param>
-    /// <returns></returns>
-    protected bool TestTile (Vector2Int checkPos, int lowestTileNumber)
-    {
-        if (battleGrid.IsMoveable (checkPos.x, checkPos.y))
-        {
-            //Check if tile is "unassigned" to avoid stepping on tiles that aren't part of the path.
-            if (gridPather.grid[checkPos.x, checkPos.y] == BattleGridPather.UnassignedTileNumber)
-            {
-                return false;
-            }
-            if (gridPather.grid[checkPos.x, checkPos.y] < lowestTileNumber)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
+    /// <summary>
+    /// Returns the tile with the lowest path number that is closest to the player.
+    /// If there are no valid tiles, returns -1,-1 which tells the character to not move.
+    /// </summary>
+    /// <returns></returns>
     protected Vector2Int GetLowestTileToTarget ()
     {
+        var playerPos = battleStateController.battlePlayer.gridPawnController.position;
         var lowestTileNumber = 9999;
         var lowestTile = new Vector2Int (-1, -1);
 
+        List<Vector2Int> possibleTiles = new List<Vector2Int> ();
+
         // Check surrounding tiles
+        // If multiple are found, they should be added to the possibleTiles list
         DirectionUtility.ForEachDirection ((direction) =>
         {
             Vector2Int checkPos = gridPawnController.position + direction.Info ().direction;
-            if (TestTile (checkPos, lowestTileNumber))
+            if (battleGrid.IsMoveable (checkPos.x,checkPos.y)==false) return;
+            int n = gridPather.grid[checkPos.x, checkPos.y];
+            if (n == BattleGridPather.UnassignedTileNumber)
+            {
+                return;
+            }
+
+            if (n < lowestTileNumber)
             {
                 lowestTileNumber = gridPather.grid[checkPos.x, checkPos.y];
-                lowestTile = checkPos;
+                possibleTiles.Clear ();
+                possibleTiles.Add (checkPos);
+            }
+            else if (n == lowestTileNumber)
+            {
+                possibleTiles.Add(checkPos);
             }
         });
-        return lowestTile;
+        if (possibleTiles.Count == 0)
+        {
+            //if there's no possible tiles, return lowestTile which is still -1,-1 at this point.
+            return lowestTile;
+        }
+
+        //Compare the distance of the tiles before picking one.
+        //If there's equadistant options, pick at random.
+        float farthest = 0;
+        //Note: I went with the farthest tiles as-the-crow-flies because
+        //      while all these tiles are the same number of steps from
+        //      the player, this behavior makes enemies prefer approach from cardinal directions.
+        //      In theory we could make it a setting: have them prefer cardinal, diagonal (nearest), or random!
+        List<Vector2Int> sameScoreTiles = new List<Vector2Int> ();
+        foreach (var tile in possibleTiles)
+        {
+            float distance = (tile - playerPos).magnitude;
+            if (distance > farthest)
+            {
+                sameScoreTiles.Clear ();
+                sameScoreTiles.Add (tile);
+                farthest = distance;
+                lowestTile = tile;
+            }
+            else if (distance == farthest)
+            {
+                sameScoreTiles.Add(tile);
+            }
+        }
+        if (sameScoreTiles.Count == 1)
+        {
+            return sameScoreTiles[0];
+        }
+
+        int n = UnityEngine.Random.Range(0,sameScoreTiles.Count);
+        return sameScoreTiles[n];
     }
 
 
