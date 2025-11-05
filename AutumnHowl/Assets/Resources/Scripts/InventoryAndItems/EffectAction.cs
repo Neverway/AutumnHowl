@@ -146,7 +146,11 @@ public class ModifyCorruptionAction : TargetedEffectAction
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
-    public override void ApplyEffectToTarget(CharacterIdentifier user) => user.Stats.ModifyCorruption(amount);
+    public override void ApplyEffectToTarget(CharacterIdentifier target)
+    {
+        CharacterStats stats = target.Stats;
+        stats.ModifyCorruption(modifierType.ApplyMod(amount, stats.corruption, stats.maxCorruption));
+    }
     public override string DescribeNoFormat()
     {
         string corrupts = "Corrupts";
@@ -176,7 +180,11 @@ public class ModifyPowerAction : TargetedEffectAction
     public StatModType modifierType = StatModType.Flat;
     public int amount = 1;
 
-    public override void ApplyEffectToTarget (CharacterIdentifier user) => user.Stats.ModifyPower (amount);
+    public override void ApplyEffectToTarget (CharacterIdentifier target)
+    {
+        CharacterStats stats = target.Stats;
+        stats.ModifyPower(Mathf.RoundToInt(modifierType.ApplyMod(amount, stats.power, stats.maxPower)));
+    }
     public override string DescribeNoFormat ()
     {
         string power = "Restores Power of";

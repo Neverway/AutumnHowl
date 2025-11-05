@@ -81,8 +81,10 @@ public class CharacterStats
 
             if (health + _amount > maxHealth)
             {
+                if (health != maxHealth)
+                    GameInstance.Get<GI_WidgetManager>().SpawnEffectText("MAX HP", owner.transform.position, 1);
+
                 health = maxHealth;
-                GameInstance.Get<GI_WidgetManager>().SpawnEffectText("MAX", owner.transform.position, 1);
             }
             else
             {
@@ -221,7 +223,7 @@ public class CharacterStats
     public void ModifyPower (int _amount)
     {
         power += _amount;
-        GameInstance.Get<GI_WidgetManager> ().SpawnEffectText (_amount.ToString (), owner.transform.position, 5);
+        GameInstance.Get<GI_WidgetManager> ().SpawnEffectText(_amount.ToString (), owner.transform.position, 5);
         power = Mathf.Clamp (power, 0, maxPower);
     }
 

@@ -871,14 +871,13 @@ public interface ICreatesGameObject
     {
         //Ensure only ONE random call happens instead of uncertain amounts
         int newSeed = Random.Range(int.MinValue, int.MaxValue);
-        Random.State oldSeedState = Random.state;
+        var oldSeedState = Random.state;
         Random.InitState(newSeed);
         GameObject created = GetCreatedGameObject();
         Random.state = oldSeedState;
         return created;
     }
     protected GameObject GetCreatedGameObject();
-    //protected int GetSeed();
 }
 public class NoObjectCreator : ICreatesGameObject
 {
