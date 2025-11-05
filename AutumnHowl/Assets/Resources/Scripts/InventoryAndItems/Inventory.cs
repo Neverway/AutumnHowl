@@ -132,6 +132,11 @@ public class Inventory
 
         return false;
     }
+
+    public bool TryRemoveItem(Item _item)
+    {
+        return items.Remove(_item);
+    }
     
     public bool TryUseItem(int _atIndex, CharacterIdentifier user, int _inList = 0)
     {

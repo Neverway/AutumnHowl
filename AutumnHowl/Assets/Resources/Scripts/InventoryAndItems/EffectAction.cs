@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>Base class for all EffectActions! 
 /// (Polymorphic and serializeable actions that can be defined on objects) </summary>
@@ -216,6 +217,32 @@ public class GiveItemsEffect : EffectAction
         Item[] items = itemToGive.GetItems(UnityEngine.Random.Range(int.MinValue, int.MaxValue));
         foreach (Item item in items)
             inventoryToAddTo.TryAddItem(item);
+    }
+
+    public override string DescribeNoFormat() => $"[{EffectDescription}]";
+}
+
+[Serializable]
+public class TakeItemsEffect : EffectAction
+{
+    //[Polymorphic, SerializeReference] public EffectActionTarget target = new TargetSelf();
+    public string EffectDescription;
+    public Item itemToTake;
+    public UnityEvent OnSuccess, OnFail;
+    
+    public override void ApplyEffect(CharacterIdentifier user)
+    {
+        if (!user.IsPlayer()) return;
+
+        Inventory inventoryToRemoveFrom = GameInstance.Gamestate.inventory;
+        if (inventoryToRemoveFrom.TryRemoveItem(itemToTake))
+        {
+            OnSuccess?.Invoke();
+        }
+        else
+        {
+            OnFail?.Invoke();
+        }
     }
 
     public override string DescribeNoFormat() => $"[{EffectDescription}]";

@@ -41,6 +41,7 @@ MonoBehaviour:
     enemyStartPosition: {x: 2, y: 5}
   victoryState:
     rid: 26149116751642627
+  music: 6
   references:
     version: 2
     RefIds:
