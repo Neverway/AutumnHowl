@@ -23,7 +23,7 @@ public class ApplyModsAsPlayerOnActive : MonoBehaviour
             GameInstance.Gamestate.player != null;
         }
         );
-        if (targets == null) targets = new TargetSelf();
+        targets ??= new TargetSelf();
         toRemove = modifier.GetNewRegisteredModifier(targets.GetTargetsFrom(GameInstance.Gamestate.player));
     }
 }

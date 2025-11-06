@@ -11,7 +11,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GI_WidgetManager : MonoBehaviour
@@ -228,6 +227,9 @@ public class GI_WidgetManager : MonoBehaviour
 
     public void SpawnEffectText(string _amount, Vector3 _position, int _mode, float _delay=0)
     {
+        if (string.IsNullOrWhiteSpace(_amount)) return;
+        if (_amount == "0") return;
+
         StartCoroutine(CoSpawnEffectText(_amount, _position, _mode, _delay));
     }
 
