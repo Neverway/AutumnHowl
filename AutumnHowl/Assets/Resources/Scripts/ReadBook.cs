@@ -14,7 +14,7 @@ public class ReadBook : MonoBehaviour
 
     public void StartReadingBook()
     {
-        GameInstance.SendCoroutine(Co_ReadBook().UsingSeed(100));
+        GameInstance.SendCoroutine(Co_ReadBook());
     }
 
     public IEnumerator Co_ReadBook()
@@ -29,6 +29,7 @@ public class ReadBook : MonoBehaviour
             while (true)
             {
                 Debug.Log($"Random Number = {Random.Range(0, 1000)}");
+
                 string optionLeft = (pages.IsIndexInRange(pageIndex - 1) ? "Previous Page" : "Close Book");
                 string optionRight = (pages.IsIndexInRange(pageIndex + 1) ? "Next Page" : "Close Book");
                 yield return WB_TextChoice.WaitForChoice(pages[pageIndex], true, optionLeft, optionRight);

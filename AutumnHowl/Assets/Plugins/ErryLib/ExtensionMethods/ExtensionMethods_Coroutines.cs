@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class ExtensionMethods_Coroutines
 {
+    //DUNNO IF THIS ACTUALLY WORKS? FIRST VALUE SEEMS TO BE OFF
     public static IEnumerator UsingSeed(this IEnumerator enumerator, int seed)
     {
         var oldSeedState = Random.state;
@@ -20,15 +21,22 @@ public static class ExtensionMethods_Coroutines
             Random.state = enumeratorSeedState;
             if (!enumerator.MoveNext())
             {
-                //Debug.Log("COROUTINE END");
                 Random.state = oldSeedState;
                 yield break;
             }
-            //Debug.Log("COROUTINE CONTINUE");
             yield return enumerator.Current;
             enumeratorSeedState = Random.state;
 
             Random.state = oldSeedState;
+        }
+    }
+    //Needs to be tested to see if this works
+    public static IEnumerator ThenDo(this IEnumerator enumerator, params IEnumerator[] otherEnumerators)
+    {
+        yield return enumerator;
+        foreach (IEnumerator current in otherEnumerators)
+        {
+            yield return current;
         }
     }
 }
