@@ -69,6 +69,13 @@ public class WB_Textbox : MonoBehaviour
                 chat.rectTransform.offsetMin = new Vector2(100, 15);
                 chat.rectTransform.offsetMax = new Vector2(-200, -15);
                 break;
+            case TextboxDisplayMode.centered:
+                SetDrawInBack();
+                portrait.enabled = false;
+                name.enabled = false;
+                chat.rectTransform.offsetMin = new Vector2(200, 15);
+                chat.rectTransform.offsetMax = new Vector2(-200, -15);
+                break;
         }
     }
 

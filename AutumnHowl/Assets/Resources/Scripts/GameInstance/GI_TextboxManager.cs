@@ -14,6 +14,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
+// ReSharper disable once HollowTypeName
 public class GI_TextboxManager : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
@@ -448,4 +449,5 @@ public enum TextboxDisplayMode
     dialogue,
     shopMono,
     shopDia,
+    centered,
 }
