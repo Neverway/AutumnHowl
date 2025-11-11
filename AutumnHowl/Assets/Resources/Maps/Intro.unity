@@ -4545,7 +4545,8 @@ MonoBehaviour:
       preventTextContinuing: 1
       autoProgressOnComplete: 1
     - name: 
-      chatContent: '{spd=0.05}Somthing something eternal autumn{spd=3} {spd=0.05}'
+      chatContent: '{spd=0.05}The lands are cloaked in a forest of eternal Autumn{spd=3}
+        {spd=0.05}'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 11400000, guid: 8627461905224cf4686012d99980d1c2, type: 2}
       OnFrameCompleted:
@@ -4556,7 +4557,7 @@ MonoBehaviour:
       preventTextContinuing: 1
       autoProgressOnComplete: 1
     - name: 
-      chatContent: '{spd=0.05}Something something beast beyond the barrier{spd=3}
+      chatContent: '{spd=0.05}An evil beast lurks beyond the forrests barrier{spd=3}
         {spd=0.05}'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 11400000, guid: 8627461905224cf4686012d99980d1c2, type: 2}

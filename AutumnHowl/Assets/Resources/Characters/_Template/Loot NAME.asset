@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda8f9292e85913a683492f258b230b5, type: 3}
-  m_Name: NAME Voice
+  m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
+  m_Name: Loot NAME
   m_EditorClassIdentifier: 
-  textChatter: {fileID: 0}
-  chatterFrequency: 1
-  chatterPitchMin: 0
-  chatterPitchMax: 0
+  notes: 
+  itemsToGrant:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

@@ -463,6 +463,10 @@ PrefabInstance:
       value: Splash
       objectReference: {fileID: 0}
     - target: {fileID: 7125903689475217921, guid: e2f30d12d7f17cbc7ab45202b7c3af07, type: 3}
+      propertyPath: m_Volume
+      value: 0.662
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125903689475217921, guid: e2f30d12d7f17cbc7ab45202b7c3af07, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
