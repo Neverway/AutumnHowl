@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222c761a0527af5dd9e2a3248f67ad96, type: 3}
-  m_Name: SaltBat_Battle
+  m_Name: Battle Saltbat
   m_EditorClassIdentifier: 
   targetLevelScene: {fileID: 102900000, guid: 23ba94449cea27896ba8a4ab2595882b, type: 3}
   mapID: Battle
   openingText:
     frames:
     - name: 
-      chatContent: '*A flock of wild saltbat approaches!'
+      chatContent: '*A flock of wild saltbats approaches!'
       portrait: {fileID: 0}
       chatterVoice: {fileID: 0}
       OnFrameCompleted:
@@ -43,6 +43,7 @@ MonoBehaviour:
     enemyStartPosition: {x: 3, y: 4}
   victoryState:
     rid: 26149116751642625
+  music: 0
   references:
     version: 2
     RefIds:

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4642924554136743999}
   - component: {fileID: 8037564537701802603}
   m_Layer: 0
-  m_Name: SaltBat Spawn
+  m_Name: _Spawn Saltbat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

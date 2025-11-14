@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11da011b30d71b94db675f2296c52cac, type: 3}
-  m_Name: BattleLoot Saltbat
+  m_Name: Loot Saltbat
   m_EditorClassIdentifier: 
   notes: 
   itemsToGrant:

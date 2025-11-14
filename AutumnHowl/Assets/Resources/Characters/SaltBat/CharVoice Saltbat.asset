@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bda8f9292e85913a683492f258b230b5, type: 3}
-  m_Name: SaltBat Voice
+  m_Name: CharVoice Saltbat
   m_EditorClassIdentifier: 
   textChatter: {fileID: 0}
   chatterFrequency: 1
