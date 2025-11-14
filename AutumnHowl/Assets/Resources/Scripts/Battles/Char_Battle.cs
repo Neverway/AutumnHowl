@@ -18,34 +18,41 @@ public abstract class Char_Battle : Character
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
-    public List<AttackSequence> AttackSequences;
-
-    /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+    [Header("General Battle Variables")]
+    [Tooltip("If enabled, the character can do stuff, like attacking and moving")]
     public bool canMove;
-    //If true, this character can be moved by "pushing" attacks
+    [Tooltip("A complicated messy system for storing attacks this character can perform. (This is sometimes populated procedurally)")]
+    public List<AttackSequence> AttackSequences;
+    [Tooltip("If enabled, this character can moved by attacks that 'push'")]
     public bool pushable;
+    
+    [Header("Hop Animation")]
     [Tooltip("Time in seconds it takes to hop from one grid position to another")]
     public float gridHopAnimation_Seconds = 0.15f;
     [Tooltip("Peak height to reach during hop animation")]
     public float gridHopAnimation_Height = 0.35f;
     [Tooltip("Transform to use for the hop animation")]
     public Transform gridHopAnimationContainer;
-    /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
 
+    /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+    //This is so we can invert the direction the pawn faces when it attacks (currently only used for the Player pawn).
+    [HideInInspector] public bool invertAttackFacingDirections = false;
+    
+    /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     //unique identifier for a stat mod
     private const string Mod_ConditionalBlock = "ConditionalBlock";
+    // ^ Scary! ~Liz
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    [Header("Battle References")]
     public GridPawn gridPawnController;
     public BattleGridPather gridPather;
     public BattleGrid battleGrid;
     public BattleStateController battleStateController;
-    //If this is not null, this object gets spawned when the character dies.
+    [Tooltip("If set, create this prefab when the character dies")]
     public GameObject spawnOnDeath;
     public bool useBlock = false;
 
-    //This is so we can invert the direction the pawn faces when it attacks (currently only used for the Player pawn).
-    [HideInInspector] public bool invertAttackFacingDirections = false;
 
     private Coroutine currentGridHop;
     #endregion
