@@ -684,7 +684,7 @@ MonoBehaviour:
     leavingBattle: 0
     enteredBattleFromMap: 
     enteredBattleFromLocation: {x: 0, y: 0}
-    money: 99999
+    money: 0
     kills: 0
     deaths: 0
     playtime: 0
