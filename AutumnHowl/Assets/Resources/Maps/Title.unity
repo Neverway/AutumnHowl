@@ -1245,7 +1245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1748106790}
-  - component: {fileID: 1748106789}
+  - component: {fileID: 1748106791}
   m_Layer: 0
   m_Name: WorldSettings
   m_TagString: Untagged
@@ -1253,20 +1253,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1748106789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748106788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5342f04ca55e860a80a591624f31aef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnOffMusicSelection: 0
-  music: 1
 --- !u!4 &1748106790
 Transform:
   m_ObjectHideFlags: 0
@@ -1282,6 +1268,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1589659525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1748106791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748106788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df0f55d557ce284aa8266027910bf17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnOffMusicSelection: 0
+  musicTrack: 1
 --- !u!224 &1825888069 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2735062518934660987, guid: 7dd494a3e22715e088eed32d8823f80f, type: 3}

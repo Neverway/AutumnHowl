@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3035767572820107707}
   - component: {fileID: 7069582619323147952}
+  - component: {fileID: 1842966639411866067}
   m_Layer: 0
   m_Name: WorldSettings
   m_TagString: Untagged
@@ -44,8 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5342f04ca55e860a80a591624f31aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1842966639411866067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667583419100332156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df0f55d557ce284aa8266027910bf17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   turnOffMusicSelection: 0
-  music: 0
+  musicTrack: 0
 --- !u!1 &2323947548703106034
 GameObject:
   m_ObjectHideFlags: 0

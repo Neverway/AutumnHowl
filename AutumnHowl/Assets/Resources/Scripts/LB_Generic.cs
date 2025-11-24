@@ -16,6 +16,8 @@ public class LB_Generic : MonoBehaviour
 {
     #region========================================( Variables )======================================================//
     /*-----[ Inspector Variables ]------------------------------------------------------------------------------------*/
+    [Tooltip("When enabled, the currently playing music track will not be overridden")]
+    public bool turnOffMusicSelection = false;
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -25,6 +27,7 @@ public class LB_Generic : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    [Tooltip("The music track to begin playing when this level loads")]
     public GI_AudioManager.Music musicTrack = GI_AudioManager.Music.none;
     
     #endregion
@@ -32,9 +35,16 @@ public class LB_Generic : MonoBehaviour
 
     #region=======================================( Functions )=======================================================//
     /*-----[ Mono Functions ]-----------------------------------------------------------------------------------------*/
-    public void Start()
+    private void Start()
     {
-        GI_AudioManager.Instance.SetMusic(musicTrack);
+        GameInstance.Get<GI_TransitionManager>().Fadein();
+        if (turnOffMusicSelection == false) StartCoroutine(StartMusicRoutine());
+    }
+
+    private IEnumerator StartMusicRoutine ()
+    {
+        yield return new WaitUntil (() => GI_AudioManager.Instance != null);
+        GI_AudioManager.Instance.SetMusic (musicTrack);
     }
 
 
