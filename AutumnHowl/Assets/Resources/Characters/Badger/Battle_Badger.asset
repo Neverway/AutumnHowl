@@ -41,6 +41,7 @@ MonoBehaviour:
     enemyStartPosition: {x: 2, y: 4}
   victoryState:
     rid: 6522102354630410240
+  music: 0
   references:
     version: 2
     RefIds:
@@ -49,7 +50,6 @@ MonoBehaviour:
       data:
         waves:
         - rid: 26148788346028043
-        - rid: 26148788346028044
     - rid: 26148788346028043
       type: {class: BattleWave, ns: , asm: Assembly-CSharp}
       data:
@@ -70,28 +70,7 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
         waveAttack: {fileID: 0}
-        waveSteps: 5
-    - rid: 26148788346028044
-      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
-      data:
-        waveText:
-          frames:
-          - name: 
-            chatContent: The saltbat is preparing a melee attack!
-            portrait: {fileID: 0}
-            chatterVoice: {fileID: 0}
-            OnFrameCompleted:
-              m_PersistentCalls:
-                m_Calls: []
-            displayMode: 0
-            preventTextSkipping: 0
-            preventTextContinuing: 0
-            autoProgressOnComplete: 0
-          OnFinish:
-            m_PersistentCalls:
-              m_Calls: []
-        waveAttack: {fileID: 0}
-        waveSteps: 8
+        waveSteps: 3
     - rid: 6522102354630410240
       type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
       data: 
