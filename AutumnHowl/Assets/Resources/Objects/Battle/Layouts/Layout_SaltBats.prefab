@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb38e89d35b46148a93f29bb1271833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowerBounds: {x: 0, y: 4}
-  upperBounds: {x: 1, y: 4}
+  lowerBounds: {x: 0, y: 0}
+  upperBounds: {x: 4, y: 0}
   pawnsToPlace:
   - {fileID: 2702253734167480065, guid: e72fbbc1f89fa944cbcf8b4e549c4d9f, type: 3}
   - {fileID: 2702253734167480065, guid: e72fbbc1f89fa944cbcf8b4e549c4d9f, type: 3}
