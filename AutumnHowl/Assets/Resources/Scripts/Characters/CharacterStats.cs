@@ -67,10 +67,13 @@ public class CharacterStats
     /// <param name="_direction">The direction in which this effect is coming from (used for detecting damage direction)</param>
     public void ModifyHealth(float _amount, Vector2Int _direction = new Vector2Int())
     {
+        
         // Character healed
         if (_amount > 0)
         {
-            //Create a heal event, stop if it gets interrupted by a modifier, and get modified value
+            GameInstance.SendCoroutine(owner.DisplayColorEffect(Color.green));
+            
+            // Create a heal event, stop if it gets interrupted by a modifier, and get modified value
             Event_Heal healEvent = new Event_Heal(Identifier, _amount);
             if (healEvent.IfInvokeInterrupted() || healEvent.healAmount <= 0) return;
             _amount = healEvent.healAmount;
@@ -78,7 +81,6 @@ public class CharacterStats
             if (_amount <= 0) return;
 
             owner.InvokeOnHeal();
-
             if (health + _amount > maxHealth)
             {
                 if (health != maxHealth)
@@ -100,6 +102,8 @@ public class CharacterStats
         // Character damaged
         if (_amount < 0)
         {
+            GameInstance.SendCoroutine(owner.DisplayColorEffect(Color.red));
+            
             //Create a damage event, stop if it gets interrupted by a modifier, and get modified value
             Event_TakeDamage damageEvent = new Event_TakeDamage(Identifier, _direction, -_amount);
             if (damageEvent.IfInvokeInterrupted() || damageEvent.damage <= 0) return;
@@ -199,6 +203,7 @@ public class CharacterStats
         // Corruption Increase
         if (_amount > 0)
         {
+            GameInstance.SendCoroutine(owner.DisplayColorEffect(new Color(0.25f,0.05f,0.75f)));
             if (corruption + _amount > maxCorruption)
             { 
                 corruption = maxCorruption;
@@ -211,6 +216,7 @@ public class CharacterStats
         // Corruption Decrease
         else if (_amount < 0)
         {
+            GameInstance.SendCoroutine(owner.DisplayColorEffect(Color.yellow));
             corruption += _amount;
         }
         corruption = Mathf.Clamp(corruption, 0, maxCorruption);

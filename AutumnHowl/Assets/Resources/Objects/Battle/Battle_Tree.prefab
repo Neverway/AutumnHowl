@@ -232,12 +232,20 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: 82ca5521bcd1abd46a9041978ea48a5d, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
+  _freezeCharacterMovement: 0
+  uniqueDeathBehavior: 0
   isDead: 0
   movement: {x: 0, y: 0}
+  facingDirection: {x: 0, y: 0}
   animator: {fileID: 0}
-  AttackSequences: []
+  characterSprite: {fileID: 8218532994369632249}
   canMove: 0
+  AttackSequences: []
   pushable: 0
+  gridHopAnimation_Seconds: 0.15
+  gridHopAnimation_Height: 0.35
+  gridHopAnimationContainer: {fileID: 0}
+  invertAttackFacingDirections: 0
   gridPawnController: {fileID: 8046438316640366819}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}

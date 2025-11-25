@@ -1012,6 +1012,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
   animator: {fileID: 1867420067129031397}
+  characterSprite: {fileID: 9012977918629766531}
   canPause: 1
   inLightZone: 0
   <SwingAnimator>k__BackingField: {fileID: 8111747414621678850}
@@ -1041,8 +1042,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4264719621217924197, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 8642731249078861319}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6972457444599413610 stripped
-Transform:
+--- !u!224 &6972457444599413610 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 8642731249078861319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9012977918629766531 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 8642731249078861319}
   m_PrefabAsset: {fileID: 0}

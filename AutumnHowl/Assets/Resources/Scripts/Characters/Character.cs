@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -54,6 +55,7 @@ public abstract class Character : MonoBehaviour
     protected Rigidbody2D _rigidbody;
     protected GI_AuHoGameState gameState;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected SpriteRenderer characterSprite;
 
 
     #endregion
@@ -158,6 +160,16 @@ public abstract class Character : MonoBehaviour
         animator.SetBool ("attacking", true);
         yield return new WaitForSeconds (0.2f);
         animator.SetBool ("attacking", false);
+    }
+
+    public IEnumerator DisplayColorEffect(Color _effectColor)
+    {
+        if (!characterSprite) yield break;
+        var originalColor = characterSprite.color;
+        var tween = characterSprite.DOColor(_effectColor, 0.1f);
+        yield return tween.WaitForCompletion();
+        if (!characterSprite) yield break;
+        characterSprite.DOColor(originalColor, 0.25f);
     }
 
     #endregion

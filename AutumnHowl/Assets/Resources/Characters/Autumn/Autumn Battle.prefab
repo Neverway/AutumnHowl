@@ -919,11 +919,14 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: b24d2966880d38346b08616f25c6896e, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
-  freezeCharacterMovement: 0
+  _freezeCharacterMovement: 0
+  uniqueDeathBehavior: 0
   isDead: 0
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
   animator: {fileID: 8407677613216461500}
+  characterSprite: {fileID: 2148916272030115486}
+  canMove: 0
   AttackSequences:
   - attacks: []
   - attacks: []
@@ -939,18 +942,17 @@ MonoBehaviour:
       visualEffect: {fileID: 0}
       direction: {x: 0, y: 0}
       pushing: 0
-  canMove: 0
   pushable: 0
   gridHopAnimation_Seconds: 0.15
   gridHopAnimation_Height: 0.35
   gridHopAnimationContainer: {fileID: 1341769465767893047}
+  invertAttackFacingDirections: 0
   gridPawnController: {fileID: 2113060241678384352}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
-  invertAttackFacingDirections: 0
   <SwingAnimator>k__BackingField: {fileID: 2344505522417123672}
 --- !u!114 &2113060241678384352
 MonoBehaviour:

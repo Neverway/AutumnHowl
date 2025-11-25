@@ -197,22 +197,22 @@ public class GI_WidgetManager : MonoBehaviour
                 textComponent.text =
                     $"{_amount}";
                 break;
-            case 2:
+            case 2: // Defense damage
                 textComponent.color = Color.white;
                 textComponent.text =
                     $"<sprite index=8> {_amount}";
                 break;
-            case 3:
+            case 3: // ???
                 textComponent.color = Color.white;
                 textComponent.text =
                     $"<sprite index=3> {_amount}";
                 break;
-            case 4:
+            case 4: // Corruption
                 textComponent.color = new Color(0.25f,0.05f,0.75f);
                 textComponent.text =
                     $"{_amount}";
                 break;
-            case 5:
+            case 5: // ???
                 textComponent.color = Color.yellow;
                 textComponent.text =
                     $"{_amount}";

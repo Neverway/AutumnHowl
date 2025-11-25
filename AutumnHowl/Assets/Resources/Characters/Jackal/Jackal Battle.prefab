@@ -100,8 +100,13 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1449108568966244714}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
---- !u!4 &1673734515386349373 stripped
-Transform:
+--- !u!212 &787547314445363668 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
+  m_PrefabInstance: {fileID: 2339698727629392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1673734515386349373 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
@@ -125,10 +130,14 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: d812dd04686e0b3e2a72b7c5665bc62f, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
+  _freezeCharacterMovement: 0
+  uniqueDeathBehavior: 0
   isDead: 0
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
   animator: {fileID: 7931684597536962226}
+  characterSprite: {fileID: 787547314445363668}
+  canMove: 0
   AttackSequences:
   - attacks:
     - position: {x: 0, y: 1}
@@ -154,18 +163,17 @@ MonoBehaviour:
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
       direction: {x: -1, y: 0}
       pushing: 0
-  canMove: 0
   pushable: 0
   gridHopAnimation_Seconds: 0.15
   gridHopAnimation_Height: 0.35
   gridHopAnimationContainer: {fileID: 1673734515386349373}
+  invertAttackFacingDirections: 0
   gridPawnController: {fileID: 1449108568966244714}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
-  invertAttackFacingDirections: 0
   randomRetreat: 50
   skipFirstTurn: 0
 --- !u!114 &1449108568966244714

@@ -102,11 +102,14 @@ MonoBehaviour:
   template: {fileID: 11400000, guid: 380a919475a3a43928630d31c0b60f85, type: 2}
   isDefenseActive: 0
   startFaceDirection: {x: 0, y: -1}
-  freezeCharacterMovement: 0
+  _freezeCharacterMovement: 0
+  uniqueDeathBehavior: 0
   isDead: 0
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
   animator: {fileID: 0}
+  characterSprite: {fileID: 6377997341840455716}
+  canMove: 0
   AttackSequences:
   - attacks:
     - position: {x: 0, y: 0}
@@ -114,21 +117,22 @@ MonoBehaviour:
       visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
       direction: {x: 0, y: 0}
       pushing: 0
-  canMove: 0
   pushable: 0
   gridHopAnimation_Seconds: 0.15
   gridHopAnimation_Height: 0.35
   gridHopAnimationContainer: {fileID: 0}
+  invertAttackFacingDirections: 0
   gridPawnController: {fileID: 2301574754548831689}
   gridPather: {fileID: 0}
   battleGrid: {fileID: 0}
   battleStateController: {fileID: 0}
   spawnOnDeath: {fileID: 0}
   useBlock: 0
-  invertAttackFacingDirections: 0
   ignoreObstacles: 0
+  destroyOnHit: 1
   movementDelay: 0.7
   moveDirection: {x: 0, y: -1}
+  additionalCollisionPoints: []
   attackSequence:
     attacks:
     - position: {x: 0, y: 0}
