@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BarKeeper_0
+      name: Librarian_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8975920c199e10e1db12441ea199dcf1
-      internalID: 1174465554
+      spriteID: 06e3aaf0c9d51ae0da8e227b5fa03251
+      internalID: -1438459624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_1
+      name: Librarian_1
       rect:
         serializedVersion: 2
         x: 64
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce892d596a6ae8483823304401675773
-      internalID: 29944909
+      spriteID: f0f642b4a469d6f4a8e7cafe8e5b5d2e
+      internalID: 253377051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_2
+      name: Librarian_2
       rect:
         serializedVersion: 2
         x: 128
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aed91663616bb27ca9113ea90a13ab60
-      internalID: 526068294
+      spriteID: aa2e1ea8a7aed19adbf8fc529940afa6
+      internalID: -1671859816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_3
+      name: Librarian_3
       rect:
         serializedVersion: 2
         x: 192
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0527e0c31c8ef06ab9656e426d45603f
-      internalID: 804650776
+      spriteID: edf4b8fef662389a582ec60fd5ee80a4
+      internalID: -292379507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_4
+      name: Librarian_4
       rect:
         serializedVersion: 2
         x: 256
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41425dcbfaa95456298430370020262b
-      internalID: -20004583
+      spriteID: d7da84ff5ac584f4383e3a8dcc484d5d
+      internalID: 2013339343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_5
+      name: Librarian_5
       rect:
         serializedVersion: 2
         x: 320
@@ -255,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd56287a1630b5ee0a783778cc7e3a52
-      internalID: 1285635449
+      spriteID: e48fd4f667c2de263946595a9c66614d
+      internalID: -898286146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_6
+      name: Librarian_6
       rect:
         serializedVersion: 2
         x: 384
@@ -276,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12acbb19c739dc7a2aa4c9cbaf74b368
-      internalID: -1411151543
+      spriteID: d8b7994d4f37c1fd8b325a1db6732e6b
+      internalID: 1496207974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_7
+      name: Librarian_7
       rect:
         serializedVersion: 2
         x: 448
@@ -297,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edf7e99c2e343020a94d09c552c48c00
-      internalID: -664992429
+      spriteID: 92778b9a9323705928b774d6e6049bac
+      internalID: 1200006472
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_8
+      name: Librarian_8
       rect:
         serializedVersion: 2
         x: 512
@@ -318,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d63a29a3e8be692228dda78fc4f019ab
-      internalID: 1436931785
+      spriteID: f2762d0a6ff18ec028ce72a58dd6d9a5
+      internalID: 460558511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_9
+      name: Librarian_9
       rect:
         serializedVersion: 2
         x: 576
@@ -339,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ba57b51b1908e08986445ea027dd8c9
-      internalID: -582388042
+      spriteID: bb295496ac72e15279e9a304528c871f
+      internalID: -2109499061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_10
+      name: Librarian_10
       rect:
         serializedVersion: 2
         x: 640
@@ -360,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39c3043313b4023f2993e4ffc85c88d0
-      internalID: -1760734624
+      spriteID: bfc4de4bbdd091069afe544f4e82b43c
+      internalID: -232865667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_11
+      name: Librarian_11
       rect:
         serializedVersion: 2
         x: 704
@@ -381,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a04ce1f3b19769ec2bb4a9048c2457b0
-      internalID: -1929215549
+      spriteID: 2ee2f1d1f4f80c5b9b6032e61df05b4f
+      internalID: 203829817
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_12
+      name: Librarian_12
       rect:
         serializedVersion: 2
         x: 768
@@ -402,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 839e282c2de01afbf8706fd2b73643c8
-      internalID: 1169587282
+      spriteID: b97493014280231a5b6c057d98097cb8
+      internalID: -1664858613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_13
+      name: Librarian_13
       rect:
         serializedVersion: 2
         x: 832
@@ -423,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce09a295582da4eecbe79137f94e91c5
-      internalID: -1434934694
+      spriteID: 5fb18115ada4a506a894a6136f4de968
+      internalID: 1611631767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_14
+      name: Librarian_14
       rect:
         serializedVersion: 2
         x: 896
@@ -444,14 +444,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 002b9b1584c9fd9e197ff81536cd122c
-      internalID: 14538246
+      spriteID: 360b8c71ad42675a7af0336c3ba4a76b
+      internalID: -2103273035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_15
+      name: Librarian_15
       rect:
         serializedVersion: 2
         x: 960
@@ -465,14 +465,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59f549e53d5bcbb4a82f3a56918fda9a
-      internalID: -1649963767
+      spriteID: 7bfb364e5170720f182653ea66a8e7ac
+      internalID: -1048224259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_16
+      name: Librarian_16
       rect:
         serializedVersion: 2
         x: 1024
@@ -486,14 +486,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4279355717458bff89ccc18fd487674
-      internalID: -87892187
+      spriteID: 99a0913304cbecbf29ae8eef3926bf0c
+      internalID: 457451044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_17
+      name: Librarian_17
       rect:
         serializedVersion: 2
         x: 1088
@@ -507,14 +507,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f752259ddbc7e38048e4b5fec8e61649
-      internalID: -1660180154
+      spriteID: 7d5fd4b32426fe5b792baec03e6ae171
+      internalID: -1606308103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_18
+      name: Librarian_18
       rect:
         serializedVersion: 2
         x: 1152
@@ -528,14 +528,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a8d05cd10c8077258bc8621a82d2ed8
-      internalID: -1100147144
+      spriteID: a9a09a34fdd8a9d81bce9b4dbb162763
+      internalID: -1970235133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_19
+      name: Librarian_19
       rect:
         serializedVersion: 2
         x: 1216
@@ -549,14 +549,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5e9d27dc301e94798fc8f02e1f351bb
-      internalID: 1706410907
+      spriteID: 530448d3f26c9246fb478ef704db23ad
+      internalID: -25486555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_20
+      name: Librarian_20
       rect:
         serializedVersion: 2
         x: 0
@@ -570,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5981700c966ae48f817c826f0f53707
-      internalID: 1688609270
+      spriteID: bdbc8a5cff57a9fefb9abe3dfb6dc7c9
+      internalID: -1161386004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_21
+      name: Librarian_21
       rect:
         serializedVersion: 2
         x: 64
@@ -591,14 +591,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62314ccf4a45dcb2b985cca2a21fda0c
-      internalID: 412067887
+      spriteID: 8f0290f1b6b900325ac6c2da15e9f97d
+      internalID: -1197862501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_22
+      name: Librarian_22
       rect:
         serializedVersion: 2
         x: 128
@@ -612,14 +612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a379c2c1f68850d549d0345173a88cab
-      internalID: 408454078
+      spriteID: aba67c18a226b36ac8d7ab86c9b0cf34
+      internalID: 1190428920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_23
+      name: Librarian_23
       rect:
         serializedVersion: 2
         x: 192
@@ -633,14 +633,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31f4522c8c1e213b391743eb0ddc3504
-      internalID: -1234148880
+      spriteID: 3eb24d9f1cc238480857c6f3a193f6c9
+      internalID: 1238705708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_24
+      name: Librarian_24
       rect:
         serializedVersion: 2
         x: 256
@@ -654,14 +654,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1f46e8ab67eedc8a83af7198b1cc9f4
-      internalID: -1091216609
+      spriteID: 7429cb4c53b44c958b5f85500abba10e
+      internalID: 161020854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_25
+      name: Librarian_25
       rect:
         serializedVersion: 2
         x: 320
@@ -675,14 +675,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9e895dd89a60ea4b82d02cc40a53b6
-      internalID: -324287385
+      spriteID: e432410ca9542fbb9a097c97a03e53c4
+      internalID: 2098338907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_26
+      name: Librarian_26
       rect:
         serializedVersion: 2
         x: 384
@@ -696,14 +696,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 973c0f97b074122e3bb92c947c5633f8
-      internalID: 866953318
+      spriteID: 197ba5d2539fda401976ea14dd1f062a
+      internalID: 2123626968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_27
+      name: Librarian_27
       rect:
         serializedVersion: 2
         x: 448
@@ -717,14 +717,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3549720734c96d899a59295c10dcb91d
-      internalID: 1002305000
+      spriteID: f3c3e7a54120171348f77d30a388c96a
+      internalID: -487530807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_28
+      name: Librarian_28
       rect:
         serializedVersion: 2
         x: 512
@@ -738,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6e525d900dfa41bd9d0020ed172cdfe
-      internalID: -182324139
+      spriteID: 217c8ad01150074b48763ec0ab3ec7e4
+      internalID: -915209403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_29
+      name: Librarian_29
       rect:
         serializedVersion: 2
         x: 576
@@ -759,14 +759,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbda270ee4ee63600b54896e1b27278e
-      internalID: -1294596434
+      spriteID: 03d27a50818fbc132a065062b663dcf8
+      internalID: 886844553
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_30
+      name: Librarian_30
       rect:
         serializedVersion: 2
         x: 640
@@ -780,14 +780,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 745381d943cfdec2c998c78089590e37
-      internalID: 194365291
+      spriteID: f044f33b8416a5dd1be0350deb40bc63
+      internalID: -780961000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_31
+      name: Librarian_31
       rect:
         serializedVersion: 2
         x: 704
@@ -801,14 +801,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea42e0f2721714c6a972f9084ce24a7f
-      internalID: -1389455169
+      spriteID: 4512d9f7ecf53c17181fda93ebced275
+      internalID: 396180121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_32
+      name: Librarian_32
       rect:
         serializedVersion: 2
         x: 768
@@ -822,14 +822,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acf41d9ae9bde7eccb290a7b28854a16
-      internalID: -1882644014
+      spriteID: e80fc21ca4afa7aadb53f0cfe1e7f74c
+      internalID: -367789405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_33
+      name: Librarian_33
       rect:
         serializedVersion: 2
         x: 832
@@ -843,14 +843,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 364e822439562ba7b8d2439c7ec171a8
-      internalID: -1623874780
+      spriteID: f9e4172613044af15a8378a95ea2735a
+      internalID: -727739530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_34
+      name: Librarian_34
       rect:
         serializedVersion: 2
         x: 896
@@ -864,14 +864,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3af91f87b88e66648daa5e0c08789c3
-      internalID: -816383667
+      spriteID: a6d8add4829e2407591b7a3d689cbdfc
+      internalID: 1890413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_35
+      name: Librarian_35
       rect:
         serializedVersion: 2
         x: 960
@@ -885,14 +885,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d901c7a89892e668b30c5ba6d676a4
-      internalID: 862610941
+      spriteID: accb3f655941f913aa42e5fde3158dec
+      internalID: -762482573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_36
+      name: Librarian_36
       rect:
         serializedVersion: 2
         x: 1024
@@ -906,14 +906,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4d7362b357d4209a90de842c55e3f55
-      internalID: -940625575
+      spriteID: 3c1b6050a4634fcca8021a2e1ccccfee
+      internalID: -1020616410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_37
+      name: Librarian_37
       rect:
         serializedVersion: 2
         x: 1088
@@ -927,14 +927,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bb73dcf535bbfa40b6b3a81db960b2d
-      internalID: -179276353
+      spriteID: 470f44ed09bcf63b78c0528568957b05
+      internalID: -1809892095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_38
+      name: Librarian_38
       rect:
         serializedVersion: 2
         x: 1152
@@ -948,14 +948,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbe99d5b827cc122da1ed07207991a67
-      internalID: 543725182
+      spriteID: 4b4c989ae59a77463a0d6441400c7def
+      internalID: 1272224729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_39
+      name: Librarian_39
       rect:
         serializedVersion: 2
         x: 1216
@@ -969,14 +969,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95df4ff080e551bce8ecd538c4dad49f
-      internalID: 1229038775
+      spriteID: e071c991a307870ce956f92e92e4802a
+      internalID: -776287309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_40
+      name: Librarian_40
       rect:
         serializedVersion: 2
         x: 0
@@ -990,14 +990,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9099bf150286f703f9ffd3d59fe1e89c
-      internalID: -493045617
+      spriteID: 10915db51eb4f285fa6658140f11c11a
+      internalID: 1177490631
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_41
+      name: Librarian_41
       rect:
         serializedVersion: 2
         x: 64
@@ -1011,14 +1011,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 015e0344edbb5cf8ebe64bd3766c4748
-      internalID: 1620483855
+      spriteID: 3c902f25f3030a07a92987a14f39aab5
+      internalID: -1070140274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_42
+      name: Librarian_42
       rect:
         serializedVersion: 2
         x: 128
@@ -1032,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9bafa74cf3f615eeb2bb4b7ec40e295
-      internalID: -1193539752
+      spriteID: 35534d99e9fc488e69e74b6370e7e893
+      internalID: 1343675808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_43
+      name: Librarian_43
       rect:
         serializedVersion: 2
         x: 192
@@ -1053,14 +1053,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c37b7e36fa12c3134bfb0c716b1c1ee3
-      internalID: -1124898335
+      spriteID: 8caa8c1005d6effc7beff2a537dcb101
+      internalID: -1709970160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_44
+      name: Librarian_44
       rect:
         serializedVersion: 2
         x: 256
@@ -1074,14 +1074,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10fc1e06beba000b08d9d22a28411f29
-      internalID: 867233108
+      spriteID: 25bb1c45778c9686b8f509d4fd37e238
+      internalID: 1196917461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_45
+      name: Librarian_45
       rect:
         serializedVersion: 2
         x: 320
@@ -1095,14 +1095,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a18560cf28bece942aab7e7885bf8ad9
-      internalID: -1905653806
+      spriteID: 3c35c6ad982106cf98065c3356d5583c
+      internalID: -1463992330
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_46
+      name: Librarian_46
       rect:
         serializedVersion: 2
         x: 384
@@ -1116,14 +1116,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f76a0a35277ee3d7d9472b7c8c52a1d1
-      internalID: -1351561832
+      spriteID: d9cffcb773d57c78ea2a81f9d5aaf967
+      internalID: -1445973467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_47
+      name: Librarian_47
       rect:
         serializedVersion: 2
         x: 448
@@ -1137,14 +1137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4befdb44309051cf94041590d74ce95
-      internalID: -1305524931
+      spriteID: 70b90b2738e532fcb9894759aa5023e1
+      internalID: 800041645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_48
+      name: Librarian_48
       rect:
         serializedVersion: 2
         x: 512
@@ -1158,14 +1158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c127ddde3ae8948a9855e4d973357a6a
-      internalID: -998378443
+      spriteID: 8cdcca8e8114ead36b2bb2c0c89fab28
+      internalID: -1944152958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_49
+      name: Librarian_49
       rect:
         serializedVersion: 2
         x: 576
@@ -1179,14 +1179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d689ce0a54624344791d93bace11b973
-      internalID: 1052201123
+      spriteID: e96a6fc09908f134e8632f2154bd1d74
+      internalID: 1595285692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_50
+      name: Librarian_50
       rect:
         serializedVersion: 2
         x: 640
@@ -1200,14 +1200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 288c073f7aed3961b8605437ebd6ebc9
-      internalID: -1033938092
+      spriteID: 7774aaef37b0e014a970fc2c5f7ed0b0
+      internalID: 1015288303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_51
+      name: Librarian_51
       rect:
         serializedVersion: 2
         x: 704
@@ -1221,14 +1221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3729ff9ed0f01116aba2d3a3e5361855
-      internalID: -1611455146
+      spriteID: c188037aa1a54569d98691c24201f484
+      internalID: -2000432989
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_52
+      name: Librarian_52
       rect:
         serializedVersion: 2
         x: 768
@@ -1242,14 +1242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79f08f042e90879ad8a87ca789d82042
-      internalID: 456453696
+      spriteID: 9510c1b6aa20caf5280d218b4d93ce88
+      internalID: -202885831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_53
+      name: Librarian_53
       rect:
         serializedVersion: 2
         x: 832
@@ -1263,14 +1263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83ab604a340885dc78ce98b83aed7dbb
-      internalID: 2020076635
+      spriteID: 957f1730fcc17fc339f4d421756f68bf
+      internalID: 1505085258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_54
+      name: Librarian_54
       rect:
         serializedVersion: 2
         x: 896
@@ -1284,14 +1284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b94619a2213a2c329ba9fe7e12268c2e
-      internalID: -1506121551
+      spriteID: 14d11c772166453fcb89b1b8683f3e74
+      internalID: 714809253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_55
+      name: Librarian_55
       rect:
         serializedVersion: 2
         x: 960
@@ -1305,14 +1305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f577cd3450690357880f19ee1de59ef4
-      internalID: -531850737
+      spriteID: e25c7b83cd053886889f80f3ce24f276
+      internalID: -485809170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_56
+      name: Librarian_56
       rect:
         serializedVersion: 2
         x: 1024
@@ -1326,14 +1326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfebf2fe2ad9e5e119d3c2f737bf63a7
-      internalID: 1885775784
+      spriteID: 2956731e8dcc0439185aafbe0f2afd6f
+      internalID: -1045642369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_57
+      name: Librarian_57
       rect:
         serializedVersion: 2
         x: 1088
@@ -1347,14 +1347,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7927c78e7b1552207942bfc1859abd1d
-      internalID: 680842727
+      spriteID: c425e9cab0d6d29328713c708edf00c0
+      internalID: -2010245955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_58
+      name: Librarian_58
       rect:
         serializedVersion: 2
         x: 1152
@@ -1368,14 +1368,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e31983ad72bc8b2fbb490a73efa6d3b3
-      internalID: -516708288
+      spriteID: 612c2525268b5400fa2c72f1e1393c41
+      internalID: 1078938905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_59
+      name: Librarian_59
       rect:
         serializedVersion: 2
         x: 1216
@@ -1389,14 +1389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cdb29520aba7411fb4e57225d01fc2f
-      internalID: 1875463680
+      spriteID: 2e1a540d0259eedf8820dfcda612ea4d
+      internalID: -1490010568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_60
+      name: Librarian_60
       rect:
         serializedVersion: 2
         x: 0
@@ -1410,14 +1410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cff3024c86453e69a50ae3e9b8e9296
-      internalID: -1027310429
+      spriteID: ca0c9192a3717d0aaa8aa04907e6a013
+      internalID: 2023314788
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_61
+      name: Librarian_61
       rect:
         serializedVersion: 2
         x: 64
@@ -1431,14 +1431,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9fd98437aefc40fa8a683344be22756
-      internalID: -1601510603
+      spriteID: d54d1f6de77678eccbbcb0f03cd501d6
+      internalID: -495672008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_62
+      name: Librarian_62
       rect:
         serializedVersion: 2
         x: 128
@@ -1452,14 +1452,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b86d7f173413588d8559b8006dda4cf
-      internalID: 74978075
+      spriteID: 00f3b153a421250c79775519b7ed44e7
+      internalID: -1957030486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_63
+      name: Librarian_63
       rect:
         serializedVersion: 2
         x: 192
@@ -1473,14 +1473,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fa56880b750468178825badcef4eb07
-      internalID: -1010367804
+      spriteID: c8d0b429dcd9bd2ce81aa08f2ff05e0a
+      internalID: -1682772475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_64
+      name: Librarian_64
       rect:
         serializedVersion: 2
         x: 256
@@ -1494,14 +1494,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dac5da4d2152a27eaab421098457638
-      internalID: 1044500431
+      spriteID: f01580a667c93247da54889d1fb5a915
+      internalID: -1916838115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_65
+      name: Librarian_65
       rect:
         serializedVersion: 2
         x: 320
@@ -1515,14 +1515,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6758007628b9b470f86a893292d72ea9
-      internalID: -808485554
+      spriteID: 4e8f239789b1a911ba194aa8d5612690
+      internalID: 1654806550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_66
+      name: Librarian_66
       rect:
         serializedVersion: 2
         x: 384
@@ -1536,14 +1536,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6307aa9fa037662a7971e244ec12cadc
-      internalID: -751729575
+      spriteID: d4a3977e1ebbef62c9b5d78807464b19
+      internalID: -240694636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_67
+      name: Librarian_67
       rect:
         serializedVersion: 2
         x: 448
@@ -1557,14 +1557,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d83dd2761420246f1b722e2c2bcccee6
-      internalID: 706817047
+      spriteID: 95f813fbdea03cc629f120e064d67ac3
+      internalID: 1450338772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_68
+      name: Librarian_68
       rect:
         serializedVersion: 2
         x: 512
@@ -1578,14 +1578,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95bc45768fd92e18a9bf8e259a4296a5
-      internalID: -2109362738
+      spriteID: cc66fdf08b19f3b728bebd562e771126
+      internalID: 1510541052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_69
+      name: Librarian_69
       rect:
         serializedVersion: 2
         x: 576
@@ -1599,14 +1599,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb226ab9f616e3e099b7b1b1f3854480
-      internalID: 1864544003
+      spriteID: a649c06924569311c9d120ba931c5424
+      internalID: 1274050869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_70
+      name: Librarian_70
       rect:
         serializedVersion: 2
         x: 640
@@ -1620,14 +1620,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b583d52a660059f5ebf729f93d94d35b
-      internalID: -1079035636
+      spriteID: fd2a810bbe2d1da609ec681d09196adb
+      internalID: -624334536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_71
+      name: Librarian_71
       rect:
         serializedVersion: 2
         x: 704
@@ -1641,14 +1641,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc029eef449988904887be50bfad7ca5
-      internalID: 426706536
+      spriteID: 1a2ddd8cbd70f7c2a8eba6bc66c99c24
+      internalID: -1872671870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_72
+      name: Librarian_72
       rect:
         serializedVersion: 2
         x: 768
@@ -1662,14 +1662,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4366f9dea708090a4b5e7eef158e39a9
-      internalID: 1723596315
+      spriteID: 44607a464d49230b6b2f23e2ab176102
+      internalID: 902799396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_73
+      name: Librarian_73
       rect:
         serializedVersion: 2
         x: 832
@@ -1683,14 +1683,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f39b2c8e514c98acbdd1996f71654c6
-      internalID: -1411062656
+      spriteID: ad6cfdc71a96f6858978171ed61a9727
+      internalID: 1588683054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_74
+      name: Librarian_74
       rect:
         serializedVersion: 2
         x: 896
@@ -1704,14 +1704,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d13c12cb673fdf6f8aaa061122f79665
-      internalID: -524144691
+      spriteID: ee05210fc2d0313d19b153eb337b8f10
+      internalID: -110389068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_75
+      name: Librarian_75
       rect:
         serializedVersion: 2
         x: 960
@@ -1725,14 +1725,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d762e4e07e5d9df18c9eb9ebbe7334f
-      internalID: 1744782091
+      spriteID: 2c20f0362e91e3827a067ce33e9024af
+      internalID: 2062118928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_76
+      name: Librarian_76
       rect:
         serializedVersion: 2
         x: 1024
@@ -1746,14 +1746,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4318130683a1641f9d6429066c0d866
-      internalID: -318159036
+      spriteID: b7d1041e8b9f9693aa06aac3d8b7d46d
+      internalID: -1874987856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_77
+      name: Librarian_77
       rect:
         serializedVersion: 2
         x: 1088
@@ -1767,14 +1767,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b9ccc5ab1338acb48ffcc697cf3c289
-      internalID: 686514883
+      spriteID: aff07073b9495d14bb1071e27268b339
+      internalID: -1981281935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_78
+      name: Librarian_78
       rect:
         serializedVersion: 2
         x: 1152
@@ -1788,14 +1788,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40cde6b599c03a6a691f4675afe2f4ea
-      internalID: 125300265
+      spriteID: 5633c4c9b3d10d173a6da57e1de7f18a
+      internalID: -572987412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_79
+      name: Librarian_79
       rect:
         serializedVersion: 2
         x: 1216
@@ -1809,14 +1809,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc94ce38bea559d3e86ff0d4b6930ea9
-      internalID: -1357141767
+      spriteID: ca7a53554f15df4a684632595896996c
+      internalID: -631514157
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_80
+      name: Librarian_80
       rect:
         serializedVersion: 2
         x: 0
@@ -1830,14 +1830,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de993ab7076d67ce6b4fdfed365ad454
-      internalID: 862023316
+      spriteID: d3eb96e35fa35507da368def2b8e003f
+      internalID: 1834545839
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_81
+      name: Librarian_81
       rect:
         serializedVersion: 2
         x: 64
@@ -1851,14 +1851,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d0364228b7a9d87194b0b949b66ef16
-      internalID: -672290678
+      spriteID: 9b83be083c830b9539df844601cc9f09
+      internalID: 1309730505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_82
+      name: Librarian_82
       rect:
         serializedVersion: 2
         x: 128
@@ -1872,14 +1872,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0da2d227a47ac77c88192ab0ba5fbf99
-      internalID: -1853029511
+      spriteID: 6400e09448f50a1968a8122be9946ece
+      internalID: 553683882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_83
+      name: Librarian_83
       rect:
         serializedVersion: 2
         x: 192
@@ -1893,14 +1893,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee73b9280069ff0a68f7ccfb9f39cd9f
-      internalID: -1702627007
+      spriteID: 47863d5d5315c164a8697d8f7fa93a62
+      internalID: 1610481884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_84
+      name: Librarian_84
       rect:
         serializedVersion: 2
         x: 256
@@ -1914,14 +1914,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6fe3a2a9a220bef6b648522fda560f3
-      internalID: -1480629241
+      spriteID: f96cd786c57ac4cc9991968810e5722b
+      internalID: 1366431187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_85
+      name: Librarian_85
       rect:
         serializedVersion: 2
         x: 320
@@ -1935,14 +1935,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e233628c6de9bdfb9d603d10cc1de01
-      internalID: 232136740
+      spriteID: 4ef38e43268073d9c8d605d5137ef05d
+      internalID: -755381125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_86
+      name: Librarian_86
       rect:
         serializedVersion: 2
         x: 384
@@ -1956,14 +1956,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 410c28b858e8269b78474a72f2767df5
-      internalID: -385264595
+      spriteID: b65fd60ac1d8c358abeacdb5f5cf041f
+      internalID: -1818348970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_87
+      name: Librarian_87
       rect:
         serializedVersion: 2
         x: 448
@@ -1977,14 +1977,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ae88c2cbd6237f6eb3637b602f997f8
-      internalID: 1263539296
+      spriteID: 1b9894e3907bc7f52ad6d61e497d9371
+      internalID: -663440102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_88
+      name: Librarian_88
       rect:
         serializedVersion: 2
         x: 512
@@ -1998,14 +1998,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e5b24905ef01fff6bbe96f04a5faac4
-      internalID: -1426500009
+      spriteID: 3c0df456c97e13fd5a389b551bb75ec8
+      internalID: 1393858659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_89
+      name: Librarian_89
       rect:
         serializedVersion: 2
         x: 576
@@ -2019,14 +2019,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c24eb5055e742a72cbe24d76730f8cc7
-      internalID: 169324882
+      spriteID: 62b67379b537a67c8b6655e5076aac9f
+      internalID: 19451781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_90
+      name: Librarian_90
       rect:
         serializedVersion: 2
         x: 640
@@ -2040,14 +2040,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6010d33fbede596cb8a92f00a2b908b3
-      internalID: 753460040
+      spriteID: 43c8885d57dcce146910b74bfc8ce281
+      internalID: -840708288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_91
+      name: Librarian_91
       rect:
         serializedVersion: 2
         x: 704
@@ -2061,14 +2061,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d689ea02623dd394888398dd8d1bfe2e
-      internalID: -1967868361
+      spriteID: 2de065988edf6fea19a29e2c3baefeca
+      internalID: -631788932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_92
+      name: Librarian_92
       rect:
         serializedVersion: 2
         x: 768
@@ -2082,14 +2082,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81036d6b70165d11d865c0585c652fa1
-      internalID: 2034565603
+      spriteID: 26146f59987f6fc84a9f0c70d1139a4d
+      internalID: -242763318
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_93
+      name: Librarian_93
       rect:
         serializedVersion: 2
         x: 832
@@ -2103,14 +2103,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 373f3ad199474c7a294e9904a36d558c
-      internalID: -851412050
+      spriteID: bb78373f3ec6208ce95ab08cbd447b55
+      internalID: -715621999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_94
+      name: Librarian_94
       rect:
         serializedVersion: 2
         x: 896
@@ -2124,14 +2124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82c9f6ac0495b8e47b999b1cc736b37a
-      internalID: 773578863
+      spriteID: 98f569a3c494821e2a32e9476f020eb9
+      internalID: -1260831379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_95
+      name: Librarian_95
       rect:
         serializedVersion: 2
         x: 960
@@ -2145,14 +2145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f652301165f36550aac6928005ec5747
-      internalID: 1451738319
+      spriteID: 41e4203111703c0b895a1c536c4dcbfa
+      internalID: 1344578611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_96
+      name: Librarian_96
       rect:
         serializedVersion: 2
         x: 1024
@@ -2166,14 +2166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce5b55c7fb99d48c0a0f24b8658af915
-      internalID: 1857638477
+      spriteID: bcd5fceac8c3c9602a0bd4e39c94e177
+      internalID: -1913604920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_97
+      name: Librarian_97
       rect:
         serializedVersion: 2
         x: 1088
@@ -2187,14 +2187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5d84b0849c7094269b4fc8b1899eb41
-      internalID: -598272137
+      spriteID: 4e36be3a943547445873be710746e329
+      internalID: 1467822972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_98
+      name: Librarian_98
       rect:
         serializedVersion: 2
         x: 1152
@@ -2208,14 +2208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72824403766879798bef4c550171655b
-      internalID: -1608609580
+      spriteID: 091c23a64893a3c89966522c9878953a
+      internalID: 37307568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BarKeeper_99
+      name: Librarian_99
       rect:
         serializedVersion: 2
         x: 1216
@@ -2229,8 +2229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d841244acda1dcf83a40e8df5926568f
-      internalID: -1887769537
+      spriteID: 33ceb9f5d5800320ca1becbe3d604c48
+      internalID: -177245115
       vertices: []
       indices: 
       edges: []
@@ -2246,106 +2246,106 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BarKeeper_0: 1174465554
-      BarKeeper_1: 29944909
-      BarKeeper_10: -1760734624
-      BarKeeper_11: -1929215549
-      BarKeeper_12: 1169587282
-      BarKeeper_13: -1434934694
-      BarKeeper_14: 14538246
-      BarKeeper_15: -1649963767
-      BarKeeper_16: -87892187
-      BarKeeper_17: -1660180154
-      BarKeeper_18: -1100147144
-      BarKeeper_19: 1706410907
-      BarKeeper_2: 526068294
-      BarKeeper_20: 1688609270
-      BarKeeper_21: 412067887
-      BarKeeper_22: 408454078
-      BarKeeper_23: -1234148880
-      BarKeeper_24: -1091216609
-      BarKeeper_25: -324287385
-      BarKeeper_26: 866953318
-      BarKeeper_27: 1002305000
-      BarKeeper_28: -182324139
-      BarKeeper_29: -1294596434
-      BarKeeper_3: 804650776
-      BarKeeper_30: 194365291
-      BarKeeper_31: -1389455169
-      BarKeeper_32: -1882644014
-      BarKeeper_33: -1623874780
-      BarKeeper_34: -816383667
-      BarKeeper_35: 862610941
-      BarKeeper_36: -940625575
-      BarKeeper_37: -179276353
-      BarKeeper_38: 543725182
-      BarKeeper_39: 1229038775
-      BarKeeper_4: -20004583
-      BarKeeper_40: -493045617
-      BarKeeper_41: 1620483855
-      BarKeeper_42: -1193539752
-      BarKeeper_43: -1124898335
-      BarKeeper_44: 867233108
-      BarKeeper_45: -1905653806
-      BarKeeper_46: -1351561832
-      BarKeeper_47: -1305524931
-      BarKeeper_48: -998378443
-      BarKeeper_49: 1052201123
-      BarKeeper_5: 1285635449
-      BarKeeper_50: -1033938092
-      BarKeeper_51: -1611455146
-      BarKeeper_52: 456453696
-      BarKeeper_53: 2020076635
-      BarKeeper_54: -1506121551
-      BarKeeper_55: -531850737
-      BarKeeper_56: 1885775784
-      BarKeeper_57: 680842727
-      BarKeeper_58: -516708288
-      BarKeeper_59: 1875463680
-      BarKeeper_6: -1411151543
-      BarKeeper_60: -1027310429
-      BarKeeper_61: -1601510603
-      BarKeeper_62: 74978075
-      BarKeeper_63: -1010367804
-      BarKeeper_64: 1044500431
-      BarKeeper_65: -808485554
-      BarKeeper_66: -751729575
-      BarKeeper_67: 706817047
-      BarKeeper_68: -2109362738
-      BarKeeper_69: 1864544003
-      BarKeeper_7: -664992429
-      BarKeeper_70: -1079035636
-      BarKeeper_71: 426706536
-      BarKeeper_72: 1723596315
-      BarKeeper_73: -1411062656
-      BarKeeper_74: -524144691
-      BarKeeper_75: 1744782091
-      BarKeeper_76: -318159036
-      BarKeeper_77: 686514883
-      BarKeeper_78: 125300265
-      BarKeeper_79: -1357141767
-      BarKeeper_8: 1436931785
-      BarKeeper_80: 862023316
-      BarKeeper_81: -672290678
-      BarKeeper_82: -1853029511
-      BarKeeper_83: -1702627007
-      BarKeeper_84: -1480629241
-      BarKeeper_85: 232136740
-      BarKeeper_86: -385264595
-      BarKeeper_87: 1263539296
-      BarKeeper_88: -1426500009
-      BarKeeper_89: 169324882
-      BarKeeper_9: -582388042
-      BarKeeper_90: 753460040
-      BarKeeper_91: -1967868361
-      BarKeeper_92: 2034565603
-      BarKeeper_93: -851412050
-      BarKeeper_94: 773578863
-      BarKeeper_95: 1451738319
-      BarKeeper_96: 1857638477
-      BarKeeper_97: -598272137
-      BarKeeper_98: -1608609580
-      BarKeeper_99: -1887769537
+      Librarian_0: -1438459624
+      Librarian_1: 253377051
+      Librarian_10: -232865667
+      Librarian_11: 203829817
+      Librarian_12: -1664858613
+      Librarian_13: 1611631767
+      Librarian_14: -2103273035
+      Librarian_15: -1048224259
+      Librarian_16: 457451044
+      Librarian_17: -1606308103
+      Librarian_18: -1970235133
+      Librarian_19: -25486555
+      Librarian_2: -1671859816
+      Librarian_20: -1161386004
+      Librarian_21: -1197862501
+      Librarian_22: 1190428920
+      Librarian_23: 1238705708
+      Librarian_24: 161020854
+      Librarian_25: 2098338907
+      Librarian_26: 2123626968
+      Librarian_27: -487530807
+      Librarian_28: -915209403
+      Librarian_29: 886844553
+      Librarian_3: -292379507
+      Librarian_30: -780961000
+      Librarian_31: 396180121
+      Librarian_32: -367789405
+      Librarian_33: -727739530
+      Librarian_34: 1890413
+      Librarian_35: -762482573
+      Librarian_36: -1020616410
+      Librarian_37: -1809892095
+      Librarian_38: 1272224729
+      Librarian_39: -776287309
+      Librarian_4: 2013339343
+      Librarian_40: 1177490631
+      Librarian_41: -1070140274
+      Librarian_42: 1343675808
+      Librarian_43: -1709970160
+      Librarian_44: 1196917461
+      Librarian_45: -1463992330
+      Librarian_46: -1445973467
+      Librarian_47: 800041645
+      Librarian_48: -1944152958
+      Librarian_49: 1595285692
+      Librarian_5: -898286146
+      Librarian_50: 1015288303
+      Librarian_51: -2000432989
+      Librarian_52: -202885831
+      Librarian_53: 1505085258
+      Librarian_54: 714809253
+      Librarian_55: -485809170
+      Librarian_56: -1045642369
+      Librarian_57: -2010245955
+      Librarian_58: 1078938905
+      Librarian_59: -1490010568
+      Librarian_6: 1496207974
+      Librarian_60: 2023314788
+      Librarian_61: -495672008
+      Librarian_62: -1957030486
+      Librarian_63: -1682772475
+      Librarian_64: -1916838115
+      Librarian_65: 1654806550
+      Librarian_66: -240694636
+      Librarian_67: 1450338772
+      Librarian_68: 1510541052
+      Librarian_69: 1274050869
+      Librarian_7: 1200006472
+      Librarian_70: -624334536
+      Librarian_71: -1872671870
+      Librarian_72: 902799396
+      Librarian_73: 1588683054
+      Librarian_74: -110389068
+      Librarian_75: 2062118928
+      Librarian_76: -1874987856
+      Librarian_77: -1981281935
+      Librarian_78: -572987412
+      Librarian_79: -631514157
+      Librarian_8: 460558511
+      Librarian_80: 1834545839
+      Librarian_81: 1309730505
+      Librarian_82: 553683882
+      Librarian_83: 1610481884
+      Librarian_84: 1366431187
+      Librarian_85: -755381125
+      Librarian_86: -1818348970
+      Librarian_87: -663440102
+      Librarian_88: 1393858659
+      Librarian_89: 19451781
+      Librarian_9: -2109499061
+      Librarian_90: -840708288
+      Librarian_91: -631788932
+      Librarian_92: -242763318
+      Librarian_93: -715621999
+      Librarian_94: -1260831379
+      Librarian_95: 1344578611
+      Librarian_96: -1913604920
+      Librarian_97: 1467822972
+      Librarian_98: 37307568
+      Librarian_99: -177245115
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
