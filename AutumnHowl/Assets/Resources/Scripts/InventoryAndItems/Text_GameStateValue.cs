@@ -29,7 +29,13 @@ public class Text_GameStateValue : MonoBehaviour
         corruption,
         attack,
         defense,
-        money
+        money,
+        unassignedSkillPoints,
+        healthSP,
+        powerSP,
+        corruptionSP,
+        attackSP,
+        defenseSP,
     }
 
 
@@ -65,30 +71,20 @@ public class Text_GameStateValue : MonoBehaviour
             return;
         }
 
-        switch (gameStateVariable)
-        {
-            case GameStateVariable.level:
-                textContent = PlayerStats.level.ToString();
-                break;
-            case GameStateVariable.health:
-                textContent = PlayerStats.health + " / " + PlayerStats.maxHealth;
-                break;
-            case GameStateVariable.power:
-                textContent = PlayerStats.power + " / " + PlayerStats.maxPower;
-                break;
-            case GameStateVariable.corruption:
-                textContent = PlayerStats.corruption + " / " + PlayerStats.maxCorruption;
-                break;
-            case GameStateVariable.attack:
-                textContent = PlayerStats.attack.ToString();
-                break;
-            case GameStateVariable.defense:
-                textContent = PlayerStats.defense.ToString();
-                break;
-            case GameStateVariable.money:
-                textContent = GameInstance.Gamestate.money.ToString();
-                break;
-        }
+        if (gameStateVariable == GameStateVariable.level) textContent = PlayerStats.level.ToString();
+        if (gameStateVariable == GameStateVariable.health) textContent = PlayerStats.health + " / " + PlayerStats.maxHealth;
+        if (gameStateVariable == GameStateVariable.power) textContent = PlayerStats.power + " / " + PlayerStats.maxPower;
+        if (gameStateVariable == GameStateVariable.corruption) textContent = PlayerStats.corruption + " / " + PlayerStats.maxCorruption;
+        if (gameStateVariable == GameStateVariable.attack) textContent = PlayerStats.attack.ToString();
+        if (gameStateVariable == GameStateVariable.defense) textContent = PlayerStats.defense.ToString();
+        if (gameStateVariable == GameStateVariable.money) textContent = GameInstance.Gamestate.money.ToString();
+        /*
+        if (gameStateVariable == GameStateVariable.unassignedSkillPoints) textContent = GameInstance.Gamestate.unassignedSkillPoints.ToString();
+        if (gameStateVariable == GameStateVariable.healthSP) textContent = GameInstance.Gamestate.healthSP.ToString();
+        if (gameStateVariable == GameStateVariable.powerSP) textContent = GameInstance.Gamestate.powerSP.ToString();
+        if (gameStateVariable == GameStateVariable.corruptionSP) textContent = GameInstance.Gamestate.corruptionSP.ToString();
+        if (gameStateVariable == GameStateVariable.attackSP) textContent = GameInstance.Gamestate.attackSP.ToString();
+        if (gameStateVariable == GameStateVariable.defenseSP) textContent = GameInstance.Gamestate.defenseSP.ToString();*/
 
         text.text = textDecoratorStart + textContent + textDecoratorEnd;
     }

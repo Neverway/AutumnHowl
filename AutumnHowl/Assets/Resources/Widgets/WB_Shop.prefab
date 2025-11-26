@@ -1273,9 +1273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e690c7f9ee58b14a7bf21cc4cc64989d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDecoratorStart: '<sprite index=9> '
+  textDecoratorStart: '<size=26><sprite index=9><size=23> '
   textDecoratorEnd: 
-  gameStateVariable: 7
+  gameStateVariable: 6
 --- !u!1 &5286977388055898670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,9 +1462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e690c7f9ee58b14a7bf21cc4cc64989d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDecoratorStart: '<sprite index=9> '
+  textDecoratorStart: '<size=26><sprite index=9><size=23> '
   textDecoratorEnd: 
-  gameStateVariable: 7
+  gameStateVariable: 6
 --- !u!1 &5507495740873202073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,9 +2065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e690c7f9ee58b14a7bf21cc4cc64989d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDecoratorStart: '<sprite index=9> '
+  textDecoratorStart: '<size=26><sprite index=9><size=23> '
   textDecoratorEnd: 
-  gameStateVariable: 7
+  gameStateVariable: 6
 --- !u!1 &7234432041747801388
 GameObject:
   m_ObjectHideFlags: 0
