@@ -24,8 +24,7 @@ public class Text_GameStateValue : MonoBehaviour
     public enum GameStateVariable
     {
         level,
-        currentHealth,
-        maxHealth,
+        health,
         power,
         corruption,
         attack,
@@ -38,6 +37,7 @@ public class Text_GameStateValue : MonoBehaviour
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
+    private string textContent;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
@@ -68,30 +68,29 @@ public class Text_GameStateValue : MonoBehaviour
         switch (gameStateVariable)
         {
             case GameStateVariable.level:
-                text.text = textDecoratorStart + PlayerStats.level + textDecoratorEnd;
+                textContent = PlayerStats.level.ToString();
                 break;
-            case GameStateVariable.currentHealth:
-                text.text = textDecoratorStart + PlayerStats.health + textDecoratorEnd;
-                break;
-            case GameStateVariable.maxHealth:
-                text.text = textDecoratorStart + PlayerStats.health + textDecoratorEnd;
+            case GameStateVariable.health:
+                textContent = PlayerStats.health + " / " + PlayerStats.maxHealth;
                 break;
             case GameStateVariable.power:
-                text.text = textDecoratorStart + PlayerStats.power + textDecoratorEnd;
+                textContent = PlayerStats.power + " / " + PlayerStats.maxPower;
                 break;
             case GameStateVariable.corruption:
-                text.text = textDecoratorStart + PlayerStats.corruption + textDecoratorEnd;
+                textContent = PlayerStats.corruption + " / " + PlayerStats.maxCorruption;
                 break;
             case GameStateVariable.attack:
-                text.text = textDecoratorStart + PlayerStats.attack + textDecoratorEnd;
+                textContent = PlayerStats.attack.ToString();
                 break;
             case GameStateVariable.defense:
-                text.text = textDecoratorStart + PlayerStats.defense + textDecoratorEnd;
+                textContent = PlayerStats.defense.ToString();
                 break;
             case GameStateVariable.money:
-                text.text = textDecoratorStart + GameInstance.Gamestate.money + textDecoratorEnd;
+                textContent = GameInstance.Gamestate.money.ToString();
                 break;
         }
+
+        text.text = textDecoratorStart + textContent + textDecoratorEnd;
     }
 
 
