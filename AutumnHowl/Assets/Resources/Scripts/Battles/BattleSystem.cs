@@ -257,7 +257,7 @@ public class BS_Victory : BattleState
             $" LEVELS]\n[+${GameInstance.Gamestate.currentBattle.victoryGold}]");
         
         // Give victory loot
-        GameInstance.Gamestate.player.Stats.level += GameInstance.Gamestate.currentBattle.victoryLevels;
+        GameInstance.Playerbody.Stats.ModifyLevel(GameInstance.Gamestate.currentBattle.victoryLevels);
         GameInstance.Gamestate.money += GameInstance.Gamestate.currentBattle.victoryGold;
            
         

@@ -25,7 +25,17 @@ public class WidgetSelectable : MonoBehaviour
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
-    public UnityEvent OnInteracted, OnSelected, OnUnselected;
+    /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
+    [Tooltip("Called when the player hits the interact key")]
+    public UnityEvent OnInteracted;
+    [Tooltip("Called when the player hovers over this selectable")]
+    public UnityEvent OnSelected;
+    [Tooltip("Called when the player unhovers this selectable")]
+    public UnityEvent OnUnselected;
+    [Tooltip("Called when the player presses the negative axis navigation button adjacent to the current navigation direction (nav is vertical, this is left | nav is horizontal, this is up)")]
+    public UnityEvent OnNavigationAdjacentNegative;
+    [Tooltip("Called when the player presses the positive axis navigation button adjacent to the current navigation direction (nav is vertical, this is right | nav is horizontal, this is down)")]
+    public UnityEvent OnNavigationAdjacentPositive;
 
 
     #endregion
@@ -48,12 +58,18 @@ public class WidgetSelectable : MonoBehaviour
     {
         if (_isSelected)
         {
-            OnSelected.Invoke();
+            OnSelected?.Invoke();
         }
         else
         {
-            OnUnselected.Invoke();
+            OnUnselected?.Invoke();
         }
+    }
+    
+    public virtual void NavigateAdjacent(bool _isNegative)
+    {
+        if (_isNegative) OnNavigationAdjacentNegative?.Invoke();
+        else OnNavigationAdjacentPositive?.Invoke();
     }
 
 

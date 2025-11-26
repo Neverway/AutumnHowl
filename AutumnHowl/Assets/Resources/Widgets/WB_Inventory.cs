@@ -232,6 +232,56 @@ public class WB_Inventory : MonoBehaviour
         
     }
 
+    public void AddSkillPoint(int _skillPointStat)
+    {
+        if (GameInstance.Playerbody.Stats.unassignedSkillPoints <= 0) return;
+        
+        if (_skillPointStat == 0) GameInstance.Playerbody.Stats.healthSP += 1;
+        if (_skillPointStat == 1) GameInstance.Playerbody.Stats.powerSP += 1;
+        if (_skillPointStat == 2) GameInstance.Playerbody.Stats.corruptionSP += 1;
+        if (_skillPointStat == 3) GameInstance.Playerbody.Stats.attackSP += 1;
+        if (_skillPointStat == 4) GameInstance.Playerbody.Stats.defenseSP += 1;
+
+        GameInstance.Playerbody.Stats.unassignedSkillPoints -= 1;
+        
+        GameInstance.Playerbody.Stats.UpdateSkillPointModifiers();
+    }
+    
+    public void RemoveSkillPoint(int _skillPointStat)
+    {
+        if (_skillPointStat == 0 && GameInstance.Playerbody.Stats.healthSP > 0)
+        {
+            GameInstance.Playerbody.Stats.healthSP -= 1;
+            GameInstance.Playerbody.Stats.unassignedSkillPoints += 1;
+        }
+
+        if (_skillPointStat == 1 && GameInstance.Playerbody.Stats.powerSP > 0)
+        {
+            GameInstance.Playerbody.Stats.powerSP -= 1;
+            GameInstance.Playerbody.Stats.unassignedSkillPoints += 1;
+        }
+
+        if (_skillPointStat == 2 && GameInstance.Playerbody.Stats.corruptionSP > 0)
+        {
+            GameInstance.Playerbody.Stats.corruptionSP -= 1;
+            GameInstance.Playerbody.Stats.unassignedSkillPoints += 1;
+        }
+
+        if (_skillPointStat == 3 && GameInstance.Playerbody.Stats.attackSP > 0)
+        {
+            GameInstance.Playerbody.Stats.attackSP -= 1;
+            GameInstance.Playerbody.Stats.unassignedSkillPoints += 1;
+        }
+
+        if (_skillPointStat == 4 && GameInstance.Playerbody.Stats.defenseSP > 0)
+        {
+            GameInstance.Playerbody.Stats.defenseSP -= 1;
+            GameInstance.Playerbody.Stats.unassignedSkillPoints += 1;
+        }
+        
+        GameInstance.Playerbody.Stats.UpdateSkillPointModifiers();
+    }
+
 
     #endregion
 }

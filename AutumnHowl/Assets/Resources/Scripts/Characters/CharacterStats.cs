@@ -29,12 +29,13 @@ public class CharacterStats
     }
     #region========================================( Variables )======================================================//
     /*-----[ Settable stats (Not modifiable) ]------------------------------------------------------------------------*/
-
     [Header("Starting Values for Valued-Stats")]
     [HideInInspector] public float health;
     public float level = 0;
     public int power = 10;
     public float corruption = 0;
+    public int unassignedSkillPoints;
+    public int healthSP, powerSP, corruptionSP, attackSP, defenseSP;
 
     /*-----[ Modifiable stats (Not settable) ]------------------------------------------------------------------------*/
     [Header("Combat Stats")]
@@ -233,6 +234,12 @@ public class CharacterStats
         power = Mathf.Clamp (power, 0, maxPower);
     }
 
+    public void ModifyLevel(int _amount)
+    {
+        level += _amount;
+        unassignedSkillPoints += _amount;
+    }
+
     /// <summary>
     /// If there's enough Power, consume the given amount, otherwise return false.
     /// </summary>
@@ -246,6 +253,41 @@ public class CharacterStats
             return true;
         }
         return false;
+    }
+
+    public void ApplySkillPointModifiers()
+    {
+        maxHealth.ModifyStatWith(new SkillPointModifierID(Identifier, "healthSP"), NumberModifierType.Add, healthSP*5);
+        maxPower.ModifyStatWith(new SkillPointModifierID(Identifier, "powerSP"), NumberModifierType.Add, powerSP*5);
+        maxCorruption.ModifyStatWith(new SkillPointModifierID(Identifier, "corruptionSP"), NumberModifierType.Add, corruptionSP*5);
+        attack.ModifyStatWith(new SkillPointModifierID(Identifier, "attackSP"), NumberModifierType.Add, attackSP);
+        defense.ModifyStatWith(new SkillPointModifierID(Identifier, "defenseSP"), NumberModifierType.Add, defenseSP);
+    }
+
+    public void RemoveSkillPointModifiers()
+    {
+        maxHealth.UnmodifyStatWith(new SkillPointModifierID(Identifier, "healthSP"));
+        maxPower.UnmodifyStatWith(new SkillPointModifierID(Identifier, "powerSP"));
+        maxCorruption.UnmodifyStatWith(new SkillPointModifierID(Identifier, "corruptionSP"));
+        attack.UnmodifyStatWith(new SkillPointModifierID(Identifier, "attackSP"));
+        defense.UnmodifyStatWith(new SkillPointModifierID(Identifier, "defenseSP"));
+    }
+
+    public void UpdateSkillPointModifiers()
+    {
+        RemoveSkillPointModifiers();
+        ApplySkillPointModifiers();
+    }
+
+    public struct SkillPointModifierID
+    {
+        public SkillPointModifierID(CharacterIdentifier _character, string _statType)
+        {
+            character = _character;
+            statType = _statType;
+        }
+        public CharacterIdentifier character;
+        public string statType;
     }
 
     #endregion
@@ -349,13 +391,21 @@ public class CharacterStats
         public float level;
         public int power;
         public float corruption;
+        public int unassignedSkillPoints;
+        public int healthSP, powerSP, corruptionSP, attackSP, defenseSP;
     }
     public SaveData GetSaveData() => new SaveData()
     {
         health = this.health,
         level = this.level,
         power = this.power,
-        corruption = this.corruption
+        corruption = this.corruption,
+        unassignedSkillPoints = this.unassignedSkillPoints,
+        healthSP = this.healthSP,
+        powerSP = this.powerSP,
+        corruptionSP = this.corruptionSP,
+        attackSP = this.attackSP,
+        defenseSP = this.defenseSP
     };
     public void LoadSaveData(SaveData saveData)
     {
@@ -363,6 +413,13 @@ public class CharacterStats
         this.level = saveData.level;
         this.power = saveData.power;
         this.corruption = saveData.corruption;
+        this.unassignedSkillPoints = saveData.unassignedSkillPoints;
+        this.healthSP = saveData.healthSP;
+        this.powerSP = saveData.powerSP;
+        this.corruptionSP = saveData.corruptionSP;
+        this.attackSP = saveData.attackSP;
+        this.defenseSP = saveData.defenseSP;
+        UpdateSkillPointModifiers();
     }
     
     #endregion

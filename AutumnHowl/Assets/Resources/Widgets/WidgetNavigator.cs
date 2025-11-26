@@ -110,10 +110,14 @@ public class WidgetNavigator : MonoBehaviour
             case NavigationMode.Vertical:
                 CheckMove(GameInstance.Inputs.MoveUp, -1);
                 CheckMove(GameInstance.Inputs.MoveDown, 1);
+                if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame()) AdjacentNavigation(true);
+                if (GameInstance.Inputs.MoveRight.WasPressedThisFrame()) AdjacentNavigation(false);
                 break;
             case NavigationMode.Horizontal:
                 CheckMove(GameInstance.Inputs.MoveLeft, -1);
                 CheckMove(GameInstance.Inputs.MoveRight, 1);
+                if (GameInstance.Inputs.MoveUp.WasPressedThisFrame()) AdjacentNavigation(true);
+                if (GameInstance.Inputs.MoveDown.WasPressedThisFrame()) AdjacentNavigation(false);
                 break;
         }
 
@@ -150,6 +154,11 @@ public class WidgetNavigator : MonoBehaviour
             // Update the selectable elements
             SetElementStates();
         }
+    }
+
+    private void AdjacentNavigation(bool _isNegative)
+    {
+        selectableElements[currentIndex].NavigateAdjacent(_isNegative);
     }
 
     private IEnumerator StartInitialInputDelay()
