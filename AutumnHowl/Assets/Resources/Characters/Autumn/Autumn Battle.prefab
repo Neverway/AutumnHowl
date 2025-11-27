@@ -968,6 +968,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pawnName: Autumn
   type: 1
+  limitGridMovement: 1
+  gridMovementLimits: {x: 0, y: 5}
 --- !u!1001 &2534338768202098655
 PrefabInstance:
   m_ObjectHideFlags: 0

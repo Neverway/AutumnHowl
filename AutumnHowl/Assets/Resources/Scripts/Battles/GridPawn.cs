@@ -14,6 +14,8 @@ public class GridPawn : MonoBehaviour
     }
     public Vector2Int position { get; private set; }
     private bool initialized = false;
+    public bool limitGridMovement;
+    public Vector2Int gridMovementLimits;
 
     public void Start ()
     {

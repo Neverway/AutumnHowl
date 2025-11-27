@@ -105,8 +105,8 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 785211752259165060, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1673734515386349373 stripped
-RectTransform:
+--- !u!4 &1673734515386349373 stripped
+Transform:
   m_CorrespondingSourceObject: {fileID: 1671402109848995181, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
@@ -190,6 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pawnName: 
   type: 1
+  limitGridMovement: 1
+  gridMovementLimits: {x: 0, y: 5}
 --- !u!95 &7931684597536962226 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

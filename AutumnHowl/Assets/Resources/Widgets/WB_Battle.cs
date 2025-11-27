@@ -38,6 +38,7 @@ public class WB_Battle : MonoBehaviour
     public Animator actionBarAnimator;
     public WidgetNavigator actionBarNavigator;
     public BattleAttackCompass attackCompass;
+    public GameObject generalKeyhints;
     [Header("Step Stuff")] 
     public TMP_Text stepCountText;
 
@@ -92,10 +93,12 @@ public class WB_Battle : MonoBehaviour
             case true:
                 actionBarNavigator.SetIsNavigating(true);
                 actionBarAnimator.Play("Open");
+                generalKeyhints.SetActive(false);
                 break;
             case false:
                 actionBarNavigator.SetIsNavigating(false);
                 actionBarAnimator.Play("Close");
+                generalKeyhints.SetActive(true);
                 break;
         }
     }

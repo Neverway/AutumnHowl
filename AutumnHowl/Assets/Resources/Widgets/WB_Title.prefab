@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v2.0.0
+  m_text: v1.9.9
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1c7e441f50ff4f33a1b148e5e2626a5, type: 2}
   m_sharedMaterial: {fileID: -8766027231925672723, guid: f1c7e441f50ff4f33a1b148e5e2626a5, type: 2}
@@ -166,6 +166,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnUnselected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
     m_PersistentCalls:
       m_Calls: []
   useTextIndicators: 1
@@ -369,6 +375,12 @@ MonoBehaviour:
   OnUnselected:
     m_PersistentCalls:
       m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
+    m_PersistentCalls:
+      m_Calls: []
   useTextIndicators: 1
   selectedIndicator: '>'
   unselectedIndicator: ' '
@@ -544,6 +556,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnUnselected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
     m_PersistentCalls:
       m_Calls: []
   useTextIndicators: 1
@@ -891,6 +909,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnUnselected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
     m_PersistentCalls:
       m_Calls: []
   useTextIndicators: 1
@@ -1434,6 +1458,12 @@ MonoBehaviour:
   OnUnselected:
     m_PersistentCalls:
       m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
+    m_PersistentCalls:
+      m_Calls: []
   useTextIndicators: 1
   selectedIndicator: '>'
   unselectedIndicator: ' '
@@ -1913,6 +1943,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnUnselected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
     m_PersistentCalls:
       m_Calls: []
   useTextIndicators: 1

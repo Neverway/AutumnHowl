@@ -70,7 +70,7 @@ MonoBehaviour:
             m_PersistentCalls:
               m_Calls: []
         waveAttack: {fileID: 0}
-        waveSteps: 3
+        waveSteps: 4
     - rid: 26149116751642625
       type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
       data: 

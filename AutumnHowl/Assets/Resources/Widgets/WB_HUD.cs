@@ -30,6 +30,8 @@ public class WB_HUD : MonoBehaviour
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image lanternFill;
+
+    public Image lanternFlame;
     //public Transform lanternParticles;
     public Color onLanternDrain;
     public Color onLanternSafe;
@@ -75,9 +77,13 @@ public class WB_HUD : MonoBehaviour
     /// </summary>
     private void UpdateTimer()
     {
+        var flameScale = GameInstance.Gamestate.currentLanternTime / GameInstance.Gamestate.lanternDuration;
+        lanternFlame.transform.localScale = new Vector3(flameScale, flameScale, flameScale);
+        
         if (GameInstance.Gamestate.currentLanternTime > 0)
         {
             GameInstance.Gamestate.currentLanternTime -= Time.deltaTime;
+            if (hasLightFaded) UnfadeLights();
         }
         else if (inflictCorruptionCoroutine == null)
         {
@@ -120,6 +126,14 @@ public class WB_HUD : MonoBehaviour
         playerLightController = FindObjectOfType<PlayerLightController>();
         playerLightController.SetLanternLightState(true);
         GameInstance.Get<GI_AudioManager>().SetMusicPitch(0.6f);
+    }    
+    
+    private void UnfadeLights()
+    {
+        hasLightFaded = false;
+        playerLightController = FindObjectOfType<PlayerLightController>();
+        playerLightController.SetLanternLightState(false);
+        GameInstance.Get<GI_AudioManager>().SetMusicPitch(1f);
     }
 
     private void OnDestroy()

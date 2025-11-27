@@ -90,6 +90,14 @@ public abstract class Char_Battle : Character
     /// <returns></returns>
     protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null, bool shouldProgressTurn = true, bool ignoreObsticals=false)
     {
+        if (_direction == Vector2Int.up && _pathTargetPawn.limitGridMovement)
+        {
+            if (_pathTargetPawn.position.y == _pathTargetPawn.gridMovementLimits.y)
+            {
+                return false;
+            }
+        }
+            
         var testPos = gridPawnController.position + _direction;
         if (BattleGrid.Instance.ValidTile (testPos.x, testPos.y) && !BattleGrid.Instance.IsOccupied(testPos.x, testPos.y))
         {

@@ -74,17 +74,6 @@ MonoBehaviour:
   - {fileID: -1850769978, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
   - {fileID: 302199354, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
   - {fileID: -1942571663, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  corruptionSprites:
-  - {fileID: -460582934, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: 1535910021, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -908132771, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: 1694931769, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -1249237098, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -720039964, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -1978223085, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -1810484006, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -1811649803, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  - {fileID: -831521074, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
   heartAnimator: {fileID: 7431007868217375425}
 --- !u!1 &2835296051410381573
 GameObject:
@@ -151,12 +140,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -460582934, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -831521074, guid: 7dfb7d8ea15b92158842e748d6d79660, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -212,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lanternFill: {fileID: 3227674302849293837}
+  lanternFlame: {fileID: 53782801157093857}
   onLanternDrain: {r: 0.9803922, g: 0.6039216, b: 0.14901961, a: 1}
   onLanternSafe: {r: 0.08627451, g: 0.909804, b: 1, a: 1}
 --- !u!1 &5688510459239018098
@@ -593,6 +583,7 @@ GameObject:
   - component: {fileID: 5817217381214338756}
   - component: {fileID: 2279303332671593047}
   - component: {fileID: 53782801157093857}
+  - component: {fileID: 134977161947334291}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -657,6 +648,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &134977161947334291
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698812694054147882}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5e12939f490e68964be33abdf25d0a75, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8791709606517171679
 GameObject:
   m_ObjectHideFlags: 0

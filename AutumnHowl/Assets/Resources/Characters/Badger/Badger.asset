@@ -21,6 +21,12 @@ MonoBehaviour:
     level: 0
     power: 10
     corruption: 0
+    unassignedSkillPoints: 0
+    healthSP: 0
+    powerSP: 0
+    corruptionSP: 0
+    attackSP: 0
+    defenseSP: 0
     attack:
       startValue: 10
       multiplier: 0
@@ -30,7 +36,7 @@ MonoBehaviour:
       multiplier: 0
       addedValue: 0
     maxHealth:
-      startValue: 50
+      startValue: 40
       multiplier: 0
       addedValue: 0
     maxLevel:

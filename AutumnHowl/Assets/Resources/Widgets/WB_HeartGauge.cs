@@ -29,8 +29,9 @@ public class WB_HeartGauge : MonoBehaviour
     private GI_AuHoGameState gameState;
     [Tooltip("The UI images that represent the different levels for this stat")]
     [SerializeField] private Image heartImage, powerImage, corruptionImage;
-    [Tooltip("The sprites that represent the different levels for this stat")]
-    [SerializeField] private List<Sprite> heartSprites, powerSprites, corruptionSprites;
+
+    [Tooltip("The sprites that represent the different levels for this stat")] [SerializeField]
+    private List<Sprite> heartSprites, powerSprites;//, corruptionSprites;
     [Tooltip("The animator that controls the beating of the heart (used to speed it up on low health)")]
     [SerializeField] private Animator heartAnimator;
 
@@ -53,7 +54,17 @@ public class WB_HeartGauge : MonoBehaviour
         // Set heartbeat stuff
         // Set the heart sprite according to the player's health
         float percentHealth = stats.health / stats.maxHealth;
-        int index = Mathf.FloorToInt(heartSprites.Count * (1f-percentHealth));
+        var unknown = (1f - percentHealth);
+        var unknown2 = heartSprites.Count * unknown;
+        int index = Mathf.FloorToInt(unknown2);
+        print($"" +
+              $"index: {index},  " +
+              $"percent: {percentHealth}, " +
+              $"maxHealth: {stats.maxHealth}, " +
+              $"health: {stats.health}, " +
+              $"spriteCount: {heartSprites.Count},  " +
+              $"unknown: {unknown}, " +
+              $"unknown2: {unknown2}");
         if (index == heartSprites.Count) index--;
         heartImage.sprite = heartSprites[index];
         
@@ -65,9 +76,9 @@ public class WB_HeartGauge : MonoBehaviour
         
         // Set the heart sprite according to the player's corruption
         float percentCorruption = stats.corruption / (float)stats.maxCorruption;
-        int index3 = Mathf.FloorToInt(corruptionSprites.Count * (percentCorruption));
-        if (index3 == corruptionSprites.Count) index3--;
-        corruptionImage.sprite = corruptionSprites[index3];
+        //int index3 = Mathf.FloorToInt(corruptionSprites.Count * (percentCorruption));
+        //if (index3 == corruptionSprites.Count) index3--;
+        corruptionImage.fillAmount = percentCorruption;
 
         // Set how fast the heart is beating based on how low the player's health is
         float lowHealthSpeed = 3;
