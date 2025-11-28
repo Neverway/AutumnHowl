@@ -603,7 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 986810757242830101}
   AudioSource: {fileID: 7125903689475217921}
-  targetScene: Intro
+  targetScene: _Intro
 --- !u!1 &6422360637249620188
 GameObject:
   m_ObjectHideFlags: 0

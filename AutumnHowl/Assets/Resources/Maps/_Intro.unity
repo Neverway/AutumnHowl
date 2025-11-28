@@ -3380,7 +3380,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  sceneToLoad: Title
+  sceneToLoad: _Title
 --- !u!1 &2050496975
 GameObject:
   m_ObjectHideFlags: 0
