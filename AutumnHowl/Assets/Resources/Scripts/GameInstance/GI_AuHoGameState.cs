@@ -172,7 +172,6 @@ public class AuHoGameState
     [InvokeAfterLoad(int.MaxValue - 100)]
     public static void OnGameLoad()
     {
-        Debug.Log("Kevin is a stinky lil guy");
         var gameState = GameInstance.Gamestate;
 
         GameStateSaveData data = GI_SaveSystem.LoadValue<GameStateSaveData>(null, "AuHoGameState");
@@ -211,7 +210,6 @@ public class AuHoGameState
             GameInstance.SendCoroutine(CoLoadCycleData());
         }
             
-        Debug.Log("Appear");
         SetCycleAppearances();
     }
     
@@ -261,7 +259,6 @@ public class AuHoGameState
         //Wait for any previously loading maps to finish loading
         while (worldLoader.IsLoading) yield return null;
         
-        Debug.Log("Kevin is a STINK STINK STINK STINKY STINKER");
         // Set map flags
         gameState.SetCurrentCycle();
     }

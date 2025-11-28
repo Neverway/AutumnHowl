@@ -59,7 +59,6 @@ public class WB_CycleInfo : MonoBehaviour
         {
             yield return new WaitForSeconds(currentTextTypeDelay);
             StartCoroutine(TypeText(subtitleText, true));
-            print(animator.gameObject.name + " has finished");
             StartCoroutine(CloseCycleInfoAfterDelay());
         }
     }

@@ -9,15 +9,11 @@ public class ShopCycleHandler : MonoBehaviour
 
     public void UpdateShopItems()
     {
-        Debug.Log("Do this worke?");
         int cycle = GameInstance.Gamestate.currentCycle;
         cycle--;
 
         if (cycleShopItems.IsIndexOutOfRange(cycle))
             cycle = cycleShopItems.Length - 1;
-
-        Debug.Log(GameInstance.Gamestate == null);
-        Debug.Log(cycleShopItems[cycle] == null);
 
         Item[] shopItems = cycleShopItems[cycle].GetLoot(GameInstance.Gamestate.GetCycleSubSeed("ShopItems"));
 

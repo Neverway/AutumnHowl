@@ -57,14 +57,14 @@ public class WB_HeartGauge : MonoBehaviour
         var unknown = (1f - percentHealth);
         var unknown2 = heartSprites.Count * unknown;
         int index = Mathf.FloorToInt(unknown2);
-        print($"" +
+        /*print($"" +
               $"index: {index},  " +
               $"percent: {percentHealth}, " +
               $"maxHealth: {stats.maxHealth}, " +
               $"health: {stats.health}, " +
               $"spriteCount: {heartSprites.Count},  " +
               $"unknown: {unknown}, " +
-              $"unknown2: {unknown2}");
+              $"unknown2: {unknown2}");*/
         if (index == heartSprites.Count) index--;
         heartImage.sprite = heartSprites[index];
         

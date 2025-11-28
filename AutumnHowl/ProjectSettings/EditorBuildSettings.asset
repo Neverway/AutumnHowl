@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Resources/Maps/_Splash.unity
     guid: 6d54de344b112fe249c33640be011733
   - enabled: 1
-    path: Assets/Resources/Maps/Intro.unity
+    path: Assets/Resources/Maps/_Intro.unity
     guid: 0c481937558d6dc869e11ab317838b65
   - enabled: 1
-    path: Assets/Resources/Maps/Title.unity
+    path: Assets/Resources/Maps/_Title.unity
     guid: 852da288f69184719b0bd4391b830ec5
   - enabled: 1
     path: Assets/Resources/Maps/Town.unity
