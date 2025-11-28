@@ -30,7 +30,7 @@ MonoBehaviour:
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
-  victoryLevels: 0
+  victoryLevels: 2
   victoryGold: 20
   battleSequence:
     waves:

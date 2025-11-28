@@ -19,7 +19,7 @@
                     "name": "MoveDown",
                     "type": "Button",
                     "id": "584c2ae7-3042-4e7b-904c-c021bfe2bdbe",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -28,7 +28,7 @@
                     "name": "MoveLeft",
                     "type": "Button",
                     "id": "85de65d5-0f3d-4d5f-8464-a508bab08c47",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -37,7 +37,7 @@
                     "name": "MoveRight",
                     "type": "Button",
                     "id": "2456a7f2-c5f8-4771-a789-490609ba1329",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -104,6 +104,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b91f07ce-92d0-488b-8af9-73b4f5cc15c4",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a89458cc-73c2-4c37-ab59-c0fea435e8c3",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
@@ -117,6 +128,17 @@
                     "name": "",
                     "id": "cc687849-1b51-4578-8ee7-179fb7ce2879",
                     "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24d1d71b-2ab1-4d8c-8212-2be80424656e",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -148,6 +170,17 @@
                 },
                 {
                     "name": "",
+                    "id": "254f1a39-4c06-4e45-9bb7-91d0c26b3c62",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4de8b0f1-0319-4ee7-8ef0-076e4b94cb1d",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -161,6 +194,17 @@
                     "name": "",
                     "id": "2d80f32a-b3ee-4c69-b678-a5214b839501",
                     "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7648c82d-6e75-426e-bcc2-84b273843e97",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -248,7 +292,7 @@
                 {
                     "name": "",
                     "id": "825c633c-d36f-4549-9bc3-7e5fc719e1f3",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

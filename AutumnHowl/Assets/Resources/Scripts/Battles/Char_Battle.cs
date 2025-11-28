@@ -90,11 +90,15 @@ public abstract class Char_Battle : Character
     /// <returns></returns>
     protected virtual bool TryMoveInDirection (Vector2Int _direction, bool doNextTurn = true, GridPawn _pathTargetPawn = null, bool shouldProgressTurn = true, bool ignoreObsticals=false)
     {
-        if (_direction == Vector2Int.up && _pathTargetPawn.limitGridMovement)
+        var gridPawn = GetComponent<GridPawn>();
+        if (gridPawn)
         {
-            if (_pathTargetPawn.position.y == _pathTargetPawn.gridMovementLimits.y)
+            if (_direction == Vector2Int.up && gridPawn.limitGridMovement)
             {
-                return false;
+                if (gridPawn.position.y == gridPawn.gridMovementLimits.y)
+                {
+                    return false;
+                }
             }
         }
             
