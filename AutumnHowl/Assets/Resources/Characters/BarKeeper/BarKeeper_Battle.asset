@@ -17,13 +17,13 @@ MonoBehaviour:
   openingText:
     frames:
     - name: 
-      chatContent: '*'
-      portrait: {fileID: 0}
-      chatterVoice: {fileID: 0}
+      chatContent: '*Welcome to the active battle grid! To start, go ahead and Attack!'
+      portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
-      displayMode: 0
+      displayMode: 4
       preventTextSkipping: 0
       preventTextContinuing: 0
       autoProgressOnComplete: 0
@@ -34,64 +34,62 @@ MonoBehaviour:
   victoryGold: 10
   battleSequence:
     waves:
-    - rid: 26148788346028042
-  layoutPrefab: {fileID: 7165149278535518001, guid: 4b7b05ddedd127b49828d5f138e0aecb, type: 3}
+    - rid: 2593360386339635200
+  layoutPrefab: {fileID: 7165149278535518001, guid: ebbfc05a6488c7ee3894b5f84dd7f782, type: 3}
   enemySpawnLocations:
   - enemyPrefab: {fileID: 6242562417686465405, guid: 728f8ba85c083bb29af7b6babc146b0a, type: 3}
     enemyStartPosition: {x: 2, y: 4}
   victoryState:
     rid: 26149116751642625
+  music: 0
   references:
     version: 2
     RefIds:
-    - rid: 26148788346028042
-      type: {class: RandoBattleWave, ns: , asm: Assembly-CSharp}
-      data:
-        waves:
-        - rid: 26148788346028043
-        - rid: 26148788346028044
-    - rid: 26148788346028043
-      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
-      data:
-        waveText:
-          frames:
-          - name: 
-            chatContent: The saltbat is preparing a ranged attack!
-            portrait: {fileID: 0}
-            chatterVoice: {fileID: 0}
-            OnFrameCompleted:
-              m_PersistentCalls:
-                m_Calls: []
-            displayMode: 0
-            preventTextSkipping: 0
-            preventTextContinuing: 0
-            autoProgressOnComplete: 0
-          OnFinish:
-            m_PersistentCalls:
-              m_Calls: []
-        waveAttack: {fileID: 0}
-        waveSteps: 5
-    - rid: 26148788346028044
-      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
-      data:
-        waveText:
-          frames:
-          - name: 
-            chatContent: The saltbat is preparing a melee attack!
-            portrait: {fileID: 0}
-            chatterVoice: {fileID: 0}
-            OnFrameCompleted:
-              m_PersistentCalls:
-                m_Calls: []
-            displayMode: 0
-            preventTextSkipping: 0
-            preventTextContinuing: 0
-            autoProgressOnComplete: 0
-          OnFinish:
-            m_PersistentCalls:
-              m_Calls: []
-        waveAttack: {fileID: 0}
-        waveSteps: 8
     - rid: 26149116751642625
       type: {class: AllEnemiesDefeated, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 2593360386339635200
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveText:
+          frames:
+          - name: Barkeeper
+            chatContent: This is your Attack Compass. The needle represents your
+              sword's direction.
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 4
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Here you can choose the direction and distance of your swing.
+              A further swing does more damage, but burns more of your energy.
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 4
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Go ahead and attack the dummy!
+            portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 4
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveAttack: {fileID: 0}
+        waveSteps: 0
