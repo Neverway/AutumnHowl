@@ -43,7 +43,7 @@ public class LB_Intro : MonoBehaviour
             GameInstance.Inputs.Select.WasReleasedThisFrame() || 
             GameInstance.Inputs.Start.WasReleasedThisFrame())
         {
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene("_Title");
         }
     }
 
