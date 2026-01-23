@@ -88,7 +88,11 @@ public interface SerializedModifier_NoInput : IModifierInstancer, SerializedModi
 }
 public interface SerializedModifier_CharacterTargeting : IModifierInstancer<CharacterTargets>, SerializedModifier
 {
-    public Modifier GetNew(CharacterTargets targets) => GetNewModifier(targets);
+    public Modifier GetNew(CharacterTargets targets)
+    {
+        return GetNewModifier(targets);
+    }
+
     public void RegisterTo(object id, CharacterTargets targets)
     {
         Modifier createdModifier = GetNew(targets);
