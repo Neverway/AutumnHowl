@@ -39,6 +39,7 @@ public class LB_Generic : MonoBehaviour
     {
         GameInstance.Get<GI_TransitionManager>().Fadein();
         if (turnOffMusicSelection == false) StartCoroutine(StartMusicRoutine());
+        GameInstance.Get<GI_TextboxManager>().Clear();
     }
 
     private IEnumerator StartMusicRoutine ()

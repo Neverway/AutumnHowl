@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c092475875c44b899e70afa9a812802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableInteraction: 0
   OnInteracted:
     m_PersistentCalls:
       m_Calls:
@@ -205,12 +206,19 @@ MonoBehaviour:
   OnUnselected:
     m_PersistentCalls:
       m_Calls: []
+  OnNavigationAdjacentNegative:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNavigationAdjacentPositive:
+    m_PersistentCalls:
+      m_Calls: []
   useTextIndicators: 1
   selectedIndicator: 
   unselectedIndicator: 
   useColorIndicators: 1
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   unselectedColor: {r: 1, g: 1, b: 1, a: 0.25}
+  disabledColor: {r: 1, g: 0, b: 0, a: 0.8}
   initialized: 0
   originalTextContent: 
   text: {fileID: 0}
@@ -1119,6 +1127,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0}
   animator: {fileID: 1509115284}
+  characterSprite: {fileID: 0}
   frozen: 1
 --- !u!4 &1509115291 stripped
 Transform:
