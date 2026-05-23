@@ -47,6 +47,8 @@ public class BS_Start : BattleState
 
     public override void OnStateEnter(BattleState stateLeaving)
     {
+        GameInstance.Gamestate.currentBattleWave = 0;
+        
         //Debug.Log($"BS_START_ENTER: {controller.name}", controller);
         // Add the player to be first in the turn order
         controller.turnOrder.Add(controller.battlePlayer);
@@ -79,7 +81,8 @@ public class BS_Start : BattleState
             controller.ChangeState(new BS_PlayerAction(controller));
         });
         controller.textEvent.CallEvent();
-        
+
+
     }
 
     public override void OnStateUpdate()
@@ -89,6 +92,60 @@ public class BS_Start : BattleState
     public override void OnStateLeave(BattleState stateEntering)
     {
         //Debug.Log("BS_START_LEAVE", controller);
+        controller.textEvent.textEvent.OnFinish.RemoveAllListeners();
+    }
+}
+
+/// <summary></summary>
+public class BS_PreActionText : BattleState
+{
+    
+    public BS_PreActionText(BattleStateController controller) : base(controller)
+    {
+    }
+
+    public override void OnStateEnter(BattleState stateLeaving)
+    {
+        var currentBattleWave = controller.gameState.currentGameState.currentBattle.battleSequence.GetBattleWave();
+        // Display wave text
+        if (GameInstance.Gamestate.firstTimeOnThisBattleWave)
+        {
+            Debug.LogWarning("This is the first time on this wave");
+            // play wave start text
+            if (currentBattleWave.waveStartText.frames.IsNotEmptyOrNull())
+            {
+                controller.textEvent.textEvent = currentBattleWave.waveStartText;
+                controller.textEvent.textEvent.OnFinish.AddListener(() => { controller.ChangeState(new BS_PlayerAction(controller)); });
+                controller.textEvent.CallEvent();
+                GameInstance.Gamestate.firstTimeOnThisBattleWave = false;
+                return;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("This is NOT the first time on this wave");
+            // play wave repeat text
+            if (currentBattleWave.waveRepeatText.frames.IsNotEmptyOrNull())
+            {
+                controller.textEvent.textEvent = currentBattleWave.waveRepeatText;
+                controller.textEvent.textEvent.OnFinish.AddListener(() => { controller.ChangeState(new BS_PlayerAction(controller)); });
+                controller.textEvent.CallEvent();
+                return;
+            }
+        }
+        
+        // If we reached this point, calling the text failed, so just continue to player actions
+        controller.ChangeState(new BS_PlayerAction(controller));
+    }
+
+    public override void OnStateUpdate()
+    {
+        controller.battlePlayer.canMove = false;
+        controller.stepsRemaining = 0;
+    }
+
+    public override void OnStateLeave(BattleState stateEntering)
+    {
         controller.textEvent.textEvent.OnFinish.RemoveAllListeners();
     }
 }
@@ -161,7 +218,7 @@ public class BS_GridAction : BattleState
         controller.battleWidget.stepCountText.text = controller.stepsRemaining.ToString();
         if (controller.stepsRemaining <= 0)
         {
-            controller.ChangeState(new BS_PlayerAction(controller));
+            controller.ChangeState(new BS_PreActionText(controller));
         }
     }
 
@@ -216,7 +273,7 @@ public class BS_EarlyExitFromBattleGrid : BattleState
                 break;
         }
         controller.battlePlayer.canMove = false;
-        controller.ChangeState(new BS_PlayerAction(controller));
+        controller.ChangeState(new BS_PreActionText(controller));
     }
 
     public override void OnStateUpdate()

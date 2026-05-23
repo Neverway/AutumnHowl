@@ -26,13 +26,15 @@ public class WB_HUD : MonoBehaviour
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     private Coroutine inflictCorruptionCoroutine;
     private bool hasLightFaded;
+    private bool hasLanternDoneWarning;
 
 
     /*-----[ Reference Variables ]------------------------------------------------------------------------------------*/
     public Image lanternFill;
 
     public Image lanternFlame;
-    //public Transform lanternParticles;
+    public GameObject lanternWarningParticles;
+    public Func_TextEvent firstLanternWarningMessage;
     public Color onLanternDrain;
     public Color onLanternSafe;
 
@@ -84,6 +86,16 @@ public class WB_HUD : MonoBehaviour
         {
             GameInstance.Gamestate.currentLanternTime -= Time.deltaTime;
             if (hasLightFaded) UnfadeLights();
+
+            if (GameInstance.Gamestate.currentLanternTime <= (GameInstance.Gamestate.lanternDuration / 2) && !hasLanternDoneWarning)
+            {
+                if (GameInstance.Gamestate.currentCycle == 1)
+                {
+                    firstLanternWarningMessage.CallEvent();
+                }
+                lanternWarningParticles.SetActive(true);
+                hasLanternDoneWarning = true;
+            }
         }
         else if (inflictCorruptionCoroutine == null)
         {

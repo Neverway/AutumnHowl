@@ -39,6 +39,7 @@ public class WB_Battle : MonoBehaviour
     public WidgetNavigator actionBarNavigator;
     public BattleAttackCompass attackCompass;
     public GameObject generalKeyhints;
+    public bool canUseAttack = true, canUseSpell = true, canUseDefend = true, canUseItem = true;
     [Header("Step Stuff")] 
     public TMP_Text stepCountText;
 
@@ -80,6 +81,13 @@ public class WB_Battle : MonoBehaviour
 
 
     /*-----[ Internal Functions ]-------------------------------------------------------------------------------------*/
+    public void UpdateAvailableActions()
+    {
+        actionBarNavigator.selectableElements[0].disableInteraction = !canUseAttack;
+        actionBarNavigator.selectableElements[1].disableInteraction = !canUseItem;
+        actionBarNavigator.selectableElements[2].disableInteraction = !canUseSpell;
+        actionBarNavigator.selectableElements[3].disableInteraction = !canUseDefend;
+    }
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
@@ -94,6 +102,7 @@ public class WB_Battle : MonoBehaviour
                 actionBarNavigator.SetIsNavigating(true);
                 actionBarAnimator.Play("Open");
                 generalKeyhints.SetActive(false);
+                UpdateAvailableActions();
                 break;
             case false:
                 actionBarNavigator.SetIsNavigating(false);

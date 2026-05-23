@@ -19,6 +19,7 @@ public class WidgetSelectable : MonoBehaviour
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
+    public bool disableInteraction = false;
 
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
@@ -51,6 +52,7 @@ public class WidgetSelectable : MonoBehaviour
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
     public virtual void Interact()
     {
+        if (disableInteraction) return;
         OnInteracted?.Invoke();
     }
 

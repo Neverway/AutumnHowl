@@ -108,14 +108,14 @@ public class WidgetNavigator : MonoBehaviour
         switch (navigationMode)
         {
             case NavigationMode.Vertical:
-                CheckMove(GameInstance.Inputs.MoveUp, -1);
-                CheckMove(GameInstance.Inputs.MoveDown, 1);
+                MoveIndexSelection(GameInstance.Inputs.MoveUp, -1);
+                MoveIndexSelection(GameInstance.Inputs.MoveDown, 1);
                 if (GameInstance.Inputs.MoveLeft.WasPressedThisFrame()) AdjacentNavigation(true);
                 if (GameInstance.Inputs.MoveRight.WasPressedThisFrame()) AdjacentNavigation(false);
                 break;
             case NavigationMode.Horizontal:
-                CheckMove(GameInstance.Inputs.MoveLeft, -1);
-                CheckMove(GameInstance.Inputs.MoveRight, 1);
+                MoveIndexSelection(GameInstance.Inputs.MoveLeft, -1);
+                MoveIndexSelection(GameInstance.Inputs.MoveRight, 1);
                 if (GameInstance.Inputs.MoveUp.WasPressedThisFrame()) AdjacentNavigation(true);
                 if (GameInstance.Inputs.MoveDown.WasPressedThisFrame()) AdjacentNavigation(false);
                 break;
@@ -134,25 +134,47 @@ public class WidgetNavigator : MonoBehaviour
         }
     }    
     
-    private void CheckMove(InputAction inputAction, int incrementIndex)
+    private void MoveIndexSelection(InputAction inputAction, int incrementIndex)
     {
         if (inputAction.WasPressedThisFrame())
         {
             if (selectableElements.Count == 0) return;
-            if (enableWrapping)
-            {
-                currentIndex += incrementIndex;
-                if (currentIndex < 0) currentIndex = selectableElements.Count-1;
-                if (currentIndex >= selectableElements.Count) currentIndex = 0;
-            }
-            else
-            {
-                currentIndex += incrementIndex;
-                currentIndex = Mathf.Clamp(currentIndex, 0, selectableElements.Count-1);
-            }
             
-            // Update the selectable elements
-            SetElementStates();
+            // Help me Errynei!
+            bool moveForwards = incrementIndex > 0;
+            for (int i = 0; i < Mathf.Abs(incrementIndex); i++)
+            {
+                MoveIndexSelection(moveForwards);
+            }
+            // (Thank you Errynei :3)
+        }
+    }   
+    
+    private void MoveIndexSelection(bool moveForwards)
+    {
+        int oldIndex = currentIndex;
+        // How many indexes to shift
+        int incrementIndex = moveForwards ? 1 : -1;
+        
+        // Shift to target index
+        if (enableWrapping)
+        {
+            currentIndex += incrementIndex;
+            if (currentIndex < 0) currentIndex = selectableElements.Count-1;
+            if (currentIndex >= selectableElements.Count) currentIndex = 0;
+        }
+        else
+        {
+            currentIndex += incrementIndex;
+            currentIndex = Mathf.Clamp(currentIndex, 0, selectableElements.Count-1);
+        }
+        
+        // Update the selectable elements
+        SetElementStates();
+
+        if (selectableElements[currentIndex].disableInteraction && currentIndex != oldIndex)
+        {
+            MoveIndexSelection(moveForwards);
         }
     }
 

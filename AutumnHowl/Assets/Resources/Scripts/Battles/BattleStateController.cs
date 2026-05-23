@@ -43,6 +43,9 @@ public class BattleStateController : MonoBehaviour
     [Tooltip("Used by bosses to spawn their wave attacks")]
     public UnityEvent OnStartWave;
 
+    //[Tooltip("Used by the battle system to determine what wave is currently active")]
+    //public int currentBattleWave;
+
 
     /*-----[ Internal Variables ]-------------------------------------------------------------------------------------*/
     [Tooltip("The active state of the battle state machine")]
@@ -85,7 +88,7 @@ public class BattleStateController : MonoBehaviour
         
         currentBattleState = new BS_Start(this);
         currentBattleState.OnStateEnter(null);
-        var newTrack = GameInstance.Gamestate.currentBattle.music;
+        var newTrack = GameInstance.Gamestate.currentBattle.musicOverride;
         if (newTrack != GI_AudioManager.Music.none) GameInstance.Get<GI_AudioManager>().SetMusic(newTrack);
         else
         {
@@ -169,11 +172,19 @@ public class BattleStateController : MonoBehaviour
         ChangeState(new BS_GridAction(this));
     }
 
+    public void SetAvailablePlayerActions(bool canUseAttack, bool canUseItem, bool canUseSpell, bool canUseDefend)
+    {
+        battleWidget.canUseAttack = canUseAttack;
+        battleWidget.canUseItem = canUseItem;
+        battleWidget.canUseSpell = canUseSpell;
+        battleWidget.canUseDefend = canUseDefend;
+    }
+
     public IEnumerator CoNextTurnStep(float _delay = 0.1f)
     {
         // Disable movement for the current character
         turnOrder[currentTurn].SetTurnActive(false);
-        print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
+        //print($"Ending {turnOrder[currentTurn].gameObject.name}'s turn");
 
         yield return new WaitForSeconds(_delay);
         
@@ -182,7 +193,7 @@ public class BattleStateController : MonoBehaviour
         {
             currentTurn++;
             // Enable movement for the next character
-            print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
+            //print($"Started {turnOrder[currentTurn].gameObject.name}'s turn");
             turnOrder[currentTurn].SetTurnActive(true);
         }
         
@@ -192,12 +203,12 @@ public class BattleStateController : MonoBehaviour
             stepsRemaining--;
             currentTurn = 0;
             turnOrder[0].SetTurnActive(true);
-            print($"All turns completed, going to step {stepsRemaining}");
+            //print($"All turns completed, going to step {stepsRemaining}");
 
             //Trigger gameevent just to communicate that a turn has passed
             new Event_BattleTurnPassed().Invoke();
         }
-        print($"nextTurnCoroutine Completed!");
+        //print($"nextTurnCoroutine Completed!");
         nextTurnCoroutine = null;
         CheckForVictory();
 
@@ -210,16 +221,13 @@ public class BattleStateController : MonoBehaviour
 
     public void NextTurnStep(float _delay=0.1f, string caller="")
     {
-        print($"BS {caller} Called next turn step");
         if (nextTurnCoroutine == null)
         {
-            print($"nextTurnCoroutine started!");
             nextTurnCoroutine = StartCoroutine(CoNextTurnStep(_delay));
         }
         else
         {
             pendingNextTurnCalls++;
-            print($"nextTurnCoroutine failed, caching the request to start the call to waiting list");
         }
     }
 
@@ -242,10 +250,11 @@ public class BattleStateController : MonoBehaviour
 
     public void LoadLayout()
     {
-        GameObject layout = gameState.currentGameState.currentBattle.layoutPrefab;
+        GameObject layout = gameState.currentGameState.currentBattle.obstacleLayoutPrefab;
         if (layout == null) return;
         Instantiate( layout, battleGrid.transform);
     }
+
 
 
     #endregion

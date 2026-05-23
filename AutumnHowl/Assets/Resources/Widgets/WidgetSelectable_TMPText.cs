@@ -29,6 +29,8 @@ public class WidgetSelectable_TMPText : WidgetSelectable
     public Color selectedColor = new Color(1,1,1,1);
     [Tooltip("The color the text is changed to when not selected")]
     public Color unselectedColor = new Color(1,1,1,0.25f);
+    [Tooltip("The color the text is changed to when the selectable is disabled")]
+    public Color disabledColor = new Color(1,0,0,0.8f);
 
 
     /*-----[ External Variables ]-------------------------------------------------------------------------------------*/
@@ -62,11 +64,19 @@ public class WidgetSelectable_TMPText : WidgetSelectable
     public override void SetSelected(bool _isSelected)
     {
         if (!initialized) GetInitValues();
-        
+
         base.SetSelected(_isSelected);
-        
+
         // Remember about ternary conditional operators, "Condition ? true : false;" ~Liz
-        if (useTextIndicators) text.text = _isSelected ? (selectedIndicator + originalTextContent) : (unselectedIndicator + originalTextContent);
+        if (useTextIndicators)
+            text.text = _isSelected
+                ? (selectedIndicator + originalTextContent)
+                : (unselectedIndicator + originalTextContent);
+        if (disableInteraction)
+        { 
+            text.color = disabledColor;
+            return;
+        }
         if (useColorIndicators) text.color =  _isSelected ? selectedColor : unselectedColor;
     }
 

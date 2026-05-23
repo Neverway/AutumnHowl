@@ -9090,7 +9090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &636510656
 Transform:
   m_ObjectHideFlags: 0
@@ -37531,6 +37531,10 @@ PrefabInstance:
     - target: {fileID: 2847026067039455842, guid: 7c3f3833178b06d0e86e053ad0375ee1, type: 3}
       propertyPath: m_Name
       value: Volume_TriggerEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847026067039455842, guid: 7c3f3833178b06d0e86e053ad0375ee1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3083713600096094931, guid: 7c3f3833178b06d0e86e053ad0375ee1, type: 3}
       propertyPath: m_LocalScale.x

@@ -95,10 +95,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3411343996498358984}
+      addedObject: {fileID: 1449108568966244714}
     - targetCorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1449108568966244714}
+      addedObject: {fileID: 9219553382996232229}
   m_SourcePrefab: {fileID: 100100000, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
 --- !u!212 &787547314445363668 stripped
 SpriteRenderer:
@@ -110,67 +110,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6244881350179780909, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}
   m_PrefabInstance: {fileID: 2339698727629392}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3411343996498358984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242562417686465405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142500dbeaa12e74bb99b9173c570c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  template: {fileID: 11400000, guid: aa328e082b9564a8b831195dacb58f46, type: 2}
-  isDefenseActive: 0
-  startFaceDirection: {x: 0, y: -1}
-  _freezeCharacterMovement: 0
-  uniqueDeathBehavior: 0
-  isDead: 0
-  movement: {x: 0, y: 0}
-  facingDirection: {x: 0, y: 0}
-  animator: {fileID: 7931684597536962226}
-  characterSprite: {fileID: 787547314445363668}
-  canMove: 0
-  AttackSequences:
-  - attacks:
-    - position: {x: 0, y: 1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-      direction: {x: 0, y: 1}
-      pushing: 0
-  - attacks:
-    - position: {x: 0, y: -1}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-      direction: {x: 0, y: -1}
-      pushing: 0
-  - attacks:
-    - position: {x: 1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-      direction: {x: 1, y: 0}
-      pushing: 0
-  - attacks:
-    - position: {x: -1, y: 0}
-      damage: 0
-      visualEffect: {fileID: 5691844686723054416, guid: 852b42c1a22beb1698fb8f2b4109dc47, type: 3}
-      direction: {x: -1, y: 0}
-      pushing: 0
-  pushable: 1
-  gridHopAnimation_Seconds: 0.15
-  gridHopAnimation_Height: 0.35
-  gridHopAnimationContainer: {fileID: 0}
-  invertAttackFacingDirections: 0
-  gridPawnController: {fileID: 1449108568966244714}
-  gridPather: {fileID: 0}
-  battleGrid: {fileID: 0}
-  battleStateController: {fileID: 0}
-  spawnOnDeath: {fileID: 0}
-  useBlock: 0
-  randomRetreat: 75
-  skipFirstTurn: 0
 --- !u!114 &1449108568966244714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +124,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pawnName: 
   type: 1
+  limitGridMovement: 0
+  gridMovementLimits: {x: 0, y: 0}
+--- !u!114 &9219553382996232229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242562417686465405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245d3e22bd0e18ffc9283b20141fc99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  template: {fileID: 11400000, guid: aa328e082b9564a8b831195dacb58f46, type: 2}
+  isDefenseActive: 0
+  startFaceDirection: {x: 0, y: -1}
+  _freezeCharacterMovement: 0
+  uniqueDeathBehavior: 0
+  isDead: 0
+  movement: {x: 0, y: 0}
+  facingDirection: {x: 0, y: 0}
+  animator: {fileID: 7931684597536962226}
+  characterSprite: {fileID: 787547314445363668}
+  canMove: 0
+  AttackSequences: []
+  pushable: 0
+  gridHopAnimation_Seconds: 0.15
+  gridHopAnimation_Height: 0.35
+  gridHopAnimationContainer: {fileID: 0}
+  invertAttackFacingDirections: 0
+  gridPawnController: {fileID: 1449108568966244714}
+  gridPather: {fileID: 0}
+  battleGrid: {fileID: 0}
+  battleStateController: {fileID: 0}
+  spawnOnDeath: {fileID: 0}
+  useBlock: 0
+  currentWave: 0
+  dummyPrefab: {fileID: 4958639730316272625, guid: 66a6b1d03f8764b4aa2375cc322224c1, type: 3}
+  boulderPrefab: {fileID: 2702253734167480065, guid: be4eda339cb88b645b63ff6ede05327a, type: 3}
+  currentDummy: {fileID: 0}
+  currentBoulder: {fileID: 0}
 --- !u!95 &7931684597536962226 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7934021959449969890, guid: 16e442e09fd7c07bfaf82426835e63ba, type: 3}

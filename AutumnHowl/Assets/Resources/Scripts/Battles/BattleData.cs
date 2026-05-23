@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random=UnityEngine.Random;
 
 /// <summary>
@@ -20,19 +21,31 @@ using Random=UnityEngine.Random;
 [CreateAssetMenu(menuName = "AuHo/New Battle Data", fileName = "Battle_")]
 public class BattleData : ScriptableObject
 {
+    [Header("Map")]
 #if UNITY_EDITOR
+    [Tooltip("Drag in a scene to override the default battle scene, the mapID will be gotten from this field")]
     public SceneAsset targetLevelScene;
 #endif
-    public string mapID;
-
+    [Tooltip("The id of the battle scene (This gets overriden when setting targetLevelScene)")]
+    public string mapID = "Battle";
+    [Tooltip("Override the default battle music, leave as none to use the default battle track")]
+    [FormerlySerializedAs("music")] public GI_AudioManager.Music musicOverride;
+    [Tooltip("The prefab to spawn to create obstacles and background scenery")]
+    [FormerlySerializedAs("layoutPrefab")] public GameObject obstacleLayoutPrefab;
+    [Header("Battle")]
+    [Tooltip("The dialogue to display when the battle first begins")]
     public TextEvent openingText;
-    public int victoryLevels;
-    public int victoryGold;
-    public BattleSequence battleSequence;
-    public GameObject layoutPrefab;
+    [Tooltip("What enemies to spawn on the battle grid when the battle first begins")]
     public List<EnemySpawnLocation> enemySpawnLocations;
+    [Tooltip("The order of waves and turn steps (progressing through waves is usually done by the individual battle character scripts)")]
+    public BattleSequence battleSequence;
+    [Header("Victory")]
+    [Tooltip("What condition must be met for the battle to end")]
     [Box, SerializeReference, Polymorphic] public VictoryState victoryState;
-    public GI_AudioManager.Music music;
+    [Tooltip("How many levels to reward the player on winning a battle")]
+    public int victoryLevels;
+    [Tooltip("How much gold to reward the player on winning a battle")]
+    public int victoryGold;
 
 
     private void OnValidate()
@@ -45,7 +58,7 @@ public class BattleData : ScriptableObject
 }
 
 /// <summary>
-/// 
+/// A list of battle waves
 /// </summary>
 [Serializable]
 public class BattleSequence
@@ -54,12 +67,22 @@ public class BattleSequence
 
     public BattleWave GetBattleWave()
     {
-        return waves[0].GetBattleWave();
+        var currentWave = GameInstance.Gamestate.currentBattleWave;
+        Debug.LogWarning($"CURRENT WAVE IS {currentWave}");
+        
+        // If the last wave has been exceeded, wrap back around to wave 0
+        if (currentWave > waves.Length)
+        {
+            currentWave = 0;
+        }
+        
+        // Return the current wave info
+        return waves[currentWave].GetBattleWave();
     }
 }
 
 /// <summary>
-///
+/// ???
 /// </summary>
 [Serializable]
 public abstract class BattleWaveSelector
@@ -73,8 +96,13 @@ public abstract class BattleWaveSelector
 [Serializable]
 public class BattleWave : BattleWaveSelector
 {
-    public TextEvent waveText;
-    public GameObject waveAttack;
+    [Tooltip("This is just a short title for the purpose of this wave, (it's only used for info in the inspector)")]
+    public string waveDescription;
+    [Tooltip("The text to display when first starting this wave, (It's the first flavour text before the player chooses an action)")]
+    [FormerlySerializedAs("waveText")] public TextEvent waveStartText;
+    [Tooltip("The text to display when repeating this wave")]
+    [FormerlySerializedAs("waveText")] public TextEvent waveRepeatText;
+    [Tooltip("How many turn-steps each fighter gets during this wave")]
     public int waveSteps;
     
     public override BattleWave GetBattleWave()

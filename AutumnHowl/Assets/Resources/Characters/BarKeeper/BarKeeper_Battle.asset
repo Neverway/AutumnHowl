@@ -14,34 +14,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLevelScene: {fileID: 102900000, guid: 23ba94449cea27896ba8a4ab2595882b, type: 3}
   mapID: Battle
+  musicOverride: 0
+  obstacleLayoutPrefab: {fileID: 7165149278535518001, guid: ebbfc05a6488c7ee3894b5f84dd7f782, type: 3}
   openingText:
     frames:
-    - name: 
-      chatContent: '*Welcome to the active battle grid! To start, go ahead and Attack!'
+    - name: Barkeeper
+      chatContent: Welcome to the Active Battle Grid!
+      portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 1
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Barkeeper
+      chatContent: Let's start with teaching you how to swing that big sword of yours!
+      portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 1
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Barkeeper
+      chatContent: When attacking, you will be presented with an Attack Compass.
+        Its needle represents your sword's direction.
       portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
       chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
       OnFrameCompleted:
         m_PersistentCalls:
           m_Calls: []
-      displayMode: 4
+      displayMode: 1
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Barkeeper
+      chatContent: Using it, you can choose the direction and distance of your swing.
+        A further swing does more damage, but burns more of your energy.
+      portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 1
+      preventTextSkipping: 0
+      preventTextContinuing: 0
+      autoProgressOnComplete: 0
+    - name: Barkeeper
+      chatContent: Go ahead and attack the dummy!
+      portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+      chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+      OnFrameCompleted:
+        m_PersistentCalls:
+          m_Calls: []
+      displayMode: 1
       preventTextSkipping: 0
       preventTextContinuing: 0
       autoProgressOnComplete: 0
     OnFinish:
       m_PersistentCalls:
         m_Calls: []
-  victoryLevels: 0
-  victoryGold: 10
-  battleSequence:
-    waves:
-    - rid: 2593360386339635200
-  layoutPrefab: {fileID: 7165149278535518001, guid: ebbfc05a6488c7ee3894b5f84dd7f782, type: 3}
   enemySpawnLocations:
   - enemyPrefab: {fileID: 6242562417686465405, guid: 728f8ba85c083bb29af7b6babc146b0a, type: 3}
     enemyStartPosition: {x: 2, y: 4}
+  battleSequence:
+    waves:
+    - rid: 2593360386339635200
+    - rid: 5087324151564468224
+    - rid: 5087324151564468225
+    - rid: 5087324151564468226
+    - rid: 5087324151564468227
   victoryState:
     rid: 26149116751642625
-  music: 0
+  victoryLevels: 0
+  victoryGold: 10
   references:
     version: 2
     RefIds:
@@ -51,29 +101,43 @@ MonoBehaviour:
     - rid: 2593360386339635200
       type: {class: BattleWave, ns: , asm: Assembly-CSharp}
       data:
-        waveText:
+        waveDescription: Learn To Attack
+        waveStartText:
           frames:
           - name: Barkeeper
-            chatContent: This is your Attack Compass. The needle represents your
-              sword's direction.
+            chatContent: When attacking, you will be presented with an Attack Compass.
+              Its needle represents your sword's direction.
             portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
             chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
             OnFrameCompleted:
               m_PersistentCalls:
                 m_Calls: []
-            displayMode: 4
+            displayMode: 1
             preventTextSkipping: 0
             preventTextContinuing: 0
             autoProgressOnComplete: 0
           - name: Barkeeper
-            chatContent: Here you can choose the direction and distance of your swing.
-              A further swing does more damage, but burns more of your energy.
+            chatContent: Using it, you can choose the direction and distance of your
+              swing. A further swing does more damage, but burns more of your power.
             portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
             chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
             OnFrameCompleted:
               m_PersistentCalls:
                 m_Calls: []
-            displayMode: 4
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: The flame in your heart represents your current power! The
+              brighter it burns, the stronger you are, and the more you can swing,
+              so try not to let it burn out!
+            portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
             preventTextSkipping: 0
             preventTextContinuing: 0
             autoProgressOnComplete: 0
@@ -84,12 +148,227 @@ MonoBehaviour:
             OnFrameCompleted:
               m_PersistentCalls:
                 m_Calls: []
-            displayMode: 4
+            displayMode: 1
             preventTextSkipping: 0
             preventTextContinuing: 0
             autoProgressOnComplete: 0
           OnFinish:
             m_PersistentCalls:
               m_Calls: []
-        waveAttack: {fileID: 0}
-        waveSteps: 0
+        waveRepeatText:
+          frames:
+          - name: Barkeeper
+            chatContent: When attacking, you will be presented with an Attack Compass.
+              Its needle represents your sword's direction.
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Using it, you can choose the direction and distance of your
+              swing. A further swing does more damage, but burns more of your power.
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: The flame in your heart represents your current power! The
+              brighter it burns, the stronger you are, and the more you can swing,
+              so try not to let it burn out!
+            portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Go ahead and attack the dummy!
+            portrait: {fileID: -751729575, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveSteps: 1
+    - rid: 5087324151564468224
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveDescription: Learn To Defend
+        waveStartText:
+          frames:
+          - name: Barkeeper
+            chatContent: Excellent work! You knocked 'em silly!
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Swinging such a big sword can get pretty exhausting though.
+              So you'll need to be able to rest when you run out of power.
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Defending will subtract any incoming damage by your defense
+              stat, but it also gives you time to rest and regain some power!
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Go ahead and try defending!
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveRepeatText:
+          frames:
+          - name: Barkeeper
+            chatContent: Swinging such a big sword can get pretty exhausting. So
+              you'll need to be able to rest when you run out of power.
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Defending will subtract any incoming damage by your defense
+              stat, but it also gives you time to rest and regain some power!
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          - name: Barkeeper
+            chatContent: Go ahead and try defending!
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveSteps: 1
+    - rid: 5087324151564468225
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveDescription: Learn To Move
+        waveStartText:
+          frames:
+          - name: Barkeeper
+            chatContent: On to moving
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveRepeatText:
+          frames:
+          - name: Barkeeper
+            chatContent: On to moving
+            portrait: {fileID: 866953318, guid: d1a0ca5211c3884cbb0d80af09011836, type: 3}
+            chatterVoice: {fileID: 11400000, guid: 65b3fc3a5355944d6b632355a061e2b2, type: 2}
+            OnFrameCompleted:
+              m_PersistentCalls:
+                m_Calls: []
+            displayMode: 1
+            preventTextSkipping: 0
+            preventTextContinuing: 0
+            autoProgressOnComplete: 0
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveSteps: 3
+    - rid: 5087324151564468226
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveDescription: Learn To Swing
+        waveStartText:
+          frames: []
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveRepeatText:
+          frames: []
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveSteps: 1
+    - rid: 5087324151564468227
+      type: {class: BattleWave, ns: , asm: Assembly-CSharp}
+      data:
+        waveDescription: 
+        waveStartText:
+          frames: []
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveRepeatText:
+          frames: []
+          OnFinish:
+            m_PersistentCalls:
+              m_Calls: []
+        waveSteps: 1

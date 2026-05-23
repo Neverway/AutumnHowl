@@ -58,6 +58,22 @@ public class AuHoGameState
     public CharacterIdentifier player;
     public BattleData currentBattle;
 
+    public int _currentBattleWave;
+    
+    public int currentBattleWave
+    {
+        get=>_currentBattleWave;
+        set
+        {
+            _currentBattleWave = value;
+            Debug.Log("Set first time on wave to TRUE");
+            firstTimeOnThisBattleWave = true;
+        }
+    }
+
+    [Tooltip("Used by the pre-action flavour text to see if we should play the starting or repeating wave text")]
+    public bool firstTimeOnThisBattleWave;
+
     //Saved Values --------------------------------------------------
     [Box] public Inventory inventory = new Inventory();
 
@@ -120,6 +136,7 @@ public class AuHoGameState
         currentBattle = battleData;
         GameInstance.Get<GI_WorldLoader>().Load(battleData.mapID);
     }
+
     public void LeaveBattle()
     {
         //Unset the battle
