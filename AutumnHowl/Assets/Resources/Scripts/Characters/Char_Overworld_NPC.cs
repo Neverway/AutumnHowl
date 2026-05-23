@@ -73,6 +73,10 @@ public class Controller_Overworld_NPC : Character
 
 
     /*-----[ External Functions ]-------------------------------------------------------------------------------------*/
+    public void MoveToPos(Transform pos)
+    {
+        transform.position = pos.position;
+    }
 
 
     #endregion
